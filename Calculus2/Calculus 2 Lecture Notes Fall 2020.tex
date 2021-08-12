@@ -1,0 +1,2770 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb,amscd,graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\bibliographystyle{unsrt}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{epsfig}  		% For postscript
+%\usepackage{epic,eepic}       % For epic and eepic output from xfig
+\renewcommand{\thesection}{}  % toc dispaly
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ul}{\underline}
+
+\title{Calculus II Notes}
+\date
+\Large
+\begin{document}
+\maketitle
+\large
+
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fun Stuff}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+\item Feynman Method: \url{https://www.youtube.com/watch?v=FrNqSLPaZLc}
+\item Bad math writing: \url{https://lionacademytutors.com/wp-content/uploads/2016/10/sat-math-section.jpg}
+\item Google AI experiments: \url{https://experiments.withgoogle.com/ai}
+\item Babylonian tablet: \url{https://www.maa.org/press/periodicals/convergence/the-best-known-old-babylonian-tablet}
+\item Parabola in real world: \url{https://en.wikipedia.org/wiki/Parabola#Parabolas_in_the_physical_world}
+\item Parabolic death ray: \url{https://www.youtube.com/watch?v=TtzRAjW6KO0}
+\item Parabolic solar power: \url{https://www.youtube.com/watch?v=LMWIgwvbrcM}
+\item Robots: \url{https://www.youtube.com/watch?v=mT3vfSQePcs}, riding bike, kicked dog, cheetah, backflip, box hockey stick
+\item Cat or dog: \url{https://www.datasciencecentral.com/profiles/blogs/dogs-vs-cats-image-classification-with-deep-learning-using}
+\item History of logarithm: \url{https://en.wikipedia.org/wiki/History_of_logarithms}
+\item Log transformation: \url{https://en.wikipedia.org/wiki/Data_transformation_(statistics)}
+\item Log plot and population: \url{https://www.google.com/publicdata/explore?ds=kf7tgg1uo9ude_&met_y=population&hl=en&dl=en#!ctype=l&strail=false&bcs=d&nselm=h&met_y=population&scale_y=lin&ind_y=false&rdim=country&idim=state:12000:06000:48000&ifdim=country&hl=en_US&dl=en&ind=false} 
+\item Yelp and NLP: \url{https://github.com/skipgram/modern-nlp-in-python/blob/master/executable/Modern_NLP_in_Python.ipynb} \url{https://www.yelp.com/dataset/challenge}
+\item Polynomials and splines: \url{https://www.youtube.com/watch?v=O0kyDKu8K-k}, Yoda / matlab, \url{https://www.google.com/search?q=pixar+animation+math+spline&espv=2&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj474fQja7TAhUB3YMKHY8nBGYQ_AUIBigB&biw=1527&bih=873#tbm=isch&q=pixar+animation+mesh+spline}, \url{http://graphics.pixar.com/library/}
+\item Polynomials and pi/taylor series: Matlab/machin \url{https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80} 
+\url{https://en.wikipedia.org/wiki/Approximations_of_%CF%80#Machin-like_formula}
+\url{https://en.wikipedia.org/wiki/William_Shanks}
+\item Deepfake: face \url{https://www.youtube.com/watch?v=ohmajJTcpNk} \\
+dancing \url{https://www.youtube.com/watch?v=PCBTZh41Ris}
+\item Pi digit calculations: \url{https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80}, poor shanks...\url{https://en.wikipedia.org/wiki/William_Shanks}
+\end{enumerate}
+
+
+\section{Course Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Syllabus highlights
+\begin{enumerate}
+\item Grades: 
+\begin{enumerate}
+\item Know the expectation / what you are getting into.
+\item 15perc A (excellent), 35perc B (good), 35perc C (satisfactory),10perc D (passing), some F (failing)
+\item Expect lower grades than you are used to. I was a student once upon a time. I know what it's like to give some effort in a class and still get an A/B. Night before study, good enough? 
+\item Turn in an exam / project. Did you do good work?
+\item Many will start off doing good / satisfactory work. Improve to something more. C is not the worst thing in existence. These letters say nothing of your capability. 
+\end{enumerate}
+\item What does good mean? Good means good. Good job! Excellent means you showed some flair.
+\item Expect: More work, more expectation on good writing.
+\item Math is a challenging subject. Not a natural thing to think or write in. It takes work and practice to be better. My goal is to train you to be better and give you ideas of where it can go.
+\item Fact that you are here shows you are smart and capable. Your goal should be to improve. 
+\item Why do I do this? I do it out of respect for you. You are smart enough. I want you to gain something valuable here. I wouldn't do this job if I didn't think you were gaining something of value.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Grand scheme of things. Where does this class sit inside all of mathematics.
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item Basics: Algebra, arithmetic.
+\item First steps: Geometry, functions. (us now)
+\item Calculus: Math of change / infinity.
+\item Linear algebra: Math of vectors. Anything with finite representation. Invention of computers fueled this one. Gateway to real math / applications.
+\item Applied math. Any application you want. Physics, finance, marketing, material science, CFD, sports. 
+\item Abstract math. Create your own world of ideas. Number theory, analysis, algebra, topology, more. 
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Day 1}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What is Calculus? (Review of Calculus 1 ideas, let them complete in groups) 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Write down a single sentence description.
+\begin{itemize}
+\item Calculus is the mathematics of \emph{change}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Write down all important ideas. What are the top ideas?
+\begin{itemize}
+\item Central ideas: Limit, derivative, integral
+\item Limit
+\begin{enumerate}
+\item continuity 
+\item limit laws 
+\item squeeze theorem 
+\item l'Hospital's rule
+\item IVT
+\end{enumerate}
+\item Derivative: 
+\begin{enumerate}
+\item rules (power, product, quotient, chain, special functions (trig, exp, log, etc) 
+\item MVT
+\end{enumerate}
+\item Integral: 
+\begin{enumerate}
+\item definite (area under curve) 
+\item indefinite (antiderivative)
+\item Riemann sum
+\item fundamental theorem of Calculus
+\item substitution
+\end{enumerate}
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What is left for us? Continue the saga.
+\begin{enumerate}
+\item Integration techniques (more challenging than differentiation)
+\item Generalize integration further (arc length and surface area)
+\item New coordinate systems and representations of curves (polar coords and parametric eqns)
+\item Encounter infinity 
+\begin{enumerate}
+\item Infinite areas (improper integral)
+\item Infinite sum (series)
+\end{enumerate}
+\item Power / Taylor series (replace functions with infinite degree polynomial)
+\item Differential equations (a real purpose for integration)
+\begin{enumerate}
+\item $\ds y' = ky$, reverse differentiation with real meaning ($y$ grows at a rate proportional to size)
+\end{enumerate}
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{Motivating Calculus}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Where does calculus sit within mathematics? Evolution of ideas:
+\begin{enumerate}
+\item Develop math tools:
+\begin{itemize}
+\item Arithmetic (combining numbers)
+\item Algebra (equations and solving for unknowns)
+\item Functions (Machine that maps inputs to outputs, polynomials, logarithms, trigonometry, graphs)
+\item Calculus (Solve paradoxes of processes, change, area, limit, infinity)
+\end{itemize}
+\item Branches following these tools:
+\begin{itemize}
+\item Statistics and probability (chance and modeling uncertainty)
+\item Linear algebra (data and high dimensional, discrete space)
+\item Differential equations (translation of world into calculus, modeling)
+\item Analaysis and abstract algebra (rigorous details and generalization of math)
+\item Much more (number theory, computational, etc)
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Two large application areas of calculus:
+\begin{enumerate}
+\item Optimization (will discuss soon)
+\item Differential equations (mentioned above)
+\begin{itemize}
+\item Links
+\end{itemize}
+\item More as well
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The big picture of calculus (intuition here, details for the rest of the semester)
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area under a curve: area of a circle.
+\begin{itemize}
+\item Consider a hard problem (which we already know). What is the area of a circle with radius $R$. Pick $R=3$ for now. 
+\item Lots of ways to chop it up to try (vertical rectangles, triangles, circular rings). Let's try circular rings with thickness $dr$ (change in $r$).
+\item Take one ring at location $r$. Unroll the ring. Approximate by a rectangle. 
+\[
+\text{Ring area } = 2\pi r ~dr
+\]
+\item Stack all these rectangles vertically in the plane (plot $y=2\pi r$). 
+\item The smaller $dr$, the closer we are. Looks to approach the area of a triangle.
+\[
+\text{Triangle area } = \frac{1}{2}bh = \frac{1}{2} 3 2\pi 3 = \pi 3^2
+\]
+\item For general radius $R$, we get an area of $\pi R^2$.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Process: Hard problem $\Rightarrow$ sum of many small values $\Rightarrow$ area under a graph. 
+\begin{itemize}
+\item A bit of a paradox here. Rectangles disappear, infinitely many.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area under a curve: velocity / distance.
+\begin{itemize}
+\item Suppose a car speeds up then comes to a stop. 
+\item Assume we know the velocity everywhere. Plot a velocity function that makes sense.
+\item $d=r \cdot t$, so we can compute the distance over small time intervals to approximate. The smaller the $dt$, the better the approximation.
+\item These are rectangles under the curve for $v$ which we are summing.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area under a curve: general problem.
+\begin{itemize}
+\item Of course math is about pushing conversation beyond a single problem. We generalize to create a more powerful theory.
+\item Example: $y=x^2$. Find the area under the curve on $[0,3]$ or in general $[0,x]$. Denote this area $A(x)$ also known as the \emph{integral of $x^2$}.
+\item If we change the area slightly, call it $dA$, can approximate as
+\[
+dA \approx x^2 dx \quad \Rightarrow \quad \frac{dA}{dx} \approx x^2
+\]
+The smaller $dx$ (and hence $dA$), the better the approximation.
+\item Derivative
+\[
+\frac{dA}{dx} = f(x)
+\]
+connects the function to the area under the curve (integral)
+\item This idea is the fundamental theorem of calculus. More later on.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 7: Techniques of integration} 
+
+Project to watch visual calculus sequence for 3brown1blue: \url{https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr}
+
+Give take home quiz on integration review (basic antiderivatives, chain rule, Riemann sum, Fundamental Theorem of Calculus).
+
+We see that integration is much more challenging than differentiation. This chapter develops needed techinques.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.1 Integration by parts}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Past methods for integration
+\begin{enumerate}
+\item Direct formula: $\ds \frac{d}{dx} \sin(x) = -\cos(x), \quad \frac{d}{dx} x^n = nx^{n-1}$ and others
+\item Sum formula: $\ds \int (f(x) + g(x))~dx$ 
+\item Constant multiplication: $\ds \int cf(x)~dx$
+\item Substitution: Reverse chain rule $\ds \frac{d}{dx} f(g(x)) = f'(g(x))g'(x)$.
+$$
+\int 2xe^{x^2}~dx
+$$
+\item What else can we reverse? Product rule? (Quotient rule is a disaster...) Try on own!
+$$
+\int xe^x~dx,\quad\int x\cos x~dx,\quad \int x\sin x~dx
+$$
+\item New formula from the product rule:
+\[
+\frac{d}{dx} (f(x)g(x)) = f'(x)g(x) + f(x)g'(x) 
+\]
+\[
+\int \frac{d}{dx} (f(x)g(x)) ~dx = \int \left(f'(x)g(x) + f(x)g'(x)\right) ~dx 
+\]
+\[
+f(x)g(x)= \int f'(x)g(x) ~dx + \int f(x)g'(x) ~dx 
+\]
+\[
+\int f(x)g'(x) ~dx = f(x)g(x) - \int f'(x)g(x) ~dx 
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item {\bf Theorem:} Integration by parts
+\[
+\int f(x)g'(x) ~dx = f(x)g(x) - \int f'(x)g(x) ~dx 
+\]
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Check it by differentiation to be sure.
+$$
+\int xe^x ~dx
+$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Steps:
+\begin{enumerate}
+\item Assign $f$ and $g'$.
+\item Compute $f'$ and $g$.
+\item Substitute into formula
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Comments:
+\begin{enumerate}
+\item Difficulty: How to choose $f$ and $g'$? Takes guess and check until intuition is developed. 
+\begin{enumerate}
+\item What if we chose $\int xe^x ~dx$ wrong?
+\item Always try to make it simpler.
+\end{enumerate}
+\item Short hand notation as with substitution: Substitute $u=f(x), v=g(x)$, then via differentials $du = f'(x)dx, dv = g'(x)dx$. Then, the IBPs formula becomes
+\[
+\int u~dv = uv - \int v~du
+\]
+Take care as this can be easier, though confusing.
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: A bit more challenging. Try on own.
+\begin{enumerate}
+\item $\int x^2 \sin(x) ~dx$ (twice IBPS)
+\item $\int \ln(x) ~dx$ (hidden constant)
+\item $\int \cos^2(x) ~dx$ ($\cos,\cos$, cyclic once Pythagorean id is used)
+\item $\int \cos(x)e^x ~dx$ (cyclic reasoning)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definite Integral Version: Fundamental Theorem of Calculus at work.
+\begin{enumerate}
+\item What if we have bounds / area under the curve? $ \ds \int_4^9 \frac{\ln(y)}{\sqrt{y}}~dy$
+\item Recall: FTOC says if $F'(x) = f(x)$, then $\int_a^b f(x)~dx = F(b)-F(a)$.
+\item \textbf{Theorem:} Integration by parts for definite integrals.
+$$\displaystyle\int_a^b f(x)g'(x)~dx = f(x)g(x)\Big|_a^b-\int_a^b f'(x)g(x)~dx$$
+Recall: $f(x)\Big|_a^b = f(b)-f(a)$.
+\item Create your own integration by parts problem.
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.2 Trigonometric integrals}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item In the next section, we see a new substitution which transforms
+\[
+\int x^2 \sqrt{1-x^2}~dx = \int \sin^2(\theta)\cos^2(\theta)~d\theta.
+\]
+via the unit circle and such trigonometric relationships. In light of this, we need techinques for integrating powers/products of trig functions. 
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \emph{Everything} in this entire section is either \emph{substitution} or \emph{trig identites}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Notational confusion: 
+$$
+\sin^n(x) = (\sin (x))^n\neq\sin (x^n),\quad\quad\quad \sin^{-1} (x) = \arcsin (x) \neq 1/\sin (x) = \sec(x)
+$$
+I will always denote inverse sine as $\arcsin(x)$ to avoid confusion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Basic integration formulas:
+$$
+\int \cos(x)~dx = \sin(x)+C,\quad \int \sin(x)~dx = -\cos(x)+C
+$$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Combinations of sine and cosine: $\ds \int sin^m(x)\cos^n(x)~dx$ for $m,n$ positive integers.
+\begin{enumerate}
+\item Example: $\ds \int \sin^4(x)\cos(x)~dx$, substitute $u=\sin(x)$. 
+\item Example: $\ds \int \sin(x)\cos^4(x)~dx$, substitute $u=\cos(x)$.
+\item Example: $\ds \int \sin^3(x)\cos^4(x)~dx$, rewrite $\sin^2(x) = 1-\cos^2(x)$, then substitute $u=\cos(x)$.
+\[
+\int \sin^3(x)\cos^4(x)~dx = \int \sin(x)\sin^2(x)\cos^4(x)~dx = \int \sin(x)(1-\cos^2(x))\cos^4(x)~dx 
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Try on own: 
+\begin{enumerate}
+\item Example: $\ds \int \cos^5(x)~dx$, rewrite via Pythagoras and substitute $u=\sin(x)$.
+\item Example: $\ds \int \cos^2(x)~dx$, integrate by parts (did this last time) OR use half angle formula.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Two big formulas in trigonometry: Pythagoras ($\sin^2(x)+\cos^2(x)=1$) which everyone knows, same as right triangle. 
+Also, sum formula ($\cos(u+v) = \cos(u)\cos(v)-\sin(u)\sin(v)$). From the latter we get double/half angle formulas, take $u=v=x$.
+\[
+\cos(2x) = \cos^2(x)-\sin^2(x) = 2\cos^2(x)-1 = 1-2\sin^2(x)
+\]
+Then, even powers of $\cos(x)$ (and $\sin(x)$) can be rewritten.
+\[
+\cos^2(x) = \frac{1}{2}(1+\cos(2x)); \quad \quad \sin^2(x) = \frac{1}{2}(1-\cos(2x))
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: 
+\begin{enumerate}
+\item $\ds \int \cos^2(x)~dx$, use double angle formula, small substitution needed. 
+Different form than the IBPs result, yet equivalent. 
+Verify the trig identity.
+\[
+\int \cos^2(x)~dx = \int \frac{1}{2}(1+\cos(2x))~dx
+\]
+\item $\ds \int \sin^4(x)~dx$, use double angle formula twice, small substitution needed.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item In summary, only two ideas: subsitution and trig identities.
+\begin{enumerate}
+\item In conclusion, {\bf EVERY} $\ds \int\sin^m(x)\cos^n(x)~dx$ can be integrated for $m,n$ integers positive or negative.
+\item Try substutution first (look ahead in mind, all possible if necessary).
+\item Use trig identity (Pythagoras or half angle formulas, {\bf MEMORIZE} both).
+\item What if $n, m$ are negative number or radical? Same ideas may work.
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sine and cosine are connected since their derivatives relate. 
+\[\frac{d}{dx}\sin(x) = \cos(x).\] 
+Likewise for tangent and secant, we should have an analogous story. Why? Derivatives match and Pythagoras connects again. 
+\[\frac{d}{dx} \tan(x) = \sec^2(x), \quad\quad \frac{d}{dx} \sec(x) = \sec(x)\tan(x),\]
+\[\sin^2(x) + \cos^2(x)=1 \quad \Rightarrow \quad \tan^2(x)+1 = \sec^2(x)\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Basic integratation formulas:
+\[
+\int \tan (x)~dx = \ln|\sec(x)|+C \quad\quad \text{via subsituting $u=\cos(x)$}
+\]
+\[
+\int \sec(x)~dx = \ln|\sec(x) +\tan(x)|+C \quad\quad \text{via subsituting $u=\sec(x)+\tan(x)$}
+\]
+Mercator map application Strang for secant integral origins.
+\begin{itemize}
+\item Strang: \url{https://ocw.mit.edu/ans7870/resources/Strang/Edited/Calculus/Calculus.pdf}
+\item WIKI:  \url{https://en.wikipedia.org/wiki/Mercator_projection}
+\item Paper: \url{https://www.maa.org/sites/default/files/pdf/cms_upload/0025570x15087.di021115.02p0115x.pdf}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: For $\ds \int \tan^m(x)\sec^n(x)~dx$, we have same ideas as above.
+\begin{enumerate}
+\item $\ds \int \tan^2(x)~dx = \int (\sec^2(x)-1)~dx = \tan(x)-x+C$
+\item $\ds \int \tan^3(x)~dx = \int \tan(x)(\sec^2(x)-1) ~dx$ then separate and substitute ($u=\tan(x)$) / formula.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: More challenging, try on own first.
+\begin{enumerate}
+\item $\ds \int \sec^3(x)~dx = \int \sec(x)\sec^2(x)~dx= \sec(x)\tan(x)-\int \tan^2(x)\sec(x)~dx$, then Pythagoras and cyclic integral.
+\item $\ds \int \tan^3(x)\sec^4(x)~dx$, assign $u=\tan(x)$ OR $u = \sec(x)$
+$$
+\int \tan^3(x)\sec^4(x)~dx= \frac{1}{4}\tan^4(x)+\frac{1}{6}\tan^6(x)+C
+$$
+$$
+\int \tan ^3(x)\sec^4(x)~dx  = \frac{1}{6} \sec^6(x)-\frac{1}{4}\sec^4(x)+C
+$$
+Same via Pythagorean theorem.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What if the trig functions argument is not $x$?
+\begin{enumerate}
+\item Example: $\ds \int \sin(2x)\cos(2x)~dx$. Substitute $u=2x$ then carry on.
+\item Example: $\ds \int \sin(2x)\cos(5x)~dx$. Of course there is another identity to use from the sum formula (product to sum formula).
+\[
+\sin(u)\cos(v) = \frac{1}{2}\left[\sin(u-v)+\sin(u+v)\right]
+\]
+Then,  $\ds \int \sin(2x)\cos(5x)~dx = \int \frac{1}{2}\left[\sin(-3x)+\sin(8x)\right] ~dx$ separate, then substitute.
+Now you've seen it, later {\bf I won't test it}.
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.3 Trigonometric substitution}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Our motivation for last time was to transform integrals of the form
+\[
+\int x^2\sqrt{1-x^2} ~dx = \int \sin^2(\theta)\cos^2(\theta)~d\theta
+\]
+into trig integrals. Why? To leverage trig identities and symmetry. How? Substitute $x = \sin(\theta) (dx = \cos(\theta)~d\theta$ then Pythagoras is there again.
+\[
+\int x^2\sqrt{1-x^2} ~dx = \int \sin^2(\theta)\sqrt{1-\sin^2(\theta)} \cos(\theta)~d\theta = \int \sin^2(\theta)\cos^2(\theta)~d\theta
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item A basic example:
+\[
+\int \frac{1}{\sqrt{1-x^2}}~dx = \int \frac{1}{\cos(\theta)}\cos(\theta)~d\theta = \int 1 ~d\theta = \theta + C = \arcsin(x)+C
+\]
+Here, $x=\sin(\theta), dx=\cos(\theta)~d\theta, \theta = \arcsin(x)$.
+This same formula was found via function inverses and log differentiation in Calculus 1.
+An obscure formula is easily derived now.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Trigonometric substitution overview (backwardsish from regular substitution)
+\begin{enumerate}
+\item Remove the radical via trig substitution then Pythagoras
+\begin{enumerate}
+\item $\sqrt{1-x^2}$, \quad $x = \sin(\theta)$, \quad $\sqrt{1-x^2}=\sqrt{1-\sin^2(\theta)} = \sqrt{\cos^2(\theta)}$
+\item $\sqrt{1+x^2}$, \quad $x = \tan(\theta)$, \quad $\sqrt{1+x^2}=\sqrt{1+\tan^2(\theta)} = \sqrt{\sec^2(\theta)}$
+\item $\sqrt{x^2-1}$, \quad $x = \sec(\theta)$, \quad $\sqrt{x^2-1}=\sqrt{\sec^2(\theta)-1} = \sqrt{\tan^2(\theta)}$
+\item All boils down to 
+\[
+\sin^2(\theta) + \cos^2(\theta) = 1, \quad\quad \tan^2(\theta)+1=\sec^2(\theta).
+\]
+\item Does $\sqrt{x^2}=x$ always? Not for $x$ negative. So, $\sqrt{1-x^2}\rightarrow \sqrt{\cos^2\theta} = |\cos\theta|$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Domain issues are involved (required for you to write each time!)
+\begin{enumerate}
+\item $\theta = \arcsin(x)$ requires domain restriction $-\pi/2\leq \theta\leq \pi/2$ (draw graph, unit circle).
+\item $\theta = \arctan(x)$ requires domain restriction $-\pi/2\leq \theta\leq \pi/2$ 
+\item $\theta = \text{arcsec}(x)$ requires domain restriction $0\leq \theta\leq \pi/2$ and $\pi\leq\theta\leq 3\pi/2$ 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Insert absolute value and domain restriction into the substitution for above problem. 
+Why does $|\cos(\theta)|=\cos(\theta)$ here so we need not worry about the absolute value?
+\end{enumerate}
+
+
+\item Examples: A bit more sophisticated. Only transfer to trig integral. They will handle in groupwork.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\begin{enumerate}
+\item Constant not 1 inside radical. Factor then subsitute $\frac{x}{2} = \sin(\theta), \frac{1}{2}dx = \cos(\theta) d\theta$.
+\[
+\int \sqrt{4-x^2}~dx = 2 \int \sqrt{1-\left(\frac{x}{2}\right)^2} ~dx
+= 2 \int \sqrt{1-\sin^2(\theta)} 2\cos(\theta)~d\theta
+= 4 \int \cos^2(\theta)~d\theta
+\]
+Alternatively, substitute $x=2\sin(\theta)$ from the get go to get the same.
+\[
+\int \sqrt{2^2-x^2}~dx = \int \sqrt{2^2-2^2\sin^2(\theta)} 2\cos(\theta)~d\theta
+= 4 \int \cos^2(\theta)~d\theta
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Reference triangle required for back-substitution ($x=\tan(\theta), dx=\sec^2(\theta)~d\theta$).
+\[
+\int \frac{1}{\sqrt{1+x^2}}~dx = \int \frac{1}{\sqrt{1+\tan^2(\theta)}}\sec^2(\theta)~d\theta = 
+\ln |\sec\theta+\tan\theta|+C = \ln|\sqrt{1+x^2}+x|+C
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Complete the square, a useful technique.
+\[
+\int \frac{1}{\sqrt{2x-x^2}}~dx = ?
+\]
+This isn't of the form we need.
+Any quadratic in standard form can be rewritten in vertex form by competing the square.
+\[
+ax^2+bx+c = a(x-h)^2+k
+\]
+\[
+2x-x^2 = -x^2 + 2x = -(x^2-2x) = -(x^2-2x+1)+1 = -(x-1)^2+1 = 1-(x-1)^2
+\]
+Show Wikipedia visual: \url{https://en.wikipedia.org/wiki/Completing_the_square}
+
+Give random example and see who can do it fastest. Show can check easily.
+
+Then, use this form instead with our integral and substitute $u=x-1, du = dx$.
+\[
+\int \frac{1}{\sqrt{2x-x^2}}~dx = \int \frac{1}{\sqrt{1-(x-1)^2}}~dx = \int \frac{1}{\sqrt{1-u^2}}~du
+\]
+Which trig substitution is this now? $u=\sin(\theta)$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Overview of trigonometric substitution
+\begin{enumerate}
+\item Always try $u$ substitution first. Sometimes easier ways.
+\[
+\int 2x\sqrt{x^2+1}~dx
+\]
+\item Complete the square if needed.
+\item Assign a trig substitution (along with the domain of $\theta$).
+\item Match the constant for substitution if not 1.
+\item Integrate via trig integral ideas of sectin 7.2.
+\item Replace $\theta$ by $x$, may need reference triangle here.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Groupwork challenge (expect something of this caliber on the exam).
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Transfer to trigonometric integral, use 7.2. Simplish solution hits to substitute from the get-go ($u=x^2+1$). Much easier.
+\[
+\int\frac{x^3}{(x^2+1)^{3/2}}~dx = \frac{1}{\sqrt{1+x^2}}+\sqrt{1+x^2}+C
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Half angle formula needed. Better yet, area would have made life simple. Just the upper hemisphere of circle of radius 3.
+\[
+\int_0^3 \sqrt{9-x^2}~dx
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Complete the square.
+\[
+\int\frac{x}{\sqrt{3-2x-x^2}}~dx = -\sqrt{3-2x-x^2}-\sin^{-1}(\frac{x+1}{2})+C
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Complete the square.
+\[
+\int \frac{1}{x^2+10x+16}~dx
+\]
+This last one hints at a better way. How to reverse fraction addition? This is partial fraction decomposition of the next section.
+\[
+\frac{1}{x^2+10x+16} = \frac{1}{(x+8)(x+2)} = \frac{?}{x+8}+\frac{?}{x+2}
+\]
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.4 Integration of Rational Functions by Partial Fractions}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The rational of rational function comes from ratio...
+$$
+f(x) = \frac{p(x)}{q(x)}
+$$
+is a rational function where $p(x)$ and $q(x)$ are polynomials. 
+Our goal is to have a method integrate any rational function.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Integral of proper rational function (degree of top is less than degree of bottom). 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linear denominator
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Already know: 
+$$
+\int \frac{1}{(ax+b)}~dx = \frac{1}{a}\ln |ax+b| + C
+$$
+via substitution. So linear function division is doable.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Production of distinct linear factors. How to reverse fraction to reduce to previous case?
+It is reasonable to think that $\frac{1}{6} = \frac{1}{2\cdot 3} = \frac{A}{2} + \frac{B}{3}$ giving $1=3A+2B$. Use this idea. 
+$$
+\frac{3x+1}{(x-1)(x+3)} = \frac{A}{x-1}+\frac{B}{x+3}
+$$
+How to find $A,B$? Two ways.
+\begin{enumerate}
+\item Add fractions and compare coefficients.
+$$
+\frac{3x+1}{(x-1)(x+3)} = \frac{A(x+3)+B(x-1)}{(x-1)(x+3)}
+$$
+\item Add fractions, clear fractions on both sides, choose nice $x$ values.
+$$
+3x+1 = A(x+3)+B(x-1), \quad x=-3,1
+$$
+Either way $A=1, B=2$ and we are set to integrate.
+\[
+\int \frac{3x+1}{(x-1)(x+3)}~dx = \int\left(\frac{1}{x-1}+\frac{2}{x+3}\right) ~dx = \ln|x-1| + 2\ln|x+3| + C
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Try on own, no need to integrate. Can always add fractions to check.
+$$
+\frac{4x-2}{x^2-1} = \frac{1}{x-1}+\frac{3}{x+1}
+$$
+More challenging examples. Divide and conquer.
+$$
+\frac{15x-20}{(2x-1)(x+2)(x-3)} = \frac{2}{2x-1}-\frac{2}{x+2}+\frac{1}{x-3}
+$$
+and
+$$
+\frac{4x^2-6x-22}{(x^2-1)(x-5)} = \frac{3}{x-1}-\frac{1}{x+1}+\frac{2}{x-5}
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Repeating linear factors with multiplicity
+$$
+\frac{1}{(x-1)^2}, \quad \frac{x+1}{(x-1)^2} = \frac{1}{x-1}+\frac{2}{(x-1)^2},\quad \frac{6x+2}{(x-1)^2(x+3)} = \frac{1}{x-1}+\frac{2}{(x-1)^2}-\frac{1}{x+3}
+$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Factoring is hard: Factor $x^3+3x^2+x-5$ knowing that $x=1$ is a zero.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Quadratic denominator
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item It is not always possible to have linear factors (and avoid complex numbers).
+\begin{enumerate}
+\item Reducible quadratic factor can be factored: $x^2+4x+3 = (x+1)(x+3)$. Linear terms.
+\item Irreducible quadratic factor cannot be factored: $x^2+1=?$ (How to tell? Check the discriminant $b^2-4ac<0$ which indicates complex zeros). 
+This is where arctangent lives from last time.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Is the denominator irreducible? Check. Need to complete the square here and substitute $u=x+1$.
+$$
+\int \frac{2x+4}{x^2+2x+2} ~dx = \int \frac{2x+4}{(x+1)^2 +1}~dx =  \int \frac{2(u-1)+4}{u^2 +1}~dx = \int \frac{2u}{u^2+1}~du + \int \frac{2}{u^2+1}~du
+$$
+
+\item Example: $\ds \int \frac{10}{(x-1)(x^2+9)}$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tips
+\begin{enumerate}
+\item Often split into 2 parts, ln and arctangent.
+\item Match the u substitution for the $\ln$ part by taking derivative of the denominator 
+\item Basic formula for the tangent part
+$$
+\int\frac{1}{a^2+x^2} ~dx = \frac{1}{a}\tan^{-1}(\frac{1}{a}x)
+$$
+\item Complete the square if necessary
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Do we need to consider irreducible cubics? No.
+\begin{enumerate}
+\item \textbf{The fundamental theorem of ALGEBRA}\\
+Every non-zero, single-variable, degree $n$ polynomial with complex coefficients has, counted with multiplicity, exactly $n$ roots. \\
+\url{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}
+\item This implies every polynomial can be factored into a product of linear and quadratic factors (complex zeros come in conjugate pairs). 
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Integration of improper rational functions: If the degree of the numerator is the same or exceeds that of the denomiantor, PFD fails. How to handle improper rational functions?
+\begin{enumerate}
+\item Think regular improper fractions: $\ds \frac{12}{5}, \frac{63}{4}$.
+\item Long division to polynomial + proper rational function
+\begin{enumerate}
+\item Linear factors
+\item Irreducible quadratic factors
+\item Factors may repreat.
+\end{enumerate}
+\end{enumerate}
+Try
+$$
+\frac{x^2}{x^2-1}
+$$
+\item Create your own examples (don't compute the PFD coefficients)
+
+%%%%%%%%%%%%%%%%%
+\item Special cases: Radicals converged to rationals via substitution.
+$$
+\int\frac{\sqrt{x+1}}{x} ~dx= 2\sqrt{x+1}+\ln(1-\sqrt{x+1})-\ln(\sqrt{x+1}+1)+C
+$$
+What about
+$$
+\int\frac{\sqrt[4]{x+1}}{x}~dx,\quad \int\frac{1}{\sqrt{x}-\sqrt[3]{x}}~dx
+$$
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.5 Strategy for integration}
+Tip
+\begin{enumerate}
+\item Simplify if possible
+\item Direct formula
+\item Look for direct substitution
+\item Try techniques from 7.1-7.4. What are the giveaways of each technique? Make a list.
+\item If no techniques are obvious, think about a substitution to transform. 
+\end{enumerate}
+Group work
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.7 Approximate integration}
+Show idea, but do not test. 
+\begin{enumerate}
+\item Motivation: Necessity (no technique to compute exactly) vs practicality (coding software) vs theory / history (\url{https://en.wikipedia.org/wiki/Numerical_integration#History})
+\item Techniques:
+\begin{enumerate}
+\item Riemann sum (midpoint rule / pw constant approximation)
+\item Trapezoidal rule (tangent line approximation) \url{https://www.desmos.com/calculator/d9rmt4wfoa}
+\item Simpsons rule (quadratic approximation) \url{https://www.desmos.com/calculator/cdgj6pgeni}
+\item Script to show comparison (main considerations are accuracy vs calculation)
+\item Idea leads into Taylor series
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.8 Improper integral}
+\begin{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we extend integration to unbounded regions. Reasons:
+\begin{enumerate}
+\item Applications
+\begin{itemize}
+\item Probability: Bell curve and normal distributions (\url{https://en.wikipedia.org/wiki/Normal_distribution})
+\item Physics: Escape velocity (\url{https://en.wikipedia.org/wiki/Escape_velocity})
+\end{itemize}
+\item Mathematics and theory
+\begin{itemize}
+\item Study the nuances of infinity
+\item Find the limitations of the Riemann integral (\url{https://en.wikipedia.org/wiki/Lebesgue_integration#Intuitive_interpretation}, \url{en.wikipedia.org/wiki/Henri_Lebesgue#Lebesgue's_theory_of_integration}) as discovered in 1900s thru studying probability / Fourier series / transform.
+\item Fourier: \url{https://en.wikipedia.org/wiki/Fourier_series}
+\item Orbitness: \url{https://www.youtube.com/watch?v=QVuU2YCwHjw}
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Back to infinity. What if our area of integration is unbounded? For example, two possibilities here. Draw graph.
+$$
+\int_1^\infty \frac{1}{x}, \quad \int_0^1 \frac{1}{x}
+$$
+\begin{enumerate}
+\item Infinite interval
+\item Discontinuous integrand
+\item Intuition says such a region must be infinite, though that isn't always the case.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Case 1: Improper integral with infinite interval
+$$
+\int_0^\infty f(x)~dx, \quad
+\int_{-\infty}^0 f(x)~dx,\quad 
+\int_{-\infty}^\infty f(x)~dx
+$$
+\begin{enumerate}
+\item Is it always infinity?
+\item If $f(x)>0$ is it always infinity?
+\item Try several examples by plug in $\infty$. Disclaimer: sloppy mathematics here. Not indeterminant forms here are cringeworthy.
+\[
+\int_0^{\infty} e^x~dx, \quad 
+\int_0^{\infty} e^{-x}~dx, \quad 
+\int_0^{\infty} x~dx,  \quad 
+\int_{-\infty}^{\infty} x~dx
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Better to think of this as a limit of a definite integral (which we already understand well).
+\begin{enumerate}
+\item Example: 
+$$
+\int_1^\infty \frac{1}{x^2}~dx = \lim_{t\rightarrow \infty}\left(-\frac{1}{x}\Big|_1^t\right) = 1
+$$ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition
+\begin{enumerate}
+\item 
+$$
+\int_a^\infty f(x)~dx  = \lim_{b\rightarrow \infty}\int_a^bf(x)~dx
+$$
+$$
+\int_{-\infty}^b f(x)~dx  = \lim_{a\rightarrow -\infty}\int_a^bf(x)~dx
+$$
+\item If the limit exists, the improper integral is called convergent. If the limit doesn't exist, it's called divergent
+\item If both 
+$$
+\int_{-\infty}^b f(x)~dx, \quad\int_a^\infty f(x)~dx
+$$
+are convergent, then
+$$
+\int_{-\infty}^\infty f(x)~dx = \int_{-\infty}^a f(x)~dx+\int_a^\infty f(x)~dx
+$$
+where $a$ can be any number you choose. Note the subtly of a limit law here. Need both limits to exist to pass the limit.
+\[
+\lim_{x\rightarrow a} (f(x)+g(x)) = \lim_{x\rightarrow a} f(x)+ \lim_{x\rightarrow a} g(x)
+\]
+only if BOTH limits exist (are finite).
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Draw the graph. Let them vote convergent/divergent beforehand.
+$$
+\int_1^\infty \frac{1}{x^3}~dx, \quad
+\int_1^\infty \frac{1}{x}~dx, \quad
+\int_1^\infty \sqrt{x}~dx, 
+\quad\int_{-\infty}^0xe^x~dx, 
+\quad\int_{-\infty}^\infty \frac{1}{1+x^2}~dx
+$$
+For each, hint at comparison theorem ideas using intuition of $\int_1^{\infty} \frac{1}{x^2}~dx$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Lecture on infinitesimal
+\begin{itemize}
+\item The ghost step
+\item Cavalieri's principle
+\item The wrong case
+\item The difference between $0$, $>0$, limit equal $0$
+\item The theory of infinitesimal calculus
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tips
+\begin{enumerate}
+\item Must use limit notation (don't plug in $\infty$ as we already know from experience with l'Hospitals rule..) Silly example: $\ds \lim_{x\rightarrow \infty} (x^2-x)$.
+\item $-\infty$ to $\infty$ must be split into two parts by definition.
+\item Convergent or divergent is most important discussion from a math view. If convergent, resulting constant mostly used for application.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Important case: Positive and decreasing is not enough. Speed of decay is key.
+\[
+\int_1^{\infty} \frac{1}{x}~dx = \infty
+\]
+compared to $\int_1^{\infty} \frac{1}{x^2}~dx=1$.  In general we can look at all powers of $x$ to think about rates of decay.
+$$
+\int_1^\infty \frac{1}{x^p}~dx=
+\lim_{a\rightarrow \infty} \int_1^a \frac{1}{x^p}~dx =
+\lim_{a\rightarrow \infty} \frac{-p}{x^{p-1}}
+$$
+\begin{enumerate}
+\item Convergent if $p>1$
+\item Divergent if $p<1$
+\item Divergent if $p=1$ (interesting barrier for rate of decay)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How to understand this using area under a curve?
+\begin{itemize}
+\item $
+0\cdot \infty 
+$
+is indeterminant
+\item The ghost step
+\item Cavalieri's principle
+\item The difference between infinitely small and zero
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The comparison theorem: If cannot easily integrate, can still sometimes tell if convergent / divergent. \\ \ \\
+Suppose f, g are continuous functions and $f(x)\geq g(x)\geq 0$ for $x>a$ (draw a picture), then 
+\begin{itemize}
+\item If $\int_a^\infty f(x)~dx$ is convergent, then $\int_a^\infty g(x)~dx$ is convergent
+\item If $\int_a^\infty g(x)~dx$ is divergent, then $\int_a^\infty f(x)~dx$ is divergent
+\end{itemize}
+There was a Calculus 1 analogy of this for bounded intervals. Mostly we are comparing rates of decay.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Use the comparison theorem to say divergent or convergent. First use intuition, then bound in the correct direction. Try 
+$$
+\int_2^{\infty}\frac{1+e^{-x}}{x}~dx,\quad
+\int_{\pi}^{\infty} \frac{1}{\sqrt[3]{x^2+1}}~dx,\quad
+\int_1^{\infty} \frac{e^x}{e^{2x}+3}~dx
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Case 2: Discontinuous (integrand) integrand
+$$
+\int_0^1\frac{1}{x}~dx
+$$
+Draw the graph, how does this compare to infinite interval case? Same, just sideways. How to handle carefully? Cannot compute and substitute. Try. Fail (sorta). Limit needed again. Expect this to be infinite as before by comparing the inverse function. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item Definition (let them write down the careful version on own first). Note the necessity of limit direction here.
+\begin{enumerate}
+\item If $f$ is continuous on $[a,b)$ and is discontinuous at $b$, then
+$$\int_a^b f(x)~dx = \lim_{t\rightarrow b^- }\int_a^t f(x)~dx$$
+\item If $f$ is continuous on $(a,b]$ and is discontinuous at $a$, then
+$$\int_a^b f(x)~dx = \lim_{t\rightarrow a^+ }\int_t^b f(x)~dx$$
+\item If $f$ is discontinuous at c and both 
+$$\int_a^c f(x)~dx \quad \text{and} \quad\int_c^b f(x)~dx\quad\text{are convergent}$$
+then
+$$
+\int_a^b f(x)~dx = \int_a^c f(x)~dx+\int_c^b f(x)~dx
+$$
+is also convergent.
+\end{enumerate}	
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:  Where is the discontinuity? Does your intuition say converge or diverge? Vote. The inverse of $\frac{1}{\sqrt{x-2}}$ is $\frac{1}{x^2}+2$ so expect convergent. 
+$$
+\int_2^5\frac{1}{\sqrt{x-2}} = 2\sqrt{3}
+$$
+Relate to $\ds \int_1^{\infty} \frac{1}{x^p}~dx$ and reverse the above theorem.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 
+$$
+\int_{-1}^1\frac{1}{x} ~dx, \quad \int_{-\infty}^\infty \frac{1}{x}~dx = \quad \quad 0 \text{ \quad or \quad divergent}?
+$$
+Key is the definition we choose to accept. Difference between
+$$
+\lim_{t\rightarrow \infty}\int_{-t}^t \frac{1}{x}~dx  = \lim_{t\rightarrow \infty}\int_{-t}^0\frac{1}{x}~dx+\lim_{t\rightarrow \infty}\int_0^t\frac{1}{x}~dx ?
+$$
+The left hand side is the Cauchy principle value as seen in certain generalizations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tips
+\begin{enumerate}
+\item Use limit notation
+\item Split the terms so that each term is well defined
+\item Be extremely sensitive to $\displaystyle\frac{1}{x^p}$
+\item Comparison theorem is the first choice if only care about converge / diverge.
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 8 Further application of integration}
+
+Here we see some uses of integration which aren't directly area under the curve.
+\begin{itemize}
+\item Already did volumes of revolution. (Section 6.2)
+\begin{enumerate}
+\item Archimedes and the volume of the sphere. \\ \url{http://math.gmu.edu/~rsachs/math400/History%20Method%20of%20Archimedes%20Gould.pdf}
+\item Cavaleri and volume of sphere \\
+\url{http://www.matematicasvisuales.com/english/html/history/cavalieri/cavalierisphere.html}
+\end{enumerate}
+\item Arc length: Sum of line segment (distance)
+\item Surface area (of revolution): Sum of cone section (circle)
+\item Physics and engineering (pressure, force, center of mass): Sum of pressure, low dim moments) \url{https://en.wikipedia.org/wiki/Work_(physics)}
+\item Economics (surplus): Sum of demand \url{https://en.wikipedia.org/wiki/Economic_surplus}
+\item Biology (Blood flow): Sum cylinder (circle) \url{https://en.wikipedia.org/wiki/Cardiac_output}
+\item Probability: Sum of individual probabilities
+\end{itemize}
+Key for each is to compute via summation of continuous values
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.1 Arc length}
+\begin{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Arc length: Find the arc length of $y = x^2$ between $(0,0)$ and $(2,4)$. 
+\begin{enumerate}
+\item Draw picture, label $n+1$ points $P_0,\dots,P_n$ spaced equally in $x$ by $\Delta x$. 
+\item Approximate with line segment lengths, take limit as number of segments goes to infinity. This familiar process results in a definite integral. 
+\item Pythagoras gives us distance formula.
+\[
+L = \lim_{n\rightarrow \infty} \sum_{i=1}^n \left| \overline{P_{i-1}P_i}\right|
+= \lim_{n\rightarrow \infty} \sum_{i=1}^n \sqrt{(x_i-x_{i-1})^2 + (y_i-y_{i-1})^2}
+= \lim_{n\rightarrow \infty} \sum_{i=1}^n \sqrt{\Delta x^2 + \Delta y^2}
+\]
+\[
+= \lim_{n\rightarrow \infty} \sum_{i=1}^n \sqrt{1 + \left(\frac{\Delta y}{\Delta x}\right)^2} ~\Delta x
+= \int_0^2 \sqrt{1 + \left(f'(x)\right)^2}~dx
+\]
+Trig substitution naturally appears due to Pythagoras.
+\item Theorem: The arc length of $y=f(x)$ on interval $[a,b]$ is given by
+\[
+L = \int_a^b \sqrt{1 + \left(f'(x)\right)^2}~dx
+\]
+This is the only new thing in this section, but the idea that we can bend Riemann sums to do new things shows the reach of calculus.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Check formula with something simpler. Find the arc length of $y=3x+1$ from $x=0$ to $x=4$.
+\[
+L = \int_0^4 \sqrt{1+3^2}~dx = 4\sqrt{10}
+\]
+Graph it. Pythagoras agrees.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Divide and conquer.
+\begin{enumerate}
+\item Finish what we started... Find the arc length of $y=x^2$ from $(0,0)$ to $(2,4)$. 
+\item Find the length of a quarter of the perimeter of the unit circle.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Integrals in $y$: For $x=g(y)$, we have an almost identical formula:
+\[
+L = \lim_{n\rightarrow \infty} \sum \sqrt{\Delta x^2 + \Delta y^2}
+\lim_{n\rightarrow \infty} \sum \sqrt{\frac{\Delta x}{\Delta y}^2 + 1} ~\Delta y = \int_a^b \sqrt{(g'(y))^2+1 } ~dy
+\]
+\begin{enumerate}
+\item Repeat above example for $y=f(x)=x^2$ but instead $x=g(y)=\sqrt{y}$ from $(0,0)$ to $(2,4)$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Parametric curves: This idea and most calculus ideas extend nicely to \emph{parametric curves} which show up naturally in places like physics among others. This is usually a better way to describe geometry and doesn't restrict us to curves which are functions. Though, they are more difficult to conceptualize and often compute.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item Familiar: Unit circle $x^2+y^2=1$ is given by $x=\cos(t), y=\sin(t)$ for parameter $t \geq 0$. Just as in precalculus.
+\item Silly yet new: Parabola $y=x^2$ is given by $x=t, y=t^2$ for parameter $-\infty <t< \infty$.
+\item Desmos demonstration. \\
+\url{https://www.desmos.com/calculator/qepemyowpv}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Arc length formula transforms. For $x=g(t), y=h(t)$ from $t=a$ to $t=b$,
+\[
+L
+= \lim_{n\rightarrow \infty} \sum_{i=1}^n \sqrt{\Delta x^2 + \Delta y^2}
+= \lim_{n\rightarrow \infty} \sum_{i=1}^n \sqrt{\left(\frac{\Delta x}{\Delta t}\right)^2 + \left(\frac{\Delta y}{\Delta t}\right)^2} ~\Delta t
+= \int_a^b \sqrt{g'(t)+h'(t)}~dt
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can now do the full unit circle even though not a function. One revolution is given by $x=\cos(t), y=\sin(t)$ for parameter $0\leq t \leq 2\pi$.
+\[
+L = \int_0^{2\pi} \sqrt{\sin^2(t)+\cos^2(t)}~dt = 2\pi
+\]
+More on this in chapter 10.
+\end{enumerate}
+
+\item This section is just one formula (though three versions). Challenges are
+\begin{enumerate}
+\item Setup the integral by drawing a graph (if possible).
+\item Compute integral using chapter 7 techniques.
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.2 Area of a surface of revolution}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Recall, solids of revolution have a nice formula for volume (draw picture for simple example). 
+\[
+V = \int_a^b A(x) ~dx = \int_a^b \pi r^2 ~dx = \int_a^b \pi f(x)^2 ~dx 
+\]
+where $A(x)$ is the area of a cross section (circle). This is summation of circular areas over an interval. Surface area of revolusions is the same idea in lower dimension (sum circle circumference to get surface area).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Surface of revolution:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Formula for $y=f(x)$ on $[a,b]$ rotated about the $x-$ axis.
+\[
+S = \int_a^b 2\pi r L~dx = \int_a^b 2\pi f(x)\sqrt{1+(f'(x))^2}~dx
+\]
+where
+\begin{itemize}
+\item $r$: rotation radius
+\item $L$: arc length
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Similar formula if rotated about the $y-$axis. Consider $x=g(y)$ for $y$ in interval $[c,d]$. 
+\[
+S = \int_c^d 2\pi r L~dy = \int_c^d 2\pi g(y)\sqrt{1+(g'(y))^2}~dy
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item This is the same idea as volume of revolution (and Reimann sum for that matter). Read the careful proof on own in text. Want proof on quiz / exam?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Just another formula, intuition makes it easy to remember. Examples:
+\begin{enumerate}
+\item Find the surface area generated by by $y = x^2$ from $(1,1)$ to $(2,4)$ rotated about the y axis (Solution: $\frac{\pi}{6}(17\sqrt{17}-5\sqrt{5})$)
+\item You try: What's the surface area of a sphere with radius $1$? Divide and conquer $x$ direction and $y$ direction.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tips:
+\begin{enumerate}
+\item Sometimes have choice of $dx$ or $dy$. Think which is easier to integrate. Write both down if needed.
+\item Make sure formula is consistent with $x$ or $y$
+\item Implicit formula, u - substitution, perfect square
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Gabriel's horn: Evangelista Torricelli, (1608-1647), Italian physicist and mathematician (Carrol paper). Pre-Newton, Torricelli brought about a troubling paradox on the boundary between the finite and infinite.
+\begin{enumerate}
+\item Rotate curve $y=\frac{1}{x}, x\geq 1$ about the $x$-axis. Find the volume / surface area of the solid.
+\item Volume: 
+\[
+V = \int_1^{\infty} A(x)~dx = \int_1^{\infty} \frac{\pi}{x^2}~dx = \pi
+\]
+\item Surface Area:
+\[
+A = \int_1^{\infty} 2\pi \left(\frac{1}{x}\right)\sqrt{1+\frac{1}{x^4}}~dx = 2\pi \int_1^{\infty} \frac{\sqrt{x^4}+1}{x^3}~dx  
+\]
+which diverges by the comparison test $\frac{\sqrt{x^4}+1}{x^3}\geq \frac{1}{x}$ on $[1,\infty)$.
+\item Paper: \url{https://www.jstor.org/stable/pdf/10.4169/math.mag.86.4.239.pdf?casa_token=JVd8NiDg6ugAAAAA:wbjOXan7IUUVJVNXJxg-PVfgG4q0xQgwtMfEkD3QLTe5D9T4mdJqtKQLe8OEsOkvjEmWR4Cu76gbmJX3YoLmc7-5lth4D0Me-TIs0jU3qNP186KBDxOT}
+\end{enumerate}
+So, GH has finite volume $\pi$, but infinite surface area. Rephrase, can fill the horn with less than 4 gallons of paint, but painting the outside is impossible. Can show the converse is false, no possible shape with infinite volume and finite surface area. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.3 Applications to physics and engineering}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.4 Applications to economics and biology}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.4 Probability}
+
+ADD THIS
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 10 Parametric equations and polar coordinates}
+
+So far we have considered calculus in 2 dimensions for 
+\begin{itemize}
+\item functions of $x$: $y=f(x)$
+\item implicit functions of $x$: $f(x,y)=0$ where $y=y(x)$ (i.e. $x^2+y^2=1$, implicit differentiation). 
+\end{itemize}
+Functions of $x$ often fall short. Physics has no shortage of examples:
+\begin{itemize}
+\item Newton planetary motion: \url{https://en.wikipedia.org/wiki/Newton%27s_theorem_of_revolving_orbits}
+\end{itemize}
+Here we consider two new ways to describe planar curves:
+\begin{itemize}
+\item Parametric equations: Tracing a curve via new parameter $t$ (often denotes time)
+\item Polar coordinates: Curves described by an angle $\theta$ and radius $r$. Rotation.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{10.1 Curves defined by parametric equations}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%
+\item Motivation: Earth rotating about the sun following an ellipse (sun at one focus). This is given by Kepler's law of planetary motion, Newton later proved it. Here $x$ is not the driving information. Instead, time $t$ (or distance traveled) makes sense. $t=365$ gives one full rotation. Variables $x=x(t)$ and $y=y(t)$ tracing this curve should each be variables of $t$.
+\url{https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Definition: For parameter $t$, 
+\[
+x = f(t), \quad y=g(t)
+\]
+are parametric equations. As $t$ varies, the point $(x,y)=(f(t),g(t))$ traces a parametric curve. Note:
+\begin{itemize} 
+\item Parameter $t$ can be restricted (ie $a \leq t \leq b$).
+\item Parametric curves may not be functions of $x$ or $y$.
+\item Often simply denote $x=x(t), y=y(t)$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{itemize}
+\item $x(t)=t-1$, $y(t)=2t+4$, $-3 \leq t \leq 2$. Make table for $t$ values. Eliminate parameter $t$. Not always possible to eliminate $t$. 
+\item Try on own: $x(t) = t^2-3$, $y(t)=2t+1$, $-2 \leq t \leq 3$
+\item Try on own: $x(t) = 4 \cos(t)$, $y=4\sin(t)$, $0 \leq t \leq 2\pi$. Need Pythagoras to eliminate $t$ in this case.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Notes: 
+\begin{itemize}
+\item There are often many parametrizations of the same curve. Show off in desmos.
+\begin{itemize}
+\item $x(t)=4\cos(t)$, $y(t)=4\sin(t)$, $0 \leq t \leq 2\pi$
+\item $x(t)=4\cos(2t)$, $y(t)=4\sin(2t)$, $0 \leq t \leq \pi$ (different speed)
+\item $x(t)=4\sin(t)$, $y(t)=4\cos(t)$, $0 \leq t \leq 2\pi$ (different start / end point)
+\end{itemize}
+\item Can always parametrize if given an equation though the way the curve is traced may differ.
+\begin{itemize}
+\item $y=x^2+1$: $x(t)=t, y(t)=t^2+1$
+\item $y=x^2+1$: $x(t)=2+t, y(t)=t^2+4t+5$
+\end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Cycloid: Famous example from geometry. Curve traced by a point on a circle rolling along the $x-$ axis.
+\begin{itemize}
+\item \url{https://en.wikipedia.org/wiki/Cycloid}
+\item Let the point $P$ start at the origin (rotation angle $\theta=0$ and the circle have radius $r$. As $\theta$ increases the circle rolls along the positive $x-$ axis. Can show
+\[
+x = r(\theta-\sin(\theta), \quad y=r(1-cos(\theta))
+\]
+\item It is possible to eliminate parameter $\theta$ and write as a single Cartesian equation, though not pretty.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item History and the brachistochrone problem: 
+\begin{itemize}
+\item \url{https://en.wikipedia.org/wiki/Brachistochrone_curve}
+\item \url{https://www.youtube.com/watch?v=Cld0p3a43fU}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-28, 37-38
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{10.2 Calculus with parametric curves}
+
+Here we extend calculus ideas (tangent line, area, arc length, etc) to parametric curves. \\ \ \\
+
+Working example: Cycloid for the unit circle.
+\[
+x(\theta) = \theta-\sin(\theta), \quad y(\theta) = 1-\cos(\theta)
+\]
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tangent line: Find the tangent line to the cycloid when $\theta=\frac{\pi}{2}$. 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Need $\frac{dy}{dx}$ for a general parametric curve $x=x(t), y=y(t)$. Noting that $y$ is also a function of $x$, the chain rule is the key.
+\[
+\frac{dy}{dt} = \frac{d}{dt} y(x) = \frac{dy}{dx} \frac{dx}{dt}
+\]
+rearranges as
+\[
+\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}
+\]
+where we need $\frac{dx}{dt} \neq 0$ (no vertical tangents).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Graph and find tangent line. Should have positive slope.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note, to find horizontal tangents we need $\frac{dy}{dx}=0$ leading to only $\frac{dy}{dt}=0$. Horizontal tangents for the cycloid are at $\pi, 3\pi, $ etc as expected.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Need a limiting idea to examine vertical tangents.
+\[
+\lim_{\theta \rightarrow 2\pi^+} \frac{dy}{dx} = \infty
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item High order derivatives are also easy.
+\[
+\frac{d^2y}{dx^2} = \frac{d}{dx} \frac{dy}{dx} = \frac{\frac{d}{dt} \left( \frac{dy}{dx} \right)}{\frac{dx}{dt}}
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area: Find the area under one arch of the cycloid.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Again, the chain rule is needed (substitution for integration). For $y=y(x)\geq 0$ on $[a,b]$, substitute $x=x(t)$ with $\alpha \leq t \leq \beta$ giving $dx = x'(t)dt$
+\[
+A = \int_a^b y(x)~dx = \int_{\alpha}^{\beta} y(t) x'(t)~dt
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Back to the cyloid, the area of one arch is then
+\[
+A = \int_0^{2\pi} y(t)x'(t)~dt = \int_0^{2\pi} (1-\cos(t)(1-\cos(t))~dt = 3\pi 
+\]
+via the half angle formula for cosine.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can show for the cycloid of a circle of radius $r$, the area under one arch is 3 times the area of the circle. 
+\[
+A = 3\pi r^2
+\]
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Arc length
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Already have the formula from chapter 8.
+\[
+L = \int_{\alpha}^{\beta} \sqrt{\left( \frac{dx}{dt}\right)^2 + \left( \frac{dx}{dt} \right)^2 }~dt
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Show the length of the unit cycloid arch is 8. In general for a circle of radius $r$, the cycloid arch is $8r$. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Skip surface area.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Another example: $x=t^2, y=t^3-3t$. 
+\begin{enumerate}
+\item Find the two tangent lines at point $(3,0)$. 
+\item Find vertical and horizontal tangents.
+\item Find where concave up / down.
+\item Sketch the curve. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-8, 11-19, 25-36, 41-44
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{10.3 Polar coordinates}
+
+In the last sections we extend the idea of function to parametric curves. Here we look at an alternate coordinate system designed to handle rotation / circular motion.
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Idea of polar coordinates:  
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item For many situations, distance $r$ and direction $(\theta)$ are more natural than horizontal ($x$) and vertical ($y$). Ie. Navigation (ship, airplane), astronomy (planets spinning and rotating). 
+%%%%%%%%%%%%%
+\item Cartesian coordinates $(x,y)$ vs polar coordinates $(r,\theta)$. 
+\begin{itemize}
+\item Draw the plane with point $(1,\sqrt{3})$. Two ways to describe. How are they connected? Trigonometry and right triangles. 
+\item In general, for any point $(x,y)$, 
+\[
+x = r\cos(\theta), \quad y=r\sin(\theta).
+\]
+\item Given $r$ and $\theta$, easy to find $x$ and $y$. The other way around is messier. Pythagoras gives $r$.
+\[
+r^2 = x^2 + y^2
+\]
+Arctangent gives $\theta$ (almost). Issue is the restricted domain for tangent to make invertible.
+\[
+\tan(\theta) = \frac{y}{x}, \quad \theta = \arctan(y/x), \quad -\frac{\pi}{2} < \theta < \frac{\pi}{2}
+\]
+\end{itemize}
+%%%%%%%%%%%%%
+\item Examples: Note $r$ and $\theta$ both are allowed to be negative.
+\begin{itemize}
+\item Convert to Cartesian coordinates: $(r,\theta) = (1,-\frac{5\pi}{6})$, $(-2,\frac{3\pi}{4})$. One unique solution for each.
+\item Convert to polar coordinates, many solutions for each due to periodicity and negative $r$: $(1,-1)$, $(0,-2)$. Note the above formula fails.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Graphs of polar curves: We know Cartesian graphs ($y=f(x)$). Now we change our thinking to polar graphs ($r=F(\theta)$). 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%5
+\item Simple examples: $r=2$, $r=-2$, $\theta=1$, $r=\frac{1}{\cos(\theta)}$ (straight line $x=1$), $r=\theta$ (spiral(s) of Archimedes). 
+\begin{itemize}
+\item Note how they are traced for $\theta$ increasing.
+\item It is good to see that $r$ and $\theta$ are orthogonal just as $x$ and $y$ are.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%5
+\item Example: $r=\cos(\theta)$. Have them guess what it should be. Approaches.
+\begin{itemize}
+\item Imagine $\theta$ increasing on $[0,2\pi]$. Better yet to graph $r=\cos(\theta)$ in $\theta-r$ plane. Circle is traced once on $[0,\pi]$. 
+\item Rewrite in Cartesian coordinates: $r^2=r\cos(\theta)$ gives a circle $x^2+y^2=x$ and complete the square to standard form.
+\item Parametric equations: $x=r\cos(\theta)=\cos^2(\theta)$ and $y=r\sin(\theta) = \cos(\theta)\sin(\theta)$ though this doesn't help much with the graph.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Try on own via the graph in $\theta-r$ plane.
+\begin{itemize}
+\item Cardiod: $r = 1+\sin(\theta)$.
+\item Rose: $r=\cos(2\theta)$. 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%5
+\item Useful to take advantage of symmetry with graphs.For $r=F(\theta)$, 
+\begin{itemize}
+\item $\theta$ and $-\theta$ give same equation: $x$-axis symmetry.
+\item $r$ and $-r$ give same equation: rotational symmetry.
+\item $\theta$ and $\pi - \theta$ give same equation: $y$-axis symmetry.
+\end{itemize}
+\item Use Desmos: \url{https://www.desmos.com/calculator/uu1erqkbey}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tangent lines: Assume $r=F(\theta)$ and revert to parametric equation results with parameter $\theta$.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $x=r\cos(\theta)=F(\theta)\cos(\theta)$ and $y=r\sin(\theta)=F(\theta)\sin(\theta)$ gives
+\[
+\frac{dy}{dx} = \frac{\frac{dy}{d\theta}}{\frac{dx}{d\theta}}
+= \frac{\frac{dr}{d\theta}\sin(\theta) + r\cos(\theta)}{\frac{dr}{d\theta}\cos(\theta) - r\sin(\theta)} 
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item For cardiod $r=1+\sin(\theta)$ find the tangent line $\theta=\frac{\pi}{3}$. Location of vertical tangent lines (note need to show $\frac{dy}{dx} \rightarrow \pm \infty$, zero division is not enough if top is also zero. Handle the pole this way.)?
+\end{enumerate}
+
+\item Interesting: 
+\begin{itemize}
+\item Mars as seen from Earth. \url{https://www.google.com/search?q=mars++path+as+seen+from+earth&rlz=1C1JZAP_enUS695US695&tbm=isch&sxsrf=ACYBGNSJ_XktM-A984LtyJH4bUp5LMHNxw:1578943964452&source=lnms&sa=X&ved=0ahUKEwiB7vvQqIHnAhVKbc0KHREWBGQQ_AUICigB&biw=1163&bih=510&dpr=1.65#imgrc=WHFeMQWy5IPmcM:}
+\item Mercury wandering sun: \url{https://planetpailly.com/2018/07/25/things-i-dont-understand-mercurys-wandering-sun/}
+\item Cardiod refraction: \url{https://www.tandfonline.com/doi/pdf/10.4169/amer.math.monthly.122.5.452?needAccess=true}
+\item Cardiod: \url{https://en.wikipedia.org/wiki/Cardioid}
+\end{itemize}
+
+\item Homework: 1-49, 55-63
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{10.4 Areas and lengths in polar coordinates}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the area enclosed by $r=\cos(\theta)$. 
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Unfortunately the area under polar curve $r=F(\theta)$ is not simply $\int_a^b F(\theta)~d\theta$. Why not?
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Dividing our region into small slices from $\theta$ to $\theta+\Delta \theta$, we see shapes are wedges (not rectangles). The area of this wedge with interior angle $\Delta \theta$ is a fraction of the area of an entire circle.
+\[
+A_w = \frac{\Delta \theta}{2\pi} \pi r^2 = \frac{\Delta \theta}{2} r^2
+\]
+Summing all these areas via a Riemann sum gives
+\[
+A = \int_a^b \frac{1}{2} r^2 ~d\theta = \int_a^b \frac{1}{2} (F(\theta))^2 ~d\theta.
+\]
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Back to our example, it is tempting to just use $[0,2\pi]$ as the integration interval.
+\[
+A = \int_0^{2\pi} \pi r^2 ~d\theta
+ = \int_0^{2\pi} \pi \cos^2(\theta) ~d\theta = \frac{\pi}{2}
+\]
+This is incorrect. We should have $\frac{\pi}{4}$ for the area of a circle of radius 1/2. Issue, the circle was traced twice. The correct interval should have been $[0,\pi]$ as we saw last section.
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Find the area inside circle $r=\cos(\theta)$ but outside circle $r=\frac{1}{2}$. Take the upper curve area minus the lower curve area.
+\[
+A = \int_a^b \frac{1}{2}(\cos^2(\theta)-(1/2)^2) ~d\theta
+\]
+Finding intersections of polar curves is just as easy as Cartesian curves $y=f(x)$. Solve $\cos(\theta)=\frac{1}{2}$ to get $\frac{\pi}{3}$ and $-\frac{\pi}{3}$. Note $\theta$ needed to trace the curve correctly. Then,
+\[
+A = \int_{-\pi/3}^{\pi/3} \frac{1}{2}(\cos^2(\theta)-(1/2)^2) ~d\theta
+\]
+%%%%%%%%%%%%%%%%%%%
+\item Example: Try on own. Find the area between the cardiod $r=1+\cos(\theta)$ and circle $r=1$. Bounds end up as $[-\pi/2,\pi/2]$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Arc length: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%
+\item Here we just use the parametric result
+\[
+L = \int_a^b \sqrt{\left(\frac{dx}{d\theta}\right)^2+ \left(\frac{dy}{d\theta}\right)^2 }~d\theta
+\]
+where $x=r\cos(\theta)$ and $y=r\sin(\theta)$. Simplifying,
+\[
+\left(\frac{dx}{d\theta}\right)^2+ \left(\frac{dy}{d\theta}\right)^2 = r^2 + \left(\frac{dr}{d\theta}\right)^2
+\]
+giving us
+\[
+L = \int_a^b \sqrt{r^2 + \left(\frac{dr}{d\theta}\right)^2 }~d\theta
+\]
+%%%%%%%%%%%%%%%%%
+\item Example: Find the arc length of $r=\cos(\theta)$. Make sure to only go around once ($0 \leq \theta \leq \pi$). Results is $\pi$ as expected.
+%%%%%%%%%%%%%%%%%%
+\item Example: Find the length of the cardiod $r=1+\cos(\theta)$. Via symmetry,
+\[
+L = 2\int_0^{\pi} \sqrt{2+2\cos(\theta)}~d\theta = 4\int_0^{\pi} \cos(\theta/2)~d\theta = 8
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Homework: 1-12, 17-21, 23-33, 35-42, 45-48
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{10.5 Conic sections}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{10.6 Conic sections in polar coordinates}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 11 Infinite sequences and series}
+Purpose of this chapter
+\begin{itemize}
+\item A general way to study most all functions. Make new connections $\sin(x),\cos(x), e^x$ are close relatives and any nice function can be rewritten as a polynomial (of infinite degree). (Desmos and $\frac{1}{1+x}, \sin(x)$.
+\item A general way to study derivative and integral. How many integrals can you do? 
+\item A rigorous way to define, compute and understand infinity or infinitesimal (1/infinity). (Desmos $\pi$ computation?)
+\item A way to do approximation well. What is the first 100 digits of $\pi$? Compute $\int_0^1 e^{-x^2}~dx$ accurate to 5 digits. Use telescope data for exoplanet detection. Predict weather / stock market trends. Transfer data to function. So much more. 
+\item Basically we push the boundary of calculus, though the sacrifice is abstraction.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.1 Sequences}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What is a sequence?
+\begin{enumerate}
+\item Intuition: A list of numbers where order matters (stock market prices, weather tempurature, my value).
+\item Definition: An infinite sequence of numbers is a function whose domain is the set of positive integers.
+\item Notation: Set notation $ \{a_1, a_2, \dots, a_n, \dots \} = \{a_n\}_{n=1}^{\infty} = \{a_n\}$. $a_n$ is called the $n$th term.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Writing out a list of numbers is not the way to go. We want a formula. 
+\begin{enumerate}
+\item Explicit formula
+\[a_n = \frac{(-1)^{n+1}}{2n-1}, \quad a_1=1, a_2=-\frac{1}{3}, \dots\]
+\item  Recursive formula
+\[a_n = \frac{a_{n-1}}{n+1}, a_1=1, \quad a_2=\frac{1}{3}, \dots\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Write a formula for each. Can you get them all?
+\begin{enumerate}
+\item $\{0, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \dots\}$ Explicit
+\item $\{-\frac{1}{4}, \frac{3}{9}, -\frac{5}{16}, \frac{7}{25}, \dots\}$ Explicit
+\item $\{1, 1, 2, 3, 5, 8, \dots\}$ Recursive, explicit is unpretty but possible! \\
+Ted talk Art Benjamin: \url{https://www.youtube.com/watch?v=SjSHVDfXHQ4} \\
+Closed form and other goodness: \url{https://en.wikipedia.org/wiki/Fibonacci_number} \\
+How fast does Fibonacci grow? Linear, polynomial, exponential? Akin to exponential $F_n \approx \frac{\phi^n}{\sqrt{5}}$ for golden ration $\phi = \frac{1+\sqrt{5}}{2}$.
+\item $\{2, 5, 8, 11, 14, \dots\}$ Explicit and recursive, called arithmetic sequence
+\item $\{1, \frac{1}{4}, \frac{1}{16}, \frac{1}{64}, \dots\}$ Explicit and recursive, called geometric sequence \\
+Archimedes and quadrature of parabola,  geometric sum formula: \url{https://en.wikipedia.org/wiki/The_Quadrature_of_the_Parabola}
+\item $\{3, 1, 4, 1, 5, \dots\}$ Neither possible (as far as we know), Pi movie (every system has order which can be expressed mathematically) \\ \ \\
+Explicit vs recursive formula, which is better?
+\item Create your own sequence groupwork! 1 bonus point if can stump the chumps, 1 if solve. Mine: Look-say sequence. Has a formula believe it or not. Conway.
+\[
+1, 11, 21, 1211, 111221, 312211, 13112221, \dots
+\]
+Conway himself: \url{https://www.youtube.com/watch?v=ea7lJkEhytA}
+\item Note: Formulas arent always possible even if pattern is there. Sometimes seemingly no pattern exists.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Function vs sequence.
+\begin{enumerate}
+\item Generally, functions have continuous variables (eg distance), sequences are discrete (eg time).
+\item A sequence is a special type of function, so all we know of functions transfers.
+\item Graphing a sequence $\{a_n\} = \{f(n)\}$, dots only on positive integers.
+\item CAN take limit $\lim_{n\rightarrow \infty} a_n$ (end behavior of sequence, La Crosse population stabalization)
+\item CANNOT take finite limits, differentiate, integrate, etc. Why? But we sometimes can interplay $\{a_n\} = \{f(n)\}$ connection and analyze $f$ instead.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Limit of a infinite sequence: $\lim_{n\rightarrow \infty} a_n$, a few possibilities.
+\begin{enumerate}
+\item Convergent (finite limit): $\{a_n = \frac{n-1}{n}\}$ (write out sequence) gives $\ds \lim_{n\rightarrow \infty} a_n = 1$. Precisely, \\ \ \\
+For every $\epsilon >0$ (small), there is an integer $N$ such that if $n>N$, then $|a_n-L|<\epsilon$. \\ \ \\
+Draw picture to convince. Similar to $\delta-\epsilon$ definition from Calc 1.
+\item Divergent: 2 cases
+\begin{enumerate}
+\item Infinite limit: $a_n = n$, $\ds \lim_{n\rightarrow \infty} a_n=\infty$. Can you manage precision? \\ \ \\
+For every $M >0$ (large), there is an integer $N$ such that if $n>N$, then $a_n>M$. \\ \ \\
+Similar for limit to $-\infty$.
+\item Rambler: $a_n=(-1)^n$ does not fit into either of above and also diverges.
+\end{enumerate}
+\item Note: The first $n$ terms doesn't matter. We are after end behavior only.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Convergent/divergent:
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Try on own. Find the end behavior. 
+\[
+\frac{1}{n}, \quad \frac{n^2}{3n^2-1}, \quad \frac{\ln(n)}{n}
+\]
+First two can use old tricks.
+\[
+\lim_{n\rightarrow \infty} \frac{1}{n^p} = 0 \quad p>0, \quad \lim_{n\rightarrow \infty} \frac{n^2}{3n^2-1}=\lim_{n\rightarrow \infty} \frac{1}{3-1/n^2}=\frac{1}{3}
+\]
+We are tempted to use l'Hospital for third, but remember cannot differentiate a sequence. Need more.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If $\ds \lim_{x\rightarrow \infty} f(x)=L$ and $f(n)=a_n$, then $\lim_{n\rightarrow \infty} a_n=L$. \\ 
+
+Feel free to use any techniques for function $f(x)$ as in Calc 1. Who remembers any?
+\begin{enumerate}
+\item Limit laws
+\item Squeeze theorem, sometimes called comparison theorem.
+\item l'Hospital's Rule
+\item Absolute convergence (If $\ds \lim_{n\rightarrow \infty} |a_n| = 0$, then $\ds \lim_{n\rightarrow \infty} a_n = 0$. Really the squeeze theorem.
+\item If $\ds \lim_{n\rightarrow \infty} a_n = L$ and $f(x)$ is continuous at $L$, then $\ds \lim_{n\rightarrow \infty} f(a_n) = f(L)$. Pass the limit inside the function.
+\item Just cite this theorem when using this fact. 
+\item Theorem converse (reverse) is not true. Can you think of an example where $\ds \lim_{n\rightarrow \infty} a_n=L$ but $\ds \lim_{x\rightarrow \infty} f(x) \neq L$? $a_n=\sin(\pi n)$ works.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Careful solutions for the last two.
+\begin{enumerate}
+\item $\ds \lim_{n\rightarrow \infty} \frac{\ln(n)}{n}=?$ What does your intuition say? Need l'Hospital. Let $x$ be a continuous variable. Then, 
+\[
+\lim_{x\rightarrow \infty} \frac{\ln(x)}{x} \quad \left( \frac{\infty}{\infty} IF \right) = \lim_{x\rightarrow \infty} \frac{1/x}{1} = 0
+\]
+By the above theorem, $\ds \lim_{n\rightarrow \infty} \frac{\ln(n)}{n}=0$. Note the careful footwork to avoid differentiating a sequence.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Groupwork!
+\begin{enumerate}
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \frac{n}{n+1} =  1
+$
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \frac{n}{\sqrt{n+10}} = \infty
+$
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \left(\frac{2n}{3n+1} + \frac{1}{\sqrt[3]{n}}-3\right) = -\frac{7}{3}
+$
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \frac{\sin n}{n} = 0
+$ (Squeeze theorem)
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \sin\left(\frac{n\pi +1 }{\sqrt[2]{n^3}}\right) = 0
+$ (Continuous function theorem)
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \tan^{-1}(n) = \frac{\pi}{2}
+$
+\item 
+$ \ds
+\lim_{n\rightarrow \infty}\sqrt[n]{2} = 1
+$ (Logarithm / $e$ continuous function)
+\item 
+$ \ds
+\frac{e^n}{n!}, \frac{n^n}{n!}
+$ (Squeeze theorem?)
+\item 
+$ \ds
+\lim_{n\rightarrow \infty} \frac{n!}{n^n}
+$ (Squeeze theorem $ 0 < \frac{n!}{n^n} < \frac{1}{n}$)
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Monotone convergence
+\begin{enumerate}
+
+\item Definition: $\{a_n\}$ is monotone increasing if $a_n < a_{n+1}$ for all $n\geq 1$. Similar for monotone decreasing.  
+$\{a_n\}$ is bounded above if there exists a $M$ such that $a_n < M$ for all $n \geq 1$. Similar for bounded below. If bounded above and below, we say $\{a_n\}$ is bounded.
+\item Theorem: Every bounded, monotone sequence is convergent. Draw a picture of inc / dec cases to convince. Much like the squeeze theorem, this is a nice way to show convergence of difficult sequences.
+\item Example:
+\[
+\lim_{n\rightarrow \infty} \frac{2^n}{n!} = 0 \text{(monotone decreasing, bounded above and below)}, \quad
+\lim_{n\rightarrow \infty} \sqrt[n]{n} = 1, \quad
+\lim_{n\rightarrow \infty} \frac{n^n}{3^n\cdot n!}, 
+\]
+\item How to tell increasing or decreasing
+\begin{itemize}	
+\item $a_n-a_{n-1}$ positive or negative
+\item $a_n/a_{n-1}$ bigger or smaller than 1
+\item Derivative positive or negative
+\end{itemize}
+\item We care about monotone convergence theorem because it is used to show most of remaining results in this chapter. Tis a powerful tool in abstract mathematics.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Reasoning: Find the end behavior.
+\begin{enumerate}
+\item
+$
+1, 1, 1, 1, 1, 1, 1, 1, \cdots
+$
+\item
+$
+1,2,3,4,5,6,\dots
+$
+\item
+$
+-1, 1, -1, 1, -1, 1\dots
+$
+\item
+$
+1,0, 1, 0, 0, 1, 0,0,0,1, 0,0,0,0,1
+$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Fact: $\ds
+\lim_{n\rightarrow \infty} a_n = \lim_{n\rightarrow \infty} a_{n+1}
+$ Boring, but can lead somewhere interesting.
+$$
+a_n = 1+\frac{1}{2+\frac{1}{2+\cdots}}
+$$
+Mention the limit of this continued fraction which must be rational is an irrational number, $\sqrt{2}$. How? Let $\lim_{n\rightarrow \infty} a_n = x$. Then,
+\[
+x = 1 + \frac{1}{1+x}
+\]
+and $x=\sqrt{2}$ via algebra. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.2 Series}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item There are two interesting (and related) views of sequences:
+\begin{itemize}
+\item End behavior (done)
+\item Summing terms (remainder of chapter)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions:
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item A partial sum $S_n$ of sequence $\{a_n\}$ is given by
+$$
+S_n = a_1+a_2+a_3... = \sum_{i=1}^n a_i
+$$
+This is also called a finite series. Note, this is a special type of sequence itself.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Compute the $n$th partial sums. Explicit form is the preference here, transfer series to sequence.
+\begin{enumerate}
+\item Arithmetic sequence: $a_n = 3n-1$ (sum properties / formulas from Calc 1)
+\item Geometric sequence: $a_n = \frac{1}{2}^n$ (pictureness, note not a way to compute in general.)
+\item Telescoping sum (special case, important, transfer series to sequence): $a_n=\frac{1}{n(n+1)}=\frac{1}{n} - \frac{1}{n+1}$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item An infinite series $s$ of sequence $\{a_n\}$ is
+$$
+s = \sum_{n=1}^\infty a_n
+$$
+If the limit converges (is finite), then $s$ is called the sum of the series. Note, this is the limit of a partial sum.
+$$
+s = \lim_{n\rightarrow\infty }S_n.
+$$
+Getting an explicit form of $S_n$ makes finding $s$ easy. Revisit above 3 examples.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Is it possible that $s$ (a sum of infinite numbers) is finite? We already have examples where it is!
+\begin{enumerate}
+\item $\frac{1}{2} +\frac{1}{4} +\frac{1}{8} + \dots = 1$ (draw picture justification).
+\item Riemann sum is very similar, yet not quite same.
+\item $1 + 1 + 1 + \dots = \infty$ (of course cannot always be finite, what condition might we need? For sure decreasing sequence to sum.)
+\item $1 + \frac{1}{2} + \frac{1}{3} + \dots = \infty$ (Harmonic series, will show decreasing is not enough, not surprising in light of improper integrals, will need to decrease fast enough.
+\item $1-1+1-1+1-1+\dots = ?$ (not all cases are clear) 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Geometric series (most important series)
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A geometric series is of the form
+\[
+\sum_{n=1}^{\infty} a r^{n-1}
+\]
+for $a,r$ constants. $r$ is the common ratio ($\ds \frac{a_n}{a_{n-1}}=r$ for all $n$).
+\item Above example fits this mold: $a_n=\frac{1}{2}^n = \frac{1}{2} \left(\frac{1}{2}\right)^n$.
+\item Why geometric? Can always draw nice pictures to interpret as area as above and in Archimedes quadrature of parabola. See text.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item When does the geometric series converge? Can compute the partial sum via algebraic fanciness to create a telescoping sum.
+\[
+S_n = a + ar + \dots + ar^{n-1}
+\]
+\[
+rS_n = ar + ar^2 + \dots + ar^{n}
+\]
+\[
+S_n-rS_n = a - ar^n \quad \Rightarrow \quad S_n = \frac{a-ar^n}{1-r}
+\]
+\[
+s = \lim_{n\rightarrow \infty} S_n = \lim_{n\rightarrow \infty} \frac{a-ar^n}{1-r}
+\]
+Only need $\ds \lim_{n\rightarrow \infty} r^n$ finite which requires $|r|<1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The geometric series $\ds \sum_{n=1}^{\infty} a r^{n-1}$ is
+\begin{itemize}
+\item convergent if $|r|<1$
+\item  divergent if $|r|\geq 1$
+\item The sum when convergent is 
+\[
+\sum_{n=1}^{\infty} a r^{n-1} = \frac{1}{1-r}
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Does each yield a geometric series? If yes, does each converge?
+\begin{enumerate}
+\item $3, 1, 1/3, 1/9, \dots$
+\item $a_n=2^{2n}\pi^{1-n}$ (If cannot see, use ratio to check.)
+\item $0.\overline{7} = 0.77777\dots = \frac{7}{10}+\frac{7}{100}+\dots$ (can express any repeating decimal as a fraction this way, $0.999\dots = 1$, chickawha?)
+\item $1+1+1\dots$
+\item $1-1+1-1\dots=\frac{1}{2}?$ (Note quite, on the end of convergence.)
+\item $1+2+4+8\dots=\frac{1}{1-2}?$ (Don't forget to check convergence condition.)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Power series: Represent a function as an infinite degree polynomial. Powerful (heh) idea here.
+$$
+\frac{1}{1-x} = \sum_{n=1}^\infty x^n = 1 + x + x^2 + \dots, \quad\quad |x|>1
+$$
+Can perform operations to generate more:
+\begin{enumerate}
+\item Differentiate: 
+\[
+\frac{1}{(1-x)^2} = 1 + 2x + 3x^2 + \dots
+\]
+\item Substitute: Let $x=-x^2$.
+\[
+\frac{1}{1+x^2} = 1 - x^2 + x^4 + \dots
+\]
+\item Integrate:
+\[
+-\ln(1-x) = \int \frac{1}{1-x} ~dx = x + \frac{x^2}{2} + \frac{x^3}{3} + \dots
+\]
+In a sense, this is the most practical definition of logarithm we have so far. Can compute $\ln(2) = -\ln(1/2)$ by hand (approximately). Key questions: how fast does it converge? when does it even converge? $|x|<1$. This gives concrete motivation for series.
+\end{enumerate}
+Details to be checked here: can we pass limit to infinite number of terms? More in section 11.8.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Given a series, a key question is does it converge or not. Here we have the simplest of all tests, always our first resort. \\ \ \\
+Divergence test:
+\begin{enumerate}
+\item If the series $\sum a_n$ is convergent, then $\lim_{n\rightarrow a_n} =0$. 
+\item If $\lim_{n\rightarrow }a_n\neq 0$, then $\sum a_n$ is divergent
+\item Example: The reverse is not true. $a_n =\ln (1+1/n)$ has $\lim_{n\rightarrow a_n} =0$, but this telescoping sequence diverges to infinity.
+$$
+\sum_{n=1}^k \ln\left(1+\frac{1}{n}\right) =
+\sum_{n=1}^k \ln\left(\frac{n+1}{n}\right) =
+\sum_{n=1}^k \left(\ln(n+1)-\ln(n) \right) = 
+\ln(k+1)
+$$
+Note, the divergence test can only show divergence. Never convergence.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{enumerate}
+\item Harmonic series: $1+\frac{1}{2} + \frac{1}{3} + \dots$
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Proof that harmonic series diverges: Idea is to compare to a simpler series.
+\[
+1+\frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \dots >
+1+\frac{1}{2} + \left( \frac{1}{4} + \frac{1}{4} \right) + \left(\frac{1}{8}+ \dots +\frac{1}{8}\right) + \left( \frac{1}{16} + \dots \right) \dots >
+1 + \frac{1}{2}+\frac{1}{2}+\dots
+\]
+The last smaller series diverges by the divergence test. By the comparison test, the harmonic series must also. Another view is to use $-\ln(1-x)$ series for $x=1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Surprising, yet not. Think back to $\int_1^\infty \frac{1}{x}~dx$ which also diverged. This inspires the next section.
+\item Many a paradox to be had: If an ant travels on a rubber band at 1 inch per minute and the band stretches at 1 foot per minute after each step, will the ant get to the other side? Indeed it will eventually.
+\item Show how slow this thing diverges via desmos. Carefulness next section for speed of divergence.
+\item Called the harmonic series since the sum of harmonics.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Series are limits of sequences, so our limit laws of last section apply. Assuming $\sum a_n$ and $\sum b_n$ both exist (are finite), then
+$$
+\sum_{n=1}^\infty(a_n\pm b_n) = \sum_{n=1}^\infty a_n \pm \sum_{n=1}^{\infty} b_n, \quad \sum_{n=1}^\infty(ca_n) = c \sum_{n=1}^\infty a_n
+$$
+Be sure to check that limits exist!
+\begin{enumerate}
+\item What about $\sum_{n=1}^\infty a_nb_n$? You think on it.
+\item Show the existence of god. Something from nothing. Grandi's series.
+\[
+0 = (1-1)+(1-1)+(1-1)+\dots = 1+(-1+1)+(-1+1)-1+\dots=1
+\]
+$0=1$ via zero division for fun: $x=1$, $x^2-1=0$, $(x+1)(x-1)=0$, $x+1=0$, $2=0$, $1=0$. \\ \ \\
+Similar voodoo occurs if laws of series are ignored. Where did Numberphile go wrong? \url{https://plus.maths.org/content/infinity-or-just-112}
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.3 The integral test}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we abandon computing infinite series. Instead, for sections 11.3-11.6 we simply answer, does the series converge or not? These are tests for convergence, and we have many ideas.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item Last time we showed the harmonic series $\sum \frac{1}{n}$ diverges. This was shown via trick, but we also mentioned comparing to an improper integral. That is the essence of this section. Draw the picture here to remind and do carefully. Show
+\[
+\sum \frac{1}{n} > \int_1^{\infty} \frac{1}{x}~dx = \infty
+\]
+by drawing area under curve inside rectangles adding to infinite sum.
+\item Repeat for $\sum \frac{1}{n^2}$. Why draw inside here instead of outside? Because gut says convergence. Can show $\sum \frac{1}{n^2} = \frac{\pi}{6}$. Euler and the Basil Problem.
+\item For positive series, comparison to improper integrals can show convergence or divergence of the resulting series.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theoerm: The integral test \\ \ \\
+Suppose $a_n$ has only positive terms. Let $a_n = f(n)$ with $f(x)$
+\begin{itemize}
+\item continuous on $[1,\infty)$
+\item positive on $[1,\infty)$
+\item decreasing on $[1,\infty)$.
+\end{itemize}
+Then, 
+\begin{itemize}
+\item if $\int_1^\infty f(x)~dx$ is convergent, then $\sum_{n=1}^\infty a_n$ is convergent
+\item if $\int_1^\infty f(x)~dx$ is divergent, then $\sum_{n=1}^\infty a_n$ is divergent
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Notes:
+\begin{enumerate}
+\item Need to check three hypothesis each time we use this.
+\item $\sum a_n$ and $\int f(x)~dx$ converge/diverge together. We do not have equality: $\sum a_n \neq \int f(x)~dx$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Does $\sum \frac{1}{1+n^2}$ converge or diverge?
+\begin{enumerate}
+\item Use divergence test first. Inconclusive. Why?
+\item Can we use the integral test? Check the three hypothesis on $f(x)  = \frac{1}{1+x^2}$. First two easy, use derivative to show third carefully.
+\item Can we easily integrate? Eyeball.
+\item Integrate to convergence.
+\end{enumerate} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $p$-series: For what $p$ does $\sum \frac{1}{n^p}$ converge?
+\begin{enumerate}
+\item Silly cases first. $p<0$ diverges by divergence test.
+\item $p=0$, same.
+\item $p>0$, $f(x)=\frac{1}{x^p}$ passes the three and we know $\int \frac{1}{x^p}$ converges from our past. 
+\item Theorem: The $p$-series converges for $p>1$ and diverges otherwise. This is our second most important series result so far behind geometric series.
+\end{enumerate} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Try on own. Take 2, what does this integral test yield?
+$$
+\frac{\ln n}{n}, \frac{n^2}{e^{n^3}}, \frac{1}{n^2+2n+2}, \frac{\sin n}{n^2}
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Error estimate: Our series and integral don't match in value, yet we can estimate a series in this way.
+\begin{enumerate}
+\item Assume $a_n$ is such that the integral test can be used.
+\item Denote $s = \sum a_n$ and partial sum $s_n = \sum_{k=1}^n a_k$. When is $s_n$ close to $s$?
+\item Check if the remainder is small:  $R_n = s - s_n$
+\item Suppose $a_n = f(n)$, and $f(x)$ is
+\begin{itemize}
+\item Continuous on $[n,\infty)$
+\item Positive on $[n,\infty)$
+\item Decreasing on $[n,\infty)$
+\end{itemize}
+then 
+$$
+\int_{n+1}^\infty f(x)~dx\leq s-s_n \leq \int_n^\infty f(x)~dx
+$$
+Draw a picture here, rectangles inside for one, outside for other.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: 
+\begin{enumerate}
+\item How close is the sum of the first 100 terms of $\sum \frac{1}{n^2}$ to the true sum?
+\[
+\int_{101}^{\infty} \frac{1}{x^2}~dx \leq s-s_{100} \leq \int_{100}^{\infty} \frac{1}{x^2}~dx 
+\]
+\item Can modify to check rate of divergence as well. How big is the sum of the first 100 terms of divergent harmonic series $\sum \frac{1}{n}$? 1000? 
+\[
+1 + \frac{1}{2} + \dots + \frac{1}{n} \leq 1 + \int_1^n \frac{1}{x}~dx = 1+\ln(n)
+\]
+Now, when will the ant get there?
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.4 The comparison test}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The comparison test \\ \ \\
+Let $a_n$, $b_n$ are series with positive terms and $a_n\leq b_n$. Then
+\begin{enumerate}
+\item if $\sum a_n$ diverges then $\sum b_n$ diverges.
+\item if $\sum b_n$ converges then $\sum a_n$ converges.
+\end{enumerate}
+Why does this make sense? Remember, a positive series converges if it goes to zero fast enough. If $a_n$ is too slow, $b_n$ must be also. If $b_n$ fast enough, $a_n$ also is. Similar to integral comparison test. See text for proof. Key is monotone bounded.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:  
+\begin{enumerate}
+\item $\ds \sum \frac{5}{n^2+n+3}$ converges by comparison to $p=2$ series
+\item $\ds \sum \frac{\ln k}{k}$ diverges by comparison to harmonic
+\item $\ds \sum \frac{k\cos^2 k}{1+k^3}$ converges by comparison to $p=2$ series
+\item $\ds \sum \frac{1}{\sqrt[3]{n^4+1}}$ converges by $p=\frac{4}{3}$ series
+\item $\ds \sum \frac{e^{1/n}}{n}$ diverges by comparison to harmonic
+\item $\ds \sum \frac{1}{2^n-1}$ not easy to bound, think should converge compared to $\ds \sum \frac{1}{2^n}$.  
+\item Be sure to check the hypothesis. Difficulty is having intuition, then finding a suitable nice series to compare to. Harmonic, geometric, and $p$-series are our candidates. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How else can we compare two series other than bounding? $a_n=\frac{1}{2^n-1}$ has the same rate of end behavior as $b_n=\frac{1}{2^n}$. That is, $\lim a_n$ and $\lim b_n$ grow at the same rate. Then,
+$\lim \frac{a_n}{b_n}$ must be constant. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The limit comparison test: \\ \ \\
+Suppose $\sum a_n$, $\sum b_n$ are series with positive terms. If 
+$$
+\lim_{n\rightarrow \infty}\frac{a_n}{b_n} = c \quad \text{(same end behavior speed)}
+$$
+where $c>0$ is a finite number. Then either both series converge or both diverge.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item $\ds \sum \frac{1}{2^n-1}$ converges
+\item $\ds \sum \frac{(k+1)(2k-2)}{\sqrt[3]{k^8-1}}$ diverges
+\item $\ds \sum \sin \left(\frac{1}{n}\right)$ diverges compared to harmonic. Trig limit from the past.
+$$
+\lim_{n\rightarrow\infty} n\sin(1/n)= \lim_{h\rightarrow 0} \frac{\sin(h)}{h}=1
+$$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Notes:
+\begin{enumerate}
+\item Leading terms are key. 
+\item What if $c = \infty$, $c = 0$? All we know is rates differ. Either both converge, only one, or neither. Give me examples of each. Test is inconclusive.
+\item If $\sum  a_n$, $\sum b_n$ is convergent and $a_n$, $b_n>0$, then $\sum a_nb_n$ converges. Why? Is converse true?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Thar be monsters at the edge of the world. Doe each converge or diverge? Give intuition first.
+\begin{enumerate}
+\item $\ds \sum \frac{1}{n\ln (n)}$ diverges by integral test
+\item $\ds \sum \frac{1}{n(\ln (n))^2}$ converges by integral test
+\item $\ds \sum \frac{1}{1+n^{1/n}}$  diverges?
+\item $\ds \sum \frac{1}{n^{1+1/\ln n}}$ diverges by limit comparison with harmonic
+\item $\ds \sum \frac{1}{e^n-n^e}$ converges by 
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.5 Alternating series}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Inspiration: Parallel parking ham video.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Thus far, we have tests for positive series only. The geometric is all that we allowed to be negative. What about others? A first case is the alternating series.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: $\sum a_n$ is an alternating series if $a_n=(-1)^nb_n$ or $a_n=(-1)^{n-1}b_n$ for $b_n>0$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Alternating series test \\ \ \\
+If the alternating series $\sum a_n = \sum (-1)^n b_n$ satisfies
+\begin{enumerate}
+\item $b_n$ is decreasing for all $n$ ($b_n < b_{n-1}$)
+\item $\displaystyle\lim_{n\rightarrow \infty} b_n = 0$
+\end{enumerate}
+then $\sum a_n$ is convergent. Again, proof consists of monotone and bounded. Draw picture for idea of proof, parallel parking-esque.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: This theorem is easy to use. How to show decreasing? May need derivative if inequality is not easy.
+\begin{enumerate}
+\item $\ds \sum \frac{(-1)^n}{n}$ alternating harmonic converges
+\item $\ds \sum (-1)^n\sin(\frac{1}{n})$
+\item $\ds \sum (-1)^n\cos(\frac{1}{n})$
+\item $\ds \sum (-1)^n\frac{n^2}{n^3+1}$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Alternating series remainder theorem: \\ \ \\
+If $s=\sum a_n = \sum (-1)^n b_n$ is convergent, then
+$$
+|R_n| = |s-s_n| \leq b_{n+1}
+$$.
+Reason, $s$ lies between consecutive terms by alternatingness. Then, 
+$|s-s_n| \leq |s_{n+1}-s_n| = b_{n+1}$. Cute...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: How many digits are required to estimate the series to 2 digits? 
+$$
+\sum_{n=1}^{\infty} \frac{(-1)^n}{n}
+$$
+Can show (in HW, also in 11.9) that $\ds \sum \frac{(-1)^n}{n}=\ln(2)$. Of course it does...
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.6 Absolute convergence and the ratio and root tests}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Absolute convergence 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A series $\sum a_n$ is absolutely convergent if $\sum |a_n|$ is convergent.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The absolute convergence theorem:\\ \ \\
+If a series is absolutely convergent , then it is convergent. \\
+\begin{enumerate}
+\item Why? $|a_n|$ goes to zero slower than $a_n$. So this is the comparison test in disguise. More carefully, we have
+\[
+0 \leq a_n + |a_n| \leq 2|a_n|
+\]
+and 
+\[
+\sum a_n = \sum \left(a_n+|a_n|\right) - \sum |a_n|.
+\]
+\item Why is it important? Make any series positive to access all previous tests.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can you find anything that is convergent but not absolutely convergent? Alternating harmonic.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A series is conditionally convergent if it is convergent but not absolutely convergent. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Is each absolutely, conditionally, or not convergent?
+\begin{enumerate}
+\item $\ds \sum \frac{(-1)^n}{n^2}$ Abs convergent
+\item $\ds \sum \frac{(-1)^n n}{n+1}$ Not convergent
+\item $\ds \sum \frac{\cos n}{n^2}$ Abs convergent
+\item $\ds \sum \frac{\sin n}{n}$
+\item $\ds \sum \frac{(-1)^n}{n}$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What is the advantage of absolute convergence over conditional?
+\begin{enumerate}
+\item Theorem: If $\sum a_n$ is absolutely convergent, can add the series in any order to result in same sum. 
+\item Theorem: If $\sum a_n=s, \sum b_n=t$, can multiply series $\left(\sum a_n \right) \left(\sum b_n \right) = st$. 
+\item This sheds light on $\sum (-1)^n$. Can get most any sum you want by rearranging.
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The ratio and root tests
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The ratio test: \\ \ \\
+For series $\sum a_n$, if 
+$$
+\lim_{n\rightarrow}\left|\frac{a_{n+1}}{a_n}\right| = L
+$$
+and
+\begin{enumerate}
+\item if $L<1$, $\sum |a_n|$ is convergent thus $\sum a_n$
+\item if $L>1$ or $L=\infty$, $\sum a_n$ is divergent
+\item if $L=1$, inconclusive
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The root test \\ \ \\
+If
+$$
+\lim_{n\rightarrow}\sqrt[n]{|a_n|} = L
+$$
+and
+\begin{enumerate}
+\item if $L<1$, $\sum |a_n|$ is convergent thus $\sum a_n$
+\item if $L>1$ or $L=\infty$, $\sum a_n$ is divergent
+\item if $L=1$, inconclusive
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Comments:
+\begin{enumerate}
+\item Why does it work? This should remind of geometric series. We are checking if $a_n \approx L^n$ for large $n$.
+\item Result is stronger then usual, we get absolute convergence instead of just convergence.
+\item Test is often inconclusive, so not a silver bullet. Yet it is simpler than other tests.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: This thing is easy to use. What does your intuition say first?
+\begin{enumerate}
+\item Friendly faces
+\[
+\sum r^n, \quad \sum \frac{1}{n^p}
+\]
+Inconclusive for $r=1$, any $p$.
+\item Ratio test
+$$
+\sum \frac{(-1)^nn^3}{3^n}, \quad \sum \frac{n!}{n^n}, \quad \sum \frac{1}{n!}=e
+$$
+\item Root test
+$$
+\sum\left(\frac{2n+3}{3n-2}\right)^n, \quad \sum \left(\frac{n+1}{n}\right)^{n^2}, \quad \sum \left(1+\frac{1}{n}\right)^n
+$$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can now handle some recursive sequences within series via ratio test, so that is pretty sweet.
+\[
+\sum a_n, \quad a_n = (\frac{n^2+1}{2n^2-2n})a_{n-1}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Bonus offerings
+$$
+\sum \frac{2n!}{n!5^n}, \quad \sum \frac{n^n}{n!3^n}, \quad \sum \frac{n}{\sqrt{n^3+2}}
+$$
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.7 Strategy for testing series}
+\begin{enumerate}
+\item Groupwork handout.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.8 Power series}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The idea of the remainder of the chapter is that we can represent many functions as series (infinite degree polynomial) instead. 
+\begin{enumerate}
+\item Recall our geometric series:
+\[
+\frac{1}{1-x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + \dots
+\]
+\item So, if in algebra we continued the journey of $c, mx+b, ax^2+bx+c, \dots$, we would (?) have found all other functions. 
+\item Why bother? Can make life easier (or harder). It expands the mathematical world to allow for new maneuvers.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A power series centered at $a$ is given by
+$$
+\sum_{n=0}^\infty c_n(x-a)^n = c_0 + c_1(x-a) + c_2(x-a)^2 \dots
+$$
+for $c_n$ some sequence. Note,
+\begin{enumerate}
+\item $c_n$: coefficients (numbers)
+\item $a$: the center. ($a = 0$ sometimes as with above geometric series)
+\item Is this a power series $\displaystyle\sum_{n=1}^\infty x^{2n}$? 
+\item A power series is a function (infinite order polynomial) which sometimes has a tidy/familiar formula. What formula? Stay tuned.
+\item It's a general collection of series (ie geometric series)
+\item It's convergent/divergent for different $x$ (ie geometric series needs $|x|<1$), though the function may make sense elsewhere.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Write each in power series form. Ie what is $a, c_n$?
+$$
+\sum\frac{(x+1)^n}{n!}, \quad \sum(-1)^n\frac{x^{2n+1}}{(2n+1)!}, \quad \sum\frac{(x-2)^n}{e^n+1}
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We are masters of series convergence. When (for what $x$) does each converge? ($x=0$ always)
+$$
+\sum_{n=1}^\infty x^n, \quad \sum_{n=1}^\infty \frac{x^n}{n!},\quad \sum_{n=1}^\infty\frac{x^n}{n5^n}
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item Imagine $x$ as some number. Ratio test jumps out. Ration test is limited so end points are needed.
+\item Not surprisingly, geometric series appears naturally.(give random examples)
+$$
+\sum_{n=1}^\infty \frac{nx^n}{3^{n+1}}
+$$
+\item The center $a \neq 0$
+$$
+\sum_{n=1}^\infty \frac{n(x-2)^n}{3^{n+1}}, \sum_{n=1}^\infty \frac{n(x+1)^n}{3^{n+1}}
+$$
+Now why is $a$ called the center? Interval of convergence is always symmetric about it.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For any power series $\displaystyle \sum_{n=0}^\infty c_n(x-a)^n$ there are only three possibilities for the interval of convergence for $x$:
+\begin{itemize}
+\item The series converges only when $x=a$. Why?
+\item The series converges for all $x$.
+\item There is a positive number $R$ such that the series converges if $|x-a|<R$ and diverges if $|x-a|>R$. $|x-a|=R$ needs checking any anything goes.
+\end{itemize}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $R$ is called the radius of convergence (for how many $x$ the series is convergent).
+\item $R$ doesn't include the ending points.
+\item The interval of divergence 
+\item Check the previous examples to rephrase in our new language.
+\item Try this one if still nervous: $\sum \frac{(-1)^n(x-2)^n}{n!}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Advanced topic
+\item[] 1. If 
+$$
+\lim_{n\rightarrow \infty} \sqrt[n]{c_n} = c
+$$
+where $c\neq 0$. Then the radius of convergence of 
+$\displaystyle\sum_{n=0}^\infty c_nx^n
+$
+is $R = 1/c$
+\item [] 2. If 
+\begin{itemize}
+\item $\displaystyle\sum_{n=0}^\infty c_nx^n$, $R = 2$
+\item $\displaystyle\sum_{n=0}^\infty d_nx^n$, $R = 3$
+\end{itemize}
+What is the radius of convergence of 
+$$
+\sum_{n=0}^\infty (c_n+d_n)x^n
+$$
+\item[] 3. Suppose the radius of convergence of 
+$\displaystyle\sum_{n=0}^\infty c_nx^n$ is $R$. Then what is the radius of convergence of 
+$$\displaystyle\sum_{n=0}^\infty c_nx^{2n}$$
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.9 Representations of functions as power series}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Goal: Given a function, how can we rewrite as a power series (infinite degree polynomial)?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Modify existing formula to derive new ones. Already saw this a bit with geometric series.
+\[
+\frac{1}{1-x} = \sum_{n=1}^\infty x^n,\quad |x|<1
+\]
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Substitution, constant multiple, distribution (allowed since absolutely convergent).
+$$
+\frac{1}{1+x^2}, \quad\frac{1}{2+x} = \frac{1/2}{1+x/2}, \quad\frac{x^3}{2+x}, \frac{1}{(1-x)^2} = \frac{1}{1-x}\cdot\frac{1}{1-x}
+$$
+\begin{enumerate}
+\item How does the radius of convergence change? It shifts with the substitution.
+\item Why is it called radius of convergence and why does it limit our series? $\frac{1}{1-x}$ can only be represented on $|x|<1$. Makes sense since we collide with a discontinuity at $x=1$. But, $\frac{1}{1+x^2}$ also is limited to $|x|<1$ despite being defined everywhere. It turns out power series naturally extend to the complex plane and complex numbers are pulling the strings out of site. That is, $\frac{1}{1+i^2}$ gives a discontinuity. Draw circle in complex plane. We will see a deeper connection to complex numbers in the next section with Euler's formula. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Differentiation and integration of power series \\ \ \\
+If the power series $\ds \sum_{n=1}^\infty c_n(x-a)^n$ has a radius of convergence $R>0$, then the function 
+$$
+f(x) = \sum_{n=1}^\infty c_n(x-a)^n
+$$
+is differentiable on the interval $(a-R,a+R)$ and
+\begin{itemize}
+\item $\ds f'(x) =  \sum_{n=1}^\infty nc_n(x-a)^{n-1}$
+\item $\ds \int f(x)~dx=  \sum_{n=1}^\infty \frac{1}{n+1}c_n(x-a)^{n+1}+C$
+\item The radius of convergence stay the same
+\end{itemize}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Key is that the interval of convergence comes for free. Always write this. Important.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Differentiate, integrate.
+\[
+\frac{1}{(1-x)^2} = \frac{d}{dx}\frac{1}{1-x}, \quad \ln(1-x)=-\int \frac{1}{1-x}~dx, \quad \arctan(x) = \int \frac{1}{1+x^2}~dx
+\]
+When we integrate, what is $C$? We should only have one constant here. Check $x=a$ at center to see. What is the radius of convergence for each? 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Interesting to see all these functions from geometric series alone. What else can we get?
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Applications of power series.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Historic detour: $\pi$ calculation goodness. \\ \ \\
+Noting that $\arctan(1) = \frac{\pi}{4}$, we have 
+\[
+\frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \dots
+\]
+a definition of $\pi$ called Leibniz formula! Unfortunately it is very slow to converge (5000th term is still size of 0.0001) so it isn't practical for $\pi$ digits. Yet, it inspired the following journey.
+\begin{enumerate}
+\item Start with Archimedes and polygons bounding a circle found 34 digits.
+\item Halley while waiting for his comet modified the formula and chose $x=\frac{1}{\sqrt{3}}$ giving 71 correct digits of $\frac{\pi}{6}$.
+\item Machin and followers edited the formula to increase speed of convergence. Why does this work? Try and see!
+\[
+\frac{\pi}{4} = \arctan\left(\frac{1}{2}\right)+\arctan\left(\frac{1}{3}\right) = 4\arctan\left(\frac{1}{5}\right)-\arctan\left(\frac{1}{239}\right) = ?
+\]
+\item The saga is long... \url{https://en.wikipedia.org/wiki/Approximations_of_%CF%80 }.
+I think the key wonder is whether the digits of $\pi$ do occur randomly ($\frac{1}{10}$th of the time). No one knows the answer here.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Approximation: 
+$$\int_0^{0.5} \frac{1}{1+x}$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What about $\sin (x)$, $\cos (x)$, $e^x$? 
+\begin{enumerate}
+\item These do not follow from the geometric series exactly, but they are three close relatives as next section will show. 
+\item $e^x$ we can handle now. Define $f(x)=e^x$ as the function such that $f'=f$. Assuming $f$ has a power series,
+\[
+f(x) = \sum_{n=0}^\infty c_n x^n = c_0 + c_1 x + c_2 x^2 + \dots 
+\]
+\[
+f'(x) = \frac{d}{dx} \sum_{n=0}^\infty c_n x^n = c_1 + 2c_2 x + 3c_3 x^2 + \dots
+\]
+Comparing coefficients,
+\[
+c_0 = c_1, \quad c_1 = 2 c_2, \quad c_2 = 3 c_3, \dots
+\]
+But, $f(0)=c_0=1$. Then,
+\[
+c_1 = 1, \quad c_2 = \frac{1}{2}, \quad c_3 = \frac{1}{3\cdot 2}, \quad \dots \quad , c_n = \frac{1}{n!} \quad \dots
+\]
+At last, a familiar series.
+\[
+e^x = \sum_{n=0}^\infty \frac{x^n}{n!}
+\]
+Radius of convergence? $R=\infty$.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item It is worth mentioning here that there exist other types of series for representing functions. Power series are simplest. Fourier series are instead 
+\[
+f(x) = \sum a_n \sin(nx)
+\]
+and spread out across the entire domain of the function and are built for periodic behavior. Power series on the other hand do very well at the center of the series.
+\end{enumerate}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.10 Taylor and Maclaurin series}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Last section hints that we need a better way to find power series for a function. Taylor series gives a method to find any smooth function
+'s power series.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Idea of Taylor: Assume function $f$ has a power series with center $x=a$.
+\[
+f(x) = \sum_{n=0}^\infty c_n (x-a)^n
+\]
+Our goal is to make the left and right hand derivatives match at $x=a$. This yields 
+\[
+c_n = \frac{f^{(n)}(a)}{n!}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If $f(x)$ has a power series representation at $a$, then it is given by the Taylor series formula is
+$$
+f(x)  = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n, \quad |x-a|<R
+$$
+\begin{enumerate}
+\item $R$: radius of convergence still.
+\item $0!=1$ and $n!$ factorial notation
+\item When $a = 0$, this is called a Maclaurin series.
+\item This is just a formula in the end, though complicated to look at.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the Maclaurin series of each.
+\begin{enumerate}
+\item $\ds e^x = \sum_{n=0}^\infty \frac{x^n}{n!}$
+\item $\ds \sin x = \sum_{n=0}^\infty (-1)^n\frac{x^{2n+1}}{(2n+1)!}$
+\item $\ds \cos x = \sum_{n=0}^\infty (-1)^n\frac{x^{2n}}{(2n)!}$
+\item $\ds \frac{1}{1-x} = \sum_{n=0}^\infty x^n$
+\item $\ds \ln(1+x) = \sum_{n=1}^\infty(-1)^n\frac{x^n}{n}$
+\item Memorize age 762, table 1. Be able to derive when tortured.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the Taylor series of each.
+\begin{enumerate}
+\item Above at $a = 1$, $a = \frac{\pi}{2}$
+\item $f(x)=\sqrt{x}, a = 16$
+\item $f(x)=\ln(x), a=2$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item A curious example: What happens to the power series with Fibonacci coefficients (0,1,1,2,3,5,...)? Use recusion $F_n = F_{n-2}+F_{n-1}$ to reveal.
+\[
+s(x) = \sum_{n=0}^\infty F_n x^n
+\]
+\[
+s(x) = 0+ x + \sum_{n=2}^\infty F_n x^n 
+= x + \sum_{n=2}^\infty F_{n-2} x^n + \sum_{n=2}^\infty F_{n-1} x^n
+= x + x\sum_{n=0}^\infty F_{n} x^n + x^2\sum_{n=0}^\infty F_{n} x^n
+= x + xs(x) + x^2s(x) 
+\]
+\[s(x) = \frac{x}{1-x-x^2}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item A key idea is to truncate a power series to give a (finite degree) polynomial approximation of a function. \\ 
+
+Taylor's Remainder Theorem: Let $f(x) = T_n(x)+R_n(x)$
+\begin{enumerate}
+\item $T_n(x)$, nth degree Taylor polynomial of $f(x)$
+\item $R_n(x)$ remainder (of the infinite series)
+\end{enumerate}
+If $|f^{(n+1)}(x)|\leq M$ for $|x-a|\leq R$, then
+$$
+|R_n(x)|\leq \frac{M}{(n+1)!}|x-a|^{n+1}\quad for \quad |x-a|\leq R
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note: Taylor's remainder theorem is used for two main purposes.
+\begin{enumerate}
+\item Theoretical: To show (carefully) a Taylor series converges to a function. 
+\item Practical: To assess how well a Taylor polynomial approximates a function. This has a wide range of uses.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Applications: Approximation and computer calculation.
+\begin{enumerate}
+\item Difficult number calculations. Can you find $\sqrt{2}$? $\sin(1)$?Your calculator can and Taylor polynomials is a way. Let's use
+$$
+\sin(x) \approx x-\frac{x^3}{3!}+\frac{x^5}{5!}
+$$
+How accurate is it when $-0.3\leq x\leq 0.3$? Via Taylor's theorem, we can bound the remainder by 
+\[
+R_5 \leq \frac{1}{7!} |x|^7
+\]
+On our interval, $R_5 \leq \frac{0.3^7}{7!} = 4.3*10^{-8}$. Show desmos to see. Using symmetry / periodicity of the sine curve, can calculate $\sin(x)$ for any $x$ value desires. This is similar to how your calculator functions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Analysis: How well does the difference quotient approximate $f'$? Consider $x = a+h$. Then,
+\[
+f(a+h) \approx f(a) + hf'(a)
+\]
+fits our mold
+\[
+f(x) \approx f(a) + f'(a) x 
+\]
+and Taylor's theorem gives
+\[
+|R_2| \leq \frac{M}{(n+1)!} |x-a|^{n+1}
+\]
+So, we depend on second derivative behavior and a squared term. Can approximate any derivative this way as long as we are mindful of error.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Euler's formula: Complex numbers tie up the loose ends left by real numbers. Recall, imaginary unit $i=\sqrt{-1}$. Then, via our power series results,
+\[
+e^{i\theta} = 1 + (i\theta) + \frac{i^2\theta^2}{2!} + \dots
+= 1 + (i\theta) - \frac{\theta^2}{2!} - \frac{i\theta}{3!} + \dots
+\]
+Separate real and imaginary parts.
+\[
+e^{i\theta} = \left( 1 - \frac{\theta^2}{2!}+\dots \right) + \left( i\theta - i\frac{\theta^3}{3!}+\dots \right) = cos(\theta)+i\sin(\theta)
+\]
+So, $\ds e^{i\theta} = \cos(\theta) + i\sin(\theta)$. This is Euler's formula.
+\begin{enumerate}
+\item First, this formula is bedaffling. Complex exponential is a complex number of this form $(a+bi)$. $e^{2\pi i}=1$.
+\item Can draw this easily in complex plane via trigonometry. Unit circle connection. 
+\item $e^{\pi i}=-1$, then $\ln(-1) = \pi i$ is imaginary. That is why we missed it in precalculus. This gives a easy way to make more room in the reals.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Summary: The idea of Taylor polynomial is that any smooth function $f(x)$ can be approximated by a polynomial under restrictions.
+\begin{enumerate}
+\item Smooth: all the derivatives of $f(x)$ are nice (finite)
+\item Restrictions: only works on a interval, highest accuracy near center. 
+\begin{itemize}
+\item You can shift (so it will work for any x)
+\item Approximate all the $f(x)$ in $(a-R,a+R)$ using all the informations at $a$
+\end{itemize}
+\item Approximate (nth degree)
+\begin{itemize}
+\item The more you choose, the more accurate it will be
+\item The remainder theorem is nice, insurance yet not always practical.
+\item The closer $x$ to the center $a$, the smaller the remainder will be.
+\item One more term means one more derivative
+\item Euler's method (Newton's method in Calculus I). Peek at the analysis. \\
+\url{https://en.wikipedia.org/wiki/Newton%27s_method} \\
+\url{https://en.wikipedia.org/wiki/Euler_method}
+\end{itemize}
+\item All the information of the derivatives of $f(x)$ is contained in $f(x)$
+\item This is a top idea of this class, and in a sense what our entire discussion of series is about.
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{11.11 Applications of Taylor polynomials}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 9 Differential equations}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{9.1 Modeling with differential equations}
+\begin{enumerate}
+\item Differential equations
+\begin{enumerate}
+\item Definition: equation with derivatives
+\item Population modeling
+\item[] Modification (HIV, fish harvest)
+\item Spring-mass system
+\item Order of differential equation
+\end{enumerate}
+\item Initial value problem: differential equation + initial value
+\item[] Initial values
+\item Solvability:
+\begin{enumerate}
+\item Existence: non-solvable
+$$
+y ' = \frac{1}{y},\quad y(0) = 0
+$$
+\item Uniqueness: not unique
+$$
+y ' = x\sqrt{y}, \quad y(0) = 0, \quad y = \frac{x^4}{16}
+$$
+
+\end{enumerate}
+\item Homework: page 584, 1, 2, 5, 6(a), 11, 12, 13
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{9.2 Direction fields and Euler's method}
+How to solve equation?
+\begin{enumerate}
+\item Guess and verify (limitation: seriously?)
+\item Solve by maths (limitation: anti-derivative)
+\item Direction field (use d-field software), $y' = x+y$, $y' = x^2+y$, $y' = -\frac{x}{y}$ (limitation first order)
+\item Euler's method (limitation first order)
+\item Generalize one of above. Taylor series
+\end{enumerate}
+
+
+\end{document}
