@@ -1,0 +1,2090 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb,amscd,graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\bibliographystyle{unsrt}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{epsfig}  		% For postscript
+%\usepackage{epic,eepic}       % For epic and eepic output from xfig
+\renewcommand{\thesection}{}  % toc dispaly
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ul}{\underline}
+
+\title{Applied Linear Algebra Notes, Fall 2021}
+\date
+\Large
+\begin{document}
+\maketitle
+\large
+
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fun Stuff}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+\item Feynman Method: \url{https://www.youtube.com/watch?v=FrNqSLPaZLc}
+\item Bad math writing: \url{https://lionacademytutors.com/wp-content/uploads/2016/10/sat-math-section.jpg}
+\item Google AI experiments: \url{https://experiments.withgoogle.com/ai}
+\item Babylonian tablet: \url{https://www.maa.org/press/periodicals/convergence/the-best-known-old-babylonian-tablet}
+\item Parabola in real world: \url{https://en.wikipedia.org/wiki/Parabola#Parabolas_in_the_physical_world}
+\item Parabolic death ray: \url{https://www.youtube.com/watch?v=TtzRAjW6KO0}
+\item Parabolic solar power: \url{https://www.youtube.com/watch?v=LMWIgwvbrcM}
+\item Robots: \url{https://www.youtube.com/watch?v=mT3vfSQePcs}, riding bike, kicked dog, cheetah, backflip, box hockey stick
+\item Cat or dog: \url{https://www.datasciencecentral.com/profiles/blogs/dogs-vs-cats-image-classification-with-deep-learning-using}
+\item History of logarithm: \url{https://en.wikipedia.org/wiki/History_of_logarithms}
+\item Log transformation: \url{https://en.wikipedia.org/wiki/Data_transformation_(statistics)}
+\item Log plot and population: \url{https://www.google.com/publicdata/explore?ds=kf7tgg1uo9ude_&met_y=population&hl=en&dl=en#!ctype=l&strail=false&bcs=d&nselm=h&met_y=population&scale_y=lin&ind_y=false&rdim=country&idim=state:12000:06000:48000&ifdim=country&hl=en_US&dl=en&ind=false} 
+\item Yelp and NLP: \url{https://github.com/skipgram/modern-nlp-in-python/blob/master/executable/Modern_NLP_in_Python.ipynb} \url{https://www.yelp.com/dataset/challenge}
+\item Polynomials and splines: \url{https://www.youtube.com/watch?v=O0kyDKu8K-k}, Yoda / matlab, \url{https://www.google.com/search?q=pixar+animation+math+spline&espv=2&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj474fQja7TAhUB3YMKHY8nBGYQ_AUIBigB&biw=1527&bih=873#tbm=isch&q=pixar+animation+mesh+spline}, \url{http://graphics.pixar.com/library/}
+\item Polynomials and pi/taylor series: Matlab/machin \url{https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80} 
+\url{https://en.wikipedia.org/wiki/Approximations_of_%CF%80#Machin-like_formula}
+\url{https://en.wikipedia.org/wiki/William_Shanks}
+\item Deepfake: face \url{https://www.youtube.com/watch?v=ohmajJTcpNk} \\
+dancing \url{https://www.youtube.com/watch?v=PCBTZh41Ris}
+\item Pi digit calculations: \url{https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80}, poor shanks...\url{https://en.wikipedia.org/wiki/William_Shanks}
+\end{enumerate}
+
+
+\section{Course Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Syllabus highlights
+\begin{enumerate}
+\item Grades: 
+\begin{enumerate}
+\item Know the expectation / what you are getting into.
+\item 15perc A (excellent), 35perc B (good), 35perc C (satisfactory),10perc D (passing), some F (failing)
+\item Expect lower grades than you are used to. I was a student once upon a time. I know what it's like to give some effort in a class and still get an A/B. Night before study, good enough? 
+\item Turn in an exam / project. Did you do good work?
+\item Many will start off doing good / satisfactory work. Improve to something more. C is not the worst thing in existence. These letters say nothing of your capability. 
+\end{enumerate}
+\item What does good mean? Good means good. Good job! Excellent means you showed some flair.
+\item Expect: More work, more expectation on good writing.
+\item Math is a challenging subject. Not a natural thing to think or write in. It takes work and practice to be better. My goal is to train you to be better and give you ideas of where it can go.
+\item Fact that you are here shows you are smart and capable. Your goal should be to improve. 
+\item Why do I do this? I do it out of respect for you. You are smart enough. I want you to gain something valuable here. I wouldn't do this job if I didn't think you were gaining something of value.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Grand scheme of things. Where does this class sit inside all of mathematics.
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item Basics: Algebra, arithmetic.
+\item First steps: Geometry, functions. (us now)
+\item Calculus: Math of change / infinity.
+\item Linear algebra: Math of vectors. Anything with finite representation. Invention of computers fueled this one. Gateway to real math / applications.
+\item Applied math. Any application you want. Physics, finance, marketing, material science, CFD, sports. 
+\item Abstract math. Create your own world of ideas. Number theory, analysis, algebra, topology, more. 
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Day 1}
+
+\begin{enumerate}
+\item 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 1: Linear Equations in Linear Algebra} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.1 Systems of linear equations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Definition: A \emph{linear equation} is of the form
+\[
+a_1 x_1 + a_2 x_2 + \dots + a_n x_n = b
+\]
+where $x_i$ are unknown variables with $a_i$ known constant coefficients and $b$ known constant. Only powers of 1 per variable. No other products or quotients.
+
+%%%%%%%%%%%%%%%%%%%
+\item Fundamental problem of linear algebra:
+\begin{itemize}
+\item Solve a system of linear equations (rich theory can completely study).
+\item Key questions: Existence and uniqueness.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+\item Familiar example, new ideas.
+\begin{enumerate}
+\item Solve for $x$ and $y$.
+\[
+\begin{cases}
+2x-y=0 \\
+-x+2y=3
+\end{cases}
+\]
+Linear equations, graphs are lines in 2d. 
+
+%%%%%%%%%%%%%%%%%%%
+\item Three perspectives of this class:
+\begin{itemize}
+\item Row picture (familiar)
+\item Column picture (new)
+\item Matrix representation (maybe new)
+\end{itemize}
+
+\item Row picture: 
+\begin{itemize}
+\item Graph in $xy$-plane. Solution is intersection of two lines. How to find? Substitute or elimination.
+
+\item In general, can see thee possibilities: Unique solution (lines differ in slope), infinite solutions (2 lines overlap), no solution (2 parallel non intersecting lines). No solution is called \emph{inconsistent}. One or infinite many solutions called \emph{consistent}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+\item Column picture: Vector representation
+\begin{itemize}
+\item Remind of 2D vector geometry, scalar multiplication, vector addition, graph, and linear combination. 
+
+\item Rewrite in vector form. How to think of this? What linear combination of column vectors $\vec{v}_1$ and $\vec{v_2}$ result in vector $\vec{b}$? Draw in the plane and sketch solution. 
+
+\item Verify that solutions $x=1, y=2$ from before work.
+
+\item Again, three possibilities. What are the vector analogies regarding column vectors and RHS vector?
+
+\item Generalize: If we change the RHS vector, will we always have a solution? In this case yes since $\vec{v}_1$ and $\vec{v_2}$ span $\mathbb{R}^2$. Change for parallel column vectors to see not always. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+\item Matrix representation: 
+\begin{itemize}
+\item Rewrite as coefficient matrix times unknown vector equal a RHS vector. 
+
+\item Notation: Note text uses bold face letters for vectors.
+\[
+A, \quad \vec{x}, \quad \vec{b}
+\]
+
+\item Can also write short hand as an augmented matrix.
+
+\item Solve using the same elimination strategy as with linear equations. Think of this as a computational view. Next section covers this.
+
+\item Matrix $A$ can be thought of as an operator on solution vector $\vec{x}$ with resulting vector $\vec{b}$. Studying this linear system equations to studying properties of matrix $A$. 
+\end{itemize}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%
+\item Higher dimensions:
+\begin{enumerate}
+
+\item 3 equations, 3 unknowns:
+\[
+\begin{cases}
+x+2y+3z = 5 \\
+2x+5y+2z = 7 \\
+6x-3y+z = -2
+\end{cases}
+\]
+
+%%%%%%%%%%%
+\item Row picture
+\begin{itemize}
+\item Ask graph of each linear equation. Graph in Geogebra 3d to see. Can anyone solve? Plot solution point as well.
+
+\item Again 3 cases here, but a bit richer. 1 solution, infinite solutions (plane or line of intersection), no solution (2 planes parallel but not the same). 
+
+\item Solve by row reduction and backwards substitution. Goal is to replace system with equivalent, though simpler system. Summarize 3 elementary row operations (swap, scale, replace with row plus multiple of another). Why bother swap or scale? Take advantage of zeros and nice numbers. Computers care for high dimension to avoid roundoff error. Mention could eliminate all the way to Gauss Jordan form.
+
+\end{itemize}
+
+%%%%%%%%%%%
+\item Column picture: Linear combination of three vectors giving RHS vector. Use Geogebra 3d again. Again, think of three cases. Key is all three vectors are linearly independent.
+
+%%%%%%%%%%%
+\item Matrix picture: Easy to write down? Now what?
+\begin{itemize}
+\item Can see columns of $A$ are column vectors. 
+\item What about row vectors? Will develop this.
+\item Augmented matrix. Algorithm in next section.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%
+\item Advantages / disadvantages of each picture: Combined they offer a complete theory.
+\begin{itemize}
+\item Row picture: Lots of info and intuition, cannot extend beyond 3d, will think in analogies.
+\item Column picture: Easy to extend, hard to solve, lots of info and intuition.
+\item Easy to adapt as algorithm, little intuition.
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 3, 7, 13, 18, 19, 23, 25, 33, 34
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.2 Row reduction and echelon form}
+
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 2 algorithms for solving linear systems of equations: 
+\begin{itemize}
+\item Gaussian elimination and backwards substitution (saw last time).
+\item Gauss-Jordan elimination.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example, $2 \times 2$: Solve the system using equation form.
+\[
+\begin{cases}
+x - 2y = 1 ~(R_1) \\
+3x + 2y = 11 ~ (R_2)
+\end{cases}
+\]
+
+\begin{enumerate}
+%%%%%%%%%%%%
+\item Use the same forward reduction and back substitution idea as in last section.
+\[
+R_2 \rightarrow -3R_1 + R_2
+\]
+Check solution works. Recall 3 elementary row operations.
+
+%%%%%%%%%%%%%%
+\item Generalize: Use augmented matrix and aim towards a standard form.
+\begin{itemize}
+\item Row echelon form (GE)
+\[
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+3 & 2 & 11
+\end{array}
+\right]
+\rightarrow
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+0 & 8 & 8
+\end{array}
+\right]
+\]
+\item Reduced row echelon form (G-JE)
+\[
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+3 & 2 & 11
+\end{array}
+\right]
+\rightarrow
+\left[
+\begin{array} {cc|c}
+1 & 0 & 3 \\
+0 & 1 & 1
+\end{array}
+\right]
+\]
+\item Pivot entries correspond to locations of 1's in RREF. Pivot columns are columns which contain a pivot entry.
+\item Note, for any matrix REF is not unique but RREF is. Will prove the latter later.
+\end{itemize}
+
+%%%%%%%%%%%%%%
+\item What if...
+\begin{itemize}
+
+%%%%%%%%%%%%%%%%
+\item No solution:
+\[
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+3 & -6 & 11
+\end{array}
+\right]
+\rightarrow
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+0 & 0 & 8
+\end{array}
+\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%
+\item Infinitely many solutions:
+\[
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+3 & -6 & 3
+\end{array}
+\right]
+\rightarrow
+\left[
+\begin{array} {cc|c}
+1 & -2 & 1 \\
+0 & 0 & 0
+\end{array}
+\right]
+\]
+Here $y$ is a free variable and all solutions are
+\[
+\begin{cases}
+x = 1+2y \\
+y \text{ free}
+\end{cases}
+\]
+or written parametrically as
+\[
+\begin{cases}
+x = 1+2t \\
+y = t
+\end{cases}
+\]
+for parameter $t$.
+\end{itemize}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Higher dimension, try on own:
+\[
+\begin{cases}
+2x+4y-2z = 2 \\
+4x+9y-3z = 8 \\
+-2x-3y+7z = 10
+\end{cases}
+\]
+REF and backwards sub vs RREF.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 11, 13, 15, 17, 21, 23, 33-34 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.3 Vector equations}
+
+
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item 3 view of linear algebra:
+\begin{itemize}
+\item Equation (row picture)
+\item Matrix 
+\item Vector (column picture): This section, this is where we get geometric reasoning with math rigor.
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Definition: The vector space $\mathbb{R}^n$ consists of all column vectors $\vec{u}$ with $n$ real valued components.
+\begin{itemize}
+\item Notation: $\vec{u} = [u_1, u_2, \dots, u_n]^T$, each entry is called a component.
+\item Special case: $\vec{0}$.
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Examples: Geometry of vectors, imagine displacement.
+\begin{itemize}
+\item $vec{u} = [1,2]^T \in \mathbb{R}^2$. Note not the same as (1,2). Vectors are location independent. Other examples in 4 quadrants. Sad zero vector.
+\item $vec{u} = [-3,1,2]^T \in \mathbb{R}^3$
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Definitions: Vector operations
+\begin{itemize}
+\item Addition: $\vec{u} + \vec{v} = [u_1+v_1, \dots, u_n+v_n]^T$ in $\mathbb{R}^n$. Note need vectors of same length.
+\item Scalar multiplication: $c \vec{u} = [c u_1, \dots, c u_n]^T$ for scalar $c$.
+\item Subtraction (triangular law): $\vec{u}-\vec{v}$
+\item Bonus (dot product to compare direction, more later): $\vec{u} \cdot \vec{v}$
+\item Bonus (norm or length, more later): $\| \vec{u} \|_n = \sqrt{u_1^2 + \dots + u_n^2}$
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Examples: $\vec{u} = [1,2]^T, \vec{v} = [3,1]^T$
+\begin{itemize}
+\item $2\vec{u}, -\vec{u}, 4\vec{u}, 0\vec{u}, c\vec{u}$, set of all scalar multiples results in a line (rescaling gives name to scalar)
+\item $\vec{u}+\vec{v}, \vec{v}+\vec{u}$ (Parallelogram law)
+\item $\vec{u}-\vec{v} = \vec{u}+(-\vec{v})$ (Triangular law)
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Theorem (these mirror familiar algebraic properties, some proofs in HW): For all $\vec{u}, \vec{v} \in \mathbb{R}^n$ and scalars
+\begin{enumerate}
+\item $\vec{u}+\vec{v} = \vec{v}+\vec{u}$ (Commutative)
+\item $(\vec{u}+\vec{v})+\vec{w} = \vec{u}+(\vec{v}+\vec{w})$ (Associative)
+\item $\vec{u}+\vec{0}=\vec{u}$ (Identity)
+\item $\vec{u} + (-\vec{u}) = \vec{0}$ for $-\vec{u} = (-1)\vec{u}$ (Inverse)
+\item $c(\vec{u}+\vec{v}) = c\vec{u}+c\vec{v}$ (Distribution)
+\item $(c+d)\vec{u} = c\vec{u}+d\vec{u}$ (Distribution)
+\item $c(d\vec{u}) = (cd)\vec{u}$ (Compatibility)
+\item $1\vec{u} = \vec{u}$ (Identity)	
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Definition (the linear of linear algebra): Vector $\vec{y} \in \mathbb{R}^n$ is a linear combination of vectors $\vec{v}_1, \vec{v}_2, \dots, \vec{v}_n$ if there exists scalars $c_1, \dots , c_n$ (called weights) such that 
+\[
+\vec{y} = c_1 \vec{v}_1 + \dots + c_n\vec{v}_n
+\]
+
+%%%%%%%%%%%%
+\item Example (Vector equation): Show that $\vec{b} = [3,1,-1]^T$ is a linear combination of vectors $\vec{a_1}=[2,0,-1]^T$ and $\vec{a_2} = [-1,1,1]^T$.
+\begin{itemize}
+\item This is equivalent to solving a linear system via GE.
+\item Geogebra and geometric interpretation.
+\item Is the same true for any $\vec{b}$? No, only if it lies in the plane generated by all linear combinations of $\vec{a_1}$ and $\vec{a_2}$. Consider a $\vec{b}$ which does not. 
+\end{itemize}
+
+
+%%%%%%%%%%%%
+\item Definition: The collection of all linear combinations of $\vec{v_1}, \dots, \vec{v_p} \in \mathbb{R}^n$ is called the Span$\{\vec{v_1}, \dots, \vec{v_p} \}$ and is a subset of $\mathbb{R}^n$.
+
+%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 21, 23, 27
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.4 The matrix equation $A \vec{x} = \vec{b}$}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item 3 views of linear algebra:
+\begin{itemize}
+\item Row picture (lines and planes, done)
+\item Column picture (vectors, done)
+\item Matrix picture (now, idea is to capture linear combination as an operation)
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Definition: For $A$ a $m \times n$ matrix with columns $\vec{a_1}, \dots, \vec{a_n}$ and $\vec{x} \in \mathbb{R}^n$, the produce $A\vec{x}$ is the linear combination of the columns of $A$ with weights as entries in $\vec{x}$. That is,
+\[
+A \vec{x} =
+[\vec{a_1} \dots \vec{a_n}]
+\left[ 
+\begin{array}{c}
+x_1 \\
+\vdots \\
+x_n
+\end{array}
+\right]
+= x_1 \vec{a_1} + \dots x_n \vec{a_n}
+\]
+Note, the number of columns in $A$ must match the number of entries of $\vec{x}$. 
+
+%%%%%%%%%%%%
+\item Example: Multiply a random $A_{2 \times 3}$ matrix by a $\vec{x}_{3 \times 1}$ vector. 
+
+3 linear algebra POVs are here. For general $\vec{x}$, write 
+\begin{itemize}
+\item 2 equations (planes, geometry)
+\item Linear combinations of 3 vectors (vectors, geometry)
+\item Matrix equation $A \vec{x} = \vec{b}$ (operation on a vector, similar to idea of function). Important question is given $A$, can we solve $A \vec{x} = \vec{b}$ for any RHS vector $\vec{b}$. 
+\end{itemize}
+We will readily switch between these views to gain insight and perspective.
+
+%%%%%%%%%%%%
+\item Example (entry-wise matrix multiplication): Multiply a random $A_{3 \times 3}$ matrix by a $\vec{x}_{3 \times 1}$ vector.
+\begin{itemize}
+\item Linear combination of 3 row vectors. Important concept.
+\item Dot product of rows and $\vec{x}$. This version is more convenient for hand calculation.
+\end{itemize}
+Replace $A$ with identity matrix $I_{3 \times 3}$ and ask them to guess result. 
+
+%%%%%%%%%%%%
+\item Theorem (linearity of matrix multiplication): For matrix $A$ $m \times n$, vectors $\vec{u}, \vec{v}$ $n \times 1$, and scalar $c$, we have
+\begin{enumerate}
+\item $A(\vec{u} + \vec{v}) = A\vec{u} + A\vec{v}$ (distributive)
+\item $A(c\vec{u}) = c(A\vec{u})$ (associative)
+\end{enumerate}
+Proof (of (a), $n=3$ case, (b) in text): All we need is the corresponding result from vectors in previous section.
+\begin{align*}
+A(\vec{u} + \vec{v})
+&= A \left[
+\begin{array}{c}
+u_1+v_1 \\
+u_2+v_2 \\
+u_3+v_3
+\end{array} \right]\\
+&= (u_1+v_1) \vec{a_1} + (u_2+v_2) \vec{a_2} + (u_3+v_3) \vec{a_3} \\
+&= (u_1 \vec{a_1} + u_2 \vec{a_2} + u_3 \vec{a_3})
++ (v_1 \vec{a_1} + v_2 \vec{a_2} + v_3 \vec{a_3})\\
+&= A\vec{u} + A\vec{v}
+\end{align*}
+
+%%%%%%%%%%%%
+\item Theorem (big result for entire course, will grow this list): For $A$ a $m\times n$ matrix, the following statements are either all true or all false.
+\begin{enumerate}
+\item For each $\vec{b} \in \mathbb{R}^n$, equation $A\vec{x}=\vec{b}$ has a solution.
+\item Each $\vec{b} \in \mathbb{R}^n$ is a linear combination of the columns of $A$.
+\item The columns of $A$ span $\mathbb{R}^m$.
+\item $A$ has a pivot position in every row.
+\end{enumerate} 
+
+%%%%%%%%%%%%
+\item Homework: 5, 7, 9, 11, 13, 15, 17, 23, 29, 30
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.5 Solution sets of linear equations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item We want to characterize solutions to a linear system of equations $A\vec{x} = \vec{b}$ for $A$ and $\vec{b}$ given and $\vec{x}$ unknown thru two perspectives:
+\begin{itemize}
+\item Geometrically (picture, intuition)
+\item Explicitly (formula, practical)
+\end{itemize}
+Our approach will be to consider two related cases:
+\begin{itemize}
+\item Homogeneous linear system: $A\vec{x} = \vec{0}$
+\item Nonhomogeneous linear system: $A\vec{x} = \vec{b}$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%
+\item Homogeneous linear system: $A\vec{x} = \vec{0}$
+\begin{enumerate}
+
+%%%%%%%%%%
+\item For any $A$, $\vec{x} = \vec{0}$ is always a solution (called the trivial solution). We seek nontrivial solutions $\vec{x} \neq \vec{0}$. Will there always be a nontrivial solution? Only if the GE solution has at least one free variable.
+
+%%%%%%%%%%
+\item Solve the homogeneous linear system:
+\[
+\left[
+\begin{array}{ccc}
+1 & 3 & -5 \\
+1 & 4 & -8 \\
+-3 & -7 & 9 
+\end{array}
+\right]
+\vec{x} = 
+\vec{0}
+\]
+Solving by GE gives $x_3$ a free variable with
+\[
+\vec{x} = 
+x_3\left[
+\begin{array}{ccc}
+-4 \\
+3 \\
+1 
+\end{array}
+\right]
+= x_3 \vec{v} = span \{ \vec{v} \}
+\]
+The set of these solutions are a line thru the origin parallel to $\vec{v}$. 
+
+
+%%%%%%%%%%%%%%%%%
+\item Change above example so three rows are multiples of eachother giving 2 free variables. 
+\[
+\left[
+\begin{array}{ccc}
+1 & 3 & -5 \\
+1 & 3 & -5 \\
+1 & 3 & -5 
+\end{array}
+\right]
+\vec{x} = 
+\vec{0}
+\]
+Solving by GE gives $x_2, x_3$ free variables with
+\[
+\vec{x} = 
+\left[
+\begin{array}{ccc}
+-3x_2+5x_3 \\
+x_2 \\
+x_3 
+\end{array}
+\right]
+= x_2 \vec{v_2} +  x_3 \vec{v_3} = span \{ \vec{v_2}, \vec{v_3} \}
+\]
+generating a plane thru the origin. View in Geogebra.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Nonhomogenous linear system: $A\vec{x} = \vec{b}$
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item Example as from before:
+\[
+\left[
+\begin{array}{ccc}
+1 & 3 & -5 \\
+1 & 4 & -8 \\
+-3 & -7 & 9 
+\end{array}
+\right]
+\vec{x} = 
+\left[
+\begin{array}{c}
+4 \\
+7 \\
+6 
+\end{array}
+\right]
+\]
+gives
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 3 & -5 & 4 \\
+0 & 1 & -3 & 3 \\
+0 & 0 & 0 & 0
+\end{array}
+\right]
+\]
+Again $x_3$ is free and we have
+\[
+\vec{x} = \left[
+\begin{array}{c}
+-4x_3 - 5 \\
+3x_3 + 3 \\
+x_3
+\end{array}
+\right]
+=  \left[
+\begin{array}{c}
+-5 \\
+3 \\
+0
+\end{array}
+\right] + 
+x_3 \left[
+\begin{array}{c}
+-4 \\
+3 \\
+1
+\end{array}
+\right]
+= \vec{p} + x_3 \vec{v}
+\]
+for the same $\vec{v}$ as in the homogenous case.
+Graph same lines as before but first shifted by vector $\vec{p}$ away from the origin.
+
+%%%%%%%%%%%%%
+\item Solution to nonhomogenous equation is the same as the homogenous case but translated.
+
+%%%%%%%%%%%%%
+\item Theorem: For $A\vec{x} = \vec{b}$ consistent and $\vec{p}$ a particular solution, then the solution set of all $A\vec{x} = \vec{b}$ is all vectors of the form
+\[
+w = \vec{p} + \vec{v_h}
+\]
+where $\vec{v_h}$ is any solution to the homogeneous equation $A\vec{x} = \vec{0}$. (sketch the plane case in $\mathbb{R}^3$)
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Homework: 1, 5, 7, 9, 11, 13, 17, 19, 21, 23, 27, 29, 31
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.6 Applications of linear systems}
+
+\begin{enumerate}
+
+\item Skip. Possible lab material.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.7 Linear independence}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we rephrase homogeneous systems of linear equations as vector equations instead. So our example homogeneous linear system 
+\[
+\left[
+\begin{array}{ccc}
+1 & 3 & -5 \\
+1 & 4 & -8 \\
+-3 & -7 & 9 
+\end{array}
+\right]
+\vec{x} = 
+\vec{0}
+\] 
+is equivalent to
+\[
+x_1 \left[
+\begin{array}{c}
+1 \\
+1 \\
+-3 
+\end{array}
+\right]
++ x_2 \left[
+\begin{array}{c}
+ 3  \\
+ 4  \\
+ -7 
+\end{array}
+\right]
++ x_3 \left[
+\begin{array}{c}
+ -5 \\
+ -8 \\
+ 9 
+\end{array}
+\right]
+ = 
+\vec{0}
+\] 
+which brings us to an important definition for this course.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: The set of vectors $\{ \vec{v_1}, \dots, \vec{v_p} \}$ in $\mathbb{R}^n$ is linearly independent if the vector equation
+\[
+x_1 \vec{v_1} + \dots + x_p \vec{v_p} = \vec{0}
+\]
+has only the trivial solution. If there are weights $x_1, \dots, x_p$ not all zero such that 
+\[
+x_1 \vec{v_1} + \dots + x_p \vec{v_p} = \vec{0}
+\]
+then $\{ \vec{v_1}, \dots, \vec{v_p} \}$ is linearly dependent.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Previous work on 
+\[
+\left[
+\begin{array}{ccc}
+1 & 3 & -5 \\
+1 & 4 & -8 \\
+-3 & -7 & 9 
+\end{array}
+\right]
+\vec{x} = 
+\vec{0}
+\] 
+gave solution set
+\[
+\vec{x} = 
+x_3\left[
+\begin{array}{ccc}
+-4 \\
+3 \\
+1 
+\end{array}
+\right]
+= x_3 \vec{v} = span \{ \vec{v} \}
+\]
+meaning that there are infinitely many solutions. Choosing $x_3=1$ gives $\vec{x} \neq 0$ so that
+\[
+-4\vec{v_1} + 3\vec{v_2} + \vec{v_3} = \vec{0}
+\]
+and so these three column vectors are linearly dependent. Alternatively,
+\[
+\vec{v_3} = 4\vec{v_1} - 3\vec{v_2} 
+\]
+and there is redundant information in these columns. This points towards the following results.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The columns of matrix $A$ are linearly independent if and only if the equation $A\vec{x} = \vec{0}$ has only the trivial solution.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The set of vectors $\{ \vec{v_1}, \dots, \vec{v_p} \}$ is linearly dependent if one vector can be written as a linear combination of the others.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Intuition of linear dependence / independence:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%
+\item One vector: Is the set of one vector linearly independent or dependent? Only if that vector is not the zero vector.
+\[
+\vec{v_1} = [1,2]^T
+\]
+
+%%%%%%%%%%%%%%%%
+\item Two vectors, $n=2$: When are two vectors linearly dependent? If one is a scalar multiple of the other.
+\[
+\vec{v_1} = [1,2]^T, \vec{v_2} = [5,10]^T, ~\text{on the same line, same direction of information}
+\]
+\[
+\vec{v_1} = [1,2]^T, \vec{v_2} = [1,10]^T, ~\text{not on the same line, separate direction of information}
+\]
+
+%%%%%%%%%%%%%%%%
+\item Three vectors, $n=2$: When are three vectors linearly dependent? Always. GE always yields a free variable. Graph example to show one vector as a linear combination of the other. Redundant information. This generalizes to the following result.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The set $\{ \vec{v_1}, \dots, \vec{v_p} \}$ in $\mathbb{R}^n$ with $p > n$ is linearly dependent.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note: With this section especially, we start to see the wide range of terminology in this course, much of it is a different perspective on the same root concept. Keeping this all straight is essential to avoid confusion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 15, 17, 21, 23, 25, 27, 31
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.8 Introduction to the linear transformation}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item New perspective: Think of $A\vec{x} = \vec{b}$ as a matrix operation.
+\begin{enumerate}
+\item Similar to $f(x) = y$, function $f$ acting on $x$ to result in $y$.
+\item Matrix $A$ acts on vector $\vec{x}$ resulting in vector $\vec{y}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Def and terminology: $A$ random $2 \times 3$ matrix times $\vec{x}$ giving $\vec{b}$. 
+\begin{enumerate}
+\item Picture: Mapping of inputs to outputs
+\item Inputs (domain) any vector in $\mathbb{R}^3$
+\item Outputs (range) some vectors in $\mathbb{R}^2$ (codomain)
+\item Linear transformation $A$ mapping inputs to outputs
+\item Notation: Matrix transformation $T(\vec{x}) = A\vec{x} = \vec{b}$ where $\vec{b}$ is the image of $\vec{x}$
+\item Just as we try to understand a function for any input, we will try to understand a matrix transformation in general.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Same $2 \times 3$ matrix as above. Define $T(\vec{x}) = A\vec{x}$. 
+\begin{enumerate}
+\item Find the image of random vector $\vec{x}$.
+\item For random vector $\vec{b}$, find input $\vec{x}$ if possible. Is it unique? If no, transformation is not invertible (reversible) as with function inverses.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linear transformations: Defined and alternate forms.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%
+\item Def: A transformation $T(\vec{x})$ is linear if
+\[
+T(\vec{u}+\vec{v}) = T(\vec{u})+T(\vec{v}), 
+\quad \text{and} \quad 
+T(c\vec{u}) = cT(\vec{u})
+\]
+for all vectors $\vec{u}, \vec{v}$ in the domain of $T$ and all scalars $c$.
+
+%%%%%%%%%%%%%%%%
+\item We have from before that all matrix transformations are linear transformations, but there are other linear transformations to be seen later on.
+
+%%%%%%%%%%%%%%%%
+\item Theorem: If $T(\vec{x})$ is a linear transformation, then
+\[
+T(c\vec{u}+d\vec{v}) = cT(\vec{u})+dT(\vec{v}), 
+\quad \text{and} \quad 
+T(\vec{0}) = T(\vec{0})
+\]
+for all vectors $\vec{u}, \vec{v}$ in the domain of $T$ and all scalars $c, d$.
+
+%%%%%%%%%%%%%%%%
+\item Theorem: The superposition principle holds for any linear transformation $T(\vec{x})$. That is,
+\[
+T(c_1 \vec{u_1} + \dots + c_p \vec{u_p}) = 
+c_1 T(\vec{u_1} + \dots + T(c_p \vec{u_p})
+\]
+
+%%%%%%%%%%%%%%%%
+\item These two theorems are often more convenient.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Geometry of linear transformations. For vectors $\vec{u}=[3,1]^T$, $\vec{v}=[1,2]^T$ and $\vec{u}+\vec{v}$, what does transformation $T(\vec{x})=A\vec{x}$ do? Use linearity for $\vec{u}+\vec{v}$.
+\begin{itemize}
+%%%%%%%%%%%
+\item Dilation 
+\[
+A = \left[ \begin{array}{cc}
+2 & 0 \\
+0 & 2
+\end{array} \right]
+\]
+%%%%%%%%%%%
+\item Contraction 
+\[
+A = \left[ \begin{array}{cc}
+1/3 & 0 \\
+0 & 1/3
+\end{array} \right]
+\]
+%%%%%%%%%%%
+\item Reflection 
+\[
+A = \left[ \begin{array}{cc}
+-1 & 0 \\
+0 & 1
+\end{array} \right]
+\]
+%%%%%%%%%%%
+\item Shear 
+\[
+A = \left[ \begin{array}{cc}
+1 & 2 \\
+0 & 1
+\end{array} \right]
+\]
+%%%%%%%%%%%
+\item 90 degree rotation 
+\[
+A = \left[ \begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array} \right]
+\]
+%%%%%%%%%%%
+\item Projection
+\[
+A = \left[ \begin{array}{cc}
+0 & 0 \\
+0 & 1
+\end{array} \right]
+\]
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 29, 31 	
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.9 The matrix of a linear transformation}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item In the last section, we looked at a matrix transformation and saw geometry. Here we reverse. Given a geometric description, we will derive the needed linear transformation. 
+
+%%%%%%%%%%%%%%%%%%%%
+\item Unit basis in $\mathbb{R}^2$:
+\begin{itemize}
+\item $\vec{e_1}=[1,0]^T, \vec{e_2}=[0,1]^T$, all other vectors in $\mathbb{R}^2$ are linear combinations of these two. Show example.
+\item Amounts to transformation of the unit square.
+\item Using linearity, understanding $T(\vec{x})=A\vec{x}$ action on these two unit basis will determine $A$.
+\end{itemize} 
+
+%%%%%%%%%%%%%%%%%%%%
+\item Example: Find linear transformation $T: \mathbb{R}^2 \rightarrow \mathbb{R}^4$ such that
+\[
+T(\vec{e}_1) = \left[ \begin{array}{c}
+1 \\ 2 \\ 3 \\ 4
+\end{array} \right]
+\quad \text{and} \quad
+T(\vec{e}_2) = \left[ \begin{array}{c}
+2 \\ -1 \\ 0 \\ 0
+\end{array} \right]
+\]
+Since we have for any $\vec{x}$ that
+\[
+\vec{x} = \left[ \begin{array}{c}
+x_1 \\ x_2
+\end{array} \right]
+= x_1 \vec{e}_1 + x_2 \vec{e}_2,
+\]
+then
+\[
+T(\vec{x}) = T(x_1 \vec{e}_1 + x_2 \vec{e}_2,)
+= x_1 T(\vec{e}_1) + x_2 T(\vec{e}_2) 
+= \left[ T(\vec{e}_1) + T(\vec{e}_2) \right] 
+\vec{x}
+=  \left[ \begin{array}{cc}
+1 & 2 \\ 2 & -1 \\ 3 & 0 \\ 4 & 0
+\end{array} \right] \vec{x}
+\]
+This holds for higher dimensional space as well.
+
+%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$, there exists a unique matrix $A$ such that
+\[
+T(\vec{x}) = A\vec{x} = \left[ T(\vec{e_1}) \cdots T(\vec{e_n}) \right]\vec{x}
+\]
+for unit basis vectors $\vec{e_1}, \dots, \vec{e_n}$.
+
+Matrix $A$ is called the standard matrix for the linear transformation $T$. Also see that any linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is also a matrix transformation.
+
+%%%%%%%%%%%%%%%%%%%%
+\item Example: Use the above theorem to find the linear transformation $T(\vec{x})$ which rotates vector $\vec{x}$ by $\theta$ radians counter clockwise.
+\begin{itemize}
+\item Draw $\vec{e_1}$ and $\vec{e_2}$ in the plane and resulting rotated vectors.
+\item Use trig to find resulting vectors:
+\[
+T(\vec{e_1}) = \left[ \begin{array}{c}
+\cos(\theta) \\
+\sin(\theta)
+\end{array} \right]
+, \quad 
+T(\vec{e_2}) = \left[ \begin{array}{c}
+\cos(\theta+\pi/2) \\
+\sin(\theta+\pi/2)
+\end{array} \right]
+= \left[ \begin{array}{c}
+\cos(\pi/2-(-\theta)) \\
+\sin(\pi/2-(-\theta))
+\end{array} \right]
+= \left[ \begin{array}{c}
+-\sin(\theta) \\
+\cos(\theta)
+\end{array} \right]
+\]
+\item Theorem result says
+\[
+T(\vec{x}) = A\vec{x} = 
+\left[
+\begin{array}{cc}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{array}
+\right]
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Catalog of geometric transformations:
+\begin{itemize}
+\item Thinking of what a transformation does to unit basis vectors $\vec{e_1}$ and $\vec{e_2}$ is equivalent to picturing its action on the unit square. 
+\item See text for list of common transformations.
+\item Know these, do not memorize. Just think about what happens to $\vec{e_1}$ and $\vec{e_2}$
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item $A\vec{x} = \vec{b}$, existence and uniqueness rephrased in terms of linear transformations.
+\begin{enumerate}
+%%%%%%%%%%%%%%
+\item Definition: A mapping $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is onto $\mathbb{R}^m$ if each $\vec{b}$ in $\mathbb{R}^m$ is the image of at least one (though maybe more) $\vec{x}$ in $\mathbb{R}^n$. This is existence. Draw picture to illustrate.
+
+%%%%%%%%%%%%%%
+\item Definition: A mapping $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is one-to-one $\mathbb{R}^m$ if each $\vec{b}$ in $\mathbb{R}^m$ is the image of at most one (though maybe none) $\vec{x}$ in $\mathbb{R}^n$. This is uniqueness. Draw picture to illustrate.
+
+%%%%%%%%%%%%%%
+\item Return to textbook basic linear transformations. Which are onto? One-to-one? Both? Neither?
+
+%%%%%%%%%%%%%%
+\item Theorem: Linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is one-to-one if and only if the equation $T(\vec{x})=\vec{0}$ has only the trivial solution.
+\begin{itemize}
+
+%%%%%%%%%
+\item If and only if means if statement $P$ is true, then statement $Q$ is also true. Further if $Q$ is true, then $P$ is also true.
+
+%%%%%%%%%
+\item Here we prove this theorems in two steps. (1) Assume $P$ is true, show $Q$ is also true. (2) Assume $P$ is false, then show $Q$ also false (contrapositive of reverse direction).
+
+%%%%%%%%%
+\item Proof of (1): Assume $T$ is one-to-one. Then $T(\vec{x}=\vec{0}$ has only one solution. We know matrix transformations are such that $T(\vec{0})=\vec{0}$. Then $\vec{x}=\vec{0}$.
+
+%%%%%%%%%
+\item Proof of (2): Assume $T$ is not one-to-one. Then for some $\vec{b}$ in $\mathbb{R}^m$ there are two vectors $\vec{u} \neq \vec{v}$ such that map to $\vec{b}$. But since $T$ is linear
+\[
+T(\vec{u}-\vec{v}) = T(\vec{u})-T(\vec{v}) = \vec{b}-\vec{b}=\vec{0}
+\]
+and hence $T(\vec{x})=\vec{0}$ has a nontrivial solution.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Let $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ be a linear transformation with standard matrix $A$. Then,
+\begin{itemize}
+\item $T$ is onto if and only if the columns of $A$ span $\mathbb{R}^m$.
+\item $T$ is one-to-one if and only if the columns of $A$ are linearly independent.
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 13, 15, 17, 23, 25, 27, 29, 30
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.10 Linear models in business, science, and engineering}
+
+\begin{enumerate}
+
+\item Possible lab material. Especially difference equations.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 2: Matrix algebra} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.1 Matrix operations}
+
+\begin{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Goal of this chapter: Treating $A$ as an operator, we get a new view on $A\vec{x} = \vec{b}$. 
+\begin{itemize}
+\item Similar to $\frac{d}{dx}$ as an operator on $f(x)$
+\item What are the properties of operator $A$?
+\item How to reverse this operation (will call inverse)? 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Basic matrix operations (easy): Arithmetic (addition and scalar multiplication)
+\begin{enumerate}
+\item Random $2 \times 3$ matrices $A$ and $B$. 
+\item $2A$, entry-wise scalar multiplication
+\item $A+B$, as with vectors, need dimensions to agree, entry-wise addition (and subtraction)
+\item Theorem: For $A, B, C$ matrices of the same dimension and scalars $r, s$, 
+\begin{itemize}
+\item $A+B = B+A$ (commutative)
+\item $(A+B)+C = A+(B+C)$ (associative for addition)
+\item $A+0 = A$ (identity for addition)
+\item $r(A+B) = rA+rB$ (scalar distribution)
+\item $(r+s)A = rA+sA$ (matrix distribution)
+\item $r(sA) = (rs)A$ (associative for mult)
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Matrix multiplication:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%
+\item Recall: $B \vec{x}$ as a linear combination of the column vectors of $n \times p$ matrix $B$
+\[
+B \vec{x} = x_1 \vec{b}_1 + \dots + x_p \vec{b}_p
+\]
+
+%%%%%%%%%%%%%%%%%%%%
+\item Matrix composition: $A(B\vec{x})$ for $A$ $m \times n$ and $B$ $n \times p$.
+\begin{itemize}
+%%%%%%%%%%%%%%%%%%%%
+\item Draw diagram: $\vec{x} \rightarrow B\vec{x} \rightarrow A(B\vec{x})$
+%%%%%%%%%%%%%%%%%%%%
+\item One step arc on diagram: Think of $AB$ as the new matrix operation for which $\vec{x} \rightarrow (AB)\vec{x}$.
+%%%%%%%%%%%%%%%%%%%%
+\item Similar to function composition: $f(g(x)) = (f \circ g)(x)$
+%%%%%%%%%%%%%%%%%%%%
+\item How to compute?
+\[
+B \vec{x} = x_1 \vec{b}_1 + \dots + x_p \vec{b}_p
+\]
+\[ A(B\vec{x}) 
+= A(x_1 \vec{b}_1 + \dots + x_p \vec{b}_p) 
+= x_1 A\vec{b}_1 + \dots + x_p A\vec{b}_p
+= [A\vec{b}_1 \dots A\vec{b}_p] \vec{x}
+\]
+%%%%%%%%%%%%%%%%%%%%
+\item What is the dimension of $AB$? $m \times p$
+%%%%%%%%%%%%%%%%%%%%
+\item Definition: For $A$ $m \times n$ and $B$ $n \times p$, then
+\[
+AB = A[\vec{b}_1 \dots \vec{b}_p] = [A\vec{b}_1 \dots A\vec{b}_p]
+\]
+where matrix $AB$ is $m \times p$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Example: Random matrices $A$ $(2\times 3)$ and $B$ $(3 \times 2)$.
+\begin{itemize}
+\item $AB$ column view (can get just a column this way): 
+\[
+AB = A [\vec{b_1} \vec{b_2}] = [A\vec{b_1} A\vec{b_2}] 
+\]
+\item $AB$ computational view (can get just an entry this way): Each row as row dot column
+\item $AB$ row view (can get just a row this way): 
+\[
+AB = \left[
+\begin{array}{c}
+row_1(A) \\
+row_2(A)
+\end{array} \right] B 
+= \left[
+\begin{array}{c}
+row_1(A)B \\
+row_2(A)B
+\end{array} \right]
+\]
+where this last step is done entry-wise.
+\item Show $AB \neq BA$. Makes sense thinking of function composition.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Matrix multiplication in general:
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%55
+\item Summary of matrix multiplication: For $A$ $(m \times n)$, $B$ $(n \times m)$, and $C = AB$ $(m \times p)$,
+\begin{itemize}
+\item Column-wise in general
+\[
+C = AB = [A\vec{b}_1 \dots A\vec{b_p}]
+\]
+\item Computational in general
+\[
+C = [c_{ij}], \quad c_{ij} = row_i(A) \cdot \vec{b}_j = \sum_{k=1}^n a_{ik} b_{kj}
+\]
+\item Row-wise in general
+\[
+C = AB = \left[ 
+\begin{array}{c}
+row_1(A) B  \\
+\vdots  \\
+row_m (A) B
+\end{array}
+\right]
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem (matrix multiplication properties): For $A, B, C$ matrices of suitable dimension
+\begin{itemize}
+\item $A(BC) = (AB)C$ (associative)
+\item $A(B+C) = AB + AC$ (right distributive)
+\item $(B+C)A = BA + CA$ (left distributive)
+\item $r(AB) = (rA)B = A(rB)$ (scalar commutative)
+\item $IA = A = AI$ (identity matrix multiplication, explain what $I$ is)
+\end{itemize}
+Proofs in homework and book. These follow from vector properties shown previously.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Warning: Matrix multiplication does not follow the intuition of scalar multiplication. In general
+\begin{itemize}
+\item $AB \neq BA$, not surprising since linear combos of cols of $A$ need not equal linear combinations of cols of $B$.
+\item $AB=AC$ need not imply $B=C$.
+\item $AB=0$ need not imply $A=0$ or $B=0$ for $0$ the zero matrix.
+\item Construct you own examples for fun.
+\end{itemize}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Powers of a matrix $A$
+\begin{enumerate}
+\item Def: $A^k = A \cdot A \cdot \dots \cdot A$, repeated multiplication $k$ times
+\item Note, need a square matrix $A$ $(n \times n)$. 
+\item Think if repeating an operation over and over. Similar to repeat function composition.
+\item Will revisit this notion for important applications later.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Matrix transpose:
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Def: For $(m \times n)$ matrix $A$, the transpose of $A$ written $A^T$ is the $(n \times m)$ matrix whose columns are the rows of $A$
+\begin{itemize}
+\item Example: Random $(2 \times 3)$ matrix. 
+\item Draw general picture of row and column vectors switching
+\item Entry-wise: $A_{m \times n} = [a_{ij}]$ gives $A^T_{n \times m} = [a_{ji}]$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Properties of matrix transpose. For matrices $A$ and $B$ of suitable dimensions and scalar $r$, 
+\begin{itemize}
+\item $(A^T)^T = A$
+\item $(A+B)^T = A^T + B^T$
+\item $(rA)^T = rA^T$
+\item $(AB)^T = A^T B^T$ (only surprising result, shown in HW)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Random matrices and vectors $A_{3 \times 2}, B_{2 \times 2}, \vec{b}_3, \vec{c}_2$, find all possible products which are defined.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 10, 11, 12, 15, 17, 19, 21, 23, 27, 33
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.2 The inverse of a matrix}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Reversing $A\vec{x} = \vec{b}$. 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Draw picture: Thinking of $A\vec{x} = \vec{b}$ as an operation $A: \vec{x} \rightarrow \vec{b}$, how to invert this process? Same idea as inverting a function. We need the operation to be one-to-one.
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: Square matrix $A_{n \times n}$ is invertible if there exists matrix $A^{-1}_{n \times n}$ such that
+\[
+A \cdot A^{-1} = A^{-1} \cdot A = I
+\]
+for $I_{n\times n}$ the identity matrix. Note this only makes sense for square matrices.
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Connection: Think of as composition of linear operators.
+\[
+\vec{x} = I\vec{x} = (A^{-1}A)\vec{x} = A^{-1}(A\vec{x})
+\]
+Draw picture. Similar to function inverses and composition, $(f \circ f^{-1})(x) = x$. 
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Not all matrices $A$ are invertible. If invertible, called non singular. If not invertible, called singular (alone and without a counterpart). Singular terminology may also refer to unusual. In face most square matrices randomly generated are invertible (non-singular), for $(2\times 2)$ case, need both columns to be colinear which is less common than not. Singular may also reference troublesome. Last reason may referr to the determinant being zero resulting in zero division (singularity).
+
+%%%%%%%%%%%%%%%%%%%%
+\item Example: Show that
+\[
+A = \left[
+\begin{array}{cc}
+3 & 2 \\
+7 & 4
+\end{array}
+\right], \quad 
+B = \left[
+\begin{array}{cc}
+-2 & 1 \\
+7/2 & -3/2
+\end{array}
+\right]
+\]
+are inverses of eachother. Just need to check that $AB=BA=I$ to show $B=A^{-1}$. 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Finding matrix inverses:
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item For $A$ a given matrix, 
+\begin{itemize}
+\item How to check if $A$ is invertible? For functions can check if $f(x)$ is one-to-one.
+\item How to compute $A^{-1}$? Method for functions as well, key is $(f^{-1} \circ f)(x)=x$, the inverse relation.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item General $2 \times 2$ case:
+\[
+AB = A[\vec{b}_1 \vec{b}_2] = [A\vec{b}_1 A\vec{b}_2] = I
+\]
+requires
+\[
+A\vec{b_1} = \vec{e_1}, \quad A\vec{b_2} = \vec{e_2}.
+\]
+These are two linear systems to solve. Likewise 3 linear systems for $(3 \times 3)$, and so on.
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the inverse of 
+\[
+A = \left[
+\begin{array}{cc}
+3 & 2 \\
+7 & 4
+\end{array}
+\right].
+\]
+Previous example lets us know what to expect here. 
+\begin{itemize}
+\item Solve two systems as separate augmented matrices.
+\[
+A\vec{b_1} = \vec{e_1}, \quad A\vec{b_2} = \vec{e_2}
+\]
+by using backwards substitution.
+
+\item Note redundancy and combine into a single augmented matrix
+\[
+[A | I] ~ \rightarrow ~ [I | B]=[I | A^{-1}]
+\]
+then use full Gauss-Jordan elimination.
+
+\item Elementary row operations are a key ingredient here. More shortly.
+
+\item Note: This approach of using Gaussian elimination extends to 3 or higher dimensions as well.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Can complete the $(2 \times 2)$ case in general. For any matrix 
+\[
+A = \left[
+\begin{array}{cc}
+a & b \\
+c & d
+\end{array}
+\right],
+\]
+$A$ is invertible if $ad-bc \neq 0$ and
+\[
+A^{-1} = \frac{1}{ad-bc}\left[
+\begin{array}{cc}
+d & -b \\
+-c & a
+\end{array}
+\right]
+\]
+If $ad-bc=0$ then $A$ is not invertible. In the $(2 \times 2)$ case, $ad-bc$ is called the determinant of $A$ (note zero division singularity). Derive and verify on own.
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Validate for previous example.
+ 
+%%%%%%%%%%%%%%%%%%%%
+\item Above theorem generalizes to higher dimensions to a certain extent. Namely the idea of determinant generalizes via recursion. More later.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Using inverses to solve linear systems $A\vec{x}=\vec{b}$.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If $A_{n \times n}$ is invertible, then for each $\vec{b} \in \mathbb{R}^n$, $A\vec{x} = \vec{b}$ has a unique solution
+\[
+\vec{x} = A^{-1} \vec{b}.
+\]
+This isn't a practical method to solve (see previous example work), but it is important in reach (general, existence, uniquiness). \\ 
+
+Proof: Two steps:
+\begin{itemize}
+\item Existence: Check that $\vec{x} = A^{-1} \vec{b}$ works. Key is inverse relation $A A^{-1} = I$.
+\item Uniquiness: If $\vec{x}$ and $\vec{y}$ are two solutions, then $A\vec{x}=\vec{b}$ and $A\vec{y}=\vec{b}$. Then we have $A\vec{x}=A\vec{y}$ and so $A^{-1}A\vec{x} = A^{-1}A\vec{y}$ implying $\vec{x}=\vec{y}$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Example: Solving a linear system via inverse.
+\[
+\begin{cases}
+3x_1 + 2x_2 = 3 \\
+7x_1+4x_2= 2
+\end{cases}
+\]
+Use the above calculation where $\vec{x} = A^{-1} \vec{b} = [-4, 11]^T$. Note the Gaussian elimination work as before was packaged into the inverse function calculation.
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\item Properties of inverses
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For invertible matrices $A$ and $B$ of the same dimension,
+\begin{enumerate}
+\item $(A^{-1})^{-1} = A$ (makes sense with respect to reversing an operator)
+\item $(AB)^{-1} = B^{-1} A^{-1}$ (note the reverse of multiplication order, this is the reverse of operator composition)
+\item $(A^T)^{-1} = (A^{-1})^T$ (note inverse of a symmetric matrix also symmetric)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Proofs of each, just need to check each works. Multiply to the identify.
+\begin{enumerate}
+\item Need matrix $C$ such that
+\[
+A^{-1} C = I, \quad C A^{-1} = I.
+\]
+By definition $C=A$ is what we have.
+
+\item Compute $(AB)(B^{-1}A^{-1}) = \dots = I$ and $(B^{-1}A^{-1})(AB) = \dots = I$
+
+\item This one relies on the reversing of multiplication for transpose.
+\[
+(A^T)(A^{-1})^T = (A^{-1}A)^T = I^T = I
+\]
+\[
+(A^{-1})^T(A^T) = (AA^{-1})^T = I^T = I
+\]
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Elementary matrices and decomposing Gaussian elimination
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Example: Think of three elementary row operations on matrix 
+\[
+A = \left[
+\begin{array}{ccc}
+0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8
+\end{array}
+\right]
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%
+\item $R_1 \leftrightarrow R_3$: We seek matrix $E_1$ such that 
+\[
+E_1 A 
+= E_1 \left[
+\begin{array}{ccc}
+0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8
+\end{array}
+\right]
+= \left[
+\begin{array}{ccc}
+4 & -3 & 8 \\
+1 & 0 & 3 \\
+0 & 1 & 2 
+\end{array}
+\right]
+\]
+Thinking bout the row picture for matrix multiplication,
+\[
+\left[
+\begin{array}{c}
+row_1(E_1) \\
+row_2(E_1) \\
+row_3(E_1) 
+\end{array}
+\right]
+\left[
+\begin{array}{ccc}
+0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8
+\end{array}
+\right] =  \left[
+\begin{array}{ccc}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0  
+\end{array}
+\right]
+\left[
+\begin{array}{ccc}
+0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8
+\end{array}
+\right]
+ \left[
+\begin{array}{ccc}
+4 & -3 & 8 \\
+1 & 0 & 3 \\
+0 & 1 & 2 
+\end{array}
+\right]
+\]
+So doing the same elem row operation on the identity matrix is the multiplier we need to swap rows 1 and 3.
+%%%%%%%%%%%%%%%%%%%
+\item $R_1 \rightarrow 2 R_1$. Thinking of the same row picture,
+\[
+E_2 = \left[
+\begin{array}{ccc}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}
+\right]
+\]
+%%%%%%%%%%%%%%%%%%%
+\item $R_3 \rightarrow R_3 + 2R_2$
+\[
+E_3 = \left[
+\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 2 & 1
+\end{array}
+\right]
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%5
+\item Elementary matrices:
+\begin{itemize}
+\item Definition: An elementary matrix is the matrix resulting from performing a single elementary row operation on the identity matrix $I$.
+
+\item So each elementary row operation can be performed as multiplication of an elementary matrix.
+
+\item Turns out all elementary matrices are invertible. The inverse can be found by construction (reversing the elementary row operation) and validating the inverse relation. Illustrate for above 3 examples.
+\[
+E_1 = \left[
+\begin{array}{ccc}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0  
+\end{array}
+\right], \quad E_1^{-1} = ?, \quad
+E_2 = \left[
+\begin{array}{ccc}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}
+\right], \quad E_2^{-1} = ?, \quad
+E_3 = \left[
+\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 2 & 1
+\end{array}
+\right], \quad E_3^{-1} = ?.
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+\item Example: Use Gaussian elimination to find the inverse of 
+\[
+A= \left[
+\begin{array}{ccc}
+0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8
+\end{array}
+\right].
+\]
+Perform Gauss-Jordan elimination on 
+\[
+[A ~ | ~ I] \quad \rightarrow \quad \dots \quad \rightarrow \quad [I ~ | ~ A^{-1}]
+\]
+resulting in 
+\[
+A^{-1} = \left[ \begin{array}{ccc}
+-9/2 & 7 & -3/2 \\
+-2 & 4 & -1 \\
+3/2 & -2 & 1/2
+\end{array} \right].
+\]
+Easy to check this is correct: $A A^{-1}=I$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Thinking of elementary matricies, we must have
+\[
+A^{-1} = E_5 E_4 E_3 E_2 E_1
+\]
+and so
+\[
+A = E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}.
+\] 
+Easy to check. This leads to a general result.
+
+%%%%%%%%%%%%%%%%%%
+\item Theorem: Square matrix $A$ is invertible if and only if $A$ is row equivalent to the identity matrix $I$. 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 5, 7, 9, 21, 25, 27, 29, 31, 35
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.3 Characterizations of invertible matrices}
+
+\begin{enumerate}
+
+\item Homework: 15-24
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.4 Partitioned matrices}
+
+\begin{enumerate}
+
+\item Homework: 1-10, 13, 14, 16
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.5 Matrix factorizations}
+
+\begin{enumerate}
+
+\item Homework: 22-26
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.6 The Leontief input-output model}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.7 Applications to computer graphics}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.8 Subspaces of $\mathbb{R}^n$}
+
+\begin{enumerate}
+
+\item Homework: 5-20, 23-26
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.9 Dimension and rank}
+
+\begin{enumerate}
+
+\item Homework: 9-16
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 3: Determinants} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.1 Introduction to determinants}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.2 Properties of determinants}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.3 Cramer's rule, volume, and linear transformations}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 4: Vector spaces} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.1 Vector spaces and subspaces}
+
+\begin{enumerate}
+
+\item Homework: 1-18, 23, 24
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.2 Null spaces, column spaces, and linear transformations}
+
+\begin{enumerate}
+
+\item Homework: 3-6, 17-26
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.3 Linearly independent sets, bases}
+
+\begin{enumerate}
+
+\item Homework: 21-25
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.4 Coordinate systems}
+
+\begin{enumerate}
+
+\item Homework: 25 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.5 The dimension of a vector space}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.6 Rank}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.7 Change of basis}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.8 Applications to difference equations}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.9 Applications to Markov chains}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 5: Eigenvalues and eigenvectors} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.1 Eigenvectors and eigenvalues}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.2 The characteristic equation}
+
+\begin{enumerate}
+
+\item Homework: 25, 27
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.3 Diagonalization}
+
+\begin{enumerate}
+
+\item Homework: 18
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.4 Eigenvectors and linear transformations}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.5 Complex eigenvalues}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.6 Discrete dynamical systems}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.7 Applications to differential equations}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.8 Iterative estimates to eigenvalues}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 6: Orthogonality and least squares} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.1 Inner product, length, and orthogonality}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.2 Orthogonal sets}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.3 Orthogonal projections}
+
+\begin{enumerate}
+
+\item Homework: 19, 20
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.4 The Gram-Schmidt process}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.5 Least-squares problems}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.6 Applications to linear models}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.7 Inner product spaces}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.8 Applications of inner product spaces}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 7: Symmetric matrices and quadratic forms} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.1 Diagonalization of symmetric matrices}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.2 Quadratic forms}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.3 Constrained optimization}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.4 The singular value decomposition}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{7.5 Applications to image processing and statistics}
+
+\begin{enumerate}
+
+\item Homework: 
+
+\end{enumerate}
+
+\end{document}
