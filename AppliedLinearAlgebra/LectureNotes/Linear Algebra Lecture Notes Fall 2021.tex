@@ -893,7 +893,7 @@ c_1 T(\vec{u_1} + \dots + T(c_p \vec{u_p})
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Examples: Geometry of linear transformations. For vectors $\vec{u}=[3,1]^T$, $\vec{v}=[1,2]^T$ and $\vec{u}+\vec{v}$, what does transformation $T(\vec{x})=A\vec{x}$ do? Use linearity for $\vec{u}+\vec{v}$.
+\item Examples: Geometry of linear transformations. For vectors $\vec{u}=[3,1]^T$, $\vec{v}=[1,2]^T$ and $\vec{u}+\vec{v}$, what does transformation $T(\vec{x})=A\vec{x}$ do? Use linearity for $\vec{u}+\vec{v}$. Draw the parallelogram to see effect.
 \begin{itemize}
 %%%%%%%%%%%
 \item Dilation 
@@ -963,8 +963,11 @@ A = \left[ \begin{array}{cc}
 \item Unit basis in $\mathbb{R}^2$:
 \begin{itemize}
 \item $\vec{e_1}=[1,0]^T, \vec{e_2}=[0,1]^T$, all other vectors in $\mathbb{R}^2$ are linear combinations of these two. Show example.
-\item Amounts to transformation of the unit square.
-\item Using linearity, understanding $T(\vec{x})=A\vec{x}$ action on these two unit basis will determine $A$.
+\item Amounts to geometric transformation of the unit square.
+\item Using linearity, understanding $T(\vec{x})=A\vec{x}$ action on these two unit basis will determine $A$. This is because for any $\vec{x} \in \mathbb{R}^2$,
+\[
+\vec{x} = x_1 \vec{e_1} + x_2 \vec{e_2}
+\]
 \end{itemize} 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1005,6 +1008,13 @@ T(\vec{x}) = A\vec{x} = \left[ T(\vec{e_1}) \cdots T(\vec{e_n}) \right]\vec{x}
 for unit basis vectors $\vec{e_1}, \dots, \vec{e_n}$.
 
 Matrix $A$ is called the standard matrix for the linear transformation $T$. Also see that any linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is also a matrix transformation.
+
+%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Use the above theorem to find the linear transformation which 
+\begin{itemize}
+\item Projects $\vec{x}$ onto the main diagonal.
+\item Rotates $\vec{x}$ 180 degrees about the origin.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%
 \item Example: Use the above theorem to find the linear transformation $T(\vec{x})$ which rotates vector $\vec{x}$ by $\theta$ radians counter clockwise.
@@ -1064,6 +1074,9 @@ T(\vec{x}) = A\vec{x} =
 \item Return to textbook basic linear transformations. Which are onto? One-to-one? Both? Neither?
 
 %%%%%%%%%%%%%%
+\item Example: Random $3 \times 4$ matrix $A$ in REF. Is $A$ onto? Yes, full set of pivots. One-to-one? No, free variable. So we can answer these questions via row reduction, but there is an easier way.
+
+%%%%%%%%%%%%%%
 \item Theorem: Linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is one-to-one if and only if the equation $T(\vec{x})=\vec{0}$ has only the trivial solution.
 \begin{itemize}
 
@@ -1090,7 +1103,22 @@ and hence $T(\vec{x})=\vec{0}$ has a nontrivial solution.
 \item $T$ is onto if and only if the columns of $A$ span $\mathbb{R}^m$.
 \item $T$ is one-to-one if and only if the columns of $A$ are linearly independent.
 \end{itemize}
+Why does this theorem make intuitive sense?
 
+
+%%%%%%%%%%%%%%%%%%%%55
+\item Show $T$ is a one-to-one linear transformation. Is $T$ onto?
+\[
+T(\vec{x}) = 
+\left[
+\begin{array}{c}
+x_1-x_2 \\
+-2x_1+x_2 \\
+x_1
+\end{array}
+\right]
+\]
+Show a matrix transformation with linearly indep columns, hence a one-to-one linear transformation. Two columns cannot span $\mathbb{R}^3$, so not onto.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
