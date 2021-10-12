@@ -1701,7 +1701,53 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 15-24
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: (Invertible matrix theorem)
+
+For $A$ a square $n \times n$ matrix, the following statements are equivalent (either all true or all false).
+\begin{itemize}
+\item $A$ is an invertible matrix
+\item $A$ is row equivalent to the $n \times n$ identity matrix
+\item $A$ has $n$ pivots positions
+\item The equation $A\vec{x}=\vec{0}$ has only the trivial solution
+\item The columns of $A$ for a linearly independent set
+\item The linear transformation $T(\vec{x})=A\vec{x}$ is one-to-one
+\item The equation $A\vec{x}=\vec{b}$ has at least one solution for each $\vec{b}$ in $\mathbb{R}^n$
+\item The columns of $A$ span $\mathbb{R}^n$
+\item The linear transformation $T(\vec{x})=A\vec{x}$ is onto
+\item There is a $n \times n$ matrix $C$ such that $CA=I$
+\item There is a $n \times n$ matrix $D$ such that $AD=I$
+\item $A^T$ is an invertible matrix
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Problems 1-6 in the exercises. Decide if invertible or not.
+\begin{enumerate}
+\item Yes, LI columns
+\item No, LD columns
+\item Yes, 3 pivots after row reduction ($5, -7, -1$). Don't need to do the row reduction here.
+\item  No, LD columns since zero vector included.
+\item No after swapping rows 1 and 2 and doing row reduction, only 2 pivots
+\item Do row reduction to see.
+\item Note, 8 easy to see
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Inverse of linear transformations:
+\begin{enumerate}
+\item Def: A linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^n$ is invertible if there exists a transformation $S: \mathbb{R}^n \rightarrow \mathbb{R}^n$ such that
+\[
+S(T(\vec{x})) = \vec{x}, \quad
+T(S(\vec{x})) = \vec{x}
+\]
+for all $\vec{x} \in \mathbb{R}^n$. $S$ is called the inverse of $T$ and we denote $S=T^{-1}$.
+
+\item Theorem: For $T:\mathbb{R}^n \rightarrow \mathbb{R}^n$ a linear transformation with $T(\vec{x})=A\vec{x}$, $T$ is invertible if and only if $A$ is an invertible matrix. In which case, $T^{-1}(\vec{x}) = A^{-1} \vec{x}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-7 odd, 11, 15-23 odd, 33
+
 
 \end{enumerate}
 
@@ -1710,6 +1756,151 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%
+\item Idea: Generalize matrix multiplication to block multiplication
+\begin{itemize}
+\item Certain problems naturally lead to symmetry / block structure of a matrix.
+\item Can also block matrices to distribute computation to speed up compute time (parallel computing). High performance computing especially uses this approach.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\[
+A = \left[
+\begin{array}{cc|ccc}
+2 & -3 & 1 & 0 & -4 \\
+\hline
+1 & 5 & -2 & 3 & -1 \\
+0 & -4 & -2 & 7 & -1
+\end{array}
+\right], \quad
+B = \left[
+\begin{array}{cc}
+6 & 4 \\
+-2 & 1 \\
+\hline
+-3 & 7 \\
+-1 & 3 \\
+5 & 2 
+\end{array}
+\right]
+\]
+\begin{enumerate}
+\item Note these are compatible for multiplication.
+\item 2 approaches already: Row and columns
+\[
+AB = A[\vec{b}_1 ~ \vec{b}_2 ] = [A\vec{b}_1 ~ A\vec{b}_2]
+\]
+\[
+AB = \left[
+\begin{array}{c}
+row_1(A) \\ row_2(A) \\ row_3(A)
+\end{array}
+\right] B
+ = \left[
+\begin{array}{c}
+row_1(A)B \\ row_2(A)B \\ row_3(A)B
+\end{array}
+\right] 
+\]
+\item New idea: Partition $A$ and $B$ into blocks.
+\[
+AB = [A_1 | A_2] \left[
+\begin{array}{c}
+B_1 \\ \hline B_2
+\end{array}
+\right]
+= [A_1B_1 + A_2B_2]
+\]
+for $A_1$ $(3 \times 2)$, $A_2$ $(3\times 3)$ and $B_1$ $(2\times 2)$ and $B_2$ $(3\times 2)$. Compare to the above 2 forms.
+\item Note: We need submatrices to be compatible for multiplication.
+\item Can partition further as
+\[
+AB = \left[
+\begin{array}{c|c}
+A_1 & A_2 \\
+\hline A_3 & A_4
+\end{array}
+\right] 
+\left[
+\begin{array}{c}
+B_1 \\ \hline B_2
+\end{array}
+\right]
+= [A_1B_1 + A_2B_2]
+\]
+for $A_1$ $(1 \times 2)$, $A_2$ $(1\times 3)$, $A_3$ $(2 \times 2)$, $A_4$ $(2\times 3)$ and $B_1$ $(2\times 2)$ and $B_2$ $(3\times 2)$. Compare to the above.
+\item Think of other ways to partition:
+\begin{itemize}
+\item $A$ into 4 parts, $B$ into 2
+\item $B$ into 3 parts
+\item Repeat partitioning leads to the below theorem.
+\end{itemize}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For $A$ $(m\times n)$ and $B$ $(n \times p)$, 
+\[
+AB = [\vec{a}_1 ~ \vec{a}_2 ~ \dots ~ \vec{a}_n]
+\left[\begin{array}{c}
+row_1(B) \\
+row_2(B) \\
+\vdots \\
+row_n(B) \\
+\end{array}\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Inverses of partitioned matrices.
+\begin{enumerate}
+\item Find $A^{-1}$ for $A$ $(n \times n)$ where
+\[
+\left[
+\begin{array}{cc}
+A_{11} & A_{12} \\
+0 & A_{22}
+\end{array}
+\right]
+\]
+where $A_{11}$ $(p \times p)$, $A_{12}$ $(p \times q)$, $A_{22}$ $(q \times q)$, and $0$ $(q \times p)$.
+\item Find matrix $B$ such that 
+\[
+AB = \left[
+\begin{array}{cc}
+A_{11} & A_{12} \\
+0 & A_{22}
+\end{array} \right] 
+\left[ \begin{array}{cc}
+B_{11} & B_{12} \\
+B_{21} & B_{22}
+\end{array} \right]
+= I_{n \times n}
+\]
+Multiplying, we have that
+\begin{itemize}
+\item $A_{11} B_{11} + A_{12}B_{21} = I_p$
+\item $A_{11} B_{12} + A_{12}B_{22} = 0$
+\item $A_{22} B_{21} = 0$ 
+\item $A_{22} B_{22} = I_q$
+\end{itemize}
+\item The last bullet says $B_{22} = A_{22}^{-1}$ from the invertible matrix theorem.
+\item From the third bullet, $B_{21}=0$ since $A_{22}$ is invertible and multiplying by $A_{22}^{-1}$.
+\item The first bullet then gives $B_{11}=A_{11}^{-1}$. 
+\item Finally, the second bullet gives
+\[
+B_{12} = -A_{11}^{-1} A_{12} A_{22}^{-1}.
+\]
+\item Finally, 
+\[
+A^{-1} = B = \left[ \begin{array}{cc}
+B_{11} & B_{12} \\
+B_{21} & B_{22}
+\end{array} \right]
+\] 
+for $B$ as derived.
+\item Note, this approach is especially nice if we can get down to $(2 \times 2)$ matrices where the inverse has a simple formula.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
 \item Homework: 1-10, 13, 14, 16
 
 \end{enumerate}
