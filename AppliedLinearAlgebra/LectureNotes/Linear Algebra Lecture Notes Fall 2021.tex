@@ -1901,7 +1901,7 @@ for $B$ as derived.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-10, 13, 14, 16
+\item Homework: 1, 3, 7, 9, 11, 13, 15.
 
 \end{enumerate}
 
@@ -1909,6 +1909,8 @@ for $B$ as derived.
 \subsection{2.5 Matrix factorizations}
 
 \begin{enumerate}
+
+\item Lab content
 
 \item Homework: 22-26
 
@@ -1919,6 +1921,9 @@ for $B$ as derived.
 
 \begin{enumerate}
 
+\item Lab content
+
+
 \item Homework: 
 
 \end{enumerate}
@@ -1927,6 +1932,8 @@ for $B$ as derived.
 \subsection{2.7 Applications to computer graphics}
 
 \begin{enumerate}
+
+\item Lab content
 
 \item Homework: 
 
@@ -1937,7 +1944,160 @@ for $B$ as derived.
 
 \begin{enumerate}
 
-\item Homework: 5-20, 23-26
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we generalize to the main theory of linear algebra as a way to delve deeper into $A\vec{x}=\vec{b}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Subspaces of $\mathbb{R}^n$.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A \emph{subspace} of $\mathbb{R}^n$ is any set $H$ in $\mathbb{R}^n$ such that
+\begin{itemize}
+\item The zero vector is in $H$
+\item For each $\vec{u}, \vec{v} \in H$, we have $(\vec{u}+\vec{v}) \in H$
+\item For each $\vec{u} \in H$, we have $(c\vec{u}) \in H$
+\end{itemize}
+This is says subspaces are \emph{closed} under vector addition and scalar multiplication.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: For $\vec{u}, \vec{v}, \vec{w}$ as
+\[
+\vec{u} = \left[
+\begin{array}{c}
+-3 \\ 0 \\ 6
+\end{array}
+\right], \quad
+\vec{u} = \left[
+\begin{array}{c}
+-2 \\ 2 \\ 3
+\end{array}
+\right], \quad
+\vec{u} = \left[
+\begin{array}{c}
+0 \\ -6 \\ 3
+\end{array}
+\right],
+\]
+show $Span\{\vec{u},\vec{v},\vec{w}\}$ is a subspace of $\mathbb{R}^3$. Is 
+\[
+\vec{p} = \left[
+\begin{array}{c}
+1 \\ 14 \\ -9
+\end{array}
+\right]
+\]
+in this subspace?
+\begin{itemize}
+\item Solution: For $Span\{\vec{u},\vec{v}, \vec{w}\}$, need to check three properties. Note, $\vec{y} \in Span\{\vec{u},\vec{v}, \vec{w}\}$ means
+\[
+\vec{y} = x_1\vec{u}+x_2\vec{v}+x_3\vec{w}
+\]
+for some scalars $x_1,x_2,x_3$. Then the zero vector is there. Also, show addition and scalar multiplication are preserved. 
+\item Note, spans will always be a subspace. Sometimes say subspace spanned by these vectors or subspace generate by these vectors.
+\item For $\vec{p}$, this amounts to solving a linear system via Gaussian elimination.
+\[
+\left[
+\begin{array}{ccc|c}
+-3 & -2 & 0 & 1 \\
+0 & 2 & -6 & 14\\
+6 & 3 & 3 & -9
+\end{array}
+\right] \quad \sim \quad
+\left[
+\begin{array}{ccc|c}
+-3 & -2 & 0 & 1 \\
+0 & 2 & -6 & 14\\
+0 & -1 & 3 & -7
+\end{array} \right] \quad \sim \quad
+\left[
+\begin{array}{ccc|c}
+-3 & -2 & 0 & 1 \\
+0 & 2 & -6 & 14\\
+0 & 0 & 0 & 0
+\end{array}
+\right]
+\]
+The system is consistent and so $\vec{p}$ is in the subspace.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: $\{\vec{0}\}$ is a subspace of $\mathbb{R}^n$. Check three items. Called the zero subspace.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Column and null space of a matrix $A$. The two fundamental subspaces concerning $A\vec{x} = \vec{b}$.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions:
+\begin{itemize}
+\item The column space of matrix $A$, written $col(A)$, is the set of all linear combinations of the columns of $A$
+\item The null space of matrix $A$, written $nul(A)$, is the set of all vectors which solve the homogeneous system $A\vec{x}=\vec{0}$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorems:
+\begin{itemize}
+\item $col(A)$ is a subspace of $\mathbb{R}^n$. This holds since it is a span of vectors as discussed above.
+\item $nul(A)$ is a subspace of $\mathbb{R}^n$. This requires careful proof. \\ \ \\
+Proof: Check the three items. $A \vec{0}=\vec{0}$. For $\vec{u}, \vec{v} \in nul(A)$, we have 
+\[
+A(\vec{u}+\vec{v}) = A\vec{u}+A\vec{v} = \vec{0}+\vec{0}=\vec{0}
+\]
+\[
+A(c\vec{u}) = cA\vec{u}=\vec{0}
+\]
+which leverages linearity of a matrix transformation.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: From previous example, $\vec{p}$ is in $col(A)$. 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Basis for a subspace.
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A \emph{basis} for a subspace $H$ of $\mathbb{R}^n$ is linearly independent set $H$ which spans $H$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find a basis for the $nul(A)$ for above example.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find a basis for the $col(A)$ for the above example.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The pivot columns of matrix $A$ form a basis for $col(A)$.
+\begin{itemize}
+\item Note: These columns are the original columns of $A$, not the echelon form columns. Can see why echelon form wouldn't work with zeros in row entries.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Columns of $I$ form the standard unit basis for $\mathbb{R}^n$. Check that every system is consistent. Full set of pivots says the columns are a basis. Can now see where this terminology comes from. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find a basis for $col(A)$ and $nul(A)$. Note the difference in dimension of these spaces.
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+4 & 5 & 7 \\
+-5 & -1 & 0 \\
+2 & 7 & 11
+\end{array}
+\right]
+\]
+
+\end{enumerate}
+
+
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25
 
 \end{enumerate}
 
