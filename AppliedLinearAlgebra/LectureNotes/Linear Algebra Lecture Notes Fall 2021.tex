@@ -2037,6 +2037,7 @@ The system is consistent and so $\vec{p}$ is in the subspace.
 \begin{itemize}
 \item The column space of matrix $A$, written $col(A)$, is the set of all linear combinations of the columns of $A$
 \item The null space of matrix $A$, written $nul(A)$, is the set of all vectors which solve the homogeneous system $A\vec{x}=\vec{0}$.
+\item Note the dimension of each relies on the number of rows and columns of $A$.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2071,6 +2072,11 @@ which leverages linearity of a matrix transformation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \item Find a basis for the $col(A)$ for the above example.
+\begin{itemize}
+\item Set of all columns would span $col(A)$, but they need not be linearly independent. In this case they aren't due to free variables.
+\item Eliminating to reduced row echelon form, we see how a column is a linear combination of the others.
+\item While the columns change thru row reduction, the system has the same solution and hence the linear dependence relation does not change.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \item Theorem: The pivot columns of matrix $A$ form a basis for $col(A)$.
