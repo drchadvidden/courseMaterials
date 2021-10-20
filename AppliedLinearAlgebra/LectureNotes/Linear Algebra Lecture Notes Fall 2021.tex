@@ -2112,7 +2112,99 @@ A = \left[
 
 \begin{enumerate}
 
-\item Homework: 9-16
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Coordinate systems
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Given a basis $B=\{\vec{b_1}, \dots, \vec{b_p}\}$ of subspace $H$ in $\mathbb{R}^n$, each element $\vec{x}$ of $H$ can be written uniquely as a linear combination of basis elements of $B$. Reason: If there were two ways, 
+\[
+\vec{x} = c_1 \vec{b_1} + \dots, \quad \vec{x} = d_1 \vec{b_1} + \dots
+\]
+then
+\[
+\vec{0} = \vec{x}-\vec{x} = (c_1-d_1)\vec{b}_1, \dots
+\]
+Due to linear independence of the basis vectors, $c_1-d_1=0$ gives $c_1=d_1$ and likewise for the remaining weights.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: For basis $B = \{ \vec{b}_1, \dots, \vec{b}_p \}$ of subspace $H$, each $\vec{x}$ in $H$ can be expressed as the \emph{coordinate vector} in $\mathbb{R}^p$ as
+\[
+\left[\vec{x} \right]_B = \left[
+\begin{array}{c}
+c_1 \\ \vdots \\ c_p
+\end{array}\right]
+\]
+where $\vec{x} = c_1 \vec{b}_1 + \dots + c_p \vec{b}_p$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: For
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+3 \\ 6 \\ 2
+\end{array} \right], \quad
+\vec{v}_2 = \left[
+\begin{array}{c}
+-1 \\ 0 \\ 1
+\end{array} \right], \quad
+\vec{x} = \left[
+\begin{array}{c}
+3 \\ 12 \\ 7
+\end{array} \right],
+\]
+show $B = \{\vec{v}_1, \vec{v}_2\}$ is a basis for the subspace $H$ spanned by these vectors. Then show $\vec{x}$ is in $H$ and find its coordinate vector. In the end
+\[
+\left[ \vec{x} \right]_B = \left[
+\begin{array}{c}
+2 \\ 3
+\end{array}
+\right]
+\]
+Show picture of the book of the intuition of two dimensional subspace $H$ and coordinates with respect to $B$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Note that $H$ in the above example resembles $\mathbb{R}^2$ geometrically and with the coordinate vector. Further, $\vec{x} \rightarrow [ \vec{x} ]_B$ has a one-to-one correspondence since coordinate vectors are unique. Call this an \emph{isomorphism} and say $H$ is \emph{isomorphic} to $\mathbb{R}^2$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Definition: The \emph{dimension} of nonzero subspace $H$, denoted by $dim(H)$, is the number of vectors in any basis of $H$. The dimension of $\{\vec{0}\}$ is defined to be zero.
+
+\item Note: Can show if $H$ has a basis with $p$ vectors, then all possible basis for $H$ must also have $p$ vectors.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Return to linear system $A\vec{x} = \vec{b}$. 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Definition: The \emph{rank} of matrix $A$, denoted $rank(A)$, is the dimension of the column space of $A$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Number 12 in the book on screen. $A$ has $5$ total columns with 3 pivot columns. Then $rank(A)=3$. Note, the dimension of the null space of $A$ is the count of the remaining columns (free variables), 2 in this case. It is always the case that $rank(A)+dim(Nul(A))=n$ where $n$ is the total column number of $A$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: For $A$ matrix with $n$ columns, we have that $rank(A)+dim(Nul(A)) = n$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Terminology of \emph{rank} is an important number which measures the "singularness" of a matrix. If full rank, nonsingular. If less than full rank, singular. Lower rank means "more" linear independence. Can also show the rank of $A$ is the same as $A^T$. That is the number of LI columns matches the number of LI rows. Can see this from RREF form of a matrix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: For $H$ a $p$-dimensional subspace of $\mathbb{R}^n$, any linearly independent set of $p$ elements in $H$ is a basis for $H$. Likewise, any set of $p$ elements which spans $H$ is a basis for $H$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: Last, we add to the Invertible Matrix Theorem
+\begin{enumerate}
+\item The columns of $A$ form a basis for $\mathbb{R}^n$.
+\item $Col(A) = \mathbb{R}^n$
+\item $dim(Col(A)) = n$
+\item $rank(A)=n$
+\item $Nul(A) = \{\vec{0} \}$
+\item $dim(Nul(A)) = 0$
+\end{enumerate}
+
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23
 
 \end{enumerate}
 
