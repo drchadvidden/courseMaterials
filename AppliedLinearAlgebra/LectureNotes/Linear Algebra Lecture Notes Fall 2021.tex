@@ -2218,6 +2218,121 @@ Show picture of the book of the intuition of two dimensional subspace $H$ and co
 
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We return to the question of invertibility for square matrix $A$. 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $2 \times 2$ case from before:
+\[
+A = \left[
+\begin{array}{cc}
+a & b \\
+c & d 
+\end{array}
+\right] \quad \Rightarrow \quad
+\frac{1}{ad-bc} 
+\left[
+\begin{array}{cc}
+d & -b \\
+-c & a 
+\end{array}
+\right]
+\]
+We denote $\det(A) = ad-bc$. Then $A$ is invertible only if $det(A) \neq 0$.
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Notes: 
+\begin{itemize}
+\item $\det(A) = ad-bc=0$ implies $\frac{a}{c}=\frac{b}{d}$ and columns are parallel (linearly dependent).
+\item $\det(A) = a(d-\frac{c}{a}b)$ is the product of the pivots of $A$. Turns out this will generalize.
+\item $det(A)$ not only determinies invertibility, but it also plays a role in the entries of $A^{-1}$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $3 \times 3$ case: Perform row reduction on a general matrix.
+\[
+A = \left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{array}
+\right] \sim
+\left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+0 & a_{11}a_{22} - a_{12}a_{21} & a_{11}a_{23}-a{13}a_{21} \\
+0 & 0 & a_{33} \Delta
+\end{array}
+\right] 
+\]
+where
+\[
+\Delta = a_{11}a_{22}a_{33}+ a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%5
+\item Notes:
+\begin{itemize}
+\item If $A$ is invertible, $\Delta \neq 0$. Will show later if $\Delta \neq 0$, then $A$ is invertible.
+\item $\det(A) = \Delta$ is the formula for the $3\times 3$ case.
+\item The product has 1 entry from each row and 1 from each column. By row / column swapping, there are $6=3!$ total ways for the $3\times 3$ case.
+\item The sign of each product is determined by the column (or row) permutations. More on this later.
+\item Grouping terms reveals $(2 \times 2)$ determinants leading to a recursive computational formula.
+\begin{align*}
+\Delta &= a_{11}a_{22}a_{33}+ a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31} \\
+&= a_{11}(a_{22}a_{33}-a_{23}a_{32}) - a_{12}(a_{12}a_{21}a_{33}-a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31}) \\
+&= a_{11}|A_{11}| - a_{12}|A_{12}| + a_{13}|A_{13}| \\
+&= a_{11}C_{11} + a_{12}C_{12} + a_{13}C_{13}
+\end{align*}
+where $A_{ij}$ is the submarix of $A$ formed by deleting the $i$th row of $A$ and the $j$th column of $A$. Also,
+\[
+C_{ij} = (-1)^{i+j} |A_{ij}|
+\]
+is called the $(i,j)$th cofactor of $A$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item This formula will extend to $n\times n$ matrices.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We can group by any row / column we wish here.
+
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Compute $\det(A)$ for 
+\[
+A = \left[
+\begin{array}{ccc}
+2 & 3 & -3 \\
+4 & 0 & 3 \\
+6 & 1 & 5
+\end{array}
+\right].
+\]
+Do first row. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: For $n \geq 2$, the determinant of $n \times n$ matrix $A$ is
+\[
+\det(A) = a_{11} \det(A_{11}) - a_{12} \det(A_{12}) + \cdots + (-1)^{1+n} \det(A_{1n})
+= \sum_{j=1}^n (-1)^{i+j} a_{1j} det(A_{1j}) 
+= \sum_{j=1}^n (-1)^{i+j} a_{1j} C_{1j}
+\] 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The determinant can be computed by expansion across any row or column of matrix $A$.
+\[
+\det(A) = a_{i1} \det(A_{i1}) - a_{i2} \det(A_{i2}) + \cdots + (-1)^{1+n} \det(A_{in})
+= \sum_{j=1}^n (-1)^{i+j} a_{ij} det(A_{ij}) 
+\] 
+\[
+\det(A) = a_{1j} \det(A_{1j}) - a_{2j} \det(A_{2j}) + \cdots + (-1)^{1+n} \det(A_{nj})
+= \sum_{i=1}^n (-1)^{i+j} a_{ij} det(A_{ij}) 
+\] 
+Ask them to repeat above example with better row and column.
+
 \item Homework: 
 
 \end{enumerate}
