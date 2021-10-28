@@ -2270,16 +2270,18 @@ a_{11} & a_{12} & a_{13} \\
 0 & a_{11}a_{22}-a_{12}a_{21} & a_{11}a_{23}-a_{13}a_{21} \\
 0 & a_{11}a_{32}-a_{12}a_{31} & a_{11}a_{33}-a_{13}a_{31} 
 \end{array}
-\right] \sim
+\right]
+\]
+\[ \sim
 \left[
 \begin{array}{ccc}
 a_{11} & a_{12} & a_{13} \\
 0 & a_{11}a_{22} - a_{12}a_{21} & a_{11}a_{23}-a_{13}a_{21} \\
-0 & 0 & a_{33} \Delta
+0 & 0 & a_{11} \Delta
 \end{array}
 \right] 
 \]
-where for the last step row 3 is multiplied by $(a_{11}a_{22}-a_{12}a_{21}$ and this new row is added to $-(a_{11}a_{32}-a_{12}a_{31})$. Also,
+where for the last step row 3 is multiplied by $(a_{11}a_{22}-a_{12}a_{21})$ and this new row is added to $-(a_{11}a_{32}-a_{12}a_{31})$. Also,
 \[
 \Delta = a_{11}a_{22}a_{33}+ a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31}.
 \]
@@ -2371,6 +2373,178 @@ Ask them to repeat above example with better row and column.
 \subsection{3.2 Properties of determinants}
 
 \begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Cofactor expansion is easy, but it's recursive nature makes it very inefficient computationally. Instead, we will leverage Gaussian elmination to get to triangular form. This requires two parts:
+\begin{enumerate}
+\item Understand the effect of EROPs on $\det(A)$.
+\item Compute $\det(A)$ for an upper triangular matrix.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item OUr focus will be determinants for EROPs and elementary matrices:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Compare the determinants of each.
+\[
+\left[
+\begin{array}{cc}
+a & b \\
+c & d
+\end{array}
+\right], \quad 
+\left[
+\begin{array}{cc}
+c & d \\
+a & b 
+\end{array}
+\right], \quad 
+\left[
+\begin{array}{cc}
+ka & kb \\
+c & d
+\end{array}
+\right], \quad 
+\left[
+\begin{array}{cc}
+a+kc & b+kc \\
+c & d
+\end{array}
+\right]
+\]
+Generalize this to $3 \times 3$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Let $A$ be a square matrix. 
+\begin{itemize}
+\item If a multiple of one row of $A$ is added to another to row to produce matrix $B$, then $\det(B)=\det(A)$.
+\item If two rows of $A$ are interchanged to produce $B$, then $\det(B)=-\det(A)$.
+\item If one of $A$ is multiplied by $k$ to produce $B$, then $\det(B)=k\det(A)$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Accelerated calculation
+\[
+\left|
+\begin{array}{ccc}
+0 & 4 & 0 \\
+0 & 0 & 1 \\
+3 & 0 & 5
+\end{array}
+\right|= -\left|
+\begin{array}{ccc}
+3 & 0 & 5 \\
+0 & 0 & 1 \\
+0 & 4 & 0 
+\end{array}
+\right|= \left|
+\begin{array}{ccc}
+3 & 0 & 5 \\
+0 & 4 & 0 \\
+0 & 0 & 1 
+\end{array}
+\right|=12
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Use row reduction to accelerate calculation of 
+\[
+\left|
+\begin{array}{cccc}
+1 & 3 & 2 & -4 \\
+0 & 1 & 2 & -5 \\
+2 & 7 & 6 & -3 \\
+-3 & -10 & -7 & 2
+\end{array}
+\right|.
+\]
+Strive for triangular form then use product of pivots. Can also use cofactor expansion to simplify some. Take out common factors of rows. What if one row all zeros? 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note: Getting to triangular form $U$ via row reduction, we have
+\[
+\det(A) = (-1)^r \det(U) = (-1)^r (\text{product of pivots of $U$})
+\]
+where $r$ is the number of row swaps used and no row scaling was done.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorems: For $A$ a square matrix,
+\begin{itemize}
+\item  
+\[
+\det(A) = 
+\begin{cases}
+(-1)^r (\text{product of pivots of $U$}), & \text{if $A$ is invertible} \\
+0, & \text{if $A$ is not invertible}
+\end{cases}
+\]
+\item $A$ is invertible if and only if $\det(A) \neq 0$. (Use above bullet)
+\item $\det(A) = \det(A^T)$. (Use the above bullet and IVT. Can now do column operations as we do for row operations)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Use the determinant to determine if vectors are linearly independent.
+\[
+\left[
+\begin{array}{c}
+4 \\ 6 \\ 2 
+\end{array}
+\right], \quad
+\left[
+\begin{array}{c}
+-7 \\ 0 \\ 7 
+\end{array}
+\right], \quad
+\left[
+\begin{array}{c}
+-3 \\ -5 \\ -2
+\end{array}
+\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%%5
+\item Elementary matrices:
+\begin{enumerate}
+\item Recall, there are three types of elementary matrices each result from EROPs applied to the identity matrix I.
+\[
+E = \left[
+\begin{array}{ccc}
+0 & 1 & 0 \\
+1 & 0 & 0  \\
+0 & 0 & 1
+\end{array}
+\right], \quad
+E = \left[
+\begin{array}{ccc}
+k & 0 & 0 \\
+0 & 1 & 0  \\
+0 & 0 & 1
+\end{array}
+\right], \quad
+E = \left[
+\begin{array}{ccc}
+1 & 0 & 0 \\
+k & 1 & 0  \\
+0 & 0 & 1
+\end{array}
+\right]
+\]
+
+\item $\det(E)$ is easy to compute in each case.
+\[
+\det(E) = \begin{cases}
+1, & \text{for $E$ row replacement} \\
+-1, & \text{for $E$ row swap} \\
+k, & \text{for $E$ row scaling by $k$}
+\end{cases}
+\]
+This is another argument that the first theorem of this section holds true since we now see
+\[
+\det(EA) = \det(E)\det(A)
+\]. See text for careful proof via induction.
+
+\item Theorem: $\det(AB) = \det(A)\det(B)$. Prove by writing $A$ as a product of elementary matrices and repeatedly using the above result.
+\end{enumerate}
 
 \item Homework: 
 
