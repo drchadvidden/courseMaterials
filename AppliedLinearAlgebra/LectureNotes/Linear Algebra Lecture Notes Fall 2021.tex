@@ -2377,12 +2377,9 @@ Ask them to repeat above example with better row and column.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Cofactor expansion is easy, but it's recursive nature makes it very inefficient computationally. Instead, we will leverage Gaussian elmination to get to triangular form. This requires two parts:
 \begin{enumerate}
-\item Understand the effect of EROPs on $\det(A)$.
+\item Understand the effect of EROPs on $\det(A)$ (as well as elementary matrices).
 \item Compute $\det(A)$ for an upper triangular matrix.
 \end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item OUr focus will be determinants for EROPs and elementary matrices:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Example: Compare the determinants of each.
@@ -2420,6 +2417,7 @@ Generalize this to $3 \times 3$.
 \item If a multiple of one row of $A$ is added to another to row to produce matrix $B$, then $\det(B)=\det(A)$.
 \item If two rows of $A$ are interchanged to produce $B$, then $\det(B)=-\det(A)$.
 \item If one of $A$ is multiplied by $k$ to produce $B$, then $\det(B)=k\det(A)$.
+\item Note: This last result (row scaling) shows determinants can be made big or small via rescaling. So the size of the determinant isn't necessarily a good indicator of interest on its own.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2546,7 +2544,7 @@ This is another argument that the first theorem of this section holds true since
 \item Theorem: $\det(AB) = \det(A)\det(B)$. Prove by writing $A$ as a product of elementary matrices and repeatedly using the above result.
 \end{enumerate}
 
-\item Homework: 
+\item Homework: 1, 3, 5, 7, 11, 15, 17, 19, 21, 25, 27, 29, 37, 39
 
 \end{enumerate}
 
@@ -2555,7 +2553,7 @@ This is another argument that the first theorem of this section holds true since
 
 \begin{enumerate}
 
-\item Homework: 
+\item Skip / lab?
 
 \end{enumerate}
 
@@ -2564,87 +2562,7 @@ This is another argument that the first theorem of this section holds true since
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 4: Vector spaces} 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.1 Vector spaces and subspaces}
-
-\begin{enumerate}
-
-\item Homework: 1-18, 23, 24
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.2 Null spaces, column spaces, and linear transformations}
-
-\begin{enumerate}
-
-\item Homework: 3-6, 17-26
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.3 Linearly independent sets, bases}
-
-\begin{enumerate}
-
-\item Homework: 21-25
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.4 Coordinate systems}
-
-\begin{enumerate}
-
-\item Homework: 25 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.5 The dimension of a vector space}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.6 Rank}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.7 Change of basis}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.8 Applications to difference equations}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.9 Applications to Markov chains}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
+Skip, content in chapter 2
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2652,11 +2570,176 @@ This is another argument that the first theorem of this section holds true since
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 5: Eigenvalues and eigenvectors} 
 
+We return to the view of $A\vec{x}$ as a transformation $\vec{x} \rightarrow A\vec{x}$ and aim to understand the key characteristics of this transformation. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{5.1 Eigenvectors and eigenvalues}
 
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Discrete dynamical systems. Return to the La Crosse / Onalaska population model of our past lab.
+\[
+P = \left[
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
+\end{array}
+\right], \quad 
+\vec{x}_0 = \left[
+\begin{array}{c}
+50000/80000 \\ 30000/80000
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+5/8 \\ 3/8
+\end{array}
+\right], \quad
+\vec{x}_n = P \vec{x}_{n-1}
+\]
+where $P$ contains probability transitions and $\vec{x}_0$ is the proportion of populations in La Crosse and Onalaska respectfully. 
+\begin{enumerate}
+\item Question of end behavior: As $n\rightarrow \infty$, $\vec{x}_n \rightarrow $?
+\item One way: Iterate via computer. Solution we approach is called the steady state vector of this system which satisfies
+\[
+\vec{x} = P \vec{x}
+\]
+\item Solving the steady state equation leads to a homogeneous system.
+\[
+\vec{x} = P \vec{x} \rightarrow (P-I)\vec{x} = \vec{0} \rightarrow 
+\left[
+\begin{array}{cc|c}
+0.6-1 & 0.3 & 0 \\
+0.4 & 0.7-1 & 0
+\end{array}
+\right] \sim
+\left[
+\begin{array}{cc|c}
+-0.4 & 0.3 & 0 \\
+0 & 0 & 0
+\end{array}
+\right]
+\]
+with $x_2$ a free variable giving
+\[
+\vec{x} = \left[
+\begin{array}{c}
+x_1 \\ x_2
+\end{array}
+\right]
+= x_2\left[
+\begin{array}{c}
+3/4 \\ 1
+\end{array}
+\right]
+\]
+Since there are infinite vectors in this null space (with basis $B = \{ [3,4]^T \}$), we normalize to make a probability vector.
+\[
+\vec{x} = \left[
+\begin{array}{c}
+3/7 \\ 4/7
+\end{array}
+\right]
+\]
+which agrees with our R calculation.
+\item Observation: For matrix $P$, multiplication by nice vector $[3,7]^T$ results in just a scaling of the original vector. Graph in $x_1-x_2$ plan to illustrate. Entire line ($Span\{ \vec{x} \})$ also has this feature, but vectors not on this line do not.
+\[
+P \left[
+\begin{array}{c}
+1 \\ -2
+\end{array}
+\right]
+ = 
+\left[
+\begin{array}{c}
+0 \\ -1
+\end{array}
+\right]
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: An eigenvector of $n \times n$ matrix $A$ is a nonzero vector $\vec{x}$ such that $A\vec{x} = \lambda \vec{x}$ for $\lambda$ some scalar (called an eigenvalue). 
+\begin{itemize}
+\item Note: These special directions for a matrix give:
+\begin{itemize}
+\item insight into the matrix multiplication by $A$
+\item a way to efficiently compute $A^k$
+\end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find eigenvectors and eigenvalues of 
+\[
+A = \left[
+\begin{array}{cc}
+1 & 6 \\
+5 & 2
+\end{array}
+\right].
+\]
+\begin{enumerate}
+\item Require a nonzero vector $\vec{x}$ such that 
+\[
+A \vec{x} = \lambda \vec{x} \rightarrow (A-\lambda I) \vec{x} = \vec{0}.
+\]
+This is a homogeneous equation and we seek nontrivial solutions. Then,
+\[
+\det(A-\lambda I) = 0 \quad (\text{Why?})
+\]
+must hold and this gives a way to find eigenvalues $\lambda$.
+\[
+\det(A-\lambda I) = \left|
+\begin{array}{cc}
+1-\lambda & 6 \\
+5 & 2-\lambda
+\end{array}
+\right|
+= (1-\lambda)(2-\lambda) - 30 = \lambda^2-3\lambda - 28 = 0
+\]
+giving $\lambda = 7, \lambda = -4$. So there are two systems, $A\vec{x} = 7\vec{x}$ and $A\vec{x} = -4\vec{x}$.
+
+\item $\lambda = -4$ gives
+\[
+\vec{x} = x_2 \left[
+\begin{array}{c}
+-6/5 \\ 1
+\end{array}
+\right] = 
+c \left[
+\begin{array}{c}
+-6 \\ 5
+\end{array}
+\right] = c\vec{x}
+\]
+and so eigenvector $\vec{x}$ had corresponding eigenvalue $\lambda = -4$.
+
+\item $\lambda = 7$ gives
+\[
+y = \left[
+\begin{array}{c}
+1 \\ 1
+\end{array}
+\right].
+\]
+
+\item Graph these eigenvectors in the $x_1 x_2$ plane. $Span\{ \vec{x} \}$ and $Span \{ \vec{y} \}$ are both subspaces of $\mathbb{R}^2$ since both are $Nul(A-\lambda I)$ for each eigenvalue $\lambda$. These are called eigenspaces of $A$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Process for finding eigenvectors and eigenvalues for $n \times n$ matrix $A$:
+\begin{enumerate}
+\item $A\vec{x} = \lambda \vec{x}$ having a nonzero solution implies homogeneous equation $(A-\lambda I)\vec{x} = \vec{0}$ has nontrivial solutions.
+\item Require the characteristic equation
+\[
+\det(A-\lambda I) = 0.
+\]
+This is a polynomial equation in $\lambda$ of degree $n$.
+\item For each solution $\lambda$ to the characteristic equation, solve  $(A-\lambda I)\vec{x} = \vec{0}$ via Gaussian elimination.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Homework: 
 
 \end{enumerate}
