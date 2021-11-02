@@ -2740,6 +2740,71 @@ This is a polynomial equation in $\lambda$ of degree $n$.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Eigenvalue special cases. Find the eigenvalues of each.
+\begin{enumerate}
+\item Triangular matrices: Eigenvalues are diagonal entries
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 4 & 5 \\
+0 & 0 & 6
+\end{array}
+\right]
+\]
+\item Zero eigenvalues imply non-zero eigenvector. So $A$ is singular.
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 0 & 5 \\
+0 & 0 & 6
+\end{array}
+\right]
+\]
+\item Repeat eigenvalues
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 1 & 5 \\
+0 & 0 & 6
+\end{array}
+\right]
+\]
+\item Complex eigenvalues
+\[
+A = \left[
+\begin{array}{ccc}
+0 & -1 \\
+1 & 0 \\
+\end{array}
+\right]
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If $\{ \vec{v}_1, \dots, \vec{v}_p \}$ are eigenvectors of $n \times n$ matrix $A$ with distinct eigenvalues $\lambda_1, \dots, \lambda_p$, then $\{ \vec{v}_1, \dots, \vec{v}_p \}$ is linearly independent.
+\begin{itemize}
+\item Proof strategy: To show $P$ (if I am in WI) implies $Q$ (then am in US), it is enough to show $P$ (if I am in WI) and not $Q$ (then not in US) leads to contradiction.
+\item Proof: Assume distinct eigenvalues and $\{ \vec{v}_1, \dots, \vec{v}_p \}$ is linearly dependent. The one eigenvector is a linear combination of the preceding ones.
+\[
+c_1 \vec{v}_1 + \dots + c_{k-1} \vec{v}_{k-1} = \vec{v}_k \quad \rightarrow \quad 
+c_1 A\vec{v}_1 + \dots + c_{k-1} A\vec{v}_{k-1} = A\vec{v}_k
+\]
+\[
+\rightarrow \quad 
+c_1 \lambda_1 \vec{v}_1 + \dots + c_{p-1} \lambda_{k-1} \vec{v}_{k-1} = \lambda_k\vec{v}_k
+\]
+Multiply this original equation by $\lambda_k$ and subtract from the final line to get
+
+\[
+c_1 (\lambda_1-\lambda_k) \vec{v}_1 + \dots + c_{k-1} (\lambda_{k-1}-\lambda_k) \vec{v}_{k-1} = \vec{0}
+\] 
+Since these eigenvalues are distinct, it must be that $c_i$'s be all zero and so $\vec{v}_k$ is $\vec{0}$. This is not possible for an eigenvector. Contradiction.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Homework: 
 
 \end{enumerate}
