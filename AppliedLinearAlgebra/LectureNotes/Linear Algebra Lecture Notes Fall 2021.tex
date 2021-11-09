@@ -2847,7 +2847,7 @@ Note: This will always be a degree $n$ polynomial in $\lambda$.
 A = \left[
 \begin{array}{ccc}
 5 & -2 & 3 \\
-0 & 1 &  \\
+0 & 1 &  0\\
 6 & 7 & -2
 \end{array}
 \right]
@@ -2863,15 +2863,16 @@ Note: Row operations aren't useful here, but choosing a smart cofactor expansion
 \[
 \vec{x}_{k+1} = A \vec{x}_k, \quad 
 A =\left[
-\begin{array}{ccc}
-5 & -2 & 3 \\
-0 & 1 &  \\
-6 & 7 & -2
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
 \end{array}
 \right], \quad
 \vec{x}_0 = \left[
+\begin{array}{c}
 5/8 \\
 3/8
+\end{array}
 \right]
 \]
 
@@ -3012,7 +3013,101 @@ for rotation matrices $P_k$. This results in the non-diagonal entries of $A_k$ t
 
 \begin{enumerate}
 
-\item Homework: 18
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Motivation:
+\begin{enumerate}
+\item We saw previously matrix powers show up in applications (dynamical systems), so computing $A^k$ for potentially large values of $k$ is useful.
+\item For matrix $A$ similar to a diagonal matrix $D$, $A^k$ becomes easy.
+\[
+A = PDP^{-1} \quad \rightarrow \quad 
+A^2 = (PDP^{-1})^2 = PD^2P^{-1} \quad \rightarrow \quad 
+A^k = PD^kP^{-1}
+\]
+Note, $D^k$ is also diagonal with entries of $D$ to the power of $k$. 
+\item Such diagonalizable matrices are connected to eigenvalues and eigenvectors.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Diagonalization Theorem: $n \times n$ matrix $A$ is diagonlizable if and only if it has $n$ linearly independent eigenvectors. Specifically,
+\[
+A = PDP^{-1}
+\]
+for $P = [\vec{v}_1, \dots, \vec{v_n}$ a matrix of eigenvectors and $D=diag(\lambda_1, \dots, \lambda_n)$ a diagonal matrix of corresponding eigenvalues.
+\begin{itemize}
+\item Proof idea: 
+\[
+AP = A[\vec{v_1} \dots \vec{v}_n] = [A\vec{v_1} \dots A\vec{v}_n] = [\lambda_1\vec{v_1} \dots \lambda_n\vec{v}_n]  = PD
+\]
+Because $P$ is invertible due to a set of linearly independent columns, 
+\[
+A = PDP^{-1}
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: For previous example
+\[
+A = \left[
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
+\end{array}
+\right]
+\]
+we already found eigenvalues $\lambda_1 = 1, \lambda_2 = 3/10$ with corresponding eigenvectors
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+3 \\ 4
+\end{array}
+\right], \quad
+\vec{v}_2 = \left[
+\begin{array}{c}
+1 \\ -1
+\end{array}
+\right].
+\]
+Then,
+\[
+A = PDP^{-1} \quad \rightarrow \quad A^k = PD^kP^{-1}
+\]
+agrees with previous calculation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Diagonlize the below matrix:
+\[
+A = \left[
+\begin{array}{ccc}
+0 & 0 & -2 \\
+1 & 2 & 1 \\
+1 & 0 & 3
+\end{array}
+\right]
+\]
+\begin{itemize}
+\item Can show $\lambda_1=1, \lambda_2,3 = 2$. Then,
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+-2 \\ 1 \\ 1
+\end{array}
+\right], \quad
+\vec{v}_2 = \left[
+\begin{array}{c}
+-1 \\ 0 \\ 1
+\end{array}
+\right], \quad
+\vec{v}_3 = \left[
+\begin{array}{c}
+0 \\ 1 \\ 0
+\end{array}
+\right].
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 9, 11, 13, 15, 19, 21
 
 \end{enumerate}
 
