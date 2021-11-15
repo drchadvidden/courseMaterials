@@ -3116,7 +3116,7 @@ A = \left[
 
 \begin{enumerate}
 
-\item Skip. Not much interest without general vector spaces. Possible interest for diagonlizable matrix tranformations.
+\item Skip. Not much interest without general vector spaces. Possible interest for diagonlizable matrix tranformations. Might be worthwhile to see idea of change of basis.
 
 \item Homework: 
 
@@ -3331,6 +3331,8 @@ b & a
 
 \begin{enumerate}
 
+\item Project material. Intro covered before. Skip.
+
 \item Homework: 
 
 \end{enumerate}
@@ -3340,6 +3342,208 @@ b & a
 
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item ODEs:
+\begin{enumerate}
+\item Examples: Note infinitely many solutions for each.
+\[
+x' = x, \quad
+x' = -2x, \quad
+x' = 0.5x
+\]
+for $x=x(t)$ an unknown function of time $t$.
+\item Initial value problems: 
+\[
+\begin{cases}
+x' = 0.5x \\
+x(0) = 80
+\end{cases}
+\]
+where $x(0)$ is called the initial condition and this $x(t)$ is a particular solution to this ODE.
+\item General initial value problem
+\[
+\begin{cases}
+x' = \lambda x \\
+x(0) = x_0
+\end{cases}
+\]
+giving general solution
+\[
+x(t) = x_0 e^{\lambda t}.
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Real eigenvalues
+\begin{enumerate}
+\item MORE INTERESTING EXAMPLE:
+\[
+A = \left[ 
+\begin{array}{cc}
+-1.5 & 0.5 \\
+1 & -1
+\end{array}
+\right], \quad 
+\vec{x}(0)=[5,4]^T
+\]
+\item Coupled system of ODEs:
+\[
+\begin{cases}
+x_1' = -2x_1 + x_2 \\
+x_2' = x_1 - 2x_2 
+\end{cases}
+\]
+with initial conditions
+\[
+\begin{cases}
+x_1(0) = 6 \\
+x_2(0) = 2 
+\end{cases}
+\]
+\item Matrix formulation:
+\[
+\frac{d\vec{x}}{dt} = A \vec{x}, \quad A = \left[
+\begin{array}{cc}
+-2 & 1 \\ 1 & -2
+\end{array} \right]
+, \quad \vec{x} = \left[
+\begin{array}{c}
+x_1(t) \\ x_2(t)
+\end{array}
+\right]
+\]
+with initial condition
+\[
+\vec{x}(0) = \left[
+\begin{array}{c}
+6 \\ 0
+\end{array}
+\right].
+\]
+\item Idea: For any eigenvector of $A$, $\vec{v}$, with corresponding eigenvalue $\lambda$, write $\vec{x} = e^{\lambda t} \vec{v}$. Then,
+\[
+\frac{d \vec{x}}{dt} = \lambda \vec{x}, \quad A\vec{x} = \lambda \vec{x}.
+\]
+Noting both $A$ and $\frac{d}{dt}$ are linear operators on $\vec{x}$, we apply the superposition principle to get
+\[
+\vec{x} = c_1 e^{\lambda_1 t} \vec{v}_1 + c_2 e^{\lambda_2 t} \vec{v}_2
+\]
+where $c_1, c_2$ satisfy the initial condition
+\[
+\vec{x}(0) = c_1 \vec{v}_1 + c_2 \vec{v}_2.
+\]
+Note this initial condition can be written this way so long as eigenvectors are linearly independent and form a basis for $\mathbb{R}^2$. \item For this example, $\lambda_1=-1$ and $\lambda_2 = -3$ with eigenvectors
+\[
+\vec{v}_1 = \left[ \begin{array}{c}
+1 \\ 1
+\end{array} \right], \quad
+\vec{v}_2 = \left[ \begin{array}{c}
+1 \\ -1
+\end{array} \right].
+\]
+giving
+\[
+\vec{x} = c_1 e^{-t}  \left[ \begin{array}{c}
+1 \\ 1
+\end{array} \right]
++ c_2 e^{-3t}
+\left[ \begin{array}{c}
+1 \\ -1
+\end{array} \right].
+\]
+Applying the initial condition $\vec{x}(0) = [6,2]^T$ gives $c_1=4$ and $c_2=2$ and so
+\[
+\vec{x} = \left[
+\begin{array}{c}
+4e^{-t}+2e^{-3t} \\
+4e^{-t}-2e^{-3t} 
+\end{array}
+\right].
+\]
+\item Plot this trajectory in R. Note the tending to zero.
+\item Use pplane.html to plot many trajectories. This is known as a sink with the origin as the attractor. Note can see the eigenvectors and power of the eigenvalue.
+\item Imagine if the sign of the eigenvalues change. Leads to sink, source, saddle. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item General linear systems story: Diagonlization is the key.
+\begin{enumerate}
+\item System
+\[
+\frac{d\vec{x}}{dt} = A\vec{x}, \quad \vec{x}(0) = \vec{x}_0
+\]
+has solution
+\[
+\vec{x} c_1 e^{\lambda_1 t} \vec{v}_1 + \dots c_n e^{\lambda_n t} \vec{v}_n
+\]
+for $\lambda_i$ eigenvalues of $A$ with eigenvectors $\vec{v}_i$  with constants $c_i$ such that 
+\[
+\vec{x}_0 = c_1 \vec{v}_1 + \dots + c_n \vec{v}_n.
+\]
+\item Reason: Diagonalization is the key.
+\begin{itemize}
+\item For $A$ diagonlizable write
+\[
+A = PDP^{-1}
+\]
+and perform the change of variable
+\[
+\vec{y} = P^{-1} \vec{x}, \quad (P\vec{y} = \vec{x})
+\]
+and so
+\[
+P \frac{d\vec{y}}{dt} = PD\vec{y} \quad \rightarrow \quad
+\frac{d\vec{y}}{dt} = D\vec{y}.
+\]
+\item This system is a decoupled linear systems which can be solved as a single ODE.
+\[
+\vec{y} = \left[
+\begin{array}{c}
+c_1 e^{\lambda_1 t} \\ \vdots \\ c_n e^{\lambda_n t}
+\end{array}
+\right]
+\]
+and finally
+\[
+\vec{x} = P \vec{y} = c_1 e^{\lambda_1 t} \vec{v}_1 + \dots + c_n e^{\lambda_n t} \vec{v}_n.
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Complex eigenvalues and orbits:
+\begin{enumerate}
+\item For $A$ real and $\vec{x}_0$ real, we expect real solutions to 
+\[
+\frac{d \vec{x}}{dt} = A \vec{x}.
+\]
+For complex eigenvalues, we will see Euler's identity again.
+\[
+e^{i \theta} = \cos(\theta) + i \sin(\theta)
+\]
+\item Example: 
+\[
+\frac{d \vec{x}}{dt} = A \vec{x}, \quad A = \left[
+\begin{array}{cc}
+-2 & 1 \\
+-1 & -2
+\end{array}
+\right], \quad \vec{x}(0) = [6, 2]^T
+\]
+\begin{itemize}
+\item We have complex eigenvalues $\lambda =2 \pm i$ with corresponding eigenvectors
+\[
+\vec{v} = \left[ 
+\begin{array}{c}
+1 \\ \pm i
+\end{array} \right]
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
 \item Homework: 
 
 \end{enumerate}
