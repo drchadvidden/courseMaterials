@@ -3116,6 +3116,8 @@ A = \left[
 
 \begin{enumerate}
 
+\item Skip. Not much interest without general vector spaces. Possible interest for diagonlizable matrix tranformations.
+
 \item Homework: 
 
 \end{enumerate}
@@ -3125,7 +3127,202 @@ A = \left[
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%
+\item Before, eigenvalue and eigenvector problem
+\[
+A\vec{x} = \lambda \vec{x}
+\]
+was though of as directions in which applying $A$ amounts to a scaling of $\vec{x}$. There are cases where this is not the case.
+
+%%%%%%%%%%%%%%%%%%%%%
+\item $90^{\circ}$ rotation:
+\[
+A = \left[
+\begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array}
+\right]
+\]
+\begin{enumerate}
+\item From the characteristic equation, there are no real eigenvalues. If we allow imaginary numbers, we get $\lambda_1 = i, ~ \lambda_2 = -i$. 
+\item Corresponding eigenvectors are then
+\[
+\vec{v}_1 = \left[
+\begin{array}{cc}
+i \\ 1
+\end{array}
+\right], \quad
+\vec{v}_2 = \left[
+\begin{array}{cc}
+1 \\ i
+\end{array}
+\right]
+\]
+\item Verify these pairs work.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Complex eigenvalues: Full story.
+\begin{enumerate}
+\item Example:
+\[
+A = \left[
+\begin{array}{cc}
+0.5 & -0.6 \\
+0.75 & 1.1
+\end{array}
+\right]
+\]
+\item Eigenvalues:
+\[
+\det(A- \lambda I) = \lambda^2 - 1.6 \lambda +1 = 0 \quad \rightarrow \quad \lambda = 0.8 \pm 0.6i
+\]
+\item Eigenvectors:
+\begin{itemize}
+\item $\lambda_1 = 0.8-0.6i$
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+-2-4i \\5
+\end{array}
+\right]
+\]
+Note, hard to solve the resulting system with
+\[
+A - \lambda_1 I = \left[
+\begin{array}{cc}
+-0.3+0.6i & -0.6 \\
+0.75 & 0.3+0.6i
+\end{array}
+\right]
+\]
+but since we assume nontrivial eigenvector, there must be a free variable. Then the second equation yields 
+\[
+x_1 = (-0.4 - 0.8i) x_2
+\]
+giving the above eigenvector.
+\item $\lambda_2 = 0.8+0.6i$
+\[
+\vec{v}_2 = \left[
+\begin{array}{c}
+-2+4i \\5
+\end{array}
+\right]
+\]
+\item Note the conjugate pair relationship of eigenvalues and eigenvectors.
+\end{itemize}
+\item How to make sense of complex eigenvalues and eigenvectors? Think of this as a rotation. Plot trajectories for this system.
+\item We see rotation, why does rotation occur?
+\begin{itemize}
+\item Recall the general rotation linear transformation:
+\[
+\left[
+\begin{array}{cc}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{array}
+\right]
+\]
+\item We generalize to any matrix
+\[
+C = \left[
+\begin{array}{cc}
+a & -b \\
+b & a
+\end{array}
+\right]
+\]
+with eigenvalues $\lambda = a \pm b i$. Drawing a right triangle with legs $a,b$ in the complex plane with hypotenuse $r = \sqrt{a^2+b^2}$, we have 
+\[
+C = r \left[
+\begin{array}{cc}
+a/r & -b/r \\
+b/r & a/r
+\end{array}
+\right]
+= \left[
+\begin{array}{cc}
+r & 0 \\
+0 & r
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+\cos(\theta) & -sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{array} \right]
+\]
+and we see the rotation then a scale.
+\end{itemize}
+\item Example: For above matrix
+\[
+A = \left[
+\begin{array}{cc}
+0.5 & -0.6 \\
+0.75 & 1.1
+\end{array}
+\right]
+\]
+and eigenvalue $\lambda_1 = 0.8-0.6i$ with eigenvector
+\[
+\left[
+\begin{array}{c}
+-2-4i \\
+5
+\end{array}
+\right]
+\]
+construct matrix $P$ as
+\[
+P = \left[
+Re(\vec{v}_1  \quad IM(\vec{v}_1)
+\right] = \left[
+\begin{array}{cc}
+-2 & -4 \\ 5 & 0
+\end{array}
+\right]
+\]
+Can show such a $P$ always has linearly independent columns.
+\item Compute matrix $C$ similar to $A$ such that
+\[
+C = P^{-1} A P = \left[
+\begin{array}{cc}
+0.8 & -0.6 \\
+0.6 & 0.8
+\end{array}
+\right]
+\]
+\item Then, $A = PCP^{-1}$ with $C$ the rotation and $P$, $P^{-1}$ acting as a change of variable (draw the rectangular transformation map, note same map applies to general diagonalization). Note that $r = |\lambda_1| = 1$ and so can compute $\theta$ from
+\[
+\cos(\theta) = 0.8, \quad \sin(\theta)=0.6
+\]
+giving $\theta \approx 36.87^{\circ}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\item Above ideas generalize to the following theorem:
+\begin{itemize}
+\item Theorem: For $A$ a $2 \times 2$ real matrix with complex eigenvalue $\lambda = a-bi$ $(b \neq 0)$ and associate eigenvector $\vec{v}$ in $\mathbb{C}^2$, then
+\[
+A = P C P^{-1}
+\]
+for
+\[
+P = [ Re(\vec{v} \quad Im(\vec{v} ], \quad C = \left[
+\begin{array}{cc}
+a & -b \\
+b & a
+\end{array}
+\right]
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Note: Euler's identity is worth mentioning here.  
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 9, 13, 15, 17, 21
 
 \end{enumerate}
 
