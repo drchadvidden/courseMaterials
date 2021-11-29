@@ -3540,6 +3540,10 @@ e^{i \theta} = \cos(\theta) + i \sin(\theta)
 1 \\ \pm i
 \end{array} \right]
 \]
+\item Solving for the initial condition $\vec{x}(0) = [6,2]^T$ gives
+\[
+\vec{x} = c_1 e^{\lambda_1 t} \vec{v}_1 + c_2 e^{\lambda_2 t} \vec{v}_2
+\]
 \end{itemize}
 \end{enumerate}
 
@@ -3563,11 +3567,200 @@ e^{i \theta} = \cos(\theta) + i \sin(\theta)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 6: Orthogonality and least squares} 
 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item End goal: Least squares approximation
+\begin{enumerate}
+\item The main goal of this chapter is to solve an overdetermined system where $A\vec{x} =\vec{b}$ has no solution. That is $\vec{b}$ is not in the column space of $A$.
+\[
+\left[
+\begin{array}{cc}
+a_{11} & a_{12} \\
+a_{21} & a_{22} \\
+a_{31} & a_{32} \\
+a_{41} & a_{42} 
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+x_1 \\ x_2
+\end{array}
+\right]
+= 
+\left[
+\begin{array}{c}
+b_1 \\ b_2 \\ b_3 \\ b_4
+\end{array}
+\right]
+\]
+%%%%%%%%%%%%%%%%
+\item Linear regression, housing example, square foot vs price. If $y=mx+b$ for $m$ price per square foot and $b$ the intercept, we have
+\[
+\left[
+\begin{array}{cc}
+1 & sf_1 \\
+1 & sf_2 \\
+1 & sf_3 \\
+1 & sf_4 
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+b \\ m
+\end{array}
+\right]
+= 
+\left[
+\begin{array}{c}
+p_1 \\ p_2 \\ p_3 \\ p_4
+\end{array}
+\right]
+\]
+\item The resulting line can be used to 
+\begin{itemize}
+\item Better understand the data
+\item Predict on new data
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item How to find a best approximation in $Col(A)$? Project onto this space. Key ingredients:
+\begin{itemize}
+\item Angle (inner product)
+\item Length (norm)
+\item Orthogonality (unique directions)
+\end{itemize}
+\end{enumerate}
+
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{6.1 Inner product, length, and orthogonality}
 
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Inner production: Comparing direction
+\begin{enumerate}
+%%%%%%%%%
+\item $\mathbb{R}^2$: For $\vec{u} = [u_1, u_2]^T, \vec{v} = [v_1, v_2]^T$, 
+\[
+\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 = \vec{u}^T \vec{v}
+\]
+%%%%%%%%%
+\item $\mathbb{R}^n$: For $\vec{u} = [u_1, u_2, \dots, u_n]^T, \vec{v} = [v_1, v_2, \dots, v_n]^T$, 
+\[
+\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 + \dots + u_n v_n = \vec{u}^T \vec{v}
+\]
+%%%%%%%%%
+\item Example
+%%%%%%%%%
+\item Properties of dot product:
+\begin{itemize}
+\item $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$
+\item $(\vec{u} \cdot \vec{v}) \cdot \vec{w} = \vec{u} \cdot (\vec{v}\cdot \vec{w})$
+\item $(c \vec{u}) \cdot \vec{v} = c (\vec{u} \cdot \vec{v})$
+\item $\vec{u} \cdot \vec{u} \geq 0$ and $\vec{u} \cdot \vec{u} = 0$ if and only if $\vec{u} = \vec{0}$
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Length: AKA Euclidean norm
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item $\mathbb{R}^2$: Draw picture, Pythagorean theorem
+\[
+\| \vec{u} \| = \sqrt{u_1^2 + u_2^2 } \rightarrow \|\vec{u}\|^2 = \vec{u} \cdot \vec{u}
+\]
+%%%%%%%%%%%%%
+\item $\mathbb{R}^n$:
+\[
+\| \vec{u} \| = \sqrt{u_1^2 + u_2^2 + \dots + u_n^2} \rightarrow \|\vec{u}\|^2 = \vec{u} \cdot \vec{u}
+\]
+%%%%%%%%%%%%%
+\item Norm property: For scalar $c$,
+\[
+\| c \vec{u} \| = \sqrt{(c\vec{u}) \cdot (c \vec{u})}
+= \sqrt{c^2} \sqrt{\vec{u} \cdot \vec{u}}
+= |c| \| \vec{u} \|
+\]
+%%%%%%%%%%%%%%%%%%%%%%
+\item Unit vector: Any $\vec{u}$ such that $\|\vec{u}\| = 1$. For any $\vec{u}$, $\frac{\vec{u}}{\|\vec{u}\|}$ is a unit vector.
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Vector in $\mathbb{R}^3$, find length, make a unit vector, not two options for $\pm$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Distance: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item $\mathbb{R}^2$: Distance formula, draw picture, tip-to-tip length
+\[
+dist(\vec{u}, \vec{v}) = \sqrt{(u_1-v_1)^2 + (u_2+v_2)^2} = \|\vec{u}-\vec{v}\|
+\]%%%%%%%%%%%%%%%%%%%%%%
+\item $\mathbb{R}^n$: 
+\[
+dist(\vec{u}, \vec{v}) = \sqrt{(u_1-v_1)^2 + (u_2+v_2)^2 + \dots  + (u_n+v_n)^2} = \|\vec{u}-\vec{v}\|
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonality: How to tell if $\vec{u}$ and $\vec{v}$ are opposite directions?
+\begin{enumerate}
+%%%%%%%%%%%
+\item Definition: $\vec{u}$ and $\vec{v}$ are orthogonal if and only if $\vec{u} \cdot \vec{v} = 0$.
+%%%%%%%%%%%
+\item Reason 1: Geometrically want $dist(\vec{u},\vec{v}) = dist(\vec{u},-\vec{v})$. 
+\[
+\| \vec{u}-\vec{v} \|^2 = \| \vec{u}+\vec{v} \|^2 \quad\rightarrow\quad
+(\vec{u}-\vec{v}) \cdot (\vec{u}-\vec{v}) = (\vec{u}+\vec{v}) \cdot (\vec{u}+\vec{v}) \quad\rightarrow\quad
+4 \vec{u} \cdot \vec{v} = 0
+\]
+%%%%%%%%%%%
+\item Reason 2: Want Pythagorean theorem to hold: 
+\[
+\|\vec{u} \|^2 + \|\vec{v} \|^2 = \|\vec{u}-\vec{v} \|^2 \quad \rightarrow \quad -2 \vec{u} \cdot \vec{v} = 0
+\]
+%%%%%%%%%%%
+\item Reason 3: Consequence of law of cosines: $c^2 = a^2 + b^2 - 2ab \cos(\theta)$
+\[
+\| \vec{u} - \vec{v} \|^2 = \| \vec{u} \|^2 + \| \vec{v} \|^2 - 2\| \vec{u} \| \| \vec{v} \| \cos(\theta)
+\]
+results in Pythagoras again for $\theta = \frac{\pi}{2}$. 
+%%%%%%%%%%%%%
+\item Consequentially by comparison from the law of cosines
+\[
+\vec{u} \cdot \vec{v} = \| \vec{u} \| \| \vec{v} \| \cos(\theta)
+\]
+and the dot product says something about the angle between vectors. This is known as cosine similarity of two vectors.
+%%%%%%%%%%%
+\item Note, $\vec{0} \cdot \vec{u}=0$ always so $\vec{0}$ is orthogonal to every vector. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Vector spaces and orthogonal compliments:
+\begin{enumerate}
+\item Definitions
+\begin{itemize}
+\item If $\vec{z}$ is orthogonal to every vector in subspace $W$, then we say $\vec{z}$ is orthogonal to subspace $W$.
+\item The set of all vectors $\vec{z}$ orthogonal to subspace $W$ is call the orthogonal compliment of $W$ written $W^{\perp}$.
+\end{itemize}
+\item Theorems: 
+\begin{itemize}
+\item Can show if $W$ is a subspace, then $W^{\perp}$ is also. 
+\item Fundamental theorem of linear algebra: For $A$ an $m \times n$ matrix, we have
+\[
+(Row(A))^{\perp} = Nul(A), \quad \text{and} \quad (Col(A))^{\perp}= Nul(A^T)
+\]
+Proof: If $\vec{x} \in Nul(A)$ we have $A\vec{x} = \vec{0}$. Then for any row of $A$, 
+\[
+\vec{r}_i \cdot \vec{x} = 0.
+\]
+Because $Row(A)$ is all linear combinations of rows of $A$, we have $\vec{x} \in Row(A)^{\perp}$. Considering this first result, apply it to $A^T$ and the second result follows.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
 \item Homework: 
 
 \end{enumerate}
