@@ -3548,7 +3548,7 @@ e^{i \theta} = \cos(\theta) + i \sin(\theta)
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 
+\item Homework: 1, 3, 5
 
 \end{enumerate}
 
@@ -3761,7 +3761,7 @@ Because $Row(A)$ is all linear combinations of rows of $A$, we have $\vec{x} \in
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 
+\item Homework: 1, 3, 5, 7, 11, 13, 15, 17, 19, 23, 25, 27, 31 
 
 \end{enumerate}
 
@@ -3770,7 +3770,106 @@ Because $Row(A)$ is all linear combinations of rows of $A$, we have $\vec{x} \in
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal sets:
+\begin{enumerate}
+%%%%%%%%%%%%%%%
+\item Definition: A set of vectors $S= \left\{ \vec{u}_1, \vec{u}_2, \dots, \vec{u}_p \right\}$ is an orthogonal set of vectors in $\mathbb{R}^n$ if
+\[
+\vec{u}_i \cdot \vec{u}_j = 0
+\]
+for all distinct pairs $i \neq j$. If all vectors are unit vectors (length 1), then is called an orthonormal set.
+
+%%%%%%%%%%%%%%%
+\item Examples: 
+\begin{itemize}
+\item $\left\{ \vec{i}, \vec{j}, \vec{k} \right\}$ is an orthogonal set in $\mathbb{R}^3$. 
+\item $\left\{ [0,1,0]^T, [1,0,1]^T, [1,0,-1] \right\}$ is an orthogonal set in $\mathbb{R}^3$. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%
+\item Theorem: If $S=\left\{ \vec{u}_1, \vec{u}_2, \dots, \vec{u}_p \right\}$ is an orthogonal set of nonzero vectors in $\mathbb{R}^n$, then $S$ is linearly independent and forms a basis for $Span \{ S \}$. 
+\\ \ \\
+Proof: Need to show
+\[
+c_1 \vec{u}_1 + \dots c_p \vec{u}_p = \vec{0}
+\]
+requires $c_1=c_2=\dots=c_p = 0$. Take the dot product with $\vec{u}_1$ on both sides.
+\[
+(c_1 \vec{u}_1 + \dots c_p \vec{u}_p) \cdot \vec{u}_1 = \vec{0}\cdot \vec{u}_1 \quad \rightarrow \quad c_1 \vec{u}_1 \cdot \vec{u}_1 = 0 \quad \rightarrow \quad c_1=0
+\]
+Likewise, all other $c_j=0$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal basis: Best choice of a basis.
+\begin{enumerate}
+%%%%%%%%%%%%%%5
+\item Theorem: For $S = \left\{ \vec{u}_1 , \dots, \vec{u}_p \right\}$ an orthogonal basis of subpace $W$ of $\mathbb{R}^n$, each $\vec{y}$ in $W$ can be written
+\[
+\vec{y} = c_1 \vec{u}_1 + \dots + c_p \vec{u}_p
+\]
+where
+\[
+c_j = \frac{\vec{y} \cdot \vec{u}_j}{\vec{u}_j \cdot \vec{u}_j}, \quad j = 1,2,\dots,p.
+\]
+Proof: Use same dot product idea as above. Note that $\vec{u}_i \cdot \vec{u}_i = \|\vec{u}_i \|^2 \neq 0$.
+%%%%%%%%%%%%%%5
+\item Notes: 
+\begin{itemize}
+\item We no longer need to solve a linear system to write $\vec{y}$ as a linear combination of basis elements.
+\item This is even nicer for orthonormal basis.
+\[
+\vec{y} = (\vec{y} \cdot \vec{u}_1) \vec{u}_1 + \dots + (\vec{y} \cdot \vec{u}_p) \vec{u}_p
+\]
+\item Relate above basis to standard unit basis in $\mathbb{R}^n$. 
+\end{itemize}
+%%%%%%%%%%%%%%5
+\item Example: Write $\vec{y} = [3,1,4]$ as a linear combination of basis $\left\{ [0,1,0]^T, [1,0,1]^T, [1,0,-1] \right\}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal projections:
+\begin{enumerate}
+%%%%%%%%%%%%%%5
+\item $\mathbb{R}^2$: Recall, one can project a vector onto another using basic trigonometry.
+\begin{itemize}
+\item Project $\vec{v}$ onto vector $\vec{u}$. Draw right triangle with angle $\theta$ between two vectors.. 
+\item Need to find length $c$ of triangle leg parallel with $\vec{u}$. Use right triangle trigonometry.
+\[
+c = \| \vec{v} \| \cos(\theta) = \| \vec{v} \| \frac{ \vec{u} \cdot \vec{v}}{ \|\vec{u}\| \| \vec{v} \| } = \frac{ \vec{u} \cdot \vec{v}}{ \|\vec{u}\| }
+\]
+\item Then,
+\[
+proj_{\vec{u}} (\vec{v}) =  \frac{ \vec{u} \cdot \vec{v}}{ \|\vec{u}\| } \vec{u}
+\]
+\item The triangle leg orthogonal to $\vec{u}$ is called the component of $\vec{v}$ orthogonal to $\vec{u}$. Then,
+\[
+\vec{v} = proj_{\vec{u}} (\vec{v}) + comp_{\vec{u}} (\vec{v}) \quad \rightarrow \quad 
+comp_{\vec{u}} (\vec{v}) = \vec{v} - proj_{\vec{u}} (\vec{v}) 
+\]
+\item Think of $\vec{v} = proj_{\vec{u}} (\vec{v}) + comp_{\vec{u}} (\vec{v})$ as decomposing $\vec{v}$ as the sum of two orthogonal vectors. This is the same as the previous theorem
+\[
+\vec{v} = \frac{\vec{v} \cdot \vec{u_1}}{\vec{u_1} \cdot \vec{u_1}} + \frac{\vec{v} \cdot \vec{u_2}}{\vec{u_2} \cdot \vec{u_2}}
+\]
+\end{itemize}
+%%%%%%%%%%%%%%5
+\item Example: Write $\vec{v} = [7, 6]^T$ as a sum of a vector parallel and perpendicular to $\vec{u} = [2, 1]^T$. Draw picture to illustrate. Verify that the two vectors are orthogonal via the dot product. In the end,
+\[
+proj_{\vec{u}}(\vec{y}) = [8, 4]^T, \quad comp_{\vec{u}}(\vec{y}) = [-1, 2]^T.
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal matrices: For $U$ a square matrix with orthogonal columns, can show
+\begin{itemize}
+\item $U^T U = I$ (inverse is its transpose)
+\item $\| U \vec{x} \| = \| \vec{x} \|$ (maintains length)
+\item $(U\vec{x}) \cdot (U\vec{y}) = \vec{x} \cdot \vec{y}$ (maintains angle between)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 17, 23, 25, 27
 
 \end{enumerate}
 
@@ -3779,6 +3878,19 @@ Because $Row(A)$ is all linear combinations of rows of $A$, we have $\vec{x} \in
 
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%
+\item Here we extend the idea of projecting a vector onto another vector to projecting a vector onto a subspace.
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For $W$ any subspace of $\mathbb{R}^n$, each $\vec{y}$ in $\mathbb{R}^n$ can be written uniquely as
+\[
+\vec{y} = \vec{\hat{y}} + \vec{z}
+\]
+where $\vec{\hat{y}} \in W$ and $\vec{z} \in W^{\perp}$. Further, for $\{ \vec{u}_1, \dots , \vec{u}_p \}$ an orthogonal basis of $W$, 
+\[
+\vec{\hat{y}}
+\]
+%%%%%%%%%%%%%%%%%%%%%
 \item Homework: 19, 20
 
 \end{enumerate}
