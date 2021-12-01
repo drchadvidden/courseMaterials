@@ -3856,7 +3856,7 @@ comp_{\vec{u}} (\vec{v}) = \vec{v} - proj_{\vec{u}} (\vec{v})
 %%%%%%%%%%%%%%5
 \item Example: Write $\vec{v} = [7, 6]^T$ as a sum of a vector parallel and perpendicular to $\vec{u} = [2, 1]^T$. Draw picture to illustrate. Verify that the two vectors are orthogonal via the dot product. In the end,
 \[
-proj_{\vec{u}}(\vec{y}) = [8, 4]^T, \quad comp_{\vec{u}}(\vec{y}) = [-1, 2]^T.
+proj_{\vec{u}}(\vec{v}) = [8, 4]^T, \quad comp_{\vec{u}}(\vec{v}) = [-1, 2]^T.
 \]
 \end{enumerate}
 
@@ -3888,10 +3888,55 @@ proj_{\vec{u}}(\vec{y}) = [8, 4]^T, \quad comp_{\vec{u}}(\vec{y}) = [-1, 2]^T.
 \]
 where $\vec{\hat{y}} \in W$ and $\vec{z} \in W^{\perp}$. Further, for $\{ \vec{u}_1, \dots , \vec{u}_p \}$ an orthogonal basis of $W$, 
 \[
-\vec{\hat{y}}
+\vec{\hat{y}} = \frac{\vec{y} \cdot \vec{u}_1}{\vec{u}_1 \cdot \vec{u}_1} \vec{u}_1 + \dots + \frac{\vec{y} \cdot \vec{u}_n}{\vec{u}_n \cdot \vec{u}_n} \vec{u}_n = proj_{W}(\vec{y})
 \]
+and 
+\[
+\vec{z} = proj_{W^{\perp}} (\vec{y}) = \vec{y} - \vec{\hat{y}}.
+\]
+\begin{itemize}
+\item Show graph of vector $\vec{y}$ projected onto a subspace.
+\item This theorem is the first step towards solving the least squares problem.
+\item Proof in text.
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%
-\item Homework: 19, 20
+\item Example: Find the projection of $\vec{y}$ onto subspace $W$ where $W=Span\{\vec{u}_1, \vec{u}_2 \}$.
+\[
+\vec{y} = \left[
+\begin{array}{c}
+6 \\ 3 \\ -2
+\end{array}
+\right], \quad
+\vec{u}_1 = \left[
+\begin{array}{c}
+3 \\ 4 \\ 0
+\end{array}
+\right], \quad
+\vec{y} = \left[
+\begin{array}{c}
+-4 \\ 3 \\ 0
+\end{array}
+\right]
+\]
+\begin{itemize}
+\item Note: Can think of this as just using the theorem of the previous section. First project $\vec{y}$ onto $\vec{u}_1$, then $\vec{y}$ onto $\vec{u}_2$ and so $proj_W(\vec{y})$ is the sum of those two projections using the parallelogram law. Draw a picture.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Theorem (Best approximation theorem): For $W$ a subspace of $\mathbb{R}^n$ and any vector $\vec{y}$ in $\mathbb{R}^n$, let $\vec{\hat{y}} = Proj_W(\vec{y})$. Then,
+\[
+\| \vec{y} - \vec{\hat{y}} \| < \| \vec{y} - \vec{v} \|
+\]
+for all $\vec{v} \in W$, $\vec{v} \neq \vec{\hat{y}}$. 
+\begin{itemize}
+\item Proof in text. Rather big deal. Above picture gives intuition.
+\item This solves the least squares problem for $W = Col(A)$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21
 
 \end{enumerate}
 
