@@ -4059,7 +4059,59 @@ R = Q^T X = \left[
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Return to linear systems $A \vec{x} = \vec{b}$
+\begin{enumerate}
+\item For $A$ $m \times n$ with $m >> n$, such systems usually have no solution.
+\item Idea is to find the best fit solution by making
+\[
+\| \vec{b} - A \vec{x} \|
+\]
+as small as possible.
+\item Because this error is the sum of squares, this is called the least squares problem.
+\item Key idea is projection.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Least squares problem
+\begin{enumerate}
+%%%%%
+\item Definition: For $A$ $m \times n$ and $\vec{b} \in \mathbb{R}^m$, the least squares solution of $A \vec{\hat{x}} = \vec{b}$ is vector $\vec{x}$ in $\mathbb{R}^n$ such that
+\[
+\| \vec{b} - A \vec{\hat{x}} \| \leq \| \vec{b} - A \vec{x} \|
+\]
+for all $\vec{x} \in \mathbb{R}^n$. This is the same idea as the best approximation theorem.
+
+%%%%%
+\item Idea:
+\begin{itemize}
+\item If $\vec{b}$ is not in $Col(A)$, project $\vec{b}$ onto the columns space as $\vec{\hat{b}} \in Col(A)$. Draw picture. Solve the resulting linear system.
+\[
+A \vec{\hat{x}} = \vec{\hat{b}}
+\]
+\item Can approach this as in previous sections with 
+\[
+\vec{\hat{b}} = proj_{Col(A)} (\vec{b}),
+\]
+but the fundamental theorem of linear algebra finds another way.
+\item Since $\vec{b} \perp \vec{\hat{b}}$, we have $\vec{\hat{b}} = A \vec{\hat{x}}$ and 
+\[
+(\vec{b} - A \vec{\hat{x}}) \in Col(A)^{\perp} = Nul(A^T)
+\]
+and so
+\[
+\vec{a}_j^T(\vec{b} - A \vec{\hat{x}}) = \vec{0} \quad\rightarrow\quad
+A^T(\vec{b} - A \vec{\hat{x}}) = \vec{0} \quad\rightarrow \quad
+A^T A \vec{\hat{x}} = A^T \vec{b}
+\]
+\item No need to compute $\vec{\hat{b}}$ at all.
+\end{itemize}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 17, 25
 
 \end{enumerate}
 
