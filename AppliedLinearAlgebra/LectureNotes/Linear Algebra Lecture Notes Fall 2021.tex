@@ -3945,7 +3945,112 @@ for all $\vec{v} \in W$, $\vec{v} \neq \vec{\hat{y}}$.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal basis have a huge advantage:
+\begin{enumerate}
+\item Linear combinations are easy
+\item Projections are easy, essential for approximation
+\item Matrices with orthogonal columns are slick
+\item Question: How to find an orthogonal basis for a subspace? Gram-Schmidt process
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Idea of Gram Schmidt: Use projection and component to get orthogonal basis.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Example: Consider the subspace $W$ spanned by 
+\[
+\vec{x_1} = \left[
+\begin{array}{c}
+0 \\ 4 \\ 2 
+\end{array}
+\right], \quad
+\vec{x_2} = \left[
+\begin{array}{c}
+5 \\ 6 \\ -7
+\end{array}
+\right]
+\]
+\begin{itemize}
+\item Show basis is LI but not orthogonal. Draw picture in $\mathbb{R}^3$.
+\item New basis will be $\{\vec{v}_1, \vec{v}_2 \}$ which spans $W$ but is now orthogonal.
+\item Draw picture of idea
+\[
+\vec{v}_1 = \vec{x}_1, \quad \vec{v}_2 = x_2 - proj_{x_1}(\vec{x}_2) = comp_{x_1}(\vec{x}_2)
+\]
+\item Check the result is orthogonal. How to check $\{\vec{v}_1, \vec{v}_2 \}$ and $\{\vec{x}_1, \vec{x}_2 \}$ both span the same subspace $W$? Enough to see $\{\vec{v}_1, \vec{v}_2 \}$ are both linear combinations of $\{\vec{x}_1, \vec{x}_2 \}$, but we proved this already in past section (orthonormal set is a basis). 
+\item Easy to make an orthonormal basis.
+\[
+\left\{\frac{1}{\|\vec{v}_1\|} \vec{v}_1, \quad \frac{1}{\|\vec{v}_2\|}\vec{v}_2 \right\}
+\]
+\item Coding example.
+\end{itemize}
+
+%%%%%%%%%%%%%
+\item Example: For 3+ vectors, same idea. Just need to project onto a subspace.
+\begin{itemize}
+\item Random $4 \times 3$ matrix $X = [\vec{x}_1~\vec{x}_2~\vec{x}_3]$. We find an orthonormal basis for the $Col(A)$. 
+\item First two steps same as before. Last step projects onto a plane.
+\item Draw picture of process.
+\[
+\vec{v}_1 = \vec{x}_1 \quad (W_1 = Span(\vec{v}_1))
+\] \[
+\vec{v}_2 = \vec{x}_2 - proj_{W_2}(\vec{x}_2) \quad (W_2 = Span(\vec{v}_1, \vec{v}_2)) 
+\] \[
+\vec{v}_3 = \vec{x}_3 - proj_{W_3}(\vec{x}_3) \quad (W_3 = Span(\vec{v}_1, \vec{v}_2, \vec{v}_3))
+\]
+\item Written in terms of dot product:
+\[
+\vec{v}_1 = \vec{x}_1 
+\] \[
+\vec{v}_2 = \vec{x}_2 - \frac{\vec{x}_2 \cdot \vec{v}_1}{\vec{v}_1 \cdot \vec{v}_1} \vec{v}_1
+\] \[
+\vec{v}_3 = \vec{x}_3 - \frac{\vec{x}_3 \cdot \vec{v}_1}{\vec{v}_1 \cdot \vec{v}_1}\vec{v}_1 -  \frac{\vec{x}_3 \cdot \vec{v}_2}{\vec{v}_2 \cdot \vec{v}_2}\vec{v}_2
+\]
+\item Show theorem in text for $p$ dimensional case.
+\item Normalize if wanted.
+\item Coding example.
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%5
+\item $QR$ decomposition: Can write the above Gram schmidt process as a matrix factorization.
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item Can write the above as a matrix factorization
+\[
+X = Q R, \quad Q = \left[ \vec{v}_1, \vec{v}_2, \vec{v}_3 \right]
+\]
+%%%%%%%%%%%%%
+\item Note, $Q$ is an orthonormal matrix and so $Q^{-1} = Q^T$ and so
+\[
+R = Q^T X = \left[
+\begin{array}{ccc}
+\vec{v}_1 \cdot \vec{x}_1  & \vec{v}_1 \cdot \vec{x}_2  & \vec{v}_1 \cdot \vec{x}_3 \\
+\vec{v}_2 \cdot \vec{x}_1  & \vec{v}_2 \cdot \vec{x}_2  & \vec{v}_2 \cdot \vec{x}_3 \\
+\vec{v}_3 \cdot \vec{x}_1  & \vec{v}_3 \cdot \vec{x}_2  & \vec{v}_3 \cdot \vec{x}_3  
+\end{array}
+\right] = 
+ \left[
+\begin{array}{ccc}
+\vec{v}_1 \cdot \vec{x}_1 & \vec{v}_1 \cdot \vec{x}_2  & \vec{v}_1 \cdot \vec{x}_3 \\
+0 & \vec{v}_2 \cdot \vec{x}_2  & \vec{v}_2 \cdot \vec{x}_3 \\
+0 & 0  & \vec{v}_3 \cdot \vec{x}_3
+\end{array}
+\right]
+\]
+\item General proof in text
+\item Easy to solve $A \vec{x} = \vec{b}$ now.
+\item Easy to invert $A$ now. Work was transferred to GS process.
+\item Eigenvalues and eigenvectors now easier.
+\item Coding example.
+\end{enumerate}
+
+
+\item Homework: 1, 3, 5, 7, 9, 13, 15, 17
 
 \end{enumerate}
 
