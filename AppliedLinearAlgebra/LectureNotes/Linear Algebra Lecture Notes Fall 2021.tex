@@ -893,7 +893,7 @@ c_1 T(\vec{u_1} + \dots + T(c_p \vec{u_p})
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Examples: Geometry of linear transformations. For vectors $\vec{u}=[3,1]^T$, $\vec{v}=[1,2]^T$ and $\vec{u}+\vec{v}$, what does transformation $T(\vec{x})=A\vec{x}$ do? Use linearity for $\vec{u}+\vec{v}$.
+\item Examples: Geometry of linear transformations. For vectors $\vec{u}=[3,1]^T$, $\vec{v}=[1,2]^T$ and $\vec{u}+\vec{v}$, what does transformation $T(\vec{x})=A\vec{x}$ do? Use linearity for $\vec{u}+\vec{v}$. Draw the parallelogram to see effect.
 \begin{itemize}
 %%%%%%%%%%%
 \item Dilation 
@@ -963,8 +963,11 @@ A = \left[ \begin{array}{cc}
 \item Unit basis in $\mathbb{R}^2$:
 \begin{itemize}
 \item $\vec{e_1}=[1,0]^T, \vec{e_2}=[0,1]^T$, all other vectors in $\mathbb{R}^2$ are linear combinations of these two. Show example.
-\item Amounts to transformation of the unit square.
-\item Using linearity, understanding $T(\vec{x})=A\vec{x}$ action on these two unit basis will determine $A$.
+\item Amounts to geometric transformation of the unit square.
+\item Using linearity, understanding $T(\vec{x})=A\vec{x}$ action on these two unit basis will determine $A$. This is because for any $\vec{x} \in \mathbb{R}^2$,
+\[
+\vec{x} = x_1 \vec{e_1} + x_2 \vec{e_2}
+\]
 \end{itemize} 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1005,6 +1008,13 @@ T(\vec{x}) = A\vec{x} = \left[ T(\vec{e_1}) \cdots T(\vec{e_n}) \right]\vec{x}
 for unit basis vectors $\vec{e_1}, \dots, \vec{e_n}$.
 
 Matrix $A$ is called the standard matrix for the linear transformation $T$. Also see that any linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is also a matrix transformation.
+
+%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Use the above theorem to find the linear transformation which 
+\begin{itemize}
+\item Projects $\vec{x}$ onto the main diagonal.
+\item Rotates $\vec{x}$ 180 degrees about the origin.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%
 \item Example: Use the above theorem to find the linear transformation $T(\vec{x})$ which rotates vector $\vec{x}$ by $\theta$ radians counter clockwise.
@@ -1064,6 +1074,9 @@ T(\vec{x}) = A\vec{x} =
 \item Return to textbook basic linear transformations. Which are onto? One-to-one? Both? Neither?
 
 %%%%%%%%%%%%%%
+\item Example: Random $3 \times 4$ matrix $A$ in REF. Is $A$ onto? Yes, full set of pivots. One-to-one? No, free variable. So we can answer these questions via row reduction, but there is an easier way.
+
+%%%%%%%%%%%%%%
 \item Theorem: Linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ is one-to-one if and only if the equation $T(\vec{x})=\vec{0}$ has only the trivial solution.
 \begin{itemize}
 
@@ -1090,7 +1103,22 @@ and hence $T(\vec{x})=\vec{0}$ has a nontrivial solution.
 \item $T$ is onto if and only if the columns of $A$ span $\mathbb{R}^m$.
 \item $T$ is one-to-one if and only if the columns of $A$ are linearly independent.
 \end{itemize}
+Why does this theorem make intuitive sense?
 
+
+%%%%%%%%%%%%%%%%%%%%55
+\item Show $T$ is a one-to-one linear transformation. Is $T$ onto?
+\[
+T(\vec{x}) = 
+\left[
+\begin{array}{c}
+x_1-x_2 \\
+-2x_1+x_2 \\
+x_1
+\end{array}
+\right]
+\]
+Show a matrix transformation with linearly indep columns, hence a one-to-one linear transformation. Two columns cannot span $\mathbb{R}^3$, so not onto.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1673,7 +1701,53 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 15-24
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: (Invertible matrix theorem)
+
+For $A$ a square $n \times n$ matrix, the following statements are equivalent (either all true or all false).
+\begin{itemize}
+\item $A$ is an invertible matrix
+\item $A$ is row equivalent to the $n \times n$ identity matrix
+\item $A$ has $n$ pivots positions
+\item The equation $A\vec{x}=\vec{0}$ has only the trivial solution
+\item The columns of $A$ for a linearly independent set
+\item The linear transformation $T(\vec{x})=A\vec{x}$ is one-to-one
+\item The equation $A\vec{x}=\vec{b}$ has at least one solution for each $\vec{b}$ in $\mathbb{R}^n$
+\item The columns of $A$ span $\mathbb{R}^n$
+\item The linear transformation $T(\vec{x})=A\vec{x}$ is onto
+\item There is a $n \times n$ matrix $C$ such that $CA=I$
+\item There is a $n \times n$ matrix $D$ such that $AD=I$
+\item $A^T$ is an invertible matrix
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Problems 1-6 in the exercises. Decide if invertible or not.
+\begin{enumerate}
+\item Yes, LI columns
+\item No, LD columns
+\item Yes, 3 pivots after row reduction ($5, -7, -1$). Don't need to do the row reduction here.
+\item  No, LD columns since zero vector included.
+\item No after swapping rows 1 and 2 and doing row reduction, only 2 pivots
+\item Do row reduction to see.
+\item Note, 8 easy to see
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Inverse of linear transformations:
+\begin{enumerate}
+\item Def: A linear transformation $T:\mathbb{R}^n \rightarrow \mathbb{R}^n$ is invertible if there exists a transformation $S: \mathbb{R}^n \rightarrow \mathbb{R}^n$ such that
+\[
+S(T(\vec{x})) = \vec{x}, \quad
+T(S(\vec{x})) = \vec{x}
+\]
+for all $\vec{x} \in \mathbb{R}^n$. $S$ is called the inverse of $T$ and we denote $S=T^{-1}$.
+
+\item Theorem: For $T:\mathbb{R}^n \rightarrow \mathbb{R}^n$ a linear transformation with $T(\vec{x})=A\vec{x}$, $T$ is invertible if and only if $A$ is an invertible matrix. In which case, $T^{-1}(\vec{x}) = A^{-1} \vec{x}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-7 odd, 11, 15-23 odd, 33
+
 
 \end{enumerate}
 
@@ -1682,7 +1756,152 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 1-10, 13, 14, 16
+%%%%%%%%%%%%%%%%%%%%%%
+\item Idea: Generalize matrix multiplication to block multiplication
+\begin{itemize}
+\item Certain problems naturally lead to symmetry / block structure of a matrix.
+\item Can also block matrices to distribute computation to speed up compute time (parallel computing). High performance computing especially uses this approach.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\[
+A = \left[
+\begin{array}{cc|ccc}
+2 & -3 & 1 & 0 & -4 \\
+\hline
+1 & 5 & -2 & 3 & -1 \\
+0 & -4 & -2 & 7 & -1
+\end{array}
+\right], \quad
+B = \left[
+\begin{array}{cc}
+6 & 4 \\
+-2 & 1 \\
+\hline
+-3 & 7 \\
+-1 & 3 \\
+5 & 2 
+\end{array}
+\right]
+\]
+\begin{enumerate}
+\item Note these are compatible for multiplication.
+\item 2 approaches already: Row and columns
+\[
+AB = A[\vec{b}_1 ~ \vec{b}_2 ] = [A\vec{b}_1 ~ A\vec{b}_2]
+\]
+\[
+AB = \left[
+\begin{array}{c}
+row_1(A) \\ row_2(A) \\ row_3(A)
+\end{array}
+\right] B
+ = \left[
+\begin{array}{c}
+row_1(A)B \\ row_2(A)B \\ row_3(A)B
+\end{array}
+\right] 
+\]
+\item New idea: Partition $A$ and $B$ into blocks.
+\[
+AB = [A_1 | A_2] \left[
+\begin{array}{c}
+B_1 \\ \hline B_2
+\end{array}
+\right]
+= [A_1B_1 + A_2B_2]
+\]
+for $A_1$ $(3 \times 2)$, $A_2$ $(3\times 3)$ and $B_1$ $(2\times 2)$ and $B_2$ $(3\times 2)$. Compare to the above 2 forms.
+\item Note: We need submatrices to be compatible for multiplication.
+\item Can partition further as
+\[
+AB = \left[
+\begin{array}{c|c}
+A_1 & A_2 \\
+\hline A_3 & A_4
+\end{array}
+\right] 
+\left[
+\begin{array}{c}
+B_1 \\ \hline B_2
+\end{array}
+\right]
+= [A_1B_1 + A_2B_2]
+\]
+for $A_1$ $(1 \times 2)$, $A_2$ $(1\times 3)$, $A_3$ $(2 \times 2)$, $A_4$ $(2\times 3)$ and $B_1$ $(2\times 2)$ and $B_2$ $(3\times 2)$. Compare to the above.
+\item Think of other ways to partition:
+\begin{itemize}
+\item $A$ into 4 parts, $B$ into 2
+\item $B$ into 3 parts
+\item Repeat partitioning leads to the below theorem.
+\end{itemize}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For $A$ $(m\times n)$ and $B$ $(n \times p)$, 
+\[
+AB = [\vec{a}_1 ~ \vec{a}_2 ~ \dots ~ \vec{a}_n]
+\left[\begin{array}{c}
+row_1(B) \\
+row_2(B) \\
+\vdots \\
+row_n(B) \\
+\end{array}\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Inverses of partitioned matrices.
+\begin{enumerate}
+\item Find $A^{-1}$ for $A$ $(n \times n)$ where
+\[
+\left[
+\begin{array}{cc}
+A_{11} & A_{12} \\
+0 & A_{22}
+\end{array}
+\right]
+\]
+where $A_{11}$ $(p \times p)$, $A_{12}$ $(p \times q)$, $A_{22}$ $(q \times q)$, and $0$ $(q \times p)$.
+\item Find matrix $B$ such that 
+\[
+AB = \left[
+\begin{array}{cc}
+A_{11} & A_{12} \\
+0 & A_{22}
+\end{array} \right] 
+\left[ \begin{array}{cc}
+B_{11} & B_{12} \\
+B_{21} & B_{22}
+\end{array} \right]
+= I_{n \times n}
+\]
+Multiplying, we have that
+\begin{itemize}
+\item $A_{11} B_{11} + A_{12}B_{21} = I_p$
+\item $A_{11} B_{12} + A_{12}B_{22} = 0$
+\item $A_{22} B_{21} = 0$ 
+\item $A_{22} B_{22} = I_q$
+\end{itemize}
+\item The last bullet says $B_{22} = A_{22}^{-1}$ from the invertible matrix theorem.
+\item From the third bullet, $B_{21}=0$ since $A_{22}$ is invertible and multiplying by $A_{22}^{-1}$.
+\item The first bullet then gives $B_{11}=A_{11}^{-1}$. 
+\item Finally, the second bullet gives
+\[
+B_{12} = -A_{11}^{-1} A_{12} A_{22}^{-1}.
+\]
+\item Finally, 
+\[
+A^{-1} = B = \left[ \begin{array}{cc}
+B_{11} & B_{12} \\
+B_{21} & B_{22}
+\end{array} \right]
+\] 
+for $B$ as derived.
+\item Note, this approach is especially nice if we can get down to $(2 \times 2)$ matrices where the inverse has a simple formula.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 9, 11, 13, 15.
 
 \end{enumerate}
 
@@ -1690,6 +1909,8 @@ Easy to check. This leads to a general result.
 \subsection{2.5 Matrix factorizations}
 
 \begin{enumerate}
+
+\item Lab content
 
 \item Homework: 22-26
 
@@ -1700,6 +1921,9 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
+\item Lab content
+
+
 \item Homework: 
 
 \end{enumerate}
@@ -1708,6 +1932,8 @@ Easy to check. This leads to a general result.
 \subsection{2.7 Applications to computer graphics}
 
 \begin{enumerate}
+
+\item Lab content
 
 \item Homework: 
 
@@ -1718,7 +1944,166 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 5-20, 23-26
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we generalize to the main theory of linear algebra as a way to delve deeper into $A\vec{x}=\vec{b}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Subspaces of $\mathbb{R}^n$.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A \emph{subspace} of $\mathbb{R}^n$ is any set $H$ in $\mathbb{R}^n$ such that
+\begin{itemize}
+\item The zero vector is in $H$
+\item For each $\vec{u}, \vec{v} \in H$, we have $(\vec{u}+\vec{v}) \in H$
+\item For each $\vec{u} \in H$, we have $(c\vec{u}) \in H$
+\end{itemize}
+This is says subspaces are \emph{closed} under vector addition and scalar multiplication.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: For $\vec{u}, \vec{v}, \vec{w}$ as
+\[
+\vec{u} = \left[
+\begin{array}{c}
+-3 \\ 0 \\ 6
+\end{array}
+\right], \quad
+\vec{u} = \left[
+\begin{array}{c}
+-2 \\ 2 \\ 3
+\end{array}
+\right], \quad
+\vec{u} = \left[
+\begin{array}{c}
+0 \\ -6 \\ 3
+\end{array}
+\right],
+\]
+show $Span\{\vec{u},\vec{v},\vec{w}\}$ is a subspace of $\mathbb{R}^3$. Is 
+\[
+\vec{p} = \left[
+\begin{array}{c}
+1 \\ 14 \\ -9
+\end{array}
+\right]
+\]
+in this subspace?
+\begin{itemize}
+\item Solution: For $Span\{\vec{u},\vec{v}, \vec{w}\}$, need to check three properties. Note, $\vec{y} \in Span\{\vec{u},\vec{v}, \vec{w}\}$ means
+\[
+\vec{y} = x_1\vec{u}+x_2\vec{v}+x_3\vec{w}
+\]
+for some scalars $x_1,x_2,x_3$. Then the zero vector is there. Also, show addition and scalar multiplication are preserved. 
+\item Note, spans will always be a subspace. Sometimes say subspace spanned by these vectors or subspace generate by these vectors.
+\item For $\vec{p}$, this amounts to solving a linear system via Gaussian elimination.
+\[
+\left[
+\begin{array}{ccc|c}
+-3 & -2 & 0 & 1 \\
+0 & 2 & -6 & 14\\
+6 & 3 & 3 & -9
+\end{array}
+\right] \quad \sim \quad
+\left[
+\begin{array}{ccc|c}
+-3 & -2 & 0 & 1 \\
+0 & 2 & -6 & 14\\
+0 & -1 & 3 & -7
+\end{array} \right] \quad \sim \quad
+\left[
+\begin{array}{ccc|c}
+-3 & -2 & 0 & 1 \\
+0 & 2 & -6 & 14\\
+0 & 0 & 0 & 0
+\end{array}
+\right]
+\]
+The system is consistent and so $\vec{p}$ is in the subspace.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: $\{\vec{0}\}$ is a subspace of $\mathbb{R}^n$. Check three items. Called the zero subspace.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Column and null space of a matrix $A$. The two fundamental subspaces concerning $A\vec{x} = \vec{b}$.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions:
+\begin{itemize}
+\item The column space of matrix $A$, written $col(A)$, is the set of all linear combinations of the columns of $A$
+\item The null space of matrix $A$, written $nul(A)$, is the set of all vectors which solve the homogeneous system $A\vec{x}=\vec{0}$.
+\item Note the dimension of each relies on the number of rows and columns of $A$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorems:
+\begin{itemize}
+\item $col(A)$ is a subspace of $\mathbb{R}^n$. This holds since it is a span of vectors as discussed above.
+\item $nul(A)$ is a subspace of $\mathbb{R}^n$. This requires careful proof. \\ \ \\
+Proof: Check the three items. $A \vec{0}=\vec{0}$. For $\vec{u}, \vec{v} \in nul(A)$, we have 
+\[
+A(\vec{u}+\vec{v}) = A\vec{u}+A\vec{v} = \vec{0}+\vec{0}=\vec{0}
+\]
+\[
+A(c\vec{u}) = cA\vec{u}=\vec{0}
+\]
+which leverages linearity of a matrix transformation.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: From previous example, $\vec{p}$ is in $col(A)$. 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Basis for a subspace.
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: A \emph{basis} for a subspace $H$ of $\mathbb{R}^n$ is linearly independent set $H$ which spans $H$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find a basis for the $nul(A)$ for above example.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find a basis for the $col(A)$ for the above example.
+\begin{itemize}
+\item Set of all columns would span $col(A)$, but they need not be linearly independent. In this case they aren't due to free variables.
+\item Eliminating to reduced row echelon form, we see how a column is a linear combination of the others.
+\item While the columns change thru row reduction, the system has the same solution and hence the linear dependence relation does not change.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The pivot columns of matrix $A$ form a basis for $col(A)$.
+\begin{itemize}
+\item Note: These columns are the original columns of $A$, not the echelon form columns. Can see why echelon form wouldn't work with zeros in row entries.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Columns of $I$ form the standard unit basis for $\mathbb{R}^n$. Check that every system is consistent. Full set of pivots says the columns are a basis. Can now see where this terminology comes from. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find a basis for $col(A)$ and $nul(A)$. Note the difference in dimension of these spaces.
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+4 & 5 & 7 \\
+-5 & -1 & 0 \\
+2 & 7 & 11
+\end{array}
+\right]
+\]
+
+\end{enumerate}
+
+
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25
 
 \end{enumerate}
 
@@ -1727,7 +2112,99 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 9-16
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Coordinate systems
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Given a basis $B=\{\vec{b_1}, \dots, \vec{b_p}\}$ of subspace $H$ in $\mathbb{R}^n$, each element $\vec{x}$ of $H$ can be written uniquely as a linear combination of basis elements of $B$. Reason: If there were two ways, 
+\[
+\vec{x} = c_1 \vec{b_1} + \dots, \quad \vec{x} = d_1 \vec{b_1} + \dots
+\]
+then
+\[
+\vec{0} = \vec{x}-\vec{x} = (c_1-d_1)\vec{b}_1, \dots
+\]
+Due to linear independence of the basis vectors, $c_1-d_1=0$ gives $c_1=d_1$ and likewise for the remaining weights.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: For basis $B = \{ \vec{b}_1, \dots, \vec{b}_p \}$ of subspace $H$, each $\vec{x}$ in $H$ can be expressed as the \emph{coordinate vector} in $\mathbb{R}^p$ as
+\[
+\left[\vec{x} \right]_B = \left[
+\begin{array}{c}
+c_1 \\ \vdots \\ c_p
+\end{array}\right]
+\]
+where $\vec{x} = c_1 \vec{b}_1 + \dots + c_p \vec{b}_p$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: For
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+3 \\ 6 \\ 2
+\end{array} \right], \quad
+\vec{v}_2 = \left[
+\begin{array}{c}
+-1 \\ 0 \\ 1
+\end{array} \right], \quad
+\vec{x} = \left[
+\begin{array}{c}
+3 \\ 12 \\ 7
+\end{array} \right],
+\]
+show $B = \{\vec{v}_1, \vec{v}_2\}$ is a basis for the subspace $H$ spanned by these vectors. Then show $\vec{x}$ is in $H$ and find its coordinate vector. In the end
+\[
+\left[ \vec{x} \right]_B = \left[
+\begin{array}{c}
+2 \\ 3
+\end{array}
+\right]
+\]
+Show picture of the book of the intuition of two dimensional subspace $H$ and coordinates with respect to $B$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Note that $H$ in the above example resembles $\mathbb{R}^2$ geometrically and with the coordinate vector. Further, $\vec{x} \rightarrow [ \vec{x} ]_B$ has a one-to-one correspondence since coordinate vectors are unique. Call this an \emph{isomorphism} and say $H$ is \emph{isomorphic} to $\mathbb{R}^2$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Definition: The \emph{dimension} of nonzero subspace $H$, denoted by $dim(H)$, is the number of vectors in any basis of $H$. The dimension of $\{\vec{0}\}$ is defined to be zero.
+
+\item Note: Can show if $H$ has a basis with $p$ vectors, then all possible basis for $H$ must also have $p$ vectors.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Return to linear system $A\vec{x} = \vec{b}$. 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Definition: The \emph{rank} of matrix $A$, denoted $rank(A)$, is the dimension of the column space of $A$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Number 12 in the book on screen. $A$ has $5$ total columns with 3 pivot columns. Then $rank(A)=3$. Note, the dimension of the null space of $A$ is the count of the remaining columns (free variables), 2 in this case. It is always the case that $rank(A)+dim(Nul(A))=n$ where $n$ is the total column number of $A$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: For $A$ matrix with $n$ columns, we have that $rank(A)+dim(Nul(A)) = n$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Terminology of \emph{rank} is an important number which measures the "singularness" of a matrix. If full rank, nonsingular. If less than full rank, singular. Lower rank means "more" linear independence. Can also show the rank of $A$ is the same as $A^T$. That is the number of LI columns matches the number of LI rows. Can see this from RREF form of a matrix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: For $H$ a $p$-dimensional subspace of $\mathbb{R}^n$, any linearly independent set of $p$ elements in $H$ is a basis for $H$. Likewise, any set of $p$ elements which spans $H$ is a basis for $H$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: Last, we add to the Invertible Matrix Theorem
+\begin{enumerate}
+\item The columns of $A$ form a basis for $\mathbb{R}^n$.
+\item $Col(A) = \mathbb{R}^n$
+\item $dim(Col(A)) = n$
+\item $rank(A)=n$
+\item $Nul(A) = \{\vec{0} \}$
+\item $dim(Nul(A)) = 0$
+\end{enumerate}
+
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23
 
 \end{enumerate}
 
@@ -1741,7 +2218,154 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We return to the question of invertibility for square matrix $A$. 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $2 \times 2$ case from before:
+\[
+A = \left[
+\begin{array}{cc}
+a & b \\
+c & d 
+\end{array}
+\right] \quad \Rightarrow \quad A^{-1}=
+\frac{1}{ad-bc} 
+\left[
+\begin{array}{cc}
+d & -b \\
+-c & a 
+\end{array}
+\right]
+\]
+We denote $\det(A) = ad-bc$. Then $A$ is invertible only if $det(A) \neq 0$.
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Notes: 
+\begin{itemize}
+\item $\det(A) = ad-bc=0$ implies $\frac{a}{c}=\frac{b}{d}$ and columns are parallel (linearly dependent).
+\item $\det(A) = a(d-\frac{c}{a}b)$ is the product of the pivots of $A$. Turns out this will generalize.
+\item $det(A)$ not only determinies invertibility, but it also plays a role in the entries of $A^{-1}$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $3 \times 3$ case: Perform row reduction on a general matrix.
+\[
+A = \left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{array}
+\right] \sim
+ \left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+a_{11}a_{21} & a_{11}a_{22} & a_{11}a_{23} \\
+a_{11}a_{31} & a_{11}a_{32} & a_{11}a_{33} 
+\end{array}
+\right] \sim
+\left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+0 & a_{11}a_{22}-a_{12}a_{21} & a_{11}a_{23}-a_{13}a_{21} \\
+0 & a_{11}a_{32}-a_{12}a_{31} & a_{11}a_{33}-a_{13}a_{31} 
+\end{array}
+\right]
+\]
+\[ \sim
+\left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+0 & a_{11}a_{22} - a_{12}a_{21} & a_{11}a_{23}-a_{13}a_{21} \\
+0 & 0 & a_{11} \Delta
+\end{array}
+\right] 
+\]
+where for the last step row 3 is multiplied by $(a_{11}a_{22}-a_{12}a_{21})$ and this new row is added to $-(a_{11}a_{32}-a_{12}a_{31})$. Also,
+\[
+\Delta = a_{11}a_{22}a_{33}+ a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31}.
+\]
+We need these pivots to be non-zero for $A$ to be invertible.
+
+%%%%%%%%%%%%%%%%%%%%5
+\item Notes:
+\begin{itemize}
+\item If $A$ is invertible, $\Delta \neq 0$. Will show later if $\Delta \neq 0$, then $A$ is invertible.
+\item $\det(A) = \Delta$ is the formula for the $3\times 3$ case.
+\item The product has 1 entry from each row and 1 from each column. By row / column swapping, there are $6=3!$ total ways for the $3\times 3$ case.
+\item The sign of each product is determined by the column (or row) permutations. More on this later.
+\item Grouping terms reveals $(2 \times 2)$ determinants leading to a recursive computational formula.
+\begin{align*}
+\Delta &= a_{11}a_{22}a_{33}+ a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31} \\
+&= a_{11}(a_{22}a_{33}-a_{23}a_{32}) - a_{12}(a_{12}a_{21}a_{33}-a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31}) \\
+&= a_{11}|A_{11}| - a_{12}|A_{12}| + a_{13}|A_{13}| \\
+&= a_{11}C_{11} + a_{12}C_{12} + a_{13}C_{13}
+\end{align*}
+where $A_{ij}$ is the submarix of $A$ formed by deleting the $i$th row of $A$ and the $j$th column of $A$. Also,
+\[
+C_{ij} = (-1)^{i+j} |A_{ij}|
+\]
+is called the $(i,j)$th cofactor of $A$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item This formula will extend to $n\times n$ matrices.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We can group by any row / column we wish here.
+
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Compute $\det(A)$ for 
+\[
+A = \left[
+\begin{array}{ccc}
+2 & 3 & -3 \\
+4 & 0 & 3 \\
+6 & 1 & 5
+\end{array}
+\right].
+\]
+Do first row. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: For $n \geq 2$, the determinant of $n \times n$ matrix $A$ is
+\[
+\det(A) = a_{11} \det(A_{11}) - a_{12} \det(A_{12}) + \cdots + (-1)^{1+n} \det(A_{1n})
+= \sum_{j=1}^n (-1)^{i+j} a_{1j} det(A_{1j}) 
+= \sum_{j=1}^n (-1)^{i+j} a_{1j} C_{1j}
+\] 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The determinant can be computed by expansion across any row or column of matrix $A$.
+\[
+\det(A) = a_{i1} \det(A_{i1}) - a_{i2} \det(A_{i2}) + \cdots + (-1)^{1+n} \det(A_{in})
+= \sum_{j=1}^n (-1)^{i+j} a_{ij} det(A_{ij}) 
+\] 
+\[
+\det(A) = a_{1j} \det(A_{1j}) - a_{2j} \det(A_{2j}) + \cdots + (-1)^{1+n} \det(A_{nj})
+= \sum_{i=1}^n (-1)^{i+j} a_{ij} det(A_{ij}) 
+\] 
+Ask them to repeat above example with better row and column.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: 
+\begin{enumerate}
+\item Number 14 in text.
+\item Determinant of a random $4 \times 4$ triangular matrix. Expand about the column of all zeros repeatively.
+\item Determinant of $I$.
+\item Determinant of matrix with column of zeros.
+\item $\det(A) = \det(A^T)$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: The determinant of a triangular matrix is the product of the diagonals.
+
+\item Homework: 1, 3, 5, 9, 13, 15, 19, 21, 23, 25, 29, 33, 39, 41
 
 \end{enumerate}
 
@@ -1750,7 +2374,177 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Cofactor expansion is easy, but it's recursive nature makes it very inefficient computationally. Instead, we will leverage Gaussian elmination to get to triangular form. This requires two parts:
+\begin{enumerate}
+\item Understand the effect of EROPs on $\det(A)$ (as well as elementary matrices).
+\item Compute $\det(A)$ for an upper triangular matrix.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Compare the determinants of each.
+\[
+\left[
+\begin{array}{cc}
+a & b \\
+c & d
+\end{array}
+\right], \quad 
+\left[
+\begin{array}{cc}
+c & d \\
+a & b 
+\end{array}
+\right], \quad 
+\left[
+\begin{array}{cc}
+ka & kb \\
+c & d
+\end{array}
+\right], \quad 
+\left[
+\begin{array}{cc}
+a+kc & b+kc \\
+c & d
+\end{array}
+\right]
+\]
+Generalize this to $3 \times 3$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Let $A$ be a square matrix. 
+\begin{itemize}
+\item If a multiple of one row of $A$ is added to another to row to produce matrix $B$, then $\det(B)=\det(A)$.
+\item If two rows of $A$ are interchanged to produce $B$, then $\det(B)=-\det(A)$.
+\item If one of $A$ is multiplied by $k$ to produce $B$, then $\det(B)=k\det(A)$.
+\item Note: This last result (row scaling) shows determinants can be made big or small via rescaling. So the size of the determinant isn't necessarily a good indicator of interest on its own.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Accelerated calculation
+\[
+\left|
+\begin{array}{ccc}
+0 & 4 & 0 \\
+0 & 0 & 1 \\
+3 & 0 & 5
+\end{array}
+\right|= -\left|
+\begin{array}{ccc}
+3 & 0 & 5 \\
+0 & 0 & 1 \\
+0 & 4 & 0 
+\end{array}
+\right|= \left|
+\begin{array}{ccc}
+3 & 0 & 5 \\
+0 & 4 & 0 \\
+0 & 0 & 1 
+\end{array}
+\right|=12
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Use row reduction to accelerate calculation of 
+\[
+\left|
+\begin{array}{cccc}
+1 & 3 & 2 & -4 \\
+0 & 1 & 2 & -5 \\
+2 & 7 & 6 & -3 \\
+-3 & -10 & -7 & 2
+\end{array}
+\right|.
+\]
+Strive for triangular form then use product of pivots. Can also use cofactor expansion to simplify some. Take out common factors of rows. What if one row all zeros? 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note: Getting to triangular form $U$ via row reduction, we have
+\[
+\det(A) = (-1)^r \det(U) = (-1)^r (\text{product of pivots of $U$})
+\]
+where $r$ is the number of row swaps used and no row scaling was done.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorems: For $A$ a square matrix,
+\begin{itemize}
+\item  
+\[
+\det(A) = 
+\begin{cases}
+(-1)^r (\text{product of pivots of $U$}), & \text{if $A$ is invertible} \\
+0, & \text{if $A$ is not invertible}
+\end{cases}
+\]
+\item $A$ is invertible if and only if $\det(A) \neq 0$. (Use above bullet)
+\item $\det(A) = \det(A^T)$. (Use the above bullet and IVT. Can now do column operations as we do for row operations)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Use the determinant to determine if vectors are linearly independent.
+\[
+\left[
+\begin{array}{c}
+4 \\ 6 \\ 2 
+\end{array}
+\right], \quad
+\left[
+\begin{array}{c}
+-7 \\ 0 \\ 7 
+\end{array}
+\right], \quad
+\left[
+\begin{array}{c}
+-3 \\ -5 \\ -2
+\end{array}
+\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%%5
+\item Elementary matrices:
+\begin{enumerate}
+\item Recall, there are three types of elementary matrices each result from EROPs applied to the identity matrix I.
+\[
+E = \left[
+\begin{array}{ccc}
+0 & 1 & 0 \\
+1 & 0 & 0  \\
+0 & 0 & 1
+\end{array}
+\right], \quad
+E = \left[
+\begin{array}{ccc}
+k & 0 & 0 \\
+0 & 1 & 0  \\
+0 & 0 & 1
+\end{array}
+\right], \quad
+E = \left[
+\begin{array}{ccc}
+1 & 0 & 0 \\
+k & 1 & 0  \\
+0 & 0 & 1
+\end{array}
+\right]
+\]
+
+\item $\det(E)$ is easy to compute in each case.
+\[
+\det(E) = \begin{cases}
+1, & \text{for $E$ row replacement} \\
+-1, & \text{for $E$ row swap} \\
+k, & \text{for $E$ row scaling by $k$}
+\end{cases}
+\]
+This is another argument that the first theorem of this section holds true since we now see
+\[
+\det(EA) = \det(E)\det(A)
+\]. See text for careful proof via induction.
+
+\item Theorem: $\det(AB) = \det(A)\det(B)$. Prove by writing $A$ as a product of elementary matrices and repeatedly using the above result.
+\end{enumerate}
+
+\item Homework: 1, 3, 5, 7, 11, 15, 17, 19, 21, 25, 27, 29, 37, 39
 
 \end{enumerate}
 
@@ -1759,7 +2553,7 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+\item Skip / lab?
 
 \end{enumerate}
 
@@ -1768,87 +2562,7 @@ Easy to check. This leads to a general result.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 4: Vector spaces} 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.1 Vector spaces and subspaces}
-
-\begin{enumerate}
-
-\item Homework: 1-18, 23, 24
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.2 Null spaces, column spaces, and linear transformations}
-
-\begin{enumerate}
-
-\item Homework: 3-6, 17-26
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.3 Linearly independent sets, bases}
-
-\begin{enumerate}
-
-\item Homework: 21-25
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.4 Coordinate systems}
-
-\begin{enumerate}
-
-\item Homework: 25 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.5 The dimension of a vector space}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.6 Rank}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.7 Change of basis}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.8 Applications to difference equations}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.9 Applications to Markov chains}
-
-\begin{enumerate}
-
-\item Homework: 
-
-\end{enumerate}
-
+Skip, content in chapter 2
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1856,12 +2570,242 @@ Easy to check. This leads to a general result.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 5: Eigenvalues and eigenvectors} 
 
+We return to the view of $A\vec{x}$ as a transformation $\vec{x} \rightarrow A\vec{x}$ and aim to understand the key characteristics of this transformation. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{5.1 Eigenvectors and eigenvalues}
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Discrete dynamical systems. Return to the La Crosse / Onalaska population model of our past lab.
+\[
+P = \left[
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
+\end{array}
+\right], \quad 
+\vec{x}_0 = \left[
+\begin{array}{c}
+50000/80000 \\ 30000/80000
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+5/8 \\ 3/8
+\end{array}
+\right], \quad
+\vec{x}_n = P \vec{x}_{n-1}
+\]
+where $P$ contains probability transitions and $\vec{x}_0$ is the proportion of populations in La Crosse and Onalaska respectfully. 
+\begin{enumerate}
+\item Question of end behavior: As $n\rightarrow \infty$, $\vec{x}_n \rightarrow $?
+\item One way: Iterate via computer. Solution we approach is called the steady state vector of this system which satisfies
+\[
+\vec{x} = P \vec{x}
+\]
+\item Solving the steady state equation leads to a homogeneous system.
+\[
+\vec{x} = P \vec{x} \rightarrow (P-I)\vec{x} = \vec{0} \rightarrow 
+\left[
+\begin{array}{cc|c}
+0.6-1 & 0.3 & 0 \\
+0.4 & 0.7-1 & 0
+\end{array}
+\right] \sim
+\left[
+\begin{array}{cc|c}
+-0.4 & 0.3 & 0 \\
+0 & 0 & 0
+\end{array}
+\right]
+\]
+with $x_2$ a free variable giving
+\[
+\vec{x} = \left[
+\begin{array}{c}
+x_1 \\ x_2
+\end{array}
+\right]
+= x_2\left[
+\begin{array}{c}
+3/4 \\ 1
+\end{array}
+\right]
+\]
+Since there are infinite vectors in this null space (with basis $B = \{ [3,4]^T \}$), we normalize to make a probability vector.
+\[
+\vec{x} = \left[
+\begin{array}{c}
+3/7 \\ 4/7
+\end{array}
+\right]
+\]
+which agrees with our R calculation.
+\item Observation: For matrix $P$, multiplication by nice vector $[3,7]^T$ results in just a scaling of the original vector. Graph in $x_1-x_2$ plan to illustrate. Entire line ($Span\{ \vec{x} \})$ also has this feature, but vectors not on this line do not.
+\[
+P \left[
+\begin{array}{c}
+1 \\ -2
+\end{array}
+\right]
+ = 
+\left[
+\begin{array}{c}
+0 \\ -1
+\end{array}
+\right]
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: An eigenvector of $n \times n$ matrix $A$ is a nonzero vector $\vec{x}$ such that $A\vec{x} = \lambda \vec{x}$ for $\lambda$ some scalar (called an eigenvalue). 
+\begin{itemize}
+\item Note: These special directions for a matrix give:
+\begin{itemize}
+\item insight into the matrix multiplication by $A$
+\item a way to efficiently compute $A^k$
+\end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find eigenvectors and eigenvalues of 
+\[
+A = \left[
+\begin{array}{cc}
+1 & 6 \\
+5 & 2
+\end{array}
+\right].
+\]
+\begin{enumerate}
+\item Require a nonzero vector $\vec{x}$ such that 
+\[
+A \vec{x} = \lambda \vec{x} \rightarrow (A-\lambda I) \vec{x} = \vec{0}.
+\]
+This is a homogeneous equation and we seek nontrivial solutions. Then,
+\[
+\det(A-\lambda I) = 0 \quad (\text{Why?})
+\]
+must hold and this gives a way to find eigenvalues $\lambda$.
+\[
+\det(A-\lambda I) = \left|
+\begin{array}{cc}
+1-\lambda & 6 \\
+5 & 2-\lambda
+\end{array}
+\right|
+= (1-\lambda)(2-\lambda) - 30 = \lambda^2-3\lambda - 28 = 0
+\]
+giving $\lambda = 7, \lambda = -4$. So there are two systems, $A\vec{x} = 7\vec{x}$ and $A\vec{x} = -4\vec{x}$.
+
+\item $\lambda = -4$ gives
+\[
+\vec{x} = x_2 \left[
+\begin{array}{c}
+-6/5 \\ 1
+\end{array}
+\right] = 
+c \left[
+\begin{array}{c}
+-6 \\ 5
+\end{array}
+\right] = c\vec{x}
+\]
+and so eigenvector $\vec{x}$ had corresponding eigenvalue $\lambda = -4$.
+
+\item $\lambda = 7$ gives
+\[
+y = \left[
+\begin{array}{c}
+1 \\ 1
+\end{array}
+\right].
+\]
+
+\item Graph these eigenvectors in the $x_1 x_2$ plane. $Span\{ \vec{x} \}$ and $Span \{ \vec{y} \}$ are both subspaces of $\mathbb{R}^2$ since both are $Nul(A-\lambda I)$ for each eigenvalue $\lambda$. These are called eigenspaces of $A$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Process for finding eigenvectors and eigenvalues for $n \times n$ matrix $A$:
+\begin{enumerate}
+\item $A\vec{x} = \lambda \vec{x}$ having a nonzero solution implies homogeneous equation $(A-\lambda I)\vec{x} = \vec{0}$ has nontrivial solutions.
+\item Require the characteristic equation
+\[
+\det(A-\lambda I) = 0.
+\]
+This is a polynomial equation in $\lambda$ of degree $n$.
+\item For each solution $\lambda$ to the characteristic equation, solve  $(A-\lambda I)\vec{x} = \vec{0}$ via Gaussian elimination.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Eigenvalue special cases. Find the eigenvalues of each.
+\begin{enumerate}
+\item Triangular matrices: Eigenvalues are diagonal entries
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 4 & 5 \\
+0 & 0 & 6
+\end{array}
+\right]
+\]
+\item Zero eigenvalues imply non-zero eigenvector. So $A$ is singular.
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 0 & 5 \\
+0 & 0 & 6
+\end{array}
+\right]
+\]
+\item Repeat eigenvalues
+\[
+A = \left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 1 & 5 \\
+0 & 0 & 6
+\end{array}
+\right]
+\]
+\item Complex eigenvalues
+\[
+A = \left[
+\begin{array}{ccc}
+0 & -1 \\
+1 & 0 \\
+\end{array}
+\right]
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If $\{ \vec{v}_1, \dots, \vec{v}_p \}$ are eigenvectors of $n \times n$ matrix $A$ with distinct eigenvalues $\lambda_1, \dots, \lambda_p$, then $\{ \vec{v}_1, \dots, \vec{v}_p \}$ is linearly independent.
+\begin{itemize}
+\item Proof strategy: To show $P$ (if I am in WI) implies $Q$ (then am in US), it is enough to show $P$ (if I am in WI) and not $Q$ (then not in US) leads to contradiction.
+\item Proof: Assume distinct eigenvalues and $\{ \vec{v}_1, \dots, \vec{v}_p \}$ is linearly dependent. The one eigenvector is a linear combination of the preceding ones.
+\[
+c_1 \vec{v}_1 + \dots + c_{k-1} \vec{v}_{k-1} = \vec{v}_k \quad \rightarrow \quad 
+c_1 A\vec{v}_1 + \dots + c_{k-1} A\vec{v}_{k-1} = A\vec{v}_k
+\]
+\[
+\rightarrow \quad 
+c_1 \lambda_1 \vec{v}_1 + \dots + c_{p-1} \lambda_{k-1} \vec{v}_{k-1} = \lambda_k\vec{v}_k
+\]
+Multiply this original equation by $\lambda_k$ and subtract from the final line to get
+
+\[
+c_1 (\lambda_1-\lambda_k) \vec{v}_1 + \dots + c_{k-1} (\lambda_{k-1}-\lambda_k) \vec{v}_{k-1} = \vec{0}
+\] 
+Since these eigenvalues are distinct, it must be that $c_i$'s be all zero and so $\vec{v}_k$ is $\vec{0}$. This is not possible for an eigenvector. Contradiction.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 25, 27
 
 \end{enumerate}
 
@@ -1870,7 +2814,197 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 25, 27
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Characteristic equation:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item The easiest way to find eigenvalues and eigenvectors of matrix $A$ is to find the eigenvalues first via the characteristic equation.
+\[
+A \vec{x} = \lambda \vec{x}, \quad \vec{x}\neq \vec{0} \quad \rightarrow \quad (A-\lambda I) \vec{x} = \vec{0} \quad \rightarrow \quad
+\det(A-\lambda I) = 0
+\]
+This last determinant gives a polynomial to allow solving for $\lambda$. Eigenvectors come from Gaussian elimination.
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Markov chain from last time. Find the eigenvalues.
+\[
+A = \left[
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
+\end{array}
+\right]
+\]
+%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: Scalar $\lambda$ is an eigenvalue of $n \times n$ matrix $A$ if and only if $\lambda$ satisfies the characteristic equation
+\[
+\det(A-\lambda I) = 0
+\]
+Note: This will always be a degree $n$ polynomial in $\lambda$.
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the eigenvalues of
+\[
+A = \left[
+\begin{array}{ccc}
+5 & -2 & 3 \\
+0 & 1 &  0\\
+6 & 7 & -2
+\end{array}
+\right]
+\]
+Note: Row operations aren't useful here, but choosing a smart cofactor expansion helps.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Application of eigenvalues: Markov chains
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item Previous example:
+\[
+\vec{x}_{k+1} = A \vec{x}_k, \quad 
+A =\left[
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
+\end{array}
+\right], \quad
+\vec{x}_0 = \left[
+\begin{array}{c}
+5/8 \\
+3/8
+\end{array}
+\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Already found eigenvalues $\lambda_1 = 1, \lambda_2 = 0.3$ with eigenvectors 
+\[
+\vec{v}_1 = \left[ 
+\begin{array}{c}
+3 \\ 4 
+\end{array} \right], \quad
+\vec{v}_2 = \left[ 
+\begin{array}{c}
+1 \\ -1 
+\end{array} \right].
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem from previous section say distinct eigenvalues give linearly independent eigenvectors. True in this case, though easy to see by inspection.
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Write $\vec{x}_0$ as a linear combination of these eigenvectors.
+\[
+\vec{x}_0 = c_1 \vec{v}_1 + c_2 \vec{v}_2
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Can find weights $c_1, c_2$ as
+\[
+\vec{c} = \left[\vec{v}_1 ~\vec{v}_2 \right]^{-1} \vec{x}_0 = \left[
+\begin{array}{c}
+1/7 \\ 11/56
+\end{array}
+\right]
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Apply $A$ repeatedly to the eigenvector representation of $\vec{x}_0$.
+\[
+\vec{x}_1 = A\vec{x}_0 = c_1 A \vec{v}_1 + c_2 A \vec{v}_2 = c_1 \lambda_1 \vec{v}_1 + c_2 \lambda_2 \vec{v}_2
+\]
+\[
+x_2 = c_1 \lambda_1^2 \vec{v}_1 + c_2 \lambda_2^2 \vec{v}_2
+\]
+\[
+x_{n} = c_1 \lambda_1^n \vec{v}_1 + c_2 \lambda_2^n \vec{v}_2
+\]
+For our case,
+\[
+x_{n} = \frac{1}{7} 1^n \vec{v}_1 + \frac{11}{56} (3/10)^n \vec{v}_2
+= \left[
+\begin{array}{c}
+3/7 \\ 4/7
+\end{array}
+\right] + \frac{11}{56} (3/10)^n \left[
+\begin{array}{c}
+1 \\ -1
+\end{array}
+\right]
+\]
+
+%%%%%%%%%%%%%%
+\item Then as $n \rightarrow \infty$, as we saw computationally $\vec{x}_n \rightarrow [3/7, 4/7]$ since $(3/10)^n \rightarrow 0$. Note, for any initial vector
+\[
+\vec{x}_n = c_1(1)^n \left[
+\begin{array}{c}
+3 \\4
+\end{array}
+\right] +
+c_2 (3/10)^n \left[
+\begin{array}{c}
+1 \\ -1
+\end{array}\right] \quad \rightarrow \quad
+c_1 \left[
+\begin{array}{c}
+3 \\ 4
+\end{array}
+\right]
+\] 
+unless $c_1 =0$ in which case $\vec{x}_n \rightarrow \vec{0}$. 
+
+%%%%%%%%%%%%%%
+\item Note, so long as $\vec{x}_0$ is such that components are positive and sum to 1 (always with proportion vectors), the result of this system will remain the same. Check simulations in R.
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Computational challenge of eigenvalues: Finding determinants and zeros of resulting characteristic polynomial is not easy. Solution is to reformulate the problem in an eigenvalue equivalent way.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: $n \times n$ matrices $A$ and $B$ are similar if there is an invertible matrix $P$ such that 
+\[
+B = P^{-1}A P
+\]
+or equivalently
+\[
+A = P^{-1}B P.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If $n \times n$ matrices $A$ and $B$ are similar, then they have the same characteristic equation and hence the same eigenvalues (with the same multiplicities). \\ \ \\
+Proof: If $B = P^{-1}AP$, then
+\[
+B - \lambda I = P^{-1}AP - \lambda P^{-1}P = P^{-1} (A-\lambda I) P
+\]
+and so
+\[
+\det(B - \lambda I) = \det( P^{-1} (A-\lambda I) P)
+= \det( P^{-1}) \det(A-\lambda I) \det(P)
+= \det( P^{-1}P) \det(A-\lambda I) 
+=\det(A-\lambda I) 
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Notes:
+\begin{itemize}
+\item Matrices can have the same eigenvalues yet not be similar.
+\item Similarity is not the same as row equivalence. Row operations usually change eigenvalues.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Jacobi's method: Eigenvalues via iteration and simlarity. For $A=A^T$ (symmetric matrices),
+\[
+A_1 = A, \quad A_{k+1} = P_k^{-1} A_k P_k
+\] 
+for rotation matrices $P_k$. This results in the non-diagonal entries of $A_k$ tending to zero and eigenvalues of $A$ being the limiting diagonals of $A_k$. 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 13, 15, 17, 19, 21, 23, 25, 27
 
 \end{enumerate}
 
@@ -1879,7 +3013,101 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 18
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Motivation:
+\begin{enumerate}
+\item We saw previously matrix powers show up in applications (dynamical systems), so computing $A^k$ for potentially large values of $k$ is useful.
+\item For matrix $A$ similar to a diagonal matrix $D$, $A^k$ becomes easy.
+\[
+A = PDP^{-1} \quad \rightarrow \quad 
+A^2 = (PDP^{-1})^2 = PD^2P^{-1} \quad \rightarrow \quad 
+A^k = PD^kP^{-1}
+\]
+Note, $D^k$ is also diagonal with entries of $D$ to the power of $k$. 
+\item Such diagonalizable matrices are connected to eigenvalues and eigenvectors.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Diagonalization Theorem: $n \times n$ matrix $A$ is diagonlizable if and only if it has $n$ linearly independent eigenvectors. Specifically,
+\[
+A = PDP^{-1}
+\]
+for $P = [\vec{v}_1, \dots, \vec{v_n}$ a matrix of eigenvectors and $D=diag(\lambda_1, \dots, \lambda_n)$ a diagonal matrix of corresponding eigenvalues.
+\begin{itemize}
+\item Proof idea: 
+\[
+AP = A[\vec{v_1} \dots \vec{v}_n] = [A\vec{v_1} \dots A\vec{v}_n] = [\lambda_1\vec{v_1} \dots \lambda_n\vec{v}_n]  = PD
+\]
+Because $P$ is invertible due to a set of linearly independent columns, 
+\[
+A = PDP^{-1}
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: For previous example
+\[
+A = \left[
+\begin{array}{cc}
+0.6 & 0.3 \\
+0.4 & 0.7
+\end{array}
+\right]
+\]
+we already found eigenvalues $\lambda_1 = 1, \lambda_2 = 3/10$ with corresponding eigenvectors
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+3 \\ 4
+\end{array}
+\right], \quad
+\vec{v}_2 = \left[
+\begin{array}{c}
+1 \\ -1
+\end{array}
+\right].
+\]
+Then,
+\[
+A = PDP^{-1} \quad \rightarrow \quad A^k = PD^kP^{-1}
+\]
+agrees with previous calculation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Diagonlize the below matrix:
+\[
+A = \left[
+\begin{array}{ccc}
+0 & 0 & -2 \\
+1 & 2 & 1 \\
+1 & 0 & 3
+\end{array}
+\right]
+\]
+\begin{itemize}
+\item Can show $\lambda_1=1, \lambda_2,3 = 2$. Then,
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+-2 \\ 1 \\ 1
+\end{array}
+\right], \quad
+\vec{v}_2 = \left[
+\begin{array}{c}
+-1 \\ 0 \\ 1
+\end{array}
+\right], \quad
+\vec{v}_3 = \left[
+\begin{array}{c}
+0 \\ 1 \\ 0
+\end{array}
+\right].
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 9, 11, 13, 15, 19, 21
 
 \end{enumerate}
 
@@ -1887,6 +3115,8 @@ Easy to check. This leads to a general result.
 \subsection{5.4 Eigenvectors and linear transformations}
 
 \begin{enumerate}
+
+\item Skip. Not much interest without general vector spaces. Possible interest for diagonlizable matrix tranformations. Might be worthwhile to see idea of change of basis.
 
 \item Homework: 
 
@@ -1897,7 +3127,202 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%
+\item Before, eigenvalue and eigenvector problem
+\[
+A\vec{x} = \lambda \vec{x}
+\]
+was though of as directions in which applying $A$ amounts to a scaling of $\vec{x}$. There are cases where this is not the case.
+
+%%%%%%%%%%%%%%%%%%%%%
+\item $90^{\circ}$ rotation:
+\[
+A = \left[
+\begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array}
+\right]
+\]
+\begin{enumerate}
+\item From the characteristic equation, there are no real eigenvalues. If we allow imaginary numbers, we get $\lambda_1 = i, ~ \lambda_2 = -i$. 
+\item Corresponding eigenvectors are then
+\[
+\vec{v}_1 = \left[
+\begin{array}{cc}
+i \\ 1
+\end{array}
+\right], \quad
+\vec{v}_2 = \left[
+\begin{array}{cc}
+1 \\ i
+\end{array}
+\right]
+\]
+\item Verify these pairs work.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Complex eigenvalues: Full story.
+\begin{enumerate}
+\item Example:
+\[
+A = \left[
+\begin{array}{cc}
+0.5 & -0.6 \\
+0.75 & 1.1
+\end{array}
+\right]
+\]
+\item Eigenvalues:
+\[
+\det(A- \lambda I) = \lambda^2 - 1.6 \lambda +1 = 0 \quad \rightarrow \quad \lambda = 0.8 \pm 0.6i
+\]
+\item Eigenvectors:
+\begin{itemize}
+\item $\lambda_1 = 0.8-0.6i$
+\[
+\vec{v}_1 = \left[
+\begin{array}{c}
+-2-4i \\5
+\end{array}
+\right]
+\]
+Note, hard to solve the resulting system with
+\[
+A - \lambda_1 I = \left[
+\begin{array}{cc}
+-0.3+0.6i & -0.6 \\
+0.75 & 0.3+0.6i
+\end{array}
+\right]
+\]
+but since we assume nontrivial eigenvector, there must be a free variable. Then the second equation yields 
+\[
+x_1 = (-0.4 - 0.8i) x_2
+\]
+giving the above eigenvector.
+\item $\lambda_2 = 0.8+0.6i$
+\[
+\vec{v}_2 = \left[
+\begin{array}{c}
+-2+4i \\5
+\end{array}
+\right]
+\]
+\item Note the conjugate pair relationship of eigenvalues and eigenvectors.
+\end{itemize}
+\item How to make sense of complex eigenvalues and eigenvectors? Think of this as a rotation. Plot trajectories for this system.
+\item We see rotation, why does rotation occur?
+\begin{itemize}
+\item Recall the general rotation linear transformation:
+\[
+\left[
+\begin{array}{cc}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{array}
+\right]
+\]
+\item We generalize to any matrix
+\[
+C = \left[
+\begin{array}{cc}
+a & -b \\
+b & a
+\end{array}
+\right]
+\]
+with eigenvalues $\lambda = a \pm b i$. Drawing a right triangle with legs $a,b$ in the complex plane with hypotenuse $r = \sqrt{a^2+b^2}$, we have 
+\[
+C = r \left[
+\begin{array}{cc}
+a/r & -b/r \\
+b/r & a/r
+\end{array}
+\right]
+= \left[
+\begin{array}{cc}
+r & 0 \\
+0 & r
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+\cos(\theta) & -sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{array} \right]
+\]
+and we see the rotation then a scale.
+\end{itemize}
+\item Example: For above matrix
+\[
+A = \left[
+\begin{array}{cc}
+0.5 & -0.6 \\
+0.75 & 1.1
+\end{array}
+\right]
+\]
+and eigenvalue $\lambda_1 = 0.8-0.6i$ with eigenvector
+\[
+\left[
+\begin{array}{c}
+-2-4i \\
+5
+\end{array}
+\right]
+\]
+construct matrix $P$ as
+\[
+P = \left[
+Re(\vec{v}_1  \quad IM(\vec{v}_1)
+\right] = \left[
+\begin{array}{cc}
+-2 & -4 \\ 5 & 0
+\end{array}
+\right]
+\]
+Can show such a $P$ always has linearly independent columns.
+\item Compute matrix $C$ similar to $A$ such that
+\[
+C = P^{-1} A P = \left[
+\begin{array}{cc}
+0.8 & -0.6 \\
+0.6 & 0.8
+\end{array}
+\right]
+\]
+\item Then, $A = PCP^{-1}$ with $C$ the rotation and $P$, $P^{-1}$ acting as a change of variable (draw the rectangular transformation map, note same map applies to general diagonalization). Note that $r = |\lambda_1| = 1$ and so can compute $\theta$ from
+\[
+\cos(\theta) = 0.8, \quad \sin(\theta)=0.6
+\]
+giving $\theta \approx 36.87^{\circ}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\item Above ideas generalize to the following theorem:
+\begin{itemize}
+\item Theorem: For $A$ a $2 \times 2$ real matrix with complex eigenvalue $\lambda = a-bi$ $(b \neq 0)$ and associate eigenvector $\vec{v}$ in $\mathbb{C}^2$, then
+\[
+A = P C P^{-1}
+\]
+for
+\[
+P = [ Re(\vec{v} \quad Im(\vec{v} ], \quad C = \left[
+\begin{array}{cc}
+a & -b \\
+b & a
+\end{array}
+\right]
+\]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item Note: Euler's identity is worth mentioning here.  
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 9, 13, 15, 17, 21
 
 \end{enumerate}
 
@@ -1905,6 +3330,8 @@ Easy to check. This leads to a general result.
 \subsection{5.6 Discrete dynamical systems}
 
 \begin{enumerate}
+
+\item Project material. Intro covered before. Skip.
 
 \item Homework: 
 
@@ -1915,7 +3342,213 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item ODEs:
+\begin{enumerate}
+\item Examples: Note infinitely many solutions for each.
+\[
+x' = x, \quad
+x' = -2x, \quad
+x' = 0.5x
+\]
+for $x=x(t)$ an unknown function of time $t$.
+\item Initial value problems: 
+\[
+\begin{cases}
+x' = 0.5x \\
+x(0) = 80
+\end{cases}
+\]
+where $x(0)$ is called the initial condition and this $x(t)$ is a particular solution to this ODE.
+\item General initial value problem
+\[
+\begin{cases}
+x' = \lambda x \\
+x(0) = x_0
+\end{cases}
+\]
+giving general solution
+\[
+x(t) = x_0 e^{\lambda t}.
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Real eigenvalues
+\begin{enumerate}
+\item MORE INTERESTING EXAMPLE:
+\[
+A = \left[ 
+\begin{array}{cc}
+-1.5 & 0.5 \\
+1 & -1
+\end{array}
+\right], \quad 
+\vec{x}(0)=[5,4]^T
+\]
+\item Coupled system of ODEs:
+\[
+\begin{cases}
+x_1' = -2x_1 + x_2 \\
+x_2' = x_1 - 2x_2 
+\end{cases}
+\]
+with initial conditions
+\[
+\begin{cases}
+x_1(0) = 6 \\
+x_2(0) = 2 
+\end{cases}
+\]
+\item Matrix formulation:
+\[
+\frac{d\vec{x}}{dt} = A \vec{x}, \quad A = \left[
+\begin{array}{cc}
+-2 & 1 \\ 1 & -2
+\end{array} \right]
+, \quad \vec{x} = \left[
+\begin{array}{c}
+x_1(t) \\ x_2(t)
+\end{array}
+\right]
+\]
+with initial condition
+\[
+\vec{x}(0) = \left[
+\begin{array}{c}
+6 \\ 0
+\end{array}
+\right].
+\]
+\item Idea: For any eigenvector of $A$, $\vec{v}$, with corresponding eigenvalue $\lambda$, write $\vec{x} = e^{\lambda t} \vec{v}$. Then,
+\[
+\frac{d \vec{x}}{dt} = \lambda \vec{x}, \quad A\vec{x} = \lambda \vec{x}.
+\]
+Noting both $A$ and $\frac{d}{dt}$ are linear operators on $\vec{x}$, we apply the superposition principle to get
+\[
+\vec{x} = c_1 e^{\lambda_1 t} \vec{v}_1 + c_2 e^{\lambda_2 t} \vec{v}_2
+\]
+where $c_1, c_2$ satisfy the initial condition
+\[
+\vec{x}(0) = c_1 \vec{v}_1 + c_2 \vec{v}_2.
+\]
+Note this initial condition can be written this way so long as eigenvectors are linearly independent and form a basis for $\mathbb{R}^2$. \item For this example, $\lambda_1=-1$ and $\lambda_2 = -3$ with eigenvectors
+\[
+\vec{v}_1 = \left[ \begin{array}{c}
+1 \\ 1
+\end{array} \right], \quad
+\vec{v}_2 = \left[ \begin{array}{c}
+1 \\ -1
+\end{array} \right].
+\]
+giving
+\[
+\vec{x} = c_1 e^{-t}  \left[ \begin{array}{c}
+1 \\ 1
+\end{array} \right]
++ c_2 e^{-3t}
+\left[ \begin{array}{c}
+1 \\ -1
+\end{array} \right].
+\]
+Applying the initial condition $\vec{x}(0) = [6,2]^T$ gives $c_1=4$ and $c_2=2$ and so
+\[
+\vec{x} = \left[
+\begin{array}{c}
+4e^{-t}+2e^{-3t} \\
+4e^{-t}-2e^{-3t} 
+\end{array}
+\right].
+\]
+\item Plot this trajectory in R. Note the tending to zero.
+\item Use pplane.html to plot many trajectories. This is known as a sink with the origin as the attractor. Note can see the eigenvectors and power of the eigenvalue.
+\item Imagine if the sign of the eigenvalues change. Leads to sink, source, saddle. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item General linear systems story: Diagonlization is the key.
+\begin{enumerate}
+\item System
+\[
+\frac{d\vec{x}}{dt} = A\vec{x}, \quad \vec{x}(0) = \vec{x}_0
+\]
+has solution
+\[
+\vec{x} c_1 e^{\lambda_1 t} \vec{v}_1 + \dots c_n e^{\lambda_n t} \vec{v}_n
+\]
+for $\lambda_i$ eigenvalues of $A$ with eigenvectors $\vec{v}_i$  with constants $c_i$ such that 
+\[
+\vec{x}_0 = c_1 \vec{v}_1 + \dots + c_n \vec{v}_n.
+\]
+\item Reason: Diagonalization is the key.
+\begin{itemize}
+\item For $A$ diagonlizable write
+\[
+A = PDP^{-1}
+\]
+and perform the change of variable
+\[
+\vec{y} = P^{-1} \vec{x}, \quad (P\vec{y} = \vec{x})
+\]
+and so
+\[
+P \frac{d\vec{y}}{dt} = PD\vec{y} \quad \rightarrow \quad
+\frac{d\vec{y}}{dt} = D\vec{y}.
+\]
+\item This system is a decoupled linear systems which can be solved as a single ODE.
+\[
+\vec{y} = \left[
+\begin{array}{c}
+c_1 e^{\lambda_1 t} \\ \vdots \\ c_n e^{\lambda_n t}
+\end{array}
+\right]
+\]
+and finally
+\[
+\vec{x} = P \vec{y} = c_1 e^{\lambda_1 t} \vec{v}_1 + \dots + c_n e^{\lambda_n t} \vec{v}_n.
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Complex eigenvalues and orbits:
+\begin{enumerate}
+\item For $A$ real and $\vec{x}_0$ real, we expect real solutions to 
+\[
+\frac{d \vec{x}}{dt} = A \vec{x}.
+\]
+For complex eigenvalues, we will see Euler's identity again.
+\[
+e^{i \theta} = \cos(\theta) + i \sin(\theta)
+\]
+\item Example: 
+\[
+\frac{d \vec{x}}{dt} = A \vec{x}, \quad A = \left[
+\begin{array}{cc}
+-2 & 1 \\
+-1 & -2
+\end{array}
+\right], \quad \vec{x}(0) = [6, 2]^T
+\]
+\begin{itemize}
+\item We have complex eigenvalues $\lambda =2 \pm i$ with corresponding eigenvectors
+\[
+\vec{v} = \left[ 
+\begin{array}{c}
+1 \\ \pm i
+\end{array} \right]
+\]
+\item Solving for the initial condition $\vec{x}(0) = [6,2]^T$ gives
+\[
+\vec{x} = c_1 e^{\lambda_1 t} \vec{v}_1 + c_2 e^{\lambda_2 t} \vec{v}_2
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5
 
 \end{enumerate}
 
@@ -1934,12 +3567,201 @@ Easy to check. This leads to a general result.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 6: Orthogonality and least squares} 
 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item End goal: Least squares approximation
+\begin{enumerate}
+\item The main goal of this chapter is to solve an overdetermined system where $A\vec{x} =\vec{b}$ has no solution. That is $\vec{b}$ is not in the column space of $A$.
+\[
+\left[
+\begin{array}{cc}
+a_{11} & a_{12} \\
+a_{21} & a_{22} \\
+a_{31} & a_{32} \\
+a_{41} & a_{42} 
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+x_1 \\ x_2
+\end{array}
+\right]
+= 
+\left[
+\begin{array}{c}
+b_1 \\ b_2 \\ b_3 \\ b_4
+\end{array}
+\right]
+\]
+%%%%%%%%%%%%%%%%
+\item Linear regression, housing example, square foot vs price. If $y=mx+b$ for $m$ price per square foot and $b$ the intercept, we have
+\[
+\left[
+\begin{array}{cc}
+1 & sf_1 \\
+1 & sf_2 \\
+1 & sf_3 \\
+1 & sf_4 
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+b \\ m
+\end{array}
+\right]
+= 
+\left[
+\begin{array}{c}
+p_1 \\ p_2 \\ p_3 \\ p_4
+\end{array}
+\right]
+\]
+\item The resulting line can be used to 
+\begin{itemize}
+\item Better understand the data
+\item Predict on new data
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item How to find a best approximation in $Col(A)$? Project onto this space. Key ingredients:
+\begin{itemize}
+\item Angle (inner product)
+\item Length (norm)
+\item Orthogonality (unique directions)
+\end{itemize}
+\end{enumerate}
+
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{6.1 Inner product, length, and orthogonality}
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Inner production: Comparing direction
+\begin{enumerate}
+%%%%%%%%%
+\item $\mathbb{R}^2$: For $\vec{u} = [u_1, u_2]^T, \vec{v} = [v_1, v_2]^T$, 
+\[
+\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 = \vec{u}^T \vec{v}
+\]
+%%%%%%%%%
+\item $\mathbb{R}^n$: For $\vec{u} = [u_1, u_2, \dots, u_n]^T, \vec{v} = [v_1, v_2, \dots, v_n]^T$, 
+\[
+\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 + \dots + u_n v_n = \vec{u}^T \vec{v}
+\]
+%%%%%%%%%
+\item Example
+%%%%%%%%%
+\item Properties of dot product:
+\begin{itemize}
+\item $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$
+\item $(\vec{u} \cdot \vec{v}) \cdot \vec{w} = \vec{u} \cdot (\vec{v}\cdot \vec{w})$
+\item $(c \vec{u}) \cdot \vec{v} = c (\vec{u} \cdot \vec{v})$
+\item $\vec{u} \cdot \vec{u} \geq 0$ and $\vec{u} \cdot \vec{u} = 0$ if and only if $\vec{u} = \vec{0}$
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Length: AKA Euclidean norm
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item $\mathbb{R}^2$: Draw picture, Pythagorean theorem
+\[
+\| \vec{u} \| = \sqrt{u_1^2 + u_2^2 } \rightarrow \|\vec{u}\|^2 = \vec{u} \cdot \vec{u}
+\]
+%%%%%%%%%%%%%
+\item $\mathbb{R}^n$:
+\[
+\| \vec{u} \| = \sqrt{u_1^2 + u_2^2 + \dots + u_n^2} \rightarrow \|\vec{u}\|^2 = \vec{u} \cdot \vec{u}
+\]
+%%%%%%%%%%%%%
+\item Norm property: For scalar $c$,
+\[
+\| c \vec{u} \| = \sqrt{(c\vec{u}) \cdot (c \vec{u})}
+= \sqrt{c^2} \sqrt{\vec{u} \cdot \vec{u}}
+= |c| \| \vec{u} \|
+\]
+%%%%%%%%%%%%%%%%%%%%%%
+\item Unit vector: Any $\vec{u}$ such that $\|\vec{u}\| = 1$. For any $\vec{u}$, $\frac{\vec{u}}{\|\vec{u}\|}$ is a unit vector.
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Vector in $\mathbb{R}^3$, find length, make a unit vector, not two options for $\pm$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Distance: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item $\mathbb{R}^2$: Distance formula, draw picture, tip-to-tip length
+\[
+dist(\vec{u}, \vec{v}) = \sqrt{(u_1-v_1)^2 + (u_2+v_2)^2} = \|\vec{u}-\vec{v}\|
+\]%%%%%%%%%%%%%%%%%%%%%%
+\item $\mathbb{R}^n$: 
+\[
+dist(\vec{u}, \vec{v}) = \sqrt{(u_1-v_1)^2 + (u_2+v_2)^2 + \dots  + (u_n+v_n)^2} = \|\vec{u}-\vec{v}\|
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonality: How to tell if $\vec{u}$ and $\vec{v}$ are opposite directions?
+\begin{enumerate}
+%%%%%%%%%%%
+\item Definition: $\vec{u}$ and $\vec{v}$ are orthogonal if and only if $\vec{u} \cdot \vec{v} = 0$.
+%%%%%%%%%%%
+\item Reason 1: Geometrically want $dist(\vec{u},\vec{v}) = dist(\vec{u},-\vec{v})$. 
+\[
+\| \vec{u}-\vec{v} \|^2 = \| \vec{u}+\vec{v} \|^2 \quad\rightarrow\quad
+(\vec{u}-\vec{v}) \cdot (\vec{u}-\vec{v}) = (\vec{u}+\vec{v}) \cdot (\vec{u}+\vec{v}) \quad\rightarrow\quad
+4 \vec{u} \cdot \vec{v} = 0
+\]
+%%%%%%%%%%%
+\item Reason 2: Want Pythagorean theorem to hold: 
+\[
+\|\vec{u} \|^2 + \|\vec{v} \|^2 = \|\vec{u}-\vec{v} \|^2 \quad \rightarrow \quad -2 \vec{u} \cdot \vec{v} = 0
+\]
+%%%%%%%%%%%
+\item Reason 3: Consequence of law of cosines: $c^2 = a^2 + b^2 - 2ab \cos(\theta)$
+\[
+\| \vec{u} - \vec{v} \|^2 = \| \vec{u} \|^2 + \| \vec{v} \|^2 - 2\| \vec{u} \| \| \vec{v} \| \cos(\theta)
+\]
+results in Pythagoras again for $\theta = \frac{\pi}{2}$. 
+%%%%%%%%%%%%%
+\item Consequentially by comparison from the law of cosines
+\[
+\vec{u} \cdot \vec{v} = \| \vec{u} \| \| \vec{v} \| \cos(\theta)
+\]
+and the dot product says something about the angle between vectors. This is known as cosine similarity of two vectors.
+%%%%%%%%%%%
+\item Note, $\vec{0} \cdot \vec{u}=0$ always so $\vec{0}$ is orthogonal to every vector. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Vector spaces and orthogonal compliments:
+\begin{enumerate}
+\item Definitions
+\begin{itemize}
+\item If $\vec{z}$ is orthogonal to every vector in subspace $W$, then we say $\vec{z}$ is orthogonal to subspace $W$.
+\item The set of all vectors $\vec{z}$ orthogonal to subspace $W$ is call the orthogonal compliment of $W$ written $W^{\perp}$.
+\end{itemize}
+\item Theorems: 
+\begin{itemize}
+\item Can show if $W$ is a subspace, then $W^{\perp}$ is also. 
+\item Fundamental theorem of linear algebra: For $A$ an $m \times n$ matrix, we have
+\[
+(Row(A))^{\perp} = Nul(A), \quad \text{and} \quad (Col(A))^{\perp}= Nul(A^T)
+\]
+Proof: If $\vec{x} \in Nul(A)$ we have $A\vec{x} = \vec{0}$. Then for any row of $A$, 
+\[
+\vec{r}_i \cdot \vec{x} = 0.
+\]
+Because $Row(A)$ is all linear combinations of rows of $A$, we have $\vec{x} \in Row(A)^{\perp}$. Considering this first result, apply it to $A^T$ and the second result follows.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 11, 13, 15, 17, 19, 23, 25, 27, 31 
 
 \end{enumerate}
 
@@ -1948,7 +3770,106 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal sets:
+\begin{enumerate}
+%%%%%%%%%%%%%%%
+\item Definition: A set of vectors $S= \left\{ \vec{u}_1, \vec{u}_2, \dots, \vec{u}_p \right\}$ is an orthogonal set of vectors in $\mathbb{R}^n$ if
+\[
+\vec{u}_i \cdot \vec{u}_j = 0
+\]
+for all distinct pairs $i \neq j$. If all vectors are unit vectors (length 1), then is called an orthonormal set.
+
+%%%%%%%%%%%%%%%
+\item Examples: 
+\begin{itemize}
+\item $\left\{ \vec{i}, \vec{j}, \vec{k} \right\}$ is an orthogonal set in $\mathbb{R}^3$. 
+\item $\left\{ [0,1,0]^T, [1,0,1]^T, [1,0,-1] \right\}$ is an orthogonal set in $\mathbb{R}^3$. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%
+\item Theorem: If $S=\left\{ \vec{u}_1, \vec{u}_2, \dots, \vec{u}_p \right\}$ is an orthogonal set of nonzero vectors in $\mathbb{R}^n$, then $S$ is linearly independent and forms a basis for $Span \{ S \}$. 
+\\ \ \\
+Proof: Need to show
+\[
+c_1 \vec{u}_1 + \dots c_p \vec{u}_p = \vec{0}
+\]
+requires $c_1=c_2=\dots=c_p = 0$. Take the dot product with $\vec{u}_1$ on both sides.
+\[
+(c_1 \vec{u}_1 + \dots c_p \vec{u}_p) \cdot \vec{u}_1 = \vec{0}\cdot \vec{u}_1 \quad \rightarrow \quad c_1 \vec{u}_1 \cdot \vec{u}_1 = 0 \quad \rightarrow \quad c_1=0
+\]
+Likewise, all other $c_j=0$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal basis: Best choice of a basis.
+\begin{enumerate}
+%%%%%%%%%%%%%%5
+\item Theorem: For $S = \left\{ \vec{u}_1 , \dots, \vec{u}_p \right\}$ an orthogonal basis of subpace $W$ of $\mathbb{R}^n$, each $\vec{y}$ in $W$ can be written
+\[
+\vec{y} = c_1 \vec{u}_1 + \dots + c_p \vec{u}_p
+\]
+where
+\[
+c_j = \frac{\vec{y} \cdot \vec{u}_j}{\vec{u}_j \cdot \vec{u}_j}, \quad j = 1,2,\dots,p.
+\]
+Proof: Use same dot product idea as above. Note that $\vec{u}_i \cdot \vec{u}_i = \|\vec{u}_i \|^2 \neq 0$.
+%%%%%%%%%%%%%%5
+\item Notes: 
+\begin{itemize}
+\item We no longer need to solve a linear system to write $\vec{y}$ as a linear combination of basis elements.
+\item This is even nicer for orthonormal basis.
+\[
+\vec{y} = (\vec{y} \cdot \vec{u}_1) \vec{u}_1 + \dots + (\vec{y} \cdot \vec{u}_p) \vec{u}_p
+\]
+\item Relate above basis to standard unit basis in $\mathbb{R}^n$. 
+\end{itemize}
+%%%%%%%%%%%%%%5
+\item Example: Write $\vec{y} = [3,1,4]$ as a linear combination of basis $\left\{ [0,1,0]^T, [1,0,1]^T, [1,0,-1] \right\}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal projections:
+\begin{enumerate}
+%%%%%%%%%%%%%%5
+\item $\mathbb{R}^2$: Recall, one can project a vector onto another using basic trigonometry.
+\begin{itemize}
+\item Project $\vec{v}$ onto vector $\vec{u}$. Draw right triangle with angle $\theta$ between two vectors.. 
+\item Need to find length $c$ of triangle leg parallel with $\vec{u}$. Use right triangle trigonometry.
+\[
+c = \| \vec{v} \| \cos(\theta) = \| \vec{v} \| \frac{ \vec{u} \cdot \vec{v}}{ \|\vec{u}\| \| \vec{v} \| } = \frac{ \vec{u} \cdot \vec{v}}{ \|\vec{u}\| }
+\]
+\item Then,
+\[
+proj_{\vec{u}} (\vec{v}) =  \frac{ \vec{u} \cdot \vec{v}}{ \|\vec{u}\| } \vec{u}
+\]
+\item The triangle leg orthogonal to $\vec{u}$ is called the component of $\vec{v}$ orthogonal to $\vec{u}$. Then,
+\[
+\vec{v} = proj_{\vec{u}} (\vec{v}) + comp_{\vec{u}} (\vec{v}) \quad \rightarrow \quad 
+comp_{\vec{u}} (\vec{v}) = \vec{v} - proj_{\vec{u}} (\vec{v}) 
+\]
+\item Think of $\vec{v} = proj_{\vec{u}} (\vec{v}) + comp_{\vec{u}} (\vec{v})$ as decomposing $\vec{v}$ as the sum of two orthogonal vectors. This is the same as the previous theorem
+\[
+\vec{v} = \frac{\vec{v} \cdot \vec{u_1}}{\vec{u_1} \cdot \vec{u_1}} + \frac{\vec{v} \cdot \vec{u_2}}{\vec{u_2} \cdot \vec{u_2}}
+\]
+\end{itemize}
+%%%%%%%%%%%%%%5
+\item Example: Write $\vec{v} = [7, 6]^T$ as a sum of a vector parallel and perpendicular to $\vec{u} = [2, 1]^T$. Draw picture to illustrate. Verify that the two vectors are orthogonal via the dot product. In the end,
+\[
+proj_{\vec{u}}(\vec{v}) = [8, 4]^T, \quad comp_{\vec{u}}(\vec{v}) = [-1, 2]^T.
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal matrices: For $U$ a square matrix with orthogonal columns, can show
+\begin{itemize}
+\item $U^T U = I$ (inverse is its transpose)
+\item $\| U \vec{x} \| = \| \vec{x} \|$ (maintains length)
+\item $(U\vec{x}) \cdot (U\vec{y}) = \vec{x} \cdot \vec{y}$ (maintains angle between)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 17, 23, 25, 27
 
 \end{enumerate}
 
@@ -1957,7 +3878,65 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 19, 20
+%%%%%%%%%%%%%%%%%%%%%
+\item Here we extend the idea of projecting a vector onto another vector to projecting a vector onto a subspace.
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For $W$ any subspace of $\mathbb{R}^n$, each $\vec{y}$ in $\mathbb{R}^n$ can be written uniquely as
+\[
+\vec{y} = \vec{\hat{y}} + \vec{z}
+\]
+where $\vec{\hat{y}} \in W$ and $\vec{z} \in W^{\perp}$. Further, for $\{ \vec{u}_1, \dots , \vec{u}_p \}$ an orthogonal basis of $W$, 
+\[
+\vec{\hat{y}} = \frac{\vec{y} \cdot \vec{u}_1}{\vec{u}_1 \cdot \vec{u}_1} \vec{u}_1 + \dots + \frac{\vec{y} \cdot \vec{u}_n}{\vec{u}_n \cdot \vec{u}_n} \vec{u}_n = proj_{W}(\vec{y})
+\]
+and 
+\[
+\vec{z} = proj_{W^{\perp}} (\vec{y}) = \vec{y} - \vec{\hat{y}}.
+\]
+\begin{itemize}
+\item Show graph of vector $\vec{y}$ projected onto a subspace.
+\item This theorem is the first step towards solving the least squares problem.
+\item Proof in text.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the projection of $\vec{y}$ onto subspace $W$ where $W=Span\{\vec{u}_1, \vec{u}_2 \}$.
+\[
+\vec{y} = \left[
+\begin{array}{c}
+6 \\ 3 \\ -2
+\end{array}
+\right], \quad
+\vec{u}_1 = \left[
+\begin{array}{c}
+3 \\ 4 \\ 0
+\end{array}
+\right], \quad
+\vec{y} = \left[
+\begin{array}{c}
+-4 \\ 3 \\ 0
+\end{array}
+\right]
+\]
+\begin{itemize}
+\item Note: Can think of this as just using the theorem of the previous section. First project $\vec{y}$ onto $\vec{u}_1$, then $\vec{y}$ onto $\vec{u}_2$ and so $proj_W(\vec{y})$ is the sum of those two projections using the parallelogram law. Draw a picture.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Theorem (Best approximation theorem): For $W$ a subspace of $\mathbb{R}^n$ and any vector $\vec{y}$ in $\mathbb{R}^n$, let $\vec{\hat{y}} = Proj_W(\vec{y})$. Then,
+\[
+\| \vec{y} - \vec{\hat{y}} \| < \| \vec{y} - \vec{v} \|
+\]
+for all $\vec{v} \in W$, $\vec{v} \neq \vec{\hat{y}}$. 
+\begin{itemize}
+\item Proof in text. Rather big deal. Above picture gives intuition.
+\item This solves the least squares problem for $W = Col(A)$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21
 
 \end{enumerate}
 
@@ -1966,7 +3945,112 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%
+\item Orthogonal basis have a huge advantage:
+\begin{enumerate}
+\item Linear combinations are easy
+\item Projections are easy, essential for approximation
+\item Matrices with orthogonal columns are slick
+\item Question: How to find an orthogonal basis for a subspace? Gram-Schmidt process
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Idea of Gram Schmidt: Use projection and component to get orthogonal basis.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Example: Consider the subspace $W$ spanned by 
+\[
+\vec{x_1} = \left[
+\begin{array}{c}
+0 \\ 4 \\ 2 
+\end{array}
+\right], \quad
+\vec{x_2} = \left[
+\begin{array}{c}
+5 \\ 6 \\ -7
+\end{array}
+\right]
+\]
+\begin{itemize}
+\item Show basis is LI but not orthogonal. Draw picture in $\mathbb{R}^3$.
+\item New basis will be $\{\vec{v}_1, \vec{v}_2 \}$ which spans $W$ but is now orthogonal.
+\item Draw picture of idea
+\[
+\vec{v}_1 = \vec{x}_1, \quad \vec{v}_2 = x_2 - proj_{x_1}(\vec{x}_2) = comp_{x_1}(\vec{x}_2)
+\]
+\item Check the result is orthogonal. How to check $\{\vec{v}_1, \vec{v}_2 \}$ and $\{\vec{x}_1, \vec{x}_2 \}$ both span the same subspace $W$? Enough to see $\{\vec{v}_1, \vec{v}_2 \}$ are both linear combinations of $\{\vec{x}_1, \vec{x}_2 \}$, but we proved this already in past section (orthonormal set is a basis). 
+\item Easy to make an orthonormal basis.
+\[
+\left\{\frac{1}{\|\vec{v}_1\|} \vec{v}_1, \quad \frac{1}{\|\vec{v}_2\|}\vec{v}_2 \right\}
+\]
+\item Coding example.
+\end{itemize}
+
+%%%%%%%%%%%%%
+\item Example: For 3+ vectors, same idea. Just need to project onto a subspace.
+\begin{itemize}
+\item Random $4 \times 3$ matrix $X = [\vec{x}_1~\vec{x}_2~\vec{x}_3]$. We find an orthonormal basis for the $Col(A)$. 
+\item First two steps same as before. Last step projects onto a plane.
+\item Draw picture of process.
+\[
+\vec{v}_1 = \vec{x}_1 \quad (W_1 = Span(\vec{v}_1))
+\] \[
+\vec{v}_2 = \vec{x}_2 - proj_{W_2}(\vec{x}_2) \quad (W_2 = Span(\vec{v}_1, \vec{v}_2)) 
+\] \[
+\vec{v}_3 = \vec{x}_3 - proj_{W_3}(\vec{x}_3) \quad (W_3 = Span(\vec{v}_1, \vec{v}_2, \vec{v}_3))
+\]
+\item Written in terms of dot product:
+\[
+\vec{v}_1 = \vec{x}_1 
+\] \[
+\vec{v}_2 = \vec{x}_2 - \frac{\vec{x}_2 \cdot \vec{v}_1}{\vec{v}_1 \cdot \vec{v}_1} \vec{v}_1
+\] \[
+\vec{v}_3 = \vec{x}_3 - \frac{\vec{x}_3 \cdot \vec{v}_1}{\vec{v}_1 \cdot \vec{v}_1}\vec{v}_1 -  \frac{\vec{x}_3 \cdot \vec{v}_2}{\vec{v}_2 \cdot \vec{v}_2}\vec{v}_2
+\]
+\item Show theorem in text for $p$ dimensional case.
+\item Normalize if wanted.
+\item Coding example.
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%5
+\item $QR$ decomposition: Can write the above Gram schmidt process as a matrix factorization.
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item Can write the above as a matrix factorization
+\[
+X = Q R, \quad Q = \left[ \vec{v}_1, \vec{v}_2, \vec{v}_3 \right]
+\]
+%%%%%%%%%%%%%
+\item Note, $Q$ is an orthonormal matrix and so $Q^{-1} = Q^T$ and so
+\[
+R = Q^T X = \left[
+\begin{array}{ccc}
+\vec{v}_1 \cdot \vec{x}_1  & \vec{v}_1 \cdot \vec{x}_2  & \vec{v}_1 \cdot \vec{x}_3 \\
+\vec{v}_2 \cdot \vec{x}_1  & \vec{v}_2 \cdot \vec{x}_2  & \vec{v}_2 \cdot \vec{x}_3 \\
+\vec{v}_3 \cdot \vec{x}_1  & \vec{v}_3 \cdot \vec{x}_2  & \vec{v}_3 \cdot \vec{x}_3  
+\end{array}
+\right] = 
+ \left[
+\begin{array}{ccc}
+\vec{v}_1 \cdot \vec{x}_1 & \vec{v}_1 \cdot \vec{x}_2  & \vec{v}_1 \cdot \vec{x}_3 \\
+0 & \vec{v}_2 \cdot \vec{x}_2  & \vec{v}_2 \cdot \vec{x}_3 \\
+0 & 0  & \vec{v}_3 \cdot \vec{x}_3
+\end{array}
+\right]
+\]
+\item General proof in text
+\item Easy to solve $A \vec{x} = \vec{b}$ now.
+\item Easy to invert $A$ now. Work was transferred to GS process.
+\item Eigenvalues and eigenvectors now easier.
+\item Coding example.
+\end{enumerate}
+
+
+\item Homework: 1, 3, 5, 7, 9, 13, 15, 17
 
 \end{enumerate}
 
@@ -1975,7 +4059,59 @@ Easy to check. This leads to a general result.
 
 \begin{enumerate}
 
-\item Homework: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Return to linear systems $A \vec{x} = \vec{b}$
+\begin{enumerate}
+\item For $A$ $m \times n$ with $m >> n$, such systems usually have no solution.
+\item Idea is to find the best fit solution by making
+\[
+\| \vec{b} - A \vec{x} \|
+\]
+as small as possible.
+\item Because this error is the sum of squares, this is called the least squares problem.
+\item Key idea is projection.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Least squares problem
+\begin{enumerate}
+%%%%%
+\item Definition: For $A$ $m \times n$ and $\vec{b} \in \mathbb{R}^m$, the least squares solution of $A \vec{\hat{x}} = \vec{b}$ is vector $\vec{x}$ in $\mathbb{R}^n$ such that
+\[
+\| \vec{b} - A \vec{\hat{x}} \| \leq \| \vec{b} - A \vec{x} \|
+\]
+for all $\vec{x} \in \mathbb{R}^n$. This is the same idea as the best approximation theorem.
+
+%%%%%
+\item Idea:
+\begin{itemize}
+\item If $\vec{b}$ is not in $Col(A)$, project $\vec{b}$ onto the columns space as $\vec{\hat{b}} \in Col(A)$. Draw picture. Solve the resulting linear system.
+\[
+A \vec{\hat{x}} = \vec{\hat{b}}
+\]
+\item Can approach this as in previous sections with 
+\[
+\vec{\hat{b}} = proj_{Col(A)} (\vec{b}),
+\]
+but the fundamental theorem of linear algebra finds another way.
+\item Since $\vec{b} \perp \vec{\hat{b}}$, we have $\vec{\hat{b}} = A \vec{\hat{x}}$ and 
+\[
+(\vec{b} - A \vec{\hat{x}}) \in Col(A)^{\perp} = Nul(A^T)
+\]
+and so
+\[
+\vec{a}_j^T(\vec{b} - A \vec{\hat{x}}) = \vec{0} \quad\rightarrow\quad
+A^T(\vec{b} - A \vec{\hat{x}}) = \vec{0} \quad\rightarrow \quad
+A^T A \vec{\hat{x}} = A^T \vec{b}
+\]
+\item No need to compute $\vec{\hat{b}}$ at all.
+\end{itemize}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 17, 25
 
 \end{enumerate}
 
