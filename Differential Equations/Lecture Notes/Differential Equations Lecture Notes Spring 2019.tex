@@ -1,0 +1,3942 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb,amscd,graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\bibliographystyle{unsrt}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{epsfig}  		% For postscript
+%\usepackage{epic,eepic}       % For epic and eepic output from xfig
+\renewcommand{\thesection}{}  % toc dispaly
+
+\newcommand{\ds}{\displaystyle}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+
+\title{Differential Equations Notes}
+\date
+\Large
+\begin{document}
+\maketitle
+\large
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fun Stuff}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+\item Course resource: \url{https://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/index.htm}
+\item Feynman Method: \url{https://www.youtube.com/watch?v=FrNqSLPaZLc}
+\item Bad math writing: \url{https://lionacademytutors.com/wp-content/uploads/2016/10/sat-math-section.jpg}
+\item Google AI experiments: \url{https://experiments.withgoogle.com/ai}
+\item Babylonian tablet: \url{https://www.maa.org/press/periodicals/convergence/the-best-known-old-babylonian-tablet}
+\item Parabola in real world: \url{https://en.wikipedia.org/wiki/Parabola#Parabolas_in_the_physical_world}
+\item Parabolic death ray: \url{https://www.youtube.com/watch?v=TtzRAjW6KO0}
+\item Parabolic solar power: \url{https://www.youtube.com/watch?v=LMWIgwvbrcM}
+\item Robots: \url{https://www.youtube.com/watch?v=mT3vfSQePcs}, riding bike, kicked dog, cheetah, backflip, box hockey stick
+\item Cat or dog: \url{https://www.datasciencecentral.com/profiles/blogs/dogs-vs-cats-image-classification-with-deep-learning-using}
+\item History of logarithm: \url{https://en.wikipedia.org/wiki/History_of_logarithms}
+\item Log transformation: \url{https://en.wikipedia.org/wiki/Data_transformation_(statistics)}
+\item Log plot and population: \url{https://www.google.com/publicdata/explore?ds=kf7tgg1uo9ude_&met_y=population&hl=en&dl=en#!ctype=l&strail=false&bcs=d&nselm=h&met_y=population&scale_y=lin&ind_y=false&rdim=country&idim=state:12000:06000:48000&ifdim=country&hl=en_US&dl=en&ind=false} 
+\item Yelp and NLP: \url{https://github.com/skipgram/modern-nlp-in-python/blob/master/executable/Modern_NLP_in_Python.ipynb} \url{https://www.yelp.com/dataset/challenge}
+\item Polynomials and splines: \url{https://www.youtube.com/watch?v=O0kyDKu8K-k}, Yoda / matlab, \url{https://www.google.com/search?q=pixar+animation+math+spline&espv=2&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj474fQja7TAhUB3YMKHY8nBGYQ_AUIBigB&biw=1527&bih=873#tbm=isch&q=pixar+animation+mesh+spline}, \url{http://graphics.pixar.com/library/}
+\item Polynomials and pi/taylor series: Matlab/machin \url{https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80} 
+\url{https://en.wikipedia.org/wiki/Approximations_of_%CF%80#Machin-like_formula}
+\url{https://en.wikipedia.org/wiki/William_Shanks}
+\item Deepfake: face \url{https://www.youtube.com/watch?v=ohmajJTcpNk} \\
+dancing \url{https://www.youtube.com/watch?v=PCBTZh41Ris}
+\item Pi digit calculations: \url{https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80}, poor shanks...\url{https://en.wikipedia.org/wiki/William_Shanks}
+\end{enumerate}
+
+
+\section{Course Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Syllabus highlights
+\begin{enumerate}
+\item Grades: 
+\begin{enumerate}
+\item Know the expectation / what you are getting into.
+\item 15perc A (excellent), 35perc B (good), 35perc C (satisfactory),10perc D (passing), some F (failing)
+\item Expect lower grades than you are used to. I was a student once upon a time. I know what it's like to give some effort in a class and still get an A/B. Night before study, good enough? 
+\item Turn in an exam / project. Did you do good work?
+\item Many will start off doing good / satisfactory work. Improve to something more. C is not the worst thing in existence. These letters say nothing of your capability. 
+\end{enumerate}
+\item What does good mean? Good means good. Good job! Excellent means you showed some flair.
+\item Expect: More work, more expectation on good writing.
+\item Math is a challenging subject. Not a natural thing to think or write in. It takes work and practice to be better. My goal is to train you to be better and give you ideas of where it can go.
+\item Fact that you are here shows you are smart and capable. Your goal should be to improve. 
+\item Why do I do this? I do it out of respect for you. You are smart enough. I want you to gain something valuable here. I wouldn't do this job if I didn't think you were gaining something of value.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Outline of this class
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How to model real world with differential equations:
+\begin{itemize}
+\item Population growth (cooling, investment, etc), harmonic motion (signals, spring, vibration), disease transfer (SIR model), more.
+\item Modeling will not be a big focus of this class, but it can be a big focus depending on your area (math biology). 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Main topics:
+\begin{itemize}
+\item First order differential equations: Calculus 1,2
+\[
+\frac{dy}{dt} = f(t,y), \quad \frac{dy}{dt} = ky,  
+ \quad \frac{dy}{dt} = f(y),  
+\]
+Given a specific $f$, goal is to solve for unknown function $y$.
+\item First order systems (many coupled equations): Vector calculus
+\[
+\frac{d\vec{Y}}{dt} = f(t,\vec{Y})
+\]
+\item Linear systems: Linear algebra
+\[
+\frac{d\vec{Y}}{dt} = A \vec{Y} \quad (\text{akin to } \lambda \vec{x}=A\vec{x})
+\]
+\item Second (and higher) order differential equations:  Calculus and linear algebra
+\[
+m \frac{d^2y}{dt^2} +b\frac{dy}{dt}+ky=f(t) \quad (\text{Newton's 2nd law: } F=ma)
+\]
+\item Laplace transforms: Extension of power series
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Main tools:
+\begin{itemize}
+\item 
+\end{itemize}
+\item Big views:
+\begin{itemize}
+\item Analytic (solve via Calculus and integration)
+\item Qualitative (visualize DE to understand global behavior)
+\item Numerical (program to find approximate solutions)
+\item Theoretical (existence and uniqueness, minor in this class, big in this field)
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Why do differential equations?
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item Theories in many fields of science are translated into differential equations.
+\begin{itemize}
+\item Fliud dynamics, gravitational waves, optics, finance, etc
+\item List is long: \url{https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations}
+\item Trouble is almost none can be solved, instead they are studied (theory).
+\end{itemize}
+\item Millennium prize: \url{https://en.wikipedia.org/wiki/Millennium_Prize_Problems#Navier%E2%80%93Stokes_existence_and_smoothness}
+\item Youtubeness:
+\begin{itemize}
+\item 
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 1: First-order differential equations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.1: Modeling via differential equations}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Modeling via differential equations
+\begin{enumerate}
+\item A mathematical model is a translation of some real world problem into math (algebra, calculus, linear algebra, etc). Making assumptions translates the problem into an equation. The more assumptions, the easier to solve, though the farther we travel from reality.
+\item Differential equations involve calculus and model change (derivatives).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples of differential equations. $y=y(t)$ is an unknown function that we need to find.
+\begin{enumerate}
+\item $\ds \frac{dy}{dt} = y$ has solution $y(t)=e^t$ giving exponential growth.
+\item $\ds \frac{dy}{dt} = -y$ has solution $y(t)=e^{-t}$ giving exponential decay.
+\item $\ds \frac{dy}{dt} = 2ty$ has solution $y(t)=e^{t^2}$ giving another exponential.
+\item $\ds \frac{dy}{dt} = y^2$ has solution $y(t)=\frac{1}{1-t}$ giving geometric series summation.
+\item Note, the first three equations are linear in $y$ while the last is nonlinear in $y$. These are two important cases for us. Can check each solution by plugging into the equation and ensuring equality holds.
+\item In general, all first order equations can be written as
+\[
+\frac{dy}{dt} = f(t,y)
+\]
+for some given function $f$. They all model how $y$ changes.
+\item There are really infinite solutions to each. The first has another solution $y=2e^t$, and in general $y(t)=Ce^t$ for any constant $C$ is called the analytic solution to this equation. Sketch all these solutions given many values of $C$. This gives a global view of this differential equation (all solutions possible). Note $y(t)=0$ is called the equilibrium solution since it never changes (constant). 
+\item How do we know which one we want? Applications guide this.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Modeling with differential equations: basic models.
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Simple population growth
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Assume a population $P(t)$ grows at a rate proportional to it's size. This translates to
+\[
+\frac{dP}{dt} = k P \quad \rightarrow \quad P(t) = Ce^{kt} = P_0 e^{kt}
+\]
+where $k$ is called the growth rate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item If La Crosse had population 50000 in 2010 and 55000 now, what will the population be in 2030? $P(0)=50000$ is called the initial condition.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note this model is exactly the same for bacteria growth, continuous compound interest, radioactive decay, etc. Also the same model discussed above.
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Newton's law of cooling
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Assume an item cools (or heats) at a rater proportional to the difference between its temp ($T(t)$) and surrounding temp (constant $T_s$). Then,
+\[
+\frac{dT}{dt} = k(T-T_s)
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item A quick change of variable as $y=T-T_s$ turns this into the familiar
+\[
+\frac{dy}{dt}=ky
+\]
+resulting in exponential decay.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note $T(t)=T_s$ is now the equilibrium solution, and the name makes more sense.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Logistic population growth
+\begin{enumerate}
+\item If you compare our La Crosse population growth model to census data, it is clear that the model is good at first but then wildly inaccurate. Making more assumptions can correct this but leads to a more challenging model.
+\item Assume the carrying capacity of La Crosse is $N=80000$. Then revise the model as
+\[
+\frac{dP}{dt} = kP\left(1-\frac{P}{N}\right) = f(P)
+\]
+\item This is nonlinear and harder to solve (will see next time), though we can do a qualitative analysis by looking at $f(P)$ graphically. Plot $f$ noting that it is a parabola with zeros (equilibrium) at $P=0,N$. Note we can see decay and growth situations as well where $f$ is positive or negative. Using this we can reason out solutions between the equilibrium. Two main cases, if above capacity we have decay to $N$, if below and positive we have growth to $N$, third case doesn't make sense in application. 
+\item $P=N$ is called stable equilibrium while $P=0$ is unstable. We can check for stability via $f'(P)$ ($f'(N)>0$ is stable, $f'(0)<0$ is unstable).   
+\item If we knew the general solution, we could be more precise here. Will find later. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Predator prey model
+\begin{enumerate}
+\item Touch of high dimension. What if we have two quantities changing in a coupled way?
+\item If rabbits and foxes live together, assume
+\begin{itemize}
+\item Rabbit growth rate is 2
+\item Rabbit harvest rate is 1.2
+\item Fox death rate is 1
+\item Fox growth rate is 0.9
+\end{itemize}
+\item The resulting model is then
+\[
+\begin{cases}
+\frac{dR}{dt} &= 2R-1.2 F\cdot R\\
+\frac{dF}{dt} &= -F+0.9 F \cdot R 
+\end{cases}
+\]
+\item This gives a coupled nonlinear system and equilibrium solutions have new interest. For a linear system, we can borrow linear algebra to decouple the system. More on this later.
+\end{enumerate}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How to solve differential equations? Three ways.
+\begin{enumerate}
+\item Analytic: Use calculus to find $y(t)$ explicitly. This gives the exact solution, but ignores global behavior of the DE. Most of the time this is impossible to do (integration is hard). 
+\item Qualitative: We will use graphs to visualize all cases of curves (as with logistic population growth) to get a global view. Drawback here is cannot get actual solution values (impractical).
+\item Numerical: When analytic methods fail (most of the time), we can design computer algorithms to give us numeric answers. These are efficient and easy to use, but we don't get functions as result. Only numbers.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-3, 5, 11, 12, 16-18, 22, 23
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.2: Analytic technique: separation of variables}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Separable equations
+\begin{enumerate}
+\item There are few nice cases of first order DEs which we can completely solve by hand. 
+\item Separable equation: $f$ can be separated as a product of a function of $t$ and function of $y$.
+\[
+\frac{dy}{dt} = f(t,y)= g(t)h(y)
+\]
+\item Once separated the solution can be found via direct integration. Our focus is then just on calculus.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $\ds \frac{dy}{dt} = 2ty$ is separable. How to find $y$?
+\begin{align*}
+\frac{dy}{dt} &= 2ty \\
+\int \frac{1}{y} \frac{dy}{dt} ~dt &= \int 2t ~dt \\
+\int \frac{1}{y} ~dy &= \int 2t ~dt \\
+\ln|y| &= t^2 + \hat{C} \\
+|y| &= e^{t^2 + \hat{C}} \\
+y &= Ce^{t^2} \quad \text{(constant $C$ handles the sign)}
+\end{align*}
+Note the use of the chain rule. We will usually skip this step. Now we see where the family of solutions comes from (integration constant). Given an initial condition $y(0)=y_0$ gives
+\[
+y = y_0 e^{t^2}.
+\]
+If we had an initial value problem of $y(0)=y_0$, we also could have handled as a definite integral from $t_0$ to $t$ giving
+\[
+\int_{y_0}^y \frac{1}{y} ~dy = \int_{t_0}^t 2t ~dt
+\quad \Rightarrow \quad
+y = y_0e^{t^2}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Logistic growth: 
+\[
+\frac{dP}{dt} = k P\left( 1-\frac{P}{N} \right)
+\]
+Let's simplify things and take $k=1$, $N=1$. 
+\[
+\frac{dP}{dt} = P\left( 1-P \right) = f(P)
+\]
+Again we are separable, but note the right hand side only depends on $P$. This is called an \emph{autonomous} equation. We solve the same way.
+\begin{align*}
+\frac{dP}{dt} &= P\left( 1-P \right) \\
+\int \frac{1}{P(1-P)} ~dP &= \int ~dt \\
+\int \frac{1}{P} + \frac{1}{1-P} ~dP &= \int ~dt \\
+\ln|P|-\ln|1-P| &= t+\hat{C} \\
+\ln\left|\frac{P}{1-P}\right| &= t+\hat{C} \\
+\frac{P}{1-P} &= e^{t+\hat{C}} \\
+\frac{P}{1-P} &= Ce^{t} \\
+P &= (1-P)Ce^{t} \\
+P &= \frac{Ce^t}{Ce^t+1}  = \frac{1}{1+Ae^{-t}} 
+\end{align*}
+Note the use of partial fraction decomposition. For $A=1$ this is the sigmoid function (logistic curve). For the original equation with rate $k$ and carrying capacity $N$, we get
+\[
+P = \frac{NP_0e^{rt}}{N+P_0(e^{rt}-1)}.
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Difficulties with separation:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Implicit solutions, and missing solutions.
+\[
+\frac{dy}{dt} = \frac{y}{1+y^2}
+\]
+has solution
+\[
+\ln|y| + \frac{y^2}{2} = t+C
+\]
+and it is not possible to solve for $y$ (known as an implicit solution). Also, $y=0$ is an \emph{equilibrium solution}, yet our implicit solution does not make sense for $y=0$.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Integration is not always possible. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Mixing problems: A 200 gal tub contains pure water. Sugar water is pumped in at 5 tablespoons sugar per gallon at a rate of 3 gals per minute. The take is mixed and outflow rate is the same. How much sugar is in the tank after 10 mins? What is the equilibrium solution? Setting up the equation is the challenge.
+\[
+\frac{dS}{dt} = 5 \cdot 3 - \frac{S}{200} \cdot 3
+\]
+This is a separable equation yet again.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 3, 4, 5-38 odd, 39, 41, 43
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.3: Qualitative technique: slope fields}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item dfeild software: \url{https://math.rice.edu/~dfield/dfpp.html}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Finding exact solutions is usually out of reach in which case we need other options.
+\begin{itemize}
+\item Visualize the solution (slope fields AKA direction fields): DE gives the slope of the tangent line of all solutions.
+\item Compute solution numerically (no formula, just numbers, approximation and error involved)
+\item Test if solution is stable (less information, but might be important information)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Slope fields: The geometry of $\ds \frac{dy}{dt} = f(t,y)$.
+\begin{enumerate}
+%%%%%%%%%%%%%%%
+\item Example (autonomous equation): $\ds \frac{dy}{dt} = 2y, y(0)=1$ giving $y=e^{2t}$.
+\begin{itemize}
+\item Plot the true solution. Draw small tangent lines at $t=-1,0,1,2$ to show off DE connection. 
+\item DE actually contains this information for all solutions and all times. Rest are just horizontal shifts of this curve (slope does not change in $t$ for this case).
+\end{itemize}
+
+%%%%%%%%%%%%%%%
+\item Example (autonomous equation): $\ds \frac{dy}{dt} = 2-y$. 
+\begin{itemize}
+\item Again $f(t,y)$ is independent of $t$ and slopes stay the same horizontally. Plot slopes for $y=0,1,2,3,4,5$.
+\item Note $y=2$ is a stable equilibrium solution. 
+\item True solution ends up being $y=2+Ce^{-t}$. Can see this from the slope field.
+\end{itemize}
+
+%%%%%%%%%%%%%%%
+\item Key ideas:
+\begin{enumerate}
+\item Solution curves $y=2+Ce^{-t}$ are tangent to the direction arrows.
+\item Plot arrows along curves $f(t,y)=constant$ (known as \emph{isoclines}). In our case $2-y=s$ for slope $s$. In this case we only have horizontal isoclines since autonomous. 
+\item Note, curves can cross over isoclines, just not the zero isocline ($f(t,y)=0$) known as the \emph{nullcline}. The nullcline gives asymptotic behavior in this case.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\item Example (autonomous equation): Return to logistic equation: $\ds \frac{dP}{dt} = P(1-P)$. 
+\begin{itemize}
+\item Procedure: Plot nullcline first, then follow isoclines (horizontal again since autonomous).
+\item Nullcline: $f(t,P)=P(1-P)=0$ for $P=0,1$. 
+\item Isoclines: $f(t,P)=P-P^2=s$ will be positive for $0<P<1$ and negative otherwise. Helps to plot $z=P(1-P)$ to see symmetry.
+\item $y=1$ is a stable equilibrium (solutions around $y=1$ are attracted), while $y=0$ is unstable (solutions around $y=0$ are repelled). 
+\item Note again the sigmiod curve in between.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%
+\item Example (non-autonomous equation): $\ds \frac{dy}{dt}=1+t-y$.
+\begin{itemize}
+\item Nullcline: $f(t,y)=1+t-y=0$ gives $y=t+1$.
+\item Isoclines: $f(t,y)=1+t-y=s$ gives $y=t+1+s$ (vertical shifts of $y=t+1$). Consider $s=-2,-1,1,2$. 
+\item What is the equilibrium in this case? Looks like $y=t$. Makes sense since this solves the DE and the slop of that curve is unchanging (always 1). 
+\item True solution: $y=t+Ce^{-t}$ and we see that we asymptotically approach $y=t$.
+\item Note the lobster trap: once you pass an isocline, you cannot turn back forcing solutions off to infinity following the nullcline.
+\end{itemize}
+
+%%%%%%%%%%%%%%%
+\item Example (second special case): $\ds \frac{dy}{dt} = f(t)$
+\begin{itemize}
+\item What do you think will happen with the direction field? Nullclines? Isoclines?
+\item Example: $\ds \frac{dy}{dt}=2t$ gives $y=t^2+C$. All solutions are a vertical shift of eachother meaning slopes do not change along vertical lines (ie isoclines). 
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item dfield: Demo software for each of the above examples. 
+\begin{itemize}
+\item Slopes are computed brute force.
+\item Solution curves are computed via numerical method.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Key takeaways:
+\begin{itemize}
+\item Solution curves are tangent to direction arrows: $y'=f(t,y)$
+\item Plotting isoclines ($f(t,y)=s$) helps when doing by hand (special case is nullcline).
+\item Solution curves for autonomous equations shift from left to right (horizintal lines have same slope). 
+\item Even if we cannot find the solution, we get global behavior as well as equilibrium (asymptotics). Not much calculus is used at all (no integration)!
+\item This method is good for intuition, but not practical if you care about calculation (still will need analytic or numerical solutions).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-16, 20, 21
+
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.4: Numerical technique: Euler's method}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item For most differential equations, analytic solutions are not possible. We need numerical methods. 
+\begin{itemize}
+\item We trade exact for approximate, though as close to the the exact solution as desired if we are careful.
+\item The simplest idea harnesses tangent lines (just like direction fields) and is called Euler's method.
+\item Drawback with this simple idea will be inefficiency, but this can be improved with more advanced methods.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Euler's method for approximating solutions to $\ds \frac{dy}{dt} = f(t,y)$:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%
+\item First step: $y_1 = y_0 + \Delta t f_0$
+\begin{itemize}
+\item Notation: $y(0)=y_0$ (given initial value), $y_1 \approx y(t_1)$, $t_1 = \Delta t$ (some chosen time step), $f_0=f(t_0, y_0)$ (slope of the solution curve at $t_0$)
+\item Follow the tangent line to get the first approximation:
+\[
+y_1 = y_0 + \Delta t f_0
+\]
+\item Example: $y'=2y$ with $t_0=0, y(t_0)=1$. Then the slope of the tangent is $f_0=2$ ad the tangent line is $y=y_0+tf_0$ giving 
+\[
+y_1=y_0+\Delta t f_0=1+2\Delta t.
+\]
+Graph with the true solution $y(t)=e^{2t}$. Note we cannot take $\Delta t$ too big else we will stray far from the curve. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+\item Rearranging this is the same as approximating the derivative with a difference quotient.
+\[
+\frac{dy}{dt} = f(t,y) \quad \Leftrightarrow \quad \frac{y_1-y_0}{\Delta t} = f_0
+\]
+
+%%%%%%%%%%%%%%%%%%%
+\item General $n$th time step: $y_{n+1}=y_n+\Delta t f_n$
+\begin{itemize}
+\item Following the second tangent line in above example gives $y_2=y_1 + \Delta t f_1$. In general,
+\[
+y_{n+1}=y_n+\Delta t f_n \quad \left(\text{rearranged as } \frac{y_{n+1}-y_n}{\Delta t} = f_n \right)
+\]
+\item Example: Returning to $y' = 2y$, we get 
+\begin{align*}
+y_{n+1} 
+&= y_n + \Delta t f_n \\
+&= y_n + \Delta t 2 y_n \\
+&= (y_{n-1}+\Delta t 2 y_{n-1}) + \Delta t 2 (y_{n-1}+\Delta t 2 y_{n-1}) \\
+&= (1+2\Delta t)^2 y_{n-1} \\
+&= \vdots \\
+&= (1+2\Delta t)^n y_0 \\
+\end{align*}
+If $y(0)=1$, say we are truly after an approximation to $y(1)$. Then if we take $n$ time steps ($\Delta t = \frac{1}{n}$)
+\[
+y_{n+1} = \left(1+\frac{2}{n} \right)^n \approx e^{2} \quad \left( \text{recall } (1+\frac{1}{n})^n \rightarrow e \right)
+\]
+and it looks like it is working!
+\item Taking smaller steps ($\Delta t$) results in more steps needed (larger $n$) to get to end time $T$. So we converge to the true solution.
+\item Draw on $y'=2y$ example 2 steps to $T=1$ vs 4 steps. Close approximation in the end, but how much better?
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Euler's method error
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%
+\item Define error at the $n$th step as the exact solution minus the approximate solution:
+\[
+E_n = y(t_n)-y_n = y(n\Delta t)-y_n
+\]
+To measure this error, we break the process into two steps:
+\begin{itemize}
+\item Local error (error from tangent line approximation)
+\item Global error (summation of all local errors)
+\end{itemize}
+%%%%%%%%%%%%%%%%%
+\item Local error: How good is a tangent line approximation? Need Taylor series to tell.
+\begin{itemize}
+\item Taylor series: ($a=0$ gives Maclaurin series)
+\[
+f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n +\cdots
+\]
+with convergence for $|x-a|<R$ some radius of convergence.
+\item Maclaurin series you should know: $\ds e^x, \sin(x), \cos(x), \frac{1}{1-x}$. 
+\item For us, 
+\[
+y(t+\Delta t) = y(t) + \Delta t y'(t) + \frac{1}{2} \Delta t^2 y''(t) +\cdots
+\]
+and we approximate
+\[
+y(t+\Delta t) \approx y(t) + \Delta t y'(t) = y(t) + \Delta t f(t,y)
+\]
+giving error 
+\[
++ \frac{1}{2} \Delta t^2 y''(t) +\cdots \leq \frac{1}{2} \Delta t^2 \text{max}|y''|
+\]
+via the mean value theorem (Taylor's theorem). 
+\item So local error is of the order $\Delta t^2$ (constant times this value we control). 
+\end{itemize}
+%%%%%%%%%%%%%%%%%
+\item Global error: Euler's method is a linear method
+\begin{itemize}
+\item Taking $n$ steps to reach final destination $T=n\Delta t$ yields error accumulation of 
+\[
+\sum_{i=1}^n C \Delta t^2 = nC\Delta t^2 = TC \Delta t
+\]
+So the global error is of order $\Delta t$.
+\item We say Euler's method is a linear method. As a result, if we take $2n$ steps instead of size $\frac{\Delta t}{2}$, our error divided by a factor of 2. Not much gain for twice the work.
+\item Example: Returning to $y'=2y$, 
+\[
+\left(1+2\Delta t\right)^n = \left(1+\frac{2T}{n}\right)^n \approx e^{2T} \quad \text{with error $\frac{C}{n}$}
+\]
+\item Script example to compare $e, \left(1+\frac{1}{n}\right)^n,$ Taylor series for $e$, errors for $n=1,2,\cdots, 10$. Note the halving of error at each step for forward Euler, Taylor series is much faster.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Stability of numerical methods
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item Instability:
+\begin{itemize}
+\item Issue: Sometimes local error can grow out of control, and accumulating bad local errors can result in instable global error. 
+\item Solution: Take $\Delta t$ small enough to control instability.
+\end{itemize}
+
+%%%%%%%%%%%%%
+\item Example: $\ds \frac{dy}{dt} = -100y$ (rapid exponential decay)
+\begin{itemize}
+\item Start at $y(0)=1$ and end up at $y(T)=e^{-100T}$, very small value.
+\item Euler's method:
+\[
+y_{n+1} = y_n + \Delta t f_n = (1 - 100\Delta t)y_n \quad \Rightarrow \quad y_n = (1-100\Delta t)^ny_0
+\]
+\item What if we choose $\Delta t = 0.03$ which is reasonably small? Then $100 \Delta t=3$ and the above becomes
+\[
+y_n = (-2)^ny_0 \Rightarrow y_n = 1,-2,4,-8,\cdots
+\]
+which grows exponentially. This is instability. Local error grows faster than the true solution.
+\item Need $|1-100 \Delta t|\leq 1$ giving $\Delta t \leq \frac{2}{100}$.
+\item This is an example of a \emph{stiff} equation (true solution is varying slowly (stiff), but nearby solutions vary rapidly) resulting in instability for $\Delta t$ too large. For this example, not a huge 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Backwards Euler and implicit methods
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%
+\item Instead of going forward to $y_{n+1}$ from $y_n, t_n, f_n$, we trace tangent lines backwards.
+%%%%%%%%%%%%%%%%%
+\item Backward Euler:
+\[
+\frac{y_{n+1}^B-y_n}{\Delta t} = f_{n+1}=f(t_{n+1},y_{n+1}^B) \quad \Rightarrow \quad
+y_{n+1}^B = y_n+\Delta t f_{n+1}
+\]
+Note, we need to solve for $y_{n+1}$ at each step which can be hard for complex $f$.
+%%%%%%%%%%%%%%%%%
+\item Example: $y'=-100y$ gives division by $(1+100\Delta t)$ instead of multiplying by $(1-100\Delta t)$.
+\[
+(1+100\Delta t)y_{n+1}^B = y_n \quad \Rightarrow \quad 
+y_{n}^B = \left(\frac{1}{1+100\Delta t}\right)^ny_0
+\]
+which will always decay regardless of size of $\Delta t$. Implicit Euler is a good option for this linear equation.
+%%%%%%%%%%%%%%%%%
+\item Implicit methods are more stable, but also more computationally expensive. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How to improve?
+\begin{enumerate}
+\item Conquer more terms in the Taylor series expansion (central difference).
+\item Runge-Kutta (most often used in practice): Predict at $t+\Delta t$, correcting at $t+\Delta t$, then adjust stepsize $\Delta t$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Programming assignment: In this section demo the results of first coding assignment in class. Subsequent assignment ideas:
+\begin{itemize}
+\item Higher order (Runge-Kutta)
+\item Systems of equations
+\item Application project (SIR?)
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-11, 13-14
+
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.5: Existence and uniqueness of solutions}
+
+\begin{enumerate}
+
+\item Here we show an important theoretical (but also practical) result. When can we be sure a solution exists? Do we know it is unique?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Past experience: 
+\begin{enumerate}
+\item Quadratic equations: How many solutions does $ax^2 + bx + c = 0$ have? How do we know?
+\item Linear systems: When does $A \vec{x} = \vec{b}$ have a unique solution? $\det(A)\neq 0$, full rank, columns linearly independent...
+\item Others?
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Existence and uniqueness for $\ds \frac{dy}{dt}=f(t,y)$. Requirement is that we need $f$ to be nice enough. 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%
+\item Existence: Starting at given $y(0)$ at time $t=0$, do we have a solution?
+\begin{itemize}
+\item Theorem: A solution exists if $f(t,y)$ is a continuous function for $t$ near 0 and $y$ near $y(0)$. (note the word near, near could be rather small)
+\end{itemize}
+%%%%%%%%%%%%%%%%
+\item Uniqueness: Is there more than one solution through the same $y(0)$?
+\begin{itemize}
+\item Theorem: There cannot be two solutions with the same $y(0)$ if $\frac{\partial f}{\partial y}$ is also continuous.
+\end{itemize}
+%%%%%%%%%%%%%%%%
+\item Examples: Note each starts at $\frac{0}{0}$ which is bound to be trouble.
+\begin{itemize}
+\item $\ds \frac{dy}{dt}=\frac{y}{t}, y(0)=0$ has infinitely many solutions $y=Ct$. Check they it work.
+\item $\ds \frac{dy}{dt}=\frac{t}{y}, y(0)=0$ has two solutions $y(t)=t, y(t)=-t$. Check that they work.
+\item Existence was not even ensured, though it is clear that $f$ is not continuous at $t=0$ for the first and $y(0)=0$  for the second.
+\end{itemize}
+%%%%%%%%%%%%%%%%
+\item Avoiding future bad behavior (finite time blow up).
+\begin{itemize}
+\item Fact: Continuity of $f$ and $\frac{\partial f}{\partial y}$ at all points does not ensure that the solution will reach $t=\infty$.
+\item Example: $\ds \frac{dy}{dt}=y^2, y(0)=1$ has continuous $f$ as well as $\frac{\partial f}{\partial y} = 2y$. Separation of variables gives the solution 
+\[
+y(t)= \frac{1}{1-t}
+\]
+which blows up to $\infty$ at $t=1$. To ensure controlled growth of the solution, we require more of $f$.
+\item Theorem (big one for this chapter, maybe course?): If 
+\[
+\left|\frac{\partial f}{\partial y} \right| \leq L 
+\]
+for all $t,y$, then there is a unique solution for all $y(0)$ reaching all $t$. (Essentially we need to control the growth of $f$ in $y$)
+\item Let's prove this theorem. How do we show a solution exists when we have no formula for $y$ or $f$? The answer is to construct a solution.
+\item Example: Show off idea with $y'=y$, $y(0)=1$ (know the solution is $e^t$). Construct solution $y$ via a sequence of functions $y_k$:
+\begin{align*}
+y_0' &= 0, y(0)=1 \\
+y_1' &= y_0 \Rightarrow y_1 = 1+t \\
+y_2' &= y_1 \Rightarrow y_2 = 1+t+\frac{t^2}{2} \\
+y_3' &= y_2 \Rightarrow y_3 = 1+t+\frac{t^2}{2}+\frac{t^3}{6!} \\
+&\vdots
+\end{align*}
+generating the power series for solution $e^t$. 
+Do need to show that series converges (ratio test).
+The proof of our theorem follows the sameish approach.
+\item Proof: We construct our sequence as
+\[
+(\text{equation: })~ \frac{dy_{n+1}}{dt} = f(t,y_n(t)), \quad 
+(\text{solution: })~ y_{n+1}=y_0+\int_0^t f(s,y_n(s))~dt
+\]
+Then,
+\[
+y_{n+1}(t)-y_n(t)= \int_0^t [f(s,y_n(s))-f(s,y_{n-1}(s))~ds
+\]
+When $|\partial f/\partial y| \leq L$, the difference $|f(y_n)-f(y_{n-1})| \leq L|y_n-y_{n-1}|$. Then,
+\[
+|y_2-y_1| \leq \int_0^t L|y_1-y_0|~ds \leq Lt |y_1-y_0|_{max}
+\] 
+and also
+\[
+|y_3-y_2| \leq \int_0^t L|y_2-y_1|~ds \leq \int_0^t L^2t|y_1-y_0|_{max}~ds = \frac{L^2t^2}{2}  |y_1-y_0|_{max}
+\] 
+leading to 
+\[
+|y_n-y_{n-1}| \leq \frac{L^nt^n}{n!}  |y_1-y_0|_{max}
+\]
+which rapidly approaches zero. Then for $n$ larger and $N$ larger,
+\[
+|y_N-y_n| \leq |y_N-y_{N-1}| + |y_{N-1}-n_{N-2}| + \cdots + |y_{n+1}-y_n| \leq C \frac{L^nt^n}{n!}
+\]
+which also approaches zero. This is a Cauchy sequence which implies $y_n$ converges to some limit $y(t)$. This implies $y_{n+1}$ does likewise giving
+\[
+ y_{n+1}=y_0+\int_0^t f(s,y_n(s))~dt \quad \rightarrow \quad y(t)=y_1 + \int_0^t f(s,y(s)~ds
+\]
+solving $\frac{dy}{dt}=f(t,y)$.
+\end{itemize}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Practical side of uniqueness theorem: 
+\begin{itemize}
+\item For $f$ nice enough, if any two solutions are in the same place at the same time, they are the same function. Can use this fact to bound solutions.
+\item Example: Logistic equation $\frac{dy}{dt}=y(1-y)$ has equilibrium solutions at $y=0,1$. Then if we know $y(0)=\frac{1}{2}$, we know this solution $0<y(t)<1$ for all $t$. Also, since $f(y_0)>0$, we know $y(t)$ is always increasing. Then $y(t)$ will have to approach 1 as a horizontal asymptote. If not, say $y(t)$ had asymptote $L<1$, since $f(L)>0$, when $y$ is close to $L$ it must increase past $L$ which hence cannot be an asymptote.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-8, 11-17
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.6: Equilibria and the phase line}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Return to autonomous equations $\ds \frac{dy}{dt} = f(y)$. 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Logistic equation $\ds \frac{dy}{dt}=y(1-y)$. 
+\begin{itemize}
+\item Already noted that direction fields of autonomous equations are constant on horizontal lines. Why? $f(t,y)$ does not depend on $t$.
+\item A phase line compresses all this information into a single line. Draw vertical line next to the direction field. Already saw this in the previous sections.
+\end{itemize} 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Steps to draw a phase line
+\begin{itemize}
+\item Find equilibrium solutions, label on number line. These are the only places $f$ can change sign assuming continuous $f$.
+\item Find the sign of $f$ between equilibrium solutions. This gives increase / decrease of solution $y$.
+\end{itemize} 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Classification of equilibrium points: Three cases
+\begin{enumerate}
+\item Sink (stable): Approach $y_0$ from both above and below as $t \rightarrow \infty$. Test if $f'(y_0)<0$ (draw graph of $f$ to illustrate). 
+\item Source (unstable): Repel $y_0$ from both above and below (approach as $t \rightarrow -\infty$).  Test if $f'(y_0)>0$.
+\item Node: Opposite behavior above and below (neither sink nor source).  Test if $f'(y_0)=0$ plus more information.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Illustrate the above for
+\[
+\frac{dP}{dt} = kP\left(1-\frac{P}{N}\right)\left(\frac{P}{M}-1\right)\]
+where $N>M>0$. What is this? Modified logistic growth with minimal sustainable threshold $M$. Choose nice numbers $N=10, M=2$ and illustrate phase line and classify equilibrium. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-36, 39, 43, 
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.7: Bifurcations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we study families of differential equations with general parameters. 
+\begin{itemize}
+\item Example: $\frac{dP}{dt} = kP$ where $k$ is a parameter (any real number). 
+\item If a change in a parameter drastically changes the long term behavior of the solution, we call this a \emph{bifurcation}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Logistic equation with harvesting
+\begin{enumerate}
+\item Consider a logistic equation with harvesting rate $-h$
+\[
+\frac{dP}{dt} = 4P-P^2 - h = f(P)
+\]
+where $h>0$ is our parameter.
+\begin{itemize}
+\item Plot $f(P)$ for ...
+\item $h=0$ (no harvesting), two steady states
+\item $h=3$ (light harvesting), two steady states
+\item $h=4$ (critical harvesting), one steady state
+\item $h=5$ (over harvesting), no steady states
+\item $h=4$ is the \emph{bifurcation value}. Find it via $f'(P)=0$ and choosing the parameter such that $f=0$ at that critical point. 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-13, 15-21
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.8: Linear equations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We end the chapter with one more useful analytic technique. Though there are many more techniques available, these two are the most widely useful:
+\begin{enumerate}
+\item Separable equations (already done)
+\item Linear equations (now and next section)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item First order linear equations:
+\[
+\frac{dy}{dt} = a(t)y + b(t)
+\]
+\begin{itemize}
+\item If $b=0$, this is homogeneous (or non-forced).
+\item If $b\neq 0$, this is nonhomogeneous (or forced). Think of $b$ as new input after starting time $t=0$. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Meaning of linearity:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%
+\item Homogeneous solution: If $y_h(t)$ solves the homogeneous equation $\frac{dy}{dt} = a(t)y$, then any constant times $y_h$ also solves it.
+%%%%%%%%%%%%%%%%
+\item Particular solution: $y_p(t)$ solves the nonhomogeneous equation $\frac{dy}{dt} = a(t)y+b(t)$.
+%%%%%%%%%%%%%%%%
+\item Complete solution: For linear equations, adding these two parts gives the complete solution
+\[
+y = y_h + y_p
+\]
+Easy to plug in and see why.
+%%%%%%%%%%%%%%%%
+\item Note: This only works because of the linear term ($y^1$). If we instead had $y^2$ adding $y_h^2$ to $y_p^2$ would not give $(y_h+y_p)^2$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Method for solving linear equations:
+\begin{enumerate}
+\item Solve the homogeneous equation (separable equation) to get $y_h$.
+\item Find a particular solution $y_p$. Two techniques:
+\begin{itemize}
+\item Undetermined coefficients
+\item Integrating factor (next section)
+\end{itemize}
+\item Add two solutions.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Method of undetermined coefficients:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%
+\item Example: $\ds \frac{dy}{dt} = -2y + e^t$. 
+\begin{itemize}
+\item The homogeneous equation is $y'=-2y$ with solution $y_h = Ce^{-2t}$.
+\item For the particular solution, we need
+\[
+y' +2y = e^t
+\]
+Then $y$ better be some multiple of $e^t$. Let
+\[
+y_p = \alpha e^t
+\]
+and find the $\alpha$ which works.
+\[
+y_p'+2y_p = \alpha e^t +2\alpha e^t = 3 \alpha e^t = e^t
+\]
+Then $\alpha = 1/3$ and $y_p = \frac{1}{3} e^t$.
+\item The complete solution is then 
+\[
+y = y_h + y_p = Ce^{-2t}+\frac{1}{3}e^t
+\]
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%
+\item This guessing really only works for nice functions for $b(t)$.
+\begin{itemize}
+\item $e^t$ needs $\alpha e^t$
+\item $\sin(t)$ (or $\cos(t)$) needs $\alpha \sin(t)+\beta\cos(t)$ (why both?)
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%
+\item Of course guessing isn't a good technique: Example
+\[
+y' = -2y + e^{-2t}
+\]
+\begin{itemize}
+\item Why doesn't $y_p = \alpha e^{-2t}$ work? It solves the homogeneous equation.
+\item What might work instead? $y_p = \alpha te^{-2t}$ via the product rule.
+\item The next section trades guessing for computation (integration). 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-24, 33, 34
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.9: Integrating factors for linear equations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item This section uses a trick to integrate first order linear nonhomogeneous equations directly. 
+\begin{itemize}
+\item Advantage: Straightforward technique for finding analytic solutions.
+\item Disadvantage: Integration is hard, even impossible much of the time.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: $\ds \frac{dy}{dt} = -2y + e^t$ revisited.
+\begin{enumerate}
+\item Rearrange and note the similarity to the product rule. 
+\[
+\frac{dy}{dt} + 2y = e^t
+\]
+We need to multiply the LHS by $e^{2t}$ (called the \emph{integrating factor}) in order to see the product rule exactly.
+\begin{align*}
+e^{2t}\frac{dy}{dt} + 2e^{2t}y &= e^{2t}e^t \\
+\frac{d}{dt}\left(e^{2t}y\right) &= e^{3t} \\
+e^{2t}y &= \int e^{3t} ~dt \\
+e^{2t}y &= \frac{1}{3} e^{3t} + C \\
+y &= \frac{1}{3} e^{t} + Ce^{-2t} 
+\end{align*}
+as we found in the last section.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Method of integrating factor: General first order equation
+\[
+\frac{dy}{dt} = a(t)y + b(t) \quad \Rightarrow \quad \frac{dy}{dt} - a(t)y = b(t)
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item Rearrange, introduce exponential (integrating factor), then compact as product rule:
+\begin{align*}
+\frac{dy}{dt} - a(t)y &= b(t) \\
+e^{-\int a(t)~dt}\frac{dy}{dt} - a(t)e^{-\int a(t)~dt}y &= b(t)e^{-\int a(t)~dt} \\
+\frac{d}{dt} \left(e^{-\int a(t)~dt} y \right) &= b(t) e^{-\int a(t)~dt} \\
+\frac{d}{dt} \left(\mu(t) y \right) &= b(t) \mu(t) \\
+\mu(t) y  &= \int b(t) \mu(t)~dt \\
+y  &= \frac{1}{\mu(t)} \int b(t) \mu(t)~dt
+\end{align*}
+Note, check the differentiation of the integrating factor $\ds \mu(t) = e^{-\int a(t)~dt}$:
+\[
+\frac{d}{dt} e^{-\int a(t)~dt} = e^{-\int a(t)~dt}(-a(t))
+\]
+Better to execute this as a strategy rather than try to memorize the formula.
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Solve $\ds \frac{dy}{dt} = -\frac{y}{t}+2, y(1)=3$
+\begin{align*}
+\frac{dy}{dt} &= -\frac{y}{t}+2 \\
+\frac{dy}{dt}+\frac{y}{t} &= 2 \\
+e^{\int 1/t~dt}\frac{dy}{dt}+e^{\int 1/t~dt} \frac{1}{t}y &= 2e^{\int 1/t~dt} \\
+e^{\ln|t|}\frac{dy}{dt}+e^{\ln|t|} \frac{1}{t}y &= 2e^{\ln|t|} \\
+t \frac{dy}{dt}+ t \frac{1}{t}y &= 2t \\
+t \frac{dy}{dt}+ y &= 2t \\
+\frac{d}{dt} (ty) &= 2t \\
+ty &= \int 2t ~dt \\
+ty &= t^2+C \\
+y &= t + \frac{C}{t}
+\end{align*}
+$y(1)=3$ gives $C=2$ and
+\[
+y = t + \frac{1}{t}
+\]
+%%%%%%%%%%%%%%%%%%%%%%
+\item Trouble with this technique is two possibly challenging integrations:
+\begin{itemize}
+\item $\ds \mu(t) = e^{-\int a(t)~dt}$
+\item $\ds \int b(t)\mu(t)~dt$
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-24
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Chapter 1 review: 1-54
+
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 2: First order systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We completed first order systems, now there are two possible next steps.
+\begin{enumerate}
+\item Single function $y$, higher order. Second order equations (think displacement, velocity, acceleration), then third and higher.
+\item Multiple functions and first order systems of equations.
+\end{enumerate}
+We will choose the latter, though it turns out these are connected. Higher order linear equations can be rewritten as linear systems (and vice versa). We will return to high order equations in Chapter 3.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Again, three main approaches: This chapter takes the first two.
+\begin{enumerate}
+\item Qualitative: Trade direction fields for phase portraits which compare the derivatives of two unknown functions.
+\item Numerical: Bend Euler's method to systems.
+\item Analytic: Only special cases can be handled here. Chapter 3 focuses here.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.1: Modeling via systems}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Predator-prey first order system
+\[
+\begin{cases}
+\frac{dR}{dt} &= 2R-1.2 F\cdot R\\
+\frac{dF}{dt} &= -F+0.9 F \cdot R 
+\end{cases}
+\]
+where $R$ is rabbit population and $F$ is fox population. This is a nonlinear system since there are interaction terms ($F\cdot R$). 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Equilibrium solutions: Require both $\ds \frac{dR}{dt}=\frac{dF}{dt}=0$.
+\begin{align*}
+R(2-1.2 F) &= 0 \\
+F(-1+0.9R) &= 0
+\end{align*}
+\begin{itemize}
+\item If $R=0$ and $F=0$. So if no rabbits or fox, equilibrium.
+\item If $R=\frac{1}{0.9} = \frac{10}{9}$, then need $F=\frac{2}{1.2}=\frac{20}{12}=\frac{5}{3}$. This is a nontrivial equilibrium where the system lies in balance.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Solution curves: Finding these explicitly is usually not possible and numerical methods are relied upon. Lucky for us this one twists into a separable equation.
+\[
+\frac{dR/dt}{dF/dt} = \frac{dR}{dF} = \frac{R(2-1.2F)}{F(0.9R-1)}
+\quad \Rightarrow \quad
+\int \frac{0.9R-1}{R} ~dR = \int \frac{2-1.2F}{F} ~dF 
+\]
+resulting in a family of solution curves
+\[
+0.9R - \ln(R) = 2\ln(F)-1.2F + C
+\]
+Plot a few in Desmos. Note we lose time (direction of the orbit). Euler's method brings back time in section 2.5.
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Phase portrait: Plotting solution curves against R and F results in a phase portrait. Note our two equilibrium solutions.
+\begin{itemize}
+\item $R=\frac{10}{9}, F=\frac{5}{3}$ is the center of the circle-like orbits. If start at that point, remain stationary.
+\item $R=F=0$ is also stationary. If only $F=0$, $R\rightarrow \infty$. Also, if only $R=0$, $F \rightarrow 0$ as expected with preyless foxes.
+To add direction to the phase portrait, just compute the tangents at any point on solution curves. If $R=F=2$,
+\[
+\frac{dR/dt}{dF/dt} = \frac{dR}{dF} = \frac{R(2-1.2F)}{F(0.9R-1)} = \frac{2(2-1.2\cdot 2)}{2(0.9\cdot 2-1)}
+= \frac{2(20-12\cdot 2)}{2(9\cdot 2-10)}
+= \frac{-8}{16} = \frac{-1}{2}
+\]
+decreasing rabbits yet increasing foxes as we see in pplane.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item This system is the famous Lotka-Volterra equations dating back to 1925.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Harmonic motion (mass on a spring)
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Notation: 
+\begin{itemize}
+\item $y(t)=$ displacement ($y=0$ at rest)
+\item $y'(t)=$ velocity (speed and direction)
+\item $y''(t)=$ acceleration ($y''>0$ speeding up, $y''<0$ slowing down) 
+\item Assuming no damping of spring, how do these relate?
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Video demos:
+\begin{itemize}
+\item Mass on spring: \url{https://www.youtube.com/watch?v=eeYRkW8V7Vg}
+\item Paint can solution: \url{https://www.youtube.com/watch?v=p9uhmjbZn-c}
+\item Known as a harmonic oscillator (simple harmonic motion).
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Model formulation: 
+\begin{itemize}
+\item Newton's second law: $F=ma$. For us,
+\[
+F = my''
+\]
+\item Then how does the force of the spring $F$ behave? Hook's law says
+\[
+F = -ky.
+\]
+Translation: Force is proportional to the stretching distance. More stretch, more force.
+\item Model:
+\[
+F=ma \quad \Rightarrow \quad -ky = m\frac{d^2y}{dt^2} 
+\quad \Rightarrow \quad m\frac{d^2y}{dt^2}+ky = 0
+\]
+This is a second order equation. The solution should involve sine and cosine terms. If we added damping (friction on the spring), we would also include a $b\frac{dy}{dt}$ term to slow velocity (section 2.3).
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Solution: Use method of undetermined coefficients on $\cos(\omega t)$ (or $\sin(\omega t)$) to get general solution as
+\[
+y = c_1 \cos\left (\sqrt{\frac{k}{m}}\right) + c_2 \sin\left (\sqrt{\frac{k}{m}}\right)
+\]
+which can be combined into a single cosine curve as
+\[
+y = R\cos(\omega t - \alpha)
+\]
+with amplitude, frequency, and phase shift all depending on initial conditions $y(0)$ and $y'(0)$. More complete story on all this later.
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Can translate to a first order system for an alternate view. Let our two variables be $y$ and $v = \frac{dy}{dt}$. Then, our second order equation becomes
+\[
+\begin{cases}
+\frac{dy}{dt} = v \\
+\frac{dv}{dt} = - \frac{k}{m} y
+\end{cases}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Simplify this by letting $\frac{k}{m}=1$.
+\begin{itemize}
+\item Equilibrium solution: $y=v=0$. No displacement or velocity.
+\item General solution is 
+\[
+y = c_1 \cos(t) + c_2 \sin(t)
+\]
+If a specific solution is $y(0)=1$, $y'(0)=0$, then
+\[
+y = \cos(t), \quad v = \sin(t)
+\]
+and this curve is the unit circle in the $y-v$ plane.
+\item All solution curves are 
+\[
+y = R\cos(t-\alpha), \quad v = -R\sin(t-\alpha)
+\]
+which are circles of radius $R$ in the $y,v$ plane.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Second order equation vs first order system:
+\begin{itemize}
+\item Second order equation is simpler and directly translates mechanical law. Also good for finding analytic solution.
+\item System is more complex, but gives good qualitative analysis as well as better numeric solution.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-16, 19-24
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.2: The geometry of systems}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Translating first order systems into the language of vectors makes it easier to see how phase portraits are generated.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Predator prey
+\[
+\begin{cases}
+\frac{dR}{dt} &= 2R-1.2 F\cdot R\\
+\frac{dF}{dt} &= -F+0.9 F \cdot R 
+\end{cases}
+\]
+\begin{itemize}
+\item Introduce vector $\vec{Y}$ and RHS vector field $\vec{F}(\vec{Y})$ as
+\[
+\vec{Y} = \langle R, F \rangle, \quad \vec{F}(\vec{Y}) = \langle 2R-1.2 F \cdot R, -F+0.9 F \cdot R  \rangle
+\]
+\item Then, at any point in the $R-F$ plane, we have a corresponding vector resulting from $\vec{F}$. If $R=F=2$ as we saw last time, 
+\[
+\vec{F} = \langle 4-4.8, -2+3.6 \rangle = \langle -0.8, 1.6 \rangle.
+\]
+\item Plot all these vectors in the $R-F$ plane and we see our phase portrait.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Distinction: A direction field just gives direction while a phase portrait gives both magnitude and direction.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-18, 21
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.3: The damped harmonic oscillator}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we accomplish two things:
+\begin{enumerate}
+\item Enhance the model for harmonic oscillation by adding damping (friction of the spring).
+\item Introduce a general approach for second order constant coefficient equations:
+\[
+A \frac{d^2y}{dt^2} + B \frac{dy}{dt} + C y = 0
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Damped harmonic oscillator:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We alter the precious model by adding damping in the form of $\ds -b \frac{dy}{dt}$ for damping coefficient $b>0$. Model: $F=ma$
+\[
+-ky - b \frac{dy}{dt} = m \frac{d^2y}{dt^2} \quad \Rightarrow \quad
+m \frac{d^2y}{dt^2}+b \frac{dy}{dt}+ky = 0
+\]
+Generally we rewrite to mimic quadratic equations (will see why shortly).
+\[
+A \frac{d^2y}{dt^2} + B \frac{dy}{dt} + C y = 0
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Solution: It seems that the solution has to be an exponential $y=e^{st}$ for some number $s$. Plug it in and see.
+\begin{align*}
+A \frac{d^2y}{dt^2} + B \frac{dy}{dt} + C y &= 0 \\
+A s^2 e^{st} + B s  e^{st} + C  e^{st} &= 0 \\
+(A s^2 + B s  + C)  e^{st} &= 0 \\
+A s^2 + B s  + C &= 0 \\
+\end{align*}
+This quadratic is called the \emph{characteristic equation} and gives a way to find $s$. 
+\[
+s = \frac{-B \pm \sqrt{B^2-4AC}}{2A}
+\]
+with three cases:
+\begin{itemize}
+\item $B^2 > 4AC$ (two real roots, over damping)
+\item $B^2 = 4AC$ (repeated real roots, critical damping)
+\item $B^2 < 4AC$ (complex roots, under damping)
+\item Also include $B=0$ (no damping)
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note this translates into a first order system: Dividing by $A$ yields
+\[
+\begin{cases}
+\frac{dy}{dt} = v \\
+\frac{dv}{dt} = -\frac{C}{A} y - \frac{B}{A} v
+\end{cases}
+\] 
+and is of the form $\frac{d\vec{Y}}{dt} = \vec{F}(\vec{Y})$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: $y''+3y'+2y=0$ has characteristic equation 
+\[
+s^2+3s+2=0 \quad \Rightarrow \quad
+(s+2)(s+1)=0 \quad \Rightarrow \quad
+s=-1,-2
+\]
+Then the general solution is 
+\[
+y = c_1 e^{-t} + c_2 e^{-2t}.
+\]
+This solution is stable and tends to zero. Can translate this solution to 
+\[
+\vec{Y}= c_1 \vec{Y}_1 + c_2 \vec{Y}_2 
+\]
+for 
+\[
+\vec{Y}_1 = \langle y_1, v_1 \rangle = \langle e^{-t}, -e^{-t} \rangle, \quad 
+\vec{Y}_2 = \langle y_2, v_2 \rangle = \langle e^{-2t}, -2e^{-2t} \rangle
+\]
+and view in phase portrait.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can imagine interesting cases here:
+\begin{itemize}
+\item $s_1,s_2>0$ will be unstable (tend to infinity).
+\item $s_1<0,s_2>0$ will be unstable ans stable?
+\item $s_1=s_2$ will take thinking to find a second solution.
+\item $s$ complex will involve Euler's formula
+\[
+e^{i\theta} = \cos(\theta) + i \sin(\theta)
+\]
+resulting in sine and cosine terms (oscillation).	
+\end{itemize}
+More on these later.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-10
+
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.4: Additional analytic methods for special systems}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item A general linear system is of the form
+\[
+\begin{cases}
+\frac{dx}{dt} = Ax+By \\
+\frac{dy}{dt} = Cx+Dy 
+\end{cases}
+\]
+For nice cases (decouple $B=C=0$ or partially decoupled $B=0$ or $C=0$), we can draw on previous experience.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\[
+\begin{cases}
+\frac{dx}{dt} = 2x+3y \\
+\frac{dy}{dt} = -4y 
+\end{cases}
+\]
+\begin{enumerate}
+\item Solve for $y$ first:
+\[
+y = c_1 e^{-4t}
+\]
+\item Solve for $x$ next:
+\[
+\frac{dx}{dt} = 2x + 3c_1 e^{-4t}
+\]
+This is a nonhomogeneous equation which we can solve to get
+\[
+x = c_2 x_h + x_p = c_2 e^{2t} - \frac{1}{2} c_1 e^{-4t}
+\]
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-13
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.5: Euler's method for systems}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Euler's method for first order equations extends to systems in a straightforward way.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item First order equation: $\frac{dy}{dt} = f(t,y)$
+\[
+y_{n+1} = y_n + \Delta t f_n
+\]
+Idea is to follow the tangent line by traveling stepsize $\Delta t$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item First order system: 
+\[
+\begin{cases}
+\frac{dx}{dt} = f(x,y) \\
+\frac{dy}{dt} = g(x,y) 
+\end{cases}
+\]
+Idea here is to follow the vector field by traveling $\Delta t \cdot \vec{F}(\vec{Y})$ where $\vec{F}$ is the vector at location $(x,y)$. \begin{align*}
+\langle x_1,y_1 \rangle &= \langle x_0,y_0 \rangle + \Delta t \vec{F}(x_0, y_0) \\
+\langle x_2,y_2 \rangle &= \langle x_1,y_1 \rangle + \Delta t \vec{F}(x_1, y_1) \\
+& \vdots \\
+\langle x_{n+1},y_{n+1} \rangle &= \langle x_n,y_n \rangle + \Delta t \vec{F}(x_n, y_n)
+\end{align*}
+which simply gives componentwise
+\[
+x_{n+1} = x_n + \Delta t f_n, \quad y_{n+1} = y_n + \Delta t g_n.
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Coding project assignment.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.6: Existence and uniqueness for systems}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we state an important theorem, no homework involved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Existence and uniqueness for systems. \\ \ \\
+For $\vec{Y} = \langle x,y \rangle$ and $\vec{F} = \langle f(t,x,y), g(t,x,y) \rangle$, with $\vec{F}$ \emph{continuously differentiable}, the system
+\[
+\frac{d\vec{Y}}{dt} = \vec{F}, \quad \vec{Y}(t_0)=\vec{Y}_0
+\] 
+has a unique solution $Y$ for $t$ near $t_0$. \\ \ \\
+Note, solutions may blow up in finite time as we saw in the one dimensional case.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: None
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.7: The SIR model of an epidemic}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Coding assignment. Reproduce paper figures / tables.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.8: The Lorenz equations}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: None
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 3: Linear systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.1: Properties of linear systems and the linearity principle}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we turn to analytic techniques for systems of equations, though we are tied to a special case with a wide range of applications: first order linear systems with constant coefficients:
+\begin{enumerate}
+\item $2\times 2$ system:
+\[
+\begin{cases}
+\frac{dx}{dt} = ax+by \\
+\frac{dy}{dt} = cx+dy 
+\end{cases}
+\]
+\item Vector form:
+\[
+\frac{d\vec{Y}}{dt} = A \vec{Y}
+\]
+where 
+\[
+\frac{d\vec{Y}}{dt} = 
+  \begin{bmatrix}
+    \frac{dx}{dt} \\
+    \frac{dy}{dt}
+  \end{bmatrix}
+, \quad
+A=
+  \begin{bmatrix}
+    a & b \\
+    c & d 
+  \end{bmatrix}
+\]
+\item Recall matrix multiplication definition.
+\item Note, results will easily extend to $n \times n$ systems.
+\item Linearity principle (AKA superposition principle): If $\vec{Y}_1$ and $\vec{Y}_2$ solve the linear system, so do any linear combination $c_1\vec{Y}_1+c_2\vec{Y}_2$. \\ \ \\
+Easy to show via derivative and matrix multiplication properties. Both are linear properties.
+\[
+\frac{d}{dt}(c_1\vec{Y}_1+c_2\vec{Y}_2) = c_1\frac{\vec{Y}_1}{dt}+c_2\frac{\vec{Y}_2}{dt} = c_1 A \vec{Y}_1 +  c_2 A \vec{Y}_2
+= A ( c_1 \vec{Y}_1+ c_2 \vec{Y}_2)
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Recall high dimensional systems can be rewritten as linear systems. We will revisit the second order equations (harmonic oscillators) soon.
+\begin{enumerate}
+\item Second order equation with damping:
+\[
+m \frac{d^2y}{dt^2} + b \frac{dy}{dt} + ky = 0
+\]
+\item First order linear system:
+Substitute $v = \frac{dy}{dt}$ and name $\vec{Y} = \langle y, v \rangle$ giving
+\[
+\frac{dY}{dt}=
+\begin{bmatrix}
+v \\
+-\frac{k}{m}y - \frac{b}{m}v
+\end{bmatrix}
+= \begin{bmatrix}
+0 & 1 \\
+-\frac{k}{m} & - \frac{b}{m} 
+\end{bmatrix}
+\vec{Y} = A\vec{Y}
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item For the general $2 \times 2$ system
+\[
+\frac{d\vec{Y}}{dt} = A \vec{Y}
+\]
+a key property is that matrix $A$ is non-singular.
+\begin{enumerate}
+\item Recall, $A$ is nonsingular if 
+\begin{itemize}
+%%%%%%%%%%%%
+\item $\det(A)\neq 0$, $A^{-1}$ exists, only $\vec{0}$ in null($A$), linearly independent columns, ...
+\item Refresh: \url{https://en.wikipedia.org/wiki/Invertible_matrix#The_invertible_matrix_theorem}
+\end{itemize}
+%%%%%%%%%%%%
+\item Determinant of a $2\times 2$ matrix $A$.
+\[
+\text{det}(A) = \left|
+\begin{array}{cc}
+a & b \\
+c & d 
+\end{array}
+\right|
+= ad-bc
+\]
+\begin{itemize}
+\item Example: 
+\[
+A = 
+\begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix}
+\]
+\item $3 \times 3$
+\end{itemize}
+%%%%%%%%%%%%
+\item Theorem: For $A$ nonsingular, the system $\frac{d\vec{Y}}{dt} = A \vec{Y}$ only equilibrium point is the origin $\vec{0}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item General solutions to linear systems:
+\begin{enumerate}
+%%%%%%%%%%%%
+\item Theorem: For $\vec{Y}_1, \vec{Y}_2$ solutions to the $2 \times 2$ linear system $\frac{d\vec{Y}}{dt} = A\vec{Y}$. If $\vec{Y}_1(0)$ and $\vec{Y}_2(0)$ are linearly independent, we can always find constants $c_1$ and $c_2$ such that 
+\[
+c_1 \vec{Y}_1 + c_2 \vec{Y}_2 \quad \text{(known as the general solution)}
+\]
+solves the initial value problem. 
+%%%%%%%%%%%%
+\item Definition: Vectors $\vec{x}$ and $\vec{y}$ are linearly independent if for any vector $\vec{a}$, there exists constants $c_1$ and $c_2$ such that
+\[
+c_1 \vec{x} + c_2 \vec{y} = \vec{a}.
+\]
+Note it is equivalent to say matrix $A = \left[ \vec{x} \vec{y} \right]$ is nonsingular. Why?
+%%%%%%%%%%%%
+\item Example: Find the solution to the initial value problem
+\[
+\frac{d\vec{Y}}{dt} = A \vec{A}, \quad 
+A = 
+\begin{bmatrix}
+2 & 3 \\
+0 & -4
+\end{bmatrix}, \quad \vec{Y}(0) = 
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+\]
+We already found two solutions last time.
+\[
+x = c_1 e^{2t} - \frac{1}{2} c_2 e^{-4t}, \quad y = c_2 e^{-4t}.
+\]
+Then two vector solutions are
+\[
+\vec{Y}_1 = 
+\begin{bmatrix}
+e^{2t} \\
+0
+\end{bmatrix}, \quad
+\vec{Y}_2 = 
+\begin{bmatrix}
+-\frac{1}{2}e^{-4t} \\
+e^{-4t} 
+\end{bmatrix}.
+\]
+Then we need
+\[
+c_1\vec{Y}_1(0) + c_2\vec{Y}_2(0) = 
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+\quad \Rightarrow \quad
+\begin{bmatrix}
+\vec{Y}_1(0) & \vec{Y}_2(0) 
+\end{bmatrix}
+\vec{c} = 
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+\quad \Rightarrow \quad
+\begin{bmatrix}
+1 & -\frac{1}{2} \\
+0 & 1
+\end{bmatrix}
+\vec{c} = 
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+\]
+and we see why linear independence is again key. Result is $c_2 = 2$ and $c_1=2$ which leads to the solution to the IVP.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 5-19, 24, 30-32, 34-35
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.2: Straight-line solutions}	
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item With this section we make an important connection to linear algebra (eigenvalues and eigenvectors).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Same example as before.
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+2 & 3 \\
+0 & -4
+\end{bmatrix} \vec{Y} = A \vec{Y}
+\]
+with general solution
+\[
+\vec{Y} = 
+c_1 e^{2t} 
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
++
+c_2 e^{-4t} 
+\begin{bmatrix}
+-\frac{1}{2} \\
+1
+\end{bmatrix}
+= c_1 e^{2t}\vec{V}_1 + c_2e^{-4t}\vec{V}_2\]
+\begin{enumerate}
+\item pplane: Note straight lines in phase portrait coincide with two vectors. Also, direction followed relates to the sign of the exponent (decay or growth).
+\item Once we are on a straight line, we remain on it. Reason:
+\[
+A\vec{V}_1 = 
+\begin{bmatrix}
+2 & 3 \\
+0 & -4
+\end{bmatrix} 
+\begin{bmatrix}
+1 \\ 0
+\end{bmatrix} 
+=
+\begin{bmatrix}
+2 \\ 0
+\end{bmatrix}
+= 2 \vec{V}_1
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $A\vec{V} = \lambda \vec{V}$ gives eigenvalues and eigenvectors (the characteristic direction of a matrix). Advantage of eigenness:
+\begin{enumerate}
+\item Matrix multiplication turns into scalar multiplication
+\item Matrix diagonlization: If $A$ has $n$ linearly independent eigenvectors,
+\[
+A = V \Lambda V^{-1} \quad \Rightarrow \quad A^k = V \Lambda^k V^{-1}
+\]
+\item How to find $\lambda$ and $\vec{V}$?
+\begin{itemize}
+\item Eigenvalues: Need 
+\[
+A\vec{V} = \lambda \vec{V} \quad \Rightarrow \quad (A-\lambda I)\vec{V} = \vec{0}
+\]
+for $\vec{V} \neq \vec{0}$. This implies $(A-\lambda I)$ is singular and
+\[
+\text{det}(A-\lambda I) = 0 \quad \text{(called the characteristic equation)}
+\]
+\item Eigenvectors: Once found $\lambda$, solve $(A-\lambda I)\vec{V} = \vec{0}$ via Gaussian elimination.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the eigenvalues and eigenvectors of
+\[
+A = 
+\begin{bmatrix}
+-5 & -2 \\
+-1 & -4
+\end{bmatrix}
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%
+\item Eigenvalues:
+\[
+\text{det}(A-\lambda I) = \left|
+\begin{array}{cc}
+-5-\lambda & -2 \\
+-1 & -4-\lambda
+\end{array} \right|
+= (5+\lambda)(4+\lambda)-2 
+= \lambda^2 + 9 \lambda + 18
+= (\lambda+6)(\lambda+3) = 0
+\]
+Then $\lambda = -3, -6$.
+%%%%%%%%%%%%%%%%%%
+\item Eigenvectors:
+\begin{itemize}
+\item $\lambda = -3$
+\[
+\begin{bmatrix}
+-5+3 & -2 \\
+-1 & -4+3
+\end{bmatrix}
+\vec{V} = \vec{0}
+\]
+giving $\vec{V} = \langle 1, -1 \rangle$.
+\item $\lambda = -6$
+\[
+\begin{bmatrix}
+-5+6 & -2 \\
+-1 & -4+6
+\end{bmatrix}
+\vec{V} = \vec{0}
+\]
+giving $\vec{V} = \langle 2, 1 \rangle$.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: What can we expect from the linear system?
+\[
+\frac{d\vec{Y}}{dt} =
+\begin{bmatrix}
+-5 & -2 \\
+-1 & -4
+\end{bmatrix} \vec{Y}
+= A\vec{Y}
+\]
+\begin{enumerate}
+\item Straight line solutions are along eigenvectors. Both solutions decay along these lines. 
+\item General solution is 
+\[
+\vec{Y} = c_1 e^{\lambda_1 t} \vec{V}_1 + c_2 e^{\lambda_2 t} \vec{V}_2
+ = c_1 e^{-3 t} \langle 1,-1 \rangle + c_2 e^{-6 t} \langle 2,1 \rangle
+\]
+Key here is \emph{linearly independent eigenvectors} (as we saw in last section). Equivalently, need \emph{distinct eigenvalues.}
+\item All solutions should decay.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: If matrix $A$ has \emph{distinct real} eigenvalues $\lambda_k$ with corresponding eigenvectors $\vec{V}_k$, then  
+\[
+\frac{d\vec{Y}}{dt} = A\vec{Y}
+\]
+has straight line solutions as
+\[
+Y = c_k e^{\lambda_k t} \vec{V}_k
+\]
+has general solution 
+\[
+Y = c_1 e^{\lambda_1 t} \vec{V}_1 + c_2 e^{\lambda_2 t} \vec{V}_2 + \cdots + c_n e^{\lambda_n t} \vec{V}_n 
+\] 
+\begin{itemize}
+\item Note dimension makes no difference here. 
+\item Real distinct eigenvalues is important. We will look at complex and repeated eigenvalues later.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-25
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.3: Phase portraits for linear systems with real eigenvalues}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item There are three main types of equilibrium points for $2 \times 2$ linear systems with real eigenvalues:
+\begin{enumerate}
+\item Sinks: $\lambda_1 < \lambda_2 < 0$ implies decay to $\vec{0}$ from all directions.
+\item Sources: $0<\lambda_1 < \lambda_2$ implies repelling from $\vec{0}$ to $\pm \infty$.
+\item Saddles: $\lambda_1 < 0 < \lambda_2$ decays to $\vec{0}$ along a single straight line solution but repels from $\vec{0}$ to $\pm \infty$ otherwise.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Stability:
+\begin{enumerate}
+\item Sinks are stable meaning solutions near eachother stay near eachother. Small changes to the initial value result in small changes in the solution final value.
+\item Sources and saddles are unstable meaning solutions near eachother can end up far away. Small changes to the initial value can result in largely different final values.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item Sink:
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+-2 & 1 \\
+1 & -2
+\end{bmatrix} \vec{Y}
+\]
+has general solution
+\[
+\vec{Y} = c_1 e^{-t}
+\begin{bmatrix}
+1 \\ 1
+\end{bmatrix}
++
+c_2 e^{-3t}
+\begin{bmatrix}
+1 \\ -1
+\end{bmatrix}
+\]
+%%%%%%%%%%%%%
+\item Source:
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+2 & 1 \\
+-1 & 4
+\end{bmatrix} \vec{Y}
+\]
+has general solution
+\[
+\vec{Y} =
+\]
+%%%%%%%%%%%%%
+\item Saddle:
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+5 & 4 \\
+9 & 0
+\end{bmatrix} \vec{Y}
+\]
+has general solution
+\[
+\vec{Y} = 
+\]
+\item Plot phase portraits in pplane.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-16, 19-22, 27
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.4: Complex eigenvalues}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item There are four main cases with 2D linear systems:
+\begin{enumerate}
+\item Two distinct real eigenvalues
+\item Repeated real eigenvalues (next section)
+\item Zero eigenvalue (next section)
+\item Complex eigenvalues (now)
+\begin{itemize}
+\item We will see that complex eigenvalues result in rotations / oscillation. Hence the harmonic oscillator will return.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+-2 & 1 \\
+-1 & -2
+\end{bmatrix} \vec{Y}, \quad \vec{Y}(0) = 
+\begin{bmatrix}
+6 \\ 2
+\end{bmatrix}
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%
+\item Eigenvalues:
+\[
+\det(A-\lambda I) = \left|
+\begin{array}{cc}
+-2-\lambda & 1 \\
+-1 & -2-\lambda
+\end{array}
+\right|
+= (2+\lambda)^2 + 1 =0
+\]
+Then 
+\[
+\lambda_1 = -2 + i, \quad \lambda_2 = -2 - i.
+\]
+%%%%%%%%%%%%%%%%%
+\item Eigenvectors: We need to solve the systems $A \vec{Y}_i = \lambda_i \vec{V}_i$ and the result is
+\[
+\vec{V}_1 = 
+\begin{bmatrix}
+1 \\ i
+\end{bmatrix}
+, \quad
+\vec{V}_2 = 
+\begin{bmatrix}
+1 \\ -i
+\end{bmatrix}
+\]
+%%%%%%%%%%%%%%%%%
+\item General solution: If we follow the mold from before, the result is
+\[
+\vec{Y} = c_1 e^{\lambda_1 t} \vec{V}_1 +  c_2 e^{\lambda_2 t} \vec{V}_2
+\]
+A few troubles here:
+\begin{itemize}
+\item How to make sense of $e^{(-2+i)t}$? Need Eulers formula:
+\[
+e^{i\theta} = \cos(\theta) + i \sin(\theta)
+\]
+Recall the power series formulation proof (\url{https://en.wikipedia.org/wiki/Euler%27s_formula}) and the use in the complex plane (unit circle). This formula is a big deal. Know it. Then,
+\[
+e^{(-2+i)t} = e^{-2t}e^{it} = e^{-2t}(\cos(t)+i\sin(t))
+\]
+Likewise for $\lambda_2$.
+\item We need $\vec{Y}$ to be real valued, not complex valued. Simplify to get use there.
+\begin{align*}
+\vec{Y}_1 
+&= e^{(-2+i) t} 
+\begin{bmatrix}
+1 \\ i
+\end{bmatrix} \\
+&= e^{-2t}(\cos(t)+i\sin(t)) 
+\begin{bmatrix}
+1 \\ i
+\end{bmatrix} \\
+&= e^{-2t} 
+\begin{bmatrix}
+\cos(t)+i\sin(t) \\ i\cos(t)-\sin(t)
+\end{bmatrix} \\
+&= e^{-2t} 
+\begin{bmatrix}
+\cos(t) \\ -\sin(t)
+\end{bmatrix} 
++ i e^{-2t} 
+\begin{bmatrix}
+\sin(t) \\ \cos(t)
+\end{bmatrix} 
+\end{align*}
+$\vec{Y}_2$ results in the same two vectors. Can show these vectors both solve the system are linearly independent via
+\[
+\left |
+\begin{array}{cc}
+\cos(t) & \sin(t) \\
+-\sin(t) & \cos(t)
+\end{array} \right| 
+= 1 \neq 0
+\]
+\end{itemize}
+Then the general solution is
+\[
+\vec{Y} = c_1 e^{-2t} 
+\begin{bmatrix}
+\cos(t) \\ -\sin(t)
+\end{bmatrix} 
++ c_2 e^{-2t} 
+\begin{bmatrix}
+\sin(t) \\ \cos(t)
+\end{bmatrix}
+\]
+Note no more complex numbers.
+%%%%%%%%%%%%%%%%%%%%%
+\item IVP solution: $\vec{Y}(0) = \langle 6,2 \rangle$.
+\[
+c_1 
+\begin{bmatrix}
+1 \\ 0
+\end{bmatrix}
++ c_2 
+\begin{bmatrix}
+0 \\ 1
+\end{bmatrix}
+= 
+\begin{bmatrix}
+c1 \\ c2
+\end{bmatrix}
+= \begin{bmatrix}
+6 \\ 2
+\end{bmatrix}
+\]
+gives $c_1=6, c_2=2$ and
+\[
+\vec{Y} = 
+e^{-2t} \begin{bmatrix}
+6\cos(t) + 2 \sin(t) \\
+-6\sin(t)+2\cos(t)
+\end{bmatrix}
+\]
+%%%%%%%%%%%%%%%%%%%%%
+\item Plot individual solutions to see oscillation:
+\[
+x = e^{-2t}(\cos(t)+\sin(t)), \quad y = e^{-2t}(-\sin(t)+\cos(t))
+\]
+Note $e^{-2t}$ contributes decay, and the sine/cosine terms oscillation.
+%%%%%%%%%%%%%%%%%%%%%
+\item Phase portrait: Note no straight line solutions, spiral sink in this case. Follow a single trajectory to see spiral.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For $\vec{Y}$ a complex valued solution to $\ds \frac{d\vec{Y}}{dt} = A \vec{Y}$ where
+\[
+\vec{Y} = \vec{Y}_{re} + i \vec{Y}_{im}, 
+\]
+then both $\vec{Y}_{re}$ and $\vec{Y}_{im}$ solve the system.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How do the eigenvalue real / imaginary parts contribute to the solution and overall behavior? Assume
+\[
+\lambda = a \pm b i
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sign of $a$ assuming $b \neq 0$
+\begin{itemize}
+\item $a>0$ equilibrium is spiral source
+\item $a<0$ equilibrium is spiral sink
+\item $a=0$ equilibrium is center (only circular motion)
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $b$ cases
+\begin{itemize}
+\item $b > 0$ gives oscillation with frequency $b$
+\item $b=0$ says real eigenvalues, no oscillation
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Rotation direction: At $\vec{Y}=\langle 1,0 \rangle$, compute $y'=c$.
+\begin{itemize}
+\item If $c>0$, counterclockwise
+\item If $c<0$, clockwise
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%
+\item Center: 
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+0 & 2 \\
+-2 & 0
+\end{bmatrix} \vec{Y}
+\]
+\begin{itemize}
+\item Eigenvalues: $\lambda = \pm 2i$
+\item Eigenvector: 
+\item General solution:
+\item When is one cycle completed? $t=\pi$ periodic
+\item This is a circular orbit, but in general it can be an ellipse.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%
+\item Source:
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+0 & 2 \\
+-3 & 2
+\end{bmatrix} \vec{Y}
+\]
+%%%%%%%%%%%%%%%%%%%%
+\item Eigenvalues: $\lambda = 1\pm i \sqrt{5}$
+\item Eigenvector: 
+\[
+\vec{V} = e^{(1+\sqrt{5}i)t} \begin{bmatrix}
+2 \\ 
+1 + i \sqrt{5}
+\end{bmatrix}
+\]
+\item General solution:
+\[
+\vec{Y} = c_1 e^t
+\begin{bmatrix}
+2\cos(\sqrt{5}t) \\
+\cos(\sqrt{5}t)-\sqrt{5}\sin(\sqrt{5}t)
+\end{bmatrix}
++
+c_2 e^t
+\begin{bmatrix}
+2\sin(\sqrt{5}t) \\
+\sqrt{5}\cos(\sqrt{5}t)+\sin(\sqrt{5}t)
+\end{bmatrix}
+\]
+\item Can still think about period and cycle as one revolution about the origin.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Stability: 
+\begin{enumerate}
+\item Which of the above are stable?
+\item Later we will go further to classify all stability cases of linear systems.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-24, 26
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.5: Special cases: repeated and zero eigenvalues}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Two special cases remain (degenerate systems). These play an importation role when studying system bifurcations.
+\begin{enumerate}
+\item Repeated real eigenvalues (may still have 2 linearly independent eigenvectors, or maybe only 1). Note repeat complex eigenvalues not possible since one complex eigenvalue implies there is a conjugate pair.
+\item Zero eigenvalue (whole line of equilibrium solutions)
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Repeated eigenvalue case
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Complete case: still 2 linearly independent eigenvectors (actually infinitely many)
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+2 & 0 \\
+0 & 2
+\end{bmatrix} \vec{Y}
+\]
+\begin{itemize}
+\item Note repeated eigenvalue are $\lambda = 2$ and can see that 
+\[
+\vec{V}_1 = 
+\begin{bmatrix}
+1 \\ 0
+\end{bmatrix},
+\quad 
+\vec{V}_2 = 
+\begin{bmatrix}
+0 \\ 1
+\end{bmatrix} 
+\]
+are both eigenvectors (though there are many more).
+\item General solution:
+\[
+\vec{Y} = c_1 e^{\lambda t} \vec{V}_1 + c_2 e^{\lambda t} \vec{V}_2 
+= e^{\lambda t} \begin{bmatrix}
+c_1 \\ c_2
+\end{bmatrix}
+\]
+and there are infinite straight line solutions.
+\item Pplane visual.
+\item The sign of $\lambda$ determines source or sink. No spiraling possible here. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Incomplete case: only 1 linearly independent eigenvector
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+-2 & 1 \\
+0 & -2
+\end{bmatrix} \vec{Y}
+\]
+\begin{itemize}
+\item Eigenvalues:
+\[
+\det(A-\lambda I) = \left|
+\begin{array}{cc}
+-2-\lambda & 1 \\
+0 & -2-\lambda
+\end{array} \right|
+= (\lambda+2)^2 = 0
+\]
+gives $\lambda = -2$.
+\item Eigenvector: $A\vec{V}=\vec{V}$ yields only
+\[
+\vec{V} = \begin{bmatrix}
+1 \\ 0
+\end{bmatrix}.
+\]
+\item Single solution: $Y = c_1 e^{-2t} \langle 1,0 \rangle$, but we know there should be two linearly independent solutions.
+\item Switch gears and solve as a (partially) decoupled system.
+\[
+\frac{dx}{dt} = -2x+y, \quad \frac{dy}{dt} = -2y
+\]
+Result is 
+\[
+y = y_0 e^{-2t}, \quad x = y_0te^{-2t}x_0e^{-2t}
+\]
+giving our system general solution of
+\[
+\vec{Y} = e^{-2t} \begin{bmatrix}
+x_0 \\ y_0 
+\end{bmatrix}
++ te^{-2t} \begin{bmatrix}
+y_0 \\ 0
+\end{bmatrix}
+= e^{-2t} \vec{Y}_0
++ y_0 te^{-2t} \vec{V}
+=e^{-2t} \vec{Y}_0
++ te^{-2t} (A-\lambda I) \vec{Y}_0
+\]
+\item This final solution form can be checked in general:
+\[
+\vec{Y} =e^{\lambda t} \vec{Y}_0
++ te^{\lambda t} (A-\lambda I) \vec{Y}_0
+\]
+solves $\frac{d\vec{Y}}{dt} = A \vec{Y}$, and hence is the general solution. Plug into both sides and see.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: For linear system
+\[
+\frac{d\vec{Y}}{dt} = A \vec{Y}
+\]
+with repeated eigenvalue $\lambda$ and only one linearly independent eigenvectors, the general solution is
+\[
+\vec{Y} = e^{\lambda t} \vec{Y}_0 + t e^{\lambda t} \vec{V}
+\]
+where
+\[
+\vec{V} = (A-\lambda I) \vec{Y}_0.
+\]
+\begin{itemize}
+\item If $\vec{V}=\vec{0}$, then there are only straight line solutions as we saw in the first example.
+\item If $\vec{V} \neq \vec{0}$, then it is an eigenvector as in the second example.
+\item This theorem should be used from the start to solve any system with repeated eigenvalues. Our conversation stumbled across it. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Example: 
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+-2 & 1 \\
+-1 & 0
+\end{bmatrix} \vec{Y}
+\]
+has repeated eigenvalue $\lambda = -1$. Then the general solution is
+\[
+\vec{Y} = e^{-t} \begin{bmatrix}
+x_0 \\ y_0
+\end{bmatrix}
++ t e^{-t} (A+I) \begin{bmatrix}
+x_0 \\ y_0
+\end{bmatrix}
+= e^{-t} \begin{bmatrix}
+x_0 \\ y_0
+\end{bmatrix}
++ t e^{-t} \begin{bmatrix}
+-x_0+y_0 \\ -x_0+y_0
+\end{bmatrix}
+\]
+Check that it works to be sure.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Zero eigenvalue case: This case is simpler. One example will suffice.
+\begin{enumerate}
+\item Example:
+\[
+\frac{d\vec{Y}}{dt} = \begin{bmatrix}
+4 & 2 \\
+2 & 1
+\end{bmatrix} \vec{Y}
+\]
+\begin{itemize}
+\item Eigenvalues:
+\[
+\det(A-\lambda I) = (4-\lambda)(1-\lambda)-4 = \lambda^2-5\lambda = \lambda(\lambda-5)=0
+\]
+$\lambda = 0,5$. Note that implies $\det(A)=0$ and this matrix is nonsingular and the nullspace has more than $\vec{0}$. Our eigenvector should live there too. 
+\item Eigenvectors: $A\vec{V_1} = 5 \vec{V_1}$ gives
+\[
+\vec{V_1} = \begin{bmatrix}
+2 \\ 1
+\end{bmatrix}
+\]
+while
+$A\vec{V_2} = \vec{0}$ gives
+\[
+\vec{V_2} = \begin{bmatrix}
+1 \\ -2
+\end{bmatrix}.
+\]
+\item General solution:
+\[
+\vec{Y} = c_1 e^{5t} \vec{V}_1 + c_2 \vec{V}_2
+\]
+\item Every point along $\vec{V}_2$ will serve as an equilibrium point (unstable in this case, stable for $\lambda<0$). All other solutions will follow lines parallel to $\vec{V}_1$.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-23
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.6: Second-order linear equations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we give the complete unified story of the second-order linear equations:
+\begin{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Second order equation:
+\[
+m \frac{d^2 y}{dt^2} + b \frac{dy}{dt} + ky = 0 \quad \Rightarrow \quad 
+\frac{d^2 y}{dt^2} + p \frac{dy}{dt} + qy = 0 
+\]
+where constants denote $m$ (mass), $b$ (damping constant), and $k$ (spring strength). Engineer a leading coefficient of 1 for simplicity.
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Equivalent first order linear system:
+\[
+\frac{d \vec{Y}}{dt} = 
+\begin{bmatrix}
+0 & 1 \\
+-q & -p
+\end{bmatrix}
+\] 
+where $\vec{Y} = \langle y,\frac{dy}{dt} \rangle  = \langle y,v \rangle$.
+%%%%%%%%%%%%%%%%%%%%%%%
+\item It will turn out our characteristic equation from chapter 2 matches our eigenvalue equation from this chapter.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\[
+\frac{d^2 y}{dt^2} + 3\frac{dy}{dt} + 2y = 0
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Characteristic equation approach: Assume $y = e^{st}$, then the differential equation reduces to
+\[
+e^{st}(s^2+3s+2)=0 \quad \Rightarrow \quad s^2+3s+2=(s+2)(s+1)=0 \quad \Rightarrow \quad s=-2, -1
+\]
+Then the general solution is
+\[
+y = c_1 e^{-2t} + c_2 e^{-t}. 
+\]
+Note, the solution tends to zero without oscillation.
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Plot the solution $y$ in Desmos for $y(0)=1$, $y'(0)=v(0)=1$ giving $c_1=2, c_2=-1$.
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linear system / eigenvalue approach: Let $\vec{Y} = \langle y, v \rangle$. Then,
+\[
+\frac{d \vec{Y}}{dt} = \begin{bmatrix}
+0 & 1 \\
+-2 & -3
+\end{bmatrix} \vec{Y}
+\].
+Then,
+\[
+\det(A-\lambda I) = -\lambda(-3-\lambda)+2 = \lambda^2+3\lambda+2=0
+\]
+the same as the characteristic equation. $\lambda = -2,-3$ and the general solution is
+\[
+\vec{Y} = c_1 e^{-3t} \vec{V}_1+ c_2 e^{-2t} \vec{V}_2.
+\]
+where eigenvectors are found to be
+\[
+\vec{V}_1 = 
+\begin{bmatrix}
+-\frac{1}{2} \\1
+\end{bmatrix}, \quad
+\vec{V}_2 = 
+\begin{bmatrix}
+-1 \\1
+\end{bmatrix}.
+\] and we have the same $y$ as found above.
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Graph in pplane. Note equilibrium is a sink (stable).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\[
+\frac{d^2 y}{dt^2} -4\frac{dy}{dt} + 13y = 0, \quad y(0)=1, y'(0)=-4
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item General solution: Characteristic equation is
+\[
+s^2-4s+13=0 \quad \Rightarrow \quad s = \frac{-4\pm \sqrt{16-52}}{2}=-2 \pm 3i
+\]
+giving
+\[
+e^{(-2+3i)t} = e^{-2t} (\cos(3t)+i\sin(3t))
+\]
+for the general solution
+\[
+y = c_1 e^{-2t}\cos(3t) +c_2e^{-2t} \sin(3t).
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Initial condition gives $c_1=1, c_2=-2$ with solution
+\[
+y = e^{-2t}\cos(3t) -2e^{-2t} \sin(3t).
+\]
+Graph the result in Desmos.
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Give phase portrait for equivalent system
+\[
+\frac{d \vec{Y}}{dt} = \begin{bmatrix}
+0 & 1 \\
+-13 & 4
+\end{bmatrix} \vec{Y}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can see the strength provided by  $a$ and $b$ in the eigenvalue $a+bi$. This can be generalized in terms of $m$ (mass), $b$ (damping constant), and $k$ (spring strength)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Summary of general harmonic oscillator cases:
+\[
+m \frac{d^2 y}{dt^2} + b \frac{dy}{dt} + k y =0 \quad \Rightarrow \quad ms^2 + bs + k = 0 \ quad \Rightarrow \quad s = \frac{-b \pm \sqrt{b^2-4mk}}{2m}
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $b = 0$ gives no damping, only oscillation due to purely imaginary eigenvalues.
+\[
+\cos(\omega t), \sin(\omega t)
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $b^2>4mk$ gives overdamping, only exponential decay.
+\[
+e^{s_1 t}, e^{s_2 t}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $b^2=4mk$ gives critical damping, only exponential decay due to repeated root.
+\[
+e^{s_1 t}, te^{s_1 t}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $b^2<4mk$ gives underdamping, decay plus oscillation
+\[
+e^{at} \cos(\omega t), e^{at} \sin(\omega t)
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Classify the above two examples via this simple test. Have seen many examples in past. More in the homework. Sample solutions for 3 cases:
+\begin{itemize}
+\item No damping
+\[
+\frac{d^2y}{dt^2} + 0 \frac{dy}{dt} + y = 0, \quad s=\pm i
+\]
+\item Overdamping
+\[
+\frac{d^2y}{dt^2} + 3 \frac{dy}{dt} + y = 0, \quad s=-\frac{3}{2} \pm \frac{\sqrt{5}}{2} 
+\]
+\item Critical damping
+\[
+\frac{d^2y}{dt^2} + 2 \frac{dy}{dt} + y = 0, \quad s=-1
+\]
+\item Underdamping
+\[
+\frac{d^2y}{dt^2} + \frac{dy}{dt} + y = 0, \quad s=-\frac{1}{2} \pm \frac{\sqrt{3}}{2} i
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-33
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.7: The trace-determinant plane}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item In the last section we unified the behavior of all harmonic oscillators. Now we tackle all first order linear systems.
+\[
+\frac{d\vec{Y}}{dt} = A \vec{y} = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix} \vec{Y}
+\]
+with $\vec{Y} = \langle x, y \rangle$.
+Given $A$, we will answer two main questions.
+\begin{enumerate}
+\item Is the system stable? That is, if two solutions start close together, will they remain close together?
+\item What is the global behavior of the system? Cases are
+\begin{itemize}
+\item Sink, saddle, source, spirals, etc.
+\end{itemize}
+\item Both of these questions are determined by the eigenvalues of $A$, but a simpler approach is to consider the trace and determinant of $A$.
+\[
+\text{tr}(A)= a + d, \quad \det(A) = ad-bc
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The trace-determinant plane:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%
+\item Eigenvalues from trace / determinant:
+\[
+\det(A-\lambda I) = 
+\left| 
+\begin{array}{cc}
+a-\lambda & b \\
+c & d-\lambda
+\end{array}
+\right| = (a-\lambda)(d-\lambda)-bc = \lambda^2-(a+d)\lambda +(ad-bc) = \lambda^2 - \text{tr}(A)\lambda + \det(A) = 0
+\]
+So the trace and determinant determine $\lambda $ via
+\[
+\lambda = \frac{\text{tr}(A) \pm \sqrt{\text{tr}(A)^2-4\det(A)}}{2}
+\]
+%%%%%%%%%%%%%%%%%%
+\item Real / complex cases:
+\begin{itemize}
+\item $\text{tr}(A)^2>4\det(A)$ gives two distinct real eigenvalues
+\item $\text{tr}(A)^2<4\det(A)$ gives complex eigenvalues
+\item $\text{tr}(A)^2=4\det(A)$ gives repeated real eigenvalues, barrier between real and complex cases.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%
+\item Activity: Quiz bonus points. Give the trace / determinant plane with phase portraits covered up. Have them fill in the behavior of each then uncover. Options:
+\begin{itemize}
+\item Sink, degenerate sink, spiral sink, saddle, line of stable fixed points, line of unstable fixed points, center, spiral source, degenerate source, source.
+\end{itemize}
+Which ones are stable?
+%%%%%%%%%%%%%%%%%%
+\item Stability cases:
+\begin{itemize}
+\item Note also that $\det(A)=\lambda_1 \cdot \lambda_2$ because of the factoring of the characteristic equation. If real eigenvalues only, need $\text{tr}(A)<0$(at least one negative eigenvalue) and $\det(A)>0$ (product of eigenvalues same sign). If complex eigenvalues need $\text{tr}(A)<0$. 
+\item Stable when $\text{tr}(A)<0$ and $\det(A)>0$.
+\item Unstable otherwise.
+\end{itemize}
+\item This conversation is especially useful for bifurcation analysis which you will focus on in the homework.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: Determine behavior and stability of each via the trace and determinant.
+\begin{enumerate}
+\item $ \ds A = \begin{bmatrix}
+0 & -1 \\ 2 & -3
+\end{bmatrix}$ is stable.
+\item $ \ds A = \begin{bmatrix}
+1 & -1 \\ 3 & 3
+\end{bmatrix}$ is unstable.
+\item $ \ds A = \begin{bmatrix}
+0 & 4 \\ 5 & -6
+\end{bmatrix}$ is unstable.
+\item $ \ds A = \begin{bmatrix}
+0 & -7 \\ 7 & 0
+\end{bmatrix}$ is neutral.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Final visual: \url{https://i.stack.imgur.com/duPPi.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-12
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3.8: Linear systems in three dimensions}
+Jeff skip
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What remains of the course?
+\begin{enumerate}
+\item What have we done?
+\begin{itemize}
+\item First order equations, second order linear equations, $2\times 2$ linear systems
+\end{itemize}
+\item What remains?
+\begin{itemize}
+\item High order linear systems, $n \times n$ linear systems, of course these are tied together. I will only give basic idea, no homework.
+\item Nonlinear systems, we will borrow techniques from linear systems to partially analyze.
+\item New idea all together: Laplace transform, change our space from derivatives / functions to algebra and back.
+\end{itemize}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item High order linear equations: Consider third order, but ideas extend higher.
+\[
+y''' + By'' + Cy' + Dy = 0
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Transfer to a $3 \times 3$ linear system. Denote
+\[
+\vec{Y} = \begin{bmatrix}
+y \\ y' \\ y''
+\end{bmatrix}
+\]
+then we are left with the system
+\[
+\frac{d\vec{Y}}{dt} = A \vec{Y} = \begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+-D & -C & -B
+\end{bmatrix} \vec{Y}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%5
+\item Eigenvalues: Characteristic equation again.
+\[
+\det(A-\lambda I) = -(\lambda^3+B\lambda^2+C\lambda+D) = 0
+\]
+Challenge here is cubic equations are harder to deal with.
+
+%%%%%%%%%%%%%%%%%%%%%%%5
+\item Eigenvectors: For this case, eigenvectors have the special form
+\[
+\vec{V} = \begin{bmatrix}
+1 \\ \lambda \\ \lambda^2
+\end{bmatrix}
+\]
+Multiply $A\vec{V}$ and use the characteristic equation to see.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item High dimensional systems are more difficult to analyze, though familiar features appear (sink, source, saddle, rotation, etc). See text for concrete examples. 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: None. Not on quiz / exam.
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 4: Forcing and resonance}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Jeff skip all chapter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.1: Forced harmonic oscillators}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.2: Sinusoidal forcing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.3: Undamped forcing and resonance}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.4: Amplitude and phase of the steady state}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{4.5: The Tacoma Narrows Bridge}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 5: Nonlinear systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Here we touch on $2 \times 2$ nonlinear, autonomous systems of the form
+\[
+\frac{dx}{dt} = f(x,y), \quad \frac{dy}{dt} = g(x,y) 
+\]
+where $f$ and $g$ are nonlinear functions of $x$ and/or $y$. Of course analysis will be harder here, but we can borrow ideas of linear systems to do analysis at specific points (equilibrium points) / curves (isoclines).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.1: Equilibrium point analysis}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Motivating example:
+\[
+\frac{dx}{dt} = -2x+2x^2 = f(x,y), \quad \frac{dy}{dt}=-3x+y+3x^2 = g(x,y)
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Phase portrait is complicated. Let's look closer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Equilibrium points:
+\[
+f(x,y)=2x(-1+x)=0, \quad g(x,y)=-3x+y+3x^2=0
+\]
+Two points work: $(0,0), (1,0)$. Zoom into these on phase portrait to see a saddle point and a source.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Idea of linearization: Replace nonlinear system with a linear one near equilibrium points.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linearization of a nonlinear equation: The logistic equation.
+\[
+\frac{dy}{dt} = y(1-y) = f(y)
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Equilibrium points: $f(y)=0$ at $y=0,1$. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Stability: Draw the phase line to see stability (sink or source). Sketch direction field resulting from the phase portrait. Comparing to the graph of $f$, we just care if $f$ is increasing or decreasing thru the equilbrium point.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linearization approach to stability: 
+\begin{itemize}
+%%%%%%%%%%%%%%%%%%%%
+\item Consider $y=1$. Approximate $f$ by the tangent line thru this equilibrium point. Taylor series approximation gets us there.
+\begin{align*}
+f(y) &= f(1) + f'(1)(y-1) + \frac{f''(1)}{2!}(y-1)^2 + \cdots \\
+f(y) &\approx f(1) + f'(1)(y-1) = 0 + f'(1)(y-1)
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%
+\item Linearized equation centered at $y=1$.
+\[
+\frac{d(y-1)}{dt} = f'(1)(y-1) = -(y-1)
+\]
+Note we shifted to be centered at zero to make easier to solve. Solution:
+\[
+y-1 = Ce^{-t}
+\]
+This solution converges to zeros on the RHS and hence is stable.
+%%%%%%%%%%%%%%%%%%%%
+\item Linearized equation centered at $y=0$.
+\[
+\frac{d(y-0)}{dt} = f'(0)(y-0) = (y-0) \quad \Rightarrow \quad y = Ce^t
+\]
+which is unstable (grows to $\infty$).
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item General linearization of a single nonlinear equation centered at $Y$:
+\[
+\frac{dy}{dt} = f(y) \quad \Rightarrow \quad \frac{d(y-Y)}{dt} = f'(Y)(y-Y)
+\]
+Replace $f$ with a linear approximation centered at the equilibrium. It is an approximation, though exact at the equilibrium which is our focus here. Here, the sign of $f'$ at equilibrium determines stability ($f'>0$ unstable, $f'<0$ stable).
+\item This idea extends to 2 dimensions where nonlinear life is much harder otherwise.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linearization of nonlinear system:
+\[
+\frac{dx}{dt} = -2x+2x^2 = f(x,y), \quad \frac{dy}{dt}=-3x+y+3x^2 = g(x,y)
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Equilibrium points: $(x,y)=(0,0), (1,0)$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Linearization centered at $(1,0)$: Replace $f$ (and $g$) with a linear function centered at $(1,0)$.
+\begin{align*}
+f(x,y) &= f(1,0) + \frac{\partial f}{\partial x} (x-1) +  \frac{\partial f}{\partial y} (y-0)  + \cdots \\
+f(x,y) &\approx f(1,0) + \frac{\partial f}{\partial x} (x-1) + \frac{\partial f}{\partial y} (y-0) = \frac{\partial f}{\partial x} (x-1) +  \frac{\partial f}{\partial y} (y-0)
+\end{align*}
+Then, the linearized equation for $x$ becomes
+\[
+\frac{d(x-1)}{dt} = \frac{\partial f}{\partial x} (x-1) +  \frac{\partial f}{\partial y} (y-0).
+\]
+Likewise, for $g$ we have
+\[
+\frac{d(y-0)}{dt} = \frac{\partial f}{\partial x} (x-1) +  \frac{\partial f}{\partial y} (y-0).
+\]
+Combining the two, we have the system
+\[
+\frac{d \vec{Y}}{dt} = \begin{bmatrix}
+\frac{\partial f}{\partial x}(1,0)  & \frac{\partial f}{\partial y}(1,0)  \\
+\frac{\partial g}{\partial x}(1,0)  & \frac{\partial g}{\partial y}(1,0)  
+\end{bmatrix} \vec{Y} = A\vec{Y}
+\]
+where 
+\[
+ \vec{Y} = \begin{bmatrix}
+ x-1 \\ y-0
+ \end{bmatrix}
+\]
+Note the shifting to center at $(1,0)$ was necessary to get our linear system matching on both sides.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: The Jacobian matrix is
+\[ A = 
+\begin{bmatrix}
+\frac{\partial f}{\partial x}  & \frac{\partial f}{\partial y} \\
+\frac{\partial g}{\partial x}  & \frac{\partial g}{\partial y}  
+\end{bmatrix}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Stability analysis at $(1,0)$: Differentiating, our system becomes
+\[
+\frac{d \vec{Y}}{dt} = \begin{bmatrix}
+2  & 0  \\
+3  & 1
+\end{bmatrix} \vec{Y} = A\vec{Y}
+\]
+Take our trace-determinant plane analysis from last chapter.
+\begin{itemize}
+\item $\text{tr}(A) = 3>0$ and $\det(A)=2>0$ so we are unstable.
+\item $\text{tr}(A)^2 > 4\det(A)$, so this is a source.
+\end{itemize}
+Alternatively eigenvalues / vectors can be found.
+\begin{itemize}
+\item Eigenvalues: 2,1
+\item Eigenvectors: $\lambda = 2$ gives $\langle 1,3 \rangle$ and $\lambda = 1$ gives $\langle 0,1 \rangle$.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Repeat at second equilibrium point $(0,0)$. 
+\begin{itemize}
+\item Linearization:
+\[
+\frac{d\vec{Y}}{dt} = \begin{bmatrix}
+-2  & 0  \\
+-3  & 1
+\end{bmatrix} \vec{Y} = A\vec{Y}
+\]
+\item Stability: $\text{tr}(A) = -1<0, \det(A)=-2<0$ so unstable and also a saddle:
+\item Eigenvalues are $\lambda =-2,1$ with respective eigenvectors $\langle 1,1 \rangle$, $\langle 0,1 \rangle$.
+\end{itemize}
+\item Bring back the phase portrait.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Competing species model:
+\[
+\frac{dx}{dt} = 2x(1-x/2)-xy, \quad \frac{dy}{dt}=3y(1-y/3)-2xy
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item These are two separate logistic equations with added $xy$ interaction terms. For the $x$ equation, if $y$ gets much larger than $x$, the population of $x$ will decrease due to increased competition.
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Equilibriums:
+\begin{itemize}
+\item $\frac{dx}{dt}=0$ when $x=0$. This gives $y=0,3$ in equation 2.
+\item $\frac{dy}{dt}=0$ when $y=0$. This gives $x=0,2$ in equation 1.
+\item Note these are all points on the $x$ and $y$ axis. There must be solutions in the first quadrant (other quadrants make no sense) because of the existence / uniquiness theorem. 
+\[
+\begin{cases}
+x(2-x-y) = 0 \\
+y(3-y-2x) = 0
+\end{cases}
+\]
+Assuming $x,y \neq 0$, 
+\[
+\begin{cases}
+2-x-y = 0 \\
+3-y-2x = 0
+\end{cases}
+\]
+leading to $x=y=1$.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $(1,1)$ is the only equilibrium allowing for coexistence. Let's see its behavior.
+\begin{itemize}
+\item Linearization at $(1,1)$:
+\[
+\frac{d\vec{Y}}{dt} = 
+\begin{bmatrix}
+\frac{\partial f}{\partial x} &\frac{\partial f}{\partial y}  \\
+\frac{\partial g}{\partial x} &\frac{\partial g}{\partial y}  
+\end{bmatrix} \vec{Y} 
+=
+\begin{bmatrix}
+-1 & -1 \\
+-2 & -1
+\end{bmatrix} \vec{Y} 
+\]
+where $\vec{Y} = \langle x-1, y-1 \rangle$.
+\item Eigenvalues: $\lambda = -1 \pm \sqrt{2}$ leads to a saddle point (unstable). Sad fate for one of the two species. Note on eigenvector divides the phase plane to decide which species will survive long term.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Phase portrait.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-16
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.2: Qualitative analysis}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Nonlinear system:
+\[
+\frac{dx}{dt} = f(x,y), \quad \frac{dy}{dt} = g(x,y)
+\]
+\begin{enumerate}
+\item Linearization is only accurate near the equilibrium point (both $f=0$ and $g=0$) for which it is centered. Everything else in the phase portrait is a mystery.
+\item Idea of nullclines: Consider $f=0$ ($x-$nullcline) separate from $g=0$ ($y$-nullcline). This will allow us to sharpen our knowledge of solution flow throughout the phase portrait.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Competing species model (in first quadrant only)
+\[
+\frac{dx}{dt} = f(x,y) = 2x(1-x/2)-xy, \quad \frac{dy}{dt}= g(x,y)=3y(1-y/3)-2xy
+\]
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $x-$nullcline: Set $\frac{dx}{dt}=f(x,y)=0$.
+\[
+2x(1-x/2)-xy = x(2-x-y)=0 \text{ gives } x=0, y=-x+2
+\]
+These two curves are the $x-$nullclines. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item $y-$nullcline: Set $\frac{dy}{dt}=g(x,y)=0$.
+\[
+3y(1-y/3)-2xy = y(3-y-2x)=0 \text{ gives } y=0, y=-2x+3
+\]
+These two curves are the $y-$ nullclines.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Graph all 4 nullclines in the $xy-$plane. 
+\begin{itemize}
+\item Note, $x-$nullclines only allow change in $y$ hence the direction vector field has to be vertical. Plug a point into $\frac{dy}{dt}=g(x,y)$ to see if point up (positive slope) or down (negative slope). Up/down direction cannot change unless cross a $y-$nullcline.
+\item Likewise for $y-$nullclines.
+\item Intersections of these 4 nullclines gives equilibrium points.
+\item Note, these nullclines are not eigenvectors and in general will not be straight lines. They are any curve decided by $f$ and $g$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Nullclines divide the first quadrant into 4 regions ($A,B,C,D$). 
+\begin{itemize}
+\item Let $A$ be the top left region. $x=0$ is a solution curve. Also, boundaries of $A$ point into $A$ (up and left). Hence any solution starting in $A$ has to stay in $A$ trending up and right to the equilibrium point $(0,3)$. Note, existence and uniqueness theorem says
+\item Similar for region $B$ (lower right).
+\item Region $C$ (lower left) is bordered below by solution curves and has three options: enter $A$, enter $B$, or approach equilibrium $(1,1)$ via saddle point eigenvector.
+\item Region $D$ is similar to $C$ though from above.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Graph the nullclines and complete phase portrait in the first quadrant.
+\[
+\frac{dx}{dt} = x(-x-y+40), \quad \frac{dy}{dt}=y(-x^2-y^2+2500)
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%
+\item Nullclines:
+\begin{itemize}
+\item $\frac{dx}{dt}=0$ when $x=0$ or $y=-x+40$. 
+\item $\frac{dy}{dt}=0$ when $y=0$ or $x^2+y^2 = 50^2$.
+\item Find the horizontal / vertical vector field for each. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Phase portrait:
+\begin{itemize}
+\item Equilibrium: $(0,0)$ is a source, $(0,50)$ is a sink, $(40,0)$ is a saddle.
+\item Sketch and check in pplane.
+\item It is clear here that nullclines really give the form of the phase portrait.
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-14
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.3: Hamiltonian systems}
+Jeff skip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.4: Dissipative systems}
+Jeff skip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.5: Nonlinear systems in three dimensions}
+Jeff skip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.6: Periodic forcing of nonlinear systems and chaos}
+Jeff skip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 6: Laplace transforms}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.1: Laplace transforms}
+
+\begin{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Here we see a new idea: Laplace transform
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%
+\item Idea: 
+\begin{itemize}
+\item Transform a differential equation into an algebraic equation ($y'(t)$ in time domain $ \rightarrow sY(s)$ in frequency domain).
+\item Solve algebra equation (for $Y(s)$ in frequency domain).
+\item Transform back (to $y(t)$ in time domain). 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%
+\item Advantage of Laplace transform:
+\begin{itemize}
+\item Process to make differential equations easier, though inverting the transformation is often the hardest part.
+\item Can handle functions we couldn't before (step function (Heaviside function, turn on a signal switch), impulse function (delta function, sudden impulse of explosion or laser)).
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Laplace transform intution: There are two sources of origin for Laplace trasform.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%
+\item Mathematical: Generalized idea of a power series.
+\begin{itemize}
+\item Given a sequence $\{ a_n \}$, power series is of the form
+\[
+\sum_{n=1}^{\infty} a_n x^n = a_0 + a_1 x + a_2x^2 + \cdots = f(x)
+\]
+which may converge to function $f$ for certain $x$ (interval of convergence). 
+\item Examples:
+\[
+\sum x^n = \frac{1}{1-x}, |x|<1, \quad \sum \frac{1}{n!} x^n = e^x, \text{ for all } x, \quad \text{etc}
+\]
+\item Think of a power series as a transformation from discrete sequence $a_n$ to function $f(x)$. Depending on $a_n$, this transformation may only make sense for some $x$ values. Also, $a_n$ and $f$ have different meaning and usefulness.
+\item Laplace transform is the same transformation, only for continuous functions $a(t)$ (in place of $a_n$) to new functions $F(x)$ (we use $s$ to denote signal space as seen below). Our summation becomes an improper integral then.
+\[
+F(x) = \int_{0}^{\infty} a(t) x^{t} ~dx
+\]
+Base $x$ is not so nice here and it is good to change to base $e$ instead.
+\[
+F(x) = \int_{0}^{\infty} a(t) e^{\ln(x)t} ~dx
+\]
+Since we need $0<x<1$ for convergence, we will have $\ln(x)<0$. Do a change of variable naming $-s = \ln(x)$ and we get
+\[
+F(s) = \int_{0}^{\infty} a(t) e^{-st} ~ds.
+\]
+\item The above line is the definition of the Laplace transform. Note that $a(t)$ cannot grow faster than an exponential otherwise we have no hope for convergence. 
+\item Further, thru Euler's formula
+\[
+e^{(ta+bi)t} = e^t(\cos(bt) + i\sin(bt))
+\]
+makes base $e$ ideal for complex numbers and handling signals over time.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%
+\item Signal processing / control theory: 
+\begin{itemize}
+\item Signal processing has a wide range of application (audio, circuits, light, radar, telecommunications, etc) and took off during the tech boom of world war 2. 
+\item Video intuition for Fourier transform (a special case of Laplace transform): \url{https://www.youtube.com/watch?v=spUNpyF58BY}
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition of Laplace transform:
+\begin{enumerate}
+\item The Laplace transform $Y(s)$ of function $y(t)$ is defined as
+\[
+Y(s) = \mathcal{L}[y(t)] = \int_0^{\infty} y(t) e^{-st}~dt
+\]
+with domain all $s$ for which the improper integral converges. In general $s$ can be a complex number via Euler's formula.
+\item Terminology note. A transform differs from an operator. Operators take objects and map them to objects in a similar space (eg differential operator). Transformations change the space (in our case time $t$ to signal $s$).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples: This transform is easy to compute. Just an improper integral from calculus.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%_
+\item $y(t)=1$ (akin to geometric series above)
+\begin{align*}
+Y(s)=\mathcal{L}[1] &= \int_0^{\infty} 1 e^{-st}~dt \\
+&= \lim_{b\rightarrow\infty}\int_0^{b} e^{-st}~dt \\
+&= \lim_{b\rightarrow\infty} \frac{1}{-s} e^{-st} \big{|}_0^b \\
+&= \lim_{b\rightarrow\infty} \frac{1}{-s} (e^{-sb} - 1) \\
+&= \frac{1}{s}
+\end{align*}
+Note that we need $s>0$ for this to work. Make sure to keep track of the domains of the Laplace transforms computed.
+%%%%%%%%%%%%%%%%
+\item $y(t)=e^{at}$ for some constant $a$ since these are our prime targets for this course. Two ways to compute.
+\begin{itemize} 
+\item Use formula as above:
+\[
+Y(s)=\mathcal{L}[e^{at}] = \int_0^{\infty} e^{at} e^{-st}~dt = \int_0^{\infty} e^{(a-s)t} ~dt  = \cdots
+\]
+The book does this.
+\item Use $\mathcal{L}[1]$ result directly. For any function $f(t)$, 
+\[
+\mathcal{L}[e^{at}f(t)] = \int_0^{\infty} f(t) e^{-(s-a)t}~dt = F(s-a)
+\]
+Then, since  $\mathcal{L}[1]=\frac{1}{s}, s>0$, we have that  
+\[
+\mathcal{L}[e^{at} \cdot 1] = \frac{1}{s-a}, s>a.
+\]
+Multiplication by $e^{at}$ inside the Laplace transform works as a horizontal shift.
+\end{itemize}
+\item Will channel Euler's formula and the use the transform for $\mathcal{L}[e^{at}]$ to derive formulas for sine and cosine. Try on own if ambitious.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Laplace transform advantage with differential equations: Derivatives become powers of $s$ and $\mathcal{L}$ is a linear transformation.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Laplace transform of derivatives.
+\[
+\mathcal{L}\left[ \frac{dy}{dt} \right] = s\mathcal{L}[y]-y(0)
+\]
+Proof: This is just integration by parts in disguise.
+\begin{align*}
+\mathcal{L}\left[ \frac{dy}{dt} \right]  
+&= \int_0^{\infty} \frac{dy}{dt} e^{-st} ~dt \\
+&= \lim_{b\rightarrow \infty} \left(ye^{-st} \big{|}_0^b - \int_0^{b} -sy e^{-st} ~dt \right)\\
+&= s\mathcal{L}[y]-y(0)
+\end{align*}
+Here we need to assume again that $y$ has no more than exponential growth in order for $y e^{-st}$ to converge to zero.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Can iterate for high order derivatives.
+\[
+\mathcal{L}\left[ \frac{d^2y}{dt^2} \right] 
+= s\mathcal{L}\left[ \frac{dy}{dt} \right]-y'(0)
+= s\left( s\mathcal{L}[y]-y(0)\right)-y'(0)
+= s^2 \mathcal{L}[y] - sy(0) - y'(0)
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Can now unravel powers of $t$: $t^n$.
+\[
+\mathcal{L}[t] = \frac{1}{s} \left( \mathcal{L}[1]+y(0) \right) = \frac{1}{s^2}
+\]
+\[
+\mathcal{L}[t^2] = \frac{1}{s} \left( \mathcal{L}[2t]+y(0) \right) = \frac{2}{s^3}
+\]
+
+\[
+\mathcal{L}[t^n] = \frac{1}{s} \left( \mathcal{L}[2t]+y(0) \right) = \frac{n!}{s^{n+1}}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Linearity of Laplace transform.
+\[
+\mathcal{L}\left[ f(t)+g(t) \right] = \mathcal{L}\left[ f(t) \right]+\mathcal{L}\left[ g(t) \right], \quad
+\mathcal{L}\left[ cf(t) \right] = c\mathcal{L}\left[ f(t) \right]
+\]
+Proof: These are just properties of the definite integral.
+\begin{align*}
+\mathcal{L}\left[ f+g \right]  
+&= \int_0^{\infty} (f+g) e^{-st} ~dt \\
+&= \int_0^{\infty} f e^{-st} ~dt + \int_0^{\infty} g e^{-st} ~dt \\
+&=\mathcal{L}\left[ f \right]   + \mathcal{L}\left[ g \right]  
+\end{align*}
+Likewise for the second result.
+\item Expect to be able to prove these in an exam.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: We now see why Laplace transform will be useful for linear differential equations. 
+\[
+\frac{dy}{dt} +5y = e^{-t}, \quad y(0)=2
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Previous techniques:
+\begin{itemize}
+\item Direction field. See which curve is ours from the initial condition.
+\item Nonhomogenous equation. Solution is of the form
+\[
+y = y_h + y_p
+\]
+where $y_h$ is the general solution to the homogeneous equation and $y_p$ is a particular solution found via integrating factor.
+\[
+\frac{dy}{dt} +5y = 0 \quad \rightarrow \quad y_h = C e^{-5t}
+\]
+\[
+\frac{dy}{dt} +5y = e^{-t} \quad \rightarrow \quad 
+\frac{d}{dt}(e^{5t}y) = e^{5t}e^{-t} \quad \rightarrow \quad 
+y_p = e^{-5t} \int e^{4t}~dt = \frac{1}{4} e^{-t}
+\]
+Using the initial condition, our solution is
+\[
+y = y_h+y_p = Ce^{-5t}+\frac{1}{4}e^{-t} = \frac{7}{4} e^{-5t}+\frac{1}{4}e^{-t}
+\]
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Apply Laplace transform to both sides of the equation and denote $Y(s) = \mathcal{L}[y]$.
+\begin{align*}
+\mathcal{L}\left[\frac{dy}{dt} +5y\right] &= \mathcal{L}\left[e^{-t}\right] \\
+\mathcal{L}\left[\frac{dy}{dt}\right] +5 \mathcal{L}\left[y\right] &= \mathcal{L}\left[e^{-t}\right] \\
+s\mathcal{L}\left[y\right]-y(0) +5 \mathcal{L}\left[y\right] &= \frac{1}{s+1}, \quad s > -1 \\
+(s+5)\mathcal{L}\left[y\right]-2 &= \frac{1}{s+1}, \quad s > -1 \\
+(s+5)\mathcal{L}\left[y\right] &= 2+\frac{1}{s+1}, \quad s > -1 \\
+\mathcal{L}\left[y\right] &= \frac{2s+3}{(s+5)(s+1)}, \quad s > -1  \\
+Y(s) &= \frac{2s+3}{(s+5)(s+1)}, \quad s > -1 
+\end{align*}
+Notice we used no calculus here, just above two theorems.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We found the transform $Y(s)$, now how to recover $y(t)$? Invert the Laplace transform.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Inverse Laplace transform: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item You can show (though not easily) that the Laplace transform is invertible. That is for each transform $F(s)$, there is a unique $f(t)$ which it maps back to. There is a formula for this reverse mapping:
+\[
+f(t) =\mathcal{L}^{-1}[F] = \int_0^{\infty} e^{st} F(s) ~ds
+\]
+which just reverses the exponential multiplication. Lucky for us we have no need for this formula.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note: Our favorite functions in this class are exponentials, sine/cosine, powers of $t$. Derivatives and integrals of these remain on the list. So if we know our basic Laplace transform formulas, we can just use them in reverse.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Because $\mathcal{L}$ is a linear operator, $\mathcal{L}^{-1}$ is also linear. That is,
+\[
+\mathcal{L}^{-1}\left[ F(s)+G(s) \right] = \mathcal{L}^{-1}\left[ F(s) \right]+\mathcal{L}^{-1}\left[ G(s) \right], \quad
+\mathcal{L}^{-1}\left[ cF(s) \right] = c\mathcal{L}^{-1}\left[ F(s) \right]
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Find the inverse Laplace transform of 
+\[
+Y(s) = \frac{2s+3}{(s+5)(s+1)}.
+\]
+\begin{itemize}
+\item Note, this function reminds us of
+\[
+\mathcal{L}[e^{at}] = \frac{1}{s-a}, \quad s>a
+\]
+\item Use partial fraction decomposition to separate fraction into two parts.
+\[
+Y(s) = \frac{2s+3}{(s+5)(s+1)} = \frac{A}{s+1}+\frac{B}{s+5} 
+= \frac{1/4}{s+1}+\frac{7/4}{s+5} 
+\]
+Then, 
+\[
+y(t) = \mathcal{L}^{-1}(Y(S))
+= \mathcal{L}^{-1}\left( \frac{1/4}{s+1}+\frac{7/4}{s+5}  \right)
+= \frac{1}{4}\mathcal{L}^{-1}\left( \frac{1}{s+1} \right) + \frac{7}{4}\mathcal{L}^{-1}\left( \frac{1}{s+5}  \right)
+= \frac{1}{4} e^{-t} + \frac{7}{4} e^{-5t}
+\]
+This finishes the above example, same solution as before.
+\item Note the use of linearity here.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-25, 27
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.2: Discontinuous functions}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Advantage of Laplace transform:
+\begin{enumerate}
+\item We have seen how Laplace transform can turn a differential equation into an algebra problem. All calculus is transferred into transform formulas and derivative / linearity theorems.
+\item Here we will see a second advantage: ability to handle difficult functions 
+\begin{itemize}
+\item step functions / turn on a switch or new disease (this section) 
+\item delta (impulse) functions / shock or sudden impact (later)
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Heaviside function: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Basic step function.
+\[
+H(t) = \begin{cases}
+1, & t \geq 0 \\
+0, & t< 0
+\end{cases}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item The switch can happen at any location $a>0$ if we are considering $t\geq 0$.
+\[
+H_a(t) = H(t-a) = \begin{cases}
+1, & t \geq a \\
+0, & t< a
+\end{cases}
+\]
+Graph and see. Looks like one side is heavier!
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Can even switch on and off as the unit box function:
+\[
+H_{ab}(t) = H_a(t) - H_b(t) 
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Multiplication by the Heaviside function allows you to switch on that function at location $a$. Graph:
+\[
+y=f(t) = t^2 \quad \text{vs} \quad y=H_a(t)f(t)
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Notation: Text uses $u_a$ (unit step function) in place of $H_a$ (Heaviside function). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Forcing term only applied after $t=2$. 
+\[
+\frac{dy}{dt} = -y+H_2(t)e^{-2(t-2)}, \quad y(0)=1
+\]
+Think of this as two differential equations:
+\[
+\frac{dy}{dt}+y =
+\begin{cases}
+0, &t<2 \\
+e^{-2(t-2)}, & t\geq 2
+\end{cases}
+\]
+where function $e^{-2t}$ is switched on at $t=2$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Laplace transform of $H_a(t)$.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note, $H(t)=1$ for $t\geq 0$ and we already have $\mathcal{L}[1]$ from last time. So, 
+\[
+\mathcal{L}[H(t)] = \frac{1}{s}, \quad s>0
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Use $\mathcal{L}[H(t)]$ to compute $\mathcal{L}[H_a(t)]$.
+\begin{align*}
+\mathcal{L}[H_a(t)] 
+&= \int_0^{\infty} H_a(t)e^{-st}~dt \\
+&= \int_a^{\infty} H(t-a)e^{-st}~dt \\
+&= \int_0^{\infty} H(\tilde{t})e^{-s(\tilde{t}+a)}~d\tilde{t} \\
+&= e^{-sa}\int_0^{\infty} H(\tilde{t})e^{-s\tilde{t}}~d\tilde{t} \\
+&= e^{-sa}\mathcal{L}[H(t)] \\
+&= e^{-sa}\frac{1}{s} = \frac{e^{-sa}}{s}
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem (shift theorem): The above calculation generalizes. If $\mathcal{L}[f]=F(s)$, then
+\[
+\mathcal{L}[H_a(t)f(t-a)] = e^{-as}F(s)
+\]
+where $H_a(t)f(t-a)$ turns on $f$ (for $t>0$) starting at $t=a$. Draw picture to illustrate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Formula for $\mathcal{L}[f(t-a)]$ in terms of $\mathcal{L}[f(t)]$: 
+\begin{itemize}
+\item Note above $\mathcal{L}[1]=\mathcal{L}[H]=\frac{1}{s}$. This poses a problem for $\mathcal{L}^{-1}$. Which one is it? Kind of the same since $t \geq 0$. 
+\item Gets muddy when you shift general functions $f$ to give $f(t-a)$. Information before zero was gone, now it is there. Our formula
+\[
+\mathcal{L}[H_a(t)f(t-a)] = e^{-as}F(s)
+\]
+says erase the information before zero.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Forcing term only applied after $t=2$. 
+\[
+\frac{dy}{dt} = -y+H_2(t)e^{-2(t-2)}, \quad y(0)=1
+\]
+\begin{enumerate}
+\item Apply Laplace transform. Denote $\mathcal{L}[y]=Y(s)$.
+\begin{align*}
+\mathcal{L}[\frac{dy}{dt}] &= \mathcal{L}[-y+H_2(t)e^{-2(t-2)}] \\
+s\mathcal{L}[y]-y(0) &= -\mathcal{L}[y]+\mathcal{L}[H_2(t)e^{-2(t-2)}] \\
+sY(s)-1 &= -Y(s)+e^{-2s}\mathcal{L}[e^{-2t}] \\
+sY(s)-1 &= -Y(s)+e^{-2s}\frac{1}{s+2} \\
+(s+1)Y(s)&= 1+e^{-2s}\frac{1}{s+2} \\
+Y(s)&= \frac{1}{s+1}+\frac{e^{-2s}}{(s+1)(s+2)}
+\end{align*}
+\item Invert the Laplace transform.
+\begin{align*}
+\mathcal{L}[y] &= \frac{1}{s+1}+\frac{e^{-2s}}{(s+1)(s+2)} \\
+y &= \mathcal{L}^{-1}[\frac{1}{s+1}]+\mathcal{L}^{-1}[\frac{e^{-2s}}{(s+1)(s+2)}] 
+\end{align*}
+\item Partial fraction decomposition:
+\[
+\frac{1}{(s+1)(s+2)} = \frac{1}{s+1}+\frac{-1}{s+2}
+\]
+\item Finish inverting using shift theorem.
+\begin{align*}
+y &= \mathcal{L}^{-1}[\frac{1}{s+1}]+\mathcal{L}^{-1}[\frac{e^{-2s}}{s+1}]-\mathcal{L}^{-1}[\frac{e^{-2s}}{s+2}] \\
+&= e^{-t}+H_2(t)e^{-2(t-1)}-H_2(t)e^{-2(t-2)}  \\
+&= e^{-t}+H_2(t)(e^{-2(t-1)}-e^{-2(t-2)} )
+\end{align*}
+\item Note, our piecewise differential equation gave a piecewise solution.
+\[
+y(t) = \begin{cases}
+e^{-t}, & t<2 \\
+e^{-t}+e^{-2(t-1)}-e^{-2(t-2)} , & t\geq 2
+\end{cases}
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Homework: 1-17
+
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.3: Second-order equations}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Summary of Laplace transform results so far:
+\begin{enumerate}
+\item Definition: $\ds \mathcal{L}[f(t)] = \int_0^{\infty} f(t) e^{-st}~dt$
+\item $\ds \mathcal{L}[1] = \frac{1}{s}, s>0$
+\item $\ds \mathcal{L}[e^{at}] \frac{1}{s-a}, s>a$
+\item $\ds \mathcal{L}[t^n] = \frac{n!}{s^{n+1}}, s>0$
+\item $\ds \mathcal{L}[dy/dt] = s\mathcal{L}[y] - y(0)$, $\ds \mathcal{L}[d^2y/dt^2] = s^2\mathcal{L}[y] - sy(0)-y'(0)$ (differentiation)
+\item $\ds \mathcal{L}[f+g]=\mathcal{L}[f]+\mathcal{L}[g], \mathcal{L}[cf]=c\mathcal{L}[f]$ (linearity)
+\item $\ds \mathcal{L}[H(t)]=\frac{1}{s}, s>0$
+\item $\ds \mathcal{L}[H_a(t)] = \frac{e^{-sa}}{s}, s>0$
+\item $\ds \mathcal{L}[H_a(t)f(t-a)] = e^{-as}\mathcal{L}[f(t)]$ ($t$-axis shift)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item We have seen advantages of the Laplace transform (simpler process, handle new kinds of functions), but here we will see again the drawback of having to invert the Laplace transform.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Second order linear equation with forcing:
+\[
+m\frac{dy}{dt^2}+b\frac{dy}{dt} + ky = f(t) \quad \Rightarrow \quad \frac{dy}{dt^2}+p\frac{dy}{dt} + qy = f(t) \
+\]
+where $m$ is mass, $b$ is damping, $k$ is spring stiffness, $f$ is applied external force.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Solutions include terms like $\sin(\omega t), \cos(\omega t), e^{at}\sin(\omega t), e^{at}\cos(\omega t)$. We need these Laplace tranforms.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Note, all of the four are of the form 
+\[
+e^{(a+ib)t} = e^{at}(\cos(bt)+i\sin(bt)
+\]
+and we know $\mathcal{L}[e^{at}]$ which holds even for complex numbers $a$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Laplace transform of $\cos(bt)$. Use the fact that 
+\[
+\cos(bt) = \frac{e^{ibt}+e^{-bit}}{2}
+\]
+Then,
+\[
+\mathcal{L}[\cos(bt)] = \frac{1}{2} \left( \mathcal{L}[e^{ibt}]+\mathcal{L}[e^{-bit}]\right) 
+= \frac{1}{2} \left( \frac{1}{s-ib} + \frac{1}{s+ib} \right)
+= \frac{1}{2} \left( \frac{2s}{s^2+b^2} \right)
+= \frac{s}{s^2+b^2}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Laplace transform of $\sin(bt)$. Similar to $\cos(bt)$, 
+\[
+\mathcal{L}[\sin(bt)] = \frac{b}{s^2+b^2}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Multiplications of the form $e^{at}f(t)$ not surprisingly can be done straight from the definition of Laplace transform. Assume $\mathcal{L}[f] = F(s)$. Then,
+\[
+\mathcal{L}[e^{at}f(t)] = \int_0^{\infty} e^{at}f(t) e^{-st}~dt = \int_0^{\infty} f(t) e^{-(s-a)t}~dt = F(s-a).
+\]
+Theorem: ($s-$axis shift) If $\mathcal{L}[f] = F(s)$. Then,
+\[
+\mathcal{L}[e^{at}f(t)] = F(s-a)
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Compute the inverse Laplace transform of 
+\[
+Y(s) = \frac{s+1}{s^2+6s+10}.
+\]
+Need to complete the square of the denominator as $(s-\alpha)^2+b^2$ to see the shift and sine / cosine transform.
+\[
+Y(s) = \frac{s+1}{s^2+6s+10} = \frac{s+1}{(s+3)^2+1}
+= \frac{s+3}{(s+3)^2+1} -2 \frac{1}{(s+3)^2+1}
+\]
+Then, 
+\[
+\mathcal{L}^{-1}[Y(s)] = 
+\mathcal{L}^{-1}\left[
+\frac{s+3}{(s+3)^2+1}\right] -2 \mathcal{L}^{-1}\left[\frac{1}{(s+3)^2+1}\right]
+= e^{-3t}\cos(t)-2e^{-3t}\sin(t)
+\]
+Note we can now handle any proper rational function $\frac{p(s)}{q(s)}$ since can always factor polynomial $q$ into a product of linear and irreducible quadratic factors (fundamental theorem of algebra).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: 
+\[
+\frac{d^2y}{dt^2}-4 \frac{dy}{dt}+5y = 2e^t, \quad y(0)=3, y'(0)=1
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Laplace transform:
+\begin{align*}
+\mathcal{L}\left[ \frac{d^2y}{dt^2}\right]-4 \mathcal{L}\left[ \frac{dy}{dt}\right]+5\mathcal{L}[ y] &= 2\mathcal{L}[e^t] \\
+s^2Y(s)-sy(0)-y'(0)-4(sY(s)-y(0))+5Y(s) &= 2\frac{1}{s-1} \\
+s^2Y(s)-3s-1-4sY(s)+12+5Y(s) &= \frac{2}{s-1} 
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Solve for $Y(s)$:
+\begin{align*}
+(s^2-4s+5)Y(s) &= 3s-11+\frac{2}{s-1} \\
+Y(s) &= \frac{3s-11}{(s-2)^2+1}+\frac{2}{(s-1)((s-2)^2+1)} 
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Partial fraction decomposition:
+\[
+Y(s) = \frac{1}{s-1}+\frac{2s-8}{(s-2)^2+1}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Inverse Laplace transform:
+\begin{align*}
+y(t) &= \mathcal{L}^{-1}\left[\frac{1}{s-1}\right]+\mathcal{L}^{-1}\left[\frac{2s-8}{(s-2)^2+1}\right] \\
+&= \mathcal{L}^{-1}\left[\frac{1}{s-1}\right]+2\mathcal{L}^{-1}\left[\frac{s-2}{(s-2)^2+1}\right]-4\mathcal{L}^{-1}\left[\frac{s-2}{(s-2)^2+1}\right] \\
+&= e^t + 2e^{2t}\cos(t)-4e^{2t}\sin(t)
+\end{align*}
+Note no need to solve for unknown constants for initial conditions via system of equations.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1-31
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.4: Delta functions and impulse forcing}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item We have seen how Laplace transform allows us to solve differential equations with new functions. Here we add to that list.
+\begin{enumerate}
+\item Discontinuous functions, turning on a switch (two sections ago)
+\item Delta function, sudden impulse (this section)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Impulse forcing: 
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%
+\item Example: 
+\[
+\frac{d^2y}{dt^2}+2\frac{dy}{dt}+5y = f(t),\quad y(0)=1, y'(0)=1
+\]
+This is a spring mass equation with damping coefficient 2 and spring stiffness 5. $f$ is an external force. Here we want to understand what happens if $f$ is a sudden impact, a kick to the mass on the spring at a certain time $t$.
+%%%%%%%%%%%%%%%%%%%%%%
+\item Unit impulse at zero: Approach this idea over smaller and smaller intervals.
+\begin{itemize}
+\item $f(t)=F$ on the interval from $[a,b]$. A unit force is such that 
+\[
+\int_{-\infty}^{\infty} f(t)~dt = F(b-a) = 1
+\]
+\item At zero: $f(t)=\frac{1}{h}$ over the interval $[0,h]$. Then 
+\[
+f(t) = \frac{1}{h}\left[H(t)-H(t-h)\right] \quad \text{where $H$ is the Heaviside function}
+\]
+and
+\[
+\int_{-\infty}^{\infty} f(t)~dt = \frac{1}{h} h = 1
+\]
+The smaller $h$ is, the taller and skinnier this step function is. 
+\item Taking the limit as $h \rightarrow 0$
+\[
+\lim_{h\rightarrow 0} \frac{1}{h}\left[H(t)-H(t-h)\right]
+\]
+gives the \emph{Dirac delta function}.
+\[
+\delta (t) = \begin{cases}
+\infty, &t=0 \\
+0, &t \neq 0
+\end{cases}
+\]
+such that 
+\[
+\int_{-\infty}^{\infty} \delta(t)~dt = 1
+\]
+\item $\delta(t)$ is not really a function like we are used to (taking $\infty$ as an output makes no sense), but it is useful when the Laplace transform comes in.
+\item Also note the appearance of the difference quotient leading to the fact that 
+\[
+H'(t) = \delta(t).
+\]
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Laplace transform of the Delta function:
+\[
+\mathcal{L}\left[ \frac{1}{h}\left[H(t)-H(t-h)\right] \right] = \frac{1}{h} \left[ \frac{1}{s} - \frac{e^{-hs}}{s} \right] =
+\frac{1}{s} - \frac{e^{-hs}}{hs}  \rightarrow 1
+\]
+via lHospital's rule. Then,
+\[
+\mathcal{L} \left[ \delta(t) \right] = 1
+\]
+and we see a hint why the Delta function is important.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Modified forcing:
+\begin{itemize}
+\item Unit forcing at time $a$: $\delta_a(t) = \delta(t-a)$ (just a horizontal shift so we know the Laplace transform)
+\[
+\mathcal{L}[\delta_a(t)] = e^{-as}
+\]
+\item Forcing of strength $A$: $A\delta(t)$ (again a bit strange with the infinite value at $t=0$, but the Laplace transform shows the strength change)
+\[
+\mathcal{L}[A\delta(t)] = A
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: This basic example illustrates the idea of impulse force.
+\[
+\frac{d^2 y}{dt^2} + y = A \delta_{\pi/2}(t), \quad y(0)=1, y'(0)=0
+\]
+Spring-mass with no damping. Impulse force of strength $A$ is applied at time $\pi/2$, the equilibrium point.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Laplace transform:
+\[
+s^2 Y - s + Y = Ae^{-\frac{\pi}{2} s} \quad \Rightarrow \quad Y = \frac{s}{s^2+1} + \frac{Ae^{-\frac{\pi}{2} s}}{s^2+1}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Inverse Laplace transform:
+\[
+y(t) = \cos(t) + H(t-\pi/2)A\sin(t-\pi/2) =
+\begin{cases}
+\cos(t), & 0 \leq t \leq \frac{\pi}{2} \\
+(1-A)\cos(t), & t \geq \frac{\pi}{2}
+\end{cases}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Check that the final solution (displacement) is continuous as it should be.
+\item Graph in Desmos with slider for $A$. \url{https://www.desmos.com/calculator/7saayio0fw}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item
+\[
+\frac{d^2y}{dt^2}+2\frac{dy}{dt}+5y = \delta_3(t), \quad y(0)=1, y'(0)=1
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%5
+\item Laplace transform:
+\[
+s^2 Y -sy(0)-y'(0) + 2sY - y(0) + 5Y = e^{-3s} \quad \rightarrow \quad
+Y = \frac{2+s+e^{-3s}}{s^2+2s+5} 
+\] 
+%%%%%%%%%%%%%%%%%%%%%5
+\item Inverse Laplace transform:
+\[
+y = \mathcal{L}^{-1} \left[ \frac{2+s+e^{-3s}}{(s+1)^2+4} \right]
+= \mathcal{L}^{-1} \left[ \frac{s+1}{(s+1)^2+4}+\frac{1}{2}\frac{2}{(s+1)^2+4} + \frac{1}{2}\frac{2e^{-3s}}{(s+1)^2+4}\right]
+\]
+and then
+\[
+y = e^{-t}\cos(2t)+\frac{1}{2}e^{-t}\sin(2t)+\frac{1}{2}H_3(t)e^{-(t-3)}\sin(2(t-3))
+\]
+which is more cleanly written as
+\[
+y =
+\begin{cases}
+e^{-t}\cos(2t)+\frac{1}{2}e^{-t}\sin(2t), & 0 \leq t \leq 3 \\
+e^{-t}\cos(2t)+\frac{1}{2}e^{-t}\sin(2t)+\frac{1}{2}e^{-(t-3)}\sin(2(t-3)) & t\geq 3
+\end{cases}
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Homework: 1-7
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.5: Convolutions}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Here we develop a new idea (convolution of two functions $f \ast g$) which is useful in two ways:
+\begin{enumerate}
+\item To help analyze inverse Laplace transforms of products.
+\[
+\mathcal{L}^{-1} [F(s)G(s)]
+\]
+\item To derive a formula for any second order linear equation with forcing.
+\[
+\frac{d^2 y}{dt^2}+p\frac{dy}{dt}+qy = f(t)
+\]
+\item Bonus: Idea of convolution applies to a much more general setting than simply a tool for Laplace transform.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Idea: Laplace transform of products are difficult.
+\begin{enumerate}
+\item $\mathcal{L}[f(t)g(t)]$ has no nice formula in general.
+\item We will derive a nice formula for $\mathcal{L}^{-1}[F(s)G(s)]$ as
+\[
+F G = \int_0^{\infty} (f \ast g) e^{-st}~dt \quad \Rightarrow \quad \mathcal{L}^{-1}[F G] = f\ast g.
+\]
+\item Motivation: Recall we motivated Laplace transform as a continuous analog of a power series.
+\[
+p(x) = \sum_{n=0}^{\infty} a_n x^n \quad \Rightarrow \quad F(s) = \int_0^{infty} f(t) e^{-st}~dt
+\]
+where we rewrote $x^t$ as $e^{-st}$. For two power series
+\[
+p(x) = \sum a_n x^n, \quad q(x) = \sum b_n x^n
+\]
+there is no nice way to find 
+\[
+\sum (a_n b_n) x^n
+\]
+in terms of general $p,q$. Though, there is a way to find
+\[
+p(x) q(x) = \left( \sum a_n x^n \right) \left(\sum b_n x^n \right) = \sum c_n x_n
+\]
+called the Cauchy product of a power series.
+Its name is a \emph{discrete convolution} and the formula is
+\[
+c_n = \sum_{i=0}^n a_{n-i}b_{i}.
+\]
+Offer bonus bounty to derive this discrete formula for convolution.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Convolution formula: This is a strange formula at first glance, but the same can be said for the Laplace transform.
+\[
+f(t) \ast g(t) = \int_0^t f(t-u)g(u)~du 
+\]
+is the new function of $t$ such that 
+\[
+\mathcal{L}[f\ast g] = \mathcal{L}[f] \mathcal{L}[g] = F(s)G(s)
+\]
+(will show this soon) and is useful when calculating the inverse transform of products
+\[
+\mathcal{L}^{-1}[F G].
+\]
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Result: The convolution acts like a product in the sense that 
+\[
+f(t) \ast g(t) = g(t) \ast f(t).
+\]
+This result is not clear at first glance thru the formula (need a substitution of $v=t-u$), but if you trust the Laplace transform result added to the uniqueness of the transform, 
+\[
+\mathcal{L}[f\ast g] = F(s)G(s) = G(s)F(s) = \mathcal{L}[g\ast f]
+\]
+we see that this is just regular real number multiplication which we know is communative.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Let $f(t)=t^2$ and $g(t)=t$.
+\[
+t \ast t^2 = \int_0^t (t-u) u^2~du = \int_0^t tu^2 - u^3 ~du = t\frac{u^3}{3} - \frac{u^4}{4}\big{|}_0^t = \frac{t^4}{12} 
+\]
+Note 
+\[
+\mathcal{L} [t \ast t^2] = \mathcal{L} [t^4/12] = \frac{1}{12} \frac{4!}{s^5} = \frac{2}{s^5}.
+\]
+But, 
+\[
+\mathcal{L}[t] \mathcal{L}[t^2] = \frac{1}{s^2}\frac{2}{s^3} = \frac{2}{s^5}
+\]
+and our formula holds at least in this case.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: This product is strange though.
+\[
+1 \ast f(t) = \int_0^t f(u)~du
+\]
+Convolution with 1 is the antiderivative of $f$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: The convolution identity is $\delta(t)$.
+\[
+\delta \ast f(t) = 1
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Convolution formula derivation:
+\begin{enumerate}
+\item Denote $F=\mathcal{L}[f]$ and $G=\mathcal{L}[g]$. Then we want a formula for $\mathcal{L}^{-1}[FG]$.
+\begin{align*}
+F(s) G(s) 
+&= \left[\int_0^{\infty} f(\tau) e^{-s\tau}~d\tau\right] \left[\int_0^{\infty} g(u)e^{-su} ~du\right] \\
+&= \int_0^{\infty}\int_0^{\infty} f(\tau)g(u) e^{-s(\tau+u)}~du~d\tau 
+\end{align*}
+This is a double integral over the first quadrant of the $u \tau$-plane.
+Again, our goal is a single Laplace transform of the mold
+\[
+F(s)G(S) = \int_0^{\infty} h(t)e^{-st}~dt.
+\]
+Do a change of variable calling $t=\tau+u$, $u=u$. Then, 
+\begin{align*}
+F(s) G(s) 
+&= \int_0^{\infty}\int_0^{\infty} f(\tau)g(u) e^{-s(\tau+u)}~du~d\tau \\
+&= \int_0^{\infty}\int_0^{t} f(t-u)g(u) e^{-st} \left| \frac{\partial(u,\tau)}{\partial(u,t)} \right|~du~dt  \\
+&= \int_0^{\infty}\int_0^{t} f(t-u)g(u)  ~du ~e^{-st}~dt \\
+&= \int_0^{\infty} f(t)\ast g(t) ~e^{-st}~dt
+\end{align*}
+Note the Jacobian is computed as the following determinant.
+\[
+\left| \frac{\partial(u,\tau)}{\partial(u,t)} \right| = \left|
+\begin{array}{cc}
+\partial u/\partial u & \partial u / \partial t \\
+\partial \tau/\partial u & \partial \tau / \partial t 
+\end{array} \right|
+ = \left|
+\begin{array}{cc}
+1 & 0 \\
+-1 & 1 
+\end{array} \right| = 1
+\]
+begin that $u=u$ and $\tau = t-u$. Also the first quadrant of the $u \tau$ plane ($0<u<\infty, 0<\tau <\infty$) is achieved by $u,t$ by dragging lines of slope negative 1 ($t=\tau+u$, $0<u<t$) across the first quadrant in a diagonal fashion ($0<t<\infty$).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: It turns out this convolution formula is not all too practical. Compute the inverse Laplace transform of
+\[
+F(s) \frac{3s}{(s^2+1)(s^2+4)}.
+\]
+\begin{enumerate}
+\item Convolution solution:
+\[
+F(s) \frac{3s}{(s^2+1)(s^2+4)} = 3 \frac{s}{s^2+1}\frac{s^2+4} = 3G(s)H(s)
+\]
+Noting that $g(t)={L}^{-1}[G]=\sin(t)$ $h(t)={L}^{-1}[H]=\cos(2t)$, then
+\[
+\mathcal{L}^{-1}[F] = 3 g(t) \ast h(t) = 3\int_0^t g(t-u)h(u)~du = 3\int_0^t \sin(t-u)\cos(2u)~du
+\]
+which requires the a bit of trig integration. 
+\item Solution by partial fractions:
+\[
+f(t) = \cos(t)-\cos(2t)
+\]
+so this must match the above definite integral (convolution $g \ast f$).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Convolution solution to general second order equation:
+\[
+\frac{d^2 y}{dt^2} + p \frac{dy}{dt} + qy = f(t), \quad y(0)=y'(0)=0
+\]
+where $f$ is a general forcing function.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Take Laplace transform:
+\[
+s^2 Y + p s Y + q Y = F \quad \Rightarrow \quad Y = F \frac{1}{s^2+ps+q} = F W
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $\mathcal{L}[y]=Y$ is a product $F(s)W(s)$ making $y$ a convolution of the forcing function $f$ with $w$.
+\[
+y = f \ast w = \int_0^t f(t-u)w(u)~du
+\]
+How to interpret this?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item What is $w$?
+\begin{itemize}
+\item $W(s) = \frac{1}{s^2+ps+q}$ is called the \emph{transfer function} for the system.
+\item $w(t)$ is the \emph{weight function} for the system.
+\item How to interpret $w$? Note that $\mathcal{L}[\delta]=1$. Then,
+\[
+y''+py'+qy = \delta, \quad y(0)=y'(0)=0 \quad \Rightarrow \quad Y = \frac{1}{s^2+ps+q}=W(s)
+\]
+giving $y=w$. We kick the mass starting at rest from equilibrium with unit impulse. The solution here is the response to this unit kick.
+\item Then,
+\[
+y = f \ast w = \int_0^t f(t-u)w(u)~du
+\]
+is the combination of all these unit kicks as governed by $f$. Kick, kick, kick until accumulate solution $y$.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Bonus convolution idea: 
+\begin{enumerate}
+\item $f \ast g$ tells us to what degree $f$ and $g$ overlap across the domain of $t$. 
+\item How the shape of one is modified by the other.
+\item \url{https://en.wikipedia.org/wiki/Convolution}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Homework: 1-9
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.6: The qualitative theory of Laplace transform}
+
+\end{document}
