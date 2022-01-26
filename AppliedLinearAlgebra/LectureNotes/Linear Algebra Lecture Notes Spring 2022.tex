@@ -343,6 +343,28 @@ y = t
 for parameter $t$.
 \end{itemize}
 
+
+%%%%%%%%%%%%%%
+\item Careful definitions
+\begin{itemize}
+\item Row echelon form (REF) requires
+\begin{itemize}
+\item All nonzero rows are above rows of all zeros
+\item Each leading entry of each row is in a column to the right of the leading entry of the row above it
+\item All entries in column below a leading entry are zeros
+\end{itemize}
+\item Reduced row echelon form (RREF) requires REF and also
+\begin{itemize}
+\item The leading entry in each nonzero row is 1
+\item Each leading 1 is the only nonzero entry in its column
+\end{itemize}
+\end{itemize}
+\item Pivot position in matrix $A$ is the location in $A$ that corresponds to a leading 1 in the RREF of $A$. A pivot column contains a pivot entry.
+
+
+%%%%%%%%%%%%%%
+\item Example: Find REF and RREF of random $3 \times 2$ matrix.
+
 \end{enumerate}
 
 
