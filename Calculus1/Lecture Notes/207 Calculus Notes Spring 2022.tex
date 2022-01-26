@@ -291,84 +291,93 @@ d = rt \quad \rightarrow \quad r = \frac{d}{t}
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Definition of limit in words, when $x$ is near $a$, $f$ is near $L$. Fuzziness on word 'near' here. Revisit later.
+\item Limit idea and notation
+Seems silly and weird and confusing. 
+\begin{enumerate}
+\item Definition in words. For $x$ near $a$, $f(x)$ is near $L$. 
 $$
 \lim_{x\rightarrow a} f(x) = L
 $$
-\begin{itemize}
-\item Say: the limit of $f(x)$, as x approaches $a$, equals L. 
-\item Alternatively: $f(x)\rightarrow L$ as $x\rightarrow a$\\
-\item What it really means: what happens when $x$ is arbitrarily (but not equal) to $a$\\
-\item Difference between $f(0)$ and limit of $f$ at $0$\\
-\item DNE means doesn't exist, this is possible.
-\item Why we care?  If something is not discoverable, readable but I can read everything around it and all of them point to one thing, I can have a feeling of it. 
-\end{itemize}
+\item Important that $L$ is finite here.
+\item Reading notation: the limit of $f(x)$, as x approaches $a$, equals L. 
+\item Draw picture, careful language, how to read notation, idea only here, fuzzy and not careful.
+\item Distinction between limit and f(a), may differ or same. Show can move f(a) in picture. Near does not mean equal.
+\item Possible limit doesn’t exist. Show picture.
+\end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Finding limits by graph: block $f(a)$
+%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Return to IROC:
 \begin{enumerate}
-\item Give a continuous one
-\item Give one with removable continuity
-$$\lim_{x\rightarrow 1}\frac{x^2-1}{x-1}$$
-\item Is it always doable?
-\item Give one has jump discontinuity, Heaviside function.
-\item Give $f(x)=1/x$, infinite discontinuity, infinite limit.
-\item Give $$\lim_{x\rightarrow 0}\sin (\frac{1}{x})$$, high oscillation.
-\item {\bf Example:} Fill in blank. Give a piecewise defined function, 3 parts, 4 limits, graph  first.
+\item Example from last section: IROC at $x=2$ for $f(x)=x^2$
+\item Limit of diff quotient, undefined at zero.
+\item Plot diff quotient in desmos, show can remove zero division by factoring and simplifying, called removable discontinuity.
+\item Limit def of IROC
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Limit existence
+\begin{enumerate}
+\item Draw cases where exists, continuous, removable discontinuity
+\item Draw cases where doesn't, jump discontinuity, asymptote ($L$ must be finite), oscillatory case
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Piecewise function. Try on own.
+\begin{enumerate}
+\item Graph on own, and figure out limits everywhere in its domain. Where do limits not exist?
 \[
 f(x) = \begin{cases}
--x^2+2 , & -1 <= x < 0 \\
-2-x, & 0<x\leq 1 \\
-2x, & 2>x>1
-\end {cases}
+2-x^2, & -1 \leq x < 0 \\
+2-x, & 0<x \leq 1 \\
+2x, & 1<x<2
+\end{cases}
 \]
 \end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item One sided limit.
 \begin{enumerate}
-\item Left/right hand limit 
-$$
-\lim_{x\rightarrow a^{-/+}} f(x) = L
-$$
-the limit of $f(x)$, as x approaches $a$ from the left, is L. examples on graph
-\item When does limit exist? 
-$$
-\lim_{x\rightarrow a^{-}} f(x) = \lim_{x\rightarrow a^{+}} f(x) = L
-$$
-if and only
-$$
-\lim_{x\rightarrow a} = f(x) = L
-$$
-\item Apply right / left hand limit to each of the main points in pw function graph.
+\item Draw picture with jump disc.
+\item Right and left side limit notation. Again, $f(a)$ doesn't matter.
+\[
+\lim_{x \rightarrow a^{+/-}} f(x) = L
+\]
+\item If they differ, regular limit doesn't exist. If same, regular limit is the same and agrees. Sometimes decomposing a limit into two sides is a good strategy.
+\[
+\lim_{x \rightarrow a^{+}} f(x) = \lim_{x \rightarrow a^{-}} f(x) = L
+\]
+implies
+\[ \lim_{x \rightarrow a} f(x) = L
+\]
+and reverse as well.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Previous problem. Explore one sided limits.
+\begin{enumerate}
+\item Graph on own, and figure out limits everywhere in its domain. Where do limits not exist?
+\[
+f(x) = \begin{cases}
+2-x^2, & -1 \leq x < 0 \\
+2-x, & 0<x \leq 1 \\
+2x, & 1<x<2
+\end{cases}
+\]
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item The infinite limit
+\item Inifinite limits
 \begin{enumerate}
-\item A couple examples to lead. $f(x) = \frac{1}{x^2}, g(x) = \frac{1}{x}$.
-\item Let $f$ be a function defined on both sides of a, except possibly at a it self. Then
-$$
-\lim_{x\rightarrow a} f(x) = \infty
-$$
-means that the values of $f(x)$ can be arbitrarily large by taking $x$ sufficiently close to (but not equal to) a.
-\item $$ \lim_{x\rightarrow a} f(x) = -\infty $$
-\item We've seen this before: vertical asymptote. Define as $x=a$ where $\lim_{x\rightarrow a^{\pm}} f(x) = \pm \infty$
-\item  Where are the vertical asymptotes? Use limit to show why.
-$$
-y = \quad\ln(x), \quad\tan(x),\quad\frac{2x}{x-3},\quad\frac{x+3}{x^2+3x+2} \quad\frac{x+2}{x^2+3x+2} 
-$$
-\item How to compute these? 3 ways. Example: $f(x)=\frac{2x}{x-3}$.
-\begin{enumerate}
-\item Computationally. Plug in numbers near zero division on both sides. Not practical.
-\item Reasoning. As $x\rightarrow 3^+$, $2x \rightarrow 6$ and $(x-3)\rightarrow 0^+$ (use on quiz)
-\item Graphically. Desmos is great or remember.
-\end{enumerate}
-\item  Fact: $\lim_{x\rightarrow 0^+}\frac{c}{x} = \infty$
-\item  Vertical asymptote of the curve $y = f(x)$ if at least one side of the limit tends to $\pm\infty$
-\item Show different cases, especially only one side tends to $\infty$
-\item Give a lot of examples here.
-\item In the homework, mention to use Desmos to help build intuition.
+\item Motivating examples: $f(x)=1/x, 1/x^2$
+\item Def of $\lim_{x \rightarrow a} = +- \infty$
+\item Right / left limits can be one-sided, if agree get regular limit. 
+\item Have seen this before: VAs, bottom zero, top not
+\item If limit is infty, still say limit DNE
+\item Example: How to reason sign of infinity? Check in desmos. 
+\[
+f(x) = \frac{2-x}{x+1}
+\]
 \end{enumerate}
 \end{enumerate}
 
