@@ -390,12 +390,28 @@ f(x) = \frac{2-x}{x+1}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Current ways to calculate limit
 \begin{enumerate}
-\item Graph (draw piecewise function), unreliable
-\item Calculator / reasoning ($f(x) = \frac{x+3}{x+2}$, impractical)
+\item graph (imprecise, unreliable)
+\item  calculator (impractical, not intuitive)
+\item  reasoning (fuzzy)
+\item Need a precise approach for any functoin f(x)
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Path of math
+\begin{enumerate}
+\item Precise foundation: Basic building block.
+\begin{itemize}
+\item Soon will be $\delta - \epsilon$ def of limit, short version in next section
+\end{itemize}  
+\item Build theory: Prove more complicated, useful results.
+\begin{itemize}
+\item  Theorems, limit laws as base, combine these to handle very complex functions.
+\end{itemize}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item New way: Limit laws (analytic / computational technique, practical)
+\item Limit laws (analytic / computational technique, practical)
 \begin{enumerate}
 \item Basics, for $a,c$ constants.
 $$
@@ -411,14 +427,15 @@ $$
 \item $f(x)^n$
 \item $\sqrt[n]{f(x)}$
 \end{enumerate}
-\item These laws match your reasoning, but need to be shown carefully. Next section.
+\item These laws match your reasoning, but need to be shown carefully using $\delta- \epsilon$ def of limit.
 \item Why do we care about these laws? Practical. 
 \begin{enumerate}
-\item $ \ds \lim_{x\rightarrow 2} \left( 2x^2 - x + 2\right) $
-\item Note need to simplify algebra first otherwise zero division: $\ds \lim_{x \rightarrow 2} \frac{x^2 + 4x - 12}{x^2-2x}$. Note $x \neq$ for the simplification steps and we don't care since limitness.
-\item Sometimes need to compare left and right hand side: $\ds \lim{x\rightarrow 0} \left(2x-1+|x|\right)$. Use PW def of abs value.
+\item $ \ds \lim_{x\rightarrow 2} \left( 2x^2 - x + 2\right) $, reference corresponding limit law at each step.
+\item Note need to simplify algebra first otherwise zero division: $\ds \lim_{x \rightarrow 2} \frac{x^2 + 4x - 12}{x^2-2x}$. Note $x \neq 2$ for the simplification steps and we don't care since limitness.
+\item Check each in Desmos.
 \end{enumerate}
-\item Powerful.
+\item Return to IROC in previous section, $f(x)=x^2+1$ at $x=1$. 
+\item Powerful. 
 \begin{enumerate}
 \item Theorem: For $p(x)$ any polynomial and $r(x)$ any rational function, we can use direct substitution to evaluate limits.
 \[
@@ -428,24 +445,18 @@ provided $a$ is in the domain of the rational function.
 \end{enumerate}
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Calculating limits
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\item Challenge examples: Try on own first. Check in Desmos.
 \begin{enumerate}
-\item The flow chart
-\begin{enumerate}
-\item Can I directly subsitute?
-\item Can I simplify with limit laws?
-\item Can I remove zero division then limit laws?
-\item Does it help to separate left/right limits?
-\item Can I squeeze it? (add after below)
+\item $\lim_{x \rightarrow 0} \frac{\sqrt{3+x}-\sqrt{3}}{x}$ (mult by conjugate)
+\item $\lim_{x \rightarrow 0} (2x-1+|x|)$ (use def to remove abs val)
+\item $\lim_{x \rightarrow 0} x \sin(1/x)$ (challenge, need squeeze theorem)
 \end{enumerate}
-\item Additional exmaples
+
+%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Squeeze theorem: The indirect attack.
 \begin{enumerate}
-\item Difference quotient of $f(x) = x^2$ at (1,1) $\ds \lim_{h\rightarrow 0}\frac{(1+h)^2-(1)^2}{h}$ (we are one step  closer to what we want)
-\item {\bf Try on own: } $\ds \lim_{x\rightarrow -4}\frac{\sqrt{x^2+9}-5}{x+4}$, $ \ds \lim_{t\rightarrow 0} \left( \frac{1}{t} - \frac{1}{t^2+t} \right)$
-\item Absolute value: always try left and right limit.
-\end{enumerate}
-\item The squeeze theorem (AKA the sandwich theorem): if $f(x)\leq g(x)\leq h(x)$when $x$ is near $a$ (except at a) and
+\item Statement: if $f(x)\leq g(x)\leq h(x)$when $x$ is near $a$ (except at a) and
 $$
 \lim_{x\rightarrow a}f(x) = \lim_{x\rightarrow a}h(x) = L
 $$
@@ -453,11 +464,9 @@ then
 $$
 \lim_{x\rightarrow a} g(x) = L
 $$
-\begin{itemize}
-\item Draw picture of idea here.
-\item {\bf Example} $ \ds \lim_{x \rightarrow 0}x^2\sin(1/x)$, bound by $\pm x^2$
-\item Tips: worth a try with sine and cosine.
-\end{itemize}
+\item Draw picture of idea. Ask to draw on own first.
+\item Hard to know when to use. Bounding sine is the key giveaway here and future.
+\item Useful for proving other theorems in the future.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
