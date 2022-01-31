@@ -479,31 +479,45 @@ $$
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to understand $\lim_{x\rightarrow a} f(x) = L$? 
+\item Recall idea of limit: 
 \begin{enumerate}
-\item $f(x)\rightarrow L$ as $x \rightarrow a$
-\item $f(x)$ is very close to $L$ when $x$ is very close $a$
-\item $f(x)$ can be arbitrarily close to L when $x$ is close enough to $a$ 
-\item Intuition: Guess How Much I love You? For anyone who loves you, I love you a bit more. Think about attack and defense.
-
+\item Try to write down on own. Draw picture.
+\item $\lim_{x \rightarrow a} f(x) = L$, near wording. 
+\item Note again $x \neq a$ and $f(x) \neq L$.
+\item Issue: Fuzzy idea, lacks precision. How near is near?
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item $\varepsilon - \delta$ Language:
-\begin{itemize}
-\item Formal definition: ask the preview
-\item Give example: $f(x) = 2x$, list different epsilon
-\item Showing the limit using $\varepsilon - \delta$ language.
-\end{itemize}
-\item $\delta - \epsilon$ language, infinite limit case.
-\item My expectation: the formal definition, and finding $\delta$ for simple cases
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Motivation, try on own.
+\begin{enumerate}
+\item Design a circular plate. Boss cares about area. How off can the radius be?
+\item Area 100 inches square +- 1 square inch. How off can the radius be? 
+\item Introduce function, use absolute value.
+\[
+A(r) = 100 \pm 1 \rightarrow |A(r)-100| \leq 1
+\]
+\item Draw graph of $f$ and translate to $L$ and $a$. Graph is parabola.
+\item Boss comes back with +- 0.5 inch. Do in general once and for all. Update previous calculation and graphs.
+\end{enumerate}
 
-\item Real life: draw circle with $r = 5 ft$, with perimeter error $\pm 0.1ft$, how far off can the radius be? Error tolerance.
-$$
-\lim_{r\rightarrow 5ft} 2\pi r = 10 \pi
-$$
-\item Limit laws are built carefully from this definition. That is our foundation.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $\delta - \epsilon$ definition of limit.
+\begin{enumerate}
+\item $\lim_{x \rightarrow a} f(x) = L$ if for any $\epsilon >0$, there exists a $\delta >0$ such that if
+\[
+|x-a| < \delta
+\]
+then
+\[
+|f(x)-L| < \epsilon
+\]
+\item Draw picture. $x$ window, $f$ window.
+\item Connect to previous example. 
+\item Key is no matter hos small $\epsilon$ is, can always find a $\delta$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Prove limit of a random line.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{enumerate}
