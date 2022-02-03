@@ -449,7 +449,8 @@ provided $a$ is in the domain of the rational function.
 \item Challenge examples: Try on own first. Check in Desmos.
 \begin{enumerate}
 \item $\lim_{x \rightarrow 0} \frac{\sqrt{3+x}-\sqrt{3}}{x}$ (mult by conjugate)
-\item $\lim_{x \rightarrow 0} (2x-1+|x|)$ (use def to remove abs val)
+\item $\lim_{x \rightarrow -6} \frac{2x+12}{|x+6|} $ (use def to remove abs val)
+\item $\lim_{t \rightarrow 0} \left(\frac{1}{t} - \frac{1}{t^2+t} \right)$
 \item $\lim_{x \rightarrow 0} x \sin(1/x)$ (challenge, need squeeze theorem)
 \end{enumerate}
 
@@ -529,94 +530,118 @@ then
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Continuity before (draw one line without leaving the board)
-\begin{itemize}
-\item Not good enough
-\item Is $\sin(1/x)$ continuous at 0?
-\item The Dirichlet function (so dense)
-\end{itemize}
+\item Idea of a continuous function
+\begin{enumerate}
+\item Seen before. Only have a fuzzy definition.
+\item Graph can be drawn without lifting pencil, no jumps, holes, asymptotes, etc.
+\item Not precise enough (sin(1/x)), Dirichlet function
+\item Need to be precise if want to build a theory on this idea (most ubiquitous math idea from this class)
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Def of continuous function: Function $f$ is continuous at $x=a$ if $\lim_{x\rightarrow a} f(x) = f(a)$.
+\item Precise definition of continuous function: 
 \begin{enumerate}
-\item Note: only one point here.
-\item How about $sin(1/x)$ and Dirichlet function
+\item Function $f$ is continuous at $x=a$ if $\lim_{x\rightarrow a} f(x) = f(a)$.
 \item Three things are involved here:
 \begin{enumerate}
 \item limit exists (two sides)
-\item function value definied
+\item function value defined
 \item they are equal
 \end{enumerate}
+\item Value: If can show a class of functions is continuous (ie polynomials), then limit calculation is easy (same as function evaluation)
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Discontinuous at $x=a$ means one of them fails. What are the ways this can happen? We've already seen this.
+\item Def, discontinuous at a point $x=a$.
 \begin{enumerate}
+\item Happens if one or more of three conditions fails
+\item Try and find what fails for each: Make table
+\begin{itemize}
 \item Removable discontinuity
 \item Jump discontinuity
 \item Infinite discontinuity
-\item High oscillation ($y = \sin(1/x)$ is not continuous, how weird from the grahp, wait, it makes sense, otherwise $f(0)$ must be defined)
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item One sided continuity can be considered (point to above jump discontinuity) graph, write down definition.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Continuity on an interval
-\begin{enumerate}
-\item Function $f$ is continuous on an interval if it's continuous at every number in the interval
-\item  Continuous functions are continuous everywhere \emph{in their domain}.
-\item {\bf Example:} Graph crazy piecewise function (removable, jump, infinite, not in domain).  
-\begin{itemize}
-\item Where is $f$ discontinuous?
-\item Where is $f$ left / right discontinuous?
-\item On what interval is $f$ continuous.
+\item High oscillation ($y = \sin(1/x)$)
 \end{itemize}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Simple functions
+\item Definition: Continuous on an interval
 \begin{enumerate}
-\item Theorem: The following are continuous functions. (not surprising that they are familiar functions, each needs showing carefully)
+\item A function is continuous on an interval if continuous at every $x$ value in the said interval. Many types of intervals:
+\[
+(a,b), \quad
+(a,b], \quad
+(a,\infty), \quad
+(-\infty,\infty), \quad \dots
+\]
+\item Right / left continuity can be used here if endpoints are included. Just check right / left limit.
+\item Continuous functions are continuous everywhere in their domain.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Graph crazy piecewise function (removable, jump, infinite, not in domain).  
+\begin{itemize}
+\item Where is $f$ discontinuous?
+\item Where is $f$ left / right continuous?
+\item On what interval is $f$ continuous.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Combining basic functions
+\begin{enumerate}
+\item Theorem: The following are continuous functions \emph{in their domian}. (not surprising that they are familiar functions, but each needs showing carefully, text does this)
 \begin{itemize}
 \item Polynomials
-\item Rational functions
+\item Rational functions (not, only in it's domain)
 \item Root functions
 \item Trigonometric functions
 \item Inverse trig functions
 \item Exponential functions
 \item Logarithmic functions
 \end{itemize}
+
 \item Theorem:  if $f$ and $g$ are continuous at a and $c$ is a constant, then the following functions are also continuous at $a$:
 $$
 f\pm g, cf, f\cdot g, f/g,\quad if \quad g(a) \neq 0 
 $$
-\begin{itemize}
-\item These are just the five limit laws!
-\item {\bf Example: } Where is the following function $f(x)$ continuous?
+These are just the five limit laws!
+\item Example: Where is the following function $f(x)$ continuous?
 $$
-\frac{\ln(x)+\arcsin(x)}{x^2-4}
+\frac{\ln(x-1)+\sin(x)}{x^2--x-2}
 $$
-\item Idea: Find the domain of all the simple functions and take the intersection, worry about zero division.
-\end{itemize}
-\item Function composition: If $f$ is continuous at $b$ and $\lim_{x\rightarrow a} g(x) = b$, then
-$$
-\lim_{x\rightarrow a} f(g(x)) = f(\lim_{x\rightarrow a} g(x) ) = f(b)
-$$
-\item {\bf Example: } Rewrite $f(x) = \left| \frac{x\sin(x)}{x^2+2} \right|$ as function composition ($f(x)=g(h(x))$). Why is $f$ continuous everywhere?
-\item Can now use continuity to compute limits! $\lim_{x\rightarrow \pi} f(x)$ for above.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Intermediate Value Theorem (recite every theorem that has a name, must be important if has a name!): \\
-If $f$ is continuous on the closed interval $[a,b]$ and let $N$ be any number between $f(a)$ and $f(b)$, where $f(a) \neq f(b)$. Then there exists a number $c$ in $(a,b)$ such that $f(c)=N$.
-\item Why is this useful? 
-\begin{itemize}
-\item Theory: Show that the function $x^3+x^2-1 = 0$ has a root between $[0,1]$ 
-\item Practice: Can you find the root? Show by excel, Bisection method!
-\item solve $x = \cos x$
-\end{itemize}
-\item Give the harder ones
+\item Function composition: 
+\begin{enumerate}
+\item Recall, function composition.
+\item Theorem: If $g(x)$ is continuous at $x=a$ and $f$ is continuous at $g(a)$, then
+$$
+\lim_{x\rightarrow a} f(g(x)) = f(\lim_{x\rightarrow a} g(x) ) 
+$$
+\item Note, this theorem implies continuity of composition of two continuous functions.
+\item Random example: $\sin(e^x)$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Intermediate Value Theorem 
+\begin{enumerate}
+\item Draw picture of continuous function.
+\item Theorem: For $f$ continuous on $[a,b]$ with $f(a) \neq f(b)$. 
+For any number $L$ between $f(a)$ and $f(b)$, there exists an $N$ such that $f(c)=L$ for $a<c<b.$
+\item Draw picture.
+\item Seem obvious. Useful when you don't have a good handle on $f$.
+\item Named theorem means important. Know this result since shows up in surprising places.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Bisection method:
+\begin{enumerate}
+\item Show $F(x) = x^3+x^2-1$ has a root on $[0,1]$. 
+\item Picture to explain why. How to approximate?
+\item Bisection demo in Excel
+\end{enumerate}
+
 \end{enumerate}
 
 
@@ -624,34 +649,43 @@ If $f$ is continuous on the closed interval $[a,b]$ and let $N$ be any number be
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{2.6 Limits at infinite: horizontal asymptotes}
 
+\begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: $f(x) = 1/x$, draw graph.
 \begin{enumerate}
-\item What do you know about horizontal asymptotes? (think about vertical asymptotes)? 
+\item Know VAs. Guess what the HA version should be. 
+\item Limit notation easy, how to think about it carefully.
+\item Caution around infinity
+\end{enumerate} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Def: 
 \begin{enumerate}
-\item Simple example: $f(x)=1/x$. Draw comparison to vertical and horizontal asymptotes.
-\item Def: Let $f$ be a function defined on some interval $(a,\infty)$, then 
+\item Let $f$ be a function defined on some interval $(a,\infty)$, then 
 $$
 \lim_{x\rightarrow \infty} f(x) = L
 $$
-means that the value of f(x) can be made arbitrarily close to L by taking x sufficiently large. Can also write: $f(x) \rightarrow L$ as $x\rightarrow \infty$.
-\item Similar definition for $\lim_{x\rightarrow -\infty} f(x) = L$
-\item Definition: the line $y=L$ is called a horizontal asymptote of the curve $f(x)$ if 
+means that the value of f(x) can be made arbitrarily close to L by taking x sufficiently large. 
+\item Similar for $-\infty$.  Note two directions do not have to agree as we always see with rational functions.
+\item Careful $\delta, \epsilon$ version, draw picture.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: 
+\begin{enumerate}
+\item The line $y=L$ is called a horizontal asymptote of the curve $f(x)$ if 
 $$
 \lim_{x\rightarrow \infty}f(x)=L \quad or \quad \lim_{x\rightarrow -\infty}f(x)=L
 $$
-\item Questions:
-\begin{itemize}
-\item How many horizontal asymptotes can a function have?
-\item How many vertical asymptotes can a function have?
-\item If $f(x)$ has a horizontal asymptote, then $f^{-1}(x)$ has a vertical asymptote. Vice versa?
-\item Does $\sin(x)$ have a horizontal asymptote?
-\item What can happen at infinity? Cases here?
-\begin{itemize}
-\item Horizontal asymptote: limit is a finite number
-\item Blow up: infinite limit, different cases (oblique, parabolique?)
-\item Continued oscillation: no limit
-\end{itemize}
-\end{itemize}
+\item Who cares? End behaviour and such. UWL ash tree, ecology population asymptotics.
+\end{enumerate}
+
+\item Theorem: Basic limits at infty:
+\begin{enumerate}
+\item $1/x, 1/x^2, ..., 1/x^r, r>0$, look at $x \rightarrow +- \infty$
+\item $e^x, a^x$
+\item $\arctan(x)$
+\item Check in desmos
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
