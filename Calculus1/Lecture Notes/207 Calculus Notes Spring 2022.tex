@@ -729,119 +729,66 @@ $$
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Motivation: \emph{instantaneous rates of change} (tangent line calculation). We return.
+\item Recall: AROC as an approximation of IROC
 \begin{enumerate}
-\item Idea in physics
-\item By formula
-\item {\bf Definition:} (not a theorem!) The tangent line to the curve $y = f(x)$ at the point $P(a,f(a))$ is the line through $P$ with slope 
-$$
-m = \lim_{x\rightarrow a}\frac{f(x)-f(a)}{x-a}
-$$
-\emph{provided that this limit exists.}
-\item Alternate formulation of difference quotient. Draw graph here. Same as above.
-$$
-m = \lim_{h\rightarrow 0} \frac{f(a+h)-f(a)}{h}
-$$
+\item Previous definition of IROC as limit of IROC. Note, this is a definition.
+\item Picture. Interpret as secant lines approaching tangent lines.
+\item $x/a$ vs $x/h$ versions.
+\item We now know limit tackles this process
+\end{enumerate}
 
-\item By graph (show Desmos)
-
-\item {\bf Example:} What's the slope of the tangent line of $y=x^2$ at $(1,1)$, what's the equation of the line? Graph these.
-\item {\bf Example:} Which formula is better? Do $y = x^2$ at $x = 1$ the second  way.
-\item {\bf Example:} f(x) = 1/x at $3$. Divide and conquer 2 different formulations.
-\item {\bf Example:} What is the slope of the tangent line of $\sqrt{x}$ at $(1,1)$? Can use symmetry of inverse function here. (know what to expect here.)
-\item Definition: The \emph{derivative of a function $f(x)$ at $a$} is given by 
-$$
-f'(a) = \lim_{h\rightarrow 0}\frac{f(a+h)-f(a)}{h} = \lim_{x\rightarrow a}\frac{f(x)-f(a)}{x-a}
-$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definition: Derivative at a point, $f'(a)$ and prime notation.
+\begin{enumerate}
+\item IROC, tangent line slope, derivative all the same
+\item 2 main formulas. Which is better? $h$ formula has an advantage for limit calculation.
+\item Notation: $f'(x)=df/dx=(d/dx)f(x)$, Newton, Leibniz, operator.
+\item Examples:
 \begin{itemize}
-\item What is the derivative of function $y = x^2$ at $(1,1)$? Already did this.
-\item Compare the derivative of $y = x^2$ at different place (0,1,-1,2,-2) 
-\item How about we generalize this to a function? Try and graph that function. 
+\item From the past: $f(x)=x^2$ at $a=2$. Both ways. Graph result.
+\item Try on own: $f(x)=1/x$ at $a=3$. Find tangent line.
+\item Try on own: $f(x)=\sqrt{x}$ at $a=4$. Find tangent line. Note, inverse of previous problem. Should know what to expect. What if we allow that point to change? Consider the graph. Desmos.
 \end{itemize}
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Definition: The \emph{derivative function} of a $f(x)$ is
-$$
-f'(x) = \lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}.
-$$
-\begin{itemize}
-\item Derivative (function) of $f$ means a function, this thing has a life of its own (domain, range, inc, dec), but should be tied closely to $f$ somehow.
-\item Find the derivative function first, then just plug in numbers to find a certain slope.
-\item {\bf Example:} the derivative function of $x^2$ (Draw it on the board and compare.)
-\item {\bf Example:} Find $f'(x)$ for $1/x$. When is the slope of the tangent line $-\frac{1}{4}$? Relate to graph. Happens twice.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item The information from $f'(x)$:
+%%%%%%%%%%%%%%%%%%%%%%%%%555
+\item Definition: Derivative as a function. Two versions, $h$ version standard.
 \begin{enumerate}
-\item Draw the changing rate (derivative) of water height function: Filling a glass, cone cup, then coke bottle. Helps to draw the height function also. \url{https://www.youtube.com/watch?v=APD91nEJgkA}, 
-\url{https://teacher.desmos.com/waterline}
-\item Give a M shaped function, draw the derivative, then draw the derivative of the derivative. (It's going to have corner and straight lines)
-\item Benefits
+\item Generalize previous deriv at a point to a new function.
+\item Key questions:
 \begin{itemize}
-\item Increasing decreasing
-\item Concave and concave down.
-\item Finding the maximum and minimum
-\end{itemize}
-\item Can we always find derivatives? Corner won't work, and it shouldn't. Separate ideas/theories handle this.
-\item Vertical asymptotes: \\
-True or false: $f'(x)$ can't have fewer vertical asymptotes than $f(x)$ (bad to worse). Can we have more? Yes, vertical tangents.
-\item What about horizontal asymptotes? Always become HAs of $y=0$ for $f'$. 
-\item Can we always find derivatives?
-\end{enumerate} 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Differentiability: When can the derivative be used? 
-\begin{itemize}
-\item A function f is differentiable at a if $f'(a)$ exists
-\item A function is differentiable on an interval if it's differentiable at every number in the interval. 
-\item As mentioned above, a function is not always differentiable. When is it not differentiable? When limit fails
-\begin{itemize}
-\item A discontinuity
-\item A corner
-\item A vertical tangent
-\item {\bf Example: } Show $f(x) =|x|$ is not differentiable at $x=0$ as we expect. Compute $\lim_{h\rightarrow 0^-}$ and $\lim_{h\rightarrow 0^+}$
-\end{itemize}
-\item Theorem: If $f$ is differentiable at $c$, then $f$ is continuous at $c$. 
-\item Weierstrauss function
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Differential notation
-\begin{enumerate}
-\item Rate of change
-\begin{enumerate}
-\item Average rate of change, define $\triangle y$, $\triangle x$ and consider
-$$\frac{\triangle y}{\triangle x}$$
-\item Instantaneous rate of change (same as derivative, application terminology)
-$$
-\lim_{\triangle x\rightarrow 0}\frac{\triangle y }{\triangle x}
-$$
+\item How is $f$ related to $f'$? 
+\item Is differentiation reversible?
+\item Are all functions differentiable?
+\end{itemize} 
+\item Notation: $f'(x) = df/dx$
+\item Can go higher, $f''(x) = ...$
 \end{enumerate}
-\item Differentiation notation
-$$
-f'(x) = \frac{df}{dx}
-$$
-\begin{itemize}
-\item It contains the meaning of rate of change
-\item It's easy to see the variable (with respect to)
-\item Will be handy later when you have multi-variables.
-\item The idea of ratio
-\item Leibniz way vs Newton way
-\end{itemize}
-\item The instantaneous rate of change with respect to time of
-\begin{itemize}
-\item displacement is the velocity
-\item velocity is the acceleration
-\end{itemize}
-\item More notation: Distinguish between operator and function here. 
-\begin{align*}
-f'(x) = \frac{d}{dx} f= \frac{df}{dx} = \frac{df}{dx}(x) \\
-f''(x) = \frac{d^2f}{dx^2}= \frac{d}{dx}f' \\
-f^{(n)}(x) \quad \text{parenthesis needed here}
-\end{align*} 
-\item High order derivatives
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\begin{enumerate}
+\item $f(x)=x^2$, compute $f'(x)$ and draw both together. Connect two. Check individual points.
+\item $f$ to $f'$ is unique, $f'$ to $f$ not.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example:
+\begin{enumerate}
+\item Draw two graphs. Ask to graph $f'$
+\item Wavy function, cubic. Shift up, same $f'(x)$. 
+\item Corner function, absolute value. $f'(0)$ does not exist. 
+\item Show carefully that $f(x)=|x|$ is not differentiable at $a=0$. Compute right and left limits. In short $f'$ is not continuous at $a=0$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item When differentiation fails:
+\begin{enumerate}
+\item Corners, vertical tangent, discontinuity
+\item Theorem: If $f$ is diff at $a$, then $f$ is continuous at $a$ (so diff is stronger than continuity). Venn diagram of functions.
+
+\end{enumerate}
+
 \end{enumerate}
 
 
