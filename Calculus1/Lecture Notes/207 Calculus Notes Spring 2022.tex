@@ -773,10 +773,11 @@ $$
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Example:
+\item Examples:
 \begin{enumerate}
 \item Draw two graphs. Ask to graph $f'$
 \item Wavy function, cubic. Shift up, same $f'(x)$. 
+\item $f(x)=x^3-x$, compare $f'$ and $f''$.
 \item Corner function, absolute value. $f'(0)$ does not exist. 
 \item Show carefully that $f(x)=|x|$ is not differentiable at $a=0$. Compute right and left limits. In short $f'$ is not continuous at $a=0$.
 \end{enumerate}
@@ -795,118 +796,91 @@ $$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 3 Differentiation rules}
+\begin{enumerate}
+\item Motivation:
 \begin{itemize}
-\item Difference quotient is a pain
+\item Difference quotient is a pain, need to keep building a theory to make diff easier (more efficient, abstraction powerful).
+\item Why? Understand functions better, translate real world change to equation (DEs), optimization, etc
+\item Demo differential equation simulation: CFD, Frozen
 \end{itemize}
+\item Chapter outline:
+\begin{itemize}
+\item Easy way to diff simple functions (think limit laws)
+\item Polys, exps, rationals, trig, also combos of these.
+\item Extend to curves which are not functions (implicit curves)
+\item Apply to two problems: Beginning DEs, related rates and GPS.
+\end{itemize}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Derivatives of polynomials and exponential functions}
 \begin{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Derivatives of polynomials.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Tackle basic functions:
 \begin{enumerate}
-\item Theorem: Constant function derivative.
-$$
-\frac{d}{dx} c = 0 \quad \text{give proof}
-$$
-\item Theorem: Straight line.
-$$
-\frac{d}{dx} (mx+b) = m \quad \text{give proof}
-$$
-\item Power function: $f(x)=x^n$
-\begin{enumerate}
-\item First order (done above)
-$$
-\frac{d}{dx} x = 1
-$$
-\item Try second order, modify to cubic, pattern here, go for general.
-\item Theorem (The power rule): if $n$ is a positive integer, then
-$$
-\frac{d}{dx}(x^n)  = nx^{n-1}
-$$
-Proof: Let $f(x)=x^n$, for $n$ any positive integer. Compute
-$$
-f'(a) = \lim_{x\rightarrow a} \frac{f(x)-f(a)}{x-a}
-= \lim_{x\rightarrow a} \frac{x^n-a^n}{x-a}
-$$
-Note, can factor here. Distribute to check.
-$$
-x^n-a^n = (x-a)(x^{n-1} + x^{n-2}a + x^{n-3}a^2 + \cdots xa^{n-2}+a^{n-1})
-$$
-Then,
-\begin{align*}
-f'(a) &= \lim_{x\rightarrow a} \frac{(x-a)(x^{n-1} + x^{n-2}a + x^{n-3}a^2 + \cdots xa^{n-2}+a^{n-1})}{x-a} \\
-&= \lim_{x\rightarrow a} (x^{n-1} + x^{n-2}a + x^{n-3}a^2 + \cdots xa^{n-2}+a^{n-1}) \\
-&= na^{n-1} \quad \text{QED}
-\end{align*}
-\item Theorem: The \emph{general} power rule: (proof later, need more tools) if $n$ is \emph{any real number}, then
-$$
-\frac{d}{dx}(x^n)  = nx^{n-1}
-$$
-\begin{itemize}
-\item {\bf Example: } $\frac{d}{dx} x^5$
-\item {\bf Example: } $\frac{d}{dx} \sqrt{x^3}$
-\item {\bf Example: } $\frac{d}{dx} \frac{1}{x^5}$
-\item $n=0$ case
-\end{itemize}
-\end{enumerate}
-\item General polynomial functions? $\frac{d}{dx}(2x^2 - x + 5)=?$ As with limits, have properties to handle things here. Since derivatives are actually limits, we already have all this.
+\item $f(x)= c, mx+b, x^2, x^n, e^x, a^x$
+\item Apply difference quotient to each. H version easiest.
+\item Combine simple function difference quotients using limit laws: $f \pm g, f \cdot g, f/g, f^n, \sqrt[n]{f}$. 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Differentiation rules
-\begin{enumerate}
-\item Theorem: For $c$ any constant and $f,g$ differentiable functions, 
-\begin{enumerate}
-\item $\frac{d}{dx} [cf(x)] = c\frac{d}{dx}f(x)$ (show this one?)
-\item $\frac{d}{dx}[f(x)\pm g(x)] = \frac{d}{dx}f(x)\pm\frac{d}{dx}g(x)$
-\end{enumerate}
-\item Explain by idea (vertical stretch, combine two functions, increase rate of change.
-\item These are just our limit laws!
-\item {\bf Example: } General polynomial is now covered here. Illustrate for $\frac{d}{dx}(2x^2 - x + 5)=?$ Where are the horizontal tangents?
-\item Revisit: $\frac{d}{dx}(mx+b)$
-\item {\bf Example: } Try on own, show all steps: $\frac{d}{dx} \frac{x^{-1/2}-2x^3+1}{x^2}$ (rewrite as sum of power functions).
-\item Caution, not all limit laws simply transfer.
-$$
-(fg)' \neq f'g',\quad \frac{f}{g}\neq \frac{f'}{g'}
-$$
-Illustrate for $f(x) = (1-x)(x+2)$
-\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Exponential functions
-$$
-\frac{d}{dx}e^x = ?
-$$
+\item Examples: Try on own.
 \begin{enumerate}
-\item Sketch the graph of $f(x) = e^x$ and $f$. Look pretty similar.
-\item Detour to general exponential $f(x) = a^x, a>0$.
-$$
-\frac{d}{dx} a^x = \lim_{h\rightarrow 0} \frac{a^{x+h}-a^x}{h} 
-= a^x \lim_{h\rightarrow 0} \frac{a^{h}-1}{h} 
-= a^x \cdot f'(0)
-$$
-Then, $f'(x) = f'(0) a^x$. What is $f'(0)=1$?
-\item Definition: Euler's number $e$ is the number such that 
-$$
-\lim_{h\rightarrow 0} \frac{e^{h}-1}{h} = 1
-$$
-It turns out that $e \approx 2.71828...$
-\item Theorem: $\frac{d}{dx} e^x = e^x$. (very useful property).
-\item {\bf Examples: } $e^3,\quad e^x+x^e$
-\item Notes:
-\begin{itemize}
-\item $e$ shows up in continuous compound interest (originally in history?) where another limit appeared. Compare to above. Same thing!
-$$
-\lim_{n\rightarrow \infty} (1+\frac{1}{n})^n = e
-$$
-\item How to differentiate general exponentials $a^x$. Later!
-\item Keep differentiating $e^x$ and it ALWAYS stays the same. 
-\item Compare first derivative of any polynomial to $e^x$.
-\end{itemize}
+\item $c, mx+b, ax^2+bx+c$
+\item Can see limit law usefulness with last two.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Power rule
+\begin{enumerate}
+\item $\frac{d}{dx} x^n = nx^{n-1}$
+\item Try to prove, can see the challenge with $h$ version.
+\item Use $x-a$ version instead using factor formula
+\[
+x^n-a^n = (x-a)(x^{n-1} + ax^{n-2} + \dots + a^{n-2}x + a^{n-1})
+\]
+then limit laws after indeterminate form is removed.
+\item Proof holds for $n$ any positive integer. Will extend later to any number $n$ including irrationals.
+\item Revisit $ax^2+bx+c$ using this result hinting at limit laws again.
+\item Examples: $x^5, \sqrt{x^3}, \frac{1}{x^3}, x^0$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Theorem: Limit laws applied to derivatives.
+\begin{enumerate}
+\item $\frac{d}{dx} (cf(x)) = cf'(x)$
+\item $\frac{d}{dx} (f(x) +- g(x)) = f'(x)+g'(x)$ Prove this one to illustrate limit law use.
+\item Can treat $\frac{d}{dx}$ as a operator (like limits or multiplication in a way)
+\item Revisit above quadratic example again. Finally we can differentiate without directly using limits. This allows us to tackle any polynomial easily.
+\item Warning: Note, no simple diff rule for prod, quot.
+\[
+(f g)' \neq f' g', \quad 
+(f / g)' \neq f'/g'\]
+Try on own: Create random examples to show not same. Check limit def of product to see the complication.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Exponential functions: Recap from algebra.
+\begin{enumerate}
+\item Basic defs. Natural number, integer, rational, irrational, zero. Laws of exponents. 
+\item $a^x$, different $a$
+\item $e^x$ importance, compound interest desmos
+\item Search eulers number, more important than pi?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Theorem: Derivative of exponentials.
+\begin{enumerate}
+\item Difference quotient for general $a^x$
+\item Definition: $F'(0)$ limit is 1 for e.
+\item Desmos graph.
+\item Will have to wait for other exponentials
+\item Note can diff $e^x$ many times, unchanged.
+\end{enumerate}
+
 \end{enumerate}
 
 
