@@ -887,40 +887,45 @@ Try on own: Create random examples to show not same. Check limit def of product 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.2 The product and quotient rules}
-\begin{itemize}
-\item Already noted that $(fg)'\neq f'g'$ and likewise $(f/g)' \neq f'/g'$, so what are they?
-\end{itemize}
 \begin{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Theorem (product rule)L If both $f$ and $g$ are differentiable, then 
-$$
-\frac{d}{dx}(f\cdot g) = f(x)\frac{dg}{dx}+\frac{df}{dx} g(x)
-$$
-or
-$$
-(f\cdot g)' = f'g+g'f
-$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Already noted that $(fg)'\neq f'g'$ and likewise $(f/g)' \neq f'/g'$, so what are they?
+
+%%%%%%%%%%%%%%%%%%%%
+\item Geometry and intuition:
 \begin{enumerate}
-\item Show the area proof: Can think of product as the area of a rectangle (dimensions $f\times g$). Let $x$ change to $x + \Delta x$, then $f,g$ change by $\Delta f, \Delta g$. Draw picture. So the change in the rectangle's area is 
+\item Can think of product $f(x)g(x)$ as the area of a rectangle. 
+\item Let $x$ change to $x + \Delta x$, then $f,g$ change by $\Delta f, \Delta g$. 
+\item So the change in the rectangle's area is 
 $$
 \Delta (f\cdot g) = (f+\Delta f)(g + \Delta g) - fg
 = f\Delta g + g \Delta f + \Delta f \Delta g $$
 $$
 \frac{\Delta (f\cdot g)}{\Delta x} = f\frac{\Delta g}{\Delta x} + g \frac{\Delta f}{\Delta x} + \Delta f \frac{\Delta g}{\Delta x} 
 $$
-Take $\Delta x \rightarrow 0$. Wild.
-\item Show a rigorous proof: The power of adding zero.
-\begin{align*}
-(fg)' &= \lim_{h\rightarrow 0} \frac{f(x+h)g(x+h) - f(x)g(x)}{h}
-= \lim_{h\rightarrow 0} \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h} \\
-&= \lim_{h\rightarrow 0} \frac{f(x+h)g(x+h) - f(x+h)g(x)}{h} + \lim_{h\rightarrow 0} \frac{f(x+h)g(x) - f(x)g(x)}{h} = f(x)g'(x) + f'(x)g(x)
-\end{align*}
+\item Take $\Delta x \rightarrow 0$. Wild.
 \end{enumerate}
-{\bf Examples: } $(x-1)(x+1)$ easier to distribute, $x^2e^x$, $xe^x+ex^e$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Theorem (quotient rule):
+\item Product rule: 
+\begin{enumerate}
+\item Theorem (product rule) If both $f$ and $g$ are differentiable, then 
+$$
+\frac{d}{dx}(f\cdot g) = f(x)\frac{dg}{dx}+\frac{df}{dx} g(x)
+$$
+or more compactly
+$$
+(f\cdot g)' = f'g+g'f
+$$
+\item Show a rigorous proof. Add and subtract same term to get diff quotients. The power of adding zero.
+\item $(x-1)(x+1)$ easier to distribute, second derivative of $x^2e^x$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Quotient rule:
+\begin{enumerate}
+\item  Theorem (quotient rule):
 $$
 \frac{d}{dx}\Big[\frac{f(x)}{g(x)}\Big] = \frac{g(x)\frac{d}{dx}f(x)-f(x)\frac{d}{dx}g(x)}{[g(x)]^2}
 $$
@@ -928,32 +933,15 @@ or
 $$
 (\frac{f}{g})' = \frac{f'g-g'f}{g^2}
 $$
-\begin{enumerate}
 \item Can prove via same trick as with power rule. See text. 
 \item Show the proof by finding $(1/g)'$ first via difference quotient, then apply product rule. 
-\item {\bf Example: } $\frac{x^2-1}{x^3+6}$, find the second derivative of $e^x/x$.
-\item Can now show carefully $(x^{-n})' = -nx^{-n-1}$ via the quotient rule.
+\item  $\frac{x^2-1}{x^3+6}$, find the second derivative of $e^x/x$.
+\item Can now show carefully $(x^{-n})' = -nx^{-n-1}$ via the quotient rule. This further generalizes the power rule.
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Fancy differentiation with general constants (multivariable calculus).
-\begin{enumerate}
-\item {\bf Example: } 2 ways, const mult and quotient rule.
-$$
-\frac{d}{dx}[\frac{x}{a}]
-$$
-\item {\bf Example: } Try on own.
-$$
-\frac{ax+b}{cx+d}
-$$
-\item Notes:
-\begin{itemize}
-\item Generalize: What is $(f\cdot g\cdot h)'$
-\item Quotient rule can be derived / and replaced by product rule
-\item Create own list of nice formulas. Will need to know these.
-\end{itemize}
-\end{enumerate} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Start creating a list of differentiation formulas. Will need to memorize all these. 
 \end{enumerate} 
 
 
