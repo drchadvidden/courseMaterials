@@ -950,50 +950,50 @@ $$
 \subsection{3.3 Derivatives of Trigonometric functions}
 \begin{enumerate}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Derivative of $\sin x$:
-$$
-\frac{d}{dx} \sin x = \cos x
-$$
+\item Trig review
 \begin{enumerate}
-\item Hint at the derivative of $\sin(x)$ by drawing the graph. Let them draw $\cos(x)$ and $\tan(x)$.
-\item Limit definition of derivative. Need sum formula for sine ($\sin(u+v) = \sin(u)\sin(v) - \cos(u)\cos(v)$.
-\begin{align*}
-\frac{d}{dx}\sin(x) &= \lim_{h\rightarrow 0} \frac{\sin(x+h)-sin(x)}{h}
-= \cos x\lim_{h\rightarrow 0}\frac{\sin h}{h}+\sin x\lim_{h\rightarrow 0}\frac{\cos h-1}{h}
-\end{align*}
-\item Show the identity via the Squeeze Theorem
-$$
-\lim_{\theta\rightarrow 0} \frac{\sin \theta}{\theta} = 1
-$$
+\item Sine and cosine, right triangles, unit circle, graphs.
+\item Other 4, tangent is other essential.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Basic trig derivatives
+\begin{enumerate}
+\item Sine and cosine
 \begin{itemize}
-\item Draw the unit circle and show
-$$
-\sin(\theta)<\theta \quad \text{(arc length greater than triangle height)}
-$$
-and
-$$
-\theta <\tan(\theta) \quad \text{(triangle area bigger than sector area)}
-$$
-then combine as
-$$
-\cos(\theta) < \frac{\sin(\theta)}{h} \leq \frac{1}{\cos(\theta)}
-$$
-\end{itemize}
+\item $\frac{d}{dx} \sin(x)$, difference quotient troubles.
+\item Leverage sum formula for sine
+\[
+\sin(x+h) = \sin(x)\cos(h) + \sin(h)\cos(x)
+\]
+\item Back to difference quotient:
+\[
+\frac{d}{dx}\sin(x) = \lim_{h\rightarrow 0} \frac{\sin(x+h)-sin(x)}{h}
+= \cos(x)\lim_{h\rightarrow 0}\frac{\sin h}{h}+\sin ()\lim_{h\rightarrow 0}\frac{\cos h-1}{h}
+\]
+\item Indirect attach for below. Back to unit circle and apply squeeze theorem.
+\[
+\lim_{h\rightarrow 0}\frac{\sin h}{h}
+\]
+Image to focus on
 \begin{center}
 \includegraphics[width=0.9\textwidth]{33pic.png}
 \end{center}
-\item For $\lim_{h\rightarrow 0}\frac{\cos h-1}{h}$, use previous result by multiplying by the conjugate and show the limit is zero
-\item Returning, both limits exits and we can use limit laws.
-\begin{align*}
-\frac{d}{dx}\sin(x) &= \cos x\lim_{h\rightarrow 0}\frac{\sin h}{h}+\sin x\lim_{h\rightarrow 0}\frac{\cos h-1}{h} 
-= \cos(x) \cdot 1 + \sin(x) \cdot 0 = \cos(x)
-\end{align*}
-\item Note: $x$ must be in term of radians here, degrees differ in result by constant.
-\item Important limits to take note of:
-$$
-\frac{\sin(\theta)}{\theta} = 1 \quad \text{and} \quad \lim_{h\rightarrow 0}\frac{\cos h-1}{h} = 0
-$$
+which produces
+\[
+\sin(h) < h, \quad h < \tan(h).
+\]
+\item Tackle cosine limit via the conjugate.
+\item Ask them to prove cosine derivative on own using the same idea and 
+\[
+\cos(x+h) = \cos(x)\cos(h) - \sin(x)\sin(h).
+\]
+\end{itemize}
+\item Other 4, get from quotient rule connecting to sine and cosine.
+\item Note $x$ must be in term of radians here, degrees differ in result by constant.
+\item 2 important limits to know.
 \end{enumerate}
 
 
@@ -1013,15 +1013,15 @@ $$
 $$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples: }
+\item Examples:
 \begin{enumerate}
 \item $$\frac{d}{dx}\frac{\sec x\sin x}{e^x+\tan x}$$
-\item Find the second derivative of $\sec x$\\
+\item Find the second derivative of $\sec x$, note Pythagorean identities to be applied. Many equivalent answers possible.
 \item Find the 99th derivative of $\sin x$
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Above limit results can be useful in clever ways.
+\item Above limit results can be used in weird ways.
 \begin{enumerate}
 \item 
 $$\lim_{\theta\rightarrow 0} \frac{\sin (7\theta)}{3\theta} = 
@@ -1029,8 +1029,6 @@ $$\lim_{\theta\rightarrow 0} \frac{\sin (7\theta)}{3\theta} =
 \item Find 
 $$\lim_{\theta\rightarrow 0} \frac{\sin(4x)}{\sin(6x)} = \frac{2}{3}$$
 \item Mention limit law use and substitution ideas here.
-\item Mention for future use.
-$$\lim_{\theta\rightarrow \infty} \frac{\sin (\theta)}{\theta} = 0$$
 \end{enumerate}
 \end{enumerate}
 
