@@ -1036,54 +1036,58 @@ $$\lim_{\theta\rightarrow 0} \frac{\sin(4x)}{\sin(6x)} = \frac{2}{3}$$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.4 The chain rule}
-How many differentiation rules do we have? List as many as they can say.
-What are we missing? Combining functions via function composition.
-$$
-\frac{d}{dx}\sin(2x)=?
-$$
 
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Take stock: Goal is to diff any function f(x) by...
+\begin{enumerate}
+\item growing a list of basic functions (trig is next, really sine and cosine are only new ones)
+\item combining functions in various ways, new combination here is function composition
+\item Short review of function composition
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Rate of change
+\item Composition of rates of change
 \begin{enumerate}
 \item A cheetah is 10x as fast as me. I am 2x as fast as my chicken. How much faster is the cheetah than my chicken? 20x as fast.
 \item Example of temperature of La Crosse, temperature in the room, temperature in my storage case.
 \item Explanation of chain idea: change in daytime light - changes - temperature - changes - growth of apple tree - changes - size of apple - changes - size of worm population
-\item Draw classic function composition diagram, but write $y=f(g(x))$. Then, we have the chain rule. Rate of change in $f\circ g$ at $x$ is the same as ROC of $g$ at $x$ times ROC of $f$ at $g(x)$.
+\item Back to classic function composition diagram. Rate of change in $f\circ g$ at $x$ is the same as ROC of $g$ at $x$ times ROC of $f$ at $g(x)$.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Theorem: For $f$ and $g$ differentiable, $f\circ g$ is also differentiable and
+\item Theorem: Chain rule, for $f$ and $g$ differentiable, $f\circ g$ is also differentiable and
 $$
 \frac{d}{dx} f(g(x)) = f'(g(x))g'(x)
-$$
-or equivalently in Leibniz notation.
-$$
-\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}.
 $$
 \begin{enumerate}
 \item Proof idea:
 \[
 \frac{d}{dx} f(g(x)) = \lim_{h \rightarrow 0} \frac{f(g(x+h)) - f(g(x))}{h} = \lim_{h \rightarrow 0} \frac{f(g(x+h)) - f(g(x))}{g(x+h)-g(x)}\frac{g(x+h)-g(x)}{h}
 \]
-then change of variable and done.
-\item {\bf Example:} 
+then change of variable and done. See text for technical details.
+\item Leibniz notation is convenient.
 $$
-f(x) = x^2,\quad g(x) = 2x
+\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}.
 $$
-\item More intuition:
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Examples:
 \begin{enumerate}
-\item {\bf Examples:} Carefully identify $f$ and $g$. Challenge is identifying inside and outside functions.  
-$$(x^2+x+1)^{1000}, \quad \sin(1+\cos(x)), \quad \tan^3(4x)$$
+\item $(x^2+2x+3)^100$
+\item $\tan^3(\sin(x)+1)$
+\item $2^x = e^{2\ln(x)}$ leading towards below.
+\item Challenge is identifying $f$ and $g$ for composition $f(g(x))$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item This is a versatile new technique. Quotient rule revisited:
 $$
 \frac{d}{dx} \frac{f(x)}{g(x)} = \frac{d}{dx} f(x)(g(x))^{-1}
 $$
-\end{enumerate}
-\item Differential equation: population, mass-spring
-\end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item General exponential functions 
@@ -1093,8 +1097,7 @@ $$
 $$
 \frac{d}{dx}a^x = a^x\ln (a)
 $$
-\item {\bf Example:} $$2^{3^{x^2}}$$
-\item Do speed review of inverse functions and logarithmic function
+\item Example: $2^{3^{x^2}}$
 \end{enumerate}
 \end{enumerate}
 
@@ -1105,74 +1108,87 @@ $$
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item What remains?
+\item What remains? Extend the chain rule to further our reach.
 \begin{enumerate}
-\item Inverse trig function, $\ln(x)$ (next section via chain rule), curves which aren't functions.
-\item Should be able to differentiate any curve via the same idea, just locally.
+\item Inverse functions (log for exp, inv trig, others), next section
+\item Curves which are not functions (circle, trajectories, others), this section, tangent lines should still make sense
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Implicit differentiation (chain rule in disguise)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Find the equation of the tangent line to $x^2+y^2=1$ at point $(1/\sqrt{2}, 1/\sqrt{2})$.
 \begin{enumerate}
-\item {\bf Examples:} Find $\frac{dy}{dx}$ for $x^2+y^2 =1$ (graph)
-\begin{enumerate}
-\item Idea: treat $y=y(x)$ and differentiate both sides of equation. Require chain rule for $y$ terms.
-\item Is it useful? Just the same, but a bit more difficult to use. Find the equation of the tangent line of $x^2+y^2 = 1$ at $(\sqrt{2}/2,\sqrt{2},2)$
-\item Note:
-\begin{itemize}
-\item Always have multiple of $y'$ for function $y$, actually the chain rule
-\item Your answer may involve both $x$ and $y$
-\item All the other rules apply just the same
-\item Find the derivative by plugging in both $x$ and $y$. 
-\end{itemize}
+\item Check that point is actually on the curve. Need $dy/dx$ at this point then done.
+\item Assume $y = y(x)$ locally to this point, apply chain rule
+\item Note, could have solved for y first in this case, try on own.
 \end{enumerate}
-\item {\bf Examples:} Find $\frac{dy}{dx}$ for $x^3+y^3 =6xy$ (Folium of Descartes)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Folium of Descartes
 \begin{enumerate}
-\item Graph in desmos. Compare for following.
-\item Show (3,3) is on the graph. What is $\frac{dy}{dx}|_{x=3}$?
-\item Where is $\frac{dy}{dx}=0$? Undefined?
+\item $x^3+y^3=6xy$, not a function, cannot solve for $y$
+\item Wiki page story, history of calculus
+\item Find tangent line at (3,3). Horizontal tangents?
 \end{enumerate}
-\item {\bf Examples:} Find $\sin x\sin y+\sin y \sin x = 0$, draw the derivative in Desmos, nodal lines
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Power rule revisited
+\begin{enumerate}
+\item Can extend the power rule to rational exponents.
+\item $y = x^p/q$ gives $y^q = x^p$, diff both sides and solve.
+\item What about irrational powers?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Inverse functions:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\item Recall: Inverse function idea
 \begin{itemize}
-\item  Youtube: amazing resonance effect 
-\item \url{https://www.youtube.com/watch?v=wvJAgrUBF4w&noredirect=1}
-\item \url{https://www.youtube.com/watch?v=uENITui5_jU}
+\item General case
+\item Simple example: $f(x)=x^2$ and $f^{-1}(x)=\sqrt{x}$. Graph together. Domain and range swap. 
+\item Desmos graphs
 \end{itemize}
-\item {\bf Examples:} Find $\frac{dy}{dx}$ for $\sin(x+y) = e^{xy}$
-\item {\bf Examples:} Find the equation of the tangent line to $y\sin 2x = x\cos 2y$ at $(\pi/2, \pi/4)$
-\item Can show the power rule for rational powers:
-$$ y = x^n = x^{p/q}, \quad y^q = x^p, \quad qy^{q-1} \frac{dy}{dx} = px^{p-1}$$
+
+%%%%%%%%%%%%%%%%%%%%%%%5
+\item Differentiating inverse functions
+\begin{itemize}
+\item $f(x) = sqrt(x)$ derivative connected to $f^{-1}(x)=x^2$. Refer to the graph.
+\item General case via implicit differentiation: $d/dx f^{-1}(x) = 1/f'(f^{-1}(x))$
+\item Note how graph tangent line slope changes when reflected.
+\end{itemize}
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Derivatives of inverse trigonometric functions
 \begin{enumerate}
-\item {\bf Examples:} Find $y'$ for $\sin y = x$: $y' = \frac{1}{\sqrt{1-x^2}}$
-\item Find all the inverse trig functions by yourself, we just did $\arcsin$. Short review below (not invertible, domain restriction, Pythagorean identities, etc)
+\item Example: Inverse sine
+\begin{itemize}
+\item Review of inverse sine (hint at other trig functions, main 4 most important)
+\item Restricted sine is invertible.
+\item Use implicit differentiation to compute. Check that agrees with previous general inverse function formula. Key is to use a right triangle to eliminate $y$.
+\item Key is domain restriction, make sure to write down.
+\end{itemize}
+\item Domain restrictions for main 4 trig functions.
 \begin{itemize}
 \item $\arcsin(x), \quad -\frac{\pi}{2} \leq x \leq \frac{\pi}{2}$
 \item $\arccos(x), \quad 0 \leq x \leq \pi$
 \item $\arctan(x), \quad -\frac{\pi}{2} < x < \frac{\pi}{2}$
-\item $\text{arccsc}(x), \quad -\frac{\pi}{2} \leq x \leq \frac{\pi}{2}$
 \item $\text{arcsec}(x), \quad 0 \leq x \leq \pi$
-\item $\text{arccot}(x), \quad -\frac{\pi}{2} < x < \frac{\pi}{2}$
 \end{itemize}
-\item Add to your list of derivatives to know.
-\item {\bf Examples:} Use two method to find the derivative ((students) chain rule, (me) draw triangle and simplify as algebraic expression).
+\item 4 derivative formulas. Remember these.
+\begin{align*}
+\frac{d}{dx} \arcsin(x) &= \frac{1}{\sqrt{1-x^2}}, \quad -1 \leq x \leq 1 \\
+\frac{d}{dx} \arccos(x) &= \frac{-1}{\sqrt{1-x^2}}, \quad -1 \leq x \leq 1 \\
+\frac{d}{dx} \arctan(x) &= \frac{1}{1+x^2} \\
+\frac{d}{dx} \text{arcsec}(x) &= \frac{1}{x\sqrt{x^2-1}}
+\end{align*}
+\item Example: Use two methods to find the derivative ((students) chain rule, (me) draw triangle and simplify as algebraic expression).
 $$
 y = \sin(\cos^{-1} x)
 $$
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Derivative of general inverse functions
-\begin{enumerate}
-\item Implicit differentiation, need not memorize this formula.
-$$
-y=f^{-1}(x), \quad f(y)=x, \quad (f^{-1}(x))' = \frac{1}{f'(f^{-1}(x))}
-$$
-\item Illustrate by graph, reflection across main diagonal, how does the slope of the tangent change, slope is the reciprocal?
-\end{enumerate}
 \end{enumerate}
 
 
