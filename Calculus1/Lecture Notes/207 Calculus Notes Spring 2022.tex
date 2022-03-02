@@ -1197,10 +1197,19 @@ $$
 \subsection{3.6 Derivative of logarithmic functions}
 \begin{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Review of logs:
+\begin{enumerate}
+\item Definition, keep track of domain and range
+\item Log properties
 \item Historic motivational interestingness: \url{https://en.wikipedia.org/wiki/History_of_logarithms}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Theorem: (show via implicit differentiation of $x=e^y$)
+\item Derivatives of logarithms:
+\begin{enumerate}
+\item Already can differentiate exponentials. Use implicit differentitation to get at it.
+\item Result:
 $$
 \frac{d}{dx}(\ln x) = \frac{1}{x}
 $$
@@ -1208,21 +1217,20 @@ and
 $$
 \frac{d}{dx}(\log_a x) = \frac{1}{x\ln a}
 $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Examples:
 \begin{enumerate}
-\item {\bf Examples:} (with the Chain rule)
-\begin{enumerate}
-\item $\frac{d}{dx} (\ln (-x))$
-\item $\frac{d}{dx} (\log_5 (x^2 e^x))$ (2 ways, chain rule then log properties can be handy, need change of base formula to show match)
-\item $\frac{d}{dx}(\ln |x|) = \frac{1}{x}$
+\item $\frac{d}{dx} (\ln (x^2 e^x)/(x+1))$, leverage log props, can introduce logs when needed, just remove later, see below.
+\item Theorem: $\frac{d}{dx}(\ln |x|) = \frac{1}{x}$, force the domains to match, graph in desmos
 \end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Logarithmic differentiation: Logarithms are valued for their sweet properties.
+\item Logarithmic differentiation: Introduce logs to leverage sweet properties.
 \begin{enumerate}
-\item Three nice property of $\log_a (x)$ (prod, quotient, powers), $\ln(x)$ is the nicest choice.
-\item {\bf Example:} $y = x^x$, then $y'=?$ (no such rule)
-\item {\bf Example:} $y = \frac{(x^2+1)(x+3)^{1/2}}{x-1}$, then $y'=?$ (quotient, product, chain rule madness)
+\item Example: $y = x^x$, then $y'=?$ (no such rule)
+\item Example: $y = \frac{(x^2+1)(x+3)^{1/2}}{x-1}$, then $y'=?$ (quotient, product, chain rule madness)
 \item Summary of steps: 
 \begin{enumerate}
 \item  Identify the situation (lots of multiplication, quotient, and powers)
@@ -1234,20 +1242,9 @@ $$
 |y|=|f(x)|, \quad \ln(|y|)=\ln(|f(x)|), \quad \frac{1}{y}\frac{dy}{dx} = \frac{1}{f(x)}f'(x), \quad \frac{dy}{dx}=\dots 
 $$
 \end{enumerate}
-\item {\bf Example:} Finally, the full power rule: $y = x^n$, $n$ any real number, log differentiation.
+\item Example: Finally, the full power rule: $y = x^n$, $n$ any real number, log differentiation.
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item More complicated cases:
-\begin{enumerate}
-\item {\bf Examples:} Find $y'$ for 
-$$
-y = x^{x^x}, \quad y = \sin x^{\cos x}, \quad y = \Big(\frac{(2x+3)^2\sqrt{2-x}}{(x-1)^3}\Big)^{x^2}
-$$
-$$
-y^x = x^y
-$$
-\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Important results to know:
@@ -1272,6 +1269,11 @@ $$
 $$
 \lim_{n\rightarrow \infty}P(1+\frac{r}{n})^{nt}  = Pe^{rt}
 $$
+\item Wikipedia continuous growth
+\item Note, this leans on the previous limit
+\[
+\lim_{h \rightarrow 0} \frac{e^h-1}{h} = 1
+\]
 \end{enumerate}
 \end{enumerate}
 
