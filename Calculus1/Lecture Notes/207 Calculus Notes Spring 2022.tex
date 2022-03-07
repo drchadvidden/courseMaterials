@@ -1285,48 +1285,33 @@ $$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Things that \emph{change} according to a rule (or rules) can be translated into a differential equation.  \\
+\item Differential equations: Translation of change into calculus  \\
  See the many examples:
-\begin{itemize}
+\begin{enumerate}
 \item \url{https://en.wikipedia.org/wiki/Differential_equation}
 \item \url{https://people.maths.ox.ac.uk/trefethen/pdectb.html}
+\item Pixar research, Frozen video demo
 \item Def: A differential equation is an equation involving derivatives where the unknown is a \emph{function}. (analogous to algebraic equations)
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Exponential growth and decay is a simple start.
-$$
-\frac{dy}{dt} = ky, \quad y(0)=y_0
-$$
-Here $k$ is some constant ($k>0$ growth, $k<0$ decay) and $y_0$ is the initial size. $y=y(t)$ is an unknown function of time $t$ need to find.
-\begin{enumerate}
-\item Read the DE as 'quantity $y$ changes at a rate proportional to it's size'. What a language!
-\item What things do you know which do this? Population, investment, radioactive decay, temperature of object, etc. Will see DEs in advanced related classes.
-\item How to find solution $y(t)$? We already know a function whose derivative is (almost) the same. Guess $y(t)=Ce^{kt}$ for some constant $C$. Then,
-$$
-\frac{dy}{dt} = \frac{d}{dt}(Ce^{kt}) = ky 
-$$
-What is $C$?
-$$
-y(0) = C = y_0
-$$
-Then, the solution is $y(t)=y_0e^{kt}$. PERT formula!
-\item Can show the ONLY solution to the above DE is $y(t)=y_0e^{kt}$ (uniqueness).
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} (Optional)
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item DEs and Exponential growth: Population grows at rate proportional to size. 
 \begin{enumerate}
-\item Population growth, La Crosse had population 50000 in 2000 and 55000 in 2010, what will the population be in 2020? Here we \emph{choose} the above model. What are the issues with this assumption? \\
-Log plots: Google populations of california, texas, florida. \url{https://www.google.com/publicdata/explore?ds=kf7tgg1uo9ude_&met_y=population&idim=state:06000:48000&hl=en&dl=en#!ctype=l&strail=false&bcs=d&nselm=h&met_y=population&scale_y=lin&ind_y=false&rdim=country&idim=state:06000:48000:12000&ifdim=country&hl=en_US&dl=en&ind=false}
-\item Newton's Law of Cooling: Newton said the rate at which an object cools (or warms) is proportional to the difference in temp of the object and its surrounding temp. Language sound familiar?
-$$
-\frac{dT}{dt} = k(T-T_s), \quad T(0)=T_0
-$$
-where $T(t)$ is the unknown temperature function. Ideal coke temp $38^{\circ}$
-\item Solution: We've already solved this type once and for all! Use the substitution $y(t)=T(t)-T_s$ and reduce to $\frac{dy}{dt}=ky$.
-\item Coffee example if in high demand.
+\item $\frac{dy}{dx} = r y$, $r$ a postitive constant, $y(0)$ initial condition.
+\item Example: $r = 1, y(0) = 10$. Graph and interpret. $r = 2, -3$?
+\item General solution $y = y(0)e^{rt}$
+\item Trouble is, don't usually know $r$. Need to find this from data.
+\item La Cross population growth. Find population now and 10 years ago. Project population in 10 year. Plot result in desmos. Google real trends.
+\item Issue: Exponential growth is unrealistic long term. Can modify rule.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Improved population growth. Assume a carry capacity $L$.
+\begin{enumerate}
+\item $y << L$ increase fast then slow down, $y >> L$ decrease fast then slow down, $y \approx L$ little change, $y \approx 0$ little change.
+\item Harder to solve by hand, but this one is doable, often not possible.
+\item Approximate with slope field. Google dfield.
+\item Google logistic growth.
 \end{enumerate}
 \end{enumerate}
 
