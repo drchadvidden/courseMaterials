@@ -464,7 +464,7 @@ Consistent vs inconsistent terminology.
 \]
 
 %%%%%%%%%%%%
-\item Example (Vector equation): Show that $\vec{b} = [3,1,-1]^T$ is a linear combination of vectors $\vec{a_1}=[2,0,-1]^T$ and $\vec{a_2} = [-1,1,1]^T$.
+\item Example (Vector equation): Show that $\vec{b} = [3,1,-1]^T$ is a linear combination of vectors $\vec{a_1}=[2,0,-1]^T$ and $\vec{a_2} = [-1,1,1]^T$. Choose $h$ such that $\vec{c} = [3,1,h]^T$ does work.
 \begin{itemize}
 \item This is equivalent to solving a linear system via GE.
 \item Geogebra and geometric interpretation.
@@ -474,6 +474,9 @@ Consistent vs inconsistent terminology.
 
 %%%%%%%%%%%%
 \item Definition: The collection of all linear combinations of $\vec{v_1}, \dots, \vec{v_p} \in \mathbb{R}^n$ is called the Span$\{\vec{v_1}, \dots, \vec{v_p} \}$ and is a subset of $\mathbb{R}^n$.
+
+%%%%%%%%%%%%%%
+\item Question: For two vectors in $\mathbb{R}^3$, what can the span look like geometrically? Three vectors?
 
 %%%%%%%%%%%%
 \item Homework: 1, 3, 5, 7, 9, 11, 13, 15, 17, 21, 23, 27
@@ -1945,6 +1948,63 @@ for $B$ as derived.
 \subsection{2.5 Matrix factorizations}
 
 \begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Idea of $A=LU$ decomposition.
+\begin{enumerate}
+\item Factor $A=LU$ where $L$ is lower triangular with diagonal 1s and $U$ is upper triangular. $U$ is essentially Echelon form.
+\item Draw $A$ as a linear transformation broken into two steps, $U$ then $L$.
+\item To solve $A\vec{x} = \vec{b}$, first factor $A$ and solve
+\begin{itemize}
+\item first $L\vec{y} = \vec{b}$,
+\item then $U\vec{x} = \vec{y}$
+\end{itemize}
+\item Turns out computing $LU$ is much faster and more stable than computing $A^{-1}$. See text for discussion.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%5
+\item Example: Algorithm for computing $LU$.
+\begin{enumerate}
+\item Example: Find the $LU$ decomposition of 
+\[
+A = \left[
+\begin{array}{ccc}
+3 & -7 & -2 \\
+-3 & 5 & 1 \\
+6 & -4 & 0
+\end{array}
+\right]
+\]
+and use it to solve $A\vec{x}=\vec{b}$ where
+\[
+\vec{b} = [-7, 5, 2]^T.
+\]
+\item Idea: Perform row reduction on $A$ to get to echelon form. Then,
+\[
+E_p \dots E_2 E_1 A = U 
+\]
+and
+\[
+A = (E_p \dots E_2 E_1 )^{-1} U = (E_1^{-1} E_2 ^{-1} \dots E_p^{-1} ) U = LU
+\]
+\item For this example,
+\[
+L = \left[ 
+\begin{array}{ccc}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+2 & -5 & 1
+\end{array}
+\right], \quad
+U = \left[ 
+\begin{array}{ccc}
+3 & -7 & -2 \\
+0 & -2 & -1 \\
+0 & 0 & -1
+\end{array}
+\right]
+\]
+\end{enumerate}
 
 \item Lab content
 
