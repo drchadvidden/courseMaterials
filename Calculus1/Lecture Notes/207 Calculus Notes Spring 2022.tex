@@ -1499,120 +1499,59 @@ $$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 4 Applications of differentiation}
 
+\begin{enumerate}
+\item We've seen some applications in Ch3, but the list is long. Sometimes seem more mathy than useful.
+\begin{enumerate}
+\item \url{https://en.wikipedia.org/wiki/Differential_calculus#Applications_of_derivatives}
+\item \url{https://en.wikipedia.org/wiki/Mathematical_optimization}
+\end{enumerate}
+
+\item Chapter outline:
+\begin{enumerate}
+\item Deeper function understanding: Graphing with detail
+\item Optimization: Max and min values
+\item Theory: MVT
+\item Beginnings: Reversing differentiation, called integration
+\end{enumerate}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{4.1 Maximum and minimum values}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
-\item Motivation: Where do we see optimization
-\begin{itemize}
-\item
-\item What's the maximum/minimum speed (speeding ticket? Why do you care?
-\item Buying stocks, when to take action?
-\item Suppose you have a fence of 100 ft long. How to fence a rectangular region so that the area is maximum?
-\item What's biggest rectangle inside a circle?
-\item Who is the best March madness basketball team?
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Extreme values definition: Let $c$ be a number in the domain $D$ of a function $f$. Then
-\begin{itemize}
-\item $f(c)$ is the absolute maximum value of $f$ on $D$ if $f(c)\geq f(x)$ for all x in D
-\item $f(c)$ is the absolute minimum value of $f$ on $D$ if $f(c)\geq f(x)$ for all x in D
-\end{itemize}
-\item Draw a graph typical to smooth nice functions already seen
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item True or False? (Keys: domain endpoints included/not, unbounded functions, discontinuities, singularities (corners), lots of cases here but not too many, draw pictures to summarize)
-\begin{itemize}
-\item Domain $D$ matters. 
-\item $f$ can have more than 2 absolute values.
-\item Every function must have an absolute value.
-\item Absolute values occur where $f'(x)=0$.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Lots of possibilities: Which have absolute max or mins? What are they?
+\item Extreme values of functions: Local min and max, absolute min and max.
 \begin{enumerate}
-\item $f(x)=1/x$ (no domain listed implies all possible $x$.
-\item $f(x)=x^2$
-\item $f(x)=x^2$ on $[0,2]$
-\item $f(x)=x^2$ on $(0,2)$
-\item Keys: domain endpoints included/not, unbounded functions, discontinuities, singularities (corners), lots of cases here but not too many, draw pictures to summarize with endpoints, abs local min max/don't name, non differentiable, discontinuity.
+\item Main application: Optimization, largest, cheapest, fastest.
+\item Def of abs min / max, local min / max
+\item Eg. Local min if $f(c) <= f(x)$ for all $x$ near $c$
+\item Draw picture to illustrate.
+\item Possible locations: Zero derivatives, corners, discontinuities, endpoints, inflection pts
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Extreme Value Theorem}: if $f$ is continuous on a closed interval $[a,b]$, then $f$ attains its extreme values on $[a,b]$
+\item Extreme value theorem (EVT)
 \begin{enumerate}
-\item Check hypothesis before computing
-\item If it fails, can you say no absolute values? Nope.
-\item Require
-\begin{itemize}
-\item Continuous
-\item Closed interval (all endpoints included)
-\item The max, min can be at $a, b$
-\item Absolute max/min can occur multiple times
-\end{itemize}
+\item How to ensure EVs happen? Avoid the bad scenarios: holes, asymptotes.
+\item EVT: If $f(x)$ is continuous on closed interval $[a,b]$, then $f(x)$ must attain EV on $[a,b]$.
+\item Note, does not say where it is or how to find, just that it exists.
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Local Extreme Values
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item How to find extreme values?
 \begin{enumerate}
-\item {\bf Definition:} a number $f(c)$ is a 
-\begin{itemize}
-\item Local maximum value of $f$ if $f(c)\geq f(x)$ when $x$ is near $c$
-\item Local minimum value of $f$ if $f(c)\leq f(x)$ when $x$ is near $c$
-\end{itemize}
-\item Distinctions:
-\begin{itemize}
-\item Difference between absolute extreme values and local extreme values (draw a picture to illustrate)
-\item Is an absolute max also local max?
-\item Why do we want these in applications? More important in some cases (stock market)
-\end{itemize}
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to identify locations of local / absolute extrema? Already classified the cases.
-\begin{enumerate}
-\item {\bf Definition:} A critical number of $f$ is a number $c$ in the domain of $f$ such that $f'(c) = 0$ or $f'(c)$ DNE. (all cases here, see them? Stationary points, singular points, end points)
-\item Fermat's little theorem: if $f$ has a local max/min at $c$ and if $f'(c)$ exists, then $f'(c) = 0$. 
-\item True or false?
-\begin{itemize}
-\item If f'(c) = 0, then f has a local maximum or minimum at c
-\item If f has a local maximum or minimum at c, then f'(c) = 0
-Both are false
-\end{itemize}
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Finding critical numbers of 
-\begin{enumerate}
-\item $f(x)=2x-\tan x$ on $(-\pi,\pi)$
-\item $g(x)= x^{1/3}-x^{-2/3}$
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Method: Find the absolute extreme values of $f$: the closed interval method.
-\begin{enumerate}
-\item Check the extreme values theorem hypothesis
-\item Find all the candidates: Critical numbers
-\begin{itemize}
-\item Stationary points
-\item Singular points
-\item End points
-\end{itemize}
-\item Compare the $f$ values at all the candidates.
-\item Take the largest/smallest ones (may be more than one) and write the answer in the format: $f(x)$ has an absolute value (~) at x = ( )
+\item Must occur at a critical number.
+\item Cases for critical numbers: Endpoints, stationary points, singular points.
 \end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} Find the absolute maximum and minimum values of each. Where is the absolute max/min and where does it occur?
+\item Example: Find the absolute max and min by checking the critical numbers. Use Desmos to check.
 \begin{enumerate}
 \item $f(x) = x^3+x^2-x$ on $[-2,2]$. 
 \item $f(x) = x^{\frac{2}{3}}$, no interval then add open / closed. Change to $x^\frac{1}{3}$
-\item $f(x) = x + 2\cos(x)$ on $[-2\pi,\pi]$
+\item $f(x) = x + 2\cos(x)$ on $[0,2\pi]$
 \end{enumerate}
 \end{enumerate}	
 
