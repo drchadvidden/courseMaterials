@@ -1560,82 +1560,66 @@ $$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{4.2 The mean value theorem}
-Write statements, then let them think about what it could mean.
+
 \begin{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Rolle's Theorem:} Let $f$ be a function that satisfies the following three hypotheses: 
-\begin{itemize}
-\item $f$ is continuous on the closed interval $[a,b]$
-\item $f$ is differentiable on the open interval $(a,b)$
-\item $f(a) = f(b)$
-\end{itemize}
-Then there's a number $c$ in $(a,b)$ such that $f'(c) = 0$. Once they sort out, draw picture. Why is this useful?
-\begin{itemize}
-\item Proof:
-\item If $f$ is a constant function, we are done.
-\item Assume $f(x)>f(a)$ for some $x$. Then by the etreme value theorem $f$ has a max value which must be a local max. Then $f'(c)=0$ by Fermat's theorem.
-\item Case where $f(x)<f(a)$ is similar.
-\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Big picture of the MVT:
+\begin{enumerate}
+\item Math theory detour, useful for proofiness rather than application
+\item Big picture: Connect IROC and AROC, no limits
+\item Most used calculus result in math world
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Example} Show that $x^3+x-1 = 0$ has only one real solution.
+\item Rolle's Theorem: Let function $f(x)$ be continuous on $[a,b]$ and differentiable on $(a,b)$ with $f(a)=f(b)$. Then there's a number $c$ in $(a,b)$ such that $f'(c) = 0$. 
+\begin{enumerate}
+\item Ask to draw picture and see why true.
+\item More than one $c$ possible.
+\item Why is closed interval important? Diff? $f(a)=f(b)$?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Show that $x^3+x-1 = 0$ has only one real solution.
 \begin{enumerate}
 \item Using IVT on $[0,1]$ to show existence.
 \item What if had 2 zeros on $(0,1)$, $f(a)=f(b)=0$? Then Rolle's theorem says there is $c$ in $(a,b)$ such that $f'(0)=0$. But, $f'(x)=3x^2+1$. So, can only have 1 zero.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Mean Value Theorem:} Let f be a function that satisfies
-\begin{itemize}
-\item $f$ is continuous on [a,b]
-\item $f$ is differentiable on (a,b)
-\end{itemize}
-then there's a number c in (a,b) such that 
-$$
-f'(c) = \frac{f(b)-f(a)}{b-a}
-$$
-\begin{enumerate}
-\item Draw picture to illustrate, drr...
-\item Pro0f: Reduce the situation to Rolle's Theorem. Let $g(x)$ be the line through $(a,f(a)), (b,f(b))$.
+\item Mean Value Theorem: Let function $f(x)$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then there's a number $c$ in $(a,b)$ such that 
 \[
-g(x) = f(a) + \frac{f(b)-f(a)}{b-a} (x-a)
-\]
-Define $s(x)=f(x)-g(x)$. Rolle's theorem gives $s'(c)=0$ for some $c$ in $(a,b)$. Then, $f'(c)=\frac{f(b)-f(a)}{b-a}$.
-\item Applications: 
-\begin{itemize}
+f'(c) = \frac{f(b)-f(a)}{b-a}.
+\] 
+\begin{enumerate}
+\item Ask to draw picture and see why true.
+\item More than one $c$ possible.
+\item Why is closed interval important? Diff? $f(a)=f(b)$?
 \item Average rate of change equals inst rat of change.
 \item When you are driving, there'll always be a moment that your instantaneous velocity is the same as the average velocity.
 \item Suppose you are driving from La Crosse to Madison: 150 mile, 1.5 hours. What should the speeding ticket be written for? 100mile/h
-\end{itemize}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples} Apply the Mean Value Theorem.
+\item Example: Find an upper bound on difference $\cos(1)-\cos(1.1)$.
 \begin{enumerate}
-\item Show $(\cos A-\cos B) \leq (A-B)$.
-\item If $f(0)=-3$ and $f'(x)\leq 5$ for all $x$, how large can $f(2)$ be?
+\item Apply MVT via rearrangement. Check hypothesis first.
+\item Connected to linearization.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Theorem:} If $f'(x) =0$ for all $x$ in $(a,b)$, then $f$ is a constant on $(a,b)$. 
+\item Theorems: The power of MVT
 \begin{enumerate}
-\item Why open interval here? Actual constant is not known. How to show this?
-\item {\bf Proof:} Assume $f'(x)=0$ on $(a,b)$. Need to show for any $x_1,x_2$ in $(a,b)$, $f(x_1)=f(x_2)$. For $x_1<x_2$, by the MVT
+\item If $f'(x)=0$ on $(a,b)$, then $f$ is constant on $(a,b)$.
 \[
-0 = f'(c) = \frac{f(x_1)-f(x_2)}{x_1-x_2}
+0 = f'(x) = (f(x_1)-f(x_2))/(x_1-x_2)
 \]
-for some $c$ in $(x_1,x_2)$. Done.
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Antiderivative beginnings
-\begin{enumerate}
-\item Find $f(x)$ such that $f'(x) = 2x$. Lots here.
-\item {\bf Corollary:} If $f'(x) = g'(x)$ for all $x$ in (a,b), then $f-g$ is a constant on (a,b)
-\item That is: $f(x)$ is uniquely determined by $f'(x)$ subject to a change of constant. Terminology here is antiderivative.
-\item {\bf Proof:} Let $h(x)=f(x)-g(x)$, then $h'(x)=0$. So $h(x)=C$ and $f(x)=g(x)+C$.
+for all $x_1,x_2$ on $(a,b)$, then $f(x1)=f(x2)$.
+\item If $f'(x)=g'(x)$ on $(a,b)$, then $f(x)=g(x)+C$ for some constant $C$
+\[ 
+h(x)=f(x)-g(x) \quad \Rightarrow \quad h'(x)=0
+\]
+and $h(x)=C$ by above theorem.
 \end{enumerate}
 \end{enumerate}
 
