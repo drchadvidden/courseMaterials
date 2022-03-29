@@ -1630,10 +1630,11 @@ and $h(x)=C$ by above theorem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
-\item {\bf Example:}
+\item Example
 \begin{enumerate}
 \item Graph $f(x)$, $f'(x)$ and $f''(x)$ for $f(x) = x^3+x^2-x$
 \item How is $f'$ related to $f$, $f''$ to $f'$, $f''$ to $f$?
+\item Desmos
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1653,23 +1654,20 @@ and $h(x)=C$ by above theorem.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item  {\bf Examples: } Draw a number line and find the absolute and local maxs/mins for each. Plot the points.
+\item  Example: Draw number line to find inc/dec. Find min/maxs. Draw on own.
 \begin{enumerate}
 \item $f(x) =3x^4-4x^3-12x^2+5$ 
-\item $h(x) = 1+2\sin(x)$ on $[0,2\pi]$.
-\item $g(x) = \sin(x)$ 
 \item How to graph $f$? Have a pretty good picture. What else can we add for detail? Where are turning points? Zeros?
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Second derivative $f''(x)$, take $\sin x$ as an example. Let them fill in blank.
+\item Second derivative $f''(x)$, above example. Let them fill in blank.
 \begin{enumerate}
 \item {\bf Concavity test}
 \begin{itemize}
 \item If ... $f''(x)>0$, then $f$ is  concave up
 \item If ... $f''(x)<0$, then $f$ is  concave down
 \end{itemize}
-\item Application: Filling a coke bottle with a constant volume of pouring. How does the height function change in concavity?
 \item {\bf The second derivative test: }
 \begin{itemize}
 \item $f'(c) = 0$, $f''(c) >0$, local min
@@ -1683,13 +1681,8 @@ and $h(x)=C$ by above theorem.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item {\bf Examples:} Graph sketching
 \begin{enumerate}
-\item Give a random graph and decide where it's increasing, decreasing, concave up/down, local max/min, inflection points.
-\item Give a random graph of $f'$ and decide increasing, decreasing, concave up/down, local max/min, inflection points.
-\item Sketch the graph of $3x^4-4x^3-12x^2+5$ with all detail and glory.
-\item  Sketch the graph of 
-$$
-f(x) = x^{2/3}(6-x)^{1/3}\quad \text{ knowing } \quad f'(x) = \frac{4-x}{x^{1/3}(6-x)^{2/3}},\quad f''(x) = \frac{-8}{x^{4/3}(6-x)^{5/3}}
-$$
+\item Finish above example. Add inflection point.
+\item Try on own: $f(x) = x^3-3x^2-9x+4$, .
 \end{enumerate}
 \end{enumerate}
 
@@ -1701,94 +1694,58 @@ $$
 
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item We've already seen indeterminate forms for limits, but here we get a better way to handle them.
+\item Recall: Indeterminate form, the reason for limits.
 \begin{enumerate}
-\item {\bf Examples:} ...from the past...
-\begin{itemize}
-\item $\ds \lim_{x\rightarrow 1} \frac{x^2-1}{x-1}=1 \quad$ (0/0 IF, factor and cancel, hole in graph. )
-\item $\ds \lim_{x\rightarrow 1} \frac{\ln(x)}{x-1}=? \quad$ (0/0 IF, cannot factor)
-\end{itemize}
+\item Limit of difference quotient. $0/0$ IF. Limit idea invented to handle this problem. 
+\item Already have algebraic techniques: $f(x)=x^2, f'(1)=$? $f(x)=\sqrt{x}, f'(1)=$?
+\item Our techniques are not enough: $f(x)=\ln(x), f'(1)=$? Used the inverse relation to handle in past. 
 \item Key: Indeterminate forms can be ANYTHING. Modify above example to show 2, 200, $\pi$, $\infty$, 0, etc.
 \item Types of indeterminate form:
 \begin{itemize}
-\item Type $0/0$
-\item Type $\infty/\infty$
-\item Type $0\cdot \infty$
-\item Type $\infty-\infty$
-\item Type $0^0, 1^\infty$, $\infty^0$
+\item Quotient $0/0$
+\item Quotient $\infty/\infty$
+\item Product $0\cdot \infty$
+\item Difference $\infty-\infty$
+\item Exponent $0^0, 1^\infty$, $\infty^0$
+\item Strategy: Rewrite all as first two quotients.
 \end{itemize}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Theorem: l'Hospital's Rule} If
-\begin{enumerate}
-\item $f$ and $g$ are differentiable in interval $I$ containing $x=a$, and
-\item $\displaystyle\lim_{x\rightarrow a} \frac{f(x)}{g(x)}$ is of indeterminate form $0/0$ or $\infty/\infty$
-\end{enumerate}
-then
+\item Theorem: (l'Hospital's Rule) If $f$ and $g$ are differentiable around $x=a$, and $\displaystyle\lim_{x\rightarrow a} \frac{f(x)}{g(x)}$ is of indeterminate form $0/0$ or $\infty/\infty$, then
 $$
 \lim_{x\rightarrow a} \frac{f(x)}{g(x)} = \lim_{x\rightarrow a} \frac{f'(x)}{g'(x)}
 $$
 if $\displaystyle\lim_{x\rightarrow a} \frac{f'(x)}{g'(x)}$ exists or is $\pm\infty$
 
 \begin{enumerate}
-\item Why is this nice? $\ds \lim_{x\rightarrow 1} \frac{x^2-1}{x-1}=1, \lim_{x\rightarrow 1} \frac{\ln(x)}{x-1}=? \quad$ (0/0 IF, can use l'Hospital's Rule)
-\item Why is LR true? {\bf Proof} idea for 0/0 case by graph (slope over slope).
-\[
-\frac{f(x)}{g(x)} \approx \frac{L_f(x)}{L_g(x)} = \frac{m_f(x-a)}{m_g(x-a)} = \frac{m_f}{m_g} = \frac{f'(a)}{g'(a)} \quad \text{since } f(a)=g(a)=0
-\]
-\item {\bf Proof} of $\infty/\infty$ case: $\frac{f(x)}{g(x)} = \frac{1/g(x)}{1/f(x)}$ transfers to 0/0 IF.
+\item Proof idea ($0/0$ IF case): Close to $x=a$, replace $f(x)$ with linearization $f'(a)(x-a)$ (tangent line approximation). Draw graph. Likewise for $g$. Cancel $(x-a)$ factor to get result.
+\item Tangent line tells rate to 0 or inf. This is the tug of war.
 \item Note: LR works for one sided limits also
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:}
+\item Examples: Check on own. Check if LR hypothesis holds first.
 \begin{enumerate}
+\item $\ds \lim_{x \rightarrow 1} (x^2-1)/(x-1)$
+\item $\ds \lim_{x \rightarrow 1} ln(x)/(x-1)$
 \item Can get crazy: Which grows faster, $x^{1000}$ or $e^x$? How to tell? Look at the ratio: $\ds \lim_{x\rightarrow \infty} \frac{x^{1000}}{e^x}$
-\item Old limits are easier (?):
+\item Old limits are easier:
 $$
-\lim_{x\rightarrow 0} \frac{\sqrt{1+x}-1}{x} = \frac{1}{2}, \quad \lim_{x\rightarrow 0 } \frac{\sin x}{x} = 1,\quad 
+\lim_{x\rightarrow 0 } \frac{\sin x}{x} = 1,\quad 
+\lim_{h\rightarrow 0} \frac{\sin h}{h} = 2/3,\quad 
 \lim_{x\rightarrow 0} \frac{\sin 2x}{\sin 3x} = 2/3
 $$
 \item Beware of temptation: 
-\begin{enumerate}
-\item $\lim_{x\rightarrow 0 }\cos x/x = 0$ What went wrong? What should I have had? ALWAYS check the hypothesis of LR first.
-\item $\lim_{x\rightarrow \infty} \frac{\sqrt{x^2-1}}{x} = ?$, $\lim_{x \rightarrow \infty} \frac{\sqrt{9x+1}}{\sqrt{x+1}}$
-\item $\lim_{x\rightarrow \infty} \frac{x+\sin(x)}{x} = 1$ cannot apply right away.
-\end{enumerate}
+$$\lim_{x\rightarrow \infty} \frac{\sqrt{x^2-1}}{x} = ?$$
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Other indeterminate forms: Idea is to always transfer to $0/0$ or $\infty/\infty$ form.
 \begin{enumerate}
-\item $0\cdot\infty$ IF, for the second one way works but not other.
-$$
-\lim_{x\rightarrow 0^+}x\ln(x), \lim_{x\rightarrow -\infty}xe^x
-$$
-\item $\infty - \infty$ IF
-$$
-\lim_{x\rightarrow 0} \cot x -1/x
-$$
-\item $0^0, \infty^0, 1^\infty$ IFs, cannot use algebra but logarithms are useful.
-$$
-\lim_{x\rightarrow 0 }x^x, \lim_{x\rightarrow \infty }(1+\frac{1}{x})^x
-$$
-Idea: $\ds \lim_{x\rightarrow \infty} [f(x)]^{g(x)} =\lim_{x\rightarrow \infty} e^{\ln([f(x)]^{g(x)})} = e^{\lim_{x\rightarrow \infty} g(x)\ln(f(x))}$ assuming limit exists since $e^x$ is continuous.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} 
-$$
-\lim_{x\rightarrow 0^+ } \frac{e^x-1}{\cos x} = 0
-$$
-$$
-\lim_{x\rightarrow 1} \frac{\sin (x-1)}{x^2+x-2} = 1/3
-$$
-$$
-\lim_{x\rightarrow \pi/2 } \frac{1-\sin x}{1+\cos 2x} = 1/4
-$$
-$$
-\lim_{t\rightarrow 0^+ } (1+\sin 4t)^{\cot t}= e^4
-$$
+\item $\ds \lim_{x \rightarrow 0^+} (1/x - 1/(e^x-1))$ (add fractions)
+\item $\ds \lim_{x \rightarrow 0} x^x$ (log and exp, then log prop)
+\item $\ds \lim_{x \rightarrow inf} (1+1/x)^x$
 \item Mention it's super important: indeterminant form is the most common case we want to work on. (derivative, def integral, etc)
 \end{enumerate}
 \end{enumerate}
@@ -1797,7 +1754,7 @@ $$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{4.5 Summary of carve sketching}
+\subsection{4.5 Summary of curve sketching}
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
