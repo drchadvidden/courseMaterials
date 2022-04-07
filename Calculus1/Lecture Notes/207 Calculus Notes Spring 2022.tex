@@ -1931,64 +1931,46 @@ for (i in c(1:10)){
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Motivation: Goal is to reverse differentiation. Key here is lack of uniqueness.
 \begin{enumerate}
-\item Zombies touched on this situation already, leads to predator prey.
-\item Find function $F(x)$ such that $F'(x) = 2x$
-\item What about $F'(r) = 2\pi r$?, $F'(r) = 4\pi r^3$? Wha??
+\item Many physical laws quantify change, but computing the underlying quantities is most interesting.
+\item Saw this already with DEs for exponential growth.
 \item Conservation law.
-\item Free fall $a(t) = 9.8 m/s^2$, can get velocity and distance.
-\item Free fall with drag $a(t) = 9.8 - kv$ (gravity const - drag).
+\item Free fall $a(t) = 9.8 m/s^2$, can get velocity and distance. Free fall with drag $a(t) = 9.8 - kv$ (gravity const - drag).
 \item Kepler's laws of planetary motion spurred Newton to work on Calculus and support theory of physics.
 \item Any physical (or other) law.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Def:} Function $F$ is an antiderivative of $f$ on interval $I$ if $F'(x) = f(x)$ for all $x$ on $I$.
-Comments
+\item Def: $f(x)$ is an antiderivative of $f(x)$ on interval $I$ if $f'(x) = f(x)$ for all $x$ in $I$
 \begin{enumerate}
-\item Note: An antiderivative is not unique. Why?
-\begin{itemize}
-\item Graphically, the derivative only tells you the shape of the function subject to a vertical shift
-\item By computation, differentiating a constant always gives zero.
-\item Mean value theorem already gave us this as a theorem (lemma?).  If $F$ is an anti-derivative of $f$ on an interval $I$, then the most general anti-derivative of $f$ on $I$ is $$
-F(x)+C
-$$
-were C is an arbitrary constant.
-\end{itemize}
+\item Example: $2x$ has antiderivative $x^2$
+\item Note, not unique here. Any $f(x)+C$ works for $C$ an arbitrary constant. Graph multiple antiderivatives.
+\item Think of derivative as an operator we aim to reverse.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to understand $F(x)+C$? 
+\item Def: The collection of all antiderivatives of $f(x)$ is denoted $\int f(x) ~dx$. That is, $\int f(x) ~dx=F(x)+C$ where $F(x)$ is any antiderivative and $C$ an arbitrary constant.
 \begin{enumerate}
-\item Give me three examples for function $F$ you choose. 
-\item How to make it unique? Need more information. Find the anti-derivative of  $f(x)=2x$ that passes through point $(0,1)$. Also, zombies already tackled this situation.
+\item New idea to capture all reverse derivatives.
+\item Example: $\int 2x ~dx$
+\item Will explain notation in Chapter 5.
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item A new idea handles this lack of uniqueness. \\
-{\bf Definition:} The set of all antiderivatives of a function is called the indefinite integral of $f$ with respect to $x$, written
-$$
-\int f(x) ~dx = F(x) + C
-$$
-where $C$ is an arbitrary constant. The process of computing integrals is integration. Here, we see differential notation and a stretched out S, reasons to come.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Properties of the indefinite integral come from differentiation. They are easily checked through that lens.
+\item Theorem: Properties of the indefinite integral come from differentiation. They are easily checked through that lens.
 \begin{enumerate}
 \item $\ds \int cf(x) ~dx = c\int f(x) ~dx$
 \item $\ds \int f(x) + g(x) ~dx = \int f(x) ~dx + \int g(x)~ dx$
+\item This allows us to treat $\int ~dx$ as an operator much like $\frac{d}{dx}$.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {bf Examples:} Find the anti-derivatives of each. List all differentiation rules. Note each are easily checked, though integration is generally much harder than integration!
+\item Examples:
 \begin{enumerate}
-\item Integration rules: $k, x^n, \frac{1}{x}, \sin(x), \cos(x), \sec^2(x), \csc^2(x), \sec(x)\tan(x), \csc(x)\cot(x), e^x, e^{kx}, a^x, \frac{1}{1+x^2}$
-\item $3x$
-\item $x^2+e^x$
-\item $xe^x$
-\item $2x\cos(x^2)$
-\item $\frac{2x}{1+x^2}$
-\item Find $F(x)$ such that $F''(x) = x^2$
-\item Find $f$ such that $f'(x) = \frac{x^2-x+5x^3}{2x}$ and $f(1)=2$.
+\item Integration rules (no need to memorize, just reasoning): $k, x^n, \frac{1}{x}, \sin(x), \cos(x), \sec^2(x), \csc^2(x), \sec(x)\tan(x), \csc(x)\cot(x), e^x, e^{kx}, a^x, \frac{1}{1+x^2}$
+\item $\int( 1+\sin(x)+4x^2+2^x) ~dx$ 
+\item Not always easy: $2x\cos(x^2)$, $\tan(x)$, $xe^x$
+\item Find $f(x)$ such that $f''(x) = x^2$ and $f(3)=1$, $f'(4)=1$.
 \end{enumerate}
 \end{enumerate}
 
