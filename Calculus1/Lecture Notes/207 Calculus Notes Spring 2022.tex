@@ -1979,139 +1979,84 @@ for (i in c(1:10)){
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 5}
 
+\begin{enumerate}
+\item Second paradox of calculus: Area under the curve
+\begin{enumerate}
+\item Area under the curve.
+\item Why bother?
+\begin{itemize}
+\item Lots of applications, anything involving accumulation.
+\item Probs to chance, velocity to disp, force to work, Calc 2 etc
+\end{itemize}
+\item Approach? Mirror tangent line
+\begin{itemize}
+\item Approximation, limiting process, indet form. Again limit is key.
+\item Deep connection to derivative.
+\item FTOC: Newton connected IROC to AUC, Leibnitz did AUC to IROC
+\end{itemize}
+\end{enumerate}
+
+\item Chapter outline:
+\begin{enumerate}
+\item Area under curve.
+\item FTOC
+\item Basic integration techniques.
+\end{enumerate}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{5.1 Areas and distances}
-Motivation:
-\begin{itemize}
-\item The area of a parabola
-\item The area of a cylinder
-\item The volume of a half sphere and a cylinder with a cone removed.
-\item The area of two triangles between two parallel line
-\item The contradiction between two triangles.
-\end{itemize}
+
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Recall, when we motivated this class, we had 2 main questions:
+\item Motivation: Classic problem of physics: $d=rt$
 \begin{enumerate}
-\item Tangent problem (derivative)
-\item Area problem (our change of focus, definite integral)
-\item Surprisingly, these are deeply connected.
-\item Example: Driving car at 60mph. Draw displacement and velocity. What is the connection back and forth?
-\begin{itemize}
-\item $v'(t) = s(t)$
-\item Accumulated area under $s$ gives function values of $v$.
-\end{itemize}
+\item $s=s(t)$, we know $\frac{ds}{dt} = v$. What about the reverse connection? Our car knows...maybe.
+\item Constant velocity case, 60mph for 4 hrs. Graph. Distance is AUC.
+\item Changing velocity, can approximate velocity and approximate AUC. Smaller subintervals the better. See the tug of war.
+\item Think of summing up velocity to get distance.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Find areas: Generally not so easy....
+\item Example: Approximating AUC
 \begin{enumerate}
-\item Rectangle, triangle, circle (talk Archimedes and limiting process)
-\item Find the area under the curve $y = x^2+1$ on $[0,2]$. Use a simple shape (rectangle) to approximate. Draw idea by hand.
-\item Use Desmos to show Riemann sum, emphasize limiting procedure, hint at indeterminate form. \url{https://www.desmos.com/calculator/tgyr42ezjq}
+\item $f(x)=x^2+1$ on $[0,2]$
+\item Approximate by simple shapes. 4 rectangles of equal base.
+\item Lots of ways to choose sample point: Left, right, midpoint.
+\item Desmos and Riemann sum. More rectangels. Take the limit to get the whole way. Trouble is how to formalize this process.
+\end{enumerate} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Approximating AUC
+\begin{enumerate}
+\item $f(x)=x^2+1$ on $[0,2]$
+\item Chop into equal width subintervals. $n$ total.
+\item Choose right endpoint as sample point $x_i$. Other options are left and midpoint.
+\item Simplify Riemann sum via $f$.
+\item Need special summation formulas involving $i, i^2, i^3$, more?
+\begin{itemize}
+\item Def of summation notation, simple example.
+\item Theorem: Special summation formulas for $i, i^2, i^3$.
+\item Theorem: Properties of summation ($ca_i$, $(a_i+b_i)$)
+\end{itemize}
+\item Finish previous example.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Riemann Sum: Limiting procedure for area calculations. 
-\begin{itemize}
-\item Interval: $[a,b]=[0,2]$
-\item Function $f(x)=x^2+1>0$ on $[a,b]$
-\item Find the area under curve $y=f(x)$ (between $f(x)$ and the $x$-axis) on $[a,b]$
-\end{itemize}
-`
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Def: AUC as limit of Riemann sum
 \begin{enumerate}
-\item Finding the approximate area:
-\begin{enumerate}
-\item Partition of [a,b]
-\item Find the area of each rectangle
-\item Take the sum
+\item Draw general picture.
+\item Clarify notation, $[a,b], f(x), x_i, x_i^*, \Delta x$.
+\item Challenge, need to simplify the summation to compute limit. Usually hard.
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Details:
-\begin{enumerate}
-\item Divide $(a,b)$ into $n$ sub-intervals
-\item Name all the ending points $x_0$, $x_1$,  ... , $x_n$
-\item On each part, find the area of the rectangle
-\begin{itemize}
-\item Width: $\Delta x = (b-a)/n$, uniform for simplicity.
-\item Height: for the $i_{th}$ rectangle, we have choices. 3 standard ways.
-\begin{itemize}
-\item Left ending points: $h_i = f(x_{i-1})$
-\item Right ending points: $h_i = f(x_i)$
-\item Midpoints: $h_i = f\left(\frac{1}{2}(x_{i-1})+f(x_{i})\right)$
-\end{itemize}
-\item Area of each rectangle: $A_i=h_i\cdot \Delta x$
-\end{itemize}
-\item Take the sum: 
-$$
-R_n = [h_1\cdot \Delta x+h_2\cdot \Delta x...+h_n\cdot \Delta x]
-$$
-\end{enumerate}
-\item For the true area, take $n\rightarrow \infty$
-$$
-A = \lim_{n\rightarrow \infty} R_n
-$$ 
-\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Try on own. Find AUC of $f(x)=-2x+6$ on $[0,4]$. Check via geometry. Note the signed AUC.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Formal (make it look better)
-\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area thru history: Archimedes and quadrature of parabola, volume of sphere, Cavaliri principle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Height $h_i = f(x_i^*)$
-\begin{itemize}
-\item Left ending points: $x_i^* = x_{i-1}$
-\item Right ending points: $x_i^* = x_i$
-\item Midpoint: $x_i^* = (x_{i-1}+x_i)/2$
-\item Does the answer depends on which sample we pick?
-\begin{itemize}
-\item For approximation (finite number of rectangles), yes it does.
-\item Doesn't matter much when $n\rightarrow \infty$ as long as $f(x)$ is continuous.
-\end{itemize}
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Compactify the summation formula of $R_n$: Sigma notation.
-\begin{itemize}
-\item Review
-$$
-\sum_{i=1}^5 i^2,\quad 3, \quad j, \quad \sum_{c =1}^4 calculus
-$$
-\item Summation formulas: 
-$$
-\sum_{i=1}^n c = cn, \quad \sum_{i=1}^n i = \frac{n(n+1)}{2} (\text{Gauss, telescoping via} (i+1)^2-i^2 = 2i+1)
-$$
-$$
-\quad \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}, \quad \sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2} \right)^2
-$$
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Riemann sum
-$$
-R_n = \sum_{i=1}^n f(x_i^*)\Delta x
-$$
-\item Point to different notations and ask people the meaning of each term
-\item Area = the limit of the Riemann sum: 
-$$
-A = \lim_{n\rightarrow\infty} R_n = \lim_{n\rightarrow\infty} \sum_{i=1}^n f(x_i^*)\Delta x
-$$
-\end{itemize} 
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {Examples:}
-\begin{enumerate}
-\item Find the approximate area under the graph of $f(x)=x^2+1$ on $[0,2]$ using 4 left/right rectangles. 
-\item Find the approximate area under the graph of $\cos x$ from $(-\pi/2,\pi/2)$ using 
-\begin{itemize}
-\item 6 left rectangles
-\item 6 right rectangles
-\end{itemize}
-\item Find the approximate area under the graph of $f(x)=x^2+1$ on $[0,2]$ using $n$ right rectangles. Take the limit to get true.
-\end{enumerate}
 \end{enumerate}
 
 
