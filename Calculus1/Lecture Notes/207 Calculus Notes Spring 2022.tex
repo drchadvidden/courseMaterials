@@ -2067,8 +2067,10 @@ for (i in c(1:10)){
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Goal: Find the exact area of $f(x)$ on $[a,b]$. \\
-Idea: Take the limit of $R_n$ as $n\rightarrow \infty$.
+\item Goal: 
+\begin{enumerate}
+\item Definition and properties for calculation
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item  Definite integral of  $f$ from $a$ to $b$
@@ -2076,137 +2078,39 @@ $$
 \int_a^b f(x)~dx = \lim_{n\rightarrow \infty} \sum_{i=1}^n f(x_i^*)\Delta x
 $$
 Provided  the limit exists.
-\begin{itemize}
-\item It's a limit of a sum
-\item It's a number
-\item Notation is complex. Keep reading it for what it is. Here it is clear why we use $\int$ to denote sum and $dx$ in place of $\Delta x$. Analogy here with differentials.
-\item Terminology:
-\begin{itemize}
-\item Integrand: f(x)
-\item Upper limit: b
-\item Lower limit: a
-\item Integration
-\end{itemize}
-\item Net area has physical meaning
-\begin{itemize}
-\item Positive
-\item Negative
-\item Cancellation (sine curve)
-\item Give random functions and determine whether its net area is positive or negative
-\end{itemize}
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} We already computed one definite integral in previous section. Try this one on own via $x_i^*$ (1) left end points, (2) right end points. Check your work via geometry. One triangle subtract another.
-$$
-\int_{-1}^3 (-2x+4)~dx
-$$
-What if we had $\int_{-1}^5 (-2x+4)~dx$? Can use symmetry to get zero.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} Write the following expressions in terms of limit of a sum
-$$
-\int_0^1 \sin x~dx, \quad \int_{-2}^2 e^x\tan x~dx
-$$
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} Write the limit as definite integrals
-\begin{itemize}
-\item
-$$
-\lim_{n\rightarrow \infty}\sum_{i=1}^n x^*_i\sin x^*_i\frac{2}{n},\quad \text{with lower limit 0}
-$$
-\item
-$$
-\lim_{n\rightarrow \infty}\sum_{i=1}^n 3x^*_i\sqrt{x^*_i+1}
-\frac{7}{n},\quad \text{with upper limit 4}
-$$
-\item
-$$
- \lim_{n\rightarrow \infty}\sum_{i=1}^n \frac{\sin (x_i^*)^2}{\ln (x_i^*-2)}\Delta x,\quad \text{on}\quad [1,5]
-$$
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Properties of the definite integral
 \begin{enumerate}
-\item 
-$$
-\int_a^a f(x)dx = 0 \quad \text{no area}
-$$
-\item  $$
-\int_a^b f(x)dx = \int_a^c f(x)dx+\int_c^b f(x)dx \quad \text{separate the interval}
-$$
-\item 
-$$
-\int_a^b f(x)dx = -\int_b^a f(x)dx  \quad \text{reverse direction}
-$$
-\item 
-$$
-\int_a^b c ~dx  = c(b-a),\quad\text{rectangular area is easy}
-$$
-\item 
-$$
-\int_a^b [f(x)+g(x)]dx = \int_a^b f(x)dx+\int_a^b g(x)dx  \quad \text{same as with summation}
-$$
-\item 
-$$
-\int_a^b [f(x)-g(x)]dx = \int_a^b f(x)dx-\int_a^b g(x)dx \quad \text{same as with summation}
-$$
-\item 
-$$
-\int_a^b [cf(x)]dx = c\int_a^b f(x)dx,\quad\text{where c is a constant}
-$$
+\item AUC as limit of Riemann sum, graph, rectangles, sample point, same calculations as previous section
+\item Package as an operation on function f(x)
+\item 3 main cases for sample point $x_i^*$, but can be anything reall.
+\item Notes: Result is a number, $\Delta x$ to $dx$ as in differentials, think of as operator
+\item Terminology: Integrand, upper and lower limit, bounds
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Comparison properties of the integral (draw pictures with each)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Properties of the definite integral: Signed AUC
 \begin{enumerate}
-\item If $f(x)\geq g(x)$ on [a,b], then 
-$$
-\int_a^b f(x)~dx \geq \int_a^b g(x)~dx
-$$
-\item {\bf Examples:}
-$$
-\int_0^1 x^2 ~dx>0,\quad \int_0^1 x^2+e^x ~dx>1/2
-$$
-\item If $m\leq f(x)\leq M$ for $a\leq x\leq b$, then
-$$
-m(b-a)\leq \int_a^b f(x)~dx \leq M(b-a) \quad \text{Why? Try to decide}
-$$
-\item {\bf Example:}
-$$
--4\leq \int_{-2}^2 \sin x ~dx \leq 4 \quad \text{What is this one really though?}
-$$
+\item Pos, neg
+\item Even, odd functions
+\item Signed area under the curve, can see this from the definition
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item If $\ds\int_a^b f(x)~dx$ exists, then $f$ is integrable on $[a,b]$. 
-\begin{itemize}
-\item The limit doesn't always exist.
-\item Riemann sum: why the limit exists much of the time.
-\begin{itemize}
-\item Upper sum: overestimate
-\item Lower sum: underestimate
-\item Squeeze theorem is in the works here.
-\item When will it fail: give an example (infinite discontinuity, unbounded interval, some of these cases actually work, Calc 2 and improper integrals)
-\item When will it converge: continuous on bounded intervals
-\end{itemize}
-\item {\bf Theorem:} If f has only a finite number of jump discontinuities, then $f$ is integrable on $[a,b]$. Draw picture of idea here.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Evaluating integrals
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\item Properties of the definite integral: Limit laws and area ideas
 \begin{enumerate}
-\item Reimann sum, then limit. Need a way to compute the sum via formulas.
-$$
-\int_0^4 (x+x^3/3)~dx
-$$
-\item Geometry
-$$
-\int_{-1}^1 \sqrt{1-x^2}~dx
-$$
-\item Either way, it's complicated and frustrating. Need something better.
+\item $f(x)+-g(x), cf(x)$
+\item $\int_a^a$
+\item $\int_a^b = - \int_b^a$
+\item $\int_a^b = \int_a^c + \int_c^b$
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Try on own. Geometry first. Riemann sum next.
+\begin{enumerate}
+\item $\int_{-1}^1 (2x-1)~dx$
+\item If cannot use geometry, need summation formulas. Bottleneck here.
+\item Limits can fail to exist, but DI usually exist.
+\item Limitations of the Riemann sum if you go too deep.
 \end{enumerate}
 \end{enumerate}
 
