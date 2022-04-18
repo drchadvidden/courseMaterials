@@ -1,12 +1,14 @@
 rm(list=ls())
 cat("\014")
-dev.off()
 
-A <- matrix(c(sqrt(3), -3, 3, sqrt(3)), ncol=2, byrow=TRUE)
+
+x <- pi/12
+A <- matrix(c(cos(x), -sin(x), 
+              sin(x), cos(x)), ncol=2, byrow=TRUE)
 x <- c(1,0)
 
 xout <- x
-n <- 5
+n <- 24
 for (i in c(1:n)){
   x <- A%*%x
   xout <- rbind(xout, t(x) )
@@ -14,4 +16,4 @@ for (i in c(1:n)){
 
 plot(xout)
 lines(xout)
-text(xout, labels=1:(n+1), cex=3)
+text(xout, labels=0:n, cex=2)
