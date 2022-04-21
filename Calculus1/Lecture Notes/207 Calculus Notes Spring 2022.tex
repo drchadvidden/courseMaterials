@@ -2214,25 +2214,14 @@ $.
 \subsection{5.4 Indefinite integrals}
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item We already discussed antiderivatives. Recall an indefinite integral is the collection of all antiderivatives. Ie
-$$
-\int f(x) ~dx = F(x) + C
-$$
-if $F'(x) = f(x)$
+\item Indefinite integrals, again...
+\begin{itemize}
+\item Indef vs dev integral, all antiders vs AUC, properties agree
+\item Connection via FTOC, thus same notation.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:}
-\begin{enumerate}
-\item $\ds \int (x+1)^2dx$
-\item $\ds \int (\frac{1}{x}-\frac{2}{x^2}+\frac{3}{x^2+1})dx$
-\item $\ds \int \frac{t^6-t\sqrt{t}+2}{\sqrt[3]{t}}dx$
-\item $\ds \int (e^x\tan x)'dx$
-\item True or false: $\ds (\int x ~dx)' = \int (x)'~dx$
-\item True or false: $\ds \int \frac{\cos x}{\sin^2 x}~dx = -\frac{1}{\sin x}+C$
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Examples:} Thanks to FTOC, finding definite integrals is just as easy. More ideas involved when it comes to area though. Even though cannot integrate directly, can still manage.
+\item Examples: Thanks to FTOC, finding definite integrals is just as easy. More ideas involved when it comes to area though. Even though cannot integrate directly, can still manage.
 $$
 \int_a^b f(x) ~dx  = F(x)\Big|_a^b = F(b)-F(a) \quad \text{(some notation here)}
 $$
@@ -2242,17 +2231,15 @@ $$
 \item $\int_{-\pi/2}^\frac{3\pi}{2} |\sin x|~dx$
 \end{enumerate}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Net Change Theorem: If $r(t)$ is the rate of function $F(t)$, then
-$$
-\int_a^b r(x)~dx = F(b)-F(a)
-$$
+\item Net change theorem: Context for the FTOC
 \begin{enumerate}
-\item This is the same as the FTOC. The new idea is the interpretation.
-\item If I am driving at velocity $v(t)$, then $\ds \int_0^10 v(t)~dt$ represents my displacement after 10mins.
-\item If $r(t)$ is the rate oil leaks from my car, then $\ds \int_0^7 r(t)~dt$ represents the amount of oil lost in a week.
-\item If $i(t),o(t)$ are the global birth,death rates in the US, then $\int_0^100 b(t)-d(t)~dt$ is the net population growth over 100 years.
-\item This is a primary way in which differential equations are derived (conservation laws).
+\item FTOC: $f'(x)$ is rate of anything, $f(b)-f(a)$ is net change
+\item Example: $\int_0^5$ velocity $dt$ = distance travelled
+\item $\int_0^5$ oil drip rate $dt$ = oil lost
+\item $\int_0^5$ (birth rate – death rate) $dt$ = populatio nchange
+\item Adding up IROC gives net change
 \end{enumerate}
 \end{enumerate}
 
@@ -2263,15 +2250,11 @@ $$
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item The FTOC opens the door to many definite integrals we can now do. But, as we saw before, integration is much harder than differentiation. Here we start to grow our techniques by attempting to reverse more complicated differentiation rules.
+\item Challenge of integration:
 \begin{itemize}
-\item Basic rules (constant, power rule, exponents, etc)
-\item Addition, subtraction, constant multiple
-\item Product, quotient (calculus II, integration by parts, let's be real, nobody wants to reverse the quotient rule....but can think of as product rule instead.)
-\item \textcolor{red}{Chain rule} (now! substitution rule) How to reverse?
-\[
-\frac{d}{dx} f(g(x)) = f'(g(x))g'(x)
-\]
+\item Turns out integration is much harder than differentiation. Often there is no technique (not possible)
+\item Ex: $e^{x^2} dx, \int \ln(sin(x^2)) dx$, etc
+\item Wiki nonelemntary integral. Gaussian. Normal distribution
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2292,18 +2275,14 @@ $$
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Chain Rule:} Formalize the idea. We rename things as $u$ to help us see the structure. $u$ is essentially a guess for the inside function.
-$$
-\int f[g(x)]g'(x)dx = \int f(u)du
-$$
+\item Chain rule
 \begin{enumerate}
-\item Note, the new integral is now in $u$ only, not $x$. We update this variable as
+\item $\int f'(g(x)) g'(x) dx = \int f(u) du$ by renaming $u = g(x)$.
+\item Proof idea: From chain rule, 
 \[
-u = g(x) \quad \rightarrow \quad du = g'(x) dx 
+\int f'(g(x))g'(x) ~dx = f(g(x))+C = f(u)+C = \int f'(u) ~du
 \]
-This is a differential version of $\frac{du}{dx} =g'(x) $. Squirrelly...
-\item Hopefully we can integrate $f$.
-\item After integrate, substitute back.
+\item Once used, hopefully we can integrate $f$. After integrate, substitute back.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
