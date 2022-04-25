@@ -2343,29 +2343,44 @@ $$
 $$
 \end{enumerate}
 
+\section{Chapter 6: Applications of Integration}
+
+Here we bend the idea of Riemann sum to see how versitile accumulation is.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{6.1 Area between curves}
 \begin{enumerate}
-\item Theorem: Condition
-\begin{itemize}
-\item $f$ and $g$ are continuous
-\item $f(x)\geq g(x)$ for all $x$ in $[a,b]$
-\end{itemize}
-Conclusion:
-$$
-A = \int_a^b[f(x)-g(x)]~dx
-$$
-Example: find the are enclosed by y = x, y = 4-x, x = 0 and x=1\\
-*Find the area between $y = x^2$ and $y = 2-x^2$
-\item What if we don't have $f(x)>g(x)$: split the area\\
-Example: find the area bounded by $y = \sin x$, $y = \cos x$, x= 0 and x = $\pi/2$\\
-* Find the area between $y = x^3$ and $y= x$
-*Find the area between $y = x-2$ and $x = y^2$
-\item Integrate with respect to $y $\\
-Find the area enclosed by $y = x$ and $y = x^2$ in both direction\\
-Find the area of a unit circle.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Area between curves.
+\begin{enumerate}
+\item Find the area between $f$ and $g$ on interval $[a,b]$. 
+\item Can use separate integrals for $f$ and $g$, but too complicated. 
+\item Instead construct a new one from a Riemann sum.
+\[
+A = \int_a^b (f(x)-g(x))~ dx
+\]
+\end{enumerate}
+
+\item Examples: Challenge can be finding the bounds of integration.
+\begin{enumerate}
+\item Find the are enclosed by $y = x, y = 4-x, x = 0$.
+\item Find the area between $y = x^2$ and $y = 2-x^2$. Repeat for interval $[-2,2]$. 
+\item Generalize formula to
+\[
+A = \int_a^b |f(x)-g(x)|~dx
+\]
+\item Find the area between $y = x^3$ and $y=x$. Could have used symmetry.
+\end{enumerate}
+
+\item Integrate with respect to $y$.
+\[
+A = \int_c^d (f(y)-g(y)) ~dy, \quad A = \int_c^d |f(y)-g(y)| ~dy
+\]
+\begin{enumerate}
+\item Repeat for last example. 
+\end{enumerate}
 \end{enumerate}
 
 
