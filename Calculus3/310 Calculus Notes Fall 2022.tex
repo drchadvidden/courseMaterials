@@ -21,7 +21,7 @@
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
-\title{Calculus I Notes}
+\title{Calculus III Notes}
 \date
 \Large
 \begin{document}
@@ -498,11 +498,56 @@ Ax^2+By^2+Cz^2+Dxy+Exz+Fyz+Gx+Hy+Iz+J=0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 13 Vector functions}
 
-Possible project, story of Kepler and Newton, maybe Strang version.
-
 \subsection{13.1 Vector functions and space curves}
+\begin{enumerate}
+\item Finally we do calculus, basic case first: $\vec{r}(t)$ is a vector-valued function. For input $t$, result is a vector. 
+\begin{enumerate}
+\item Need a function per component.
+\[
+\vec{r}(t) = \langle f(t), g(t), h(t) \rangle
+\]
+\item Example: Already know lines. Label direction.
+\[
+\vec{r}(t) = \langle x_0 + at, y_0 + bt, z_0 + ct \rangle
+\]
+Knowing two points allows to draw the line. Show example.
+\item Example: Corkscrew. Label direction.
+\[
+\vec{r}(t) = \langle \cos(t), sin(t), t \rangle
+\]
+Helps to graph the projection onto the $xy, xz, yz$ planes.
+\item Example: Try on own.
+\[
+\vec{r}(t) = \langle t, t^2, t^3 \rangle
+\]
+\item Matching: Text problems 21-26.
+
+\item Find a vector function to describe the curve of intersection of cylinder $x^2+y^2=4$ and surface $z=xy$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Limits and continuity: Everything component-wise.
+\begin{enumerate}
+\item If $\vec{r}(t) = \langle f(t), g(t), h(t) \rangle$, then
+\[
+\lim_{t \rightarrow a} \vec{r}(t) = \langle \lim_{t \rightarrow a} f(t), \lim_{t \rightarrow a} g(t), \lim_{t \rightarrow a} h(t) \rangle.
+\]
+\item $\vec{r}(t)$ is continuous at $t=a$ if
+\[
+\lim_{t \rightarrow a} \vec{r}(t) = \vec{r}(a)
+\]
+\item Example from previous.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 15, 17, 27, 29, 31, 43, 49
+
+\end{enumerate}
+
 \subsection{13.2 Derivatives and integrals of vector functions}
+
 \subsection{13.3 Arc length and curvature}
+
 \subsection{13.4 Motion in space: Velocity and acceleration}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -933,12 +978,33 @@ D_{\vec{u}} = f_x(x,y,z)a + f_y(x,y,z)b + f_z(x,y,z)c = \nabla f \cdot \vec{u}
 
 %%%%%%%%%%%%%%%%%
 \item Tangent planes to level surfaces
+\begin{enumerate}
+\item We already have tangent planes to surfaces of the form $z=f(x,y)$ at point $(x_0, y_0, z_0)$.
+\[
+z-z_0 = (f_x)_0 (x-x_0) + (f_y)_0(y-y_0)
+\]
+\item This extends implicitly to a level surface $F(x,y,z)=k$ at point $(x_0, y_0, z_0)$.
+\[
+(F_x)_0 (x-x_0) + (F_y)_0(y-y_0) + (F_z)_0(z-z_0) = 0
+\]
+Note, the gradient vector $\nabla F$ is our normal vector to the plane (and surface).
+\item The normal line then has symmetric equations
+\[
+\frac{x-x_0}{(F_x)_0} = \frac{y-y_0}{(F_y)_0} = \frac{z-z_0}{(F_z)_0}.
+\]
+\item Example: Find the tangent plane to the ellipsoid $x^2/4 + y^2 + z^2/9 = 3$ at point $(-2,1,-3)$. Check result in Geogebra.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\item Summary of gradient vector
+\item Summary of gradient vector: This section is rich. Summarize the key ideas.
+\begin{enumerate}
+\item For $f(x,y)$ (or $f(x,y,z)$), $\nabla f$ gives the direction of fastest increase of $f$.
+\item $\|\nabla f\|$ is the fastest increase rate (slope).
+\item $\nabla f$ is orthogonal to the level curve (or surface).
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%
-\item Homework:
+\item Homework: 5, 7, 9, 11, 15, 19, 23, 25, 27, 29, 37, 39, 41, 49
 
 \end{enumerate}
 
