@@ -546,7 +546,58 @@ Helps to graph the projection onto the $xy, xz, yz$ planes.
 
 \subsection{13.2 Derivatives and integrals of vector functions}
 
+\begin{enumerate}
+
+%%%%%%%%%%%%%
+\item Derivatives of vector functions:
+\begin{enumerate}
+\item Definition: For $\vec{r}(t)$ any vector function, define the derivative as
+\[
+\vec{r}'(t) = \lim_{h \rightarrow 0} \frac{\vec{r}(t+h) - \vec{r}(t)}{h}.
+\]
+Draw picture in $\mathbb{R}^3$ for some $t$. Result is a tangent vector at $t$. The unit tangent vector 
+\[
+\vec{T}(t) = \frac{\vec{r}'(t)}{\|\vec{r}'(t) \|}.
+\] 
+Also have a tangent line using this vector and point. 
+
+\item Theorem:  In $\mathbb{R}^3$ for vector function $\vec{r}(t) = \langle f(t), g(t), h(t) \rangle$, we have
+\[
+\vec{r}'(t) = \langle f'(t), g'(t), h'(t) \rangle.
+\]
+Proof moves the difference quotient inside the vector function component-wise.
+
+\item Examples:
+\begin{itemize}
+\item $\mathbb{R}^2$ case, tangent vector to $\vec{r}(t) = \langle t-2, t^2+1 \rangle$ when $t=2$. Draw picture. Tangent line also.
+\item Tangent vector for any line $\vec{r}(t)=\vec{r}_0 + t\vec{v}$ is $\vec{v}$ and the tangent line is the same line. This is the velocity vector for the line as we will see in the next section. Constant change with constant velocity.
+\item Find the tangent vector to $\vec{r}(t) = \langle \cos(t), \sin(t), t \rangle$ at $t=2$. Tangent line also. Geogebra. 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Vector function differentiation rules.
+\begin{enumerate}
+\item Theorem: For $\vec{u}(t)$ and $\vec{v}(t)$ differentiable vector functions,
+\begin{itemize}
+\item $\ds \frac{d}{dt} \left[ \vec{u}(t)+\vec{v}(t) \right] = \vec{u}'(t)+\vec{u}'(t)$
+\item $\ds \frac{d}{dt} \left[ c\vec{u}(t)\right] = c\vec{u}'(t)$
+\item $\ds \frac{d}{dt} \left[ f(t) \vec{u}(t) \right] = f'(t)\vec{u}(t)+f(t)\vec{u}'(t)$
+\item $\ds \frac{d}{dt} \left[ \vec{u}(t)\cdot \vec{v}(t) \right] = \vec{u}'(t)\cdot\vec{v}(t)+\vec{u}(t)\cdot\vec{v}'(t)$
+\item $\ds \frac{d}{dt} \left[ \vec{u}(t)\times \vec{v}(t) \right] = \vec{u}'(t)\times\vec{v}(t)+\vec{u}(t)\times\vec{v}'(t)$
+\item $\ds \frac{d}{dt} \left[ \vec{u}(f(t))\right] = \vec{u}'(f(t)) f'(t)$
+\end{itemize}
+\item Proof of dot product version, component-wise calculation.
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 13, 17, 21, 25, 43, 45, 47
+
+\end{enumerate}
+
 \subsection{13.3 Arc length and curvature}
+
+SKIP
 
 \subsection{13.4 Motion in space: Velocity and acceleration}
 
