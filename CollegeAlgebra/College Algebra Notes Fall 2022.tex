@@ -12,6 +12,7 @@
 \bibliographystyle{unsrt}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{stmaryrd}
 \usepackage{epsfig}  		
 
 
@@ -594,7 +595,13 @@ Check via Desmos.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Chapter 1 Review}
 
-Exam review problems: 
+Exam review problems:
+\begin{enumerate}
+\item Chapter 1 Review: 
+\item Concept check: 1-20
+\item Exercises: 1-30, 35-94
+\item Chapter 1 test: 1-14
+\end{enumerate} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -602,83 +609,166 @@ Exam review problems:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{enumerate}
+\item Function: the most important idea of this class.
+\begin{itemize}
+\item Applications: Channel an action into equation
+\item Math: Foundation of all math theory
+\end{itemize}
+
+\item Equations vs functions
+\begin{itemize}
+\item Static: Solve $3=4x-5$ for $x$
+\item All cases: Study $y=4x-5$ for all $(x,y)$, as $x$ changes how is $y$ influenced?
+\item Key is generalization, thinking of this equation as an action performed on input $x$ to generate output $y$.
+\item Housing example and linear regression. Instead of understanding a single house instance, we can to generalize to the entire real estate situation.
+\end{itemize}
+
+\item Power of functions:
+\begin{itemize}
+\item Practical view: Understanding and intuition. General rule (conceptual), formula (calculation), graph (intuition), super rich discussion
+\item Math Theory foundation: Study many situations at once (classes of functions, lines, polynomials, exp; large groupings, smooth, continuous). Calculus is built on this, all smooth functions. More general makes for fuzzy understanding, but far reaching.
+\end{itemize}
+
+\item Chapter outline:
+\begin{itemize}
+\item Idea of functions (concept, visualize)
+\item First full function story (linear, quad/poly/rationals in chp 3, exp/logs in chp 4)
+\item Combining / transforming simple functions to harness complexity
+\item Reversing functions (inverses)
+\end{itemize}
+
+\item Application: Real world is complex, how to find a function that represents it? Machine learning is one way.
+\begin{itemize}
+\item Classification: Cat, bird, bird song, 
+\item Forecasting: Stock market, covid
+\item Many more
+\end{itemize}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{2.1 Functions}
 
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Intuition and basics
+\item Idea and definition of function:
 \begin{enumerate}
-\item Definition: to be a function, one input is assigned to a unique output. (IMPORTANT!)
-\item Real life example of correspondence of one object with another: gas/price, email/name, mortgage/downpayment, number of students paying attention/time, house/price, image/classification, machine learning!
-\item It's just a rule which relates two things.
-\item This is the most powerful math idea you have yet to come across. It is a vessel which can contain a lot of information.
+\item Complete this sentence: A function $f(x)$ is....
+\item What is the key idea? Why does it matter? Go as detailed as possible.
+\item Definition: A function $f(x)$ is a rule which maps one input $x$ to at most one output $y$, written $y=f(x)$.
+\item Diagram to conceptualize: Domain, range, indep variable, dep variable
+\item Most important part: One input to at most one output. Why? Want certainty in what will happen.
+\item Think of as a machine: One thing in, at most one out.
+\item Example: Email mapped to student. Want message to go to one person. Is reverse association possible?
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Representation of a function (student paying attention example)
+\item Representations of functions:
 \begin{enumerate}
 \item Description (easy to understand, hard to use)
-\item Table (practical but not general)
-\item Graph (big picture, but no details)
-\item Formula ($S=f(t)$, most general way, good luck writing it down in this case, finding these in the real world is hard (regression, ML, etc))
+\item Table (practical and easy, not general)
+\item Formula (good for calculation, not intuitive)
+\item Graph (good for intuition, not practical)
+\item Example: Line $y = 2x+1$. 4 versions. 
+\item Best case is knowing all versions.
 \end{enumerate}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Mathematical representation of function
+\item Example: Consider $y=f(x)=x^2+2x-3$
 \begin{enumerate}
-\item Definition: A function $f$ is a rule that assigns to each element $x$ in a set $A$ exactly one element, called $f(x)$ in a set $B$.
-\item Notation: $y = f(x)$
-\item Terminology
-\begin{itemize}
-\item $x$: independent variable, $y$ dependent variable
-\item $x$: input, $y=f(x)$: output
-\item $A$: domain, $B$: range
-\item Key requirement: exactly one
-\end{itemize}
+\item Input to output: $f(2), f(a+2)$.
+\item Output to input: When is $f(x)=-3$? More at end of chapter.
+\item Try on own: Simplify the difference quotient $(f(a+h)-f(a))/h$.
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Piecewise functions:
+\begin{itemize}
+\item Combining rules, three part example (const, $-2x+1$, $x^2$).
+\item Graph. Function evaluations.
+\item Should remind of absolute value.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Function in math is usually expressed as an equation: 
+\item Finding domain and range:
 \begin{enumerate}
-\item $f(x) = x^2+x-1$
-\begin{itemize}
-\item Equation defines the whole picture.
-\item Fix one variable, find the other one.
-\item The difference between $y$ and $f(x)$. $y$ is the second variable, $f(x)$ is the $x$ relation.
-\end{itemize}
-\item Compute each for the above $f$.
-\begin{itemize}
-\item $f(3)=?$, $f(-\sqrt{2})$, $f(a+b)$, $f(a)+f(b)$, difference quotient
-\end{itemize}
-\item Again, key restriction: one $x$ cannot go to multiple $y$ (name and email address, both direction, person/name, person/ID, one to one function)
-\item Example of piecewise functions. 
-\item What if we are not written in function notation? Does the equation define $y$ as a function of $x$? $x$ as a function of $y$? Solve for $x,y$ and see if only one possible.
-\[
-3x+2y=5, \quad 3x^2-y=5
-\]
+\item $y = f(x) = x^2$, parabola, will study quadratics as transformations of this one in chapter 3.
+\item Define domain and range. Draw diagram.
+\item Find domain and range, check in desmos.
+\item Domain usually easy, range take knowledge or intuition and often not doable.
+\item Try on own: $f(x)=3/sqrt{4-x}$. What can't $x$ be? Check in desmos, graph inequality
+\item Try on own: Find the domain of $f(x) = sqrt{x^2-1}{x+2}$ and write in interval notation. Range not easy. Check for zero division and negative roots, same for most of this class with functions.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 11, 17, 19, 21, 25, 29, 31, 33, 37, 39, 43, 49, 51, 55, 59, 69
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.2 Graphs of functions}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%5
+\item Graph features and stock prices.
+\begin{enumerate}
+\item Google tesla stock
+\item Graph labels important
+\item Is this a function? What is $x, y$? Domain / range?
+\item Key features: Inc / dec, max / min (local and global)
+\item Net change: $f(b)-f(a)$, average change: $(f(b)-f(a))/(b-a)$
+\item Hard to find precise values with graph, better to have a formula $f(x)$. Not doable here. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Graph features: Definitions
+\begin{enumerate}
+\item Draw $y=f(x)$, general graph on side
+\item Vertical line test
+\item Domain / range
+\item Inc / dec
+\item Max / min, local and absolute
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Example: Does the equation $x^2-y=7$ represent a function?
+\begin{enumerate}
+\item Is $y$ a function of $x$? Is $x$ a function of $y$? If yes write in function notation.
+\item Graph function knowing basic $y=x^2$.
 \item Domain and range
+\item Try on own for $x^2+y^2=9$. In some cases can solve for $y$ as two separate functions. Easy if know the graph.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Graphs of functions: Visualizing a graph gives intuition of its behavior.
+\begin{enumerate}
+\item 2 ways to draw graphs:
 \begin{itemize}
-\item $f(x)=x^2$ domain and range
-\item Find the domain of $\displaystyle f(x) = \frac{3}{\sqrt{x-4}}$, $\displaystyle g(t) = \frac{\sqrt{t^2-1}}{t+2}$. Domain is easy. What can go wrong? Range is usually hard. 
-\item Domain needs to be specified for any function (example of a line vs a segment) otherwise it is implied
-\item Range is determined by the domain (give range for above line vs segment)
-\item Finding the domain of a given function (if the domain is not specified)
-\begin{itemize}
-\item Denominator cannot be zero
-\item Even radical function cannot be less than zero inside
+\item Plot points, last resort, better left to computers
+\item Understand classes of function (lines, parabolas, etc).
 \end{itemize}
+\item Important classes of functions:
+\begin{itemize}
+\item Linear: $f(x)=mx+b$
+\item Powers: $x^n$, even vs odd cases
+\item Root: $\sqrt[n]{x}$
+\item Reciprocal: $1/x^n$
+\item Abs value: $|x|$
+\item Greatest integer: $\llbracket x \rrbracket$
+\item Will modify these later to grow complexity.
 \end{itemize}
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{2.2-2.3 Graphs of functions}
+%%%%%%%%%%%%%%%5
+\item
+
+\end{enumerate}
+
+
+\subsection{2.3 Graphs of functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
