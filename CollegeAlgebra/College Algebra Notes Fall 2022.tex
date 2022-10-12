@@ -777,12 +777,19 @@ Exam review problems:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Recall: Key graph features.
 \begin{enumerate}
-\item Y=f(x), general graph on side
-Vertical line test
-Domain / range
-Inc / dec
-Max / min
+\item $y=f(x)$, general graph on side
+\item Vertical line test
+\item Domain / range
+\item Inc / dec
+\item Max / min, abs and local
+\item Example: Find all important features of $f(x) = sqrt{9-x^2}$.
+\item Example: Graph comparisons of $g(x)=x > , <, =, f(x)=sqrt{9-x^2}$.
+\item Try on own: Graph comparisons of $g(x)=x^2 > , <, =, f(x)=x+2$.
 \end{enumerate} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 7, 9, 11, 13, 15, 23, 25, 31, 33, 43, 45, 
+
 
 
 
@@ -797,46 +804,42 @@ Max / min
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Average rate of change of $f$ over interval $(a,b)$: $\ds\frac{f(b)-f(a)}{b-a}$
+
+%%%%%%%%%%%%%%%%%%%%%%
+\item AROC idea:
 \begin{enumerate}
-\item Examples: Average velocity driving to work (15 miles in 20 mins), change of temperature, profit growth
-\item Compare to net change. What is the difference? Rate is key. 
-\item Draw the graph and interpret as slope of secant line
-\item Two forms of difference quotient: $\ds\frac{f(b)-f(a)}{b-a}$, $\ds\frac{f(x+h)-f(h)}{h}$
-\end{enumerate}
-\item Linear function rephrased: function with constant rate of change.
-\item Instantaneous rate of change: Three cases
-\begin{enumerate}
-\item Straight: rate of change is always the same 
-\item Concave up: rate of change is increasing 
-\item Concave down: rate of change is decreasing
-\end{enumerate}
+\item Dis = rate (time), one decides the other, odometer vs spedometer.
+\item What is the average velocity ($v(t)$, change in distance) if I go 20 miles in 15 mins? Note, we don’t know a formula for $v$ for all $t$. 
+\item Also called difference quotient.
+\item Distinguish between net change and AROC.
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{2.5 Linear function and models}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%
+\item AROC and function graphs:
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Linear model: unit price + initial cost
-\begin{enumerate}
-\item Gas price and car wash. What will 20 dollars get me?
-\item Drain my fish 120 gallon tank half way and fill at rate of 15 gals per minute. When is it full?
-\item Dog tries to escape. Runs away at 10 feet per second. Gets a 6 second head start. I run at 15 feet per second. Will she make it to the woods?
+\item $f(x) = x^2$ graph, AROC on [1,3]. Slope of secant line.
+\item General case $f(x)$, 2 forms. 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Linear regression training slides. 
+%%%%%%%%%%%%%%%%%%%%%%
+\item Lines redefined, the precise way.
 \begin{enumerate}
-\item Assume should be a linear function (may be wrong).
-\item Test model quality.
-\item High dimension is no problem.
-\item Coefficient meaning.
+\item Line $y=f(x) = mx+b$ is the function such that AROC is always constant.
+\item $(f(b)-f(a))/(b-a)= \dots = m$ for any $a,b$.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Calculus and the paradox of AROC:
+\begin{enumerate}
+\item First problem of calculus considers AROC approaching IROC. Secant lines approaching tangent lines. 
+\item Need a way around zero division. Invention of idea of limit is the key.
+\item Desmos tangent and secant line
+\item \url{https://en.wikipedia.org/wiki/Rate_(mathematics)#Rate_of_change}
+\item 3blue1brown the essence of calculus
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 7, 9, 11, 15, 19, 23, 25, 27, 
 
 \end{enumerate}
 
@@ -848,6 +851,44 @@ Max / min
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Motivation: Power of linear transformations.
+\begin{enumerate}
+\item List of 6 transformations for $f(x)$ and general combination.
+\item Why bother? Can go from a basic function ($y=x^2$) to very complex transformation ($y=-2(x-3)^2+10$).
+\item Grow tremendously the number of functions we can graph and understand.
+\item Study each individually to gain intuition. Combine to understand complexity.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $y$-direction transformations for $f(x)=x^2$.
+\begin{enumerate}
+\item Summary: $y=f(x)$ vs $y=f(x)+k$ vs $y = af(x)$ vs $y= = -f(x)$ vs all combined $y=-af(x)+k$.
+\item Vertical shift: 
+\begin{itemize}
+\item $f(x)+k$, how is the output of f changed? Note, output changes, input location does not.
+\item $y=f(x)=x^2, f(x)+2, -3$.
+\item Use Desmos tables. Draw +2 carefully on slide. Keep track of three points moving.
+\item This balance of formula, table, graph is what grows your intuition in this class, rich diversity of perspective.
+\end{itemize}
+\item Try yourself: 
+\begin{itemize}
+\item Remaining $2, af(x), -f(x)$
+\item Try in Desmos for various choices. Explain what happens. 
+\item Y multiplied (vertical stretch). Y flipped in sign (x-axis reflection)
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Types of transformation
 \begin{enumerate}
