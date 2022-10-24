@@ -1001,83 +1001,67 @@ Exam review problems:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Inverse functions: Same association, the opposite direction. Reverse of a function.
+
+%%%%%%%%%%%%%%%55
+\item Key idea: Reversing a function.
 \begin{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item New mapping, given the output, find the input. Draw the set diagram. Output $\rightarrow $ input. Once you know one direction, and you know it is invertible, you should know both directions.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Big questions:
-\begin{itemize}
-\item Why do we want to invert a function? Encryption/decryption, student id, currency, feet/meters, etc.
-\item How to tell if a function is invertible?
-\item If $f$ is invertible, how to find it?
-\item What is the relationship between a function and its inverse? (Domain/range, graph, etc)
-\end{itemize}
+\item Thinking of a function as an action, how to reverse this action? Reverse is called the inverse function.
+\item Domain/range diagram. Notation.
+\item Question: Can you always reverse a function? No. Need each output to belong to a single input.
+\item Examples: Student to id, encrypt and ecrypt, currency exchange, feet/meters
+Need certainty for reversing. Not always possible. Student to class.
+\item Example: $f(x) = -2x+1$. Given and output, find the input. $y=-3,5$. Draw graph. General $y$. New function $x=f^{-1}(y)$ is the reverse mapping of $f$
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Motivating Example:} $f(x) = -2x+1$ 
-\begin{itemize}
-\item When is the output 1, -4, $y$? How do we know if there is only one answer here? Only one output for each input.
-\item New function to give you $x$ is our inverse function. $x=f^{-1}(y)$. Let's give some careful definitions.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Definitions: 
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions:
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item One-to-one function: Function $f$ is one-to-one if $f(x_1)\neq f(x_2)$ whenever $x_1\neq x_2$. (Same output never found twice).
+\item Careful definitions: One-to-one function, inverse function, diagram, function composition identities, flip of domain and range.
+\item How to tell in invertible (one-to-one)? 
 \begin{itemize}
-\item Equivalently, if $f(x_1)=f(x_2)$ then $x_1=x_2$. 
-\item Graphically, $f$ passes the horizontal line test.
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Inverse function: For $f$ one-to-one, the inverse of $f$, written $f^{-1}$ is the association which maps outputs of $f$ to corresponding inputs. That is,
-\[
-y=f(x) \quad \Longleftrightarrow f^{-1}(y)=x
-\]
-\begin{itemize}
-\item Draw a picture to illustrate. Note the function composition story $(f\cdot f^{-1})(x) = (f^{-1} \cdot f)(x) = x$ for all $x$.
-\item Note: There exists notational confusion.
-$$
-f^{-1} (x) \neq \frac{1}{f(x)}
-$$
+\item $f(x) = -2x+1, g(x)=x^2$
+\item 2 ways, definition (if outputs match, show inputs match or give contradiction), graph (HLT, not precise). 
 \end{itemize}
 \end{enumerate}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to find the inverse function $f^{-1}$ of a given function $f$?
-\begin{itemize}
-\item Check if it is one-to-one (HLT or carefully). Show careful version for $f(x) = -2x+1$. If $f(x_1)=f(x_2)$, then $x_1=x_2$.
-\item Assume $y$ is known, then find $x$. Solve the equation $y=f(x)$ for $x$. Result gives $x=f^{-1}(y)$.
-\item Write it in the standard way: $y=f^{-1}(x)$.
-\item Find the domain if necessary.
-\item Verify your work using composition property: $(f\cdot f^{-1})(x) = (f^{-1} \cdot f)(x) = x$ for all $x$.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Example:} Find the inverse function of $g(x)=x^2-1$, restricted domain $x>0$. Why / where is the restriction needed?
-\begin{itemize}
-\item Repeat above steps.
-\item Graph each and relate the graphs.
-\item Relate the domain and range. 
-$$\text{range of $f$ = domain of $f^{-1}$}$$
-$$\text{domain of $f$ = range of $f^{-1}$}$$
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item {\bf Student Examples:}  
-\begin{itemize}
-\item A bit more challenging, find inverse of $f(x)  = \frac{x+2}{2x-1}$, list domain and range.
-\item A bit more challenging, find inverse of $f(x)  = 2\sqrt{x+4}$, list domain and range. Graph each together.
-\end{itemize}
-
+%%%%%%%%%%%%
+\item Examples
+\begin{enumerate}
+\item $f(x) = x^2-1, x>=0$ domain restriction to make invertible
+\item Graph, show one-to-one
+\item Find the inverse. Check composition identity.
+\item Graph both, relate the domain and range. Note reflective symmetry.
+\item Graph in Desmos, hint at general case.
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%
+\item Graphs of a function and its inverse
+\begin{enumerate}
+\item General picture. Domain and range flip. 
+\item Reflective symmetry across y=x. 
+\item All different views of the same basic definition.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%55
+\item Example: Try on own.
+\begin{enumerate}
+\item F(x) =(x+2)/(2x-1)
+\item Use Desmos to show invertible
+\item Find inverse, verify composition identity.
+\item Verify domain / range relation
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 5, 7, 9, 13, 15, 17, 23, 25, 29, 31, 39, 43, 47, 49, 55, 61, 69, 73
+\end{enumerate}
+
+\subsection{Chapter 2 Review}
+
+\begin{enumerate}
+\item Concept Check: 1-9, 11-14
+\item Exercises: 1-42, 51-56, 69-74, 85-92, 95-102
+\item Chapter test: 1-4, 6-21
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
