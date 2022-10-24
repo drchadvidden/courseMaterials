@@ -923,7 +923,7 @@ Exam review problems:
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework:
+\item Homework: 1, 3, 7, 9, 11, 15, 23, 25, 27, 29, 33, 41, 45, 47, 51, 69, 71, 83, 85, 87
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -934,53 +934,63 @@ Exam review problems:
 
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Algebraic combinations
-\begin{itemize}
-\item $f+g$, \quad $f-g$, \quad $f\cdot g$, \quad $f/g$
-\item New notation is easy.
-\item Domains are the main discussion: $D_f \cap D_g$ and avoid zero division.
-\item Examples: $f(x)=\sqrt{x+2}$, $g(x) = \frac{x}{x+1}$
+\item Idea: 2 ways to grow complexity of functions to understand.
 \begin{enumerate}
-\item Compute $(f+g)(1)$, $(f/g)(0)$.
-\item Find the domain of $(f+g), (f/g)$. 
-\begin{itemize}
-\item Two ways: Domain of $f$ and $g$ also $g\neq 0$ OR compute $f/g$ keeping track of domian changes.
-\end{itemize}
+\item Graph transformations
+\item Combine functions
 \end{enumerate}
-\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions: Arithmetic combinations of functions $f(x)$ and $g(x)$.
+\begin{enumerate}
+\item $f+g, f-g, f \cdot g, f/g$
+\item Only new thing is notation, take care about how you write.
+\item Domain is $D_f \cap D_g$, avoid zero division for last case.
+\item Example: $f(x)=\sqrt{x+2}, g(x) = x/(x+1)$, compute $(f+g)(1), (f/g)(0)$.
+\item Example: Compute $(f/g)(x)$ in general. Keep track of domain changes and compare to $D_f \cap D_g$, avoid zero division.
+\item Basic arithmetic operations bit boring. Simple, notation just shorthand. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Function composition definition and idea.
+\begin{enumerate}
+\item Doing functions in order more interesting.
+\item $(f \circ g)(x) = f(g(x))$, draw diagram, relay race. 
+\item Do an operation first, apply to the result. 
+\item Domain, all $x$ in $D_g$ such that $g(x)$ is in $D_f$.
+\item Note, $(f \circ g)(x) \neq (g \circ f)(x)$.
+\item Example: Savy shopper. 10\$ off. 7\% discount. Which to use first? Let $x$ be the cost of the thing. Write as two functions: $f(x) = x-10, g(x) = 0.97x$, $f(g(x))$ vs $g(f(x))$.
+\item Example:
+\begin{itemize}
+\item $f(x) = x/(x-2), g(x) = 1/x$
+\item $(f\circ g)(x)$ at $x=3, 1/2$
+\item Domain is the key discussion, $1/2$ not in the domain even though $g(1/2)$ makes sense.
+\item Find the domain 2 ways: need $x$ in domain of $g$, $g(x)$ in domain of $f$, simplify keeping track of domain changes.
+\end{itemize} 
+\item Example: Try on own. $f(x) = x/(x^2-1)$, $g(x) = 2x-1$, $f \circ g$ versus $g \circ f$. Domain of each, note not the same.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Composite functions
+\item Example: Decomposing composition.
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Motivation: Tax is a function of your income, your income is a function of your work hour, how does your tax change related to your work hour? $T=T(I), I=I(h)$ so $T=T(I(h))$, taxes are really a function of hours.
-\item Definition: $(f\circ g)(x)=f(g(x))$ 
-\item How to conceptualize? Draw picture. Think of this as relay race. What should the domain be?
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Example: $f(x)=\frac{x}{x-2}, g(x) = \frac{1}{x}$.
-\begin{itemize}
-\item Compute $f\circ g$ at $x=3,\frac{1}{2}$. Latter is not in the domain even though $g(1/2)$ makes sense. Again, domain is the key discussion.
-\item Find $f \circ g$ domain 2 different ways. 
-\begin{itemize}
-\item Need $x$ in domain of $g$ and $g(x)$ in the domain of $f$. (Preferred since it keeps the idea of function composition in mind.)
-\item Compute $f\circ g$ keeping track of domain changes.
-\end{itemize}
-\end{itemize} 	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Example: $f(x)=\frac{x}{x^2-1}$ and $g(x)=2x-1$. Compute $f\circ g$ and $g\circ f$ and find the domain of each. 
-\begin{itemize}
-\item Order matters: $(f\circ g)(x)\neq (g\circ f)(x)$. Not like multiplication
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Example: View as a composite function: $y = (2x+5)^3$. How many ways here? As many as you want really.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Example: Let's lean into inverse functions. $f(x) = 3x-5$, $g(x)=\frac{1}{3}x+\frac{5}{3}$.
-\begin{itemize}
-\item Show that $(f\circ g)(x)=x$ and mention $(g\circ f)(x)=x$. What does this mean? 
-\item Go back to set diagram. $g$ undoes $f$ and visa versa. 
-\item This is idea of inverse function.
-\end{itemize}
+\item $h(x) = (2x+5)^3$, many ways to write as composition, no uniquiness.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Example: Next section teaser.
+\begin{enumerate}
+\item $f(x) = 3x-5, g(x) = 1/3 x+5/3$
+\item $f \circ g = g \circ f = x$
+\item Draw diagram. $g$ action undoes $f$ action.
+\item This is the idea of inverse, next section.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Iteration and chaos: \url{https://en.wikipedia.org/wiki/Chaos_theory}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 9, 11, 15, 17, 21, 27, 29, 31, 33, 35, 37, 49, 55, 59, 63, 73, 81, 83
+
 \end{enumerate}
 
 
