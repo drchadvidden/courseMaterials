@@ -883,20 +883,20 @@ Note the similarity to the tangent line for $y=f(x)$.
 \item Try on own: Find the tangent plane to the sphere $x^2+y^2+z^2=14$ at $(1,2,3)$. Can solve for $z$ taking the positive root or use implicit differentiation with respect to $x,y$. Note the normal vector is in the same direction as the sphere radius when directed to our point.
 \item Linearization of $z=f(x,y)$ by the tangent plane.
 \[
-f(x,y) approx L(x,y) = f(x_0, y_0)+f_x(x-x_0)+f_y(y-y_0)
+f(x,y) \approx L(x,y) = f(x_0, y_0)+f_x(x-x_0)+f_y(y-y_0)
 \]
-Two dimensional Taylor series approximation. Can guess the extension to 3+ independent variables.
+Two dimensional Taylor series approximation. Can guess the extension to 3+ independent variables. 
 \end{enumerate}
 
 %%%%%%%%%%%%%%%
 \item Differentiability of $f(x,y)$:
 \begin{enumerate}
-\item Remind of differentiability in $\mathbb{R}^2$. 
+\item Remind of differentiability in $\mathbb{R}^2$. Derivative exists. Differentiable implies continuous. 
 \item Def: We say $f(x,y)$ is differentiable at point $(a,b)$ if 
 \[
 \Delta z = f_x(a,b)\Delta x + f_y(a,b) \Delta y +\epsilon_1 \Delta x + \epsilon_2 \Delta y
 \]
-where $\epsilon_1,\epsilon_2 \rightarrow 0$ as $\Delta x,\Delta y \rightarrow 0$.
+where $\epsilon_1,\epsilon_2 \rightarrow 0$ as $\Delta x,\Delta y \rightarrow 0$. Basically says can approximate $f$ well by the tangent line.
 \item Theorem: If the partial derivatives $f_x,f_y$ exist near $(a,b)$ and are continuous at $(a,b)$, then $f$ is differentiable at $(a,b)$.
 \end{enumerate}
 
@@ -1105,7 +1105,92 @@ Note, the gradient vector $\nabla F$ is our normal vector to the plane (and surf
 
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{14.7 Maximum and minimum values}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Recall functions of one variable...
+\begin{enumerate}
+\item Draw $f(x)$ with make an min values. Smooth and continuous on $\mathbb{R}$.
+\item $f'(x)=0$ (stationary points) gives locations of horizontal tangents. $f''(x)=0$ discerns the three cases.
+\begin{itemize}
+\item $f''(x)>0$, local min
+\item $f''(x)<0$, local max
+\item $f''(x)=0$, inflection point
+\end{itemize}
+\item Two other cases for extrema: Singular points, end points.
+\item Absolute max and mins are ensured by the EVT: Continuous function $f(x)$ on closed interval $[a,b]$ must have a local max and local min.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions for $f(x,y)$.
+\begin{enumerate}
+\item Local min at $(a,b)$ with local min value $f(a,b)$. Likewise for max.
+\item Global min and max.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Extending calulus 1 results:
+\begin{enumerate}
+\item Theorem: If $f(x,y)$ has a local max or min at $(a,b)$ and $f_x, f_y$ both exist at $(a,b)$, then $f_x(a,b)=0$ and $f_y(a,b)=0$ ($\nabla f = \vec{0}$).
+\item If $\nabla f = \vec{0}$ at $(a,b)$, then this is called a stationary point. Not all critical points are local mins or maxes.
+\item Example: Find the stationary points of $f(x,y)=3x-x^3-2y^2+y^4$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How to classify stationary points? Concavity is key, but we need to look in all directions.
+\begin{enumerate}
+\item 2 examples: $x^2+xy+y^2$ and $x^2+10xy+y^2$. Only $(0,0)$ stationary point for both. Both have two positive partials second $(f_{xx}=f_{yy}=2>0$). Graph in Geogebra to see different behavior.
+\item To classify, consider all the second directional derivatives at once. For $f(x,y)$ and $\vec{u} = \langle h,k \rangle$,
+\[
+D_{\vec{u}} f = f_x h + f_yk.
+\]
+\[
+D_{\vec{u}}^2 f = D_{\vec{u}}\left( f_x h + f_yk \right) = f_{xx} h^2 + 2f_{xy}hk + f_{yy}k^2 = f_{xx} \left(h + \frac{f_{xy}}{f_{xx}} k\right)^2 + \frac{k^2}{f_{xx}} \left(f_{xx}f_{yy}-f_{xy}^2 \right)
+\]
+where the last step follows by completing the square.
+\item If we think concave up since $f_{xx}>0$ we would also need $D=f_{xx}f_{yy}-f_{xy}^2>0$. Likewise for concave down we need $f_{xx}<0$ but still $D>0$.
+\item Theorem: For $(a,b)$ a stationary point of $f(x,y)$ and 
+\[
+D = D(a,b) = f_{xx}f_{yy}-f_{xy}^2 = \left|
+\begin{array}{cc}
+f_{xx} & f_{xy} \\
+f_{yx} & f_{yy} 
+\end{array}
+\right|
+\]
+\begin{itemize}
+\item If $D>0$ and $f_{xx}(a,b)>0$, then $f(a,b)$ is a local min.
+\item If $D>0$ and $f_{xx}(a,b)<0$, then $f(a,b)$ is a local max.
+\item If $D>0$ then $f(a,b)$ is a saddle point.
+\end{itemize}
+\item Check for 2 examples.
+\item Example: Apply to first example.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Last, we extend the EVT
+\begin{enumerate}
+\item EVT: For $f(x,y)$ continuous on closed, bounded region $R$ in $\mathbb{R}^2$, then $f$ has an absolute max and min in $R$.
+\item How to find extrema? Abs max and mins must be at stationary points in $R$ or on the boundary of $R$.
+\begin{itemize}
+\item Find the stationary points in $R$.
+\item Find the extreme values on the boundary via Calc 1.
+\item Get the largest and smallest $f$ values from parts 1 and 2.
+\end{itemize}
+\item Example: 34 in text.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 13, 15, 17, 23, 27, 31, 33
+
+\end{enumerate}
+
+
 \subsection{14.8 Lagrange multipliers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
