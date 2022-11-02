@@ -1192,12 +1192,138 @@ f_{yx} & f_{yy}
 
 
 \subsection{14.8 Lagrange multipliers}
+Skip.
+
+\subsection{Chapter 14 Review}
+\begin{enumerate}
+\item Concept check: 1-18
+\item True-False: 1-11
+\item Exercises: 1-56
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 15 Multiple integrals}
+
 \subsection{15.1 Double integrals over rectangles}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Summary of past: Extend the definite integral of calculus 1 to 3 dimensions. 
+\begin{enumerate}
+\item $\ds \int_a^b f(x) ~dx$ as area under the curve.
+\item Compute via limit of Riemann sum. Classic calculus paradox.
+\item Fundamental theorem of calculus.
+\item Alternate view: $\ds \int_a^b f(x) ~dx$ as adding up 1D lengths to get 2D area.
+\item Really about summation: Sum lines to area, areas to volumes (discs and washers), probability, force to work, line segment to arc length, arc length to surface area, etc
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Basic case for $z=f(x,y)$ in $\mathbb{R}^3$: Volumes over rectangular domains.
+\begin{enumerate}
+\item Find the volume of the solid between $z=f(x,y)$ and the $xy-$plane over region $R = [a,b] \times [c,d]$ (Cartesian product).
+\item Partition $R$ by $\Delta x$ and $\Delta y$ giving rectangular areas $\Delta A$.
+\item Notation and limit of a Riemann sum. 
+\[
+\iint\limits_R f(x) ~dA = \int_a^b \int_c^d f(x,y) ~dy ~dx = \lim_{m,n \rightarrow \infty} \sum_{i=1}^n \sum_{j=1}^n f(x_{ij}^*, y_{ij}^*) \Delta A 
+\]
+\item If the limit exists we say $f$ is integrable over $R$.
+\item Can approximate area as in Calc 1 by computing the finite sum, though only works for simple functions.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item FTOC for calculation: Volume by accumulating area.
+\begin{enumerate}
+\item Slicing the solid in the $x$ direction gives cross-sections with area
+\[
+A(x) = \int_c^d f(x,y) ~dy.
+\]
+This is a computable function of $x$ for any $y$ held constant. 
+\item Add up area to get volume. FTOC twice.
+\[
+V = \int_a^b A(x) ~dx = \int_a^b \left[ \int_c^d f(x,y) ~dy \right] ~dx
+\]
+\item Of course slicing in $y$ gives a similar formula resulting in Fubini's theorem which extends to more general regions as well.
+\[
+\int_a^b \left[ \int_c^d f(x,y) ~dy \right] ~dx = \int_c^d \left[ \int_a^b f(x,y) ~dx \right] ~dy
+\]
+\item Examples: Divide and conquer to find the area under $z=1+x^2+y^2$ on $[1,2]\times[0,1]$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Average value of functions:
+\begin{enumerate}
+\item Calc 1 version:
+\[
+\frac{1}{b-a} \int_a^b f(x) ~dx
+\]
+\item Calc 3 version:
+\[
+\frac{1}{A(R)} \iint\limits_R f(x) ~dA
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 13, 15, 17, 19, 21, 25, 29, 31, 33, 35, 39, 47
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
 \subsection{15.2 Double integrals over general regions}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Idea of general regions:
+\begin{enumerate}
+\item The domain of integration for $z=f(x,y)$ doesn't have to be a rectangle. In general it can be any shape (denote as $D$). Draw picture.
+\item Can still do slicing in $x$ or $y$ direction. Result is 2 cases to choose from. 
+\item Volume from accumulating area in $x$ (holding $y$ constant). Draw domain picture.
+\[
+\iint\limits_D f(x,y) ~dA = \int_a^b A(x) ~dx = \int_a^b \int_{g_1(y)}^{g_2(y)} f(x,y) ~dy ~dx
+\]
+\item Volume from accumulating area in $y$ (holding $x$ constant). Draw domain picture.
+\[
+\iint\limits_D f(x,y) ~dA = \int_c^d A(y) ~dy = \int_c^d \int_{h_1(x)}^{h_2(x)} f(x,y) ~dx ~dy
+\]
+\item Sometimes only one is an option, sometimes both can be used and need to think strategically.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Examples: Drawing the domain in the $xy-$plane is key.
+\begin{enumerate}
+\item Only one direction is easy. Find the volume under the surface $z=x^2+y$ on domain $D$ bound by curves $y=x+1$ and $y=x^2$.
+\item Divide and conquer by doing both at same time. Find the volume below the plane $z=x-2y$ and above the triangle with vertices $(0,0), (1,1), (0,1)$ in the $xy-$plane. Need to divide into two volumes in one direction leading to the below theorem.
+\item Theorem: If $D = D_1 \cup D_2$, then
+\[
+\iint\limits_D f(x,y) ~dA = \iint\limits_{D_1} f(x,y) ~dA + \iint\limits_{D_2} f(x,y) ~dA 
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item If integration is hard, estimation will often do by capturing the solid inside and outside a cylinder.
+\begin{enumerate}
+\item Theorem: For $m \leq f(x,y) \leq M$ on domain $D$ with area $A(D)$, then
+\[
+m A(D) \leq \iint\limits_{D} f(x,y) ~dA \leq M A(D).
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 
+
+\end{enumerate}
+
+
 \subsection{15.3 Double integrals over polar coordinates}
 \subsection{15.4 Applications of double integrals}
 \subsection{15.5 Surface area}
