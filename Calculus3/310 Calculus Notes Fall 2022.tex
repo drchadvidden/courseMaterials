@@ -1398,19 +1398,55 @@ Skip.
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%
-\item 
+\item Triple integrals: Continue the path.
+\begin{enumerate}
+\item Instead of small intervals ($dx$) or small boxes ($dA$), we not have small boxes ($dV$). 
+\item Integrating will be the easy part, setting up the integral is the challenge.
+\item For $f(x,y,z)$ a continuous function on the rectangular box $B=[a,b]\times[c,d]\times[r,s]$,
+\[
+\iiint\limits_B f(x,y,z) ~dV = \lim_{l,m,n \rightarrow \infty} \sum_{i=1}^l \sum_{j=1}^m \sum_{k=1}^n f(x_i^*,y_j^*,z_k^*) \Delta V = \int_r^s \int_c^d \int_a^b f(x,y,z) ~dx~dy~dz
+\] 
+\item Fubini's theorem says the order of integration can be changed.
+\item Below we will just integrate 1 to find volumes of solids. Replace 1 with any $f(x,y,z)$ with the same story.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%
-\item 
+\item Examples: Volumes of solids.
+\begin{enumerate}
+\item Box: Graph it. Two integrations gives area of cross section. Final integral adds area to get volume.
+\[
+ \int_0^1 \int_0^3 \int_0^2 ~dx~dy~dz
+\]
+\item Prism: Graph it. Should be half of box. Easiest to project onto the $xy$-plane first, then sort out the $z$ bounds. Result is the following description of the solid.
+\[
+E = \left\{(x,y,z) | 0 \leq x \leq 2, \quad 0 \leq y \leq 3, \quad 0 \leq z \leq (3-y)/3 \right\}
+\]
+\[
+\int_0^2 \int_0^{3} \int_0^{(3-y)/3} ~dz~dy~dx
+\]
+Note middle two integrals produce area of a cross section.
+\item Try on own: Find the volume of the tetrahedron (4-sided pyramid) with corners 1s on the 3 axis. Follow previous example.
+\[
+\int_0^1 \int_0^{1-x} \int_0^{1-x-y} ~dz~dy~dx
+\]
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%
-\item 
+\item Changing order of integration.
+\begin{enumerate}
+\item Try on own: Find the prism volume in order $dx ~dy ~dz$. Hint: Draw projection in $yz-$plane first.
+\[
+ \int_0^1 \int_0^{3-3z} \int_0^2 ~dx~dy~dz
+\]
+\item Try on own:  Find the volume of the tetrahedron in order $dy ~dz ~dx$. Hint: Draw projection in the $xz-$plane first.
+\[
+\int_0^1 \int_0^{1-x} \int_0^{1-x-z} ~dy~dz~dx
+\]
+\item Example 4 in text.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%
-\item 
-
-%%%%%%%%%%%%%%%%%
-\item Homework: 
+\item Homework: 1, 3, 9, 13, 19, 21, 27, 31, 35 
 
 \end{enumerate}
 
