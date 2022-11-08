@@ -12,7 +12,6 @@
 \bibliographystyle{unsrt}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{stmaryrd}
 \usepackage{epsfig}  		
 
 
@@ -757,7 +756,7 @@ Exam review problems:
 \item Root: $\sqrt[n]{x}$
 \item Reciprocal: $1/x^n$
 \item Abs value: $|x|$
-\item Greatest integer: $\llbracket x \rrbracket$
+\item Greatest integer: $[ x ]$
 \item Will modify these later to grow complexity.
 \end{itemize}
 \end{enumerate}
@@ -1213,6 +1212,9 @@ Take advantage of multiplicity on sign chart.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+SKIP
+
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Rational zeros of polynomial
@@ -1266,126 +1268,87 @@ $$
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.5 Complex zeros and the fundamental theorem of algebra}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item The fundamental theorem of algebra 
+\item Motivation:
 \begin{enumerate}
-\item The fundamental theorem of algebra: Every polynomial with complex coefficients has at least one complex zero.
-\item Complete factorization theorem (another view of FTOA): If $P(x)$ is a polynomial of degree $n\geq 1$, then there exist complex numbers $a$, $c_1...$, $c_n$ such that $P(x)= a(x-c_1)...(x-c_n)$. Here $c_1$... $c_n$ are zeros of $P(x)$
+\item Factor $p(x) = x^4+x^3+7x^2+9x-18$ knowing that $1$ and $–2$ are both zeros.
+\item Result is linear factor and irreducible quadratic (with complex roots).
+\item Still, roots are factors, just need complex numbers to make sense of it.
+\item Note conjugate pair relationships.
+\item Every polynomial can be factored completely.
+\item Check in Desmos.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Zeros of polynomial
+\item Fundamental Theorem of Algebra
 \begin{enumerate}
-\item Zero Theorem: a degree $n$ polynomial has exactly n zeros
-\item Zeros
-\begin{itemize}
-\item Real zeros
-\item Complex zeros (conjugate zeros): complex root always appear in pairs. If $z$ is a zero, then $\bar z$ is also a zero of $P(x)$
-\item Repeating zeros: multiplicity
-\end{itemize}
+\item Every degree $n$ polynomial has $n$ roots (real or complex) up to multiplicity.
+\item Huge math impact. Connects two big areas: algebra and geometry. Complex plane is a elegant place to do geometry.
+\item Search FTOA, complex plane, fourier series
+\item Fundamental theorem of calculus is your chance to see such a thing in action.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Linear and quadratic factors: every polynomial with real coefficients can be factored in to a product of linear and irreducible quadratic factors with real coefficients.
-\begin{enumerate}
-\item Examples: $p(x) = x^4+3x^2-4$, $p(x) = x^5+x^3+8x^2+8$. $p(x)=x^4+x^3+7x^2+9x-18$. 
-\item Recovering polynomial from roots: order 5 polynomial with roots $\pm 2$, $1+i$ and $0$ while $P(1) = 1$
-\end{enumerate}
+\item Example: Find a degree 5 polynomial with zeros $–3$ repeated twice, $2i$, and $1$ with $y$-intercept $5$. Check your result in Desmos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Graphing
+\item Homework: 7, 9, 13, 29, 31, 37, 41, 47, 67
+
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.6 Rational functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Definition;
+
+%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%
+\item Motivitation and infinity twice.
 \begin{enumerate}
-\item A rational function is of the form $f(x) = p(x)/q(x)$ where $p,q$ are polynomials. 
-\item Domain is all real numbers except the real zeros of $q$. 
+\item Basic case: $r(x) = 1/x$
+\item Reason out graph. Domain and range.
+\item Label VAs and HAs. 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Graph
+%%%%%%%%%%%%%%%%
+\item Definitions:
 \begin{enumerate}
-\item Motivating examples:
-\begin{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item $f(x)=\frac{1}{x}$. Is this a rational function? Give a table to describe behavior near zero.
-\item Does zero division imply a vertical asymptote exists there? No. 
-\begin{enumerate}
-\item $f(x) = \frac{x}{x}$.
-\item $f(x) = \frac{x^2-9}{x-3}$. 
-\item Hole in place of asymptote. Need be in lowest terms to see vertical asymptotes.  
+\item $r(x) = p(x)/q(x)$ for $p,q$ polynomials. Domain requires $q(x)$ not zero. Show up places, especially in math theory. Good setting to think about infinity.
+\item Vertical and horizontal asymptotes. Asymptotics and end behavior.
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item $f(x) = \frac{3x+6}{x-1}$. 
+%%%%%%%%%%%%%%%%
+\item Example:
 \begin{enumerate}
-\item Are we in lowest terms?
-\item Divide top and bottom by highest order term in bottom for end behavior discussion. Also can use long division. 
-\item What if bottom HOT is $x^2$? (Divide by this HOT throughout to imagine behavior) 
-\item Top HOT $x^2$ (long division for oblique asymptote)?
+\item Graph $r(x)=(3x+6)/(x-1)$
+\item Zeros, asymptotes, sign chart helps.
+\item \item Think of end behavior by dividing by the highest order term. $1/x$ is easy to understand.
+\item Check with Desmos.
+\item Try on own: Same for $r(x)=(2x^2+7x-4)/(x^2+x-2)$.
 \end{enumerate}
-\end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Zero in the denominator: Two cases here.
-\begin{itemize}
-\item Hole
-\item Vertical asymptote
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Asymptotes: Knowing these definitions is important.
+%%%%%%%%%%%%%%%
+\item Other situations.
 \begin{enumerate}
-\item Vertical asymptote 
-\item Horizontal asymptote (leading terms or by polynomial division)
+\item Does there always have to be a VA? No can be a hole: $x/x, (x^2-2)/(x+2)$
+\item Does there always have to be a HA? No degree doesn't have to match for $p$ and $q$. Zero HA, slant asymp, etc. Long division gives the slant asymptote.
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%
+\item Homework: 9, 11, 13, 15, 21, 23, 29, 33, 35, 45, 53, 55, 63, 73
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Drawing the graph of a rational function.
-\begin{enumerate}
-\item Factor the top and the bottom
-\item Vertical asymptotes and holes
-\item Horizontal asymptotes or infinity
-\item $x, y$ intercepts
-\item Sketch the graph (possibility of intersection of horizontal asymptote)
-\end{enumerate}
-$$
-y = \frac{x-2}{3x-1}, \quad y = \frac{x^2-4}{2x^2-4x}, \quad y= \frac{2x^2+7x-4}{x^2+x-2}
-$$
-\end{enumerate}
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{3.7 Polynomial and rational inequalities}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{enumerate}
-\item Mention section. Already done!
-\item Solve by drawing graph.
-\begin{itemize}
-\item $2x^3 + x^2 +6 \geq 13x$
-\item $\frac{(x-2)}{x-1}\leq 3$
-\end{itemize}
 \end{enumerate}
 
 
