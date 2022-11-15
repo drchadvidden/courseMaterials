@@ -1504,7 +1504,55 @@ Then,
 
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{15.8 Triple integrals in spherical coordinates}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Spherical coordinate system
+\begin{enumerate}
+\item On Earth we use latitude and longitude. Allow dig in or fly out, and we need a third measurement, distance from center.
+\item $(\rho, \theta, \phi)$ where $\rho \geq 0$ is distance from the origin, $0 \leq \theta \leq 2\pi$ is angle in $xy-$plane as before, and $0 \leq \phi \leq \pi$ is angle from $z$-axis.
+\item Describe the shapes.
+\begin{itemize}
+\item $\rho = 10$, $\theta = 1$, $\phi = 1$, ...
+\end{itemize}
+\item Conversion to rectangular coordinates $(x,y,z)$
+\begin{itemize}
+\item In the $xy$-plane, $x=r\cos(\theta)$, $y=r\sin(\theta)$ though we discard $r$. Using the triangle formed by $r$ and $\rho$, we have
+\[
+x = \rho \sin(\phi) \cos(\theta), \quad y = \rho \sin(\phi) \sin(\theta)
+\]
+\item Can see $z = \rho \cos(\phi)$ from another right triangle.
+\item Check that $x^2+y^2+z^2 = \rho^2$ as the distance formula will know.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Integration with spherical volumes
+\begin{enumerate}
+\item Can show that
+\[
+\iiint\limits_E f ~dV = \iiint\limits_E f ~\rho^2 \sin(\phi) ~d\rho ~d\theta ~d\phi
+\]
+\item The resulting spherical box has edges $d\rho$, $\rho d\phi$ and horizontal edge becomes $\rho \sin(\phi) d\theta$. The product of the three is $dV$. This is really cubic distance from $\rho^2 ~d\rho$.
+\item Example: Find the volume of a sphere of radiues $R$.
+\[
+\iiint\limits_E ~dV = \int_0^{\pi} \int_0^{2\pi} \int_0^R ~\rho^2 \sin(\phi) ~d\rho ~d\theta ~d\phi
+\]
+\item Example: Find the volume of the ice cream cone above cone $z=\sqrt{x^2+y^2}$ and below the sphere $x^2+y^2+z^2=z$. 
+\[
+\iiint\limits_E ~dV = \int_0^{\pi/4} \int_0^{2\pi} \int_0^{\cos(\phi)} ~\rho^2 \sin(\phi) ~d\rho ~d\theta ~d\phi
+\]
+Figure 11 in the text is helpful.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework:1, 3, 5, 7, 9, 11, 15, 17, 21, 23, 25, 41
+
+\end{enumerate}
+
 \subsection{15.9 Change of variable in multiple integrals}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
