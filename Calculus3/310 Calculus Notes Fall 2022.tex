@@ -1555,11 +1555,150 @@ Figure 11 in the text is helpful.
 
 \subsection{15.9 Change of variable in multiple integrals}
 
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Substituion from calculus 1:
+\begin{enumerate}
+\item We reverse the chain rule: $\frac{d}{dx} f(g(x)) = f'(g(x)) g'(x)$. 
+\item $\ds \int F(g(x)) g'(x) ~dx = \int F(u) ~du$
+\item Also can write as $\int F(u(x)) \frac{du}{dx} ~dx = \int F(u) ~du$.
+\item Example: $\int x\sin(x^2)~dx$
+\item Here we write things a bit backwards: $\ds \int f(x) ~dx = \int f(x(u)) \frac{dx}{du} ~du$
+\item As a change of variable, we have a stretching factor $J = \frac{dx}{du}$.
+\item Here we usually change variables to simplify the integrand, but now we consider the region of integration as well.
+\item Our aim is to generalize results such as $\ds \int_R f(x,y)~dydx = \int_S f(r\cos(\theta), r\sin(\theta)) r ~drd\theta$. Saw the $r$ from geometry before. Will see again.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Change of variables in $\mathbb{R}^2$: $x=g(u,v)$, $y=h(u,v)$.
+\begin{enumerate}
+\item For transformation $T(u,v)=(x,y)$ given by  $x=g(u,v)$, $y=h(u,v)$. This maps from the $uv$-plane to the $xy$-plane. The reverse mapping $T^{-1}$ also makes sense.
+\item Example: $x=r\cos(\theta)$, $y=r\sin(\theta)$. Maps rectangular regions to circular ones.
+\item We want to know how area changes with the new variables. That is relate $dxdy$ to $dudv$.
+\item For rectangle in the $uv$-plane mapped to nonlinear region in the $xy$-plane, our rectangels $\delta u \delta v$ get mapped to nearly parallelograms $\delta u (g_u \vec{i} + h_u \vec{j})$ and $\delta v (g_v \vec{i} + h_v \vec{j})$. The cross product magnitude gives the area of such parallelograms.
+\[
+\| \Delta u (g_u \vec{i} + h_u \vec{j}) \times \Delta v (g_v \vec{i} + h_v \vec{j}) \|
+= \| \left|
+\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k} \\
+g_u & h_u & 0 \\
+g_v & h_v & 0 
+\end{array}
+\right| \| \Delta u \Delta v
+= \| \left|
+\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k} \\
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} & 0 \\
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} & 0 
+\end{array}
+\right| \| \Delta u \Delta v 
+= \left|
+\begin{array}{cc}
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v}  \\
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} 
+\end{array}
+\right|  \Delta u \Delta v 
+\]
+Limit and Riemann sum gives our integration result.
+\item Theorem: 
+\[
+\iint\limits_R f(x,y) ~dx~dy = \iint\limits_S f(x(u,v), y(u,v)) \left| \frac{\partial (x,y)}{\partial (u,v)} \right| ~ du ~dv
+\]
+where the Jacobian $\frac{\partial (x,y)}{\partial (u,v)}$ is defined as
+\[
+\frac{\partial (x,y)}{\partial (u,v)} = \left|
+\begin{array}{cc}
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v}  \\
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} 
+\end{array}
+\right| 
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item For $R$ the parallelogram with corners $(0,0), (2,1), (3,3), (1,2)$, computer $\ds \iint\limits_R e^x ~dxdy$ by first transforming $R$ to $S$ the square with corners $(0,0), (0,3), (3,3), (3,0)$ in the $uv$-plane.
+\begin{itemize}
+\item $u=2x-y$ and $v=2y-x$ does the trick. See where the edges of the parallelogram map. 
+\item Then $x=(2u+v)/3$ and $y=(u+2v)/3$ and we compute the jacobian $J=1/3$.
+\item Note $\ds \iint\limits_R ~dxdy = \int_0^3 \int_0^3 (1/3)~dudv = 9/3=3$ and the area of $R$ was $1/3$ of new region $S$.
+\item Last,  $\ds \iint\limits_R e^x ~dxdy=(3/2)(e^2-1)(e-1)$, though we could have used past techniques for region $R$.
+\item Can see the opposite directoin would have tripled the area. 
+\end{itemize}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%
+\item Triple integrals have $3 \times 3$ determinants. Rectangular prisms become parallelpipeds. See text for spherical coords derivation.
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 15, 17
+
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chapter 16 Vector calculus}
+
+\begin{enumerate}
+\item The big step of the class: FTOC for double and trible integrals.
+\item For chapter 15, we mostly rely on FTOC from calculus 1, but there are high dimension versions.
+\item 2 new ideas: Vector fields (vectors at all locations in the plane or 3-space) and line integrals (integration along a curve rather than an integral).
+\item Our FTOC for double integrals will connect a double integration over a region to a single integration along a boundary curve (called Green's theorem).
+\end{enumerate}
+
 \subsection{16.1 Vector fields}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Foundation:
+\begin{enumerate}
+\item Def: A vector field on $\mathbb{R}^2$ is a function $\vec{F}$ that assigns to each point $(x,y)$ in $D$ a two-dimensional vector $\vec{F}(x,y)$. That is,
+\[
+\vec{F}(x,y) = P(x,y) \vec{i} + Q(x,y) \vec{j}.
+\]
+Similar for $\mathbb{R}^3$.
+\item Example: Position vector field $\vec{F}(x,y) = \langle x,y \rangle$. 
+\item Example: Spin vector field $\vec{F}(x,y) = \langle -y, x \rangle$. Each vector length is distance from the origin.
+\item Graphing is a pain. Check out Geogebra...ish.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Gradient vector field: 
+\begin{enumerate}
+\item $\nabla f(x,y)$ is really a vector field. 
+\item Important question: Which vector fields are gradient vector fields (called conservative vector feilds). That is, for vector field $\vec{F}$ is there a $f$ such that $\vec{F} = \nabla f$? $f$ is called the potential function for $F$.
+\item The position vector field is conservative since $\vec{F} = \nabla f$ for $f(x,y)=x^2/2 y^2/2$. 
+\item Can show the spin vector feild is not, but if you scale by $1/r^2 = 1/\sqrt{x^2+y^2}$ it is for $f(x,y)=\arctan(y/x)=\theta$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 3, 5, 7, 9, 11, 13, 15, 17, 21, 23, 35
+
+\end{enumerate}
+
 \subsection{16.2 Line integrals}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%%%%%
+\item 
+
+%%%%%%%%%%%%%%%%%%%%
+\item 
+
+\end{enumerate}
+
 \subsection{16.3 The fundamental theorem of line integrals}
 \subsection{16.4 Green's theorem}
 \subsection{16.5 Curl and divergence}
