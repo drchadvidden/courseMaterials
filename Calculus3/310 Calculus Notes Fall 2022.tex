@@ -1589,14 +1589,14 @@ g_v & h_v & 0
 = \| \left|
 \begin{array}{ccc}
 \vec{i} & \vec{j} & \vec{k} \\
-\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} & 0 \\
-\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} & 0 
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u} & 0 \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} & 0 
 \end{array}
 \right| \| \Delta u \Delta v 
 = \left|
 \begin{array}{cc}
-\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v}  \\
-\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} 
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u}  \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} 
 \end{array}
 \right|  \Delta u \Delta v 
 \]
@@ -1609,8 +1609,8 @@ where the Jacobian $\frac{\partial (x,y)}{\partial (u,v)}$ is defined as
 \[
 \frac{\partial (x,y)}{\partial (u,v)} = \left|
 \begin{array}{cc}
-\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v}  \\
-\frac{\partial x}{\partial u} & \frac{\partial y}{\partial v} 
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u}  \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} 
 \end{array}
 \right| 
 \]
@@ -1686,10 +1686,31 @@ Similar for $\mathbb{R}^3$.
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
-\item 
+\item Line integral basics
+\begin{enumerate}
+\item Idea: A line integral is the integral along a curve rather than an interval. Interpretation is area, though physics has applications.
+\item Draw picture for $z=f(x,y)$, $\Delta s$ for change in arc length. Rectangles are still in the Riemann sum.
+\item Definition: The line integral of $f$ along curve $C$ is
+\[
+\int_C f(x,y) ~ds = \lim_{n \rightarrow \infty} \sum_{i = 1}^n f(x_i^*, y_i^*) \Delta s
+\]
+\item Arc length is an integration problem from Chapter 10.
+\[
+L = \int_a^b \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} ~dt
+\]
+for $x=x(t), y=y(t)$ a parameterization of curve $C$. This sum of line segment lengths (distance formula) in the limit.
+\item Theorem: Argue along similar lines as arc length to get...
+\[
+\int_C f(x,y) ~ds =\int_a^b f(x,y) \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} ~dt
+\]
+\item Find the line integral of $f(x,y)=1$ along the upper half of the circle of radius 2. Easy to replace $f$ with any function and just compute.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
+\item Physics applications: Work and mass along a curve.
+\begin{enumerate}
 \item 
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
 \item 
