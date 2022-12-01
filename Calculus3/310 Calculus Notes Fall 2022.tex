@@ -1703,20 +1703,92 @@ for $x=x(t), y=y(t)$ a parameterization of curve $C$. This sum of line segment l
 \[
 \int_C f(x,y) ~ds =\int_a^b f(x,y) \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} ~dt
 \]
+which can also be written as
+\[
+\int_C f(\vec{r}) ~ds =\int_a^b f(\vec{r}(t)) \| \vec{r}'(t) \| ~dt
+\]
+\item Note, for $f(x,0)$ this reduces to the interval version $\int_a^b f(x,0) ~dx$.
 \item Find the line integral of $f(x,y)=1$ along the upper half of the circle of radius 2. Easy to replace $f$ with any function and just compute.
+\item Can also integrate in a single direction and translated to parameter $t$ via the chain rule. Meaning to be mentioned shortly.
+\[
+\int_C f(x,y) ~dx = \int_C f(x(t),y(t)) x'(t)~dt, \quad \int_C f(x,y) ~dy = \int_C f(x(t),y(t)) y'(t)~dt
+\]
+Can combine into a single expression.
+\[
+\int_C f(x,y) ~dx + \int_C g(x,y) ~dy  = \int_C f(x,y) ~dx  + g(x,y) ~dy
+\]
+\item Example 4 in text.
+\item Extensions to three dimensions not surprising.
+\[
+\int_C f(x,y,z) ~ds =\int_a^b f(x,y,z) \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2+ \left(\frac{dz}{dt}\right)^2} ~dt = \int_a^b f(\vec{r}(t)) \| \vec{r}'(t) \| ~dt
+\]
+\[
+\int_C f(x,y,z) ~dx  + g(x,y,z) ~dy + h(x,y,z) ~dz
+\]
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
-\item Physics applications: Work and mass along a curve.
+\item Physics applications: Work and vector fields.
 \begin{enumerate}
-\item 
+\item In one dimension:
+\begin{enumerate}
+\item $W = F \cdot D$ for constant force, $W = \int_0^D F(x) ~dx$ for variable force.
+\end{enumerate}
+\item In two dimensions:
+\item $W = \vec{F} \cdot \vec{D}$ for constant force vector $\vec{F}$ (mag and dir) and direction vector $\vec{D}$.
+\item Line integrals give work done along a curve:
+\begin{enumerate}
+\item Constant force vector in direction of tangent vector $\vec{T}$.
+\[
+W = \int_C \vec{F} \cdot \vec{T} ~ds = \int_C \vec{F} \cdot \frac{\vec{r}'}{\|\vec{r'}\|} ~ds = \int_C \vec{F} \cdot \frac{\vec{r(t)}'}{\|\vec{r(t)'}\|} \|\vec{r}'(t)\| ~dt = \int_C \vec{F} \cdot \vec{r(t)}' ~dt
+\]
+\item Variable force via a vector field $\vec{F}(x,y,z) = \vec{F}(\vec{r})$
+\[
+W = \int_C \vec{F}(\vec{r}) \cdot \vec{T} ~ds = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt
+\]
+\end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
-\item 
+\item General vector fields
+\begin{enumerate}
+\item Definition: The line integral of vector field $\vec{F}$ is 
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt = \int_C \vec{F} \cdot \vec{T} ~ds 
+\]
+This is general for 2+ dimensions.
+\item Can connect line integrals for vector fields $\vec{F} = \langle P(x,y), Q(x,y) \rangle$ to line integral for functions giving reason to line integrals in $x$ and $y$ (and $z$).
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt =\int_C P(x,y) ~dx + Q(x,y) ~dy
+\]
+Likewise for 3 variables.
+\item Example: Compute the work done by vector field $\vec{F} = \langle -y,x \rangle$ (spin field) along
+\begin{itemize}
+\item Straight line from $(1,0)$ to $(0,1)$. $y=1-x$ gives $x=1-t, y=t$ for $0 \leq t \leq 0$. Then,
+\[
+\vec{F}(\vec{r(t)}) = \langle -t, 1-t \rangle, \quad \vec{r'(t)} = \langle -1, 1 \rangle
+\]
+and
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt = \int_0^1 \left(t+(1-t) \right) ~dt = 1
+\]
+\item Quarter circle from $(0,1)$ to $(1,0)$. $x=\cos(t), y=\sin(t)$ for $0 \leq t \leq \frac{\pi}{2}$ works.
+\[
+\vec{F}(\vec{r(t)}) = \langle -\sin(t),\cos(t) \rangle, \quad \vec{r'(t)} = \langle -\sin(t), \cos(t) \rangle
+\]
+and
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt = \int_0^{\pi/2} \left(1 \right) ~dt = \frac{\pi}{2}
+\]
+\item Note work done is positive for both, more for the second.
+\item Check out in Geogebra to see how more work is done along the circle. 
+\item Direction reversed would give negative work done. Zero work done if directions are all perpendicular. Position vector field would give this.
+\end{itemize}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
-\item 
+\item Homework: 1, 3, 7, 11, 15, 17, 19, 21, 
 
 \end{enumerate}
 
