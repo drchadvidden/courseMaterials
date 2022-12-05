@@ -1793,6 +1793,63 @@ and
 \end{enumerate}
 
 \subsection{16.3 The fundamental theorem of line integrals}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item Fundamental theorems
+\begin{enumerate}
+\item FTOCP2: $\ds \int_a^b F'(x) ~dx = F(b)-F(a)$. Area under the curve equates to endpoint evaluation.
+\item Theorem (FTOLI):  For curve $C$ defined by the vector function $\vec{r}(t)$, $a \leq t \leq b$ and differentiable function $f(x,y)$ such that $\nabla f$ is continuous on $C$, we have
+\[
+\int_C \nabla f \cdot d\vec{r} = f(\vec{r}(b)) - f(\vec{r}(a))
+\]
+\item Proof: We use the chain rule and FTOCP2. 
+\[
+\int_C \nabla f \cdot d\vec{r} = \int_C \nabla f \cdot \vec{r}'(t) ~dt = \int_a^b \left( \frac{\partial f}{\partial x} \frac{dx}{dt} +  \frac{\partial f}{\partial y} \frac{dy}{dt} +  \frac{\partial f}{\partial z} \frac{dz}{dt} \right) ~dt = \int_a^b \frac{d}{dt} f(\vec{r}(t) ~dt = f(\vec{r}(b))-f(\vec{r}(a))
+\]
+\item Notes:
+\begin{itemize}
+\item For conservative vector fields $\vec{F} = \nabla f$, line integrals amount to endpoint evaluation at $A=(x(a), y(a))$ and $B=(x(b), y(b))$.
+\item Since $C$ can be any curve, this implies path indendence so long as endpoints $A$ and $B$ are the same. That is
+\[
+\int_{C_1} \nabla f \cdot d\vec{r} = \int_{C_2} \nabla f \cdot d\vec{r} = f(\vec{r}(b)) - f(\vec{r}(a))
+\]
+\item For a closed curve (ends where you started), we have
+\[
+\int_{C} \nabla f \cdot d\vec{r} = \oint_{C} \nabla f \cdot d\vec{r} = 0
+\]
+\item Integration can be completely avoided for $\ds \int_C F \cdot d\vec{r}$ as long as we can verify $F$ is conservative and find $F= \nabla f$ for potential $f$. How to test? Easy way is for $F=\langle M(x,y), N(x,y) \rangle = \nabla f$, we need $M_y = N_x$. This is the quick test.
+\end{itemize}
+\item Example: Exercise 12 in text.
+\item Example: See again that the spin field is not conservative.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Conservation of energy:
+\begin{enumerate}
+\item Here we see why we say conservative and potential.
+\item Force acting on a mass results in change in velocity. Newton's Law gives $F=ma = mv'$. Then over a path $\vec{r}$, $\vec{F}(\vec{r}(t)) = m r''(t)$ and
+\[
+W = \int_C \vec{F} \cdot \vec{r} = \int_a^b \vec{F}(\vec{r}(t)) \cdot \vec{r}'(t) ~dt = \frac{m}{2} \int_a^b \frac{d}{dt} \left[ \vec{r} \cdot \vec{r} \right] ~dt = \frac{m}{2} \left( \|\vec{v}(b)\|^2 -  \|\vec{v}(a)\|^2 \right)
+\]
+This last part is change in kenetic energy $\frac{m}{2} \|\vec{v} \|^2$, half mass times square of speed.
+\item For $\vec{F}$ conservative it has potential $f$. $\vec{F} = -\nabla P$ gives $P$ the potential energy of the object. Then,
+\[
+W = \int_C \vec{F} \cdot \vec{r} = \int_C -\nabla P \cdot \vec{r} = P(\vec{r}(a))-P(\vec{r}(b))
+\]
+\item Equating work done $W$ we get conservation of total energy
+\[
+P(\vec{r}(a)) + \frac{m}{2} \|\vec{v}(a)\|^2 = P(\vec{r}(b)) + \frac{m}{2} \|\vec{v}(b)\|^2 
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Homework:
+
+\end{enumerate}
+
+
 \subsection{16.4 Green's theorem}
 \subsection{16.5 Curl and divergence}
 \subsection{16.6 Parametric surfaces and their area}
