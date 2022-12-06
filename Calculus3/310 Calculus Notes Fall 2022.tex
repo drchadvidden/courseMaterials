@@ -1788,7 +1788,7 @@ and
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%
-\item Homework: 1, 3, 7, 11, 15, 17, 19, 21, 
+\item Homework: 1, 3, 7, 11, 15, 17, 19, 21, 29
 
 \end{enumerate}
 
@@ -1845,12 +1845,44 @@ P(\vec{r}(a)) + \frac{m}{2} \|\vec{v}(a)\|^2 = P(\vec{r}(b)) + \frac{m}{2} \|\ve
 \end{enumerate}
 
 %%%%%%%%%%%%%%
-\item Homework:
+\item Homework:1, 3, 5, 7, 11, 13, 15, 19, 23, 25, 29, 35
 
 \end{enumerate}
 
 
 \subsection{16.4 Green's theorem}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item 2D version of FTOC, volume connected to integral, 150 years after Newton and Leibniz.
+\begin{enumerate}
+\item Equate a double integral over region $R$ to a line integral along its boundary $C$. Some conditions need heeding.
+\item Green's Theorem: Let $C$ be a positively oriented (counter-clockwise traversal of $R$), smooth, simple closed curve in the plane and let $D$ be the region bounded by $C$. Then,
+\[
+\int_C P~dx + Q~dy = \iint\limits_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) ~dA
+\]
+\item Notation:
+\[
+\int_C P~dx + Q~dy = \oint_C P~dx + Q~dy
+\]
+\item Can use to turn line integrals into area or area into line integrals.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item Compute $\ds \oint_C x^4~dx + xy ~dy$ where $C$ is the triangle from $(0,0)$ to $(1,0)$ to $(0,1)$ and back.
+\item Exer 9 in text.
+\item Area application: Find the area of the ellipse $\ds \frac{x^2}{a^2} +\frac{y^2}{b^2} = 1$. Use parameterization $x=a\cot(t), y=b\sin(t)$. Can choose any $P, Q$ such that $Q_x-P_y=1$. Choose $P=-\frac{1}{2}y$ and $Q=\frac{1}{2}x$. Then area gives $\pi a b$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Homework:
+
+\end{enumerate}
+
+
 \subsection{16.5 Curl and divergence}
 \subsection{16.6 Parametric surfaces and their area}
 \subsection{16.7 Surface integrals}
