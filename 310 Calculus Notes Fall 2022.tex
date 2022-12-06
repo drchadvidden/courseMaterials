@@ -1,0 +1,1901 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb,amscd,graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\bibliographystyle{unsrt}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{epsfig}  		% For postscript
+%\usepackage{epic,eepic}       % For epic and eepic output from xfig
+\renewcommand{\thesection}{}  % toc dispaly
+
+\newcommand{\ds}{\displaystyle}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\title{Calculus III Notes}
+\date
+\Large
+\begin{document}
+\maketitle
+\large
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fun stuff}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 12 Vectors and the geometry of space}
+\subsection{12.1 Three-dimensional coordinate systems}
+\begin{enumerate}
+\item Rectangular (Cartesian) coordinate system
+\begin{enumerate}
+%%%%%%%%%%
+\item 2D: 
+\begin{itemize}
+\item Basics: $xy$-plane, orthogonal axis with standard orientation, 4 quadrants, coordinates of point $(x,y)$, projection onto axis, notation $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R} = \{ (x,y) | x,y \in \mathbb{R} \}$.
+\item Distance between two points, Pythagoras, distance formula.
+\end{itemize} 
+
+%%%%%%%%%%
+\item 3D: 
+\begin{itemize}
+\item $xyz$-space, orthogonal axis with standard orientation, 8 octants, coordinates of point $(x,y,z)$, projection onto $xy$-plane ($xz,yz$). Projection onto axis,  notation $\mathbb{R}^3 = \{ (x,y,z) | x,y,z \in \mathbb{R} \}$.
+\item Distance between two points, Pythagoras twice, distance formula, proof in text.
+\end{itemize}
+\end{enumerate}
+
+\item Graphs of equations
+\begin{enumerate}
+%%%%%%%%%%
+\item 2D: 
+\begin{itemize}
+\item Point
+\item Lines: Vertical, horizontal, sloped
+\item Quadratics, polynomials
+\item Circles from distance formula, standard form $(x-1)^2+(y-2)^2=4$, complete the square if not in standard form.
+\item Lots more
+\item Try on own: Regions via inequalities $y<x$, $x^2+y^2>9$, $x/y<1$, $xy\geq0$.
+\end{itemize}
+%%%%%%%%%%
+\item 3D: 
+\begin{itemize}
+\item Point
+\item Planes: Vertical ($x=2$), horizontal ($z=1)$, out at us ($y=0$).
+\item Try on own: $x^2+y^2=1$, $x+y=1$, $z=x^2$, $x<y$.
+\item Spheres from the distance formula, standard form, complete the square if not in standard form.
+\item Showcase Geogebra.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%
+\item Homework: 7, 9, 11, 13, 15, 17, 21, 23, 25-37 odd, 45
+\end{enumerate}
+
+\subsection{12.2 Vectors}
+\begin{enumerate}
+%%%%%%%%%%%
+\item Vector basics: $\mathbb{R}^2$, then $\mathbb{R}^3$. 
+\begin{enumerate}
+\item Coordinate (location) vs vector (action such as displacement).
+\item Vector has 2 attributes, magnitude (size) and direction (angle).
+\item Location doesn't matter, standard position for comparison.
+\item Vector components.
+\[
+\vec{a} = \langle a_1, a_2 \rangle = \langle x, y \rangle
+\]
+\item Vector from two points $\vec{AB}$. General formula.
+\item Magnitude and direction. Need to adjust direction by $180^{\circ}$ with arctangent formula for quadrants 2 and 3.
+\[
+\| \vec{a} \| = \sqrt{a_1^2+a_2^2}, \quad \theta = \arctan(y/x)
+\]
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Vector operations: Geometry and algebra, $\mathbb{R}^2$ then $\mathbb{R}^3$
+\begin{enumerate}
+\item Addition: Parallelogram law, sum of components.
+\item Scalar multiplication: Stretch / reverse, scale components.
+\item Subtraction: Triangular law, subtract components, rewrite as
+\[
+\vec{a}-\vec{b} = \vec{a}+(-\vec{b}).
+\]
+\item Bonus: Dot product
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Theorem: Vector properties, all proven component-wise via properties of real number arithmetic, geometric intuition.
+\begin{enumerate}
+\item Commutative: $\vec{a} + \vec{b} = \vec{b}+\vec{a}$
+\item Associative: $(\vec{a}+\vec{b})+\vec{c} = \vec{a} + (\vec{b}+\vec{c})$
+\item Addition identity: $\vec{a}+\vec{0} = \vec{a}$
+\item Addition inverse: $\vec{a}+(-\vec{a})=0$
+\item Scalar distribution: $c(\vec{a}+\vec{b}) = c\vec{a}+c\vec{b}$
+\item Vector distribution: $(c+d)\vec{a} = c\vec{a}+d\vec{a}$
+\item Scalar associative: $(cd)\vec{a} = c(d\vec{a})$
+\item Scalar multiplication identity: $1\cdot \vec{a} = \vec{a}$
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Unit vectors and standard basis
+\begin{enumerate}
+\item $\mathbb{R}^2$: $\langle 1,0 \rangle, \quad \langle 0,1 \rangle$, divide by length to make unit.
+\[
+\vec{a} = \langle a_1, a_2 \rangle = a_1 \langle 1,0 \rangle + a_2 \langle 0,1 \rangle, \quad \pm \frac{1}{\| \vec{a} \|} \vec{a}
+\]
+\item $\mathbb{R}^3$: $\vec{i}, \vec{j}, \vec{k}$
+\[
+\vec{a} = a_1 \vec{i} + a_2 \vec{j} + a_3 \vec{k}
+\]
+\item $\mathbb{R}^2$: Vector in terms of angle and magnitude.
+\[
+\vec{a} = \|\vec{a}\| \langle \cos(\theta), \sin(\theta) \|
+\]
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Application: Wire tension. Hang from a wire, wonder if will break. Know angles from ceiling. How much tension on each wire?
+
+%%%%%%%%
+\item Homework: 3, 5, 7, 11, 13, 15, 17, 19, 21, 25, 29, 31, 35, 39, 45, 47
+
+\end{enumerate}
+
+\subsection{12.3 The dot product}
+\begin{enumerate}
+%%%%%%%%
+\item Basics of the dot product:
+\begin{enumerate}
+\item Definition: $\mathbb{R}^2$: $\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2$,  $\mathbb{R}^3$: $\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + a_3b_3$, 
+\item Examples. Note result is a scalar, not a vector.
+\item Theorem: Properties of the dot product.
+\begin{itemize}
+\item $\vec{a} \cdot \vec{a} = \|\vec{a}\|^2$
+\item $\vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{a}$
+\item $\vec{a} \cdot (\vec{b} + \vec{c}) = \vec{a} \cdot \vec{b} +  \vec{a} \cdot \vec{c})$
+\item $(c \vec{a}) \cdot \vec{b} = c(\vec{a} \cdot \vec{b}$
+\item $\vec{a} \cdot \vec{0} = 1$
+\item All are easily shown via the def of dot product. Show first two quick.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%
+\item Meaning of the dot product.
+\begin{enumerate}
+\item Theorem: For $\theta$ the smallest angle between $\vec{a}$ and $\vec{b}$.
+\[
+\vec{a} \cdot \vec{b} = \|\vec{a} \| \| \vec{b} \| \cos(\theta)
+\]
+\item Proof: Law of cosines (generalized Pythagoras, after peek at proofs of LoC) and dot product properties.
+\item Why useful? Corollary:
+\[
+\cos(\theta) = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\| \|\vec{b}\|} \quad \rightarrow \quad \theta = \arccos\left(\frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\| \|\vec{b}\|}\right) \in [0,\pi]
+\]
+\item Corollary: $\vec{a} \perp \vec{b}$ if and only if $\vec{a} \cdot \vec{b}=0$.
+\item Example: Find angle between vectors. Show vectors perpendicular. $\vec{0}$ is perpendicular to all vectors. Acute and obtuse cases.
+\end{enumerate}
+
+%%%%%%%%
+\item Use of dot product, vector orientation.
+\begin{enumerate}
+\item Direction angles and direction cosines.
+\item $\mathbb{R}^3$: Let $\alpha$ be the angle between $\vec{a}$ and $\vec{i}$. Likewise for angles $\beta, \gamma$ and $\vec{j}$ and $\vec{k}$. 
+\item $\cos(\alpha) = \frac{\vec{a}\cdot\vec{i}}{\|\vec{a}\| \|\vec{i}\|} = \frac{a_1}{\|\vec{a}\|}$. Likewise for $\cos(\beta)$, $\cos(\gamma)$. 
+\item Theorem:
+\[
+\frac{1}{\| \vec{a} \|} \vec{a} = \langle \cos(\alpha), \cos(\beta), \cos(\gamma) \rangle
+\]
+\item Example: Find the direction angles of $\vec{a} = \langle 1,2,3 \rangle$.
+\end{enumerate}
+
+%%%%%%%%
+\item Use of dot product 2, vector projection.
+\begin{enumerate}
+\item Definitions:
+\begin{enumerate}
+\item Scalar projection of $\vec{b}$ onto $\vec{a}$: $\text{comp}_{\vec{a}} (\vec{b})$
+\item Vector projection of $\vec{b}$ onto $\vec{a}$: $\text{proj}_{\vec{a}} (\vec{b})$
+\end{enumerate}
+\item Find each using cosine of the angle between and dot product connection to $\cos(\theta)$.
+\item Theorem:
+\[
+\text{comp}_{\vec{a}} (\vec{b}) = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\|}, \quad\quad \text{proj}_{\vec{a}} (\vec{b}) = \left(\frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\|} \right) \frac{1}{\|\vec{a}\|}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\|^2} \vec{a}
+\]
+\item Can see the projection is parallel to $\vec{a}$.
+\item Examples
+\end{enumerate}
+
+%%%%%%%%
+\item Physics application, projection as a way to calculate work.
+
+%%%%%%%%
+\item Dot product, cosine similarity, recommender systems. Coding demo.
+
+%%%%%%%%
+\item Homework: 1, 3, 7, 9, 13, 15, 19, 23, 27, 29, 33, 39, 43, 45, 47, 61
+
+\end{enumerate}
+
+\subsection{12.4 The cross product}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item Basics of the cross product:
+\begin{enumerate}
+\item Given two non-parallel vectors, find a third non-zero vector which is orthogonal to both. Will use this idea to define planes / tangent planes later on.
+\item Given $\vec{a}, \vec{b}$ not parallel, want $\vec{c}$ such that
+\[
+\vec{a} \cdot \vec{c} = a_1c_1+a_2c_2+a_3c_3=0 \quad \text{and} \quad \vec{b} \cdot \vec{c} = b_1c_1+b_2c_2+b_3c_3=0.
+\]
+Eliminate $c_3$ by multiplying two equations and subtracting to get
+\[
+a_1b_3 c_1 + a_2b_3 c_2 - a_3b_1 c_1 - a_3b_2 c_2 = 0
+\]
+which gives
+\[
+(a_1b_3 - a_3b_1) c_1 + (a_2b_3 - a_3b_2) c_2 = 0.
+\]
+Choose $c_1 = (a_2b_3 - a_3b_2)$ and $c_2 = (a_1b_3 - a_3b_1)$ which yields $c_3 = (a_1b_2 - a_2b_1)$. 
+\item Definition: The cross product of $\vec{a}$ and $\vec{b}$ is
+\[
+\vec{a} \times \vec{b} = \langle a_2b_3 - a_3b_2, a_1b_3 - a_3b_1, a_1b_2 - a_2b_1 \rangle.
+\]
+Note, result is a vector where the dot product gives a scalar.
+\item Theorem: $\vec{a} \times \vec{b}$ is orthogonal to both $\vec{a}$ and $\vec{b}$. Proof just computes $(\vec{a} \times \vec{b}) \cdot \vec{a}$. Same for $\vec{b}$. 
+\item Determinant notation:
+\[
+\vec{a} \times \vec{b} = \left|
+\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k} \\
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3 
+\end{array}
+\right| 
+= \vec{i}
+\left|
+\begin{array}{cc}
+a_2 & a_3 \\
+b_2 & b_3
+\end{array}
+\right| +
+\vec{j}
+\left|
+\begin{array}{cc}
+a_1 & a_3 \\
+b_1 & b_3
+\end{array}
+\right| +
+\vec{k}
+\left|
+\begin{array}{cc}
+a_1 & a_2 \\
+b_1 & b_2
+\end{array}
+\right|
+\]
+\item Example: Find the cross product of two random vectors. Check that worked. What if vectors parallel? One zero?
+\item Orientation of $\vec{a} \times \vec{b}$ and the right hand rule.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Information hidden in the cross product.
+\begin{enumerate}
+\item Theorem: $\| \vec{a} \times \vec{b} \| = \|\vec{a} \| \|\vec{b} \| \sin(\theta)$. See proof in text. Easy except for first part. Surprising at first, but can see just comes from the dot product result.
+\item Corollary: Two nonzero vectors are parallel if and only if $\vec{a} \times \vec{b} = \vec{0}$.
+\item Corollary:  $\| \vec{a} \times \vec{b} \|$ gives the area of the parallelogram formed by $\vec{a}$ and $\vec{b}$. Draw parallelogram. Base times height.
+\item Find the area of the triangle in $\mathbb{R}^3$ formed by three random points.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Properties of the cross product.
+\begin{enumerate}
+\item Consider combinations of cross product of unit basis $\vec{i}, \vec{j}, \vec{k}$. Note in general $\vec{a} \times \vec{b} \neq \vec{b} \times \vec{a}$ because of right hand rule. Also since orthogonal basis, $\sin(\pi/2)=1$ and can see the result is unit. Parallelogram is a square.
+\item Theorem: Properties of the cross product.
+\begin{itemize}
+\item $\vec{a} \times \vec{b} = - \vec{b} \times \vec{a}$
+\item $(c\vec{a}) \times \vec{b} = c(\vec{a} \times \vec{b}) = \vec{a} \times (c\vec{b})$
+\item $\vec{a} \times (\vec{b}+\vec{c}) = \vec{a} \times \vec{b}+ \vec{a} \times\vec{c}$
+\item $(\vec{a} + \vec{b}) \times \vec{c} = \vec{a} \times \vec{c}+ \vec{b} \times\vec{c}$
+\item $\vec{a} \cdot (\vec{b} \times \vec{c}) = (\vec{a} \times \vec{b} ) \cdot \vec{c}$
+\item $\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{a} \cdot \vec{c})\vec{b} - (\vec{a} \cdot \vec{b}) \vec{c}$
+\item All are proven via the component-wise definition of the cross product.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Triple product, volume of parallelpiped.
+\begin{enumerate}
+\item $3 \times 3$ determinant.
+\[
+\vec{a} \cdot (\vec{b} \times \vec{c}) = \vec{a} \cdot \left|
+\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k} \\
+b_1 & b_2 & b_3 \\
+c_1 & c_2 & c_3 
+\end{array}
+\right|
+= \left| \begin{array}{ccc}
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3 \\
+c_1 & c_2 & c_3 
+\end{array}
+\right|
+\]
+\item Theorem: The volume of the parallel-piped formed by $\vec{a}, \vec{b}, \vec{c}$ is
+\[
+\| \vec{a} \cdot (\vec{b} \times \vec{c}) \|
+= \| \vec{a} \| \| \vec{b} \times \vec{c}) \| \cos(\theta)
+\]
+where $ \| \vec{b} \times \vec{c}) \|$ is the area of the base and $\| \vec{a} \| \cos(\theta)$ is the height. This comes from our dot product formula.
+\item Corollary: $\vec{a}, \vec{b}, \vec{c}$ are coplanar if and only if the triple product is zero.
+\item Newton used this to derive Kepler's law of planetary motion. 
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Torque definition and magnitude.
+
+%%%%%%%%%%%
+\item Homework: 1, 5, 7, 9, 11, 13, 17, 19, 23, 25, 27, 31, 33, 37, 49, 53
+\end{enumerate}
+
+\subsection{12.5 Equations of lines and planes}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item Equations of lines: Vector, parametric, symmetric.
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%
+\item $\mathbb{R}^2$
+\begin{itemize}
+\item Familiar case: $y=mx+b$, Ex $y=2x+1$, graph it.
+\item Two step process: Get to the line via $\vec{r}_0$, traverse the line via $\vec{v}$ which is parallel to the line.
+\item Ex: $\vec{r}_0 = \langle 0,1 \rangle$, $\vec{v} = \langle 1,2 \rangle$, then
+\[
+\vec{r} = \vec{r}_0 + t\vec{v} = \langle t, 1+2t \rangle.
+\]
+Since $t=x$, we have $y=2x+1$ again.
+\item Parameter $t$ moves us along the line in a direction as $t$ increases. \item Vector form is not unique. $\vec{r}=\vec{r}_0-t\vec{v}$ would give the same line, just traced backwards.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%
+\item $\mathbb{R}^3$
+\begin{itemize}
+\item Vector equation: For $\vec{v}$ parallel to the line and $\vec{r}_0$ the vector from the origin to any point on the line,
+\[
+\vec{r} = \vec{r}_0 + t\vec{v} = \langle x_0+at, y_0+bt, z_0+ct \rangle
+\]
+\item Draw picture.
+\item Parametric equations of a line: For parameter $t$,
+\[
+\begin{cases}
+x=x_0+at \\
+y=y_0+bt \\
+z=z_0+ct.
+\end{cases}
+\]
+PEs are not unique though they may draw the same line. 
+\item Symmetric equations of a line: Solve for parameter $t$.
+\[
+\frac{x-x_0}{a} = \frac{y-y_0}{b} = \frac{z-z_0}{c} 
+\]
+It is possible that $a,b,c$ could be zero.
+\end{itemize}
+
+%%%%%%%%%%%%
+\item Example: Find the vector, parametric, and symmetric equations for the line thru two random points. Where does it intersect the $xy$-plane? $xz$? $yz$?
+
+%%%%%%%%%%%%
+\item 3 possibilities for lines meeting now: parallel, intersecting, or skew (not parallel, not intersecting).
+\begin{itemize}
+\item 3 lines, decide if pairs are parallel, intersecting, or skew. Graph in Geogebra.
+\end{itemize}
+
+%%%%%%%%%%%
+\item Line segment from point $(x_0, y_0, z_0)$ to $(x_1, y_1, z_1)$:
+\[
+\vec{r} = (1-t) \vec{r}_0 + t\vec{r}_1, \quad \vec{r}_0 = \langle x_0, y_0, z_0 \rangle, \quad \vec{r}_1 = \langle x_1, y_1, z_1 \rangle, \quad 0 \leq t \leq 1.
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Equations of planes: Vector, scalar, linear
+\begin{enumerate}
+\item Harder to define the direction of a plane. Normal (perpendicular) vector does the trick.
+\item Vector equation of plane: For $(x_0, y_0, z_0)$ a fixed point on the plane, any point $(x,y,z)$ on the plane, and $\vec{n}=\langle a,b,c \rangle$ a normal vector to the plane, we have that
+\[
+\vec{n} \cdot (\vec{p}-\vec{p_0}) = 0
+\]
+where $\vec{p_0}=(x_0,y_0,z_0)$ and $\vec{p}=(x,y,z)$. Draw picture to illustrate.
+\item Scalar equation of plane:  Compute $\vec{n} \cdot (\vec{p}-\vec{p_0}) = 0$.
+\[
+a(x-x_0) + b(y-y_0) + c(z-z_0) = 0
+\]
+\item Linear equation of plane: Combine constant terms of $a(x-x_0) + b(y-y_0) + c(z-z_0) = 0$.
+\[
+ax+by+cz+d=0
+\]
+\item Example: Find the plane thru three random points. Uniquely possible if points are not colinear. Already have point, use cross product to get normal vector. Give all 3 forms. Plot the plane by computing the axis intercepts. Check with Geogebra.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Summary: In $\mathbb{R}^3$,
+\begin{enumerate}
+\item You need a point and a direction (parallel vector) to define a line.
+\item You need a point and a normal vector to define a plane.
+\item Examples: Group challenge.
+\begin{itemize}
+\item Problems in text: 35, 37, 45, 51.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 11, 13, 15, 17, 19, 23, 29, 31, 35, 37, 39, 41, 45, 49, 51, 53, 55, 59, 63, 65 
+
+\end{enumerate}
+
+\subsection{12.6 Cylinders and quadratic surfaces}
+\begin{enumerate}
+
+%%%%%%%%%%
+\item Summary: Goal is to develop intuition for $\mathbb{R}^3$.
+\begin{enumerate}
+\item We already considered two classes of surfaces in $\mathbb{R}^3$: Spheres and planes.
+\[
+(x-a)^2+(y-b)^2+(z-c)^2=r^2, \quad ax+by+cz+d=0
+\]
+\item New surfaces for this section:
+\begin{itemize}
+\item Cylinders: Surfaces consisting of all lines (called \emph{rulings}) parallel to a given line and passing thru a planar curve.
+\item Example: $z=x^2$ is a parabolic cylinder. Parabolas are called vertical \emph{traces}.
+\item Terminology: A \emph{trace} is a curve of intersection of the surface with planes parallel to the coordinate planes ($xy, xz, yz$).
+\item Quadratic surface: Any surface generated by the general equation
+\[
+Ax^2+By^2+Cz^2+Dxy+Exz+Fyz+Gx+Hy+Iz+J=0
+\]
+\item Example: $x^2+y^2+z^2=1$ is a sphere.
+\item Quadratic surfaces: 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%
+\item Cylinders: Sketch the graph. What are the traces? What are the rulings?
+\begin{enumerate}
+\item Example: $x^2+z^2=4$
+\item Example: $y=z^2$
+\end{enumerate}
+
+%%%%%%%%%%
+\item Quadratic surfaces: Sketch the traces, then the graph.
+\begin{enumerate}
+\item Cone: $z^2=x^2+y^2$.
+\item Elliptic paraboloid: $z=x^2+y^2$
+\item Hyperbolic paraboloid: $z=x^2-y^2$
+\item Recall the formula for an ellipse of width $2a$ and height $2b$ centered at the origin. Circle is a special case.
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1
+\]
+\item Show text table of 6 classes, won't test the hyper-stuff. Just basics.
+\end{enumerate}
+
+%%%%%%%%%%
+\item Homework: 1,3,5,7,11,17,21,23,25,27
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 13 Vector functions}
+
+\subsection{13.1 Vector functions and space curves}
+\begin{enumerate}
+\item Finally we do calculus, basic case first: $\vec{r}(t)$ is a vector-valued function. For input $t$, result is a vector. 
+\begin{enumerate}
+\item Need a function per component.
+\[
+\vec{r}(t) = \langle f(t), g(t), h(t) \rangle
+\]
+\item Example: Already know lines. Label direction.
+\[
+\vec{r}(t) = \langle x_0 + at, y_0 + bt, z_0 + ct \rangle
+\]
+Knowing two points allows to draw the line. Show example.
+\item Example: Corkscrew. Label direction.
+\[
+\vec{r}(t) = \langle \cos(t), sin(t), t \rangle
+\]
+Helps to graph the projection onto the $xy, xz, yz$ planes.
+\item Example: Try on own.
+\[
+\vec{r}(t) = \langle t, t^2, t^3 \rangle
+\]
+\item Matching: Text problems 21-26.
+
+\item Find a vector function to describe the curve of intersection of cylinder $x^2+y^2=4$ and surface $z=xy$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Limits and continuity: Everything component-wise.
+\begin{enumerate}
+\item If $\vec{r}(t) = \langle f(t), g(t), h(t) \rangle$, then
+\[
+\lim_{t \rightarrow a} \vec{r}(t) = \langle \lim_{t \rightarrow a} f(t), \lim_{t \rightarrow a} g(t), \lim_{t \rightarrow a} h(t) \rangle.
+\]
+\item $\vec{r}(t)$ is continuous at $t=a$ if
+\[
+\lim_{t \rightarrow a} \vec{r}(t) = \vec{r}(a)
+\]
+\item Example from previous.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 15, 17, 27, 29, 31, 43, 49
+
+\end{enumerate}
+
+\subsection{13.2 Derivatives and integrals of vector functions}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%
+\item Derivatives of vector functions:
+\begin{enumerate}
+\item Definition: For $\vec{r}(t)$ any vector function, define the derivative as
+\[
+\vec{r}'(t) = \lim_{h \rightarrow 0} \frac{\vec{r}(t+h) - \vec{r}(t)}{h}.
+\]
+Draw picture in $\mathbb{R}^3$ for some $t$. Result is a tangent vector at $t$. The unit tangent vector 
+\[
+\vec{T}(t) = \frac{\vec{r}'(t)}{\|\vec{r}'(t) \|}.
+\] 
+Also have a tangent line using this vector and point. 
+
+\item Theorem:  In $\mathbb{R}^3$ for vector function $\vec{r}(t) = \langle f(t), g(t), h(t) \rangle$, we have
+\[
+\vec{r}'(t) = \langle f'(t), g'(t), h'(t) \rangle.
+\]
+Proof moves the difference quotient inside the vector function component-wise.
+
+\item Examples:
+\begin{itemize}
+\item $\mathbb{R}^2$ case, tangent vector to $\vec{r}(t) = \langle t-2, t^2+1 \rangle$ when $t=2$. Draw picture. Tangent line also.
+\item Tangent vector for any line $\vec{r}(t)=\vec{r}_0 + t\vec{v}$ is $\vec{v}$ and the tangent line is the same line. This is the velocity vector for the line as we will see in the next section. Constant change with constant velocity.
+\item Find the tangent vector to $\vec{r}(t) = \langle \cos(t), \sin(t), t \rangle$ at $t=2$. Tangent line also. Geogebra. 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Vector function differentiation rules.
+\begin{enumerate}
+\item Theorem: For $\vec{u}(t)$ and $\vec{v}(t)$ differentiable vector functions,
+\begin{itemize}
+\item $\ds \frac{d}{dt} \left[ \vec{u}(t)+\vec{v}(t) \right] = \vec{u}'(t)+\vec{u}'(t)$
+\item $\ds \frac{d}{dt} \left[ c\vec{u}(t)\right] = c\vec{u}'(t)$
+\item $\ds \frac{d}{dt} \left[ f(t) \vec{u}(t) \right] = f'(t)\vec{u}(t)+f(t)\vec{u}'(t)$
+\item $\ds \frac{d}{dt} \left[ \vec{u}(t)\cdot \vec{v}(t) \right] = \vec{u}'(t)\cdot\vec{v}(t)+\vec{u}(t)\cdot\vec{v}'(t)$
+\item $\ds \frac{d}{dt} \left[ \vec{u}(t)\times \vec{v}(t) \right] = \vec{u}'(t)\times\vec{v}(t)+\vec{u}(t)\times\vec{v}'(t)$
+\item $\ds \frac{d}{dt} \left[ \vec{u}(f(t))\right] = \vec{u}'(f(t)) f'(t)$
+\end{itemize}
+\item Proof of dot product version, component-wise calculation.
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 13, 17, 21, 25, 43, 45, 47
+
+\end{enumerate}
+
+\subsection{13.3 Arc length and curvature}
+
+SKIP
+
+\subsection{13.4 Motion in space: Velocity and acceleration}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Finally, velocity and speed.
+\begin{enumerate}
+\item Definition: The velocity vector function $\vec{v}(t)$ of position of particle curve $\vec{r}(t)$ is given by 
+\[
+\vec{v}(t) = \vec{r}'(t) = \lim_{h \rightarrow 0} \frac{\vec{r}(t+h)-\vec{r}(t)}{h}.
+\]
+Draw picture in $\mathbb{R}^3$. This give speed and direction.
+\item Definition: The speed of particle at position $\vec{r}(t)$ is 
+\[
+\|\vec{v}(t)\| = \|\vec{r}'(t)\| = \frac{ds}{dt}/
+\]
+\item Definition: The acceleration is
+\[
+\vec{a}(t) = v'(t).
+\]
+\item Example: A parameterization of $y=x^2$ is given by $\vec{r}(t) = \langle 2t^2, 4t^4 \rangle$. Plot the velocity and acceleration vectors for $t=1$. Find the speed. Note the direction of the velocity vector is parallel to the old fashion tangent line. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 9, 11, 15, 19, 
+
+%%%%%%%%%%%%%%%%%%%
+\item Chapter review problems:
+\begin{enumerate}
+\item Concept check: 1-4, 8
+\item T/F: 1-6, 11, 14
+\item Exercises: 1-4, 9, 16-19
+\end{enumerate}
+
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 14 Partial derivatives}
+
+Here we return to calculus ideas to extend old idea (functions of one variable $y=f(x)$) to 3 dimensional space (functions of two variables $z=f(x,y)$).
+\begin{itemize}
+\item 2 dimensions: Get IROC for $f(x)$ as $\frac{df}{dx}$ via AROC as $\frac{\Delta f}{\Delta x}$. Graphs of $y=f(x)$ have tangent lines. Key is idea of limit.
+\item 3 dimensions: Functions like $f(x,y)=x^2+y^2$ (and even $f(x,y,z)$) should also have rates of change. Surface analogy. Key will still be limit.
+\end{itemize}
+Summary of chapter in 6 lines: Curve $y=f(x)$ vs surface $z=f(x,y)$.
+\begin{itemize}
+\item $\frac{df}{dx}$ becomes two first order derivatives $\frac{df}{dx}$ and $\frac{df}{dy}$
+\item $\frac{d^2f}{dx^2}$ becomes four second order derivatives $x^2,xy,yx, y^2$
+\item Linear approximation $\Delta f \approx \frac{df}{dx} \Delta x $ becomes $\Delta f \approx  \frac{df}{dx} \Delta x +  \frac{df}{dy} \Delta y$
+\item Tangent line $y-y_0 = \frac{df}{dx}(x-x_0)$ becomes a tangent plane $z-z_0 = \frac{df}{dx}(x-x_0)+\frac{df}{dy}(y-y_0)$.
+\item Chain rule $\frac{dy}{dt} = \frac{dy}{dx}\frac{dx}{dt}$ becomes $\frac{dz}{dt} = \frac{dz}{dx}\frac{dx}{dt}+\frac{dz}{dy}{dy}{dt}$.
+\item Max/min problem $\frac{df}{dx}$ becomes the pair $\frac{df}{dx}, \frac{df}{dy}$.
+\end{itemize}
+
+\subsection{14.1 Functions of several variables}
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%
+\item Functions in $\mathbb{R}^2$
+\begin{enumerate}
+\item $y=f(x)$ is a curve in the $xy$-plane. 
+\item $x$ is the indep variable, $y$ is the dependent variable. 
+\item Set of all $x$ which $f$ makes sense gives the domain, all obtainable $y$ gives the range. Both are intervals.
+\item Example: $f(x) = \sqrt{x}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Functions in $\mathbb{R}^3$
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%
+\item $z=f(x,y)$ is a surface in $\mathbb{R}^3$. $xy$ are independent and $z$ is dependent. The domain is now a 2 dimensional region, and the range is still an interval. Simple extension, though all these ideas become harder.
+%%%%%%%%%%%%%%%
+\item Example: $z=f(x,y)=\sqrt{x^2+y^2}$.
+\begin{itemize}
+\item Need $z\geq 0$ for range. 
+\item Level curves: For constant $z=k$ we have circles $k^2 = x^2+y^2$. These are circles, and they grow in diameter as $z$ increases. 
+\item Resulting graph is a cone. Check in Geogebra.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Level curves:
+\begin{enumerate}
+\item Definition: The level curves of function $f(x,y)$ are the curves with equations $f(x,y)=k$ for constant $k$ in the range of $f$.
+\item Example: Find the level curves of $f(x,y)=2x+y$. Level curves are lines $k=2x+y$ which are lines $y=-2x+k$. Graph in $xy$-plane. Result is a plane $z=2x+y$ giving $2x+y-z=0$.
+\item Note, different functions (surfaces) can have the same level curves. Compare $f(x,y)=x^2+y^2$ (paraboloid). Different locations though. 
+\item Examples: Try on own. Find domain and range. Sketch level curves. Describe surface.
+\[
+z = \frac{y}{x}, \quad z=\sqrt{4-x^2-y^2}
+\]
+\item Ideas extend to functions of 3+ variables as you think, harder to visualize.
+\[
+f(x,y,z), \quad f(x_1, x_2, \dots, x_n)
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Contour maps and calculus intuition: Show contour map of mountain with rivers.
+\begin{enumerate}
+\item Contours are drawn every 100 ft increase. What do you see?
+\item Steep trails have close curves. Flat are far apart.
+\item Creeks run perpendicular to level curves. Steepest direction is perpendicular.
+\item Loops indicate peaks and troughs.
+\item What if you walk along a level curve? No change in elevation.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 7, 11, 13, 15, 19, 23, 25, 33, 35, 37, 41, 43, 49, 61, 63, 65
+
+\end{enumerate}
+
+\subsection{14.2 Limits and continuity}
+\begin{enumerate}
+%%%%%%%%%%%%%%
+\item Limits in $\mathbb{R}$
+\begin{enumerate}
+%%%%%%%%%%
+\item Intuition definition: $\ds \lim_{x\rightarrow a} f(x) = L$ if for $x$ near $a$, $f(x)$ is near $L$. Draw picture. Idea is clear, but need precision to build a theory on. 
+%%%%%%%%%%
+\item Precise definition: $\ds \lim_{x\rightarrow a} f(x) = L$ if for any $\epsilon > 0$ (no matter how near to $L$), there exists a $\delta >0$ (near enough to $a$) such that if $|x-a| < \delta$, then $|f(x)-L| < \epsilon$. Add $\delta$ and $\epsilon$ to graph. $x$ window and $y$ window. Technical definition which is hard to work with, instead prove theorems and build theory.
+%%%%%%%%%%%%%%
+\item Techniques for computing limits:
+\begin{itemize}
+\item Limit laws (solid foundation, grow complexity from basic functions).
+\item Algebra tricks (multiply by conjugate, right / left limits, etc).
+\item Squeeze theorem and indirect attacks.
+\item Can direct substitute for continuous functions.
+\end{itemize}
+%%%%%%%%%%%%%%%%
+\item Why are limits important? Handling indeterminate form. Essence of calculus.
+\[
+f'(x) = \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h}, \quad \int_a^b f(x)~dx = \lim_{n\rightarrow \infty} \sum_{i=0}^n f(x_i^*)\Delta x
+\]
+$0/0$ and $\infty \cdot 0$ indeterminate forms.
+%%%%%%%%%%%%%%%%%
+\item Examples: $f(x)=x^2, f'(3)=?$, $\lim_{x \rightarrow 0} \frac{|x|}{x}$, $\lim_{x \rightarrow 2} \frac{\sqrt{x+2}-2}{x-2}$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Limits in $\mathbb{R}^2$ and beyond
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%
+\item  Intuition definition: $\ds \lim_{(x,y)\rightarrow (a,b)} f(x,y) = L$ if for $(x,y)$ near $(a,b)$, $f(x,y)$ is near $L$. Draw picture. Now we approach a point $(a,b)$ from all directions, not just right/left. Precision again is needed.
+%%%%%%%%%%%%%%%%%
+\item Precise definition: $\ds \lim_{(x,y)\rightarrow (a,b)} f(x,y) = L$ if for any $\epsilon > 0$ (no matter how near to $L$), there exists a $\delta >0$ (near enough to $(a,b)$) such that if $\sqrt{(x-a)^2+(y-b)^2} < \delta$, then $|f(x,y)-L| < \epsilon$. Note the appearance of the distance formula, circle with center $(a,b)$. Again this definition is not practical.
+%%%%%%%%%%%%%%%%%%%%%
+\item Techniques for computing limits:
+\begin{itemize}
+\item Limit laws from 1 dim generalize, but cannot separate $x$ from $y$.
+\item Squeeze theorem and indirect attacks.
+\item Can direct substitute for continuous functions (polynomials, rationals in domain, etc).
+\item Interesting case again will be indeterminate forms (next section for partial derivatives).
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%
+\item Same idea for 3+ dimensions.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+%%%%%%%%%%%%%%%%
+\item Table example in text. Hint how to explain a limit does not exist. Graph each in Geogebra.
+\item Show $f(x,y)=\frac{x^2-y^2}{x^2+y^2}$ has no limit at $(0,0)$ by following paths $x=0$ and $y=0$ and getting different values. Similar to right left limits in $\mathbb{R}$. Graph in Geogebra.
+\item Try on own: Show $f(x,y)=\frac{xy}{x^2+y^2}$ has no limit at $(0,0)$ by choosing two paths with different results. Graph in Geogebra.
+\item Theorem: If $f \rightarrow L_1$ as $(x,y)\rightarrow (a,b)$ along path $C_1$ and $f \rightarrow L_2$ as $(x,y)\rightarrow (a,b)$ along path $C_2$ with $L_1 \neq L_2$, then $\lim_{(x,y)\rightarrow (a,b)} f(x,y)$ does not exist.
+\item Show $\lim_{(x,y)\rightarrow (0,0)} \frac{3x^2y}{x^2+y^2}=0$ via the Squeeze theorem. Key step:
+\[
+0 \leq \frac{3x^2|y|}{x^2+y^2} = 3|y|\frac{x^2}{x^2+y^2} \leq 3|y|\cdot 1
+\]
+Can also do from definition. See text.
+\item If point is in domain and function is continuous, can do direct substitution.  $\lim_{(x,y)\rightarrow (1,1)} \frac{3x^2y}{x^2+y^2}=0$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Homework: 5, 9, 13, 17
+
+\end{enumerate}
+
+\subsection{14.3 Partial derivatives}
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item One dimension review, $\mathbb{R}$:
+\begin{enumerate}
+\item For $f(x)$, change in $x$ results in change in $f$. Then average rate of change $\Delta f/\Delta x$ tends to instantaneous rate of change $df/dx$ as $\Delta x \rightarrow 0$. That is,
+\[
+\frac{df}{dx} = \lim_{\Delta x \rightarrow 0} \frac{\Delta f}{\Delta x} = \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h}.
+\]
+\item Limits are foundation, but we built a theory of differentiation.
+\[
+cf(x), f(x)+g(x), f(x)g(x), f(x)/g(x), f(g(x))
+\]
+and also special functions such as logs, exponentials, trig, etc.
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Two dimensions, $\mathbb{R}^2$: $f(x,y)$
+\begin{enumerate}
+\item Analogy tangent plane to a surface. Strategy is to allow one variable to change at a time. If $x$ can change for $f(x,y)=x-yx$, then $\Delta f=\Delta x-y\Delta x$ and $\Delta f/\Delta x=1-y$. That is the $x$ derivative of $f(x,y)$ is $1-y$. Hold $y$ constant and differentiate $f$ in $x$. Knowing both will lead to tangent planes (next section).
+\item Definition: The partial derivative of $f(x,y)$ with respect to $x$ is 
+\[
+f_x(x,y) = \frac{\partial f}{\partial x} = \lim_{h \rightarrow 0} \frac{f(x+h,y) - f(x,y)}{h}
+\] Similar for $f_y$.
+\item Notation: For $f=f(x,y)$,
+\[
+f_x = f_x(x,y) = \frac{\partial f}{\partial x} = \frac{\partial}{\partial x} f = D_x f
+\]
+\item All our old differentiation rules hold since $y$ is a constant.
+\item Example: $f(x,y)=4-x^2-3y^2$. 
+\begin{itemize}
+\item Compute $f_x(1,2), f_x, f_y(1,2), f_y$. 
+\item Graph via Geogebra to get intuition around $f_x, f_y$. Note if we know $f_x(1,2), f_y(1,2)$, we can get a tangent plane (next section).
+\item Note local max at $(0,0)$.
+\item Extend to four cases of second derivatives.
+\end{itemize}
+\item Example: $f(x,y)=x^3+x^2y^3-2y^2$
+\begin{itemize}
+\item Try on own, all first and second order partials.
+\item Compare graph to $f_x$ and $f_y$.
+\end{itemize} 
+\item Theorem: $f_{xy}=f_{yx}$, order of differentiation doesn't matter. Proof via the MVT.
+\item Example: Problem 9 in text.
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Partial differential equations tour:
+\begin{itemize}
+\item \url{https://en.wikipedia.org/wiki/Partial_differential_equation}
+\item \url{https://web.stanford.edu/class/math220b/handouts/heateqn.pdf}
+\end{itemize}
+%%%%%%%%%%%%%
+
+\item Homework: 5, 7, 9, 11, 13, 15, 21, 25, 33, 45, 51, 53, 61, 63, 81, 97
+
+\end{enumerate}
+
+\subsection{14.4 Tangent planes and linear approximations}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%
+\item Recall: $y=f(x)$ version.
+\begin{enumerate}
+\item The tangent line to $y=f(x)$ at point $(x_0, y_0)$ is
+\[
+y-y_0 = f'(x_0)(x-x_0) \quad \rightarrow \quad y=L(x)=f'(x_0)(x-x_0)+y_0.
+\]
+Give example for $f(x)=x^2$ at $x=3$.
+\item Linearization approximates $f(x)$ by this line.
+\[
+y=f(x) \approx L(x)=f'(x_0)(x-x_0)+y_0.
+\]
+The closer to the tangent point, the better the approximation. Give example.
+\item Taylor series and Taylor's theorem continues this vein.
+\[
+f(x) = f(x_0) + f'(x_0)(x-x_0) + \dots
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\item Extension to $z=f(x,y)$, tangent planes.
+\begin{enumerate}
+\item Partial derivatives $f_x, f_y$ give the slope of the tangent line to $z=f(x,y)$ in the $x, y$ directions. Draw picture. How to use this to find the tangent line thru a point $(x_0, y_0, z_0)$? Need a point and a normal vector. 
+\item Normal vector construction: Find vectors in direction of partial derivative lines.
+\begin{itemize}
+\item $f_x:$, $y$ held constant, if $x$ increases 1 unit, $z$ increases $f_x$ units. Then, $\vec{a}=\langle 1,0,f_x \rangle$ is parallel to our line.
+\item $f_y:$, likewise $\vec{b}=\langle 0,1,f_y \rangle$ works.
+\item The normal vector to the tangent plane is then
+\[
+\vec{n} = \vec{a} \times \vec{b} = \langle -f_x, -f_y, 1\rangle
+\]
+\end{itemize}
+\item Vector form of tangent plane:
+\[
+\vec{n} \cdot (\vec{p}-\vec{p_0}) = 0 \quad \rightarrow \quad -f_x(x-x_0)-f_y(y-y_0)+(z-z_0)=0
+\]
+gives
+\[
+z-z_0=f_x(x-x_0)+f_y(y-y_0)
+\]
+Note the similarity to the tangent line for $y=f(x)$.
+\item Example: Find the tangent line to the paraboloid $z=14-x^2-y^2$ at $(x_0,y_0,z_0)=(1,2,9)$ Graph in geogebra. Both $x,y$ tangent lines are on this plane. All tangent lines for all surface curves as well.
+\item Try on own: Find the tangent plane to the sphere $x^2+y^2+z^2=14$ at $(1,2,3)$. Can solve for $z$ taking the positive root or use implicit differentiation with respect to $x,y$. Note the normal vector is in the same direction as the sphere radius when directed to our point.
+\item Linearization of $z=f(x,y)$ by the tangent plane.
+\[
+f(x,y) \approx L(x,y) = f(x_0, y_0)+f_x(x-x_0)+f_y(y-y_0)
+\]
+Two dimensional Taylor series approximation. Can guess the extension to 3+ independent variables. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\item Differentiability of $f(x,y)$:
+\begin{enumerate}
+\item Remind of differentiability in $\mathbb{R}^2$. Derivative exists. Differentiable implies continuous. 
+\item Def: We say $f(x,y)$ is differentiable at point $(a,b)$ if 
+\[
+\Delta z = f_x(a,b)\Delta x + f_y(a,b) \Delta y +\epsilon_1 \Delta x + \epsilon_2 \Delta y
+\]
+where $\epsilon_1,\epsilon_2 \rightarrow 0$ as $\Delta x,\Delta y \rightarrow 0$. Basically says can approximate $f$ well by the tangent line.
+\item Theorem: If the partial derivatives $f_x,f_y$ exist near $(a,b)$ and are continuous at $(a,b)$, then $f$ is differentiable at $(a,b)$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 11, 13, 19, 21
+
+\end{enumerate}
+
+\subsection{14.5 The chain rule}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%
+\item 1 dimension: $\frac{d}{dt} f(g(t)$.
+\begin{enumerate}
+\item Goal is to differentiate function composition. Nested functions are common. Do $g$ first, then $f$ takes it from there.
+\[
+\frac{d}{dt} f(x(t)) = f'(x(t)) x'(t)
+\]
+\item Compact notation: $y=f(x)$
+\[
+\frac{dy}{dt} = \frac{dy}{dx} \frac{dx}{dt}
+\]
+Right hand side collapses back if canceling were allowed.
+\item The chain rule applied to integration is the substitution rule.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item 2 dimensions, basic case: $\frac{d}{dt} f(x(t), y(t))$
+\begin{enumerate}
+\item Extend the dimension 1 case of the chain rule to get for $z=f(x,y)$:
+\[
+\frac{dz}{dt} = \frac{d}{dt} f(x,y) = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt}
+\]
+Note the similarity to the 1 dimension case.
+\item Example: For $z=3xy^2$, $x=\cos(t), y=\sin(t)$, compute $\frac{dz}{dt}$. Check by rewriting $x,y$ in original. Graph in Geogebra, not traveling about the unit circle in $xy$. Consider $t=0, \frac{\pi}{2}$. Rate of change along curve $(x(t),y(t))$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item 2 dimensions, standard case: $\frac{d}{dt} f(x(s,t), y(s,t))$
+\begin{enumerate}
+\item Repeat the above formula twice.
+\[
+\frac{dz}{ds} = \frac{d}{ds} f(x,y) = \frac{\partial f}{\partial x} \frac{dx}{ds} + \frac{\partial f}{\partial y} \frac{dy}{ds}
+\]
+\[
+\frac{dz}{dt} = \frac{d}{dt} f(x,y) = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt}
+\]
+\item Example: For $z=3xy^2$, $x=r\cos(\theta), y=r\sin(\theta)$, compute $\frac{dz}{dr}$. Try on own $\frac{dz}{d\theta}, \frac{d^2z}{dr^2}$
+\item Second derivatives and converting to polar coordinates. $z=f(x,y)$, $x=r\cos(\theta), y=r\sin(\theta)$
+\begin{itemize}
+\item Compute $f_{rr}, f_{\theta \theta}$.
+\item Turns out $f_{xx}+f_{yy}=f_{rr}+\frac{1}{r}f_r + \frac{1}{r^2}f_{\theta}$
+\item This is the polar version of Laplace's equation.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Generalizes to any dimension. Show text formula. Work example 5.
+
+%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 11, 13, 17, 21, 45, 49
+
+\end{enumerate}
+
+\subsection{14.6 Directional derivatives and gradient vectors}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Directional derivatives: So far we calculate change for $f(x,y)$ in the $x$ direction ($f_x$) or the $y$ direction ($f_y$), but of course $f$ can change in any direction.
+\begin{enumerate}
+%%%%%%%%%%%%%%
+\item Recall our limit definitions:
+\[
+f_x(x,y) = \lim_{h \rightarrow 0} \frac{f(x+h,y)-f(x,y)}{h}, \quad
+f_y(x,y) = \lim_{h \rightarrow 0} \frac{f(x,y+h)-f(x,y)}{h}
+\]
+We essentially hold $y$ and $x$ constant respectively. The directions we consider here are $\vec{i}$ and $\vec{j}$. Note both are unit vectors.
+%%%%%%%%%%%%%%
+\item Example: Find the change in $f(x,y)=xy$ at point $(3,1)$ in the direction $\vec{v}=\langle 1,2 \rangle$. Normalize our direction via the unit vector $\vec{u} = \langle 1/\sqrt{5}, 2/\sqrt{5} \rangle$. Then our change is from $(3,1)$ to $(3+h/\sqrt{5}, 2h/\sqrt{5})$ and
+\[
+D_{\vec{u}} f(3,1) = \lim_{h \rightarrow 0} \frac{f(3+h/\sqrt{5}, 1+2h/\sqrt{5})-f(3,1)}{h} =  \lim_{h \rightarrow 0} 7/\sqrt{5}+2h/5 = 7\sqrt{5}.
+\]
+Note $h$ in the denominator because of the unit vector. Graph in Geogebra and compare to $f_x, f_y$.
+%%%%%%%%%%%%%%
+\item Definition: The directional derivative of $f(x,y)$ at point $(x_0,y_0)$ in the direction of unit vector $\vec{u}=\langle a,b \rangle$ is 
+\[
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \rightarrow 0} \frac{f(x_0+ah, y_0+bh)-f(x_0,y_0)}{h} 
+\]
+Note, $D_{\vec{i}} f = f_x$ and $D_{\vec{j}} f = f_y$. Also any unit vector can be expressed in terms of a direction angle $\theta$ as
+\[
+\vec{u} = \langle a,b \rangle = \langle \cos(\theta), \sin(\theta) \rangle
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Computing directional derivatives
+\begin{enumerate}
+%%%%%%%%%
+\item The above limit definition is messy to compute. Instead, we rewrite $D_{\vec{u}} f$ in terms of $f_x$ and $f_y$. This seems doable considering the tangent plane to a surface in $\mathbb{R}^3$.
+%%%%%%%%%
+\item Theorem: For $f(x,y)$ differentiable in both $x$ and $y$ and $\vec{u} = \langle a,b \rangle$ any unit vector in $\mathbb{R}^2$, 
+\[
+D_{\vec{u}} f(x,y) = f_x(x,y) a + f_y(x,y) b.
+\]
+%%%%%%%%%
+\item Proof: Define $g(h) = f(x_0+ah, y_0+bh)$. Then,
+\[
+g'(0) = \lim_{h \rightarrow 0} \frac{g(h)-g(0)}{h}  = \lim_{h \rightarrow 0} \frac{f(x_0+ah, y_0+bh)-f(x_0,y_0)}{h} =  D_{\vec{u}} f(x_0, y_0).
+\]
+On the other hand, from the chain rule,
+\[
+g'(h) = \frac{\partial f}{\partial h} = \frac{\partial f}{\partial x}\frac{\partial x}{\partial h} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial h} = af_x+bf_y= af_x(x_0+ah,y_0+bh)+bf_y(x_0+ah,y_0+bh).
+\]
+Evaluating $g'(h)$ at zero and comparing to before gives the result.
+%%%%%%%%%
+\item Example: Repeat above example $f(x,y)=xy$ with new calculation.
+%%%%%%%%%
+\item Example: Try on own for $f(x,y)=xy^3-x^2$ at $(1,2)$ in direction $\theta = \frac{\pi}{3}$. Check via Geogebra.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Gradient vectors:
+\begin{enumerate}
+%%%%%%%%%
+\item Example: Hint to bigger things. $f(x,y)=3x+y+1$ at $(1,1)$.
+\begin{itemize}
+\item $\vec{i}$ and $\vec{j}$ directions.
+\item No change (level curve) direction. Find $\vec{u} = \langle a,b \rangle$ such that 
+\[
+D_{\vec{u}} f = f_x a + f_y b = 0
+\]
+gives $\vec{u} = \frac{1}{\sqrt{10}}\langle -3,1 \rangle$,
+\item Perpendicular to level curve gives steepest direction $\vec{u} = \frac{1}{\sqrt{10}}\langle 1, 3 \rangle$. This matches $\langle f_x, f_y \rangle$ at our point. Compute change and compare to $f_x, f_y$.
+\item Noting that the directional derivative is really a dot product, we see a new vector of import.
+\[
+D_{\vec{u}} f = f_x a + f_y b  = \langle f_x, f_y \rangle \cdot \langle a,b \rangle
+\] 
+\end{itemize}
+\item Definition: For $f(x,y)$, the gradient of $f$ is a vector-function of the form
+\[
+\nabla f = \langle f_x, f_y \rangle
+\]
+\item Example: Compute gradient for previous example $f(x,y)=xy^3-x^2$ at $(1,2)$. Reproduce previous result.
+\item Theorem: First importance of the gradient. For $f$ differentiable, the maximum value of the directional derivative $D_{\vec{u}} f$ is $|\nabla f|$ and is in the direction of $\nabla f$.
+\item Proof: We use the law of cosines version of the dot product.
+\[
+\vec{a} \cdot \vec{b} = \|\vec{a}\| \|\vec{b}\| \cos(\theta)
+\]
+where $\theta$ is the angle between $\vec{a}, \vec{b}$. Then,
+\[
+D_{\vec{u}} f = \nabla f \cdot \vec{u} = \|\nabla f\| \|\vec{u}\| \cos(\theta) = \|\nabla f\| \cos(\theta) \leq \|\nabla f\|
+\]
+which occurs when $\theta=0$ meaning $\vec{u}$ and $\nabla f$ are in the same direction.
+\item Example: Apply previous theorem to  $f(x,y)=3x+y+1$ at $(1,1)$,  $f(x,y)=xy^3-x^2$ at $(1,2)$. 
+\item Example: Try on own. Number 22 in text. Graph in Geogebra.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Extension to functions of three variables: $f(x,y,z)$.
+\begin{enumerate}
+\item Could be in $\mathbb{R}^4$ in which case cannot visualize. Could be an implicit curve $f(x,y,z)$ in $\mathbb{R}^3$.
+\item Definition of directional derivative in direction of unit vector $\vec{u}$.
+\[
+D_{\vec{u}} = \lim_{h \rightarrow 0} \frac{f(x_0+ah,y_0+bh,z_0+ch)-f(x_0,y_0,z_0)}{h}
+\]
+\item Compute $D_{\vec{u}}$ in terms of partial derivatives.
+\[
+D_{\vec{u}} = f_x(x,y,z)a + f_y(x,y,z)b + f_z(x,y,z)c = \nabla f \cdot \vec{u}
+\]
+\item Gradient of $f$ is
+\[
+\nabla f = \langle f_x, f_y, f_z \rangle.
+\]
+\item Examples are pretty well the same.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Tangent planes to level surfaces
+\begin{enumerate}
+\item We already have tangent planes to surfaces of the form $z=f(x,y)$ at point $(x_0, y_0, z_0)$.
+\[
+z-z_0 = (f_x)_0 (x-x_0) + (f_y)_0(y-y_0)
+\]
+\item This extends implicitly to a level surface $F(x,y,z)=k$ at point $(x_0, y_0, z_0)$.
+\[
+(F_x)_0 (x-x_0) + (F_y)_0(y-y_0) + (F_z)_0(z-z_0) = 0
+\]
+Note, the gradient vector $\nabla F$ is our normal vector to the plane (and surface).
+\item The normal line then has symmetric equations
+\[
+\frac{x-x_0}{(F_x)_0} = \frac{y-y_0}{(F_y)_0} = \frac{z-z_0}{(F_z)_0}.
+\]
+\item Example: Find the tangent plane to the ellipsoid $x^2/4 + y^2 + z^2/9 = 3$ at point $(-2,1,-3)$. Check result in Geogebra.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\item Summary of gradient vector: This section is rich. Summarize the key ideas.
+\begin{enumerate}
+\item For $f(x,y)$ (or $f(x,y,z)$), $\nabla f$ gives the direction of fastest increase of $f$.
+\item $\|\nabla f\|$ is the fastest increase rate (slope).
+\item $\nabla f$ is orthogonal to the level curve (or surface).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Homework: 5, 7, 9, 11, 15, 19, 23, 25, 27, 29, 37, 39, 41, 49
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{14.7 Maximum and minimum values}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Recall functions of one variable...
+\begin{enumerate}
+\item Draw $f(x)$ with make an min values. Smooth and continuous on $\mathbb{R}$.
+\item $f'(x)=0$ (stationary points) gives locations of horizontal tangents. $f''(x)=0$ discerns the three cases.
+\begin{itemize}
+\item $f''(x)>0$, local min
+\item $f''(x)<0$, local max
+\item $f''(x)=0$, inflection point
+\end{itemize}
+\item Two other cases for extrema: Singular points, end points.
+\item Absolute max and mins are ensured by the EVT: Continuous function $f(x)$ on closed interval $[a,b]$ must have a local max and local min.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definitions for $f(x,y)$.
+\begin{enumerate}
+\item Local min at $(a,b)$ with local min value $f(a,b)$. Likewise for max.
+\item Global min and max.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Extending calulus 1 results:
+\begin{enumerate}
+\item Theorem: If $f(x,y)$ has a local max or min at $(a,b)$ and $f_x, f_y$ both exist at $(a,b)$, then $f_x(a,b)=0$ and $f_y(a,b)=0$ ($\nabla f = \vec{0}$).
+\item If $\nabla f = \vec{0}$ at $(a,b)$, then this is called a stationary point. Not all critical points are local mins or maxes.
+\item Example: Find the stationary points of $f(x,y)=3x-x^3-2y^2+y^4$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item How to classify stationary points? Concavity is key, but we need to look in all directions.
+\begin{enumerate}
+\item 2 examples: $x^2+xy+y^2$ and $x^2+10xy+y^2$. Only $(0,0)$ stationary point for both. Both have two positive partials second $(f_{xx}=f_{yy}=2>0$). Graph in Geogebra to see different behavior.
+\item To classify, consider all the second directional derivatives at once. For $f(x,y)$ and $\vec{u} = \langle h,k \rangle$,
+\[
+D_{\vec{u}} f = f_x h + f_yk.
+\]
+\[
+D_{\vec{u}}^2 f = D_{\vec{u}}\left( f_x h + f_yk \right) = f_{xx} h^2 + 2f_{xy}hk + f_{yy}k^2 = f_{xx} \left(h + \frac{f_{xy}}{f_{xx}} k\right)^2 + \frac{k^2}{f_{xx}} \left(f_{xx}f_{yy}-f_{xy}^2 \right)
+\]
+where the last step follows by completing the square.
+\item If we think concave up since $f_{xx}>0$ we would also need $D=f_{xx}f_{yy}-f_{xy}^2>0$. Likewise for concave down we need $f_{xx}<0$ but still $D>0$.
+\item Theorem: For $(a,b)$ a stationary point of $f(x,y)$ and 
+\[
+D = D(a,b) = f_{xx}f_{yy}-f_{xy}^2 = \left|
+\begin{array}{cc}
+f_{xx} & f_{xy} \\
+f_{yx} & f_{yy} 
+\end{array}
+\right|
+\]
+\begin{itemize}
+\item If $D>0$ and $f_{xx}(a,b)>0$, then $f(a,b)$ is a local min.
+\item If $D>0$ and $f_{xx}(a,b)<0$, then $f(a,b)$ is a local max.
+\item If $D>0$ then $f(a,b)$ is a saddle point.
+\end{itemize}
+\item Check for 2 examples.
+\item Example: Apply to first example.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Last, we extend the EVT
+\begin{enumerate}
+\item EVT: For $f(x,y)$ continuous on closed, bounded region $R$ in $\mathbb{R}^2$, then $f$ has an absolute max and min in $R$.
+\item How to find extrema? Abs max and mins must be at stationary points in $R$ or on the boundary of $R$.
+\begin{itemize}
+\item Find the stationary points in $R$.
+\item Find the extreme values on the boundary via Calc 1.
+\item Get the largest and smallest $f$ values from parts 1 and 2.
+\end{itemize}
+\item Example: 34 in text.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 13, 15, 17, 23, 27, 31, 33
+
+\end{enumerate}
+
+
+\subsection{14.8 Lagrange multipliers}
+Skip.
+
+\subsection{Chapter 14 Review}
+\begin{enumerate}
+\item Concept check: 1-18
+\item True-False: 1-11
+\item Exercises: 1-56
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 15 Multiple integrals}
+
+\subsection{15.1 Double integrals over rectangles}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Summary of past: Extend the definite integral of calculus 1 to 3 dimensions. 
+\begin{enumerate}
+\item $\ds \int_a^b f(x) ~dx$ as area under the curve.
+\item Compute via limit of Riemann sum. Classic calculus paradox.
+\item Fundamental theorem of calculus.
+\item Alternate view: $\ds \int_a^b f(x) ~dx$ as adding up 1D lengths to get 2D area.
+\item Really about summation: Sum lines to area, areas to volumes (discs and washers), probability, force to work, line segment to arc length, arc length to surface area, etc
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Basic case for $z=f(x,y)$ in $\mathbb{R}^3$: Volumes over rectangular domains.
+\begin{enumerate}
+\item Find the volume of the solid between $z=f(x,y)$ and the $xy-$plane over region $R = [a,b] \times [c,d]$ (Cartesian product).
+\item Partition $R$ by $\Delta x$ and $\Delta y$ giving rectangular areas $\Delta A$.
+\item Notation and limit of a Riemann sum. 
+\[
+\iint\limits_R f(x) ~dA = \int_a^b \int_c^d f(x,y) ~dy ~dx = \lim_{m,n \rightarrow \infty} \sum_{i=1}^n \sum_{j=1}^n f(x_{ij}^*, y_{ij}^*) \Delta A 
+\]
+\item If the limit exists we say $f$ is integrable over $R$.
+\item Can approximate area as in Calc 1 by computing the finite sum, though only works for simple functions.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item FTOC for calculation: Volume by accumulating area.
+\begin{enumerate}
+\item Slicing the solid in the $x$ direction gives cross-sections with area
+\[
+A(x) = \int_c^d f(x,y) ~dy.
+\]
+This is a computable function of $x$ for any $y$ held constant. 
+\item Add up area to get volume. FTOC twice.
+\[
+V = \int_a^b A(x) ~dx = \int_a^b \left[ \int_c^d f(x,y) ~dy \right] ~dx
+\]
+\item Of course slicing in $y$ gives a similar formula resulting in Fubini's theorem which extends to more general regions as well.
+\[
+\int_a^b \left[ \int_c^d f(x,y) ~dy \right] ~dx = \int_c^d \left[ \int_a^b f(x,y) ~dx \right] ~dy
+\]
+\item Examples: Divide and conquer to find the area under $z=1+x^2+y^2$ on $[1,2]\times[0,1]$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Average value of functions:
+\begin{enumerate}
+\item Calc 1 version:
+\[
+\frac{1}{b-a} \int_a^b f(x) ~dx
+\]
+\item Calc 3 version:
+\[
+\frac{1}{A(R)} \iint\limits_R f(x) ~dA
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 13, 15, 17, 19, 21, 25, 29, 31, 33, 35, 39, 47
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+\subsection{15.2 Double integrals over general regions}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Idea of general regions:
+\begin{enumerate}
+\item The domain of integration for $z=f(x,y)$ doesn't have to be a rectangle. In general it can be any shape (denote as $D$). Draw picture.
+\item Can still do slicing in $x$ or $y$ direction. Result is 2 cases to choose from. 
+\item Volume from accumulating area in $x$ (holding $y$ constant). Draw domain picture.
+\[
+\iint\limits_D f(x,y) ~dA = \int_a^b A(x) ~dx = \int_a^b \int_{g_1(y)}^{g_2(y)} f(x,y) ~dy ~dx
+\]
+\item Volume from accumulating area in $y$ (holding $x$ constant). Draw domain picture.
+\[
+\iint\limits_D f(x,y) ~dA = \int_c^d A(y) ~dy = \int_c^d \int_{h_1(x)}^{h_2(x)} f(x,y) ~dx ~dy
+\]
+\item Sometimes only one is an option, sometimes both can be used and need to think strategically.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Examples: Drawing the domain in the $xy-$plane is key.
+\begin{enumerate}
+\item Only one direction is easy. Find the volume under the surface $z=x^2+y$ on domain $D$ bound by curves $y=x+1$ and $y=x^2$.
+\item Divide and conquer by doing both at same time. Find the volume below the plane $z=x-2y$ and above the triangle with vertices $(0,0), (1,1), (0,1)$ in the $xy-$plane. Need to divide into two volumes in one direction leading to the below theorem.
+\item Theorem: If $D = D_1 \cup D_2$, then
+\[
+\iint\limits_D f(x,y) ~dA = \iint\limits_{D_1} f(x,y) ~dA + \iint\limits_{D_2} f(x,y) ~dA 
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item If integration is hard, estimation will often do by capturing the solid inside and outside a cylinder.
+\begin{enumerate}
+\item Theorem: For $m \leq f(x,y) \leq M$ on domain $D$ with area $A(D)$, then
+\[
+m A(D) \leq \iint\limits_{D} f(x,y) ~dA \leq M A(D).
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 5, 7, 9, 13, 15, 17, 21, 23, 25, 31, 39, 45, 49, 51, 57, 59
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%
+\subsection{15.3 Double integrals over polar coordinates}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item When rotation is involved, rectangular coordinates are no longer nice. Switch to polar coordinates.
+\begin{enumerate}
+\item Example: $\iint\limits_R (3x+4y^2) ~dA$ for $R = \left\{ (x,y) | 4 \leq x^2+y^2 \leq 9 \right\}$. Cannot divide into rectangles. Hard to separate curves.
+\item Polar coordinates basics: $(x,y)$ replaced with $(r, \theta)$. Connection is trigonometry.
+\[
+x = r\cos(\theta), \quad y=r\sin(\theta), \quad x^2+y^2=r^2
+\]
+\item Convert point $(3,1)$ into polar coordinates. $r$ is easy. $\theta = \arctan(y/x)$ if in quandrants 1 and 4. Shift $\theta$ to the right quadrant as for $(-3,-1)$.
+\item Above region is now easier to describe. Rectangle in terms of $r,\theta$.
+\[
+R = \left\{ (r,\theta) | 2 \leq r \leq 3, ~ 0 \leq \theta \leq 2\pi \right\}
+\]
+\item How to translate $dA$ to be in terms of $d\theta$ and $dr$?
+\begin{itemize}
+\item For rectangles, the area of a small rectangle was $dA = dx dy$.
+\item For new curved rectangles, take the difference of the wedges which have area $\frac{1}{2}r^2 \Delta \theta$. The centering of $r$ in the wedgy-rectangle is needed to avoid $\Delta r^2$.
+\[
+\Delta A = \frac{1}{2}(r+\Delta r/2)^2 \Delta \theta - \frac{1}{2}(r-\Delta r/2)^2 \Delta \theta = \frac{1}{2} (2r\Delta r) \Delta \theta = r\Delta r \Delta \theta
+\] 
+\item Then, 
+\[
+\iint\limits_R (3x+4y^2) ~dA = \int_0^{2\pi} \int_2^3 (3r\cos(\theta)+4r^2\sin^2(\theta)) r~dr~d\theta
+\]
+Recall the $\sin^2(\theta)$ term will require a calc 2 trig integral strategy via the half angle formula.
+\[
+\sin^2(\theta) = \frac{1-\cos(2\theta)}{2}
+\]
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Example: Find the volume under the paraboloid $z=x^2+y^2$ yet inside the cylinder $x^2+y^2=2x$.
+\begin{enumerate}
+\item Complete the square on the cylinder to graph it.
+\[
+(x-1)^2+y^2=1
+\]
+\item Translate region into polar coordinates.
+\[
+x^2+y^2 = 2x \quad \rightarrow \quad r^2 = 2r\cos(\theta) \quad \rightarrow \quad r=2\cos(\theta)
+\]
+\[
+R = \left\{ (r,\theta) | 0 \leq r \leq 2\cos(\theta), -\pi/2 \leq \theta \leq \pi/2 \right\}
+\]
+\item Compute the integral.
+\[
+\iint\limits_R x^2+y^2 ~dA = \int_{-\pi/2}^{\pi/2} \int_0^{\cos(\theta)} r^2 ~rdrd\theta = \dots = 8\int_0^{\pi/2} \cos^4(\theta) ~d\theta = = 8\int_0^{\pi/2} \left(\frac{1+\cos(2\theta)}{2} \right)^2 ~d\theta = \frac{3\pi}{2}
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 11, 17, 19, 25
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+\subsection{15.4 Applications of double integrals}
+
+Skip.
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+\subsection{15.5 Surface area}
+
+Skip.
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+\subsection{15.6 Triple integrals}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Triple integrals: Continue the path.
+\begin{enumerate}
+\item Instead of small intervals ($dx$) or small boxes ($dA$), we not have small boxes ($dV$). 
+\item Integrating will be the easy part, setting up the integral is the challenge.
+\item For $f(x,y,z)$ a continuous function on the rectangular box $B=[a,b]\times[c,d]\times[r,s]$,
+\[
+\iiint\limits_B f(x,y,z) ~dV = \lim_{l,m,n \rightarrow \infty} \sum_{i=1}^l \sum_{j=1}^m \sum_{k=1}^n f(x_i^*,y_j^*,z_k^*) \Delta V = \int_r^s \int_c^d \int_a^b f(x,y,z) ~dx~dy~dz
+\] 
+\item Fubini's theorem says the order of integration can be changed.
+\item Below we will just integrate 1 to find volumes of solids. Replace 1 with any $f(x,y,z)$ with the same story.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Examples: Volumes of solids.
+\begin{enumerate}
+\item Box: Graph it. Two integrations gives area of cross section. Final integral adds area to get volume.
+\[
+ \int_0^1 \int_0^3 \int_0^2 ~dx~dy~dz
+\]
+\item Prism: Graph it. Should be half of box. Easiest to project onto the $xy$-plane first, then sort out the $z$ bounds. Result is the following description of the solid.
+\[
+E = \left\{(x,y,z) | 0 \leq x \leq 2, \quad 0 \leq y \leq 3, \quad 0 \leq z \leq (3-y)/3 \right\}
+\]
+\[
+\int_0^2 \int_0^{3} \int_0^{(3-y)/3} ~dz~dy~dx
+\]
+Note middle two integrals produce area of a cross section. Another view is that the inside integral is the area under integrand $f(x,y,z)=1$ over the length of a line segment, then summed over the entire region in the $xy$-plane.
+\[
+\int_0^2 \int_0^{3} \left(\int_0^{(3-y)/3} ~dz \right)~dy~dx
+\]
+\item Try on own: Find the volume of the tetrahedron (4-sided pyramid) with corners 1s on the 3 axis. Follow previous example.
+\[
+\int_0^1 \int_0^{1-x} \int_0^{1-x-y} ~dz~dy~dx
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Changing order of integration.
+\begin{enumerate}
+\item Try on own: Find the prism volume in order $dx ~dy ~dz$. Hint: Draw projection in $yz-$plane first.
+\[
+ \int_0^1 \int_0^{3-3z} \int_0^2 ~dx~dy~dz
+\]
+\item Try on own:  Find the volume of the tetrahedron in order $dy ~dz ~dx$. Hint: Draw projection in the $xz-$plane first.
+\[
+\int_0^1 \int_0^{1-x} \int_0^{1-x-z} ~dy~dz~dx
+\]
+\item Example 4 in text.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 9, 13, 19, 21, 27, 31, 35 
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%
+\subsection{15.7 Triple integrals in cylindrical coordinates}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item Cylindrical coordinates:
+\begin{enumerate}
+\item These describe 3 dimensional solids which are rotationally symmetric about the $z$-axis. Similar to solids of revolution from Calc 1.
+\item $(x,y,z)=(r,\theta,z)$, we trade the $xy$-plane rectangular coordinates for polar coordinates.
+\item Conversion is same as before:
+\[
+x=r\cos(\theta), \quad y = r\sin(\theta), \quad z=z
+\]
+\[
+r=x^2+y^2, \quad \tan(\theta) = \frac{y}{x}, \quad z=z
+\]
+\item Examples: Cylindrical point $(3,\pi/2, 2)$ to rectangular. Rectantular point $(2,-2, 1)$ to cylindrical.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Integrals in cylindrical coordinates: Hardest part is setting up the integral.
+\begin{enumerate}
+\item Nested integration where the inside is the polar integral of a cross section (integral).
+\[
+\iiint\limits_R f(x,y,z) ~dV = \int_r^s \int_{\theta_1}^{\theta_2} \int_{r_1}^{r_2} f(r\cos(\theta),r\sin(\theta),z) ~rdr~d\theta~dv
+\]
+Order of integration can change. Another order gives a new view.
+\[
+\iiint\limits_R f(x,y,z) ~dV = \iint\limits_D \left( \int_{g(x,y)}^{h(x,y)} f(x,y,z) ~dz \right) ~dA = \int_{\theta} \int_r \int_{g(x,y)}^{h(x,y)} f(r\cos(\theta),r\sin(\theta),z) ~dz  r~dr ~d\theta
+\]
+\item Again, we focus on volume. Compute $\iiint\limits_R dV$ for $R = \left\{ (r,\theta,z) ~ | ~ 0 \leq r \leq 1, 0 \leq \theta \leq \pi, 0 \leq z \leq 3 \right\}$. Solid is half a cylinder.
+\item Find the volume of the cone $r=1-z$, $0\leq r \leq 1$. Three ways. Note the areas of each order (circle, shell, triangle).
+\[
+\iint\limits_R ~dV = \int_0^1 \int_0^{2\pi} \int_0^{1-z} r ~dr ~d\theta ~dz= \int_0^1 \int_0^{2\pi} \int_0^{1-r} r  ~dz ~ d\theta ~dr  = \int_0^{2\pi} \int_0^{1} \int_0^{1-z} r ~dr ~dz  ~d\theta 
+\]
+\item Find the volume of the solid which lies between the parabolid $z=x^2+y^2$ and the sphere $x^2+y^2+z^2=2$. Converting the bounds we have $z=r$ and $z=\sqrt{2-r}$ and noting the intersection curve
+\[
+r = \sqrt{4-r} \quad \rightarrow \quad r^2+r-2=0 \quad \rightarrow r = 1,-2 \quad \rightarrow r=1
+\]
+Then,
+\[
+\iiint\limits_R ~dV = \int_0^{2\pi} \int_0^1 \int_r^{\sqrt{r}} ~dz ~rdr ~d\theta = \dots 
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 15, 17, 21, 23, 29 
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{15.8 Triple integrals in spherical coordinates}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Spherical coordinate system
+\begin{enumerate}
+\item On Earth we use latitude and longitude. Allow dig in or fly out, and we need a third measurement, distance from center.
+\item $(\rho, \theta, \phi)$ where $\rho \geq 0$ is distance from the origin, $0 \leq \theta \leq 2\pi$ is angle in $xy-$plane as before, and $0 \leq \phi \leq \pi$ is angle from $z$-axis.
+\item Describe the shapes.
+\begin{itemize}
+\item $\rho = 10$, $\theta = 1$, $\phi = 1$, ...
+\end{itemize}
+\item Conversion to rectangular coordinates $(x,y,z)$
+\begin{itemize}
+\item In the $xy$-plane, $x=r\cos(\theta)$, $y=r\sin(\theta)$ though we discard $r$. Using the triangle formed by $r$ and $\rho$, we have
+\[
+x = \rho \sin(\phi) \cos(\theta), \quad y = \rho \sin(\phi) \sin(\theta)
+\]
+\item Can see $z = \rho \cos(\phi)$ from another right triangle.
+\item Check that $x^2+y^2+z^2 = \rho^2$ as the distance formula will know.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Integration with spherical volumes
+\begin{enumerate}
+\item Can show that
+\[
+\iiint\limits_E f ~dV = \iiint\limits_E f ~\rho^2 \sin(\phi) ~d\rho ~d\theta ~d\phi
+\]
+\item The resulting spherical box has edges $d\rho$, $\rho d\phi$ and horizontal edge becomes $\rho \sin(\phi) d\theta$. The product of the three is $dV$. This is really cubic distance from $\rho^2 ~d\rho$.
+\item Example: Find the volume of a sphere of radiues $R$.
+\[
+\iiint\limits_E ~dV = \int_0^{\pi} \int_0^{2\pi} \int_0^R ~\rho^2 \sin(\phi) ~d\rho ~d\theta ~d\phi
+\]
+\item Example: Find the volume of the ice cream cone above cone $z=\sqrt{x^2+y^2}$ and below the sphere $x^2+y^2+z^2=z$. 
+\[
+\iiint\limits_E ~dV = \int_0^{\pi/4} \int_0^{2\pi} \int_0^{\cos(\phi)} ~\rho^2 \sin(\phi) ~d\rho ~d\theta ~d\phi
+\]
+Figure 11 in the text is helpful.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Homework:1, 3, 5, 7, 9, 11, 15, 17, 21, 23, 25, 41
+
+\end{enumerate}
+
+\subsection{15.9 Change of variable in multiple integrals}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Substituion from calculus 1:
+\begin{enumerate}
+\item We reverse the chain rule: $\frac{d}{dx} f(g(x)) = f'(g(x)) g'(x)$. 
+\item $\ds \int F(g(x)) g'(x) ~dx = \int F(u) ~du$
+\item Also can write as $\int F(u(x)) \frac{du}{dx} ~dx = \int F(u) ~du$.
+\item Example: $\int x\sin(x^2)~dx$
+\item Here we write things a bit backwards: $\ds \int f(x) ~dx = \int f(x(u)) \frac{dx}{du} ~du$
+\item As a change of variable, we have a stretching factor $J = \frac{dx}{du}$.
+\item Here we usually change variables to simplify the integrand, but now we consider the region of integration as well.
+\item Our aim is to generalize results such as $\ds \int_R f(x,y)~dydx = \int_S f(r\cos(\theta), r\sin(\theta)) r ~drd\theta$. Saw the $r$ from geometry before. Will see again.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%
+\item Change of variables in $\mathbb{R}^2$: $x=g(u,v)$, $y=h(u,v)$.
+\begin{enumerate}
+\item For transformation $T(u,v)=(x,y)$ given by  $x=g(u,v)$, $y=h(u,v)$. This maps from the $uv$-plane to the $xy$-plane. The reverse mapping $T^{-1}$ also makes sense.
+\item Example: $x=r\cos(\theta)$, $y=r\sin(\theta)$. Maps rectangular regions to circular ones.
+\item We want to know how area changes with the new variables. That is relate $dxdy$ to $dudv$.
+\item For rectangle in the $uv$-plane mapped to nonlinear region in the $xy$-plane, our rectangels $\delta u \delta v$ get mapped to nearly parallelograms $\delta u (g_u \vec{i} + h_u \vec{j})$ and $\delta v (g_v \vec{i} + h_v \vec{j})$. The cross product magnitude gives the area of such parallelograms.
+\[
+\| \Delta u (g_u \vec{i} + h_u \vec{j}) \times \Delta v (g_v \vec{i} + h_v \vec{j}) \|
+= \| \left|
+\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k} \\
+g_u & h_u & 0 \\
+g_v & h_v & 0 
+\end{array}
+\right| \| \Delta u \Delta v
+= \| \left|
+\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k} \\
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u} & 0 \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} & 0 
+\end{array}
+\right| \| \Delta u \Delta v 
+= \left|
+\begin{array}{cc}
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u}  \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} 
+\end{array}
+\right|  \Delta u \Delta v 
+\]
+Limit and Riemann sum gives our integration result.
+\item Theorem: 
+\[
+\iint\limits_R f(x,y) ~dx~dy = \iint\limits_S f(x(u,v), y(u,v)) \left| \frac{\partial (x,y)}{\partial (u,v)} \right| ~ du ~dv
+\]
+where the Jacobian $\frac{\partial (x,y)}{\partial (u,v)}$ is defined as
+\[
+\frac{\partial (x,y)}{\partial (u,v)} = \left|
+\begin{array}{cc}
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u}  \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} 
+\end{array}
+\right| 
+\]
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item For $R$ the parallelogram with corners $(0,0), (2,1), (3,3), (1,2)$, computer $\ds \iint\limits_R e^x ~dxdy$ by first transforming $R$ to $S$ the square with corners $(0,0), (0,3), (3,3), (3,0)$ in the $uv$-plane.
+\begin{itemize}
+\item $u=2x-y$ and $v=2y-x$ does the trick. See where the edges of the parallelogram map. 
+\item Then $x=(2u+v)/3$ and $y=(u+2v)/3$ and we compute the jacobian $J=1/3$.
+\item Note $\ds \iint\limits_R ~dxdy = \int_0^3 \int_0^3 (1/3)~dudv = 9/3=3$ and the area of $R$ was $1/3$ of new region $S$.
+\item Last,  $\ds \iint\limits_R e^x ~dxdy=(3/2)(e^2-1)(e-1)$, though we could have used past techniques for region $R$.
+\item Can see the opposite directoin would have tripled the area. 
+\end{itemize}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%
+\item Triple integrals have $3 \times 3$ determinants. Rectangular prisms become parallelpipeds. See text for spherical coords derivation.
+
+%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 5, 7, 9, 11, 15, 17
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 16 Vector calculus}
+
+\begin{enumerate}
+\item The big step of the class: FTOC for double and trible integrals.
+\item For chapter 15, we mostly rely on FTOC from calculus 1, but there are high dimension versions.
+\item 2 new ideas: Vector fields (vectors at all locations in the plane or 3-space) and line integrals (integration along a curve rather than an integral).
+\item Our FTOC for double integrals will connect a double integration over a region to a single integration along a boundary curve (called Green's theorem).
+\end{enumerate}
+
+\subsection{16.1 Vector fields}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Foundation:
+\begin{enumerate}
+\item Def: A vector field on $\mathbb{R}^2$ is a function $\vec{F}$ that assigns to each point $(x,y)$ in $D$ a two-dimensional vector $\vec{F}(x,y)$. That is,
+\[
+\vec{F}(x,y) = P(x,y) \vec{i} + Q(x,y) \vec{j}.
+\]
+Similar for $\mathbb{R}^3$.
+\item Example: Position vector field $\vec{F}(x,y) = \langle x,y \rangle$. 
+\item Example: Spin vector field $\vec{F}(x,y) = \langle -y, x \rangle$. Each vector length is distance from the origin.
+\item Graphing is a pain. Check out Geogebra...ish.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Gradient vector field: 
+\begin{enumerate}
+\item $\nabla f(x,y)$ is really a vector field. 
+\item Important question: Which vector fields are gradient vector fields (called conservative vector feilds). That is, for vector field $\vec{F}$ is there a $f$ such that $\vec{F} = \nabla f$? $f$ is called the potential function for $F$.
+\item The position vector field is conservative since $\vec{F} = \nabla f$ for $f(x,y)=x^2/2 y^2/2$. 
+\item Can show the spin vector feild is not, but if you scale by $1/r^2 = 1/\sqrt{x^2+y^2}$ it is for $f(x,y)=\arctan(y/x)=\theta$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 3, 5, 7, 9, 11, 13, 15, 17, 21, 23, 35
+
+\end{enumerate}
+
+\subsection{16.2 Line integrals}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Line integral basics
+\begin{enumerate}
+\item Idea: A line integral is the integral along a curve rather than an interval. Interpretation is area, though physics has applications.
+\item Draw picture for $z=f(x,y)$, $\Delta s$ for change in arc length. Rectangles are still in the Riemann sum.
+\item Definition: The line integral of $f$ along curve $C$ is
+\[
+\int_C f(x,y) ~ds = \lim_{n \rightarrow \infty} \sum_{i = 1}^n f(x_i^*, y_i^*) \Delta s
+\]
+\item Arc length is an integration problem from Chapter 10.
+\[
+L = \int_a^b \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} ~dt
+\]
+for $x=x(t), y=y(t)$ a parameterization of curve $C$. This sum of line segment lengths (distance formula) in the limit.
+\item Theorem: Argue along similar lines as arc length to get...
+\[
+\int_C f(x,y) ~ds =\int_a^b f(x,y) \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} ~dt
+\]
+which can also be written as
+\[
+\int_C f(\vec{r}) ~ds =\int_a^b f(\vec{r}(t)) \| \vec{r}'(t) \| ~dt
+\]
+\item Note, for $f(x,0)$ this reduces to the interval version $\int_a^b f(x,0) ~dx$.
+\item Find the line integral of $f(x,y)=1$ along the upper half of the circle of radius 2. Easy to replace $f$ with any function and just compute.
+\item Can also integrate in a single direction and translated to parameter $t$ via the chain rule. Meaning to be mentioned shortly.
+\[
+\int_C f(x,y) ~dx = \int_C f(x(t),y(t)) x'(t)~dt, \quad \int_C f(x,y) ~dy = \int_C f(x(t),y(t)) y'(t)~dt
+\]
+Can combine into a single expression.
+\[
+\int_C f(x,y) ~dx + \int_C g(x,y) ~dy  = \int_C f(x,y) ~dx  + g(x,y) ~dy
+\]
+\item Example 4 in text.
+\item Extensions to three dimensions not surprising.
+\[
+\int_C f(x,y,z) ~ds =\int_a^b f(x,y,z) \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2+ \left(\frac{dz}{dt}\right)^2} ~dt = \int_a^b f(\vec{r}(t)) \| \vec{r}'(t) \| ~dt
+\]
+\[
+\int_C f(x,y,z) ~dx  + g(x,y,z) ~dy + h(x,y,z) ~dz
+\]
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Physics applications: Work and vector fields.
+\begin{enumerate}
+\item In one dimension:
+\begin{enumerate}
+\item $W = F \cdot D$ for constant force, $W = \int_0^D F(x) ~dx$ for variable force.
+\end{enumerate}
+\item In two dimensions:
+\item $W = \vec{F} \cdot \vec{D}$ for constant force vector $\vec{F}$ (mag and dir) and direction vector $\vec{D}$.
+\item Line integrals give work done along a curve:
+\begin{enumerate}
+\item Constant force vector in direction of tangent vector $\vec{T}$.
+\[
+W = \int_C \vec{F} \cdot \vec{T} ~ds = \int_C \vec{F} \cdot \frac{\vec{r}'}{\|\vec{r'}\|} ~ds = \int_C \vec{F} \cdot \frac{\vec{r(t)}'}{\|\vec{r(t)'}\|} \|\vec{r}'(t)\| ~dt = \int_C \vec{F} \cdot \vec{r(t)}' ~dt
+\]
+\item Variable force via a vector field $\vec{F}(x,y,z) = \vec{F}(\vec{r})$
+\[
+W = \int_C \vec{F}(\vec{r}) \cdot \vec{T} ~ds = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt
+\]
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item General vector fields
+\begin{enumerate}
+\item Definition: The line integral of vector field $\vec{F}$ is 
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt = \int_C \vec{F} \cdot \vec{T} ~ds 
+\]
+This is general for 2+ dimensions.
+\item Can connect line integrals for vector fields $\vec{F} = \langle P(x,y), Q(x,y) \rangle$ to line integral for functions giving reason to line integrals in $x$ and $y$ (and $z$).
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt =\int_C P(x,y) ~dx + Q(x,y) ~dy
+\]
+Likewise for 3 variables.
+\item Example: Compute the work done by vector field $\vec{F} = \langle -y,x \rangle$ (spin field) along
+\begin{itemize}
+\item Straight line from $(1,0)$ to $(0,1)$. $y=1-x$ gives $x=1-t, y=t$ for $0 \leq t \leq 0$. Then,
+\[
+\vec{F}(\vec{r(t)}) = \langle -t, 1-t \rangle, \quad \vec{r'(t)} = \langle -1, 1 \rangle
+\]
+and
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt = \int_0^1 \left(t+(1-t) \right) ~dt = 1
+\]
+\item Quarter circle from $(0,1)$ to $(1,0)$. $x=\cos(t), y=\sin(t)$ for $0 \leq t \leq \frac{\pi}{2}$ works.
+\[
+\vec{F}(\vec{r(t)}) = \langle -\sin(t),\cos(t) \rangle, \quad \vec{r'(t)} = \langle -\sin(t), \cos(t) \rangle
+\]
+and
+\[
+\int_C \vec{F} ~d\vec{r} = \int_C \vec{F}(\vec{r(t)} \cdot \vec{r'(t)} ~dt = \int_0^{\pi/2} \left(1 \right) ~dt = \frac{\pi}{2}
+\]
+\item Note work done is positive for both, more for the second.
+\item Check out in Geogebra to see how more work is done along the circle. 
+\item Direction reversed would give negative work done. Zero work done if directions are all perpendicular. Position vector field would give this.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%
+\item Homework: 1, 3, 7, 11, 15, 17, 19, 21, 29
+
+\end{enumerate}
+
+\subsection{16.3 The fundamental theorem of line integrals}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item Fundamental theorems
+\begin{enumerate}
+\item FTOCP2: $\ds \int_a^b F'(x) ~dx = F(b)-F(a)$. Area under the curve equates to endpoint evaluation.
+\item Theorem (FTOLI):  For curve $C$ defined by the vector function $\vec{r}(t)$, $a \leq t \leq b$ and differentiable function $f(x,y)$ such that $\nabla f$ is continuous on $C$, we have
+\[
+\int_C \nabla f \cdot d\vec{r} = f(\vec{r}(b)) - f(\vec{r}(a))
+\]
+\item Proof: We use the chain rule and FTOCP2. 
+\[
+\int_C \nabla f \cdot d\vec{r} = \int_C \nabla f \cdot \vec{r}'(t) ~dt = \int_a^b \left( \frac{\partial f}{\partial x} \frac{dx}{dt} +  \frac{\partial f}{\partial y} \frac{dy}{dt} +  \frac{\partial f}{\partial z} \frac{dz}{dt} \right) ~dt = \int_a^b \frac{d}{dt} f(\vec{r}(t) ~dt = f(\vec{r}(b))-f(\vec{r}(a))
+\]
+\item Notes:
+\begin{itemize}
+\item For conservative vector fields $\vec{F} = \nabla f$, line integrals amount to endpoint evaluation at $A=(x(a), y(a))$ and $B=(x(b), y(b))$.
+\item Since $C$ can be any curve, this implies path indendence so long as endpoints $A$ and $B$ are the same. That is
+\[
+\int_{C_1} \nabla f \cdot d\vec{r} = \int_{C_2} \nabla f \cdot d\vec{r} = f(\vec{r}(b)) - f(\vec{r}(a))
+\]
+\item For a closed curve (ends where you started), we have
+\[
+\int_{C} \nabla f \cdot d\vec{r} = \oint_{C} \nabla f \cdot d\vec{r} = 0
+\]
+\item Integration can be completely avoided for $\ds \int_C F \cdot d\vec{r}$ as long as we can verify $F$ is conservative and find $F= \nabla f$ for potential $f$. How to test? Easy way is for $F=\langle M(x,y), N(x,y) \rangle = \nabla f$, we need $M_y = N_x$. This is the quick test.
+\end{itemize}
+\item Example: Exercise 12 in text.
+\item Example: See again that the spin field is not conservative.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Conservation of energy:
+\begin{enumerate}
+\item Here we see why we say conservative and potential.
+\item Force acting on a mass results in change in velocity. Newton's Law gives $F=ma = mv'$. Then over a path $\vec{r}$, $\vec{F}(\vec{r}(t)) = m r''(t)$ and
+\[
+W = \int_C \vec{F} \cdot \vec{r} = \int_a^b \vec{F}(\vec{r}(t)) \cdot \vec{r}'(t) ~dt = \frac{m}{2} \int_a^b \frac{d}{dt} \left[ \vec{r} \cdot \vec{r} \right] ~dt = \frac{m}{2} \left( \|\vec{v}(b)\|^2 -  \|\vec{v}(a)\|^2 \right)
+\]
+This last part is change in kenetic energy $\frac{m}{2} \|\vec{v} \|^2$, half mass times square of speed.
+\item For $\vec{F}$ conservative it has potential $f$. $\vec{F} = -\nabla P$ gives $P$ the potential energy of the object. Then,
+\[
+W = \int_C \vec{F} \cdot \vec{r} = \int_C -\nabla P \cdot \vec{r} = P(\vec{r}(a))-P(\vec{r}(b))
+\]
+\item Equating work done $W$ we get conservation of total energy
+\[
+P(\vec{r}(a)) + \frac{m}{2} \|\vec{v}(a)\|^2 = P(\vec{r}(b)) + \frac{m}{2} \|\vec{v}(b)\|^2 
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Homework:1, 3, 5, 7, 11, 13, 15, 19, 23, 25, 29, 35
+
+\end{enumerate}
+
+
+\subsection{16.4 Green's theorem}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item 2D version of FTOC, volume connected to integral, 150 years after Newton and Leibniz.
+\begin{enumerate}
+\item Equate a double integral over region $R$ to a line integral along its boundary $C$. Some conditions need heeding.
+\item Green's Theorem: Let $C$ be a positively oriented (counter-clockwise traversal of $R$), smooth, simple closed curve in the plane and let $D$ be the region bounded by $C$. Then,
+\[
+\int_C P~dx + Q~dy = \iint\limits_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) ~dA
+\]
+\item Notation:
+\[
+\int_C P~dx + Q~dy = \oint_C P~dx + Q~dy
+\]
+\item Can use to turn line integrals into area or area into line integrals.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Examples:
+\begin{enumerate}
+\item Compute $\ds \oint_C x^4~dx + xy ~dy$ where $C$ is the triangle from $(0,0)$ to $(1,0)$ to $(0,1)$ and back.
+\item Exer 9 in text.
+\item Area application: Find the area of the ellipse $\ds \frac{x^2}{a^2} +\frac{y^2}{b^2} = 1$. Use parameterization $x=a\cot(t), y=b\sin(t)$. Can choose any $P, Q$ such that $Q_x-P_y=1$. Choose $P=-\frac{1}{2}y$ and $Q=\frac{1}{2}x$. Then area gives $\pi a b$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Homework:
+
+\end{enumerate}
+
+
+\subsection{16.5 Curl and divergence}
+\subsection{16.6 Parametric surfaces and their area}
+\subsection{16.7 Surface integrals}
+\subsection{16.8 Stoke's theorem}
+\subsection{16.9 The divergence theorem}
+\subsection{16.10 Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 17 Second-order differential equations}
+\subsection{17.1 Second-order linear equations}
+\subsection{17.2 Nonhomogeneous linear equations}
+\subsection{17.3 Applications of second-order differential equations}
+\subsection{17.4 Series solutions}
+
+\end{document}
