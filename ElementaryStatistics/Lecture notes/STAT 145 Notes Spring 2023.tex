@@ -1,0 +1,979 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb,amscd,graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\bibliographystyle{unsrt}
+\renewcommand{\thesection}{}  % toc dispaly
+
+\newcommand{\ds}{\displaystyle}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\title{STAT 145 Notes}
+\date
+\Large
+\begin{document}
+\maketitle
+\large
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fun stuff}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Course outline}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{A: Data (Ch1-2)}
+\begin{enumerate}
+\item How to collect and describe data.
+\item How data collection influences the types of conclusions to be drawn.
+\item Ways to sumarize and visualize data.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{B: Understanding inference (Ch3-4)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{C: Inference with normal and t-distributions (Ch5-6)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{D: Inference for multiple parameters (Ch7-10)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 1: Collecting Data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.1 The structure of data}
+\begin{enumerate}
+%%%%%%%%%%%%%
+\item Basics: Data structure, variable types
+\begin{enumerate}
+\item \emph{Statistics} is the science of collecting, describing, and analyzing data.
+\item Here we focus on data collection, chapter 2 describes data, and later chapters analyze data.
+\item Dataset structure:
+\begin{itemize}
+\item Rows are \emph{cases} or \emph{units}
+\item Columns are \emph{variables}
+\item Example: Student survey, rows are students, columns are GPA, gender, email, major, age, etc
+\end{itemize}
+\item Variable types:
+\begin{itemize}
+\item \emph{Categorical variables} divide cases into groups
+\item \emph{Quantitative variables} give a numerical quantity which can be applied operations to such as averaging.
+\item Example: Classify variables above. 
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%
+\item Investigating variables and relationships between variables
+\begin{enumerate}
+\item Single variable questions: What is the average student age? Majority gender? Number of 4.0 GPAs?
+\item Variable relationship questions: Who has higher GPA, male or female? Does age determine GPA? (many pairings, quant to cat, quant to quant, cat to cat)
+\item Explanatory and response variables
+\begin{enumerate}
+\item Ask if one variable helps to explain another.
+\item Explanatory variable helps us understand (or predict) another variable. Also called independent variable.
+\item Response variable is what we aim to understand (or predict). Also called dependent variable.
+\item Example: Does student age predict GPA?
+\end{enumerate}
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.2 Sampling from a population}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%
+\item Data collection: Super important before any analysis can be done and trusted.
+\begin{enumerate}
+\item A \emph{population} is the entire group of indviduals or objects of interest.
+\item A \emph{sample} is a subset of the population which data is collected for.
+\item \emph{Statistical inference} is the process of using data from a sample to gain information about the entire population.
+\item \emph{Sampling bias} occurs when the method of selcting a sample causes the sample to differ from the population in some relevant way. Such a sample would not generalize to the entire population.
+\item Key question: How to tell if the sample is good enough for inference? How much to trust the findings? Choose a random sample.
+\item A \emph{simple random sample} of $n$ units is such that all groups of size $n$ have the same chance of becoming the sample.  
+\item Still pitfalls exist. How to randomly select? Computer random number generator. Need all selected participants to be willing. May not be completely doable.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%
+\item Types of bias:
+\begin{enumerate}
+\item \emph{Voluntary response bias} occurs when volunteers are asked to participate.
+\item \emph{Convenience sampling} occurs when you use the group which is easiest to access for the sample. 
+\item \emph{Response bias} occurs when people do not answer questions honestly.
+\item \emph{Non-response bias} occurs when people do not respond and therefore are excluded from the sample.
+\item \emph{Undercoverage} occurs when a part of the population is not considered for inclusion into the sample.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{1.3 Experiments and observational studies}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%
+\item Association vs causation:
+\begin{enumerate}
+\item Two variables are \emph{associated} if values of one variable tend to be related to values of another variable.
+\item Two variables are \emph{causally associated} if changing the value of one variable influences the value of the other variable.
+\item Example: Sharks and ice cream sales. Heat wave.
+\item A \emph{confounding variable} is a third variable that is associated with both the explanatory and response variable. These can offer a plausible explanation for the associate between the two variables.
+\item How to avoid confounding variables? Avoid observational studies and instead perform random experiments.
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Randomized experiements:
+\begin{enumerate}
+\item In a \emph{random experiment} the value of the explanatory variable for each unit is determined randomly before the response variable is measured. 
+\item Allows to establish a causal relationship.
+\item Two basic types of random experiments:
+\begin{itemize}
+\item A \emph{randomized comparative experiment} randomly assigns cases to to different treatment groups and then compares results on the response variable. This includes examples such as control groups and placebos. 
+\begin{itemize}
+\item Placebos require blinding to hide the lie. 
+\item Single-blind experiments don't tell participants which group they are in.
+\item Double-blind experiments don't tell participants which group and the data recorders also don't know which group.
+\end{itemize}
+\item A \emph{matched pairs experiment} get both treatments in random order and then compare individual differences.
+\end{itemize}
+\item In all, randomized experiments are the best to determine causality, though they are not always possible or ethical. Observational studies may then be used to determine association.
+\end{enumerate}
+
+%%%%%%%%%%%%%%5
+\item Two fundamental questions about data collection:
+\begin{enumerate}
+\item Was the sample randomly selected? If yes, can generalize to the entire population.
+\item Was the explanatory variable randomly assigned? If yes, conclusions can be made about causality.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 2: Describing Data}
+
+Goal of chapter:
+\begin{enumerate}
+\item Describe both types of variable (categorical and quantitative) and their relationships between them.
+\item Visualize data via graphs
+\item Summarize key aspects of data via \emph{summary statistics}.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.1 Categorical variables}
+
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item One categorical variable
+\begin{enumerate}
+\item A \emph{frequency table} gives counts of each category.
+\item \emph{Proportions} (AKA relative frequencies) are computed as 
+\[
+\text{Category proportion} = \frac{\text{Category number}}{\text{Total number}}
+\]
+\item Visualize as a bar char or a pie chart.
+\item $\hat{p}$ denotes proportion for a sample. $p$ denotes proportion for a population. This distinction is key with writing.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Two categorical variables
+\begin{enumerate}
+\item Two way table comparison. Counts vs proportions. 
+\item Difference in proportions.
+\item Visualize as segmented (stacked) bar chart or a side-by-side bar chart.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.2-2.3 One quantitative variable: Shape and center, measures of spread}
+
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item For a quantitative variable, three main questions are key.
+\begin{enumerate}
+\item What is the \emph{shape}?
+\item What is the \emph{center}?
+\item How does the data vary (known as \emph{spread})?
+\item Combined these compose the \emph{distribution} of the data.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item The \emph{shape} of a distribution:
+\begin{enumerate}
+\item Dotplots or histograms can be used to visualize smaller sized data. Histograms require binning of data.
+\item \emph{Outliers} are observed data which is much larger or much smaller than the rest of the data values.
+\item Symmetric or skewed distributions:
+\begin{itemize}
+\item Symmetric distributions are bell shaped. Bimodal (non-bell shaped) symmetric is possible.
+\item Skewed distributions have a long tale on right or left side. A tail on the left is called \emph{right-skewed}.
+\item Many other shapes are possible.
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%
+\item The \emph{center} of a distribution:
+\begin{enumerate}
+\item Two main summary statistics describe the center of a distribution, the mean and the median.
+\begin{itemize}
+\item The \emph{mean} is the average (sum of all values divided by the count). Sample mean is computed as
+\[
+\overline{x} = \frac{1}{n} \sum x_i
+\]
+and population mean is denoted with Greek letter $\mu$.
+\item The \emph{median} (denoted $m$) is the middle entry if all values are listed in order. For even counts, the two middles are averaged.
+\item The mean is the balance point of a distribution. The median splits the data into two equal halfs.
+\item The median is more \emph{resistant} to outliers while the mean is now.
+\end{itemize}
+\item Can use the mean and median of a distribution to tell if it is symmetric or skewed.
+\begin{itemize}
+\item $m=\overline{x}$ is symmetric
+\item $m<\overline{x}$ is right skew
+\item $m>\overline{x}$ is left skew
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%
+\item The \emph{spread} of a distribution:
+\begin{enumerate}
+\item We need a way to measure how spread out data is. Is it clustered close to the mean or farther out?
+\item The \emph{deviation} of a single data value $x$ from the mean $\overline{x}$ is the difference $x-\overline{x}$. Positive means bigger than the mean, negative means smaller.
+\item Adding up all deviations will always give zero!
+\item Instead we take the square root of the averaged sum of squares. The sample standard deviation is then
+\[
+s = \sqrt{\frac{1}{n-1} \sum (x-\overline{x})^2}
+\]
+The population standard deviation is $\sigma$.
+\item In essence, the standard deviation is a rough estimate of the typical distance from the mean. Large $s$ means more spread. 
+\item The standard deviation $95\%$ rule:
+\begin{itemize}
+\item For symmetric, bell-shaped data, 95\% of the data should fall within two standard deviations of the mean. That is, in the interval $[ \overline{x}-2s, \overline{x}+2s]$.
+\end{itemize}
+\item For a single sample $x$ we can measure how many standard deviations from the mean as
+\[
+x = \bar{x}+s\cdot z \quad \rightarrow \quad z\text{-score} = \frac{x-\bar{x}}{s}
+\]
+which defines the $z-$score. Then for symmetric bell-shaped data, only 5\% of the data will have a $z-$score bigger than 2 in absolute value.
+\item Explanations of $s$ formula.
+\begin{itemize}
+\item \url{https://en.wikipedia.org/wiki/Standard_deviation#Corrected_sample_standard_deviation}
+\item Bessel's correction: \url{https://en.wikipedia.org/wiki/Bessel%27s_correction}
+\item \url{https://www.khanacademy.org/computer-programming/spin-off-of-fishy-statistics-unbiased-estimate-of-population-variance/6742828205522944}
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%5
+\item Percentiles and IQR:
+\begin{enumerate}
+\item Again, the mean and therefore standard deviation are sensitive to outliers (though they do have the advantage that all data values are used in calculation). We can replace mean with median and measure spread thru this lens.
+\item The \emph{$P$th percentile} is the value of the quantitative variable which is greater than $P$ percent of the data.
+\item Five number summary:
+\begin{itemize}
+\item Minimum, $Q_1$, median, $Q_3$, maximum
+\item $Q_1$ is the 25th percentile (first quartile).
+\item $Q_3$ is the 75th percentile (third quartile).
+\item This divides the data into fourths with an equal count of data in each of the 4 buckets.
+\item Better than mean and SD to tell distribution shape and skewness.
+\end{itemize}
+\item Range = max - min
+\item Interquartile range (IQR) = $Q_3-Q_1$.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.4 Boxplots and quantitative/categorical relationships}
+
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item Boxplots
+\begin{enumerate}
+\item A \emph{boxplot} is a graphical display of the five number summary for a single quantitative variable. The main goal is to show the general shape of a distribution. Components:
+\begin{itemize}
+\item Data scale
+\item Box stretching from $Q_1$ to $Q_3$
+\item Line drawn at the median
+\item Line from each quartile drawn to the most extreme value not an outlier
+\item Individual outliers drawn with an asterisk
+\item Symmetry and skew can be seen
+\end{itemize}
+\item IQR method for detecting \emph{outliers} is:
+\begin{itemize}
+\item Smaller than $Q_1 - 1.5(IQR)$
+\item Bigger than $Q_3 + 1.5(IQR)$
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%
+\item One quantitative and one categorical variable:
+\begin{enumerate}
+\item Side-by-side boxplots or dotplots
+\item Comparative summary statistics 
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.5 Two quantitative variables: Scatterplot and correlation}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item SKIP
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.6 Two quantitative variables: Linear regression}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item SKIP
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2.7 Data visualization and multiple variables}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item SKIP
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 3: Confindence intervals}
+
+\begin{enumerate}
+\item Develop the key ideas of statistical inference (estimation and testing) using simulation methods to build understanding and carry out analysis.
+\item Key goal is to use data in the sample to understand what might be true about the entire population. With these conclusions will come accuracy.
+\end{enumerate}
+
+%%%%%%%%%%%
+\subsection{3.1 Sampling distributions}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item \emph{Statistical inference} is the process of drawing conclusions about the entire population based on the information in the sample.
+
+ 
+%%%%%%%%%%%
+\item Population parameters and sample statistics:
+\begin{enumerate}
+\item A \emph{parameter} is a number that describes some aspect of a population.
+\item A \emph{statistic} is a number computed from the data in a sample.
+\item Names for parameters and statistics are the same, but notation differs. For example, mean for a statistic is $\bar{x}$ and for a population is $\mu$. See table in text for full list.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Sample statistics as estimates of population parameters
+\begin{enumerate}
+\item If we only have one sample and don't know the value of the population parameter, the sample statistic is our \emph{best estimate} of the true parameter value.
+\item Parameters are fixed though usually unknown. Sample statistics vary from sample to sample, but at least we compute their values.
+\item A \emph{sampling distribution} is the distribution of sample statistics computed from different samples of the same size from the same population.
+\item For most parameters, if samples are randomly selected and sample size is large enough, the sampling distribution will be symmetric and bell-shaped with center at the value of the population parameter. This is known as the Central Limit Theorem. 
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Measuring the sampling variability: The standard error
+\begin{enumerate}
+\item The spread of the sample statistic is the most important in knowning how accurate the estimate is. Standard deviation captures this.
+\item The \emph{standard error} of a statistic, denoted $SE$, is the standard deviation of the sample statistic.
+\item In the next section we use $SE$ to quantify uncertainty via confidence intervals.
+\item Sample size is important. As sample size increases, $SE$ decreases making the statistic a better estimate of the population parameter.
+\item Random sampling is important. Bias in sampling can lead to false conclusions about the population parameter.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%
+\subsection{3.2 Understanding and interpreting confidence intervals}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item First we aim to identify the parameter we are interested in. To estimate, repeat random sampling and compute the sampling statistic. In the process, measure the variation on sample statistics. Result is an estimate of the parameter with a range of plausible values.
+
+%%%%%%%%%%%
+\item Identifying the parameter of interest: 5 options so far
+\begin{enumerate}
+\item Single categorical variable, proportion $p$ (parameter) has statistic $\hat{p}$.
+\item Single quantitative variable, mean $\mu$ (parameter) has statistic $\bar{x}$.
+\item Two categorical variables, difference in proportions $p_1-p_2$ (parameter) has statistic $\hat{p_1}-\hat{p_2}$.
+\item One categorical and one quantitative variable, difference in means $\mu_1-\mu_2$ (parameter) has statistic $\bar{x}_1-\bar{x}_2$.
+\item (Will see later on) Two quantitative variables, correlation $\rho$ (parameter) has statistic $r$.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Parameter estimation with an interval (margin of error)
+\begin{enumerate}
+\item Aim is a range of possible values for the population parameter as
+\[
+\text{sample statistic} \pm \text{margin of error}
+\]
+which is the interval $[SS - MoE, SS + MoE]$
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Confidence intervals
+\begin{enumerate}
+\item A \emph{confidence interval} for a parameter is an interval computed from the sample data by a method that will capture the parameter for a proportion of all samples. The success rate (proportion of all samples whose intervals contain parameter) is the \emph{confidence level}.
+\item If we estimate the standard error $SE$ the sampling distribution is symmetric and bell shaped, a 95\% confidence interval can be estimated using 
+\[
+\text{Statistic} \pm 2 \cdot SE.
+\]
+The tails of the bell curve more than $2SE$ away from the mean comprise 5\% of the sample statistics.
+\item We interpret a CI as being 95\% certain that the population parameter lies in the interval.
+\item Note, margin of error (amount added and subtracted in confidence interval), standard error (standard dev of many sample statistics), and standard deviation of a sample (single sample of data values) are different! Stats terminology sux.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item In practice we only have one sample for our data. The next section shows how bootstrapping can be used to generate artificial samples from a single one.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%
+\subsection{3.3 Constructing bootstrap confidence intervals}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item Bootstrapping samples:
+\begin{enumerate}
+\item We need many different samples to construct a confidence interval. In practice, we only have one sample to work with. We can use that one sample to create a sampling distribution.
+\item \emph{Sampling with replacement} randomly samples the sample. Once an item is selected, it is still available to be selected again.
+\item A \emph{bootstrap sample} is the collection of samples with replacement from the original sample.
+\item A \emph{bootstrap statistic} is computed from the bootstrap sample. 
+\item Collecting all bootstrap statistics give the \emph{bootstrap distribution}. Assuming the original sample was chosen randomly and is big enough, the bootstrap distribution is a good approximation to the sampling distribution.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Estimating standard error from a bootstrap distribution
+\begin{enumerate}
+\item The standard deviation of the bootstrap statistics in a bootstrap distribution gives a good approximation of the standard error of the statistic.
+\item Likewise the confidence interval from the bootstrap distribution approximates the sample statistic confidence interval.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%
+\subsection{3.4 Bootstrap confidence intervals using percentiles}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item Confidence intervals based on bootstrap percentiles
+\begin{enumerate}
+\item 95\% confidence intervals are found from a symmetric, bell-shaped bootstrap distribution via the rough $Statistic \pm 2 \cdot SE$. Instead of using $SE$, we could just remove the upper and lower 2.5\% of the bootstrap distribution. This would yield similar results. Generalizing this idea to any percentile gives a more flexible approach.
+\item A 90\% confidence interval would remove 5\% from both tails of the bootstrap distribution.
+\item In general, for a symmetric bootstrap distribution, a $XX \%$ confidence interval 
+\end{enumerate}
+
+%%%%%%%%%%%
+\item Caution on constructing bootstrap confidence intervals
+\begin{enumerate}
+\item Bootstrap intervals don't always work. When data looks more discrete (rather than continuous) or non-bell-shaped, results are note reasonable. 
+\item Plotting the bootstrap distribution is always a best practice before discussion of confidence intervals.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 4: Hypothesis testing}
+
+%%%%%%%%%%%%%%%
+\subsection{4.1 Introducing hypothesis tests}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item Two main areas of statistical inference: estimation and testing
+\begin{enumerate}
+\item Chapter 3 gives estimate with a confidence interval.
+\item Here we use statistical testing to answer questions about our data.
+\item A \emph{statistical test} is used to determine whether the results from a sample are convincing enough to allow us to conclude something about the population.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Null and alternative hypothesis
+\begin{enumerate}
+\item The \emph{null hypothesis} $H_0$ claims that there is no effect or no difference.
+\item The \emph{alternative hypothesis} $H_a$ claims what we seek as significant evidence.
+\item The \emph{hypothesis test} examines whether sample data provides enough evidence to refute the null hypothesis and support that alternative hypothesis.
+\item Note, $H_0$ and $H_a$ are claims about population parameters, not sample statistics.
+\item Note, $H_0$ is a statement about equality while $H_a$ claims less than, more than, or not equal depending on the question asks.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\subsection{4.2 Measuring evidence with p-values}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item How to measure evidence?
+\begin{enumerate}
+\item A hypothesis test examines whether data from a sample provides enough evidence to refute the null hypothesis and support the alternative hypothesis. 
+\item How to measure evidence? We need to have a sense of what is likely to occur by random chance. 
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Randomization distribution
+\begin{enumerate}
+\item We want to understand how statistics randomly vary from sample to sample, if the null hypothesis is true. 
+\item We will bootstrap to simulate samples in a way that his consistent with the null hypothesis.
+\item This is called \emph{random samples}.
+\item For each random sample, we calculate the statistic of interest.
+\item The values of the statistic of interest for all random samples generates a \emph{randomization distribution}.
+\item How to generate a randomization distribution:
+\begin{itemize}
+\item Put each case randomly into 2 groups.
+\item Compute sample statistic.
+\item Repeat.
+\end{itemize}
+\item We then compare our observed statistic to the randomization distribution.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Measuring strength of evidence with a $p$-value
+\begin{enumerate}
+\item The \emph{p-value} is the proportion of samples, when the null hypothesis is true, that would gave a statistic as extreme as (or more extreme than) the observed sample.
+\[
+p-value = \frac{\text{number of random samples with statistic bigger than (same sign) observed stat}}{\text{total random samples}}
+\]
+\item The $p$-value only considers one side of the randomized distribution.
+\item The farther to the tail of the randomization, the smaller the $p$-value.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%
+\item $p$-values and the alternative hypothesis.
+\begin{enumerate}
+\item The randomize distribution only considers the null hypothesis.
+\item The $p$-value connects to the alternative hypothesis and considers one or both tails of the distribution. We call these \emph{right-tailed}, \emph{left-tailed}, and \emph{two-tailed} tests.
+\item Note, for a \emph{two-tailed} test, we find the proportion of the simulated statistic in the smaller tail at or beyond the observed statistic. The $p$-value doubles this proportion to account for the other tail.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\subsection{4.3 Determining statistical significance}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item Statistical significance
+\begin{enumerate}
+\item The smaller the $p$-value, the stronger the statistical evidence is against the null hypothesis in support of the alternative hypothesis.
+\item If the $p$-value is small enough, we say the sample results are \emph{statistically significant} and we have convincing evidence against $H_0$ and in favor of $H_a$.
+\item The \emph{significance level} $\alpha$ for a test of hypothesis is a boundary below which concludes the $p$-value is statistically significant. Common levels are $\alpha=0.05, 0.01, 0.1$. If not specified, $\alpha=0.05$ is used.
+\item If the $p$-value is less than $\alpha$, we reject $H_0$. If the $p$-value $\geq \alpha$, we cannot reject $H_0$ and do not have convincing evidence that $H_a$ is true.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Summary of hypothesis tests
+\begin{enumerate}
+\item State the null and alternative hypothesis. 
+\item Determine the value of the observed sample statistic.
+\item Find the $p$-value 
+\item Reject or do not reject $H_0$.
+\item Write a sentence explaining the conclusion.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Less formal rules for statistical decisions.
+\begin{enumerate}
+\item Instead of reject / do not reject, can replace with strength levels (little, some, moderate, strong, very strong).
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\subsection{4.4 A closer look at testing}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item Pitfalls to hypothesis testing: Type 1 and type 2 errors
+\begin{enumerate}
+\item Two generic decisions: reject $H_0$, do not reject $H_0$.
+\item Type 1 error: $H_0$ is in reality true, decide to reject $H_0$ (false positive)
+\item Type 2 error: $H_0$ is false in reality, decide not to reject $H_0$ (false negative)
+\item Good to avoid both error types, but sometimes one is more important to avoid. Choosing significant level $\alpha$ is a way to control this balance.
+\item $\alpha = 0.01$ is decreased making it harder to reject $H_0$ which avoids Type 1 error.
+\item $\alpha = 0.1$ is increased making it easier to reject $H_0$ which avoids Type 2 error.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item The problem of multiple testing: 
+\begin{enumerate}
+\item When multiple tests are conducted, if the null hypothesis are all true, the proportion of the tests that will yield a statistically significant result by random chance if about $\alpha$, the significance level.
+\item With publications, only significant results are often published. This could be a result of multiple testing with non-sig results not published.
+\item It is important to replicate or reproduce results with another study as with clinical trials.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Effect of sample size
+\begin{enumerate}
+\item As sample size increases, there will be less spread in the kinds of statistics we will see just by random chance. Statistics in the randomization distribution will be closely concentrated around the null value.
+\item A large sample size makes it easier to reject $H_0$ when $H_a$ is true, decreasing the chance of Type 2 errors.
+\item Larger samples are always better!
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\subsection{4.5 Making connections}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item Connecting randomization and bootstrap distributions.
+\begin{enumerate}
+\item Sampling distribution: shows the distribution of sample statistics from a population, and is usually centered at the true value of the population parameter.
+\item Bootstrap distribution: simulates a distribution of sample statistics for the population, but is generally centered at the value of the original sample statistic.
+\item Randomization distribution: Simulates a distribution of sample statistics for a population for which the null hypothesis is true, and is generally centered at the value of the null parameter.
+\item Both simulate many samples then collect values of a sample statistic to form a distribution.
+\item Both have typical values in the middle and unusual values in the tails.
+\item Both use information from the original sample to make inference what might be true about a population, parameter, or relationship.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Connecting confidence intervals and hypothesis tests
+\begin{enumerate}
+\item Confidence intervals: show us plausible values of the population parameter
+\item Hypothesis tests: used to determine whether a given parameter in a null hypothesis is plausible or not
+\item The formal decision of a two-tailed hypothesis test is related to whether or not the null parameter falls within a confidence interval:
+\begin{itemize}
+\item when the parameter value of $H_0$ falls outside a 95\% confidence interval, then it is not a plausible value for the parameter and we should reject $H_0$ at 5\% level in a two-tailed test
+\item when the parameter value of $H_0$ falls inside a 95\% confidence interval, then it is a plausible value for the parameter and we should not reject $H_0$ at 5\% level in a two-tailed test
+\end{itemize}
+\item Combining ideas of confidence intervals and hypothesis enables 2 things:
+\begin{itemize}
+\item Conclude if we should reject $H_0$ or not
+\item Confidence interval gives scale of desired parameter
+\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item Creating randomization distributions
+\begin{enumerate}
+\item Two main criteria to consider when creating randomization samples for a statistical test:
+\begin{itemize}
+\item be consistent with the null hypothesis
+\item use the data in the original sample (and possibly reflect the way the original data was collected)
+\end{itemize}
+\item 5 examples of tests to create randomization distributions for:
+\begin{itemize}
+\item Difference in means $\mu_1 = \mu2$
+\item Difference in proportions: $p_1=p_2$
+\item Correlation (later)
+\item Single proportion $p$
+\item Single mean $\mu$
+\end{itemize}
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 5: Approximating with a distribution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.1 Hypothesis tests using normal distributions}
+\begin{enumerate}
+
+%%%%%%%%%%%
+\item Normal distribution
+\begin{enumerate}
+\item The \emph{normal distribution} follows a bell-shaped curve. We use two parameters (mean $\mu$ and standard deviation $\rho$) to distinguish one normal curve from another and abbreviate with notation $N(\mu, \rho)$.
+\item Mean $\mu$ locates the center of the distribution
+\item Standard deviation $\rho$ tells how tall and skinny (or short and wide) the distribution is.
+\item The standard normal distribution is $Z=N(0,1)$ with mean 0 an standard deviation 1.
+\item Convert any normal distribution $N(\mu, \rho)$ to $Z$ by
+\[
+Z = \frac{X-\mu}{\rho}
+\]
+where $X$ is any value on $N(\mu, \rho)$. We use $Z$ because this is the $Z-$score from before.
+\item Formula for $N(\mu, \rho)$ at any location $x$ is
+\[
+f(x) = \frac{1}{\rho \sqrt{2\pi}} e^{-\frac{1}{2} \left(\frac{x-\mu}{\rho}\right)^2}
+\]
+\end{enumerate}
+
+%%%%%%%%%%%
+\item The central limit theorem
+\begin{enumerate}
+\item For random samples of sufficiently large sample size, the distribution of many common sample statistics can be approximated with a normal distribution.
+\item A bit vague. What precisely is random? How large a sample? How good an approximation?
+\item If true, we can trade randomization distributions for normal distribution to compute $p$-values and confidence intervals.
+\end{enumerate}
+
+%%%%%%%%%%%
+\item $p-$value from a normal distribution
+\begin{enumerate}
+\item The normal distribution that best approximates a bell-shaped randomization distribution has mean equal to the null value of the parameter, with standard deviation equal to the standard error:
+\[
+N(\text{null parameter}, SE).
+\]
+A $p-$ value can be found as the proportion of this normal distribution beyond the observed sample statistic in the direction of the alternative (or twice the smaller tail for a two-tailed test).
+\item Can also standardize the test statistic and compare to the standard normal distribution. For the distribution of the statistic under $H_0$ which is normal, we compute a standardized \emph{test statistic} using
+\[
+z = \frac{\text{Sample statistic} - \text{Null parameter}}{SE}.
+\]
+The $p-$ value for the test is the proportion of the standard normal distribution beyond the standardized test statistic, depending on the direction of the alternative hypothesis.
+\end{enumerate}
+
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{5.2 Confidence intervals using normal distributions}
+SKIP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 6: Inference for means and proportions}
+
+%%%%%%%%%%%%%%%%%
+\subsection{6.1 Inference for a proportion}
+\begin{enumerate}
+
+%%%%%%%%%%%%
+\item 6.1D: Distribution of a proportion
+\begin{enumerate}
+\item For categorical data, the parameter of interest is a population proportion $p$.
+\item For large enough sample size, CLT says the sample proportion $\hat{p}$ will follow a normal distribution centered at $p$. 
+\item The normal distribution also has a standard deviation, the standard error (SE) of the sample proportions.
+\item $SE$ can be estimated by bootstrapping or randomization distribution, but a version of the CLT gives another way
+\item Theorem: CLT alternate version. For random samples of size $n$ from population with proportion $p$, the distribution of sample proportions is centered at population proportion $p$ with standard error
+\[
+SE = \sqrt{\frac{p(1-p)}{n}}
+\]
+and is reasonably normally distributed if $np \geq 10$ and $n(1-p) \geq 10$.
+\item The conditions  $np \geq 10$ and $n(1-p) \geq 10$ prevent the normal distribution center from being too close to 0 and 1 respectively. If so, the $0 \leq p \leq 1$ restriction will cutoff the normal curve making it not normalish.
+\end{enumerate}
+
+%%%%%%%%%%%%
+\item6.1CI: Confidence interval for a proportion
+\begin{enumerate}
+\item In section 5.2 we found for a normal distribution of a sample statistic, confidence intervals are found via
+\[
+\text{Sample Statistic} \pm z^* \cdot SE
+\]
+where $z^*$ is a distribution percentile and $SE$ is the standard error of the sample statistic.
+\item In section 6.1-D, we have for a large sample, the distribution of the sample proportion is normalish with standard error
+\[
+SE = \sqrt{\frac{p(1-p)}{n}}
+\]
+for $n$ the sample size and $p$ the population proportion. Replace unknown $p$ with sample proportion $\hat{p}$ and we have
+\[
+SE = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+\]
+and 
+\[
+\hat{p} \pm  z^* SE = z^* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+\]
+\item How big of a sample do we need to estimate a proportion? If we know what margin of error $ME$ is acceptible, 
+\[
+ME = z^*\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \quad \rightarrow \quad n=\left(\frac{z^*}{ME}\right)^2 \hat{p}(1-\hat{p}),
+\]
+though if we do not know $\hat{p}$ since we haven't collected the sample, often $\hat{p} = 0.5$ is used because that is where $ME$ is largest.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+\item 61HT: Hypothesis testing for a proportion
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item We have already seen that when a randomization distribution is normal, we can compute a $p$-value using a standard normal distribution and standardized test statistic
+\[
+z = \frac{\text{Sample statistic} - \text{Null parameter}}{SE}
+\]
+The sample statistic is computed from the sample data and the null parameter is specified by the null hypothesis $H_0$.
+
+%%%%%%%%%%%%%%
+\item For a population proportion,
+\[
+z = \frac{\hat{p}-p_0}{SE}
+\]
+for $\hat{p}$ the sample proportion and $p_0$ the proportion for $H_0$. Using our new formula for $SE = \sqrt{\frac{p_0(1-p_0)}{n}}$, we get the following result.
+
+%%%%%%%%%%%%%%
+\item Hypothesis test for a proportion: To test $H_0: p=p_0$ vs $H_a: p \neq p_0$ (or a one-tail alternative, we use the standardized test statistic
+\[
+z = \frac{\text{Sample statistic} - \text{Null parameter}}{SE} = \frac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+\]
+where $\hat{p}$ is the proportion in a random sample of size $n$. Provided the sample is large enough so that $np_0 \geq 10$ and $n(1-p_0) \geq 10$, the $p$-value of the test is computed using the standard normal distribution.
+
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{6.2 Inference for a mean}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item Distribution of for a mean
+\begin{enumerate}
+%%%%%%%%%%
+\item CLT for sample means:
+\begin{itemize}
+\item For quantitative data, the parameter of interest is usually the population mean $\mu$.
+\item The distribution of sample means $\bar{x}$ often follows a normal distribution with center $\mu$.
+\item The standard deviation of this normal distribution is important to know, which we view through the standard error ($SE$) of the sample means. The normal distribution curve gives us the formula:
+\[
+SE = \frac{\sigma}{\sqrt{n}}
+\]
+for random samples of size $n$ from a population with mean $\mu$ and standard deviation $\sigma$.
+\item Two difficulties in practice: We likely don't know $\sigma$ and usually compute the standard deviation $s$ of the sample statistic giving an estimate to the standard error of the sample means:
+\[
+SE = \frac{s}{\sqrt{n}}.
+\]
+The second difficulty is the distribution is no longer a standard normal. We address this issue below.
+\end{itemize}
+
+%%%%%%%%%%%
+\item The $t$-distribution
+\begin{itemize}
+\item The distribution of sample means using the sample standard deviation: When choosing random samples of size $n$ from a population with mean $\mu$, the distribution of the sample means is centered at the population mean $\mu$ and has standard error estimated by 
+\[
+SE = \frac{s}{\sqrt{n}}
+\]
+for $s$ the standard deviation of the sample. The standardized sample means approximately follow a $t$-distribution with $n-1$ degrees of freedom (df). For small sample sizes $(n<30)$, the $t$- distribution is only a good approximation if the underlying population has a distribution that is approximately normal.
+\item $t$-distributions and normal distributions are very similar. Main advantage with $t$-distributions is they are better for small sample size when we approximate $\sigma$ with $s$.
+\end{itemize}
+
+%%%%%%%%%%%%%%
+\item Conditions for the $t$-distribution: Need the distribution of the population to be approximately normal. For a small sample, this is hard to assess since it can appear skewed or appear to have outliers.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Confidence interval for a mean
+\begin{enumerate}
+\item A sample mean based on a random sample of size $n$ has sample statistic $\bar{x}$ and standard error 
+\[
+SE = \frac{s}{\sqrt{n}}
+\]
+If $t^*$ is an endpoint chosen from a $t$-distribution with $n-1$ df to give the desired level of confidence, and if the distribution of the population is approximately normal or the sample size is large ($n \geq 30$), then the confidence interval for the population mean $\mu$ is
+\[
+\bar{x} \pm t^* \cdot \frac{s}{\sqrt{n}}
+\]
+\item Determining the sample size for estimating the mean: The margin of error from the confidence interval is
+\[
+ME = t^* \frac{s}{\sqrt{n}} \quad \rightarrow \quad n = \left( \frac{t^* \cdot s}{ME} \right)^2
+\]
+Issues: 
+\begin{itemize}
+\item $t^*$ requires $n$, use $z^*$ instead since it should resemble $t^*$ for $n$ large.
+\item $s$ is computed from the sample which we haven't collected yet. Use a guess of the population parameter $\sigma$, call it $\tilde{\sigma}$.
+\end{itemize}
+\item Determining the sample size for estimating the mean:
+\[
+n = \left( \frac{z^* \cdot \tilde{\sigma}}{ME} \right)^2
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Hypothesis testing for a mean
+\begin{enumerate}
+\item $t$-test for a mean: To test $H_0$: $\mu = \mu_0$ vs  $H_a$: $\mu \neq \mu_0$ (or a one-tail alternative) use the $t$-statistic
+\[
+t = \frac{\text{Statistic} - \text{Null value}}{SE} = \frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+\] 
+where $\bar{x}$ is the mean and $s$ is the standard deviation in a random sample of size $n$. Provided the underlying population is reasonably normal (or the sample size is large), the $p$-value of the test is computed using the appropriate tail(s) of a $t$-distribution with $n-1$ degrees of freedom.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\subsection{6.3 Inference for a difference in proportions}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item Distribution of for a difference in proportions
+\begin{enumerate}
+\item
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Confidence interval for a difference in proportions
+\begin{enumerate}
+\item
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Hypothesis testing for a difference in proportions
+\begin{enumerate}
+\item
+\end{enumerate}
+
+\end{enumerate}
+
+
+\subsection{6.4 Inference for a difference in means}
+\begin{enumerate}
+
+%%%%%%%%%%%%%%
+\item Distribution of for a difference in means
+\begin{enumerate}
+\item
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Confidence interval for a difference in means
+\begin{enumerate}
+\item
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\item Hypothesis testing for a difference in means
+\begin{enumerate}
+\item
+\end{enumerate}
+
+\end{enumerate}
+
+
+\subsection{6.5 Paired difference in means}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 7: Chi-square tests for categorical variables}
+\subsection{7.1 Testing goodness of fit for a single categorical variable}
+\subsection{7.2 Testing for an association between two categorical variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 8: ANOVA to compare means}
+\subsection{8.1 Analysis of variance}
+\subsection{8.2 Pairwise comparisons and inference after ANOVA}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 9: Inference for regression}
+\subsection{9.1 Inference for slope and correlation}
+\subsection{9.2 ANOVA for regression}
+\subsection{9.3 Confidence and prediction intervals}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 10: Multiple regression}
+\subsection{10.1 Multiple predictors}
+\subsection{10.2 Checking conditions for a regression model}
+\subsection{10.3 Using multiple regression}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter P: Probability basics}
+\subsection{P.1 Probability rules}
+\subsection{P.2 Tree diagrams and Baye's rule}
+\subsection{P.3 Random variables and probability functions}
+\subsection{P.4 Binomial probabilities}
+\subsection{P.5 Density curves and the normal distribution}
+
+\end{document}
