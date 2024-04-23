@@ -4311,7 +4311,18 @@ $A$ is broken into pieces according to its eigenstuff (spectrum). Further, each 
 
 \begin{enumerate}
 
-\item Goal: Extend the idea of diagonalization to non-square matrices. Results is a new factorization $A=QDP^{-1}$ (rotate, stretch, unrotate). called the singular value decomposition. Most useful factorization yet.
+\item Goal: Extend the idea of diagonalization to non-square matrices. 
+\begin{itemize}
+\item Results is a new factorization $A=U \Sigma V^T$ called the singular value decomposition. Most useful factorization yet.
+\item Approach is 2 change of basis $\vec{u}_i$'s and $\vec{v}_i$'s which gives an orthonormal basis for the 4 fundamental subspaces.
+\item Instead of eigenvalues, we have singular values in diagonalish matrix $\Sigma$ where $A \vec{v}_i = \sigma_i \vec{u}_i$.
+\item Also get a decomposition of $A$ as it's singular values
+\[
+A = \sigma_1 \vec{u}_1 \vec{v}_1^T + \dots
+\]
+\end{itemize}
+
+\item Motivation: For symmetric matrices $A$, we write as spectral decomposition for orthogonal basis of eigenvectors. The largest direction of stretch for $A \vec{x}$ for unit $\vec{x}$ is in the direction of the strongest eigenvalue / eigenvector pair. We follow this lead.
 
 \item Example: Find the largest stretch directions.
 \[
@@ -4322,15 +4333,15 @@ A =
 \end{bmatrix}
 \]
 \begin{enumerate}
-\item Cannot iterate and see as with past eigenspaces and dynamical systems. See visual in text of trasformation of the unit sphere to a rotated ellipse.
-\item Find a unit vector $\vec{x}$ where $\| A \vec{x} \| $ is maximized. Find the max length.
+\item Iterate 2x2 symmetric matrix on on the unit circle and see the ellipse mapped to. Theorem in section 7.3 shows eigenvectors are directions of largest stretch. Same in this case for unit sphere mapping to 2D ellipse.
+\item Goal: Find a unit vector $\vec{x}$ where $\| A \vec{x} \| $ is maximized. Find the max length.
 \item Strategy is to maximize $\| A\vec{x} \|^2$.
 \[
-\| A\vec{x} \|^2 = (A\vec{x})^T (A\vec{x}) = \vec{x}^T A^T A\vec{x} = \vec{x}^T (A^T A)\vec{x}
+\| A\vec{x} \|^2 = (A\vec{x})^T (A\vec{x}) = \vec{x}^T A^T A\vec{x} = \vec{x}^T (A^T A)\vec{x} = \lambda
 \]
-\item Note $A^T A$ is symmetric since its transpose is itself. Section 7.3 shoes the greatest eigenvalue $\lambda_1$ is the max value and the corresponding eigenvector is where the max occurs. Use R to find the eigenstuff. $\lambda_1=360$ with eigenvector $\vec{v_1} = (1/3, 2/3, 2/3)$. Then $A \vec{v_1} = (18,6)$. Also, the max of the square is $\|A \vec{v_1} \|^2 = 360$ hence $\|A \vec{v_1} \| = \sqrt{360}$
+\item Note $A^T A$ is symmetric since its transpose is itself. Use R to find the eigenstuff. $\lambda_1=360$ with eigenvector $\vec{v_1} = (1/3, 2/3, 2/3)$. Then $A \vec{v_1} = (18,6)$. Also, the max of the square is $\|A \vec{v_1} \|^2 = 360$ hence $\|A \vec{v_1} \| = \sqrt{360}$
 \[
-\| A \vec{v_1} \| = \| \lambda \vec{v_1} \| = 
+\| A \vec{v_1} \| = \| \lambda \vec{v_1} \| = \sqrt{360}
 \]
 \end{enumerate}
 
@@ -4346,6 +4357,28 @@ hence eigenvalues are all nonnegative.
 \item The singular values of $A$ are the square roots of the eigenvalues of $A^T A$ and denoted as $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_n \geq0$ where $\sigma_i = \sqrt{\lambda_i}$. These are the lengths of vectors $A \vec{v_i}$.
 \item Illustrate for previous example. Illustrate that $A \vec{v_1}$ is orthogonal to $A \vec{v_2}$. 
 \item Theorem: For $A$ with $r$ nonzero singular values and eigenvectors $\{ \vec{v_1}, \dots\, \vec{v_n}\}$  of $A^TA$, then $\{ A\vec{v_1}, \dots , A \vec{v_r} \}$ is an orthogonal basis of $Col(A)$ and $rank(A)=r$.
+\end{enumerate}
+
+\item Singular value decomposition
+\begin{enumerate}
+\item Finally, we diagonalizeish $A$ as
+\[
+\Sigma = 
+\begin{bmatrix}
+D & 0 \\
+0 & 0
+\end{bmatrix}
+\]
+where $D$ is $r \times r$ and contains the first $r$ singular values of $A$.
+\item Theorem (SVD): For $A$ a $m\times n$ matrix of rank $r$, we have
+\[
+A = U \Sigma V^T
+\]
+for $\Sigma$ above (note singular values are from greatest to least), $U$ is a $m \times m$ orthogonal matrix and $V$ is a $n \times n$ orthogonal matrix.
+\item Idea is to rewrite as $A V = U \Sigma$ and use the above ideas. $\vec{v}$'s are as above and $\vec{u}$'s are normalized $A \vec{v}$'s.
+\[
+\vec{u_i} = \frac{1}{\| A \vec{v_i}\|} A \vec{v_i} = \frac{1}{\sigma_i} A \vec{v_i}
+\] 
 \end{enumerate}
 
 \item Homework: 
