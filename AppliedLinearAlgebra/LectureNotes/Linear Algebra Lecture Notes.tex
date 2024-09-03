@@ -23,7 +23,7 @@
 \newcommand{\ds}{\displaystyle}
 \newcommand{\ul}{\underline}
 
-\title{Applied Linear Algebra Notes, Fall 2023}
+\title{Applied Linear Algebra Notes}
 \date
 \Large
 \begin{document}
@@ -4249,7 +4249,42 @@ A^T A \vec{\hat{x}} = A^T \vec{b}
 
 \begin{enumerate}
 
-\item Homework: 
+\item Definition: Matrix $A$ is symmetric if $A^T = A$. Must be a square matrix. Show example. 
+
+\item Example: Diagonalize matrix
+\[
+A=
+\begin{bmatrix}
+6 & -2 & -1 \\
+-2 & 6 & -1 \\
+-1 & -1 & 5
+\end{bmatrix}.
+\]
+Result is an orthogonal set of eigenvectors. Make orthonormal to see diagionalization where $A=PDP^{-1}$ and $P^{-1}=P^T$. Such $P$ is an orthogonal matrix and $A$ is called orthogonally diagonalizable.
+
+\item Theorems
+\begin{enumerate}
+\item Theorem: If matrix $A$ is symmetric, then any two eigenvectors from different eigenspaces are orthogonal. Proof in text is pretty slick.
+\item Theorem: Square matrix $A$ is orthogonally diagonalizable if and only if $A$ is a symmetric matrix. (Note, get always diagonalizable, no longer need distinct real eigenvalues. For repeat eigenvalues, need Gram-Schmidt for an orthogonal set of eigenvectors.)
+\item Spectral theorem for symmetric matrices: Symmetric matrix $A$ has the following properties:
+\begin{itemize}
+\item $A$ has $n$ real eigenvalues counting multiplicities
+\item The dimension of the eigenspace for each eigenvalue $\lambda$ equals the multiplicity of $\lambda$ as a root of the characteristic equation
+\item The eigenspaces are mutually orthogonal
+\item $A$ is orthogonally diagonalizable
+\end{itemize}
+\end{enumerate}
+
+\item Spectral decomposition: For $A$ orthogonally diagonalizable, we have the following.
+\[
+A = PDP^T = \left[ \vec{u_1} \dots  \vec{u_n}\right] D P^T
+ \left[ \lambda_1 \vec{u_1} \dots \lambda_n \vec{u_n}\right] P^T = \lambda_1 \vec{u_1} \vec{u_1}^T + \dots + \lambda_n \vec{u_n} \vec{u_n}^T
+\]
+$A$ is broken into pieces according to its eigenstuff (spectrum). Further, each term is a $n \times n$ matrix of rank 1. Further, each $ \vec{u_1} \vec{u_1}^T $ is a projection matrix in the sense that for each $\vec{x}$, $( \vec{u_1} \vec{u_1}^T ) \vec{x}$ is the orthogonal projection of $\vec{x}$ onto the subspace spanned by $\vec{u_1}$.
+
+\item Find the spectral decomposition of number 2 in exercises.
+
+\item Homework: 1, 5, 9, 11, 15, 19, 23, 25, 33, 36
 
 \end{enumerate}
 
@@ -4275,6 +4310,76 @@ A^T A \vec{\hat{x}} = A^T \vec{b}
 \subsection{7.4 The singular value decomposition}
 
 \begin{enumerate}
+
+\item Goal: Extend the idea of diagonalization to non-square matrices. 
+\begin{itemize}
+\item Results is a new factorization $A=U \Sigma V^T$ called the singular value decomposition. Most useful factorization yet.
+\item Approach is 2 change of basis $\vec{u}_i$'s and $\vec{v}_i$'s which gives an orthonormal basis for the 4 fundamental subspaces.
+\item Instead of eigenvalues, we have singular values in diagonalish matrix $\Sigma$ where $A \vec{v}_i = \sigma_i \vec{u}_i$.
+\item Also get a decomposition of $A$ as it's singular values
+\[
+A = \sigma_1 \vec{u}_1 \vec{v}_1^T + \dots
+\]
+\end{itemize}
+
+\item Motivation: For symmetric matrices $A$, we write as spectral decomposition for orthogonal basis of eigenvectors. The largest direction of stretch for $A \vec{x}$ for unit $\vec{x}$ is in the direction of the strongest eigenvalue / eigenvector pair. We follow this lead.
+
+\item Example: Find the largest stretch directions.
+\[
+A = 
+\begin{bmatrix}
+4 & 11 & 14 \\
+8 & 7 & -2
+\end{bmatrix}
+\]
+\begin{enumerate}
+\item Iterate 2x2 symmetric matrix on on the unit circle and see the ellipse mapped to. Theorem in section 7.3 shows eigenvectors are directions of largest stretch. Same in this case for unit sphere mapping to 2D ellipse.
+\item Goal: Find a unit vector $\vec{x}$ where $\| A \vec{x} \| $ is maximized. Find the max length.
+\item Strategy is to maximize $\| A\vec{x} \|^2$.
+\[
+\| A\vec{x} \|^2 = (A\vec{x})^T (A\vec{x}) = \vec{x}^T A^T A\vec{x} = \vec{x}^T (A^T A)\vec{x} = \lambda
+\]
+\item Note $A^T A$ is symmetric since its transpose is itself. Use R to find the eigenstuff. $\lambda_1=360$ with eigenvector $\vec{v_1} = (1/3, 2/3, 2/3)$. Then $A \vec{v_1} = (18,6)$. Also, the max of the square is $\|A \vec{v_1} \|^2 = 360$ hence $\|A \vec{v_1} \| = \sqrt{360}$
+\[
+\| A \vec{v_1} \| = \| \lambda \vec{v_1} \| = \sqrt{360}
+\]
+\end{enumerate}
+
+\item Singular values of a $m \times n$ matrix.
+\begin{enumerate}
+\item For $A$ $m \times n$, $A^TA$ is summetric and can be orthogonally diagonalized. Then eigenvectors make and orthonormal basis of $\mathbb{R}^n$, and for corresponding eigenvalues,
+\[
+\| A \vec{v_i} \|^2 = (A\vec{v_i})^T (A\vec{v_i}) = \vec{v_i}^T A^T A\vec{v_i}
+= \vec{v_i}^T \lambda_i \vec{v_i} = \lambda_i
+\]
+hence eigenvalues are all nonnegative. 
+\item Order the eigenvalues as $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n \geq 0$.
+\item The singular values of $A$ are the square roots of the eigenvalues of $A^T A$ and denoted as $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_n \geq0$ where $\sigma_i = \sqrt{\lambda_i}$. These are the lengths of vectors $A \vec{v_i}$.
+\item Illustrate for previous example. Illustrate that $A \vec{v_1}$ is orthogonal to $A \vec{v_2}$. 
+\item Theorem: For $A$ with $r$ nonzero singular values and eigenvectors $\{ \vec{v_1}, \dots\, \vec{v_n}\}$  of $A^TA$, then $\{ A\vec{v_1}, \dots , A \vec{v_r} \}$ is an orthogonal basis of $Col(A)$ and $rank(A)=r$.
+\end{enumerate}
+
+\item Singular value decomposition
+\begin{enumerate}
+\item Finally, we diagonalizeish $A$ as
+\[
+\Sigma = 
+\begin{bmatrix}
+D & 0 \\
+0 & 0
+\end{bmatrix}
+\]
+where $D$ is $r \times r$ and contains the first $r$ singular values of $A$.
+\item Theorem (SVD): For $A$ a $m\times n$ matrix of rank $r$, we have
+\[
+A = U \Sigma V^T
+\]
+for $\Sigma$ above (note singular values are from greatest to least), $U$ is a $m \times m$ orthogonal matrix and $V$ is a $n \times n$ orthogonal matrix.
+\item Idea is to rewrite as $A V = U \Sigma$ and use the above ideas. $\vec{v}$'s are as above and $\vec{u}$'s are normalized $A \vec{v}$'s.
+\[
+\vec{u_i} = \frac{1}{\| A \vec{v_i}\|} A \vec{v_i} = \frac{1}{\sigma_i} A \vec{v_i}
+\] 
+\end{enumerate}
 
 \item Homework: 
 

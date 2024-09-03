@@ -1,3 +1,0 @@
-- fix collatz iteration latex
-- fix matrix multiplication operator
-- make GE part closer to class, augmented matrix, row reduction more clear, etc
