@@ -1,0 +1,46 @@
+clc; clear; xdel(winsid()); format('v',20);
+
+function y = f(x)
+    y=x.^3-2;    
+endfunction
+function y = df(x)
+    y=3*x.^2;    
+endfunction
+
+
+a=1; b=2; TOL=10^(-4); MaxIters=20;
+
+disp('Bisection:')
+fa=f(a);
+fb=f(b);   
+    
+// main loop for Bisection Method
+// iterate til interval width is <= 2TOL
+for i=1:5
+    c = (a+b)/2; // bisect interval
+    disp(c)
+    fc = f(c);
+    // check where the root is, (a,c) or (c,b),
+    // reassign and interate again
+    if sign(fa)==sign(fc) then // root in (c,b)
+        a=c;
+        fa=fc;
+    else // root in (a,c)
+        b=c;
+        fb=fc;
+    end
+end
+
+p(1)=1.5;
+disp('Newton:')
+
+for i=1:5
+    NumIters=NumIters+1;
+    x(k+1) = x(k)-f(x(k))/df(x(k));    
+    k=k+1;
+end
+
+disp(x)
+disp(NumIters)
+    
+

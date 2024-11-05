@@ -1,0 +1,35 @@
+function [x,NumIters] = Bisection(f,a,b,TOL,MaxIters)
+
+    // Section 2.2, Bisection Method
+    // Author: Chad Vidden,  Date: 2/10/14
+    //
+    // This function implements the Bisection Method
+    // for solving f(x)=0 on interval (a,b) with 
+    // absolute error tolerance TOL and maximum 
+    // iterations MaxIter. The approximate root x
+    // and iteration count is returned.
+
+    NumIters=0;
+
+    fa=f(a);
+    if faa==0 then
+        x=a;
+    end
+    fb=f(b);    
+    
+    while abs(b-a)>2*TOL
+        NumIters = NumIters + 1;
+        c = (a+b)/2;
+        fc = f(c);
+        if sign(fa)==sign(fc) then
+            a=c;
+            fa=fc;
+        else
+            b=c;
+            fb=fc;
+        end
+    end
+    
+    x = (a+b)/2;
+    
+endfunction

@@ -1,0 +1,128 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Wednesday, April 29, 2015 \\{\bf Due:} Friday, May 8, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Group Project 4 \\ Systems of Differential Equations \normalsize
+\end{center}
+
+\noindent GENERAL GROUP PROJECT GUIDELINES: 
+\begin{itemize}
+\item Group project assignments should be a collaborative effort. All should participate in discussion and solution writing. \vspace{-2mm}
+\item Two weeks after the project is assigned, your group will meet with Dr. Vidden to discuss. All members must be present. Your grade will be determined at the end of the meeting. \vspace{-2mm}
+\item Each student should keep group project solutions in a dedicated notebook. Bring this notebook to your weekly meeting to discuss your findings. For coded solutions, bring a laptop to your weekly meeting. Have the laptop ready before the start of the meeting. \vspace{-2mm}
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+\ \\
+
+\noindent Much of our discussion of numerical methods for differential equations applies to systems of differential equations! Let vector $\vec{y}(t)$ denote a vector of $n$ functions, $\vec{y}(t) = [ y_1(t), y_2(t), \dots, y_n(t) ]^T$ and let $\vec{f}(t,\vec{y}(t))$ denote a vector valued function, $\vec{f}(t,\vec{y}(t))=[f_1(t,\vec{y}(t)), f_2(t,\vec{y}(t)), \dots, f_n(t,\vec{y}(t))]^T$. Then, the initial value problem
+$$
+\vec{y}\,' = f_n\left(t,\vec{y}\right), \quad \vec{y}(t_0) = \vec{y}_0
+$$
+represents the system
+$$
+\begin{cases}
+y_1' = f_1(t,y_1,y_2, \dots, y_n) \\
+y_2' = f_2(t,y_1,y_2, \dots, y_n) \\
+\vdots \\
+y_n' = f_n(t,y_1,y_2, \dots, y_n) \\
+\end{cases}
+$$
+with the initial conditions
+$$
+y_1(t_0)=y_{10}, \ y_2(t_0)=y_{20}, \dots, y_n(t_0)=y_{n0}.
+$$
+For Euler's method, we have the form
+$$
+\vec{y}_{k+1} = \vec{y}_k + h \vec{f}(t_k,\vec{y}_k),
+$$
+which componentwise means,
+$$
+y_{i,k+1} = y_{ik} + h f_i(t_k,y_{1k},\dots,y_{nk}), \quad i=1,\dots,n.
+$$
+Use this framework to answer the questions on the backside of this handout.
+\pagebreak
+
+\noindent Here we will model the romantic love of Romeo and Juliet whose affection for eachother is quantified on a scale from $-5$ to $5$ described below.
+\begin{center}
+\begin{tabular}{c c c c c} 
+\hline\hline
+hysterical & & & sweet & ecstatic \\
+hatred & disgust & indifference & affection & love \\ 
+\hline 
+-5 & -2.5 & 0 & 2.5 & 5 \\ 
+\hline\hline
+\end{tabular} 
+\end{center}
+\ \\
+These characters struggle with frustrated love due to the lack of reciprocity of their feelings. Mathematically, they might say: \\
+\ \\
+ROMEO: ``My feelings for Juliet decrease in proportion to her love for me"' \\
+JULIET: ``My love for Romeo grows in proportion to his love for me"'\\
+\ \\
+We will measure time in days beginning at $t=0$ and ending at $t=60$. This ill-fated love affair might be modeled by the differential equations
+$$
+\begin{cases}
+\frac{dx}{dt} = -0.2 y , \\
+\frac{dy}{dt} = 0.8 x ,
+\end{cases}
+$$
+where $x$ and $y$ are Romeo's and Juliet's love, respectively. 
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Explain how the above differential equations model Romeo and Juliet's affections.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write a Scilab function \verb1y=EulerSys(f,a,b,y0)1 which solves a general system of first order equations as outline on the previous page. Here, \verb1f=f(t,y)1 is a predefined Scilab function where \verb1t1 denote the time variable and \verb1y1 denotes a vector of function values. Also, \verb1y01 denotes a vector of initial values and \verb1a,b1 are the interval endpoints.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Solve the above system using your function from problem 2. For endpoints, take $t=0$ to $t=60$ and for initial values take $\vec{y}_0 = [2, 0]^T$. Also, use $N=10,000$ nodes for this calculation. To view your results, plot the following three graphs all on the same figure using the \verb1subplot1 command.
+\begin{parts}
+\part Plot Romeo and Juliet's love ($y$-axis) against time $t$ ($x$-axis) for the above time interval.
+\part Plot Juliet's love ($y$-axis) against Romeo's love ($x$-axis) for the above time interval.
+\part Use the Scilab \verb1plot3d31 command to view Juliet's love ($y$-axis) against Romeo's love ($x$-axis) along with the time $t$ ($z$-axis).
+\end{parts}
+What will be the fate of Romeo and Juliet's romance?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Repeat problem 3 for the refined model
+$$
+\begin{cases}
+\frac{dx}{dt} = -0.2 y , \\
+\frac{dy}{dt} = 0.8 x - 0.1y.
+\end{cases}
+$$
+What is the interpretation of this model? 
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Complete one of the following. The rest are left for BONUS!
+\begin{parts}
+\part Solve the two systems of differential equations EXACTLY. Compare the exact solution to your results from Euler's method.
+\part Modify the above models to achieve a more desirable outcome for Romeo and Juliet. Analyze your results. 
+\part Read and implement the cannibalistic portion of the Romeo and Juliet paper on D2L
+\part Compare this project to harmonic oscillators from physics.
+\part  Implement a higher order method for any of the above problems..  
+\end{parts}
+
+
+
+\end{questions}
+\end{document} 

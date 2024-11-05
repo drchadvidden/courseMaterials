@@ -1,0 +1,106 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Friday, April 3, 2015 \\{\bf Due:} Friday, April 10, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 9 \\ Newton Interpolation \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page immediately following each problem. Also, clearly indicate the problem they correspond to.
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the following table of $(x,f(x))$ point values. 
+\begin{center}
+\begin{tabular}{ c||c|c|c|c|c }
+$x$ & 8 & 9 & 10 & 11 & 12 \\ \hline
+$f(x)$ & 2 & 9 & 8 & 8 & 2
+\end{tabular}
+\end{center}
+\begin{parts}
+\part Create a Newton divided difference table for these points in the order given. List the $x$-values in the first column, and the 0th, 1st, 2nd, 3rd, and 4th divided differences in the next columns. Write down the Newton form interpolating polynomial and plot it in Scilab. Also plot these points to verify your work.
+\part Using the table from part (a), write down the Newton form obtained by interpolating nodes in the order 8, 9, 10, 11, 12. Compare the final polynomal to that of (a).
+\part Using the table from part (a), write down the Newton form obtained by interpolating nodes in the order 10, 11, 9, 12, 8. Compare the final polynomal to that of (a).
+\part Why can't the table from (a) be used for the Newton form with order 8, 10, 9, 11, 12?
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write a Scilab function (\verb1.sci1 file) for polynomial interpolation using Newton form. The input for this function should be an array of $x$-values, $\verb1x1$, with $(n+1)$ distinct points $x_0, x_1, x_2, \dots, x_n$ and also an array of function values, $\verb1f1$, with $(n+1)$ function values $f_0, f_1, f_2, \dots, f_n$. Your function should return a Scilab polynomial $\verb1P1$ such that $P(x_i) = f(x_i)$ for $i=0,1,\dots,n$. 
+\[ \verb1P = NewtonInt(x,f)1 \]
+To test your fantastic new function, write a script (\verb1.sce1 file) which plots the Newton degree $n=4$ interpolation polynomial using the \verb1subplot1 command for each of the following. Include the original function in each plot and use 200 $x$-values. You should use the \verb1horner1 command in Scilab to evaluate a polynomial at $x$-values. Note, this function should produce the exact same end result as the previous homework \verb1LagrangeInt1 function.
+\begin{parts}
+\part $f(x) = \sin(x), \ 0\leq x \leq 2\pi$
+\part $g(x) = \cos(x), \ 0\leq x \leq 2\pi$
+\part $h(x) = \ln(x), \ 0.5 \leq x \leq 2$
+\part $i(x) = e^x, \ 0\leq x \leq 2$ \\
+\end{parts}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Prove the recursion formula for computing Newton divided differences.
+$$
+f[x_0,x_1,\dots,x_k] = \frac{f[x_1,x_2,\dots,x_k]-f[x_0,x_1,\dots,x_{k-1}]}{x_k-x_0}
+$$
+To do this, let $P$ be the interpolating polynomial for $\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_{k-1}, f(x_{k-1})) \}$ and $Q$ the interpolating polynomial for  $\{(x_1, f(x_1)), (x_2, f(x_2)), \dots, (x_{k}, f(x_{k})) \}$ and consider the polynomial
+$$
+R(x) = \frac{x_k-x}{x_k-x_0}P(x) + \frac{x-x_0}{x_k-x_0}Q(x).
+$$
+\begin{parts}
+\part Prove $R$ is the unique polynomial of at most degree $k$ which interpolates points \\$\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_{k}, f(x_{k})) \}$.
+\part Determine the coefficient of $x^k$ on each side of the equation. \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question The polynomial $p(x)=x^4-x^3+x^2-x+1$ has the values shown below.
+\begin{center}
+\begin{tabular}{ c||c|c|c|c|c|c }
+$x$ & -2 & -1 & 0 & 1 & 2 & 3 \\ \hline
+$p(x)$ & 31 & 5 & 1 & 1 & 11 & 61
+\end{tabular}
+\end{center}
+Using as little work as possible find a polynomial $q$ which has values
+\begin{center}
+\begin{tabular}{ c||c|c|c|c|c|c }
+$x$ & -2 & -1 & 0 & 1 & 2 & 3 \\ \hline
+$q(x)$ & 31 & 5 & 1 & 1 & 11 & 30
+\end{tabular}
+\end{center}
+Hint: This can be done with little work! Note, the degree of $p$ is 4.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Computer libraries often use tables of function values together with piecewise linear interpolation to evaluate elementary functions such as $\sin(x)$, because table lookup and interpolation can be faster than using a Taylor series expansion. Write one Scilab \verb1.sci1 file to accomplish the following.
+\begin{parts}
+\part Create a vector \verb1x1 of 1000 uniformly-spaced values between 0 and $\pi$. Then, create a vector \verb1y1 with the values of the sine function at each of these points. This will serve as your lookup table.
+\part Next create a vector \verb1r1 of 100 randomly distributed values between 0 and $\pi$. (This can be done is Scilab by typing \verb1 r = %pi*rand(1100,1)).
+ Estimate \verb1sin(r)1 as follows: \\ \ \\
+ For each value \verb1r(j)1, find the two consecutive \verb1x1 entries, \verb1x(i)1 and \verb1x(i+11) which satisfy \\
+\verb1x(i)1 $\leq$ \verb1r(j)1 $\leq$ \verb1x(i+11). Having identified the subinterval containing \verb1r(j)1, use linear interpolation to estimate \verb1sin(r(j))1. \\ \ \\
+ Compare your results with those returned by Scilab when you type \verb1sin(r)1. Find the maximum absolute error and maximum relative error in your results to Scilabs results.
+\end{parts}
+
+
+\end{questions}
+\end{document} 

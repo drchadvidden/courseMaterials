@@ -1,0 +1,109 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Wednesday, February 25, 2014 \\{\bf Due:} Wednesday, March 4, 2014}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 5 \\ Fixed Point Methods and Linear Algebra \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page \emph{immediately following} each problem. \vspace{-2mm}
+\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the ``subplot" when needed
+\end{itemize}
+
+
+\begin{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question The goal of this problem is to solve the cubic equation $f(x)=x^3+6x^2-8=0$ via fixed point iterations. 
+\begin{parts}
+\part Use the Intermediate Value Theorem to show $f$ has a root on $[1,2]$.
+\part Show function $g_1(x)=x^3+6x^2+x-8$ has a fixed point which is a zero of $f$.
+\part Show function $\ds g_2(x)=\sqrt{\frac{8}{x+6}}$ has a fixed point which is a zero of $f$.
+\part Show function $\ds g_3(x)=\sqrt{\frac{8-x^3}{6}}$ has a fixed point which is a zero of $f$.
+\part Picking a starting point of $x_0=1.5$ graph a cobweb plot of the fixed point iteration.
+\part Using the fixed point theorem from class, analyze the convergence of fixed point iterations in (b), (c), and (d) for any starting point. Hint: One should diverge and the others will converge.
+\part Use Scilab to test your conclusions in part (f).
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Fixed point iteration: Consider the iteration $x_n = \frac{1}{2}\left(x_{n-1} + \frac{c}{x_{n-1}}\right)$ for constant $c>0$.
+\begin{parts}
+\part Prove this iteration converges at least quadratically. 
+\part What will the iteration converge to? Why?
+\part Write a script in Scilab to confirm your results of parts (a) and (b).
+\part Relate this iteration to Newton's Method.
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Find a solution $p$ to $x^4+2x^2-x-3=0$ using the following methods.
+\begin{itemize}
+\item A fixed point iteration for $g_1(x) = (3+x-2x^2)^{1/4}$. First verify that a solution to the above equation is a fixed point for $g_1$. Use initial guess $x_0=0.5$.
+\item A fixed point iteration for $g_2(x) = \frac{3x^4+2x^2+3}{4x^3+4x-1}$.  First verify that a solution to the above equation is a fixed point for $g_2$. Use initial guess $x_0=0.5$.
+\item The Secant Method. Use the code developed above with initial guesses $x_0=0.5, x_1=2$.
+\item Newton's Method. Use the code developed above with initial guess $x_0=0.5$.
+\end{itemize}
+For each, compute until you reach absolute error less than $10^{-14}$. Use Wolfram alpha to find the exact root to at least 14 decimal digits for calculation of the absolute error. Also, compute an approximation to the rate of convergence for each as was discussed in class (rate $r_n = \frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}$ where $e_n = |p-x_n|$ is the absolute error at iteration $n$). 
+\begin{parts}
+\part For each method, print the approximation, absolute error, and computed rate of convergence. Use a table format and label the columns.
+\part How many steps did each method take? What does the rate of convergence stabilize to for each method?
+\part For each method, how does the convergence rate compare to the number of correct digits gained at each step? Generalize what happens for linear, quadratic, and other rates of convergence.
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\question Use the \verb1rand1 function in Scilab to create two random $3\times 3$ matrices $A$ and $B$.
+%\begin{parts}
+%\part Write a Scilab script to compute $A*B$ component-wise.
+%\part Write a Scilab script to compute $A*B$ as a linear combination of column vectors.
+%\part Write a Scilab script to compute $A*B$ as a linear combination of row vectors.
+%\part Compare the results of (a)-(c) with the Scilab command $A*B$.
+%\part Repeat the above parts with a random $3\times 2$ matrix $A$ and $2\times 3$ matrix $B$. Compute both $AB$ and $BA$.
+%\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the linear system $A\vec{x}=\vec{b}$ where
+$$
+A= \left[
+\begin{array}{cccc}
+6 & -2 & 2 & 4 \\
+12 & -8 & 6 & 10 \\
+3 & -13 & 9 & 3 \\
+-6 & 4 & 1 & -18
+\end{array} \right], \quad
+\vec{b} = \left[
+\begin{array}{c}
+16 \\
+26 \\
+-19 \\
+-34
+\end{array} \right]
+$$
+\begin{parts}
+\part Solve this system by using regular Gaussian elimination without pivoting.  Show this by hand and clearly show every step as well as all steps for backwards substitution. Verify that your $\vec{x}$ solution solves this system.
+\part Write a Scilab script which computes the solution using Gaussian elimination without pivoting. Compare your results to what you found in part (a).
+\end{parts}
+
+
+\end{questions}
+\end{document} 

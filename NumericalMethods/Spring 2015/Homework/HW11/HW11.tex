@@ -1,0 +1,84 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Friday, April 17, 2015 \\{\bf Due:} Friday, April 24, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 11 \\ Quadrature Rules \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page immediately following each problem. Also, clearly indicate the problem they correspond to.
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write Scilab functions (\verb1.sci1 files) for composite trapezoidal and Simpson's rules which approximate $\ds \int_a^b f(x)~dx$. Write these functions as follows.
+\begin{parts}
+\part \verb1y = Trap(f, a, b, n)1 (Composite Trapezoidal Rule)
+\part \verb1y = Simpson(f, a, b, n)1 (Composite Simpson's Rule)
+\end{parts}
+Here \verb1f1 is a pre-defined Scilab function, \verb1a,b1 are the endpoints of the interval of integration, and \verb1n1 is the number of subintervals used. Test the performance of these functions for the following integrals with $n=2, 4, 8$. For each, compute the exact value, approximations and errors. Organize your results in a single table. 
+\begin{parts}
+\part $\ds \int_0^{\pi} \sin(x) ~dx$
+\part $\ds \int_1^2 x\ln(x) ~dx$
+\part $\ds \int_0^{\pi/4} \tan(x) ~dx$
+\part $\ds \int_0^1 \sqrt{x} ~dx$
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question The error function is defined as $\ds \text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2}~dt$. Use the error formula from class to determine how large $n$ should be if we wish to approximate $\text{erf}(1)$ accurately to 4 decimal places via the Trapezoidal and Simpson's Rules. Verify your findings by using the function written in problem 1.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Derive the Newton-Cotes formula for $\ds \int_0^1 f(x)~dx$ using the nodes $0, \frac{1}{3}, \frac{2}{3}, 1$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question In class we derived Simpson's rule by using the method of undetermined coefficients. Derive Simpson's rule again by direct integration of the interpolating polynomial $P_2(x)$. \\ Hint: Use Newton form for $P_2(x)$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question In class we derived the trapezoidal rule by directly integrating the interpolating polynomial. Derive the trapezoidal rule again by using the method of undetermined coefficients. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question In class, we derived the error formula for Simpson's rule by using Taylor series. Derive the error formula for Simpson's rule by using the polynomial interpolation error formula. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question
+\begin{parts}
+\part Determine constants $a, b, c$ and $d$ for which the quadrature formula
+$$
+\int_{-1}^1 f(x) ~dx \approx a f(-1) + b f(1) + c f'(-1) + d f'(1)
+$$
+is exact for all polynomials of degree 3 or less.
+\part Determine constants $x_0, x_1, A_0, A_1$ for which the quadrature formula
+$$
+\int_{0}^1 xf(x) ~dx \approx A_0 f(x_0) + A_1 f(x_1)
+$$
+is exact for all polynomials of degree 3 or less.
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question (OPTIONAL) In class we showed that the $n$ step composite trapezoidal rule approximates integral $\ds \int_a^b f(x)~dx $ at rate $O(h^2)$ where $h=(b-a)/n$. Also composite Simpson's rule approximates at rate $O(h^4)$. Demonstrate this convergence by computing trapezoidal and Simpson's rule approximations to $\ds \int_0^{\pi} \sin(x)~dx$ for $n=1, 2, 4, 8, 16, 32$. To examine the convergence rates of these two methods, divide the trapezoidal rule error by $h^2$ for each $n$. Likewise, divide Simpson's rule error by $h^4$ for each $n$. These ratios should be nearly constant for small values of $h$.
+
+\end{questions}
+\end{document} 

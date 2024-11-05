@@ -1,0 +1,187 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=6.3in
+\topmargin=-0.5in
+\textheight=9in
+\parindent=0in
+\pagestyle{empty}
+\thispagestyle{empty}
+
+%\printanswers
+\noprintanswers
+
+\newtheorem{Definition}{Definition}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ul}{\underline}
+
+\begin{document}
+
+Math 371 \\
+Final Exam, \ \ May 13, 2014
+\hspace{1.9in}
+{Name:} {\underline {\hspace{2.15in}}}
+\begin{center}
+\fbox{\fbox{\parbox{6.2in}{
+You have two hours to complete this exam. Show all work, justify your solutions completely, simplify as much as possible. The only materials you should have on your
+desk are this exam and a pencil. If you have any questions, be sure to ask for clarification.
+ }}}
+\end{center}
+\begin{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% POLYNOMIAL INTERPOLATION FORMULA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] 
+\begin{parts}
+\part State the polynomial interpolation error theorem. \vfill
+\part Prove the polynomial interpolation error theorem. \vfill \vfill \vfill \vfill \vfill
+\end{parts}
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ROOTFINDING AND FIXED POINT ITERATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] Let function $g(x)=x^2(2-x)$.
+\begin{parts}
+\part Complete the following statement. A sequence $x_n$ converges to number $L$ quadratically if \vfill
+\part Write down a fixed point iteration for finding the fixed points of $g$. \vfill
+\part Find the fixed points of $g$ algebraically. \vfill
+\part To which of the fixed points found in (c) will the iteration in (b) converge quadratically? Why? \vfill
+\part Find a function $f$ with roots the same as the fixed points of $g$. \vfill
+\part Write down Newton's method for finding the roots of function $f$ from part (e). \vfill
+\part To which of the roots found of function $f$ will the iteration in (f) converge quadratically? Why? \vfill
+\end{parts}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GAUSSIAN ELIMINATION / LU DECOMPOSITION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] Find the $LU$ decomposition without partial pivoting for the following matrix. Show all steps!
+$$
+\left[
+\begin{array} {ccc}
+1 & 2 & 3 \\
+3 & 1 & 4 \\
+5 & 1 & 1
+\end{array}  \right]
+$$
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% INTERPOLATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] Prove that a polynomial interpolant of degree at most $n$ through the $(n+1)$ points  $\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_n, f(x_n)) \}$ must be unique.
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% INTERPOLATION, NEWTON DIVIDED DIFFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12]
+\begin{parts}
+\part A freshman calculus student was amazed to learn that the prime numbers have no predictable pattern. Mess with their head by using divided differences to produce a polynomial $P$ for which $P(n)$ gives the $n$th prime number for $n=1,2,3,4,5$. (Recall, the first prime number is 2). \vfill \vfill \vfill \vfill
+\part Assuming the existence of such a miraculous function $f$ for which $f(n)$ gives the $n$th prime number, provided the error formula for $f(6)-P(6)$. \vfill
+\end{parts}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% hermite / spline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] 
+\begin{parts}
+\part List all 8 conditions for $S(x)$ to be a natural cubic spline for a function $f$ through points $(-1,f(-1)),~(0,f(0)),~(1,f(1))$. \vfill
+\part Do there exist constants $a,b,c,d$ such that the function
+$$
+S(x) =
+\begin{cases}
+ax^3 + x^2 + cx, & -1\leq x \leq 0 \\
+bx^3 + x^2 + dx, & 0 \leq x \leq 1
+\end{cases}
+$$
+is a natural cubic spline for $f(x)=|x|$ through points $(-1,1),~(0,0),~(1,1)$. \vfill
+\end{parts}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% QUADRATURE RULES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] 
+Recall that the error for the trapezoidal rule on one subinterval is given by
+$$
+\int_a^b f(x)~dx - T_1(a,b) = -\frac{(b-a)^3}{12} f''(\xi)
+$$
+where $T_1(a,b)$ denotes the trapezoidal rule you derived in part (a). Show that the error for the $n$ step composite trapezoidal rule approximation is given by
+$$
+\int_a^b f(x)~dx - T_n(a,b) = -\frac{(b-a)}{12} f''(\eta) h^2
+$$
+where $T_n(a,b)$ denotes the $n$ step composite trapezoidal rule and $h$ is the size of each subinterval.  
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% gaussian quad
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] 
+\begin{parts}
+\part Find the needed constants $A_0, A_1, x_0, x_1$ so that the quadrature rule of the form
+$$
+\int_{-1}^1 f(x)~dx \approx A_0 f(x_0) + A_1 f(x_1)
+$$
+is exact for degree 3 polynomials. What is the name of this quadrature rule? (Hint: Assume $A_0=1$.) \vfill
+\part Use part (a) to find constants $B_0, B_1, t_0, t_1$ so that the quadrature rule of the form
+$$
+\int_{-1}^1 tg(t)~dt \approx B_0 g(t_0) + B_1 g(t_1)
+$$
+which is exact for degree 3 polynomials.  \vfill
+\end{parts}
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% numerical differentiation, centered difference
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] 
+\begin{parts}
+\part Give the Taylor series expansion for $f(x-h)$ and $f(x+h)$ with center $x$ up til error $O(h^5)$. \vfill
+\part Use part (a) to derive the central difference approximation formula for $f'(x)$. What is the order of the error? \vfill
+\part Use your results in part (b) along with Richardson Extrapolation to create an approximation of $f'(x)$ which is $O(h^4)$. \vfill
+\end{parts}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% EULER'S METHOD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] Consider the following initial value problem (IVP).
+$$
+\begin{cases}
+y' = f(t,y), \quad a\leq t \leq b \\
+y(a) = y_a.
+\end{cases}
+$$
+\begin{parts}
+\part Give the Taylor series expansion for $y(t+h)$ with center $t$ up til error $O(h^3)$. \vfill
+\part Derive Euler's method for the above IVP. What is the local error and global error? \vfill
+\part Derive an order 2 Taylor method for the above IVP. What is the local error and global error? \vfill
+\part Write down the methods from (b) and (c) for the following IVP.
+$$
+\begin{cases}
+y' = 2ty, \quad 0\leq t \leq 1 \\
+y(0) = 1.
+\end{cases}
+$$ \vfill
+\end{parts}
+
+
+\end{questions}
+\end{document} 

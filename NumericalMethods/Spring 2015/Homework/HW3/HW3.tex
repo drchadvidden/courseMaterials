@@ -1,0 +1,92 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Wednesday, February 11, 2014 \\{\bf Due:} Wednesday, February 18, 2014}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 3 \\ Taylor Series \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page \emph{immediately following} each problem. \vspace{-2mm}
+\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the ``subplot" when needed
+\end{itemize}
+
+
+\begin{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Compute by hand the first 5 terms in the Taylor series (constant, linear, quadratic, cubic, and quartic terms) for the following functions.
+\begin{parts}
+\part $f(x) = 3\tan(x)$, \quad about the point $x = \pi/4$.
+\part $f(x) = e^{\cos(x)}$, \quad about the point $x=0$.
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Using the both parts (a) and (b) from problem 1, make a single Scilab plot which contains all of the following. 
+\begin{parts}
+\part a graph of $f(x)$ versus $x$ for $x\in(-3,3)$,
+\part a graph of $P_2(x)$.
+\part a graph of $P_4(x)$.
+\part a title, $x$-axis label, $y$-axis label, and a legend.
+\end{parts}
+What role does the center of the Taylor series play with these graphs?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Find the second Taylor polynomial $P_2(x)$ for the function $f(x)=e^x\cos(x)$ about $x_0=0$.
+\begin{parts}
+\part  Using Taylor's theorem from class, find an upper bound for $|f(0.5)-P_2(0.5)|$. Compare this bound to the true error $|f(0.5)-P_2(0.5)|$.
+\part Find a bound for the error $|f(x)-P_2(x)|$ where $P_2$ approximates $f$ on interval $[0,1]$.
+\part Plot $f$ and $P_2$ on $[0,1]$ in Scilab. Approximately, where does the maximum error occur?
+\part Approximate $\int_0^1 f(x)~dx$ by $\int_0^1 P_2(x)~dx$.
+\part Find an upper bound for the error in (d) by using $\int_0^1 |R_2(x)|~dx$. Compare this bound to the true error.
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Give the Taylor series for $f(x)=x^3-2x^2+4x-1$ using center $x=2$. Discuss how this series compares to the original function. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question 
+\begin{parts}
+\part Derive the Maclaurin series for $f(x)=\cos(x)$. What is it's radius of convergence and why?
+\part How many terms are needed in the series from part (a) to compute $\cos(x)$ for $|x|<0.5$ accurate to 12 decimal places? Verify your results using Scilab.
+\end{parts}
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question An alternating series is of the form
+\[
+S= \sum_{k=1}^{\infty} (-1)^{k-1}b_k = b_1 - b_2 + b_3 - b_4 + \dots, \quad b_k>0
+\]
+If both $b_{k+1} \leq b_k$ for all $k$ and also $\ds \lim_{k\rightarrow \infty} b_k = 0$, then the series is convergent. In addition, for the $n$th partial sum $\ds S_n =  \sum_{k=1}^{n} (-1)^{k-1}b_k$, we have the following error formula.
+\[
+|S-S_n| \leq b_{n+1}
+\] 
+Use this result to answer the following.
+\begin{parts}
+\part If you use the Maclaurin series for $\sin(x)$ to approximate $\sin(1)$ to within error $0.5 \times 10^{-6}$, how many terms in the series are needed? Use Scilab to check your answer.
+\part Derive a series for the natural logarithm $\ln(x)$ with center $x=-1$. How many terms of this series are needed to compute an approximation to $\ln(2)$ within error $0.5 \times 10^{-6}$?
+\end{parts}
+
+
+\end{questions}
+
+\end{document} 

@@ -1,0 +1,160 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Monday, April 27, 2015 \\{\bf Due:} Friday, May 8, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 12 \\ Quadrature Rules, Numerical Differentiation, and Numerical Methods for ODEs\normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page immediately following each problem. Also, clearly indicate the problem they correspond to.
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Below is a table of the zeros of the $k$th degree Legendre polynomial for $k=2,3,4,5$. These zeros give the nodes $x_i$ for Gaussian quadrature rules on interval $[-1,1]$. Using the method of undetermined coefficients, find the corresponding $A_i$ values for each $k$ via Scilab. Summarize your results in a table.
+\begin{center}
+\begin{tabular}{ c||c }
+$k$ & $x_i$ \\ \hline  \hline   
+2 & $\pm \sqrt{\frac{1}{3}}$ \\ \hline  
+3 & 0, $\pm \sqrt{\frac{3}{5}}$ \\ \hline  
+4 & $\pm \sqrt{\frac{1}{7}(3-4\sqrt{0.3})}$, \quad $\pm \sqrt{\frac{1}{7}(3+4\sqrt{0.3})}$  \\ \hline  
+5 &  0, \quad $\pm \sqrt{\frac{1}{9}\left(5-2\sqrt{\frac{10}{7}}\right)}$, \quad $\pm \sqrt{\frac{1}{9}\left(5+2\sqrt{\frac{10}{7}}\right)}$ 
+\end{tabular}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question With the transformation $\ds t=\frac{2x-(a+b)}{b-a}$, a Gaussian quadrature rule of the form 
+$$
+\int_{-1}^1 f(t)~dt \approx \sum_{i=0}^n A_i f(t_i)
+$$
+can be used over the interval $[a,b]$. Write a function \verb1y = GaussianQuad(f,a,b,n)1 which computes the the $n$th Gaussian quadrature rule
+$$
+\int_{a}^b f(x)~dx \approx \sum_{i=0}^n A_i f(x_i).
+$$
+Use the $x_i, A_i$ values found from problem 1 stored as a table as well as the above transformation. Assume input \verb1f1 is a defined Scilab function.
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Use your code from problem 2 to compute the Gaussian quadrature approximations of the following functions for $n=1,2,3,4$.
+\begin{parts}
+\part $\int_0^1 \frac{1}{\sqrt{x}}~dx$
+\part $\int_0^1 \frac{\sin(x)}{x} ~dx$
+\end{parts}
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Derive the following two formulas and establish formulas for the errors.
+\begin{parts}
+\part $\ds f'(x) \approx \frac{1}{4h} \left( f(x+2h) - f(x-2h) \right)$
+\part $\ds f''(x) \approx \frac{1}{4h^2} \left( f(x+2h) -f(x) +  f(x-2h) \right)$
+\end{parts}
+For each, determine the best choice of $h$ to minimize the total error (combination of roundoff and theoretical error). Write a Scilab script to test your findings for derivatives of $f(x)=\sin(x)$ at $x=\pi/6$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the following initial value problem.
+$$
+\begin{cases}
+y' = y + y^2, & t \in [1,2.77] \\
+y(1) = \frac{e}{16-e}
+\end{cases}
+$$
+\begin{parts}
+\part Verify that $y(t) = \frac{e^t}{16-e^t}$ is the exact solution.
+\part Use Euler's method with $h=\frac{1}{100}$ to find an approximate solution. Compare the result with the exact solution by plotting them on the same graph and printing the 10 largest absolute errors.
+\part Use a linear interpolant of your solution from (b) to approximate the solution at $t=\frac{\pi}{3} ,\frac{\pi}{2},\frac{e}{2},e$. Compute the absolute error at these values.
+\part Repeat parts (b) and (c) with
+\begin{subparts}
+\subpart a high order Taylor methods of global error $O(h^2)$,
+\subpart a high order Taylor methods of global error $O(h^3)$,
+\subpart and the midpoint method. 
+\end{subparts}
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the following initial value problem.
+$$
+\begin{cases}
+y' =(2-t)y, & t \in [2,5] \\
+y(2) = 1
+\end{cases}
+$$
+\begin{parts}
+\part Verify that $\ds y(t) = \exp\left(-\frac{(t-2)^2}{2}\right)$ is the exact solution. (Here $\exp(x)=e^x$.)
+\part Use a second order Runge-Kutta method with $h=\frac{1}{100}$ to find an approximate solution. Compare the result with the exact solution by plotting them on the same graph and printing the 10 largest absolute errors.
+\part Repeat part (b) with a fourth order Runge-Kutta method.
+\part Repeat part (b) by using the built in Scilab function \verb1ode(y0,t0,t,f,`rk')1. Research this Scilab function and compare it to the previous two. 
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Suppose that a differential equation is solved numerically on an interval $[a,b]$ and that the local error is $C h^p$ for some constant $C$. Show that if all truncation errors have the same sign (the worst possible case), then the total truncation error is $(b-a)Ch^{p-1}$ where $h=\frac{(b-a)}{n}$.
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question(BONUS) In class, we discussed Richardson extrapolation as a way to improve an approximation. Apply this methodology to the composite trapezoidal rule below
+$$
+\int_a^b f(x)~dx = \frac{h}{2} \left( f_0 + 2f_1 + \dots + 2f_{n-1} + f_n \right) + Ch^2 + O(h^4)
+$$
+where $h=(b-a)/n,~ x_i = a+ih,~ f_i=f(x_i)$, and $C$ is a constant by completing the following steps. This is known as {\bf Romberg integration} (Section 4.4 in the text).
+\begin{parts}
+\part Define $T_h = \frac{h}{2} \left( f_0 + 2f_1 + \dots + 2f_{n-1} + f_n \right)$. Find a linear combination of approximations $T_h$ and $T_{h/2}$ which results in a method which is $O(h^4)$. Denote this new linear combination as $\phi_1(h)$. $\phi_1(h)$ should look familiar. What is it?
+\part Assume the error for the above composite trapezoidal rule has only even powers of $h$, $h^2, h^4, h^6, \dots$ Repeat part (a) twice to find methods, $\phi_2(h), \phi_3(h)$ which are $O(h^6)$ and $O(h^8)$ respectively. 
+\part To test your three new methods $\phi_1, \phi_2, \phi_3$ for the following integrals. Compare these three results and their errors to the regular composite trapezoidal rule. Use $n=5$ for each.
+\begin{subparts}
+\subpart $\ds \int_0^1 \frac{1}{1+x^2}~dx$
+\subpart $\ds \int_0^{\pi} \sin(x)~dx$
+\subpart $\ds \int_0^1 \sqrt{x}~dx$ \quad Why are the results for this part worse than perhaps expected?
+\end{subparts}
+\end{parts}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question (BONUS) Solve the initial value problems from problems 5 and 6 exactly. Your final solution should match the given exact solution.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question (BONUS) Use Simpson's rule to design an implicit method for a general initial value problem.
+$$
+\begin{cases}
+y' = f(t,y), & t \in [a,b] \\
+y(a) = y_a.
+\end{cases}
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question (BONUS) Design a third-order Runge Kutta method for a general initial value problem
+$$
+\begin{cases}
+y' = f(t,y), & t \in [a,b] \\
+y(a) = y_a.
+\end{cases}
+$$
+
+
+
+\end{questions}
+\end{document} 

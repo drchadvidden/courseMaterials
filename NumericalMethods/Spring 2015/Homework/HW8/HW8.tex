@@ -1,0 +1,110 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Wednesday, March 27, 2015 \\{\bf Due:} Wednesday, April 3, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 8 \\ Lagrange Interpolation \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page immediately following each problem. Also, clearly indicate the problem they correspond to.
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+
+
+\begin{questions}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question
+\begin{parts}
+\part Construct the minimum degree Lagrange form interpolating polynomial $P(x)$ for \\ $f(x)=\sin(x)$ passing through points
+$$
+(0, \sin(0)), \quad \left(\frac{\pi}{4}, \sin\left(\frac{\pi}{4}\right)\right), \quad \left(\frac{\pi}{2}, \sin\left(\frac{\pi}{2}\right)\right).
+$$
+\part Plot the polynomial $P(x)$ from (a) and the function $f(x) = \sin(x)$ on the same graph for $0 \leq x \leq \frac{\pi}{2}$. Also, using the \verb1subplot1 command, plot the absolute error $|f(x)-P(x)|$. Use 200 equally spaced data points for $x$ (in Scilab: \verb1 x = linspace(0,%pi/2,200)1).
+\part Use the polynomial from part (a) to estimate both $\sin(\pi/3)$ and $\sin(\pi/6)$. What is the error in each approximation? 
+\part Using the polynomial interpolation error theorem from class, compute 
+$$
+\max_{0\leq x \leq \pi/2} |f(x)-P(x)|.
+$$
+Use Scilab to compute the maximum error on the 200 equally spaced points in part (b), and compare this to the theoretical error bound you just found. \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write a Scilab function (\verb1.sci1 file) for polynomial interpolation using Lagrange form. The input for this function should be an array of $x$-values, $\verb1x1$, with $(n+1)$ distinct points $x_0, x_1, x_2, \dots, x_n$ and also an array of function values, $\verb1f1$, with $(n+1)$ function values $f_0, f_1, f_2, \dots, f_n$. Your function should return a Scilab polynomial $\verb1P1$ such that $P(x_i) = f(x_i)$ for $i=0,1,\dots,n$. 
+\[ \verb1P = LagrangeInt(x,f)1 \]
+To test your fantastic new function, write a script (\verb1.sce1 file) which plots the Lagrange  degree $n=4$ interpolation polynomial using the \verb1subplot1 command for each of the following. Include the original function in each plot and use 200 $x$-values. You should use the \verb1horner1 command in Scilab to evaluate a polynomial at $x$-values.
+\begin{parts}
+\part $f(x) = \sin(x), \ 0\leq x \leq 2\pi$
+\part $g(x) = \cos(x), \ 0\leq x \leq 2\pi$
+\part $h(x) = \ln(x), \ 0.5 \leq x \leq 2$
+\part $i(x) = e^x, \ 0\leq x \leq 2$ \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Prove that a polynomial interpolant of degree at most $n$ through the $(n+1)$ points \\ $\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_n, f(x_n)) \}$ must be unique. \\
+Hint: Assume that there are two such polynomials, $P$ and $Q$, and argue that they must be identical. Consider the function $R(x)=P(x)-Q(x)$. \\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the Runge function $\ds f(x) = \frac{1}{1+25x^2}$ on $[-1,1]$. Graph the following all on the same plot. Label your graph and include a legend. Use the function in problem 2!
+\begin{parts}
+\part Graph $y=f(x)$ on $[-1,1]$ using 100 data points (in Scilab:  \verb1x = linspace(-11, 1, 100)).
+\part Graph the degree 10 polynomial interpolant of function $f$ through 11 equally spaced nodes in $[-1,1]$ (in Scilab:  \verb1x = linspace(-11, 1, 11)) using the same data points as in (a).
+\part Graph the degree 10 polynomial interpolant of function $f$ through the 11 non-equally spaced Chebyshev points $\ds x_j = \cos\left(\frac{\pi j}{10}\right), \ j=0,1,\dots,10$ using the same data points as in (a). \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question 
+\begin{parts}
+\part Verify that the polynomials
+$$
+p(x) = 5x^3 - 27x^2 + 45x - 21, \quad\quad\quad q(x) = x^4-5x^3+8x^2-5x+3
+$$
+both interpolate the points in the below table. Feel free to use Scilab to do this.
+\begin{center}
+\begin{tabular}{ c||c|c|c|c }
+$x$ & 1 & 2 & 3 & 4 \\ \hline
+$y$ & 2 & 1 & 6 & 47
+\end{tabular}
+\end{center}
+Above you showed that interpolation polynomials are unique. Explain why this problem does not contradict that. 
+\part Verify that the polynomials
+$$
+p(x) = 3+2(x-1)+4(x-1)(x+2), \quad\quad\quad q(x) = 3\frac{(x+2)x}{3}-3 \frac{(x-1)x}{6} - 7\frac{(x-1)(x+2)}{-2}
+$$
+both interpolate the points in the below table. Feel free to use Scilab to do this.
+\begin{center}
+\begin{tabular}{ c||c|c|c }
+$x$ & 1 & -2 & 0  \\ \hline
+$y$ & 3 & -3 & -7 
+\end{tabular}
+\end{center}
+Above you showed that interpolation polynomials are unique. Explain why this problem does not contradict that. 
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question To evaluate a polynomial in Scilab, the \verb1horner1 function is used. Research Horner's method (either in the textbook, library, or a simple internet search) and write a paragraph discussion of this method.  \\
+
+
+\end{questions}
+\end{document} 

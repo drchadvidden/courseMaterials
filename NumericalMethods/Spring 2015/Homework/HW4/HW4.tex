@@ -1,0 +1,134 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Wednesday, February 18, 2015 \\{\bf Due:} Wednesday, February 25, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 4 \\ Root Finding Methods \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page \emph{immediately following} each problem. \vspace{-2mm}
+\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the ``subplot" when needed
+\end{itemize}
+
+
+\begin{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the function $f(x)=x^3-2$.
+\begin{parts}
+\part Show by hand that $f(x)$ has a root $p$ in interval $[1,2]$. Use a theorem from class.
+\part Compute an approximation to the root by taking 5 steps of the Bisection Method {\bf BY HAND}.
+\part Repeat (b) using Newton's method with $p_0=1.5$ as the initial approximation. \\ \ \\
+For each method, present the results in the form of a table: \\
+Column 1: $n$ (iteration number) \\
+Column 2: $p_n$ (approximation) \\
+Column 3: $f(p_n)$ (residual) \\
+Column 4: $|p-p_n|$ (absolute error) \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How many binary digits of precision are gained in each step of bisection? Knowing this, how many steps are required for each decimal digit of precision?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write Scilab Functions for the Bisection Method, Secant Method, Method of False Position, and Newton's Method. These functions should be written so that they can be called in Scilab by typing:
+\begin{parts}
+\part \verb1[p,NumIters] = Bisection(f,a,b,TOL,MaxIters)1
+\part \verb1[p,NumIters] = Secant(f,p0,p11\verb1,TOL,MaxIters)1
+\part \verb1[p,NumIters] = FalsPos(f,a,b,TOL,MaxIters)1
+\part \verb1[p,NumIters] = Newton(f,df,p0,TOL,MaxIters)1
+\end{parts}
+Here, \verb1f 1 is the function whose root we are trying to approximate and \verb1df1 is the derivative of function \verb1f1. Both functions need to be defined and loaded into Scilab before running these rootfinding methods. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question 
+\begin{parts}
+\part Find the first ten positive values for which $x=\tan(x)$.
+\part Investigate the behavior of the secant method on the function
+\[
+f(x)=\text{sign}(x-a)\sqrt{|x-a|}.
+\]
+\end{parts}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Each of the functions 
+\begin{align*}
+f_1(x) &= \sin(x)-x-1 \\
+f_2(x) &= x(1-\cos(x)) \\
+f_3(x) &= e^x-x^2+3x-2 
+\end{align*}
+have a root in the interval $[-2,1]$. Use all four of the above rootfinding methods to approximate the roots within absolute error tolerance $10^{-6}$ for each function. Limit the number of iterations to 500. For Newton's Method, use starting value $p_0=1$; for the Secant Method use $p_0=1$ and $p_1=0.9$. Summarize the results of the analysis for each method in table form.
+\begin{center}
+\begin{tabular}{|c|c|c|}
+  \hline
+	Function & Number of Iterations & Approximate Root \\
+	\hline
+	$f_1(x)$ & & \\
+	\hline
+	$f_2(x)$ & & \\
+	\hline
+	$f_3(x)$ & & \\
+	\hline
+\end{tabular}
+\end{center}
+\begin{parts}
+\part Why did the Bisection Method require approximately the same number of iterations to converge to the approximate root for all three test problems?
+\part Newton's method should have experienced difficulty approximating the root of one of the test functions. Identify which function presented a problem and explain why the difficulty occurred.
+\part Above, the Bisection Method was used to find the root of the function $f_1(x)=\sin(x)-x-1$. Consider the function $g_1(x)=(\sin(x)-x-1)^2$. Clearly $f_1$ and $g_1$ have the same root in $[-2,1]$. Could the Bisection Method be used to approximate the root in $g_1$? Why or why not?
+\end{parts}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question In 1685 John Wallis published a book called \emph{Algebra} in which he described a method devised by Newton for solving equations. In a slightly modified form, this method was also published by Joseph Raphson in 1690. This form is the one commonly called Newton's method or the Newton-Raphson method. Newton himself discussed the method in 1669 and illustrated it with the equation $x^3-2x-5=0$. Wallis used the same example. Find a root of this equation using Newton's method, thus continuing the tradition that every numerical analysis student should solve this venerable equation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Let $f(x)=\sin(x)$ and $g(x)=\sin^2(x)$ and note that both have $x=\pi$ as a root.
+\begin{parts}
+\part Will Newton's method converge to root $\pi$ for each of these functions? Why? What rate of convergence do you expect?
+\part Use Newton's method to approximate $\pi$ as roots of $f$ and $g$ accurate to machine error. Use Scilab to check the rate of convergence at each step. List your results.
+\part Plot the number of iterations for Newton's method in part (b) against the absolute error at each step. Plot the results for $f$ and $g$ in the same graph. What does each curve resemble?
+\end{parts}
+
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question If the root of $f(x)=0$ is a double root, then Newton's method can be accelerated by using
+\[
+x_{n+1}=x_n - 2 \frac{f(x_n)}{f'(x_n)}
+\]
+Numerically compare the convergence of this scheme with regular Newton's method for a couple interesting examples.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Read the convergence analysis of the Secant Method on page 111 of the Cheney and Kincaid text. Rewrite this proof in your own words to understand it completely. How does this proof compare to our analysis of Newton's Method?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Show that if the iterates in Newton's method converge to a point $p$ for which $f'(p)=0$, then $f(p)=0$. Do the same for the secant method. \\
+Hint: For the secant method, use the mean-value theorem.
+
+\end{questions}
+\end{document} 

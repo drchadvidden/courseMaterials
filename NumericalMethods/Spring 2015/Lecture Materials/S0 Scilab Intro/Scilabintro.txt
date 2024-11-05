@@ -1,0 +1,728 @@
+-->// this is a comment
+ 
+-->// basic operations
+ 
+-->1+2*3+4^2
+ ans  =
+ 
+    23.  
+ 
+-->ans
+ ans  =
+ 
+    23.  
+ 
+-->ans/2
+ ans  =
+ 
+    11.5  
+ 
+-->1+2*3+4^2
+ ans  =
+ 
+    23.  
+ 
+-->1
+ ans  =
+ 
+    1.  
+ 
+-->1.
+ ans  =
+ 
+    1.  
+ 
+-->1.0000
+ ans  =
+ 
+    1.  
+ 
+ 
+-->// special constants
+ 
+-->%pi
+ %pi  =
+ 
+    3.1415927  
+ 
+-->%e
+ %e  =
+ 
+    2.7182818  
+ 
+-->%i
+ %i  =
+ 
+    i    
+ 
+-->%eps
+ %eps  =
+ 
+    2.220D-16  
+ 
+-->1+%eps == 1
+ ans  =
+ 
+  F  
+ 
+-->1+%eps/2 == 1
+ ans  =
+ 
+  T  
+ 
+-->1+%eps/2 > 1
+ ans  =
+ 
+  F  
+ 
+-->1+%eps > 1
+ ans  =
+ 
+  T  
+ 
+-->1+%eps/2 ~= 1
+ ans  =
+ 
+  F  
+ 
+-->// built in functions
+ 
+-->sin(0)
+ ans  =
+ 
+    0.  
+ 
+-->exp(1)
+ ans  =
+ 
+    2.7182818  
+ 
+-->cos(0)
+ ans  =
+ 
+    1.  
+ 
+-->// creating variables
+ 
+-->tau = 2*%pi
+ tau  =
+ 
+    6.2831853  
+ 
+-->tau = 4*%pi;
+ 
+-->tau
+ tau  =
+ 
+    12.566371  
+ 
+-->b=1, c=2
+ b  =
+ 
+    1.  
+ c  =
+ 
+    2.  
+ 
+-->// general purpose commands
+ 
+-->help
+ 
+-->help %pi
+ 
+-->help sin
+ 
+-->who
+
+Your variables are:
+
+                    help                        c                        b                      tau 
+                    home           scicos_autolib          scicos_utilslib                  xcoslib 
+       graphic_exportlib              graphicslib              datatipslib                   guilib 
+               uitreelib              scinoteslib                   jvmlib             helptoolslib 
+               tclscilib                 atomslib              atomsguilib                 matiolib 
+           parameterslib   simulated_annealinglib    genetic_algorithmslib               umfpacklib 
+          spreadsheetlib            demo_toolslib      external_objectslib                 soundlib 
+                m2scilib  compatibility_functilib               arnoldilib            statisticslib 
+        windows_toolslib                     WSCI                  timelib                stringlib 
+    special_functionslib                sparselib     signal_processinglib                       %z 
+                      %s           polynomialslib           overloadinglib          optimsimplexlib 
+            optimbaselib            neldermeadlib          optimizationlib         interpolationlib 
+       linear_algebralib         output_streamlib                    iolib               integerlib 
+         dynamic_linklib       data_structureslib                 cacsdlib                fileiolib 
+            functionslib  elementary_functionslib differential_equationlib                  corelib 
+                     PWD                      %tk                       %F                       %T 
+                    %nan                     %inf                      SCI                  SCIHOME 
+                  TMPDIR                     %gui                    %fftw                        $ 
+                      %t                       %f                     %eps                      %io 
+                      %i                       %e                      %pi 
+
+ using       8520 elements out of    10000000.
+ and           79 variables out of       9231.
+
+Your global variables are:
+
+           %modalWarning               %toolboxes           %toolboxes_dir                   %helps 
+
+
+ using         27 elements out of      999999.
+ and            4 variables out of        767.
+ 
+-->whos
+Name                     Type           Size           Bytes        
+ 
+$                        polynomial     1 by 1         56           
+%e                       constant       1 by 1         24           
+%eps                     constant       1 by 1         24           
+%F                       boolean        1 by 1         24           
+%f                       boolean        1 by 1         24           
+%fftw                    boolean        1 by 1         24           
+%gui                     boolean        1 by 1         24           
+%helps                   constant*      0 by 0         16           
+%i                       constant       1 by 1         32           
+%inf                     constant       1 by 1         24           
+%io                      constant       1 by 2         32           
+%modalWarning            boolean*       1 by 1         24           
+%nan                     constant       1 by 1         24           
+%pi                      constant       1 by 1         24           
+%s                       polynomial     1 by 1         56           
+%T                       boolean        1 by 1         24           
+%t                       boolean        1 by 1         24           
+%tk                      boolean        1 by 1         16           
+%toolboxes               constant*      0 by 0         16           
+%toolboxes_dir           string*        1 by 1         152          
+%z                       polynomial     1 by 1         56           
+arnoldilib               library                       264          
+atomsguilib              library                       344          
+atomslib                 library                       1000         
+b                        constant       1 by 1         24           
+c                        constant       1 by 1         24           
+cacsdlib                 library                       4072         
+compatibility_functilib  library                       4144         
+corelib                  library                       592          
+data_structureslib       library                       464          
+datatipslib              library                       1096         
+demo_toolslib            library                       616          
+differential_equationlib library                       496          
+dynamic_linklib          library                       744          
+elementary_functionslib  library                       2960         
+external_objectslib      library                       304          
+fileiolib                library                       672          
+functionslib             library                       728          
+genetic_algorithmslib    library                       672          
+graphic_exportlib        library                       296          
+graphicslib              library                       3920         
+guilib                   library                       488          
+help                     function                      5368         
+helptoolslib             library                       728          
+home                     string         1 by 1         88           
+integerlib               library                       1416         
+interpolationlib         library                       336          
+iolib                    library                       440          
+jvmlib                   library                       296          
+linear_algebralib        library                       1400         
+m2scilib                 library                       352          
+matiolib                 library                       328          
+neldermeadlib            library                       1144         
+optimbaselib             library                       1000         
+optimizationlib          library                       744          
+optimsimplexlib          library                       1200         
+output_streamlib         library                       312          
+overloadinglib           library                       15904        
+parameterslib            library                       424          
+polynomialslib           library                       928          
+PWD                      string         1 by 1         104          
+SCI                      string         1 by 1         112          
+scicos_autolib           library                       360          
+scicos_utilslib          library                       504          
+SCIHOME                  string         1 by 1         232          
+scinoteslib              library                       296          
+signal_processinglib     library                       2056         
+simulated_annealinglib   library                       600          
+soundlib                 library                       544          
+sparselib                library                       504          
+special_functionslib     library                       304          
+spreadsheetlib           library                       280          
+statisticslib            library                       1384         
+stringlib                library                       696          
+tau                      constant       1 by 1         24           
+tclscilib                library                       360          
+timelib                  library                       520          
+TMPDIR                   string         1 by 1         224          
+uitreelib                library                       512          
+umfpacklib               library                       456          
+whos                     function                      15416        
+windows_toolslib         library                       288          
+WSCI                     string         1 by 1         144          
+xcoslib                  library                       808          
+ 
+-->who_user
+ User variables are:
+ 
+ whos      help      c
+ b         tau
+ 
+ Using 2607 elements out of 9990767
+ ans  =
+ 
+!whos  !
+!      !
+!help  !
+!      !
+!c     !
+!      !
+!b     !
+!      !
+!tau   !
+ 
+-->clc
+ 
+-->who_user
+ User variables are:
+ 
+ whos      help      c
+ b         tau
+ 
+ Using 2607 elements out of 9990767
+ ans  =
+ 
+!whos  !
+!      !
+!help  !
+!      !
+!c     !
+!      !
+!b     !
+!      !
+!tau   !
+ 
+-->clear
+ 
+-->who_user
+ ans  =
+ 
+     []
+ 
+-->// ctrl+c breaks current calc
+ 
+ 
+Type 'resume' or 'abort' to return to standard level prompt.
+
+-1->abort
+ 
+-->// strings
+ 
+-->'ha'
+ ans  =
+ 
+ ha   
+ 
+-->"ha"
+ ans  =
+ 
+ ha   
+ 
+-->"sci" + "lab"
+ ans  =
+ 
+ scilab   
+ 
+-->// precision
+ 
+-->%eps
+ %eps  =
+ 
+    2.220D-16  
+ 
+-->sin(%pi)
+ ans  =
+ 
+    1.225D-16  
+ 
+-->sin(%pi)<%eps
+ ans  =
+ 
+  T  
+ 
+-->a=sqrt(3)
+ a  =
+ 
+    1.7320508  
+ 
+-->format(20)
+ 
+-->a
+ a  =
+ 
+    1.73205080756887719  
+ 
+-->format('e',10)
+ 
+-->a
+ a  =
+ 
+    1.732D+00  
+ 
+-->format('v',10)
+ 
+-->a
+ a  =
+ 
+    1.7320508  
+ 
+-->b=1; c=2;
+ 
+-->a^2+b^2==c^2
+ ans  =
+ 
+  F  
+ 
+-->abs(a^2+b^2-c^2) < %eps
+ ans  =
+ 
+  F  
+ 
+-->abs(a^2+b^2-c^2)/c^2 < %eps
+ ans  =
+ 
+  T  
+ 
+-->a^2
+ ans  =
+ 
+    3.  
+ 
+-->format(20)
+ 
+-->a^2
+ ans  =
+ 
+    2.99999999999999956  
+ 
+-->format('v',10)
+ 
+-->// arrays and matrices
+ 
+-->x = [1 2 3]
+ x  =
+ 
+    1.    2.    3.  
+ 
+-->x = [1, 2, 3]
+ x  =
+ 
+    1.    2.    3.  
+ 
+-->1:3
+ ans  =
+ 
+    1.    2.    3.  
+ 
+-->1:.5:3
+ ans  =
+ 
+    1.    1.5    2.    2.5    3.  
+ 
+-->1:.35:3
+ ans  =
+ 
+ 
+         column 1 to 5
+ 
+    1.    1.35    1.7    2.05    2.4  
+ 
+         column 6
+ 
+    2.75  
+ 
+-->[1; 2; 3]
+ ans  =
+ 
+    1.  
+    2.  
+    3.  
+ 
+-->[1 2 3]'
+ ans  =
+ 
+    1.  
+    2.  
+    3.  
+ 
+-->sum(x)
+ ans  =
+ 
+    6.  
+ 
+-->length(x)
+ ans  =
+ 
+    3.  
+ 
+-->x2 = [x 4]
+ x2  =
+ 
+    1.    2.    3.    4.  
+ 
+-->x2 = [x; 4]
+           !--error 6 
+Inconsistent row/column dimensions.
+ 
+ 
+-->y = [4 5 6]
+ y  =
+ 
+    4.    5.    6.  
+ 
+-->x*y
+    !--error 10 
+Inconsistent multiplication.
+ 
+ 
+-->x*y'
+ ans  =
+ 
+    32.  
+ 
+-->x'*y
+ ans  =
+ 
+    4.     5.     6.   
+    8.     10.    12.  
+    12.    15.    18.  
+ 
+-->y = [6 5 4]
+ y  =
+ 
+    6.    5.    4.  
+ 
+-->y
+ y  =
+ 
+    6.    5.    4.  
+ 
+-->x.*y
+ ans  =
+ 
+    6.    10.    12.  
+ 
+-->x
+ x  =
+ 
+    1.    2.    3.  
+ 
+-->y
+ y  =
+ 
+    6.    5.    4.  
+ 
+-->help ones
+ 
+-->ones(3,2)
+ ans  =
+ 
+    1.    1.  
+    1.    1.  
+    1.    1.  
+ 
+-->zeros(3,4)
+ ans  =
+ 
+    0.    0.    0.    0.  
+    0.    0.    0.    0.  
+    0.    0.    0.    0.  
+ 
+-->eye(3,4)
+ ans  =
+ 
+    1.    0.    0.    0.  
+    0.    1.    0.    0.  
+    0.    0.    1.    0.  
+ 
+-->eye(3,3)
+ ans  =
+ 
+    1.    0.    0.  
+    0.    1.    0.  
+    0.    0.    1.  
+ 
+-->A = [1 2; 3 4]
+ A  =
+ 
+    1.    2.  
+    3.    4.  
+ 
+-->x
+ x  =
+ 
+    1.    2.    3.  
+ 
+-->x(2)
+ ans  =
+ 
+    2.  
+ 
+-->A(2,1)
+ ans  =
+ 
+    3.  
+ 
+-->sum(A)
+ ans  =
+ 
+    10.  
+ 
+-->size(A)
+ ans  =
+ 
+    2.    2.  
+ 
+-->diag(A)
+ ans  =
+ 
+    1.  
+    4.  
+ 
+-->A
+ A  =
+ 
+    1.    2.  
+    3.    4.  
+ 
+-->inv(A)
+ ans  =
+ 
+  - 2.     1.   
+    1.5  - 0.5  
+ 
+-->A(:,2)
+ ans  =
+ 
+    2.  
+    4.  
+ 
+-->A
+ A  =
+ 
+    1.    2.  
+    3.    4.  
+ 
+-->A2 = [A; 5 6]
+ A2  =
+ 
+    1.    2.  
+    3.    4.  
+    5.    6.  
+ 
+-->A2(2:3, :)
+ ans  =
+ 
+    3.    4.  
+    5.    6.  
+ 
+-->A2(2:$, :)
+ ans  =
+ 
+    3.    4.  
+    5.    6.  
+ 
+-->b=[1;1]
+ b  =
+ 
+    1.  
+    1.  
+ 
+-->A
+ A  =
+ 
+    1.    2.  
+    3.    4.  
+ 
+-->// solve Ax=b
+ 
+-->x = A\b
+ x  =
+ 
+  - 1.  
+    1.  
+ 
+-->A*x
+ ans  =
+ 
+    1.  
+    1.  
+ 
+-->b
+ b  =
+ 
+    1.  
+    1.  
+ 
+-->x = inv(A)*b
+ x  =
+ 
+  - 1.  
+    1.  
+
+ ans  =
+ 
+    3.  
+ 
+-->// loops
+ 
+-->n=0;
+ 
+-->for i=1:10
+-->n=n+i;
+-->end
+ 
+-->n
+ n  =
+ 
+    55.  
+ 
+-->n=0;
+ 
+-->for i=1:2:100
+-->n=n+i;
+-->end
+ 
+-->n
+ n  =
+ 
+    2500.  
+ 
+-->help for
+ 
+-->// functions and scripts
+ 
+-->function y=func(x); y=x^2; endfunction
+ 
+-->func(10)
+ ans  =
+ 
+    100.  
+ 
+-->func([1 2])
+ !       
+at line       1 of function func                     called by :  
+func([1 2])
+ 
+Warning: Syntax "vector ^ scalar" is obsolete. It will be removed in Scilab 6.0.
+  Use "vector .^ scalar" instead.
+
+ ans  =
+ 
+    1.    4.  
+ 
+-->function y=func(x); y=x.^2; endfunction
+Warning : redefining function: func                    . Use funcprot(0) to avoid this message
+
+ 
+-->func([1 2])
+ ans  =
+ 
+    1.    4.  
+ 
+-->diary([], "close")
+

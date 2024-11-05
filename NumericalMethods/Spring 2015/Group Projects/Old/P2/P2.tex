@@ -1,0 +1,61 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Monday, March 31, 2014 \\{\bf Due:} Week of April 7, 2014}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Group Project 2 \\ Spline Interpolation \normalsize
+\end{center}
+\ \\
+\noindent GENERAL GROUP PROJECT GUIDELINES: 
+\begin{itemize}
+\item Group project assignments should be a collaborative effort. All should participate in discussion and solution writing. \vspace{-2mm}
+\item Each week, your group must meet with Dr. Vidden to discuss your findings. All members must be present. Your grade will be assigned at the end of the meeting. \vspace{-2mm}
+\item Each student should keep group project solutions in a dedicated notebook. Bring this notebook to your weekly meeting to discuss your findings. For coded solutions, bring a laptop to your weekly meeting. Have the laptop ready before the start of the meeting. \vspace{-2mm}
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+\ \\
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write a Scilab \verb1.sci1 file for the following functions.
+\begin{parts}
+\part \verb1x = trisolver(u,h,b)1 \vspace{2mm} \\
+This function solves the system $A\vec{x}=\vec{b}$ where $A$ is a symmetric tridiagonal matrix with main diagonal \verb1u1, lower diagonal \verb1h1, and upper diagonal \verb1h1 where \verb1u,h1 are vectors of appropriate length. Code this function to be as efficient as possible. That, as we discussed in class, modify ideas from Gaussian elimination to solve special systems of this form.
+\part \verb1P = natCubicSpline(x,f)1 \vspace{2mm} \\
+This function computes the natural cubic spline approximation to a function using equally spaced intervals. \verb1x1 gives the interpolation nodes and \verb1f1 gives the function values at these nodes. The returned array \verb1P1 contains the Scilab cubic polynomial for each interval. The above \verb1trisolver1 function should be used.
+\end{parts} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write a Scilab \verb1.sce1 file which uses the scripts from problem 1 to compute the natural cubic spline approximation of function $\ds f(x)=\sin(x)\sin\left( \frac{2x+5}{10} \right)$ on the interval $[-5,5]$ using nodes $-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5$. Plot this function and your spline approximation on the same graph. Clearly indicate the location of the interpolation points. Label your graph and include a legend. \\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question BONUS QUESTION!
+\begin{parts}
+\part Repeat question 2 using a complete cubic spline. You can use the \verb1trisolver1 function from 1, but you will need to write a new function, \verb1compCubicSpline1.
+\part Use the Scilab function \verb1splin1 to plot as many types of splines (natural, complete, and more!) as you can. Do this again for problem 2. Plot all approximations of the same graph. Research the background and purpose of each type.  \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question BONUS QUESTION! \\
+Create a random set of function values using the Scilab command \verb [x,f]=rand(100,2) and fit a natural cubic spline to these 100 points. Feel free to modify code from problem 1 to do this. Plot these points and your spline approximation together.
+
+\end{questions}
+\end{document} 

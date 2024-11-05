@@ -1,0 +1,46 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Monday, April 21, 2014 \\{\bf Due:} Week of April 28, 2014}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Group Project 4 \\ Adaptive Quadrature Rules \normalsize
+\end{center}
+\ \\
+\noindent GENERAL GROUP PROJECT GUIDELINES: 
+\begin{itemize}
+\item Group project assignments should be a collaborative effort. All should participate in discussion and solution writing. \vspace{-2mm}
+\item Each week, your group must meet with Dr. Vidden to discuss your findings. All members must be present. Your grade will be assigned at the end of the meeting. \vspace{-2mm}
+\item Each student should keep group project solutions in a dedicated notebook. Bring this notebook to your weekly meeting to discuss your findings. For coded solutions, bring a laptop to your weekly meeting. Have the laptop ready before the start of the meeting. \vspace{-2mm}
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+\ \\
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Develop an adaptive Trapezoidal rule by following our class discussion of adaptive Simpson's rule. Derive a way to test the error on a given interval by comparing $T_1$ and $T_2$.  
+\question Implement your new adaptive Trapezoidal rule by creating the Scilab function \verb1y=TrapA(f,a,b,eps)1 where \verb1f1 is a predefined Scilab function, \verb1a,b1 are the endpoints of the current subinterval, and \verb1eps1 is the error tolerance. Test it on the following integrals for \verb1eps1$=0.5*10^{-5}$.
+\begin{parts}
+\part $\ds \int_0^1 \frac{4}{1+x^2}~dx$
+\part $\ds \int_0^{1/\sqrt{2}} 8(\sqrt{1-x^2} - x)~dx$
+\end{parts}
+\question BONUS: As was illustrated in class with adaptive Simpson's rule, keep track of the levels of iteration required as well as the endpoints of the needed subintervals. Print the levels needed and plot the above functions with these endpoints to illustrate the inner workings of your new adaptive trapezoidal rule.
+
+
+\end{questions}
+\end{document} 

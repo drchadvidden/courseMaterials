@@ -1,0 +1,125 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=6.3in
+\topmargin=-0.5in
+\textheight=9in
+\parindent=0in
+\pagestyle{empty}
+\thispagestyle{empty}
+
+%\printanswers
+\noprintanswers
+
+\newtheorem{Definition}{Definition}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ul}{\underline}
+
+\begin{document}
+
+Math 371 \\
+Exam 1, \ \ March 13, 2015
+\hspace{1.9in}
+{Name:} {\underline {\hspace{2.15in}}}
+\begin{center}
+\fbox{\fbox{\parbox{6.2in}{
+You have until the end of the hour to complete this exam. Show all work, justify your solutions
+completely, simplify as much as possible. The only materials you should have on your
+desk are this exam and a pencil. If you have any questions, be sure to ask for clarification.
+ }}}
+\end{center}
+\begin{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[10] 
+\begin{parts}
+\part Convert the binary number 1011.11 to decimal. \vfill
+\part Convert the decimal number 27 to binary. \vfill
+\part Add the above two numbers using binary arithmetic. \vfill
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[5] Consider a number system which can only store numbers of the form $\pm 1.b_1b_2 \times 2^E$ for $E=-1, 0, 1$. Exactly, what is machine epsilon in this system and why? \vfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[10] 
+\begin{parts}
+\part Compute by hand the 4th degree Taylor polynomial $P(x)$ for function $f(x)=\sin(x)$ around $a=0$. \vfill
+\part Use Taylor's theorem to compute the maximum error of $|f(x)-P(x)|$ on $-0.3\leq x \leq 0.3$.  \vfill
+\end{parts}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[10] If you use the $n$th degree Taylor polynomial of $f(x)=e^x$ centered at $x_0=0$ to approximate $e$, what should $n$ be to guarantee accuracy within absolute error $10^{-9}$.  \vfill \vfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[10]
+\begin{parts}
+\part Let the rootfinding problem $f(x)=0$ have solution $x=p$. Also, let $p_n$ be the $n$th term found by the bisection method. Show that if we want the absolute error less than some error tolerance $TOL$, i.e. $|p-p_n|<TOL$, we need $\ds n > \log_2\left(\frac{b-a}{TOL}\right)$.  \vfill \vfill \vfill
+\part If the bisection method converges, what rate does it converge at? What does this mean precisely? \vfill
+\end{parts}
+
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[12] Consider the fixed point problem $x=g(x)=\frac{1}{2}\left(x+\frac{3}{x}\right)$.
+\begin{parts}
+\part State a fixed-point iteration for this problem. \vfill
+\part Rewrite this fixed point problem as a root-finding problem. \vfill
+\part State Newton's method for the root-finding problem in (b). \vfill
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[13] Let $g(x)=\frac{1}{10}(x^2+x+8)$.
+\begin{parts}
+\part Find the smallest positive fixed point of $g$.  \vfill
+\part Using the Fixed Point Theorem from class, show that starting with any $x_0 \in [0,4]$, the sequence $x_n = g(x_{n-1})$ will converge to the smallest fixed point of $g$.  \vfill \vfill
+\part What is the rate of convergence of the fixed point iteration in (b)? Can it be quadratic?  \vfill
+\end{parts}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[20] Consider the following system, $A\vec{x}=\vec{b}$.
+$$
+\left[
+\begin{array}{ccc}
+1 & -1 & 2 \\
+-2 & 1 & -1 \\
+4 & -1 & 2
+\end{array}
+\right] 
+\left[
+\begin{array}{c}
+x_1 \\
+x_2 \\
+x_3
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+-2 \\ 
+2 \\
+-1
+\end{array}
+\right]
+$$ 
+\begin{parts}
+\part Perform Gaussian elimination WITHOUT pivoting to solve this system. Use an augmented matrix and show all steps.  \vfill
+\part Find the $LU$ decomposition of matrix $A$ without pivoting, and use this decomposition to solve this system. Feel free to use work from part (a).  \vfill
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pointname{ extra credit point}
+\question[1] $\pi$-day bonus! State $\pi$ correct to 6 decimal digits.
+
+\end{questions}
+\end{document} 

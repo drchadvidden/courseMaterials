@@ -1,0 +1,64 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Monday, March 24, 2014 \\{\bf Due:} Week of March 31, 2014}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Group Project 1 \\ Interpolation \normalsize
+\end{center}
+\ \\
+\noindent GENERAL GROUP PROJECT GUIDELINES: 
+\begin{itemize}
+\item Group project assignments should be a collaborative effort. All should participate in discussion and solution writing. \vspace{-2mm}
+\item Each week, your group must meet with Dr. Vidden to discuss your findings. All members must be present. Your grade will be assigned at the end of the meeting. \vspace{-2mm}
+\item Each student should keep group project solutions in a dedicated notebook. Bring this notebook to your weekly meeting to discuss your findings. For coded solutions, bring a laptop to your weekly meeting. Have the laptop ready before the start of the meeting. \vspace{-2mm}
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+\ \\
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Prove that a polynomial interpolant of degree at most $n$ through the $(n+1)$ points \\ $\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_n, f(x_n)) \}$ must be unique. \\ \ \\
+Hint: Assume that there are two such polynomials, $P$ and $Q$, and argue that they must be identical. Consider the function $R(x)=P(x)-Q(x)$. \\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Prove the recursion formula for computing Newton divided differences.
+$$
+f[x_0,x_1,\dots,x_k] = \frac{f[x_1,x_2,\dots,x_k]-f[x_0,x_1,\dots,x_{k-1}]}{x_k-x_0}
+$$
+To do this, let $P$ be the interpolating polynomial for $\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_{k-1}, f(x_{k-1})) \}$ and $Q$ the interpolating polynomial for  $\{(x_1, f(x_1)), (x_2, f(x_2)), \dots, (x_{k}, f(x_{k})) \}$ and consider the polynomial
+$$
+R(x) = \frac{x_k-x}{x_k-x_0}P(x) + \frac{x-x_0}{x_k-x_0}Q(x).
+$$
+\begin{parts}
+\part Prove $R$ is the unique polynomial of at most degree $k$ which interpolates points \\$\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_{k}, f(x_{k})) \}$.
+\part Determine the coefficient of $x^k$ on each side of the equation. \\
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the Runge function $\ds f(x) = \frac{1}{1+25x^2}$ on $[-1,1]$. Graph the following all on the same plot. Be sure to label your graph and include a legend.
+\begin{parts}
+\part Graph $y=f(x)$ on $[-1,1]$ using 100 data points (in Scilab:  \verb1x = linspace(-11, 1, 100)).
+\part Graph the degree 10 polynomial interpolant of function $f$ through 11 equally spaced nodes in $[-1,1]$ (in Scilab:  \verb1x = linspace(-11, 1, 11)) using the same data points as in (a).
+\part Graph the degree 10 polynomial interpolant of function $f$ through the 11 non-equally spaced Chebyshev points $\ds x_j = \cos\left(\frac{\pi j}{10}\right), \ j=0,1,\dots,10$ using the same data points as in (a). 
+\end{parts}
+
+
+\end{questions}
+\end{document} 

@@ -1,0 +1,53 @@
+clc; clear; xdel(winsid()); format('v',20);
+
+// p2
+
+exec('C:\Users\cvidden\Documents\UWLAX\Teaching\MTH 371\Spring 2013\Homework\Group Projects\P2\trisolver.sci', -1)
+
+function y=f(x) // function to interpolate
+    y=sin(x).*sin((2*x+5)/10);
+endfunction
+
+a=-5; b=5;
+
+x=linspace(a, b, 1000); 
+
+n=10; 
+xn=linspace(a, b, n+1); 
+h = (b-a)/n;
+
+fn=f(xn);
+
+b=(fn(3:$)-2*fn(2:$-1)+fn(1:$-2))./h; b=b';
+
+//A=diag((2*h/3)*ones(n-1,1))+diag((h/6)*ones(n-2,1),1) ...
+             +diag((h/6)*ones(n-2,1),-1);
+
+z=A\b;
+z=[0; z; 0]
+
+u=(2*h/3)*ones(n-1,1);
+hv=(h/6)*ones(n-2,1);
+z2=trisolver(u,hv,b);
+z2=[0; z2; 0]
+
+s=poly(0,"s");
+for i=2:n+1
+    P(i-1) = (1/h)*z(i-1)*((xn(i)-s)^3)/6 ...
+            + (1/h)*z(i)*((s-xn(i-1)))^3/6 ...
+            +(1/h)*(fn(i)-fn(i-1)+(h^2/6)*(z(i-1)-z(i)))*(s-xn(i-1)) ...
+            +fn(i-1)-(h^2/6)*z(i-1);
+end
+
+plot(x,f(x))
+for i=1:length(xn)-1
+    xvals = linspace(xn(i),xn(i+1),100);
+    plot(xvals,horner(P(i),xvals),'g');
+    plot(xn(i),f(xn(i)),'*r')
+end
+xtitle("Spline Interpolant", ...
+    "x-axis", "y-axis"); // graph title and axis labels
+legend(['y=f(x)', 'y=L(x)'],2); // graph legend
+a=gca(); // make lines thicker
+a.children.children.thickness = 3;
+

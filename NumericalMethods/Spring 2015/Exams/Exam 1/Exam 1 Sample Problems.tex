@@ -1,0 +1,149 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=6.3in
+\topmargin=-0.5in
+\textheight=9in
+\parindent=0in
+\pagestyle{empty}
+\thispagestyle{empty}
+
+%\printanswers
+\noprintanswers
+
+\newtheorem{Definition}{Definition}
+\newcommand{\ds}{\displaystyle}
+
+\begin{document}
+
+\begin{center}
+\Large \bfseries Exam 1 Sample Problems \\
+Math 371 \\ \normalsize
+\end{center}
+
+\begin{questions}
+\question Compute the rates of convergence of the following limits.
+\begin{parts}
+\part $\ds \lim_{h\rightarrow 0} \frac{\sin(h)-h\cos(h)}{h}$
+\part $\ds \lim_{h\rightarrow 0} \frac{\sin(h)}{h}$
+\part $\ds \lim_{h\rightarrow 0} \frac{1-e^h}{h}$
+\part $\ds \lim_{n\rightarrow \infty} \frac{n+5}{n^2}$
+\part $\ds \lim_{n\rightarrow \infty} \frac{2n^2}{n^2+1}$
+\part $\ds \lim_{n\rightarrow \infty} \sin(1/n)$
+\end{parts}
+\question What empirical evidence usually suggests quadratic convergence?
+\question Give the Taylor series expansion for function $f(x)$ about $x=a$.
+\question State Taylor's theorem.
+\question Compute by the hand the Taylor series expansion for 
+\begin{parts}
+\part $f(x)=e^x$ about $x=0$
+\part $f(x)=e^{x^2}+e^{2x}$ about $x=0$
+\part $f(x)=\sin(x)$ about $x=0$
+\part $f(x)=\cos(x)$ about $x=0$
+\part $f(x)=\ln(x+1)$ about $x=0$
+\part $f(x)=\arctan(x)$ about $x=0$
+\part $f(x)x^4-3x^2+1=$ about $x=1$
+\part $f(x)=\sqrt{x}$ about $x=16$
+\end{parts}
+\question What is the maximum absolue error posible when using the approximation
+$$
+\sin(x) \approx x - \frac{x^3}{3!}+\frac{x^5}{5!}
+$$
+for $-0.3 \leq x \leq 0.3$? For what $x$ values is the approximation accurate to within $0.00005$?
+\question Give the degree 2 Taylor polynomial $P(x)$ for $f(x)=x^3$ about $x=1$. Find the value of $\xi$ in $[1,3]$ such that $f(3)=P(3)+\frac{f''(\xi)}{6}(3-1)^3$.
+\question Give absolute and relative errors in approximating $\frac{1}{3}$ with $0.33$.
+\question As an approximation of $1.23456$, how many significant digits are there in $x = 1.237$? \pagebreak
+\question Derive a formula for the following rootfinding methods. Give a complete explanation.
+\begin{parts}
+\part Bisection method
+\part Secant method
+\part Method of false position
+\part Newtons method
+\end{parts}
+\question Show that the Bisection method on the interval $[a,b]$ requires $n>\log_2((b-a)/TOL)$ to ensure absolute error less than some tolerance $TOL$. 
+\question Apply the result of the previous problem to show that $n=14$ steps are required for the Bisection method to approximate the root of $f(x)=x^3+4x^2-10$ on $[1,2]$ within absolute error less than $10^{-4}$.
+\question For the rootfinding problem $f(x)=e^x-5x=0$, write down two equivalent fixed point problems.
+\question For the following fixed point problem $x=g(x)=\frac{1}{2}\left(x+\frac{3}{x}\right)$, write down an equivalent rootfinding problems.
+\question State the Fixed Point Theorem from class, both the linear and quadratic convergence cases.
+\question Let $g(x)=\frac{1}{10}(x^2+x+8)$.
+\begin{parts}
+\part Find the smallest positive fixed point of $g$.
+\part Using the Fixed Point Theorem from class, show that starting with any $x_0 \in [0,4]$, the sequence $x_n = g(x_{n-1})$ will converge to the smallest fixed point of $g$.
+\end{parts}
+\question Suppose that $g(x)$ has a fixed point $r$ in $[a,b]$ and that $|g'(x)|\leq K<1$ on $[a,b]$ for some constant $K$. Prove that starting with any $x_0 \in [a,b]$, the sequence $x_n=g(x_{n-1})$ converges to a fixed point of $g$. 
+\question Let $g(x)=\frac{x(2+x)}{-1+4x}$.
+\begin{parts}
+\part Find the two fixed points of $g$.
+\part To which fixed point will convergence be quadratic? 
+\end{parts}
+\question Use the Fixed Point Theorem from class to show that Newton's method has quadratic rate of convergence for initial guess close enough to the root $r$ provided $f(r)=0$ and $f'(r)\neq 0$.
+\question Consider the following system, $A\vec{x}=\vec{b}$.
+$$
+\left[
+\begin{array}{ccc}
+1 & -1 & 2 \\
+-2 & 1 & -1 \\
+4 & -1 & 2
+\end{array}
+\right] 
+\left[
+\begin{array}{c}
+x_1 \\
+x_2 \\
+x_3
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+-2 \\ 
+2 \\
+-1
+\end{array}
+\right]
+$$ 
+\begin{parts}
+\part Perform regular Gaussian elimination to solve this system.
+\part Find the $LU$ decomposition of matrix $A$ without pivoting, and use this decomposition to solve this system.
+\part Perform Gaussian elimination with partial pivoting to solve this system.
+\part Find the $LU$ decomposition of matrix $A$ with pivoting, and use this decomposition to solve this system.
+\end{parts}
+\question Problem 1 on page 265 of the text.
+\question Compute the number of floating-point operations (additions, subtractions, multiplications, and divisions) which are required for:
+\begin{parts}
+\part The product of a $(m\times n)$ matrix with a $(n\times p)$ matrix. 
+\part Forward substitution on $L \vec{y} = \vec{b}$ for $L$ $(n\times n)$ resulting from $LU$ decomposition.
+\part Backwards substitution on $U \vec{y} = \vec{x}$ for $U$ $(n\times n)$ resulting from $LU$ decomposition.
+\end{parts}
+\question What does it mean for a linear system to be ill-conditioned? What is the condition number of a matrix, and roughly, where does it come from?
+\question Compute the least squares solution to the following overdetermined system.
+$$
+\left[
+\begin{array}{cc}
+2 & -1  \\
+1 & 2 \\
+1 & 1
+\end{array}
+\right] 
+\left[
+\begin{array}{c}
+x_1 \\
+x_2 
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+2 \\ 
+1 \\
+4
+\end{array}
+\right]
+$$
+\question Construct the Lagrange iterpolation polynomial for function $f(x) = 2^x$ using nodes $x_0=0$, $x_1=1$, and $x_2=3$. What is the absolute error at $x=1$?
+\question State the theorem giving the polynomial interpolation error.
+\end{questions}
+
+\end{document} 

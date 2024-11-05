@@ -1,0 +1,111 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=6.3in
+\topmargin=-0.5in
+\textheight=9in
+\parindent=0in
+\pagestyle{empty}
+\thispagestyle{empty}
+
+%\printanswers
+\noprintanswers
+
+\newtheorem{Definition}{Definition}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ul}{\underline}
+
+\begin{document}
+
+Math 371 \\
+Exam 2, \ \ May 1, 2015
+\hspace{1.9in}
+{Name:} {\underline {\hspace{2.15in}}}
+\begin{center}
+\fbox{\fbox{\parbox{6.2in}{
+You have until the end of the hour to complete this exam. Show all work, justify your solutions completely, simplify as much as possible. The only materials you should have on your
+desk are this exam and a pencil. If you have any questions, be sure to ask for clarification.
+ }}}
+\end{center}
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[10] Prove that a polynomial interpolant of degree at most $n$ through the $(n+1)$ points $\{(x_0, f(x_0)), (x_1, f(x_1)), \dots, (x_n, f(x_n)) \}$ must be unique. \vfill
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question[10] Do there exist numbers $a,b,c$ and $d$ such that the function
+$$
+S(x) = 
+\begin{cases}
+ax^3+x^2+cx, &-1\leq x\leq 0 \\
+bx^3+x^2+dx, &0\leq x \leq 1
+\end{cases}
+$$
+is a natural cubic spline which agrees with $f(x)=|x|$ at $x=-1,0,1$? \vfill
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question 
+\begin{parts}
+\part[10] Suppose $f(x)$ is a continuous function on the interval $[a,b]$. Use the first degree interpolating polynomial of $f$ to derive the trapezoidal rule (for one subinterval). \vfill
+\part[5] For the following function values, compute the $n$ step \emph{composite} trapezoidal rule approximation to $\ds \int_0^{16} f(x)~dx$ using $n=1, 2,$ and $4$ subintervals.
+\begin{center}
+\begin{tabular}{ |c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+$x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
+$f(x)$ & 5 & 20 & 14 & 9 & 0 & 10 & 14 & 17 & 17 & 12 & 7 & 4 & 3 & 3 & 11 & 16 & 5 \\ \hline
+\end{tabular}
+\end{center} \vfill
+\end{parts}
+
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Suppose function $f$ generates the set of points $S  = \{(1,5), (4,11), (5,1), (7,35) \}$.
+\begin{parts}
+\part[10] Use Newton form to construct the minimum degree polynomial $P$ which interpolates the  points in $S$.\vfill\vfill
+\part[5] Given that $| f^{(4)}(x)| \leq 4$ on $[1,7]$, what can you say about error for $P(2)$?\vfill
+\end{parts}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question 
+\begin{parts}
+\part[7] Use the method of undetermined coefficients to find constants $A_0, A_1, A_2$ such that the following quadrature rule is exact for all degree 2 polynomials.
+$$
+\int_{-1}^1 f(x)~dx = A_0 f(-1) + A_1 f(0) + A_2 f(1)
+$$ \vfill\vfill
+\part[3] Show that the rule found in (a) is actually exact for all degree 3 polynomials, but not for degree 4 polynomials.
+\end{parts}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question 
+\begin{parts}
+\part[10] Recall that the error for the trapezoidal rule on one subinterval is given by
+$$
+\int_a^b f(x)~dx - T_1(a,b) = -\frac{(b-a)^3}{12} f''(\xi)
+$$
+where $T_1(a,b)$ denotes the trapezoidal rule you derived in part (a). Show that the error for the $n$ step composite trapezoidal rule approximation is given by
+$$
+\int_a^b f(x)~dx - T_n(a,b) = -\frac{(b-a)}{12} f''(\eta) h^2
+$$
+where $T_n(a,b)$ denotes the $n$ step composite trapezoidal rule and $h$ is the size of each subinterval. \vfill \vfill
+\part[10] How many subintervals are required to compute the composite Trapezoidal rule approximation for $\ds \int_4^9 \frac{1}{x} ~dx$ to within $10^{-6}$? \vfill
+\end{parts}
+
+%\pagebreak
+
+%This exam 2 resubmission is due at the beginning of class on Wednesday, April 23. You are required to work independently and may use any resources you wish (class notes, textbook, library books, etc.)
+
+\end{questions}
+\end{document} 

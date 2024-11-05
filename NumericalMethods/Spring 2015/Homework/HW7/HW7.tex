@@ -1,0 +1,135 @@
+\documentclass[addpoints, 11pt]{exam}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\rhead{{\bf Assigned:} Wednesday, March 11, 2015 \\{\bf Due:} Wednesday, March 25, 2015}
+
+\printanswers
+%\noprintanswers
+\newcommand{\ds}{\displaystyle}
+\newcommand{\lm}{\lim\limits}
+\newtheorem{Definition}{Definition}
+
+\begin{document}
+\vspace{100mm}
+\begin{center} \Large
+MTH 371: Homework 7 \\ Matrix Conditioning and Tridiagonal Systems \normalsize
+\end{center}
+\ \\
+\noindent GENERAL HOMEWORK GUIDELINES: 
+\begin{itemize}
+\item On the very first page of your homework, provide your name, date, and homework number.\vspace{-2mm}
+\item Homework will be graded in part on neatness, organization, and completeness of solutions. Multiple pages MUST BE STAPLED. \vspace{-2mm}
+\item Attach all Scilab code, output, and plots to the page immediately following each problem. Also, clearly indicate the problem they correspond to.
+%\item Clearly label all plots (title, $x$-axis, $y$-axis, legend). Use the \verb1subplot 1command when comparing 2 or more plots.
+\end{itemize}
+
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Consider the linear system $H\vec{x}=\vec{b}$ for $H$ the below $n$-dimensional Hilbert matrix.
+$$
+H=\left[ \arraycolsep=1.4pt\def\arraystretch{1.2}
+\begin{array}{cccc}
+1 & \frac{1}{2} & \cdots & \frac{1}{n} \\
+\frac{1}{2} & \frac{1}{3} &  \cdots & \frac{1}{n+1} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{1}{n} & \frac{1}{n+1} & \cdots & \frac{1}{2n-1} \\
+\end{array}
+\right]
+$$
+For each $n=2,~ 5,~ 8,~ 11,~ 14,~ 17$, complete the following. 
+\begin{parts}
+\part Set $\vec{x}$ as a $n$-dimensional vector of all 1's, and compute the resulting vector $H\vec{x}=\vec{b}$.
+\part Use $\vec{b}$ from (a) to solve the system $H\vec{x_c} = \vec{b}$ using the Scilab command \verb1xc = H\b1. 
+\part Compute the error between your computed solution $\vec{x}_c$ and the true solution $\vec{x}$ in the $\ell^2$ vector norm. That is compute $\| \vec{x}_c - \vec{x} \|_2$. 
+\part Compute the condition number of the Hilbert matrix in the $\ell^2$ norm, $\text{cond}_2(H)$, using the Scilab command \verb1cond1.
+\part List your results from (c) and (d) in table format. Discuss your findings.
+\part Repeat work done in parts (a) through (e) by using a random matrix $A$ via the Scilab \verb1rand1 command. Do this for at least 3 matrices and display your results in a table.
+\end{parts}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Gaussian elimination can be used for polynomial interpolation. This results in a matrix called the Vandermonde matrix which is notoriously ill-conditioned. Read the example provided on page 225 of the Cheney text. Write Scilab code to compute your own results. To test, repeat the process of parts (c), (d), and (e) of problem 1 for $n=2,~ 5,~ 8,~ 11,~ 14,~ 17$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question
+\begin{parts}
+\part Compute the $\ell^2, \ell^1,$ and $\ell^{\infty}$ norm of vector $\vec{v}=[4, 5, -6]^T$. Draw a picture in $\mathbb{R}^3$ to illustrate.
+\part Compute the $\ell^1$ and $\ell^{\infty}$ norm of 
+\[ A =\left[
+\begin{array}{cc}
+5 & 6 \\
+7 & 8
+\end{array} \right]. \]
+Also compute the condition number for $A$ in each norm.
+\end{parts}
+
+\pagebreak 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Show for all vectors $\vec{v}$ in $\mathbb{R}^n$,
+\begin{parts}
+\part $\ds \|\vec{v}\|_{\infty} \leq \|\vec{v}\|_2 \leq \sqrt{n}\|\vec{v}\|_{\infty}$
+\part $\ds \|\vec{v}\|_2 \leq \|\vec{v}\|_{1}$
+\part $\ds \|\vec{v}\|_1 \leq n\|\vec{v}\|_{\infty}$
+\end{parts}
+For each of the above inequalities, identify a nonzero vector $\vec{v}$ of dimension greater than 1 for which equality holds.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question A tridiagonal system is a linear system of the form
+\[
+\left[ \begin{array}{ccccccccc}
+d_1 & c_1 & & & & & & & \\
+a_1 & d_2 & c_2 & & & & & & \\
+& a_2 & d_3 & c_3 & & & & & \\
+& & \ddots & \ddots & \ddots & & & & \\
+& & & a_{i-1} & d_i & c_i & & & \\
+& & & & \ddots & \ddots & \ddots & \\
+& & & & & a_{n-2} & d_{n-1} & c_{n-1}  \\
+& & & & & & a_{n-1} & d_{n} \\
+\end{array}\right]
+\left[ \begin{array}{c}
+x_1 \\
+x_2 \\
+x_3 \\
+\vdots \\
+x_i \\
+\vdots \\
+x_{n-1} \\
+x_n \\
+\end{array}\right] =
+\left[ \begin{array}{c}
+b_1 \\
+b_2 \\
+b_3 \\
+\vdots \\
+b_i \\
+\vdots \\
+b_{n-1} \\
+b_n \\
+\end{array}\right]
+\]
+where all blank entries are zero. 
+\begin{parts}
+\part Read section 6.3 of the Cheney text, and write an EFFICIENT Scilab function
+\[
+\verb1x=tri(n,a,d,c,b)1
+\]
+which solves systems of this type.
+\part How many floating point operations are performed when solving a $n\times n$ tridiagonal system using your code?
+\part What happens to this algorithm if pivoting is required?
+\part Solve the following system of 100 equations. Compare the numerical solution to the obvious exact solution.
+\[x_1 + 0.5x_2 =1.5\]
+\[0.5x_{i-1} + x_i + 0.5 x_{i+1}  =2.0 \quad (2 \leq i \leq 99) \]
+\[0.5x_{99} + x_{100} =1.5 \]
+\end{parts}
+
+\end{questions}
+\end{document} 
