@@ -29,12 +29,8 @@
 
 \begin{enumerate}
 
-\item What is AI, ML, data science, statistics, etc? How does it all fit? Cool diagrams. 
+\item Slideshow: What is AI, ML, data science, statistics, etc? How does it all fit? Cool diagrams.
 
-\item Unsupervised learning is a class of machine learning methods used to discover structure in data
-\[
-X = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^p \quad \text{(note vector notaiton)}
-\] without labeled outcomes. Instead of predicting a known target, the goal is to explore, summarize, and reveal patterns that are intrinsic to the data.
 
 \item Supervised learning vs unsupervised learning:
 \begin{enumerate}
@@ -46,14 +42,19 @@ X = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^p \quad \text{(note vec
 y = f(X) + \epsilon.
 \]
 Goal is to approximate $f$ via $\hat{f}$. Call supervised because we know answers from our training data.
-\item Basic example of linear regression with $p=1$ for student data. Can be used for student intervention (early warning, effect of living on campus, attending class). 
+\item Basic example of linear regression with $p=1$ for student data. Assume $f$ is linear. Graph with data and best fit line $\hat{f}$. Write general $p$ variable case. Can be used for student intervention (early warning, effect of living on campus, attending class). 
 \item Main goals are prediction and inference by understanding $f$ (feature importance, model fit and reliability).
+\item Linear model is an assumption. Other models include decision trees, neural networks, support vector machine, and more.
 \item Well understood area, clear ways to assess quality of results. ISLR text key reference.
 \end{itemize}
 \item Unsupervised learning:
 \begin{itemize}
+\item Unsupervised learning is a class of machine learning methods used to discover structure in data
+\[
+X = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^p \quad \text{(note vector notaiton)}
+\] without labeled outcomes. Instead of predicting a known target, the goal is to explore, summarize, and reveal patterns that are intrinsic to the data.
 \item Given unlabeled data $X$, find structure in the data. No prediction, no supervision. Learning by observation, not by example.
-\item What types of students are there? What variable combinations belong together (academic, engagement)? Unusual students? Better understand student populations. 
+\item What types of students are there given hours studied per week and GPA? What variable combinations belong together (academic, engagement)? Unusual students? Goal is to better understand data.
 \item Can be a stand alone analysis or can be used to compliment supervised learning.
 \end{itemize}
 \end{enumerate}
@@ -61,7 +62,7 @@ Goal is to approximate $f$ via $\hat{f}$. Call supervised because we know answer
 \item Core tasks of unsupervised learning:
 \begin{enumerate}
 \item Clustering: Group similar observations in the same cluster. K-means, hierarchical, dbscan
-\item Dimension reduction: Reduce noise and multicolinearity, data viz, large to smaller data, data understanding. PCA, t-SNE, UMAP, SVD
+\item Dimension reduction: Reduce noise and multicolinearity, data viz, large to smaller data, data understanding. PCA, t-SNE, UMAP, SVD. Google tensorflow embedding projector.
 \item Anomaly detection: Learn distribution of data to quantify outlier probabilities.
 \end{enumerate}
 
@@ -75,9 +76,11 @@ Goal is to approximate $f$ via $\hat{f}$. Call supervised because we know answer
 \item Similarity means close distance. Scaling and choice of distance matters.
 \item Possible clusters: Weekly family stockup, single essentials, deal hunters. These are business driven interpretations.
 \item Actions: Store layout optimization, personal coupons, inventory planning, regional differences. Not aiming for individual predictions (as with supervised learning).
+\item Google: Walmart customer segmentation
 \end{itemize}
 \item Spotify music genre: Dimension reduction
 \begin{itemize}
+\item Google: Spotify api dataset
 \item Many automatic features, how to tell what genre?
 \item Vectors are high dimension, but human perception is low dimension.
 \item Can we compress data into low-dimensions?
@@ -121,7 +124,43 @@ Goal is to approximate $f$ via $\hat{f}$. Call supervised because we know answer
 \section*{Distance and similarity} 
 \addcontentsline{toc}{section}{Distance and similarity}
 
-Main reference: DMCT chapter 2
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Feature scaling and normalization}
+\addcontentsline{toc}{subsection}{Feature scaling and normalization}
+
+\begin{enumerate}
+\item Features on a bigger scale dominate distance calculations. Spend vs weekly visit count for customer segmentation.
+
+\item Standardization ($z-$score scaling):
+\begin{enumerate}
+\item Definition: Shift by mean and divide by standard deviation.
+\[
+x' = \frac{x - \overline{x}}{s_x}
+\]
+where $s_x$ is the standard deviation of variable $x$. Remind of standard deviation calculation.
+\item Results in mean 0, variance 1. Now on a standard normal distribution $N(0,1)$. Preserves order and relative distribution.
+\item Equal feature contribution, preserves relative difference.
+\end{enumerate}
+
+\item Min-max scaling: 
+\begin{enumerate}
+\item Definition: Shift by min and divide by range.
+\[
+x' = \frac{x - \min(x)}{\max(x)-\min(x)}
+\]
+\item Result is in interval $[0,1]$. Preserves order but compresses extremes.
+\item Good for bounded features. 
+\end{enumerate}
+
+\item When scaling is NOT a good idea:
+\begin{enumerate}
+\item Feature units are meaningful, important, and want to keep for analysis.
+\item Binary indicators (0/1), changes to discrete values but different values.
+\item Counts with semantic meaning, such as a 1-10 satisfaction rating.
+\item Ratios which are already normalized.
+\end{enumerate}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Distance metrics}
@@ -166,43 +205,6 @@ d_{cos}(x,y) = 1 - \frac{x \cdot y}{\|x\| \|y\|}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Feature scaling and normalization}
-\addcontentsline{toc}{subsection}{Feature scaling and normalization}
-
-\begin{enumerate}
-\item Features on a bigger scale dominate distance calculations. Spend difference vs weekly visit count.
-
-\item Standardization ($z-$score scaling):
-\begin{enumerate}
-\item Definition: Shift by mean and divide by standard deviation.
-\[
-x_j^{scaled} = \frac{x_j - \mu_j}{\sigma_j}
-\]
-\item Results in mean 0, variance 1. Now on a standard normal distribution $N(0,1)$. Preserves order and relative distribution.
-\item Equal feature contribution, preserves relative difference.
-\end{enumerate}
-
-\item Min-max scaling: 
-\begin{enumerate}
-\item Definition: Shift by min and divide by range.
-\[
-x_j^{scaled} = \frac{x_j - \min(x_j)}{\max(x_j)-\min(x_j)}
-\]
-\item Result is in interval $[0,1]$. Preserves order but compresses extremes.
-\item Good for bounded features. 
-\end{enumerate}
-
-\item When scaling is NOT a good idea:
-\begin{enumerate}
-\item Feature units are meaningful, important, and want to keep for analysis.
-\item Binary indicators (0/1).
-\item Counts with semantic meaning, such as a 1-10 satisfaction rating.
-\item Ratios which are already normalized.
-\end{enumerate}
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Curse of dimensionality}
 \addcontentsline{toc}{subsection}{Curse of dimensionality}
 
@@ -219,7 +221,7 @@ x_j^{scaled} = \frac{x_j - \min(x_j)}{\max(x_j)-\min(x_j)}
 \addcontentsline{toc}{subsection}{Readings}
 
 \begin{enumerate}
-\item DMCT 2.1, 2.2, 2.3, 2.5
+\item IDM 2.3, 2.4, 2.1-2.2 recommended
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
