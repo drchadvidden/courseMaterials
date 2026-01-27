@@ -1,0 +1,759 @@
+\documentclass{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ul}{\underline}
+
+\title{Unsupervised Learning Notes}
+\date
+\Large
+\begin{document}
+\maketitle
+\large
+
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction to unsupervised learning} 
+\addcontentsline{toc}{section}{Introduction to unsupervised learning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Idea of unsupervised learning}
+\addcontentsline{toc}{subsection}{Idea of unsupervised learning}
+
+\begin{enumerate}
+
+\item What is AI, ML, data science, statistics, etc? How does it all fit? Cool diagrams. 
+
+\item Unsupervised learning is a class of machine learning methods used to discover structure in data
+\[
+X = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^p \quad \text{(note vector notaiton)}
+\] without labeled outcomes. Instead of predicting a known target, the goal is to explore, summarize, and reveal patterns that are intrinsic to the data.
+
+\item Supervised learning vs unsupervised learning:
+\begin{enumerate}
+\item Supervised learning:
+\begin{itemize}
+\item Given labeled data, predict a target. Example is predicting a student's GPA from student data.
+\item More formally, labeled training data is $(X, y)$ for $n$ samples with relationship
+\[
+y = f(X) + \epsilon.
+\]
+Goal is to approximate $f$ via $\hat{f}$. Call supervised because we know answers from our training data.
+\item Basic example of linear regression with $p=1$ for student data. Can be used for student intervention (early warning, effect of living on campus, attending class). 
+\item Main goals are prediction and inference by understanding $f$ (feature importance, model fit and reliability).
+\item Well understood area, clear ways to assess quality of results. ISLR text key reference.
+\end{itemize}
+\item Unsupervised learning:
+\begin{itemize}
+\item Given unlabeled data $X$, find structure in the data. No prediction, no supervision. Learning by observation, not by example.
+\item What types of students are there? What variable combinations belong together (academic, engagement)? Unusual students? Better understand student populations. 
+\item Can be a stand alone analysis or can be used to compliment supervised learning.
+\end{itemize}
+\end{enumerate}
+
+\item Core tasks of unsupervised learning:
+\begin{enumerate}
+\item Clustering: Group similar observations in the same cluster. K-means, hierarchical, dbscan
+\item Dimension reduction: Reduce noise and multicolinearity, data viz, large to smaller data, data understanding. PCA, t-SNE, UMAP, SVD
+\item Anomaly detection: Learn distribution of data to quantify outlier probabilities.
+\end{enumerate}
+
+\item Concrete examples of unsupervised learning:
+\begin{enumerate}
+\item Customer segmentation: Clustering
+\begin{itemize}
+\item Walmart data on spend average, frequency, mode, product mix, app use. 
+\item No label such as budget shopper or family provider. Want to discover segments rather than predetermine behavior.
+\item Each data point is a customer in high dimensions. 
+\item Similarity means close distance. Scaling and choice of distance matters.
+\item Possible clusters: Weekly family stockup, single essentials, deal hunters. These are business driven interpretations.
+\item Actions: Store layout optimization, personal coupons, inventory planning, regional differences. Not aiming for individual predictions (as with supervised learning).
+\end{itemize}
+\item Spotify music genre: Dimension reduction
+\begin{itemize}
+\item Many automatic features, how to tell what genre?
+\item Vectors are high dimension, but human perception is low dimension.
+\item Can we compress data into low-dimensions?
+\item Distance reflect song similarity.
+\item Are there distinct groups of genres or continuous flow?
+\item Goal is to make data more intelligible.
+\end{itemize} 
+\item Credit card fraud: Anomaly detection
+\begin{itemize}
+\item Each data point is a transaction (amount, time, source, location, recent freq, device).
+\item Millions of these per day, tiny amount are fraud.
+\item False positive is a problem.
+\item Does this deviate from expected? Normal behavior is dense regions, but some deviance can naturally occur.
+\item Distance metric determines deviation from normal.
+\item Per customer (card?) normalization. 
+\item Action may be to identify fraud patterns to catch more.
+\end{itemize}
+\end{enumerate}
+
+\item Much more challenge than supervised learning. No simple goal. Results are subjective. Exploratory, descriptive, and hypothesis-generating rather than predictive.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Readings}
+\addcontentsline{toc}{subsection}{Readings}
+
+\begin{enumerate}
+\item ISLR 2.1.4, Ch12 thru 12.1
+\item HOUL Ch1
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Lab}
+\addcontentsline{toc}{subsection}{lab}
+
+\begin{enumerate}
+\item EDA and data cleaning, DMCT Ch2 and Ch3
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Distance and similarity} 
+\addcontentsline{toc}{section}{Distance and similarity}
+
+Main reference: DMCT chapter 2
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Distance metrics}
+\addcontentsline{toc}{subsection}{Distance metrics}
+
+\begin{enumerate}
+\item Distance is a choice we make which encodes different notions of similar. Many options.
+\item Common distance metrics:
+\begin{enumerate}
+\item Euclidean distance ($\ell_2$): For points $x, y \in \mathbb{R}^d$,
+\[
+d_2(x,y) = \|x-y\|_2 = \sqrt{\sum (x_j-y_j)^2}
+\]
+\begin{itemize}
+\item Geometry: Straight-line distance, rotation invariant, penalizes large feature deviations heavily.
+\item Assumes: Features are commensurate, spherical neighborhoods make sense
+\item Example: Customers close if very same spend pattern and volume. (same shop and spend)
+\end{itemize}
+
+\item Manhattan distance ($\ell_1$):
+\[
+d_1(x,y) = \|x-y\|_1 = \sum |x_j - y_j|
+\]
+\begin{itemize}
+\item Geometry: City block distance, diamond shaped contours, less sensitive to large feature deviations.
+\item Assumes: More robust to outliers.
+\item Example: Customers close if same spend pattern and volume, some diff tolerated. (similar with occasional deviation allowed)
+\end{itemize}
+
+\item Cosine similarity:
+\[
+d_{cos}(x,y) = 1 - \frac{x \cdot y}{\|x\| \|y\|}
+\]
+\begin{itemize}
+\item Geometry: measures angle between rather than distance, same direction is close, ignores scale.
+\item Assumes: Pattern rather than intensity.
+\item Example: Customers close if same spend pattern but different spend volumes. (shop same regardless of spend)
+\end{itemize}
+
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Feature scaling and normalization}
+\addcontentsline{toc}{subsection}{Feature scaling and normalization}
+
+\begin{enumerate}
+\item Features on a bigger scale dominate distance calculations. Spend difference vs weekly visit count.
+
+\item Standardization ($z-$score scaling):
+\begin{enumerate}
+\item Definition: Shift by mean and divide by standard deviation.
+\[
+x_j^{scaled} = \frac{x_j - \mu_j}{\sigma_j}
+\]
+\item Results in mean 0, variance 1. Now on a standard normal distribution $N(0,1)$. Preserves order and relative distribution.
+\item Equal feature contribution, preserves relative difference.
+\end{enumerate}
+
+\item Min-max scaling: 
+\begin{enumerate}
+\item Definition: Shift by min and divide by range.
+\[
+x_j^{scaled} = \frac{x_j - \min(x_j)}{\max(x_j)-\min(x_j)}
+\]
+\item Result is in interval $[0,1]$. Preserves order but compresses extremes.
+\item Good for bounded features. 
+\end{enumerate}
+
+\item When scaling is NOT a good idea:
+\begin{enumerate}
+\item Feature units are meaningful, important, and want to keep for analysis.
+\item Binary indicators (0/1).
+\item Counts with semantic meaning, such as a 1-10 satisfaction rating.
+\item Ratios which are already normalized.
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Curse of dimensionality}
+\addcontentsline{toc}{subsection}{Curse of dimensionality}
+
+\begin{enumerate}
+\item In high dimensions, all points become almost equally far apart. Nearest points are almost same distance as farthest.
+\item As dimension $d$ increases, 
+\[
+\frac{\max d(x,y) - \min d(x,y)}{\min d(x,y)} \rightarrow 0
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Readings}
+\addcontentsline{toc}{subsection}{Readings}
+
+\begin{enumerate}
+\item DMCT 2.1, 2.2, 2.3, 2.5
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Lab}
+\addcontentsline{toc}{subsection}{lab}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Clustering methods} 
+\addcontentsline{toc}{section}{Clustering methods}
+
+Main reference: DMCT chapter 10
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Intro to clustering}
+\addcontentsline{toc}{subsection}{Intro to clustering}
+
+\begin{enumerate}
+\item What is cluster analysis?
+\begin{enumerate}
+\item Clustering groups data into clusters so that objects within a cluster are more similar to each other than to objects in other clusters, according to a chosen notion of similarity.
+\item Clustering is an \emph{ill-posed} problem: there is no single correct solution. Results depend on modeling assumptions, similarity definitions, and analysis goals. There is no universal notion of “true” clusters.
+\item Similarity (or dissimilarity) is typically defined through a distance or proximity measure.
+\item Different clustering methods reflect different assumptions about data structure (e.g., partitioning, hierarchical, density-based, grid-based). Some methods that optimize an explicit objective (k-means) while others identify structure without a global objective (hierarchical, DBSCAN).
+\item Clustering quality can be assessed in multiple ways, including internal criteria, external validation, stability, and interpretability.
+\item Ongoing research focuses on scalability, high-dimensional settings where distance metrics break, complex cluster shapes, and diverse data types (e.g., text, images).
+\end{enumerate}
+
+\item Desiderata for clustering methods:
+\begin{enumerate}
+\item Ability to handle different data types (numeric, categorical, mixed)
+\item Ability to detect non-spherical or non-convex clusters
+\item Robustness to noise and outliers
+\item Scalability to large datasets
+\item Ability to incorporate constraints or side information
+\item Results that are interpretable and actionable
+\end{enumerate}
+
+\item Types of clustering methods
+\begin{enumerate}
+
+\item Partitioning methods
+\begin{itemize}
+\item Assume clusters are compact, well-separated, and cover all data points.
+\item Partition $n$ objects into $k$ non-overlapping clusters.
+\item Typically distance-based and solved via iterative optimization.
+\item Sensitive to initialization, distance choice, and cluster shape assumptions.
+\end{itemize}
+
+\item Hierarchical methods
+\begin{itemize}
+\item Assume nested cluster structure is meaningful.
+\item Produce a hierarchy of clusters represented as a tree.
+\item Agglomerative (bottom-up) or divisive (top-down) approaches.
+\item Once a merge or split occurs, it cannot be undone.
+\end{itemize}
+
+\item Density-based methods
+\begin{itemize}
+\item Assume clusters correspond to regions of high data density separated by low-density regions.
+\item Clusters are grown based on neighborhood density criteria.
+\item Naturally identify outliers and allow arbitrary cluster shapes.
+\end{itemize}
+
+\item Grid-based methods
+\begin{itemize}
+\item Discretize the data space into a finite grid structure.
+\item Emphasize computational efficiency, especially for spatial data.
+\end{itemize}
+
+\item Key challenges and limitations:
+\begin{itemize}
+\item Evaluation is inherently difficult due to lack of ground truth; metrics often encode the same assumptions as the algorithm.
+\item Clustering is exploratory rather than confirmatory.
+\item Domain knowledge plays a central role (feature selection, scaling, similarity choice, interpretation).
+\item Clustering is not classification, causal inference, or discovery of objective real-world categories; results should not be over-interpreted.
+\end{itemize}
+
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Partitioning methods: K-means and k-medoids clustering}
+\addcontentsline{toc}{subsection}{Partitioning methods: K-means and k-mediods clustering}
+
+\begin{enumerate}
+
+\item Big picture:
+\begin{enumerate}
+\item Given data $D = \{x_1,\dots,x_n\} \subset \mathbb{R}^p$, partition into $k$ disjoint clusters $C_1,\dots,C_k$.
+\item Each point belongs to exactly one cluster.
+\item Each cluster is summarized by a single representative (center).
+\item Clustering defined via optimization of an objective function called within-cluster loss.
+\end{enumerate}
+
+\item Key assumptions:
+\begin{enumerate}
+\item A meaningful distance $d(x,y)$ exists (eg Euclidean distance).
+\item Clusters are compact and well-separated in the chosen metric.
+\item Cluster centers summarize cluster geometry.
+\item All data belong to some cluster (no noise model).
+\item $k$ is fixed and meaningful.
+\end{enumerate}
+
+\item $k$-means: A centroid-based technique
+\begin{enumerate}
+\item Cluster center: centroid (mean) $c_i \in \mathbb{R}^p$.
+
+\item Objective function to minimize:
+\[
+\min_{C_1,\dots,C_k} \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2,
+\quad
+c_i = \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
+\]
+where the distance metric is Euclidean distance
+\[
+d(x,y) = \|x-y\| = \sqrt{(x_1-y_1)^2 + \dots + (x_p-y_p)^2}.
+\]
+
+\item The within cluster variance is the sum of square errors:
+\[
+WCSS = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
+\]
+
+\item Algorithm (Lloyd’s algorithm):
+\begin{itemize}
+\item This optimization problem is computationally expensive, so a basic algorithm is used.
+\item Initialize $c_1,\dots,c_k$ as $k$ random objects from $D$.
+\item Cluster assignment step:
+\[
+x_j \mapsto \arg\min_i \|x_j - c_i \|^2.
+\]
+\item Centroid update step:
+\[
+c_i \leftarrow \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
+\]
+\item Iterate until assignments stabilize.
+\end{itemize}
+
+\item Each step decreases the objective, converges to a local minimum, may not be global minimum.
+\item Implies Voronoi partition of the feature space, boundaries between clusters where two centroids are equidistant, only depends on centroid not data distribution.
+\item Implicit assumptions: spherical clusters, equal variance, Euclidean geometry.
+\item Variations of $k$-means involved different distance metrics, smart centroid initialization, and centroid calculation strategies, $k$-modes for nominal data, groupings of data called microclusters.
+\end{enumerate}
+
+\item $k$-medoids: A representative object-based technique
+\begin{enumerate}
+\item Motivation: $k$-means is sensitive to outliers when centroids (means) are calculated.
+\item Cluster center: medoid $o_i \in {x_1,\dots,x_n}$. Centroid is now a data point. Also called a representative object.
+\item Objective function:
+\[
+\min_{o_1,\dots,o_k} \sum_{j=1}^n \min_{1 \le i \le k} d(x_j, o_i).
+\]
+\item Distance $d(\cdot,\cdot)$ need not be Euclidean. Note the lack of squared distance.
+\item Absolute-error criterion is used.
+\[
+\sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , o_i)
+\]
+\item More robust to outliers (no averaging).
+\item Example algorithm: Partitioning around medoids PAM
+\begin{itemize} 
+\item Random initial medoids. Brute force check all updated medoids per assigned cluster.
+\item Modification for large data, clustering large applications (CLARA) considers random samples of the dataset.
+\end{itemize}
+\item Slower than $k$-means due to discrete optimization.
+\end{enumerate}
+
+\item $k$-means vs $k$-medoids (mathematical contrast)
+\begin{itemize}
+\item Continuous optimization (means) vs discrete optimization (medoids).
+\item Squared Euclidean loss vs general metric loss.
+\item Sensitive vs robust to outliers.
+\item Fast gradient-like updates vs combinatorial search.
+\end{itemize}
+
+\item Practical issues:
+\begin{itemize}
+\item Objective is non-convex $\Rightarrow$ multiple local minima.
+\item Initialization matters (e.g., random vs k-means++).
+\item Scaling changes the geometry of $|\cdot|$.
+\item Choice of $k$ is a modeling decision, not a statistical estimate.
+\end{itemize}
+
+\item When partitioning methods work well
+\begin{itemize}
+\item Clusters roughly convex and isotropic.
+\item Moderate dimension with meaningful distances.
+\item Clear notion of “center.”
+\item Need fast baseline clustering.
+\end{itemize}
+
+\item When they fail
+\begin{itemize}
+\item Non-convex or nested clusters.
+\item Unequal cluster variances or densities.
+\item Strong outliers (especially $k$-means).
+\item High-dimensional distance concentration.
+\end{itemize}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Hierarchical Methods}
+\addcontentsline{toc}{subsection}{Hierarchical Methods}
+
+\begin{enumerate}
+\item Big picture:
+\begin{enumerate}
+\item Hierarchical clustering builds a nested sequence of partitions.
+\item Output is a tree (dendrogram), not a single clustering.
+\item Clusters exist at multiple resolutions (choices of $k$).
+\item No single "best" number of clusters is assumed a priori.
+\end{enumerate}
+
+\item Key assumptions:
+\begin{enumerate}
+\item Nested structure in the data is meaningful.
+\item Pairwise dissimilarities capture relevant structure.
+\item Early decisions (merges or splits) are trustworthy.
+\item No noise model: all points participate in the hierarchy.
+\end{enumerate}
+
+\item Agglomerative hierarchical clustering:
+\begin{enumerate}
+\item Idea:
+\begin{itemize}
+\item Bottom-up procedure.
+\item Start with $n$ singleton clusters $\{x_1\}, \{x_2\}, \dots , \{x_n\}$ .
+\item Iterative merge the two closest clusters.
+\item Continue until all points are in one cluster.
+\end{itemize}
+
+\item Cluster-cluster distance (linkage)
+\begin{itemize}
+\item Requires a linkage function $D(C_a,C_b)$ for clusters $C_a, C_B$.
+\item Common choices:
+\[
+\text{Single / Minimum / Nearest neighbor: } D(C_a,C_b) = \min_{x \in C_a, y \in C_b} d(x,y)
+\]
+Allows long, thin, winding, non-convex clusters. Connectivity matters, global compactness does not.
+\[
+\text{Complete / Maximum / Farthest neighbor: } D(C_a,C_b) = \max{x \in C_a, y \in C_b} d(x,y)
+\]
+Produces compact, spherical clusters and penalizes irregular shapes. Sensitive to outliers.
+\[
+\text{Average: } D(C_a,C_b) = \frac{1}{|C_a| |C_b|} \sum_{x \in C_a} \sum_{y \in C_b} d(x,y)
+\]
+\[
+\text{Mean / Centroid: } D(C_a,C_b) = |m_a - m_b|
+\]
+Average and mean are compromise between single and complete linkage. 
+\end{itemize}
+\item Linkage choice encodes shape assumptions.
+\end{enumerate}
+
+\item Ward's method (variance-based linkage)
+\begin{itemize}
+\item Merge clusters that miminally increase total within-cluster variance.
+\item Objective interpretation:
+\[
+\Delta (C_a, C_b) = SSE(C_a \cup C_b) -  SSE(C_a) -  SSE(C_b)
+\]
+\item Closely related to k-means objective.
+\item Favors compact, spherical clusters.
+\end{itemize}
+
+\item Dendogram: Illustrate example with basic distance measures.
+\begin{itemize}
+\item Tree structure encoding merge order and merge distances.
+\item Vertical height = dissimilarity at which merge occurs. Note near in the horizontal direction does not mean points/clusters are near. Good discussions in ISLR,
+\item Cutting the tree at height $h$ induces a partition.
+\item Different cuts correspond to different $k$.
+\end{itemize}
+
+\item Divisive hierarchical clustering
+\begin{itemize}
+\item Top-down approach.
+\item Start with all points in one cluster.
+\item Recursively split clusters.
+\item Less common due to computational cost.
+\item Conceptually closer to repeated partitioning.
+\end{itemize}
+
+\item When hierarchical clustering works well
+\begin{itemize}
+\item Data have meaningful nested or multi-scale structure.
+\item Moderate sample size.
+\item Interest in relationships between clusters, not just assignments.
+\end{itemize}
+
+\item When it fails
+\begin{itemize}
+\item Large datasets (computational and memory cost).
+\item Strong noise or chaining effects (single linkage).
+\item Early incorrect merges propagate upward.
+\item Noisy distance measurements.
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Density-based clustering: DBSCAN}
+\addcontentsline{toc}{subsection}{Density-based spatial clustering of applications with noise (DBSCAN)}
+
+\begin{enumerate}
+\item Big picture:
+\begin{enumerate}
+\item DBSCAN = Density-based spatial clustering of applications with noise
+\item Clusters are defined as regions of high point density separated by regions of low density.
+\item Does not impose global geometry (no centroids, no partition).
+\item Explicitly allows noise and outliers.
+\item Number of clusters is determined by the data, not fixed in advanced.
+\end{enumerate}
+
+\item Key assumptions:
+\begin{enumerate}
+\item A meaningful distance metric exists.
+\item Clusters correspond to dense regions in the metric space.
+\item Density is approximately homogeneous within the clusters.
+\item Low-density regions separate clusters.
+\end{enumerate}
+
+\item Parameters:
+\begin{enumerate}
+\item $\varepsilon > 0$ (radius parameter).
+\item $\text{minPts} \in \mathbb{N}$ (minimum number of neighbors)
+\end{enumerate}
+
+\item Neighborhood definition:
+\begin{enumerate}
+\item $\varepsilon$-neighborhood of a point $x$:
+\[
+N_{\varepsilon} = \{y : d(x,y) \leq \varepsilon \}
+\]
+\end{enumerate}
+
+\item Point types: 
+\begin{enumerate}
+\item Core point:
+\[
+|N_{\varepsilon} (x) | \geq \text{minPts}
+\]
+\item Border point:
+\[
+|N_{\varepsilon} (x) | < \text{minPts}, \quad \text{but } x \in N_{\varepsilon}(y) \text{ for some core point } y
+\]
+\item Noise point: $x$ is neither core nor border.
+\end{enumerate}
+
+\item Density reachability:
+\begin{enumerate}
+\item Directly density-reachable:
+\[
+y \in N_{\varepsilon}(x), \quad x \text{ is a core point}
+\]
+\item Density-reachable: chain of directly density-reachable points.
+\item Density-connected: two points reachable from a common core point.
+\end{enumerate}
+
+\item Cluster definition:
+\begin{enumerate}
+\item A cluster is a maximal set of density-connected points.
+\item Noise points are not assigned to any cluster.
+\end{enumerate}
+
+\item Algorithm (conceptual):
+\begin{enumerate}
+\item Identify all core points by checking neighborhood density of all possible points.
+\item Grow clusters by connecting density-reachable points into the same cluster.
+\item Label remaining points as noise or border.
+\end{enumerate}
+
+\item Geometric consequences:
+\begin{enumerate}
+\item Can recover non-convex and arbitrarily shaped clusters.
+\item No forced assignment of all points.
+\item Cluster boundaries follow low-density regions.
+\item No global partition space.
+\end{enumerate}
+
+\item Comparison to partitioning methods
+\begin{enumerate}
+\item No centroids or objective function.
+\item No Voronoi geometry.
+\item $k$ not specified.
+\item Explicit noise handling.
+\end{enumerate}
+
+\item Sensitivity and limitations
+\begin{enumerate}
+\item Choice of $\varepsilon$ and minPts is critical.
+\item Struggles with varying cluster densities.
+\item Distance concentration in high dimensions degrades performance.
+\item Sensitive to distance scaling.
+\end{enumerate}
+
+\item When DBSCAN works well
+\begin{enumerate}
+\item Clusters separated by low-density regions.
+\item Non-spherical, irregular shapes.
+\item Presence of noise or outliers.
+\item Low-to-moderate dimensional data.
+\end{enumerate}
+
+\item When it fails
+\begin{enumerate}
+\item Clusters with significantly different densities.
+\item High-dimensional data.
+\item Data without clear density gaps.
+\item Poorly chosen distance metric.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Comparison of k-means, hierarchical, and DBSCAN methods}
+\addcontentsline{toc}{subsection}{Comparison of k-means, hierarchical, and DBSCAN methods}
+
+\begin{enumerate}
+\item Key idea: Clustering methods are not interchangeable algorithms. They encode fundamentally different notions of what a cluster is.
+
+\item The question each method answers:
+\begin{enumerate}
+\item Partitioning (k-means and k-modes): Given $k$, how should I divide all points to minimize within-cluster dissimilarity?
+\item Hierarchical clustering: How are points related across multiple scales of similarity?
+\item DBSCAN: Which points belong to the same dense region, and which points are noise?
+\end{enumerate}
+
+\item Mathematics of the machines:
+\begin{enumerate}
+\item Partitioning: 
+\begin{itemize}
+\item Force the data into $k$ compact clusters by minimizing within-cluster loss
+\item Imposes Voronoi partition where cluster boundaries are hyperplanes
+\item Parameters are $k$, distance metric, scaling, initialization
+\item Fails for non-convex shapes, unequal variance, noise
+\end{itemize}
+\item Hierarchical: 
+\begin{itemize}
+\item Reveal nested similarity structure through greedy merges or splits
+\item No global geometric partition and shape depends on linkage choice 
+\item Parameters are distance metric, linkage, cut height
+\item Fails for noise, chaining, large $n$
+\end{itemize}
+\item DBSCAN: 
+\begin{itemize}
+\item Identify dense regions separated by low-density gaps and label the rest as noise
+\item No partition of space and geometry adapts to data distribution
+\item Parameters are $\varepsilon$, minPts, distance metric
+\item Fails for varying densities, high dimension
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assessing cluster quality}
+\addcontentsline{toc}{subsection}{Assessing cluster quality}
+
+\begin{enumerate}
+\item Fundamental difficulty:
+\begin{enumerate}
+\item Clustering is unsupervised: typically no ground truth labels
+\item "Good clustering" is not uniquely defined.
+\item Evaluation criteria often encodes the same assumptions as the algorithm.
+\item Different metrics may rank the same clustering very differently.
+\item Validation is about usefulness and stability, not correctness.
+\end{enumerate}
+
+\item Three perspectives on validation:
+\begin{enumerate}
+\item Internal validation: use only the data and clustering structure
+\item External validation: compare to known labels (when available)
+\item Relative validation: compare multiple clusterings to eachother
+\end{enumerate}
+
+\item Internal validation (geometry-based):
+\begin{enumerate}
+\item Measures compactness (within-cluster similarity) and separation (between-cluster dissimilarity).
+\item Common quantities:
+\[
+W = \sum_{k=1}^K \sum_{i \in C_k} \|x_i - \mu_k \|^2 \quad \text{(within-cluster dispersion)}
+\]
+\[
+B = \sum_{k=1}^K n_k \|\mu_k - \mu \|^2 \quad \text{(between-cluster dispersion)}
+\]
+These favor spherical, equal-variance clusters.
+
+\item Silhouette analysis:
+\begin{itemize}
+\item For point $i$:
+\[
+a(i) = \text{ average distance to points in same cluster}
+\]
+\[
+b(i) = \min_{k \neq c(i)} \text{ average distance to cluster $k$}
+\]
+\[
+s(i) = \frac{b(i)-a(i)}{\max \{a(i), b(i) \}} \in [-1,1]
+\]
+\item $s \approx 1$: well-clustered
+\item $s \approx 0$: ambiguous
+\item $s < 0$: likely misclustered
+\item Assumes distance-based, compact clusters.
+\end{itemize}
+
+\item Silhouette is an internal validation metric like $W$ and $B$, but it evaluates clustering locally at the point level rather than globally at the centroid level.
+\end{enumerate}
+
+\item 
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Readings}
+\addcontentsline{toc}{subsection}{Readings}
+
+\begin{enumerate}
+\item DMCT Ch10, cluster analysis basic concepts and methods
+\item DMCT 10.1, intro to cluster analysis
+\item DMCT 10.2, partition methods (k-means and k-medoids)
+\item ISL 12.4.1, k-means clustering
+\item DMCT 10.3, hierarchical methods
+\item ISL 12.4.2, hierarchical clustering 
+\item DMCT 10.4.1, DBSCAN
+\item ISL 12.4.3, practical issues in clustering
+\item 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Lab}
+\addcontentsline{toc}{subsection}{lab}
+
+
+\end{document}
