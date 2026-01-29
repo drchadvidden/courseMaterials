@@ -130,7 +130,11 @@ X = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^p \quad \text{(note vec
 \addcontentsline{toc}{subsection}{Feature scaling and normalization}
 
 \begin{enumerate}
-\item Features on a bigger scale dominate distance calculations. Spend vs weekly visit count for customer segmentation.
+\item Features on a bigger scale dominate distance calculations. Spend vs weekly visit count for customer segmentation. Illustrate dollars vs thousands for spend on Euclidean distance.
+\[
+d_2(x,y) = \|x-y\|_2 = \sqrt{\sum (x_j-y_j)^2}
+\]
+Many ways to scale to prevent this issue.
 
 \item Standardization ($z-$score scaling):
 \begin{enumerate}
@@ -138,9 +142,14 @@ X = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^p \quad \text{(note vec
 \[
 x' = \frac{x - \overline{x}}{s_x}
 \]
-where $s_x$ is the standard deviation of variable $x$. Remind of standard deviation calculation.
-\item Results in mean 0, variance 1. Now on a standard normal distribution $N(0,1)$. Preserves order and relative distribution.
+where $s_x$ is the standard deviation of variable $x$. Remind of standard deviation calculation. Recall sample vs population notation. Draw distribution picture, two different shapes.
+\[
+s_x = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2}, \quad
+\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
+\]
+\item Results in mean 0, variance 1. Now on a standard normal distribution $N(0,1)$. Nice properties of a normal distribution for 68-95-99 percent confidence intervals. Preserves order and relative distribution.
 \item Equal feature contribution, preserves relative difference.
+\item Extensions include mean absolute deviation.
 \end{enumerate}
 
 \item Min-max scaling: 
@@ -149,11 +158,12 @@ where $s_x$ is the standard deviation of variable $x$. Remind of standard deviat
 \[
 x' = \frac{x - \min(x)}{\max(x)-\min(x)}
 \]
+\item Guess what it does. Refer to mall data scaling age.
 \item Result is in interval $[0,1]$. Preserves order but compresses extremes.
 \item Good for bounded features. 
 \end{enumerate}
 
-\item When scaling is NOT a good idea:
+\item Most of the time scale, can always revers scaling if you keep track of original stats. When scaling is NOT a good idea:
 \begin{enumerate}
 \item Feature units are meaningful, important, and want to keep for analysis.
 \item Binary indicators (0/1), changes to discrete values but different values.
@@ -163,16 +173,22 @@ x' = \frac{x - \min(x)}{\max(x)-\min(x)}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Distance metrics}
+\subsection*{Distance metrics and similarity}
 \addcontentsline{toc}{subsection}{Distance metrics}
 
 \begin{enumerate}
 \item Distance is a choice we make which encodes different notions of similar. Many options.
+\item Key properties are required: Mathematically called a metric in a metric space.
+\begin{enumerate}
+\item Positivity: $d(x,y) \geq 0$ for all $x,y$ and $d(x,y) = 0$ only if $y=x$.
+\item Symmetry: $d(x,y) = d(y,x)$.
+\item Triangle inequality: $d(x,z) \leq d(x,y) + d(y,z)$ for any $x,y,z$. Illustrate with pictures, $x$ and $z$ on the horizontal axis.
+\end{enumerate}
 \item Common distance metrics:
 \begin{enumerate}
-\item Euclidean distance ($\ell_2$): For points $x, y \in \mathbb{R}^d$,
+\item Euclidean distance ($\ell_2$ norm): For points $x, y \in \mathbb{R}^d$,
 \[
-d_2(x,y) = \|x-y\|_2 = \sqrt{\sum (x_j-y_j)^2}
+d_2(x,y) = \|x-y\|_2 = \sqrt{\sum (x_i-y_i)^2}
 \]
 \begin{itemize}
 \item Geometry: Straight-line distance, rotation invariant, penalizes large feature deviations heavily.
@@ -180,9 +196,9 @@ d_2(x,y) = \|x-y\|_2 = \sqrt{\sum (x_j-y_j)^2}
 \item Example: Customers close if very same spend pattern and volume. (same shop and spend)
 \end{itemize}
 
-\item Manhattan distance ($\ell_1$):
+\item Manhattan distance ($\ell_1$ norm):
 \[
-d_1(x,y) = \|x-y\|_1 = \sum |x_j - y_j|
+d_1(x,y) = \|x-y\|_1 = \sum |x_i - y_i|
 \]
 \begin{itemize}
 \item Geometry: City block distance, diamond shaped contours, less sensitive to large feature deviations.
@@ -190,14 +206,45 @@ d_1(x,y) = \|x-y\|_1 = \sum |x_j - y_j|
 \item Example: Customers close if same spend pattern and volume, some diff tolerated. (similar with occasional deviation allowed)
 \end{itemize}
 
-\item Cosine similarity:
+\item Supremum ($\ell_{\infty}$ norm):
 \[
-d_{cos}(x,y) = 1 - \frac{x \cdot y}{\|x\| \|y\|}
+d_{\infty}(x,y) = \max \{|x_i-y_i \}
 \]
 \begin{itemize}
-\item Geometry: measures angle between rather than distance, same direction is close, ignores scale.
+\item Geometry: Largest difference only. Shapes are squares.
+\item Example: Customers close if same spend pattern and volume, one big difference is a problem. 
+\end{itemize}
+
+\item These are all generalized by Minkowski distance:
+\[
+d(x,y) = \|x-y\|_r = \sqrt{\sum (x_i-y_i)^r} 
+\]
+Overall, Euclidean is the favorite, but there are good reasons to use others. Show animation in Desmos of different unit circles $x^r+y^r = 1$. $r=\infty$ case is the limit which calc 1 shows supremum norm is found. Show in 2D.
+\end{enumerate}
+
+\begin{enumerate}
+\item Similarities: Note not a distance, but sometimes makes more sense.
+
+\item Cosine similarity: 
+\[
+\sim_{cos}(x,y) = \frac{x \cdot y}{\|x\| \|y\|} = \cos(\theta)
+\]
+\begin{itemize}
+\item Geometry: measures cosine of angle between rather than distance, lives in $[-1,1]$, same direction is close to 1, orth and opposite direction, ignores scale. Turns our ordering agrees with Euclidean distance.
 \item Assumes: Pattern rather than intensity.
 \item Example: Customers close if same spend pattern but different spend volumes. (shop same regardless of spend)
+\end{itemize}
+
+\item Correlation: Sample Pearson correlation.
+\[
+\sim_{cor}(x,y) = r = cor(x,y) =
+\frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
+{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\;
+ \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}
+\]
+\begin{itemize}
+\item Geometry: Measures linear relationship, $r\approx 1$ strong positive linear relationship, $r \approx -1$ strong negative, in between. Book picture vs Wikipedia picture.
+\item Same as cosine similarity if data is normalized.
 \end{itemize}
 
 \end{enumerate}
@@ -221,7 +268,8 @@ d_{cos}(x,y) = 1 - \frac{x \cdot y}{\|x\| \|y\|}
 \addcontentsline{toc}{subsection}{Readings}
 
 \begin{enumerate}
-\item IDM 2.3, 2.4, 2.1-2.2 recommended
+\item IDM Ch 2 Intro, 2.3.7, 2.4.1-2.4.5, 2.4.9-2.4.10 recommend all of Ch 2
+\item DMCT Ch 2 Intro, 2.5.1, 2.3.1, 2.3.4, 2.3.7, 2.3.9 recommend all of Ch 2 except 2.6
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
