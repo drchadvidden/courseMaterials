@@ -227,7 +227,7 @@ Overall, Euclidean is the favorite, but there are good reasons to use others. Sh
 
 \item Cosine similarity: 
 \[
-\sim_{cos}(x,y) = \frac{x \cdot y}{\|x\| \|y\|} = \cos(\theta)
+sim_{cos}(x,y) = \frac{x \cdot y}{\|x\| \|y\|} = \cos(\theta)
 \]
 \begin{itemize}
 \item Geometry: measures cosine of angle between rather than distance, lives in $[-1,1]$, same direction is close to 1, orth and opposite direction, ignores scale. Turns our ordering agrees with Euclidean distance.
@@ -237,7 +237,7 @@ Overall, Euclidean is the favorite, but there are good reasons to use others. Sh
 
 \item Correlation: Sample Pearson correlation.
 \[
-\sim_{cor}(x,y) = r = cor(x,y) =
+sim_{cor}(x,y) = r = cor(x,y) =
 \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
 {\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\;
  \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}
