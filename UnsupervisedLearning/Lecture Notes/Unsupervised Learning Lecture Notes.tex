@@ -140,7 +140,7 @@ Many ways to scale to prevent this issue.
 \begin{enumerate}
 \item Definition: Shift by mean and divide by standard deviation.
 \[
-x' = \frac{x - \overline{x}}{s_x}
+x_i' = \frac{x_i - \overline{x}}{s_x}
 \]
 where $s_x$ is the standard deviation of variable $x$. Remind of standard deviation calculation. Recall sample vs population notation. Draw distribution picture, two different shapes.
 \[
@@ -156,7 +156,7 @@ s_x = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2}, \quad
 \begin{enumerate}
 \item Definition: Shift by min and divide by range.
 \[
-x' = \frac{x - \min(x)}{\max(x)-\min(x)}
+x_i' = \frac{x_i - \min(x)}{\max(x)-\min(x)}
 \]
 \item Guess what it does. Refer to mall data scaling age.
 \item Result is in interval $[0,1]$. Preserves order but compresses extremes.
@@ -208,7 +208,7 @@ d_1(x,y) = \|x-y\|_1 = \sum |x_i - y_i|
 
 \item Supremum ($\ell_{\infty}$ norm):
 \[
-d_{\infty}(x,y) = \max \{|x_i-y_i \}
+d_{\infty}(x,y) = \max \{|x_i-y_i| \}
 \]
 \begin{itemize}
 \item Geometry: Largest difference only. Shapes are squares.
