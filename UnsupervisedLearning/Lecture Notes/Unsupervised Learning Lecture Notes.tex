@@ -281,7 +281,7 @@ sim_{cor}(x,y) = r = cor(x,y) =
 \section*{Clustering methods} 
 \addcontentsline{toc}{section}{Clustering methods}
 
-Main reference: DMCT chapter 10
+Main reference: DMCT chapter 9
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Intro to clustering}
@@ -311,7 +311,7 @@ Main reference: DMCT chapter 10
 \item Types of clustering methods
 \begin{enumerate}
 
-\item Partitioning methods
+\item Partitioning methods (customer segmentation, geog segm)
 \begin{itemize}
 \item Assume clusters are compact, well-separated, and cover all data points.
 \item Partition $n$ objects into $k$ non-overlapping clusters.
@@ -319,7 +319,7 @@ Main reference: DMCT chapter 10
 \item Sensitive to initialization, distance choice, and cluster shape assumptions.
 \end{itemize}
 
-\item Hierarchical methods
+\item Hierarchical methods (fish in Mississippi, species, genus, family, order, class, phylum, kingdom)
 \begin{itemize}
 \item Assume nested cluster structure is meaningful.
 \item Produce a hierarchy of clusters represented as a tree.
@@ -327,24 +327,18 @@ Main reference: DMCT chapter 10
 \item Once a merge or split occurs, it cannot be undone.
 \end{itemize}
 
-\item Density-based methods
+\item Density-based methods (social data with natural crowding, maybe no fixed $k$ or hierarchy)
 \begin{itemize}
 \item Assume clusters correspond to regions of high data density separated by low-density regions.
 \item Clusters are grown based on neighborhood density criteria.
 \item Naturally identify outliers and allow arbitrary cluster shapes.
 \end{itemize}
 
-\item Grid-based methods
-\begin{itemize}
-\item Discretize the data space into a finite grid structure.
-\item Emphasize computational efficiency, especially for spatial data.
-\end{itemize}
-
 \item Key challenges and limitations:
 \begin{itemize}
 \item Evaluation is inherently difficult due to lack of ground truth; metrics often encode the same assumptions as the algorithm.
 \item Clustering is exploratory rather than confirmatory.
-\item Domain knowledge plays a central role (feature selection, scaling, similarity choice, interpretation).
+\item Domain knowledge plays a central role (feature selection, scaling, similarity choice, interpretation, clustering alg choice).
 \item Clustering is not classification, causal inference, or discovery of objective real-world categories; results should not be over-interpreted.
 \end{itemize}
 
@@ -359,9 +353,8 @@ Main reference: DMCT chapter 10
 
 \item Big picture:
 \begin{enumerate}
-\item Given data $D = \{x_1,\dots,x_n\} \subset \mathbb{R}^p$, partition into $k$ disjoint clusters $C_1,\dots,C_k$.
-\item Each point belongs to exactly one cluster.
-\item Each cluster is summarized by a single representative (center).
+\item Given data $D = \{x_1,\dots,x_n\} \subset \mathbb{R}^p$, partition into $k$ disjoint clusters $C_1,\dots,C_k$, $C_i \cap C_j = \emptyset$.
+\item Each point belongs to exactly one cluster, and each cluster is summarized by a single representative (center).
 \item Clustering defined via optimization of an objective function called within-cluster loss.
 \end{enumerate}
 
@@ -384,11 +377,11 @@ Main reference: DMCT chapter 10
 \quad
 c_i = \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
 \]
-where the distance metric is Euclidean distance
+where the distance metric is Euclidean distance (almost always)
 \[
 d(x,y) = \|x-y\| = \sqrt{(x_1-y_1)^2 + \dots + (x_p-y_p)^2}.
 \]
-
+The centroid represents a hypothetical average cluster member (customer).
 \item The within cluster variance is the sum of square errors:
 \[
 WCSS = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
@@ -396,13 +389,13 @@ WCSS = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
 
 \item Algorithm (Lloyd’s algorithm):
 \begin{itemize}
-\item This optimization problem is computationally expensive, so a basic algorithm is used.
+\item This optimization problem is computationally expensive (NP-hard), many ways to select $k$ clusters of $n$ data points. A basic iterative algorithm is used instead.
 \item Initialize $c_1,\dots,c_k$ as $k$ random objects from $D$.
-\item Cluster assignment step:
+\item Cluster assignment step: Belong to nearest centroid.
 \[
 x_j \mapsto \arg\min_i \|x_j - c_i \|^2.
 \]
-\item Centroid update step:
+\item Centroid update step: Average of cluster members.
 \[
 c_i \leftarrow \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
 \]
@@ -419,22 +412,21 @@ c_i \leftarrow \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
 \begin{enumerate}
 \item Motivation: $k$-means is sensitive to outliers when centroids (means) are calculated.
 \item Cluster center: medoid $o_i \in {x_1,\dots,x_n}$. Centroid is now a data point. Also called a representative object.
-\item Objective function:
-\[
-\min_{o_1,\dots,o_k} \sum_{j=1}^n \min_{1 \le i \le k} d(x_j, o_i).
-\]
-\item Distance $d(\cdot,\cdot)$ need not be Euclidean. Note the lack of squared distance.
-\item Absolute-error criterion is used.
+\item Objective function to minimize: Note that medoids $o$ must be data points, so computing new centers is not obvious.
 \[
 \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , o_i)
 \]
+Distance $d(\cdot,\cdot)$ need not be Euclidean. Note the lack of squared distance.
 \item More robust to outliers (no averaging).
 \item Example algorithm: Partitioning around medoids PAM
 \begin{itemize} 
-\item Random initial medoids. Brute force check all updated medoids per assigned cluster.
+\item Random initial medoids. Assign cluster membership. Brute force check all updated medoids per assigned cluster to see which minimizes total distance error. Iterate.
+\[
+WCTD = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
+\]
 \item Modification for large data, clustering large applications (CLARA) considers random samples of the dataset.
 \end{itemize}
-\item Slower than $k$-means due to discrete optimization.
+\item Slower than $k$-means due to discrete optimization, especially for large $n$ and large $k$.
 \end{enumerate}
 
 \item $k$-means vs $k$-medoids (mathematical contrast)
@@ -447,16 +439,16 @@ c_i \leftarrow \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
 
 \item Practical issues:
 \begin{itemize}
-\item Objective is non-convex $\Rightarrow$ multiple local minima.
-\item Initialization matters (e.g., random vs k-means++).
+\item Objective function is typically non-convex $\Rightarrow$ multiple local minima. Repeat iterations can give different cluster solutions.
+\item Initialization matters (e.g., random vs k-means++ which chooses initial clusters far apart).
 \item Scaling changes the geometry of $|\cdot|$.
-\item Choice of $k$ is a modeling decision, not a statistical estimate.
+\item Choice of $k$ is a modeling decision, not a statistical estimate. If you don't know $k$, try many and compare results.
 \end{itemize}
 
 \item When partitioning methods work well
 \begin{itemize}
-\item Clusters roughly convex and isotropic.
-\item Moderate dimension with meaningful distances.
+\item Clusters roughly convex and isotropic (not stretched in a certain direction).
+\item Moderate dimension with meaningful distances, otherwise dimension reduction needed.
 \item Clear notion of “center.”
 \item Need fast baseline clustering.
 \end{itemize}
@@ -468,6 +460,15 @@ c_i \leftarrow \frac{1}{|C_i|}\sum_{x_j \in C_i} x_j.
 \item Strong outliers (especially $k$-means).
 \item High-dimensional distance concentration.
 \end{itemize}
+
+\item How to determine the right number of clusters? Many ways! Basic discussion here, more later.
+\begin{enumerate}
+\item Need $k$ in advance, but the right number of clusters is often ambiguous.
+\item Good to balance compressibility (simplifying data) with accuracy (cluster meaning and usability).
+\item An easy approach considers plotting WCSS (within cluster sum of squares) for $k=2,3,4,\dots,k$ and use the elbow method. Sharp bend says smaller improvements. Expect to decrease to 0. Subjective but something to go by.  Better(?) ways!
+\end{enumerate}
+
+\item Fun simulator: \url{https://clustering-visualizer.web.app/kmeans}
 
 \end{enumerate}
 
@@ -733,9 +734,9 @@ y \in N_{\varepsilon}(x), \quad x \text{ is a core point}
 \begin{enumerate}
 \item Fundamental difficulty:
 \begin{enumerate}
-\item Clustering is unsupervised: typically no ground truth labels
-\item "Good clustering" is not uniquely defined.
-\item Evaluation criteria often encodes the same assumptions as the algorithm.
+\item Clustering is unsupervised: typically no ground truth labels, may not even be clusters in the first place.
+\item "Good clustering" is not uniquely defined. Many metrics.
+\item Evaluation criteria often encodes the same assumptions as the algorithm, can be deceptive.
 \item Different metrics may rank the same clustering very differently.
 \item Validation is about usefulness and stability, not correctness.
 \end{enumerate}
