@@ -422,7 +422,7 @@ Distance $d(\cdot,\cdot)$ need not be Euclidean. Note the lack of squared distan
 \begin{itemize} 
 \item Random initial medoids. Assign cluster membership. Brute force check all updated medoids per assigned cluster to see which minimizes total distance error. Iterate.
 \[
-WCTD = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
+WCTD = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , o_i)
 \]
 \item Modification for large data, clustering large applications (CLARA) considers random samples of the dataset.
 \end{itemize}
@@ -484,6 +484,7 @@ WCTD = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
 \item Output is a tree (dendrogram), not a single clustering.
 \item Clusters exist at multiple resolutions (choices of $k$).
 \item No single "best" number of clusters is assumed a priori.
+\item 2 main types: Agglomerative (bottom-up) and divisive (top-down)
 \end{enumerate}
 
 \item Key assumptions:
@@ -496,17 +497,17 @@ WCTD = \sum_{i=1}^k \sum_{x_j \in C_i} d(x_j , c_i)^2
 
 \item Agglomerative hierarchical clustering:
 \begin{enumerate}
-\item Idea:
+\item Algorithm: Bottom-up procedure.
 \begin{itemize}
-\item Bottom-up procedure.
-\item Start with $n$ singleton clusters $\{x_1\}, \{x_2\}, \dots , \{x_n\}$ .
-\item Iterative merge the two closest clusters.
-\item Continue until all points are in one cluster.
+\item Start with $n$ singleton clusters $\{x_1\}, \{x_2\}, \dots , \{x_n\}$ . Compute a pairwise distance matrix. 
+\item Iterative merge the two closest clusters. The disimilarity between these two clusters indicates the height in the dedrogram where the fusion is places.
+\item Computed updated pairwise inter-cluster disimlarities among the $n-1$ remaining clusters. Repeat merging.
+\item Merge low in dendrogram means joined clusters were similar. High merge means clusters were dissimilar (separation).
 \end{itemize}
 
 \item Cluster-cluster distance (linkage)
 \begin{itemize}
-\item Requires a linkage function $D(C_a,C_b)$ for clusters $C_a, C_B$.
+\item Requires a linkage function $D(C_a,C_b)$ for clusters $C_a, C_b$.
 \item Common choices:
 \[
 \text{Single / Minimum / Nearest neighbor: } D(C_a,C_b) = \min_{x \in C_a, y \in C_b} d(x,y)
@@ -524,17 +525,20 @@ Produces compact, spherical clusters and penalizes irregular shapes. Sensitive t
 \]
 Average and mean are compromise between single and complete linkage. 
 \end{itemize}
-\item Linkage choice encodes shape assumptions.
+\item Linkage choice encodes shape assumptions. Distance metric also important per above discussion (what similar should mean in application).
 \end{enumerate}
 
 \item Ward's method (variance-based linkage)
 \begin{itemize}
 \item Merge clusters that miminally increase total within-cluster variance.
 \item Objective interpretation:
-\[
-\Delta (C_a, C_b) = SSE(C_a \cup C_b) -  SSE(C_a) -  SSE(C_b)
-\]
-\item Closely related to k-means objective.
+\begin{align*}
+W (C_i, C_j) &= WCSS(C_i \cup C_j) -  WCSS(C_i) -  WCSS(C_j) \\
+&= \sum_{\vec{x} \in C_i \cup C_j} d(\vec{x}, \vec{c_{ij}})^2 -  \sum_{\vec{x} \in C_i} d(\vec{x}, \vec{c_{i}})^2 -  \sum_{\vec{x} \in C_j} d(\vec{x}, \vec{c_{j}})^2
+&= \frac{|C_i||C_j|}{|C_i|+|C_j|} \| \vec{c_i} - \vec{c_j} \|^2
+\end{align*}
+where $c$ denotes the clsuter centroid as in k-means. Note only for Euclidean distance for last step.
+\item Closely related to k-means objective, though indirectly. Best of both worlds in a way.
 \item Favors compact, spherical clusters.
 \end{itemize}
 
@@ -544,6 +548,25 @@ Average and mean are compromise between single and complete linkage.
 \item Vertical height = dissimilarity at which merge occurs. Note near in the horizontal direction does not mean points/clusters are near. Good discussions in ISLR,
 \item Cutting the tree at height $h$ induces a partition.
 \item Different cuts correspond to different $k$.
+\end{itemize}
+
+\item How to decide cut?
+\begin{itemize}
+\item Unlike k-mean, HCA does not optimize a cost function such as WCSS. Other approaches are needed.
+\item Dendogram viz is key. 
+\item Elbow method of linkage distance vs merge step (A sharp increase in linkage distance = merging dissimilar clusters, cut just before the big jump)
+\item WCSS works for Ward's linkage because it is inherently close to $k$-means.
+\item Cophenetic Correlation Coefficient (CCC)
+\begin{itemize}
+\item The cophenetic correlation coefficient (CCC) is specific to hierarchical clustering and is often overlooked.
+\item Idea: How well does the dendrogram preserve the original pairwise distances?
+\[
+\mathrm{CCC} = \mathrm{corr}\!\left( d_{ij}, \hat{d}_{ij} \right)
+\]
+where $d_{ij}$ is the original distance between points $i$ and $j$, and $\hat{d}_{ij}$ is the cophenetic distance, defined as the height at which points $i$ and $j$ merge in the dendrogram.
+\item Interpretation: Values close to $1$ indicate that the hierarchical clustering preserves pairwise distances well. Low values indicate that the dendrogram substantially distorts the geometry of the data.
+\item Uses: Comparing linkage methods (single, complete, average, Ward), and choosing an appropriate distance metric.
+\end{itemize}
 \end{itemize}
 
 \item Divisive hierarchical clustering
