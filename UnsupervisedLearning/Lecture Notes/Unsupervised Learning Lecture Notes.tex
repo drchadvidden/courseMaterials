@@ -1,4 +1,4 @@
-\documentclass{article}
+	\documentclass{article}
 
 \usepackage[margin=0.75in]{geometry}
 \usepackage{amsmath, amssymb}
@@ -627,21 +627,22 @@ where $d_{ij}$ is the original distance between points $i$ and $j$, and $\hat{d}
 \begin{enumerate}
 \item $\varepsilon$-neighborhood of a point $x$:
 \[
-N_{\varepsilon} = \{y : d(x,y) \leq \varepsilon \}
+N_{\varepsilon} (x) = \{y : d(x,y) \leq \varepsilon \}
 \]
+\item $|N_{\varepsilon} (x)|$ gives the density of point $x$, including the point itself in this count.
 \end{enumerate}
 
 \item Point types: 
 \begin{enumerate}
-\item Core point:
+\item Core point: At least mnPts within a neighborhood of that point. Point $A$ in diagram if $MinPts \geq 7$. 
 \[
 |N_{\varepsilon} (x) | \geq \text{minPts}
 \]
-\item Border point:
+\item Border point: Not core, but falls in the neighborhood of a point (within the border), or possibly many points. Point $B$ in diagram.
 \[
 |N_{\varepsilon} (x) | < \text{minPts}, \quad \text{but } x \in N_{\varepsilon}(y) \text{ for some core point } y
 \]
-\item Noise point: $x$ is neither core nor border.
+\item Noise point: $x$ is neither core nor border. Point $C$ in diagram.
 \end{enumerate}
 
 \item Density reachability:
