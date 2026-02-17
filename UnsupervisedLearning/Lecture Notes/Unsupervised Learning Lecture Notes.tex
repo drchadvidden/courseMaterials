@@ -775,16 +775,27 @@ y \in N_{\varepsilon}(x), \quad x \text{ is a core point}
 \item Internal validation (geometry-based):
 \begin{enumerate}
 \item Measures compactness (within-cluster similarity) and separation (between-cluster dissimilarity).
-\item Common quantities:
-\[
-W = \sum_{k=1}^K \sum_{i \in C_k} \|x_i - \mu_k \|^2 \quad \text{(within-cluster dispersion)}
-\]
-\[
-B = \sum_{k=1}^K n_k \|\mu_k - \mu \|^2 \quad \text{(between-cluster dispersion)}
-\]
-These favor spherical, equal-variance clusters.
 
-\item Silhouette analysis:
+\item Common quantities we've seen, algorithm specific:
+\[
+WCSS = \sum_{k=1}^K \sum_{i \in C_k} \|x_i - \mu_k \|^2 \quad \text{(within-cluster dispersion, built into kmeans)}
+\]
+\[
+CCC = cor(d_{ij}, \hat{d}_{ij}) \quad \text{(cophenetic correlation, evaluates dendrogram vs data distance, hierarchial)}
+\]
+
+\item Calinski-Harabasz (CH) index: measures how well-separated clusters are relative to how compact they are.
+\[
+CH = \frac{SSB / (K-1)}{SSW / (n-K)} = \frac{\sum_k n_k d_2(\mu_k, \mu)^2 / (k-1)}{\sum_k \sum d_2(x_i, \mu_k)^2 / (n-k)}
+\]
+for $k$ the number of clusters and $n$ the sample size.
+\begin{itemize}
+\item Between-cluster variance $\rightarrow$ clusters should be far apart
+\item Within-cluster variance $\rightarrow$ clusters should be tight
+\item Higher CH the better
+\end{itemize}
+
+\item Silhouette score: measures how well each point fits within its assigned cluster compared to other clusters.
 \begin{itemize}
 \item For point $i$:
 \[
@@ -799,13 +810,38 @@ s(i) = \frac{b(i)-a(i)}{\max \{a(i), b(i) \}} \in [-1,1]
 \item $s \approx 1$: well-clustered
 \item $s \approx 0$: ambiguous
 \item $s < 0$: likely misclustered
-\item Assumes distance-based, compact clusters.
+\item Assumes distance-based, compact clusters, similar cluster density. Will penalize DBSCAN
+\item Silhouette is an internal validation metric like $W$ and $B$, but it evaluates clustering locally at the point level rather than globally at the centroid level. Can average per cluster to get cluster metrics. Also average all for full clustering.
 \end{itemize}
-
-\item Silhouette is an internal validation metric like $W$ and $B$, but it evaluates clustering locally at the point level rather than globally at the centroid level.
 \end{enumerate}
 
-\item 
+\item Stability-based validation:
+\begin{enumerate}
+\item Idea: Good clusters should be reproducible under small perturbations.
+\item Methods: Compare the data cluster solution to a new solution from...
+\begin{itemize}
+\item Subsampling the data
+\item Adding noise
+\item Bootstrap resampling
+\end{itemize}
+\item Compare cluster assignments across perturbations.
+\begin{itemize}
+\item Jaccard index
+\[
+J = \frac{|C_j \cap \hat{C}_j|}{|C_j \cup \hat{C}_j|}
+\]
+where $\hat{C}_j$ denotes the sampled / noise / bootstrap
+\item Also adjusted Rand index (pairs of points in same cluster vs not adjusted for randomness).
+\end{itemize}
+\item Unstable clustering suggests:
+\begin{itemize}
+\item No strong structure
+\item $K$ too large
+\item Model overly sensitive to noise
+\end{itemize}
+\item Stability focuses on reliability rather than geometry.
+\end{enumerate}
+
 
 \end{enumerate}
 
@@ -829,6 +865,94 @@ s(i) = \frac{b(i)-a(i)}{\max \{a(i), b(i) \}} \in [-1,1]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Lab}
 \addcontentsline{toc}{subsection}{lab}
+
+
+\section*{Dimension reduction} 
+\addcontentsline{toc}{section}{Dimension reduction}
+
+Key motivations for dimension reduction: 
+\begin{enumerate}
+\item Fight the curse of dimensionality
+\item Discover latent structure within data (key combinations of variables)
+\item Remove noise dimensions from data
+\item 2/3D visualization and model diagnostics
+\end{enumerate}
+
+Techniques we will see:
+\begin{enumerate}
+\item Singular value decomposition (SVD): Foundation for many modern computational algorithms, key framework for dimension reduction capturing dominant geometric directions
+\item Principal component analysis (PCA): Decompose data into most statistically descriptive factors, follows from SVD
+\item t-distributed stoichastic neighbor embedding (t-SNE): Nonlinear method focused on preserving local neighborhoods, cutting edge technique
+\item Uniform manifold approximation and projection (UMAP): approximate manifold (surface) representation of data, cutting edge technique
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Singular value decomposition}
+\addcontentsline{toc}{subsection}{Singular value decomposition}
+
+\begin{enumerate}
+\item SVD idea: 
+\begin{enumerate}
+\item Determine a low-dimensional approximation of high-dimension data in terms of dominant patterns.
+\item Example of a matrix factorization which works on any matrix $X_{n \times m}$. Solid linear algebra conversation.
+\item Recap linear algebra and key factorizations: Matrix mult, $LU$, eigen decomposition $P D P^{-1}$, $QR$ decomposition
+\end{enumerate}
+
+\item SVD formation:
+\begin{enumerate}
+\item Data matrix $X = \left[ \vec{x}_1 \dots \vec{x}_m \right], \vec{x}_i \in \mathbb{R}^n$, though vectors could be complex valued.
+\item Factorization:
+\[
+X_{n \times m} = U_{n \times n} \, \Sigma_{n \times m} \, V_{m \times m}^{T}
+\]
+where $U,V$ are unitary (orthonormal columns) contining left and right singular vectors (similar to eigenvectors) 
+\[
+U = \left[\vec{u}_1 \dots \vec{u}_n \right]_{n \times n}, \quad U^T U = U U^T = I
+\]
+\[
+V = \left[\vec{v}_1 \dots \vec{v}_m \right]_{m \times m}
+\]
+and $\Sigma$ is a diagonal matrix of singular values (similar to eigenvalues)
+\[
+\Sigma =
+\begin{bmatrix}
+\sigma_1 & 0 & \cdots & 0 \\
+0 & \sigma_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \sigma_m \\
+\hline
+\multicolumn{4}{c}{\Large 0}
+\end{bmatrix}
+\]
+where
+\[
+m = \operatorname{rank}(X), \quad
+\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_m > 0.
+\]
+$\sigma_i$ is ordered by importance.
+\item Note that $X_{n \times m}$ has $n >> m$, long rectangular matrix. 
+\item The SVD always exists and is unique.
+\item Because of the zeros in $\Sigma$, not all of $U$ is needed. This reduces to the so-called "economy" SVD.
+\[
+X = U \Sigma V^{T}
+=
+\begin{bmatrix}
+\widehat{U} & \widehat{U}^{\perp}
+\end{bmatrix}
+\begin{bmatrix}
+\widehat{\Sigma} \\
+0
+\end{bmatrix}
+V^{T}
+=
+\widehat{U}\,\widehat{\Sigma}\,V^{T}.
+\]
+where $\widehat{U}_{m \times m}, \widehat{\Sigma}_{m \times m}$.
+
+
+\end{enumerate}
+\end{enumerate}
+
 
 
 \end{document}
