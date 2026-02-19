@@ -954,6 +954,135 @@ V^{T}
 \widehat{U}\,\widehat{\Sigma}\,V^{T}.
 \]
 where $\widehat{U}_{m \times m}, \widehat{\Sigma}_{m \times m}$.
+\end{enumerate}
+
+\item SVD for matrix approximation:
+\begin{enumerate}
+\item 
+\[
+X = \left[\vec{x}_1 \vec{x}_2 \dots \vec{x}_m \right]
+= \widehat{U}\,\widehat{\Sigma}\,V^{T}
+=
+\begin{bmatrix}
+\vec{u}_1 ~ \vec{u}_2 ~ \dots ~ \vec{u}_m
+\end{bmatrix}_{n \times m}
+\begin{bmatrix}
+\sigma_1 & 0 & \cdots & 0 \\
+0 & \sigma_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \sigma_m 
+\end{bmatrix} _{m \times m}
+\begin{bmatrix}
+\vec{v}_1^T \\
+\vec{v}_2^T \\
+\vdots \\
+\vec{v}_m^T
+\end{bmatrix}_{m \times m}
+\]
+Do the multiplication.
+\[
+X = \sigma_1 \vec{u}_1 \vec{v_1}^T +  \sigma_2 \vec{u}_2 \vec{v_2}^T + \dots + \sigma_n \vec{u}_n \vec{v_n}^T
+\]
+This is the sum of $n$ rank 1 matrices (with unit columns, magnitude 1) ordered by contribution to matrix $X$.
+
+\item Often trunkate at rank $r$ to get
+\[
+X \approx \tilde{U} \tilde{\Sigma} \tilde{V}^T
+\]
+noting that $\tilde{U}^T \tilde{U} = I_{r \times r}$ but $\tilde{U} \tilde{U}^T \neq I$.
+
+\item The Eckard-Young theorem (1936) says this is the best possible rank $r$ approximation of $X$. 
+\[
+\arg\min_{\tilde{X} ~st~ rank(\tilde{X})=r} \| X - \tilde{X} \|_F =  \tilde{U} \tilde{\Sigma} \tilde{V}^T
+\]
+where the matrix Frobenius norm is
+\[
+\|A \|_F = \sqrt{\sum (A_{ij})^2}
+\]
+\end{enumerate}
+
+\item Intuition behind SVD: Dominant correlations.
+\begin{enumerate}
+\item Data matrix where $n >> m$.
+\[
+X = \left[\vec{x}_1 ~ \vec{x_2} ~ \dots ~ \vec{x}_m \right]_{n \times m}
+\] 
+\item Correlation matrix:
+\[
+X^T X = \begin{bmatrix}
+\vec{x}_1^T \\
+\vec{x}_2^T \\
+\vdots \\
+\vec{x}_m^T 
+\end{bmatrix}
+\left[\vec{x}_1 ~ \vec{x_2} ~ \dots ~ \vec{x}_m \right]
+= \begin{bmatrix}
+\vec{x}_1^T \vec{x}_1 & \vec{x}_1^T \vec{x}_2 & \dots & \vec{x}_1^T \vec{x}_m \\
+\vec{x}_2^T \vec{x}_1 & \vec{x}_2^T \vec{x}_2 & \dots & \vec{x}_2^T \vec{x}_m \\
+\vdots & \vdots & \ddots & \vdots \\
+\vec{x}_m^T \vec{x}_1 & \vec{x}_m^T \vec{x}_2 & \dots & \vec{x}_m^T \vec{x}_m
+\end{bmatrix}
+= \left[ \vec{x}_i^T \vec{x}_j\right]_{m \times m}
+\]
+This is a matrix of inner products of columns. Likewise $XX^T$ is the matrix of inner products of rows.
+\item Assuming $X= \hat{U} \hat{\Sigma} V^T$ and so $X^T = V \hat{\Sigma}\hat{U}^T$, then
+\[
+X^T X = V \hat{\Sigma}^T \hat{U}^T \hat{U} \hat{\Sigma} V^T 
+= V \hat{\Sigma}^2 V^T
+\]
+and so
+\[
+X^T X V = V \hat{\Sigma}^2
+\]
+and $V$ give the right eigenvectors with eigenvalues on the diagonal of $\hat{\Sigma}^2$. Likewise, for the left singular vectors:
+\[
+X X^T = \hat{U} \hat{\Sigma} V^T V \hat{\Sigma}^T \hat{U}^T = \hat{U} \hat{\Sigma}^2 \hat{U}^T
+\]
+and
+\[
+X X^T \hat{U} = \hat{U} \hat{\Sigma}^2
+\]
+so $\hat{U}$ gives the left eigenvectors of $X X^T$ with the same eigenvalues $\hat{\Sigma}^2$.
+
+\item Full derivation:
+\textbf{Short derivation of SVD:}
+
+Let $X \in \mathbb{R}^{n \times m}$.
+
+\begin{enumerate}
+\item Compute $X^T X$, which is symmetric and positive semidefinite:
+\[
+X^T X \in \mathbb{R}^{m \times m}.
+\]
+
+\item Find eigenvectors $v_i$ and eigenvalues $\lambda_i \ge 0$ of $X^T X$:
+\[
+X^T X v_i = \lambda_i v_i, \quad i=1,\dots,r.
+\]
+
+\item Define singular values:
+\[
+\sigma_i = \sqrt{\lambda_i} \ge 0.
+\]
+
+\item Compute left singular vectors:
+\[
+u_i = \frac{X v_i}{\sigma_i} \in \mathbb{R}^n \quad \Rightarrow \quad X v_i = \sigma_i u_i.
+\]
+
+\item Assemble SVD:
+\[
+X = U \Sigma V^T
+\]
+where
+\begin{itemize}
+\item $U = [u_1, \dots, u_r] \in \mathbb{R}^{n \times r}$,
+\item $V = [v_1, \dots, v_r] \in \mathbb{R}^{m \times r}$,
+\item $\Sigma = \mathrm{diag}(\sigma_1, \dots, \sigma_r) \in \mathbb{R}^{r \times r}$,
+\end{itemize}
+and $r = \mathrm{rank}(X)$.
+\end{enumerate} 
+Extend $U$ and $V$ to orthonormal bases for $\mathbb{R}^n$ and $\mathbb{R}^m$ to get a full SVD.
 
 
 \end{enumerate}
