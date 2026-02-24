@@ -895,20 +895,28 @@ Demos:
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Singular value decomposition}
-\addcontentsline{toc}{subsection}{Singular value decomposition}
+\subsection*{Singular value decomposition (SVD)}
+\addcontentsline{toc}{subsection}{Singular value decomposition (SVD)}
 
 \begin{enumerate}
 \item SVD idea: 
 \begin{enumerate}
-\item Determine a low-dimensional approximation of high-dimension data in terms of dominant patterns.
+\item Determine a low-dimensional approximation of high-dimension data in terms of dominant patterns. 
+\item It finds orthogonal directions in which the matrix stretches space, ordered by importance. Show transformation picture.
 \item Example of a matrix factorization which works on any matrix $X_{n \times m}$. Solid linear algebra conversation.
-\item Recap linear algebra and key factorizations: Matrix mult, $LU$, eigen decomposition $P D P^{-1}$, $QR$ decomposition
+\item Recap linear algebra and key factorizations: 
+\begin{itemize}
+\item Matrix mult 
+\item GE result $LU$ 
+\item Eigen decomposition for a square matrix $P D P^{-1}$
+\item Spectral theorem for symmetric matrices: Eigen decomposition becomes $P D P^T$, orthogonal eigenvectors, special case of SVD below. 
+\item $QR$ decomposition, $Q$ orthonormal columns, orthogonalize the columns 
+\end{itemize}
 \end{enumerate}
 
 \item SVD formation:
 \begin{enumerate}
-\item Data matrix $X = \left[ \vec{x}_1 \dots \vec{x}_m \right], \vec{x}_i \in \mathbb{R}^n$, though vectors could be complex valued.
+\item Data matrix $X = \left[ \vec{x}_1 \dots \vec{x}_m \right], \vec{x}_i \in \mathbb{R}^n$, though vectors could be complex valued. Typically $n >> m$, tall skinny matrix.
 \item Factorization:
 \[
 X_{n \times m} = U_{n \times n} \, \Sigma_{n \times m} \, V_{m \times m}^{T}
@@ -938,7 +946,7 @@ m = \operatorname{rank}(X), \quad
 \sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_m > 0.
 \]
 $\sigma_i$ is ordered by importance.
-\item Note that $X_{n \times m}$ has $n >> m$, long rectangular matrix. 
+\item Note that $X_{n \times m}$ has $n >> m$, long rectangular matrix. Draw "shapes" of other matrices.
 \item The SVD always exists and is unique.
 \item Because of the zeros in $\Sigma$, not all of $U$ is needed. This reduces to the so-called "economy" SVD.
 \[
@@ -1056,6 +1064,7 @@ Let $X \in \mathbb{R}^{n \times m}$.
 \[
 X^T X \in \mathbb{R}^{m \times m}.
 \]
+This gives the cleanest case for eigenstuff in all of linear algebra. Eigenvalues are all real and positive. Eigenvectors corresponding to distinct eigenvectors are orthogonal. Spectral theorem gives orthogonal diagonlization.
 
 \item Find eigenvectors $v_i$ and eigenvalues $\lambda_i \ge 0$ of $X^T X$:
 \[
@@ -1086,10 +1095,82 @@ and $r = \mathrm{rank}(X)$.
 \end{enumerate} 
 Extend $U$ and $V$ to orthonormal bases for $\mathbb{R}^n$ and $\mathbb{R}^m$ to get a full SVD.
 
+\end{enumerate}
 
+\item Geometry of the SVD: Unitary transforms
+\begin{enumerate}
+\item $X = U \Sigma V^T$. $U$ is an orthonormal basis for the column space of $X$. $V$ likewise for the row space of $X$.
+\item Both $U$ and $V$ are unitary matrices. That is, $U U^T = U^T U = I_{n \times n}$, and $V V^T = V^T V = I_{m \times m}$. Unitary matrices preserve angles between and lengths resulting in a pure rotation.
+
+\item $X$ acts as
+\[
+\text{rotation (}V^T\text{)} \;\rightarrow\; \text{stretch (}\Sigma\text{)} \;\rightarrow\; \text{rotation (}U\text{)}.
+\]
+
+\item $X$ maps the unit sphere in $\mathbb{R}^m$ to an ellipsoid in $\mathbb{R}^n$.
+
+\item Principal direction
+\[
+X v_i = \sigma_i u_i,
+\]
+so $v_i$ are orthonormal input directions, $u_i$ are orthonormal output directions, and $\sigma_i$ are the stretch factors.
+
+\item Extremal property:
+\[
+\sigma_1 = \max_{\|x\|=1} \|Xx\|,
+\]
+i.e., $\sigma_1$ is the maximum stretching factor.
+\item Image and discussion on Wikipedia.
 \end{enumerate}
 \end{enumerate}
 
 
+\subsection*{Principal Component Analysis (PCA)}
+\addcontentsline{toc}{subsection}{Principal Component Analysis (PCA)}
 
+\begin{enumerate}
+\item PCA is one of the central uses of SVD, providing a data-driven, hierarchical coordinate system for high dimensional correlated data.
+\item Assume data $X_{m \times n}$ where each column is a sample.
+\item Want an orthogonal basis for the columns of $X$ which capture the most variance. Draw a 2D picture.
+\item Preprocess the data by subtracting the mean and setting the variance to unity before performing the SVD. Define the mean matrix
+\[
+M = \frac{1}{n} \sum_{i=1}^n \vec{x}_i.
+\]
+Subtracting $M$ from $X$ results in the mean-subtracted data $B$. 
+\[
+B = X - M
+\]
+\item The covariance matrix of the columns of $B$ is given by 
+\[
+S = \frac{1}{n-1} B B^T.
+\] 
+This is the sample covariance of our data $X$. The sum of diagonals of $S$, denoted $trace(S)$ is the total data variance.
+\item For simplicity, assume $X$ is in mean deviation form. We want to find change of variable
+\[
+X = PY
+\]
+where $Y$ has uncorrelated rows (features), ordered in terms of importance and where $P$ has orthogonal columns. This can be restated as $P^T X + Y$.
+For each column of $X$,
+\[
+\vec{x}_i = P \vec{y_i}
+\]
+gives the coordinate vector of $\vec{x}_i$ in basis $P$. 
+
+\item Computing the covariance for $Y$, we have
+\[
+\frac{1}{n-1} Y Y^T = \frac{1}{n-1} (P^T X)(X^T P) = \frac{1}{n-1} P^T (X X^T) P = P^T S P.
+\]
+So the needed unitary matrix $P$ is on ethat makes the $Y$ covariance matrix diagonal (and hence uncorrelated). 
+
+\item So, $S = P D P^T$ where $D$ is the diagonal of $\lambda_i$ eigenvalues of $S$ with corresponding eigenvectors as the columns of $P = [ \vec{u}_1 \dots \vec{u}_n ]$. Note that 
+\[
+trace(S) = trace(P D P^T) = trace(D P P^T) = trace(D)
+\]
+so eigenvalues give variance per principal component.
+\item Full circle, we see PCA is the same as left singular vectors and singular values from SVD.
+\[
+S P = P D
+\]
+where again $S = X^T X$.
+\end{enumerate}
 \end{document}
