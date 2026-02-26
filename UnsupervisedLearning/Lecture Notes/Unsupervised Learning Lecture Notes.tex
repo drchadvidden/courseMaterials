@@ -1122,6 +1122,172 @@ so $v_i$ are orthonormal input directions, $u_i$ are orthonormal output directio
 i.e., $\sigma_1$ is the maximum stretching factor.
 \item Image and discussion on Wikipedia.
 \end{enumerate}
+
+\item Example: Find the singular value decomposition of
+\[
+A =
+\begin{bmatrix}
+3 & 2 & 2 \\
+2 & 3 & -2
+\end{bmatrix}.
+\]
+
+\textbf{Solution:}
+
+Compute $AA^T$:
+\[
+AA^T =
+\begin{bmatrix}
+17 & 8 \\
+8 & 17
+\end{bmatrix}.
+\]
+
+Eigenvalues of $AA^T$:
+\[
+\lambda_1 = 25, \quad \lambda_2 = 9
+\]
+so the singular values are
+\[
+\sigma_1 = 5, \quad \sigma_2 = 3.
+\]
+
+Eigenvectors of $AA^T$ (columns of $U$):
+\[
+u_1 = \frac{1}{\sqrt{2}}
+\begin{bmatrix}1\\1\end{bmatrix}, \quad
+u_2 = \frac{1}{\sqrt{2}}
+\begin{bmatrix}-1\\1\end{bmatrix}.
+\]
+
+Construct $\Sigma$:
+\[
+\Sigma =
+\begin{bmatrix}
+5 & 0 & 0 \\
+0 & 3 & 0
+\end{bmatrix}.
+\]
+
+Compute $V$ from $v_i = \frac{1}{\sigma_i} A^T u_i$:
+\[
+v_1 =
+\frac{1}{3}
+\begin{bmatrix}2\\2\\1\end{bmatrix}, \quad
+v_2 =
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}-1\\1\\0\end{bmatrix}, \quad
+v_3 =
+\frac{1}{3}
+\begin{bmatrix}-1\\-1\\2\end{bmatrix}.
+\]
+
+Then the SVD is
+\[
+A = U \Sigma V^T,
+\quad
+U = 
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}1 & -1 \\ 1 & 1\end{bmatrix}, \quad
+V = [v_1 \; v_2 \; v_3].
+\]
+
+\item Example: Find the singular value decomposition of
+\[
+A =
+\begin{bmatrix}
+3 & 2 \\
+2 & 3 \\
+2 & -2
+\end{bmatrix}.
+\]
+
+\textbf{Solution:}
+
+Step 1: Compute the smaller matrix $AA^T$ (2×2):
+\[
+AA^T = 
+\begin{bmatrix}
+3 & 2 \\
+2 & 3 \\
+2 & -2
+\end{bmatrix}
+\begin{bmatrix}
+3 & 2 & 2 \\
+2 & 3 & -2
+\end{bmatrix}
+=
+\begin{bmatrix}
+13 & 12 \\
+12 & 13
+\end{bmatrix}.
+\]
+
+Step 2: Find eigenvalues of $AA^T$:
+\[
+\lambda_1 = 25, \quad \lambda_2 = 1
+\]
+so the singular values are
+\[
+\sigma_1 = 5, \quad \sigma_2 = 1.
+\]
+
+Step 3: Eigenvectors of $AA^T$ give the columns of $U$:
+\[
+u_1 = \frac{1}{\sqrt{2}}
+\begin{bmatrix}1\\1\end{bmatrix}, \quad
+u_2 = \frac{1}{\sqrt{2}}
+\begin{bmatrix}-1\\1\end{bmatrix}.
+\]
+
+Step 4: Compute $V$ from $v_i = \frac{1}{\sigma_i} A^T u_i$:
+\[
+v_1 = \frac{1}{5}
+\begin{bmatrix}
+3 & 2 & 2\\
+2 & 3 & -2
+\end{bmatrix}^T
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}1\\1\end{bmatrix}
+=
+\frac{1}{5\sqrt{2}}
+\begin{bmatrix}5\\5\\0\end{bmatrix}
+=
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}1\\1\\0\end{bmatrix},
+\]
+
+\[
+v_2 = \frac{1}{1}
+\begin{bmatrix}
+3 & 2 & 2\\
+2 & 3 & -2
+\end{bmatrix}^T
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}-1\\1\end{bmatrix}
+=
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}-1\\1\\-2\end{bmatrix}.
+\]
+
+Step 5: Construct $\Sigma$ (3×2):
+\[
+\Sigma =
+\begin{bmatrix}
+5 & 0 \\
+0 & 1 \\
+0 & 0
+\end{bmatrix}.
+\]
+
+Step 6: Assemble the SVD:
+\[
+A = U \Sigma V^T, \quad
+U = 
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}1 & -1\\ 1 & 1\end{bmatrix}, \quad
+V = [v_1 \; v_2 \; v_3].
+\]
 \end{enumerate}
 
 
