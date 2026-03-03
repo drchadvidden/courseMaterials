@@ -1295,48 +1295,277 @@ V = [v_1 \; v_2 \; v_3].
 \addcontentsline{toc}{subsection}{Principal Component Analysis (PCA)}
 
 \begin{enumerate}
-\item PCA is one of the central uses of SVD, providing a data-driven, hierarchical coordinate system for high dimensional correlated data.
-\item Assume data $X_{m \times n}$ where each column is a sample.
-\item Want an orthogonal basis for the columns of $X$ which capture the most variance. Draw a 2D picture.
-\item Preprocess the data by subtracting the mean and setting the variance to unity before performing the SVD. Define the mean matrix
-\[
-M = \frac{1}{n} \sum_{i=1}^n \vec{x}_i.
-\]
-Subtracting $M$ from $X$ results in the mean-subtracted data $B$. 
-\[
-B = X - M
-\]
-\item The covariance matrix of the columns of $B$ is given by 
-\[
-S = \frac{1}{n-1} B B^T.
-\] 
-This is the sample covariance of our data $X$. The sum of diagonals of $S$, denoted $trace(S)$ is the total data variance.
-\item For simplicity, assume $X$ is in mean deviation form. We want to find change of variable
-\[
-X = PY
-\]
-where $Y$ has uncorrelated rows (features), ordered in terms of importance and where $P$ has orthogonal columns. This can be restated as $P^T X + Y$.
-For each column of $X$,
-\[
-\vec{x}_i = P \vec{y_i}
-\]
-gives the coordinate vector of $\vec{x}_i$ in basis $P$. 
 
-\item Computing the covariance for $Y$, we have
-\[
-\frac{1}{n-1} Y Y^T = \frac{1}{n-1} (P^T X)(X^T P) = \frac{1}{n-1} P^T (X X^T) P = P^T S P.
-\]
-So the needed unitary matrix $P$ is on ethat makes the $Y$ covariance matrix diagonal (and hence uncorrelated). 
+\item Data setup.
 
-\item So, $S = P D P^T$ where $D$ is the diagonal of $\lambda_i$ eigenvalues of $S$ with corresponding eigenvectors as the columns of $P = [ \vec{u}_1 \dots \vec{u}_n ]$. Note that 
+Let
 \[
-trace(S) = trace(P D P^T) = trace(D P P^T) = trace(D)
+X = [\vec{x}_1 \ \vec{x}_2 \ \dots \ \vec{x}_n] \in \mathbb{R}^{m \times n},
+\qquad 
+\vec{x}_i \in \mathbb{R}^m.
 \]
-so eigenvalues give variance per principal component.
-\item Full circle, we see PCA is the same as left singular vectors and singular values from SVD.
+
+Each column represents one sample and each sample has $m$ features.
+
+Our goal is to reduce the dimension of each $\vec{x}_i$ from $m$ to $k$ where $k < m$.
+
+Reducing dimension is useful because it mitigates the curse of dimensionality, captures dominant patterns in the data for downstream analysis, and allows for meaningful visualization in low dimensions.
+
+\item Geometric motivation for PCA.
+
+In many datasets, the cloud of points in $\mathbb{R}^m$ appears to have one dominant direction of spread. In two dimensions, this often looks like an elongated ellipse. The variance is much larger in one direction than in others. PCA formalizes this idea by identifying directions of maximal variance.
+
+There is a strong connection between PCA and the singular value decomposition.
+
+\item Recall the definition of covariance.
+
+For two features $f_j$ and $f_k$,
 \[
-S P = P D
+\operatorname{Cov}(f_j, f_k)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}
+(f_j^{(i)} - \bar f_j)
+(f_k^{(i)} - \bar f_k).
 \]
-where again $S = X^T X$.
+
+As a special case,
+\[
+\operatorname{Cov}(X,X) = \operatorname{Var}(X)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n} (x_i - \bar x)^2.
+\]
+
+If $\operatorname{Cov}(X,Y) > 0$, the variables tend to increase together.  
+If $\operatorname{Cov}(X,Y) < 0$, they move in opposite directions.  
+If $\operatorname{Cov}(X,Y) = 0$, there is no linear association.
+
+\item Centering the data.
+
+Before performing PCA, we center the data.
+
+Define the sample mean
+\[
+\bar{\vec{x}}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+\vec{x}_i.
+\]
+
+Define centered samples
+\[
+\hat{\vec{x}}_i
+=
+\vec{x}_i - \bar{\vec{x}}.
+\]
+
+Collecting these gives
+\[
+\hat{X}
+=
+[\hat{\vec{x}}_1 \ \dots \ \hat{\vec{x}}_n].
+\]
+
+From this point forward, we assume the data has been centered and simply write $X = \hat{X}$.
+
+Centering ensures that the origin represents the mean of the dataset and simplifies the covariance formulas.
+
+\item The sample covariance matrix.
+
+The sample covariance matrix is defined by
+\[
+C_X
+=
+\frac{1}{n-1} X X^T.
+\]
+
+Expanding this expression,
+\[
+C_X
+=
+\frac{1}{n-1}
+[\vec{x}_1 \ \dots \ \vec{x}_n]
+\begin{bmatrix}
+\vec{x}_1^T \\
+\vdots \\
+\vec{x}_n^T
+\end{bmatrix}.
+\]
+
+Carrying out the multiplication,
+\[
+C_X
+=
+\frac{1}{n-1}
+\begin{bmatrix}
+\vec{x}_1 \vec{x}_1^T & \dots & \vec{x}_1 \vec{x}_n^T \\
+\vdots & \ddots & \vdots \\
+\vec{x}_n \vec{x}_1^T & \dots & \vec{x}_n \vec{x}_n^T
+\end{bmatrix}.
+\]
+
+The diagonal entries represent variances of the individual features. The off-diagonal entries represent covariances between features.
+
+The total variance in the dataset is given by the trace:
+\[
+\operatorname{trace}(C_X)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}
+\vec{x}_i^T \vec{x}_i.
+\]
+
+Thus the trace of the covariance matrix equals the sum of the variances.
+
+\item Example: house size and price.
+
+Suppose the two features are house size and price. Then
+\[
+C_X
+=
+\frac{1}{n-1}
+\begin{bmatrix}
+\text{size variance} & \text{covariance} \\
+\text{covariance} & \text{price variance}
+\end{bmatrix}.
+\]
+
+The trace becomes
+\[
+\operatorname{trace}(C_X)
+=
+\frac{1}{n-1}
+(\text{size variance} + \text{price variance}).
+\]
+
+This equals the total variance in the data.
+
+\item PCA factorization.
+
+We now seek an orthonormal basis that removes correlation and orders directions by variance.
+
+Write
+\[
+X = U Y,
+\qquad
+\text{where } Y = U^T X.
+\]
+
+Here
+\[
+U =
+[\vec{u}_1 \ \vec{u}_2 \ \dots \ \vec{u}_m]
+\]
+has orthonormal columns, and
+\[
+Y =
+\begin{bmatrix}
+\vec{y}_1^T \\
+\vec{y}_2^T \\
+\vdots \\
+\vec{y}_m^T
+\end{bmatrix}
+\]
+contains the transformed coordinates.
+
+The columns of $U$ define new orthonormal directions in feature space. The rows of $Y$ represent the data expressed in those new coordinates.
+
+The components in $Y$ are uncorrelated and are ordered in decreasing variance.
+
+\item Connection to covariance diagonalization.
+
+Using $X = P Y$, we compute
+\[
+C_X
+=
+\frac{1}{n-1} X X^T
+=
+\frac{1}{n-1} (P Y)(P Y)^T
+=
+P \left(
+\frac{1}{n-1} Y Y^T
+\right) P^T.
+\]
+
+Thus,
+\[
+C_Y = P^T C_X P.
+\]
+
+If the transformed features in $Y$ are uncorrelated, then $C_Y$ is diagonal.
+
+Therefore PCA finds an orthonormal matrix that diagonalizes the covariance matrix and orders the resulting components by decreasing variance.
+
+\item Eigenvalue characterization of principal components.
+
+Because $C_X$ is symmetric,
+\[
+C_X = \frac{1}{n-1} X X^T
+\]
+is a real symmetric matrix. Therefore it admits an eigenvalue decomposition
+\[
+C_X = U \Lambda U^T,
+\]
+where the columns of $U$ are orthonormal eigenvectors and
+\[
+\Lambda = \operatorname{diag}(\lambda_1, \lambda_2, \dots, \lambda_m)
+\]
+contains the eigenvalues.
+
+Using the change of variables $Y = U^T X$, we compute the covariance of the transformed data:
+\[
+C_Y
+=
+\frac{1}{n-1} Y Y^T
+=
+\frac{1}{n-1} (U^T X)(U^T X)^T
+=
+U^T \left( \frac{1}{n-1} X X^T \right) U
+=
+U^T C_X U.
+\]
+
+Substituting the eigenvalue decomposition,
+\[
+C_Y
+=
+U^T (U \Lambda U^T) U
+=
+\Lambda.
+\]
+
+Thus the covariance matrix becomes diagonal in the eigenvector basis. The transformed features are uncorrelated, and the variances along the new directions are precisely the eigenvalues.
+
+If we order the eigenvalues
+\[
+\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_m,
+\]
+then the first principal component is the eigenvector corresponding to $\lambda_1$, the second corresponds to $\lambda_2$, and so on. These directions maximize variance subject to orthogonality constraints.
+
+Connection to SVD.
+
+If
+\[
+X = U \Sigma V^T
+\]
+is the singular value decomposition of the centered data matrix, then
+\[
+C_X
+=
+\frac{1}{n-1} X X^T
+=
+\frac{1}{n-1} U \Sigma^2 U^T.
+\]
+
+Therefore the eigenvectors of $C_X$ are the left singular vectors of $X$, and the eigenvalues satisfy
+\[
+\lambda_i = \frac{\sigma_i^2}{n-1}.
+\]
+
+PCA can therefore be computed directly from the SVD of the centered data matrix.
+
 \end{enumerate}
+
 \end{document}
