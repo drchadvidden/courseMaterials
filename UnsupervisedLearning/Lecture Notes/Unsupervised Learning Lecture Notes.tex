@@ -1568,4 +1568,307 @@ PCA can therefore be computed directly from the SVD of the centered data matrix.
 
 \end{enumerate}
 
+\subsection*{t-SNE (t-Distributed stochastic neighbor embedding)}
+\addcontentsline{toc}{subsection}{t-SNE (t-Distributed stochastic neighbor embedding)}
+
+\begin{enumerate}
+
+\item Motivation.  
+
+While PCA captures global linear patterns, many datasets contain complex nonlinear structure. t-distributed stochastic neighbor embedding (t-SNE) is a nonlinear method designed to preserve \textbf{local neighborhoods}, making it ideal for visualizing clusters in high-dimensional data in 2 or 3 dimensions.
+
+\item Intuition.  
+
+t-SNE works by thinking: ``Points that are close together in high dimensions should stay close in the low-dimensional embedding, and points far apart can spread out.''  
+
+It does this by:
+
+\begin{itemize}
+\item Measuring high-dimensional similarity with Gaussians (nearby points have higher probability).
+\item Mapping points to a low-dimensional space so that a similar probability distribution (using heavy-tailed Student t-distribution to prevent collapsing of points) is matched.
+\item Minimizing the mismatch between these distributions, so local clusters are preserved even if global distances are distorted.
+\end{itemize}
+
+In short: \textbf{t-SNE preserves local neighborhoods, revealing clusters and manifold structure visually.}
+
+\item Prerequisites:
+\begin{enumerate}
+\item Gaussian distribution: In stat we denote a normal distribution as $X \sim N(\mu, \sigma)$ (or $Z \sim N(0,1)$). Capture this curve as a function called a Gaussian.
+\[
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \, \exp\Big(- \frac{(x - \mu)^2}{2\sigma^2}\Big),
+\]
+where $\mu$ is the mean and $\sigma^2$ is the variance.  
+
+\textbf{Key properties:}
+
+\begin{itemize}
+\item Symmetric about the mean $\mu$.
+\item 68-95-99.7 rule: about 68\% of values within 1$\sigma$, 95\% within 2$\sigma$, 99.7\% within 3$\sigma$.
+\item The Gaussian arises naturally in sums of independent random variables (Central Limit Theorem).
+\end{itemize}
+
+\textbf{Why this matters for t-SNE:}
+
+\begin{itemize}
+\item t-SNE models the \emph{similarity between points} in high-dimensional space using conditional probabilities $p_{j|i}$.
+\item These probabilities are computed using a Gaussian centered at each point: nearby points get higher probability, distant points lower.
+\item The Gaussian’s variance $\sigma_i$ controls the effective neighborhood size per data point, tuned via \emph{perplexity}.
+\item Thus, understanding Gaussians is essential to grasp how t-SNE measures "local closeness" before mapping to a lower dimension.
+\item Gaussian's are non-linear giving this feature to t-SNE.
+\end{itemize}
+
+\item Student's t-distribution:
+\[
+f(y \mid \nu) = \frac{\Gamma\Big(\frac{\nu+1}{2}\Big)}{\sqrt{\nu \pi} \, \Gamma\Big(\frac{\nu}{2}\Big)} \Big( 1 + \frac{y^2}{\nu} \Big)^{-\frac{\nu+1}{2}},
+\]
+where $\nu$ is the degrees of freedom. For $\nu=1$ we have
+\[
+f(y) = \frac{1}{\pi(1+y^2)}
+\]
+which we will see later.
+
+\textbf{Key properties:}
+\begin{itemize}
+\item Symmetric about 0, like a Gaussian, but with \emph{heavier tails}.
+\item As $\nu \to \infty$, it approaches the standard Gaussian.
+\item Heavy tails allow distant points to be modeled with small, nonzero similarity in the low-dimensional space.
+\end{itemize}
+
+\textbf{Why this matters for t-SNE:}
+\begin{itemize}
+\item In the low-dimensional embedding, t-SNE uses a Student t-distribution (often $\nu=1$, i.e., Cauchy) to compute similarities $q_{ij}$.
+\item Heavy tails prevent “crowding”: otherwise, many moderately distant points in high dimensions would collapse near the center in 2D.
+\item This choice preserves \emph{local neighborhoods} while allowing moderate distances to remain meaningful, improving cluster separation.
+\end{itemize}
+
+\item Gradient descent:
+
+\textbf{Idea:} Gradient descent is an iterative optimization method that moves variables in the direction that reduces a function’s value, step by step.
+\textbf{General formula:}
+\[
+\theta^{(t+1)} = \theta^{(t)} - \eta \, \nabla_\theta F(\theta^{(t)}),
+\]
+\textbf{Notation:}
+\begin{itemize}
+\item $\theta^{(t)}$: current value of the variable(s) at iteration $t$ (in t-SNE, the low-dimensional coordinates $y_i$).
+\item $\eta$: learning rate, a small positive number controlling step size.
+\item $F(\theta)$: the function we want to minimize (in t-SNE, the mismatch between high-dimensional and low-dimensional similarities).
+\item $\nabla_\theta F(\theta)$: gradient of $F$ with respect to $\theta$, giving the direction of steepest increase.
+\end{itemize}
+
+\textbf{Process:}
+\begin{itemize}
+\item Start with initial guesses for $y_i$.
+\item Compute the gradient $\nabla_{y_i} F$ for each point.
+\item Update each $y_i$ using the formula above to reduce $F$.
+\item Repeat until changes are small or a maximum number of iterations is reached.
+\end{itemize}
+
+\textbf{Why this matters for t-SNE:}
+\begin{itemize}
+\item t-SNE uses gradient descent to iteratively adjust low-dimensional points so that local neighborhoods are preserved.
+\item Each update moves points closer to neighbors and pushes apart distant points, producing meaningful clusters.
+\item Understanding the formula clarifies the step-by-step “learning” process of the embedding.
+\end{itemize}
+\end{enumerate}
+
+
+\item t-SNE idea: Converts high-dimensional distances into \textbf{probabilities} representing similarities:
+\begin{enumerate}
+\item High-dimensional probability distribution: 
+\begin{itemize}
+\item Draw 2D picture and pretend it is high dimensional. Want a similarity measure between 2 points $x_i$ and $x_j$. Keep in mind similarity should be symmetric (sim($x_i, x_j$)=sim($x_j, x_i$). Assuming a normal distribution, we translate Euclidean distance to probability.
+
+\item The similarity between points $x_i$ and $x_j$ is modeled as a conditional probability $p_{j|i}$, proportional to a Gaussian centered at $x_i$:
+
+\[
+p_{j|i} = \frac{\exp\big(-\|x_i - x_j\|^2 / 2\sigma_i^2\big)}{\sum_{k \neq i} \exp\big(-\|x_i - x_k\|^2 / 2\sigma_i^2\big)},
+\]
+
+where $\sigma_i$ is chosen to match a fixed \textbf{perplexity} (a user-specified effective number of likely neighbors). Note that this definition has $p_{i|i}=0$. Also similarities add to 1 via the fraction normalization.
+
+\item Symmetrize probabilities: Note that above conditional probability is not symmetric, so we average over dimension $n$ to make it so.
+
+\[
+p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}.
+\]
+\end{itemize}
+
+\item In the low-dimensional embedding (typically 2D), define a similar probability $q_{ij}$ using a Student t-distribution with 1 degree of freedom (heavy-tailed), centered at $y_i$:
+
+\[
+q_{ij} = \frac{(1 + \|y_i - y_j\|^2)^{-1}}{\sum_{k \neq l} (1 + \|y_k - y_l\|^2)^{-1}}.
+\]
+
+\item Now, all that remains is to find 2 dimensional vectors $y_i$ so that these distributions are as similar as possible. We need a probability distribution similarity measure, then gradient descent will help us minimize.
+
+\item Optimization: Kullback-Leibler (KL) divergence measures how one probability distribution $Q$ differs from a reference distribution $P$.  
+
+\[
+\text{KL}(P \| Q) = \sum_i P(i) \, \log \frac{P(i)}{Q(i)}
+\]
+
+\begin{itemize}
+\item Comes from information theory to measure the expected information lost when approximating one probability distribution with another.
+\item $P(i)$ is the probability of outcome $i$ under the “true” distribution.
+\item $Q(i)$ is the probability of outcome $i$ under the approximating distribution.
+\item $\log \frac{P(i)}{Q(i)}$ measures how much “surprise” or information is gained by assuming $Q$ instead of $P$ for that outcome.  Sign of log term signals $Q$ over or under estimating.
+\item Multiplying by $P(i)$ gives the expected contribution from outcome $i$.
+\item KL divergence is always non-negative: $\text{KL}(P\|Q) \ge 0$.
+\item $\text{KL}(P\|Q) = 0$ only if $P = Q$ exactly.
+\item Intuition: it quantifies the “extra surprise” when using $Q$ to approximate $P$.
+\item In t-SNE: $P$ represents high-dimensional similarities, $Q$ represents low-dimensional similarities. Minimizing KL ensures the low-dimensional map preserves neighborhood structure.
+\end{itemize}
+\end{enumerate}
+
+\item Key properties.  
+
+\begin{itemize}
+\item Preserves local structure: nearby points in high dimensions stay nearby in the embedding.  
+\item Can reveal clusters and nonlinear manifolds that PCA may miss.  
+\item Distances between well-separated clusters may be distorted (global geometry not preserved).  
+\item Sensitive to \textbf{perplexity} and learning rate.
+\end{itemize}
+
+\item Gradient descent update:
+
+t-SNE finds the low-dimensional coordinates $y_i$ by iteratively updating them to reduce the mismatch between $p_{ij}$ and $q_{ij}$. The gradient descent step is
+
+\[
+y_i^{(t+1)} = y_i^{(t)} - \eta \, \frac{\partial \text{KL}(P\|Q)}{\partial y_i},
+\]
+
+where
+\begin{itemize}
+\item $y_i^{(t)}$ is the coordinate of point $i$ at iteration $t$,
+\item $\eta$ is the learning rate,
+\item $\frac{\partial \text{KL}(P\|Q)}{\partial y_i}$ is the gradient of the KL divergence with respect to $y_i$, indicating the direction in which to move $y_i$ to reduce divergence.
+\end{itemize}
+
+\item Practical tips.  
+
+\begin{itemize}
+\item Preprocess data with PCA to 30--50 dimensions to speed computation and reduce noise.  
+\item Run multiple times to check for stability, as t-SNE is stochastic.  
+\item Use primarily for visualization rather than modeling, due to global distortion.
+\end{itemize}
+
+\end{enumerate}
+
+\subsection*{UMAP (Uniform Manifold Approximation and Projection)}
+\addcontentsline{toc}{subsection}{UMAP (Uniform Manifold Approximation and Projection)}
+
+UMAP is a non-linear dimensionality reduction method based on manifold learning. It produces a low-dimensional embedding that preserves both local neighborhood structure and some global structure of high-dimensional data. The algorithm can be described mathematically as follows:
+
+\begin{enumerate}
+
+\item \textbf{Manifold assumption:}
+
+Suppose the data points
+\[
+x_1, x_2, \dots, x_n \in \mathbb{R}^D
+\]
+lie on a low-dimensional manifold $M$ embedded in $\mathbb{R}^D$.
+
+UMAP does not attempt to learn an explicit equation for the manifold. Instead, it approximates the manifold using the connectivity structure of nearby data points.
+
+Specifically, UMAP constructs a weighted $k$-nearest neighbor graph
+\[
+G = (V,E),
+\]
+where the vertices correspond to the data points and edges connect nearby points.
+
+Edge weights represent the strength of the local relationship between points. This weighted graph provides a discrete approximation of the manifold:
+
+\[
+M \approx G.
+\]
+
+Thus the local geometry of the manifold is captured by the neighborhood structure of the graph.
+
+\item \textbf{Compute k-nearest neighbors:}  
+\begin{itemize}
+    \item For each high-dimensional point $x_i \in \mathbb{R}^D$, compute distances to all other points: $\text{dist}(x_i, x_j)$.
+    \item Select the $k$ nearest neighbors: $\mathcal{N}_k(x_i)$.
+    \item \emph{Whiteboard hint:} draw points in 2D, circle nearest neighbors of one point, and label the set $\mathcal{N}_k(x_i)$.
+\end{itemize}
+
+\item \textbf{Compute fuzzy membership probabilities:}  
+\begin{itemize}
+    \item Assign a “fuzzy” membership to each neighbor:
+    \[
+    \mu_{ij} = \exp\Bigg(- \frac{\max(0, \text{dist}(x_i, x_j) - \rho_i)}{\sigma_i}\Bigg)
+    \]
+    where $\rho_i$ is the distance to the nearest neighbor, ensuring each point is connected, and $\sigma_i$ is set so that the effective number of neighbors is $k$:
+    \[
+    \sum_{j \in \mathcal{N}_k(x_i)} \mu_{ij} \approx k
+    \]
+    \item \textbf{Why fuzzy?}  
+    \begin{itemize}
+        \item Real neighborhoods are not binary; some neighbors are stronger than others.
+        \item Fuzzy weights reflect the \emph{strength of connectivity} between points: $\mu_{ij} \in [0,1]$.
+        \item Smooths noisy data and allows continuous optimization via cross-entropy.
+        \item \emph{Whiteboard hint:} draw arrows of different thickness from a point to its neighbors to indicate fuzzy weights.
+    \end{itemize}
+\end{itemize}
+
+\item \textbf{Symmetrize the fuzzy graph:}  
+\[
+w_{ij} = \mu_{ij} + \mu_{ji} - \mu_{ij}\mu_{ji}
+\]
+- Ensures $w_{ij} = w_{ji}$.  
+- Represents a weighted, undirected graph of local connectivity.  
+- \emph{Whiteboard hint:} show two asymmetric arrows combining into one symmetric edge.
+
+\item \textbf{Define low-dimensional similarities:}  
+- Let $y_i \in \mathbb{R}^d$ be low-dimensional coordinates.  
+\[
+v_{ij} = \frac{1}{1 + a \|y_i - y_j\|^{2b}}
+\]
+- $a, b > 0$ control the shape of the decay.  
+- $v_{ij}$ acts like a probability of closeness in low-D.  
+- \emph{Whiteboard hint:} draw two points with distance $d$ and a curve showing $v(d)$ decreasing as distance increases.
+
+\item \textbf{Cross-entropy loss function:}  
+\[
+C = \sum_{i<j} \Big[ w_{ij} \log \frac{w_{ij}}{v_{ij}} + (1 - w_{ij}) \log \frac{1 - w_{ij}}{1 - v_{ij}} \Big]
+\]
+- First term: preserve high-weight edges (neighbors stay close).  
+- Second term: push apart non-neighbors.  
+- Gradient w.r.t $y_i$:
+\[
+\frac{\partial C}{\partial y_i} = 2 \sum_j (v_{ij} - w_{ij}) \frac{\partial v_{ij}}{\partial y_i}
+\]
+- \emph{Whiteboard hint:} draw points with arrows toward/away from neighbors showing forces moving them during optimization.
+
+\item \textbf{Optimization:}  
+- Use stochastic gradient descent or negative sampling to update points:
+\[
+y_i \gets y_i - \eta \frac{\partial C}{\partial y_i}
+\]
+- Local clusters form first, then global structure emerges.  
+- \emph{Whiteboard hint:} show a few points moving iteratively until clusters stabilize.
+
+\item \textbf{Key hyperparameters:}
+\begin{itemize}
+    \item \texttt{n\_neighbors} — controls local vs global structure.
+    \item \texttt{min\_dist} — minimum spacing between points in low-D; controls cluster tightness.
+    \item \texttt{metric} — high-D distance metric (Euclidean, cosine, etc.).
+    \item \emph{Whiteboard hint:} draw same points with tight vs spread clusters, and show effect of changing neighbors.
+\end{itemize}
+
+\item \textbf{Comparison with t-SNE:}
+\begin{tabular}{lll}
+\textbf{Feature} & \textbf{t-SNE} & \textbf{UMAP} \\
+High-D similarity & Pairwise probabilities $p_{ij}$ & Fuzzy kNN graph $w_{ij}$ \\
+Low-D similarity & Student t-distribution $q_{ij}$ & Flexible kernel $v_{ij}$ \\
+Loss function & KL divergence & Cross-entropy on fuzzy edges \\
+Global structure & Often distorted & Some global preserved \\
+Hyperparameters & Perplexity & n\_neighbors, min\_dist
+\end{tabular}
+
+\item \textbf{Intuition summary:}  
+Build a fuzzy neighbor network in high-D, embed in low-D using a smooth similarity kernel, and adjust positions to preserve connectivity: connected points stay close, unconnected points stay apart. Unlike t-SNE, UMAP uses a fuzzy graph rather than all pairwise probabilities, making it faster and better at capturing cluster structure and some global topology.
+
+\end{enumerate}
 \end{document}
