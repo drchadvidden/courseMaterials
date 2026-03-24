@@ -1758,7 +1758,7 @@ where
 \subsection*{UMAP (Uniform Manifold Approximation and Projection)}
 \addcontentsline{toc}{subsection}{UMAP (Uniform Manifold Approximation and Projection)}
 
-UMAP is a non-linear dimensionality reduction method based on manifold learning. It produces a low-dimensional embedding that preserves both local neighborhood structure and some global structure of high-dimensional data. The algorithm can be described mathematically as follows:
+UMAP is a nonlinear dimensionality reduction method based on manifold learning and topological ideas. It produces a low-dimensional embedding that preserves local neighborhood structure and some global structure of high-dimensional data. The algorithm can be described mathematically as follows:
 
 \begin{enumerate}
 
@@ -1770,91 +1770,110 @@ x_1, x_2, \dots, x_n \in \mathbb{R}^D
 \]
 lie on a low-dimensional manifold $M$ embedded in $\mathbb{R}^D$.
 
-UMAP does not attempt to learn an explicit equation for the manifold. Instead, it approximates the manifold using the connectivity structure of nearby data points.
-
-Specifically, UMAP constructs a weighted $k$-nearest neighbor graph
+UMAP does not learn an explicit manifold equation. Instead, it approximates the manifold using the connectivity of nearby points, producing a weighted $k$-nearest neighbor graph:
 \[
 G = (V,E),
 \]
-where the vertices correspond to the data points and edges connect nearby points.
-
-Edge weights represent the strength of the local relationship between points. This weighted graph provides a discrete approximation of the manifold:
-
+where vertices correspond to data points and edge weights reflect the strength of local connectivity:
 \[
-M \approx G.
+M \approx G
 \]
 
-Thus the local geometry of the manifold is captured by the neighborhood structure of the graph.
+\emph{Whiteboard hint:} draw a curved manifold replaced by a graph connecting nearby points.
 
-\item \textbf{Compute k-nearest neighbors:}  
+\item \textbf{Compute $k$-nearest neighbors:}  
 \begin{itemize}
-    \item For each high-dimensional point $x_i \in \mathbb{R}^D$, compute distances to all other points: $\text{dist}(x_i, x_j)$.
-    \item Select the $k$ nearest neighbors: $\mathcal{N}_k(x_i)$.
-    \item \emph{Whiteboard hint:} draw points in 2D, circle nearest neighbors of one point, and label the set $\mathcal{N}_k(x_i)$.
+    \item For each point $x_i$, compute distances to other points: $\text{dist}(x_i, x_j)$.
+    \item Select the $k$ nearest neighbors $\mathcal{N}_k(x_i)$.
+    \item \emph{Whiteboard hint:} circle neighbors of a point in 2D and label them.
 \end{itemize}
 
 \item \textbf{Compute fuzzy membership probabilities:}  
 \begin{itemize}
     \item Assign a “fuzzy” membership to each neighbor:
     \[
-    \mu_{ij} = \exp\Bigg(- \frac{\max(0, \text{dist}(x_i, x_j) - \rho_i)}{\sigma_i}\Bigg)
+    \mu_{ij} = \exp\Big(- \frac{\max(0, \text{dist}(x_i, x_j) - \rho_i)}{\sigma_i}\Big)
     \]
-    where $\rho_i$ is the distance to the nearest neighbor, ensuring each point is connected, and $\sigma_i$ is set so that the effective number of neighbors is $k$:
+    where $\rho_i$ is the distance to the nearest neighbor (ensuring each point is connected) and $\sigma_i$ is set so that
     \[
     \sum_{j \in \mathcal{N}_k(x_i)} \mu_{ij} \approx k
     \]
     \item \textbf{Why fuzzy?}  
     \begin{itemize}
         \item Real neighborhoods are not binary; some neighbors are stronger than others.
-        \item Fuzzy weights reflect the \emph{strength of connectivity} between points: $\mu_{ij} \in [0,1]$.
+        \item Fuzzy weights reflect the \emph{strength of connectivity} between points.
         \item Smooths noisy data and allows continuous optimization via cross-entropy.
-        \item \emph{Whiteboard hint:} draw arrows of different thickness from a point to its neighbors to indicate fuzzy weights.
+        \item \emph{Whiteboard hint:} draw arrows of different thickness to neighbors.
     \end{itemize}
 \end{itemize}
 
 \item \textbf{Symmetrize the fuzzy graph:}  
+UMAP produces directed fuzzy memberships $\mu_{ij}$ and $\mu_{ji}$, which may differ due to asymmetric neighborhoods. To form an undirected edge, the weights are combined as
 \[
-w_{ij} = \mu_{ij} + \mu_{ji} - \mu_{ij}\mu_{ji}
+w_{ij} = \mu_{ij} + \mu_{ji} - \mu_{ij}\mu_{ji}.
 \]
-- Ensures $w_{ij} = w_{ji}$.  
-- Represents a weighted, undirected graph of local connectivity.  
-- \emph{Whiteboard hint:} show two asymmetric arrows combining into one symmetric edge.
 
-\item \textbf{Define low-dimensional similarities:}  
-- Let $y_i \in \mathbb{R}^d$ be low-dimensional coordinates.  
+\textbf{Intuition:}
+\begin{itemize}
+    \item Combines both directions: either node can indicate a strong connection.
+    \item Corrects for double-counting using the probabilistic “or” rule.
+    \item Ensures symmetry ($w_{ij} = w_{ji}$) and keeps $0 \le w_{ij} \le 1$.
+\end{itemize}
+
+
+\item \textbf{Low-Dimensional Similarities:}
+In the low-dimensional embedding, UMAP defines a smooth similarity between points:
 \[
-v_{ij} = \frac{1}{1 + a \|y_i - y_j\|^{2b}}
+v_{ij} = \frac{1}{1 + a \|y_i - y_j\|^{2b}},
 \]
-- $a, b > 0$ control the shape of the decay.  
-- $v_{ij}$ acts like a probability of closeness in low-D.  
-- \emph{Whiteboard hint:} draw two points with distance $d$ and a curve showing $v(d)$ decreasing as distance increases.
+where $y_i, y_j \in \mathbb{R}^d$ are low-dimensional coordinates, and $a,b>0$ control the decay.
+
+\textbf{Intuition:}
+\begin{itemize}
+    \item Nearby points: $v_{ij} \approx 1$, strongly connected.
+    \item Distant points: $v_{ij} \approx 0$, weakly connected.
+    \item Continuous weights allow gradient-based optimization to preserve high-D fuzzy connectivity.
+	\item The low-dimensional similarity function
+\[
+v(d) = \frac{1}{1 + a d^{2b}}
+\]
+is fit \emph{before embedding} to match the high-dimensional fuzzy graph. Using the high-D neighbor distances $d_{ij}$ and weights $\mu_{ij}$, $a$ and $b$ are chosen by minimizing
+\[
+\sum_{i,j \in \text{neighbors}} \big(v(d_{ij}) - \mu_{ij}\big)^2.
+\]
+\end{itemize}
 
 \item \textbf{Cross-entropy loss function:}  
 \[
 C = \sum_{i<j} \Big[ w_{ij} \log \frac{w_{ij}}{v_{ij}} + (1 - w_{ij}) \log \frac{1 - w_{ij}}{1 - v_{ij}} \Big]
 \]
-- First term: preserve high-weight edges (neighbors stay close).  
-- Second term: push apart non-neighbors.  
+- Measures how well the low-dimensional similarities $v_{ij}$ match the high-dimensional graph weights $w_{ij}$.
+- Intuition:
+\begin{itemize}
+    \item High $w_{ij}$ (strong connection in high-D) → large penalty if $v_{ij}$ is small → points are pulled together.
+    \item Low $w_{ij}$ (weak or no connection) → large penalty if $v_{ij}$ is large → points are pushed apart.
+    \item Essentially, it is a “soft match”: connected points stay close, unconnected points separate.
+\end{itemize}
 - Gradient w.r.t $y_i$:
 \[
 \frac{\partial C}{\partial y_i} = 2 \sum_j (v_{ij} - w_{ij}) \frac{\partial v_{ij}}{\partial y_i}
 \]
-- \emph{Whiteboard hint:} draw points with arrows toward/away from neighbors showing forces moving them during optimization.
+- Optimization via gradient descent moves points to reduce this mismatch.
 
 \item \textbf{Optimization:}  
-- Use stochastic gradient descent or negative sampling to update points:
+- Update coordinates via stochastic gradient descent:
 \[
 y_i \gets y_i - \eta \frac{\partial C}{\partial y_i}
 \]
 - Local clusters form first, then global structure emerges.  
-- \emph{Whiteboard hint:} show a few points moving iteratively until clusters stabilize.
+- \emph{Whiteboard hint:} show iterative movement until clusters stabilize.
 
 \item \textbf{Key hyperparameters:}
 \begin{itemize}
-    \item \texttt{n\_neighbors} — controls local vs global structure.
-    \item \texttt{min\_dist} — minimum spacing between points in low-D; controls cluster tightness.
-    \item \texttt{metric} — high-D distance metric (Euclidean, cosine, etc.).
-    \item \emph{Whiteboard hint:} draw same points with tight vs spread clusters, and show effect of changing neighbors.
+    \item \texttt{n\_neighbors} — controls local vs global structure
+    \item \texttt{min\_dist} — minimum spacing between points; controls cluster tightness
+    \item \texttt{metric} — distance metric in high-D space
+    \item \emph{Whiteboard hint:} draw same points with tight vs spread clusters for different values
 \end{itemize}
 
 \item \textbf{Comparison with t-SNE:}
@@ -1868,7 +1887,6 @@ Hyperparameters & Perplexity & n\_neighbors, min\_dist
 \end{tabular}
 
 \item \textbf{Intuition summary:}  
-Build a fuzzy neighbor network in high-D, embed in low-D using a smooth similarity kernel, and adjust positions to preserve connectivity: connected points stay close, unconnected points stay apart. Unlike t-SNE, UMAP uses a fuzzy graph rather than all pairwise probabilities, making it faster and better at capturing cluster structure and some global topology.
-
+UMAP builds a fuzzy neighbor graph to represent local connectivity, then finds a low-dimensional embedding that preserves this structure: connected points stay close, unconnected points are pushed apart. By modeling only local neighborhoods, UMAP scales efficiently and captures both cluster structure and some global topology.
 \end{enumerate}
 \end{document}
