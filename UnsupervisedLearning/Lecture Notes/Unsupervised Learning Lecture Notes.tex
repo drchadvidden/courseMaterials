@@ -1907,7 +1907,7 @@ UMAP builds a fuzzy neighbor graph to represent local connectivity, then finds a
 \begin{itemize}
     \item \textbf{Fraud detection:} Identify unusual transactions (e.g., credit card fraud)
     \item \textbf{Cybersecurity:} Detect network intrusions or abnormal user behavior
-    \item \textbf{Healthcare:} Find abnormal patient measurements or rare conditions
+    \item \textbf{Healthcare:} Find abnormal patient measurements or rare conditions \url{https://anomagram.fastforwardlabs.com/}
     \item \textbf{Manufacturing:} Detect defects or equipment failures from sensor data
     \item \textbf{Finance:} Identify unusual market activity or trading patterns
     \item \textbf{Monitoring systems:} Detect anomalies in time series (e.g., traffic, energy usage)
@@ -2018,19 +2018,154 @@ Points that are unlikely under this model are anomalies:
 \[
 p(x) \text{ small} \;\Rightarrow\; \text{anomaly}
 \]
-
 \item \textbf{Multivariate extension.}
 
-In higher dimensions, we replace simple thresholds with a model of the joint distribution.
+\textbf{Motivation.} 
+In multiple dimensions, checking each variable separately can fail. A point may look typical in every coordinate but still be unusual \emph{as a combination}.  
+For example, height and weight may each be typical individually, but an unusual pairing (e.g., very tall and very light) may be rare.  
+Thus, we must model the \emph{joint behavior} of the variables.
+
+\medskip
+
+\textbf{From 1D to higher dimensions.}
+In one dimension, anomaly detection is based on distance from the mean:
+\[
+\frac{(x - \mu)^2}{\sigma^2} \text{ large} \;\Rightarrow\; \text{anomaly}
+\]
+This measures how far \(x\) is from \(\mu\), scaled by variability.
+
+In higher dimensions:
+\begin{itemize}
+    \item The mean becomes a vector \( \mu \in \mathbb{R}^d \)
+    \item Variability becomes a covariance matrix \( \Sigma \in \mathbb{R}^{d \times d} \)
+    \item We need a notion of distance that accounts for:
+    \begin{itemize}
+        \item different scales in each direction
+        \item relationships (correlations) between variables
+    \end{itemize}
+\end{itemize}
+
+\medskip
+
+\textbf{Why Euclidean distance is not enough.}
+A naive approach is to use Euclidean distance:
+\[
+\|x - \mu\|^2
+\]
+However, this assumes:
+\begin{itemize}
+    \item all variables have the same variance
+    \item variables are independent (no correlation)
+\end{itemize}
+In real data, some directions have much larger spread than others, and variables are often correlated.  
+Thus, Euclidean distance can misidentify anomalies.
+
+\medskip
+\subsection*{Gaussian distributions: 1D and multivariate}
+
+\textbf{1D Gaussian.} For a continuous scalar variable $X$, the normal distribution models how likely values are near the mean $\mu$:
+\[
+X \sim \mathcal{N}(\mu, \sigma^2), \qquad
+p(x) = \frac{1}{\sqrt{2\pi \sigma^2}} 
+\exp\Bigg(-\frac{(x-\mu)^2}{2\sigma^2}\Bigg)
+\]
+\begin{itemize}
+    \item $(x-\mu)^2$ measures squared distance from the mean.
+    \item Dividing by $2\sigma^2$ scales distance by the variance.
+    \item Probability density decreases exponentially as $x$ moves away from $\mu$.
+\end{itemize}
+
+\medskip
+
+\textbf{Multivariate Gaussian.} For a continuous vector $X \in \mathbb{R}^d$, we generalize to account for scale and correlations:
+\[
+X \sim \mathcal{N}(\mu, \Sigma), \qquad
+p(x) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}}
+\exp\Bigg(-\frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \Bigg)
+\]
+\begin{itemize}
+    \item $\mu \in \mathbb{R}^d$ is the mean vector.
+    \item $\Sigma \in \mathbb{R}^{d\times d}$ is the covariance matrix.
+    \item $(x-\mu)^T \Sigma^{-1} (x-\mu)$ is the Mahalanobis distance, measuring distance in the geometry of the data.
+    \item The exponent generalizes $-(x-\mu)^2/(2\sigma^2)$ from 1D.
+    \item Probability decays exponentially with distance from the mean along the principal axes of the data.
+\end{itemize}
+
+\medskip
+
+\textbf{Key intuition.} In both cases, probability is highest near the mean and decreases with “distance”:
+\begin{itemize}
+    \item 1D: distance measured by $(x-\mu)/\sigma$ (z-score)
+    \item Multivariate: distance measured by Mahalanobis distance
+\end{itemize}
+
+\medskip
+
+\textbf{Mahalanobis distance.}
+The quantity
+\[
+(x-\mu)^T \Sigma^{-1}(x-\mu)
+\]
+is called the \emph{Mahalanobis distance}.
 
 \begin{itemize}
-    \item \textbf{Gaussian model:} \(x \sim \mathcal{N}(\mu, \Sigma)\)
-    
-    \item Equivalent distance view (Mahalanobis distance):
-    \[
-    (x-\mu)^T \Sigma^{-1} (x-\mu) \text{ large} \;\Rightarrow\; \text{anomaly}
-    \]
+    \item It rescales each direction by its variance
+    \item It accounts for correlations between variables
+    \item It measures distance relative to the shape of the data cloud
 \end{itemize}
+
+\[
+\text{Large Mahalanobis distance} \;\Rightarrow\; \text{anomaly}
+\]
+
+\medskip
+
+\textbf{Geometric interpretation.}
+\begin{itemize}
+    \item In 1D: intervals around the mean
+    \item In 2D: ellipses
+    \item In higher dimensions: ellipsoids
+\end{itemize}
+
+The covariance matrix \( \Sigma \) determines the shape and orientation of these regions:
+\begin{itemize}
+    \item Large variance $\Rightarrow$ stretched directions
+    \item Small variance $\Rightarrow$ compressed directions
+    \item Correlation $\Rightarrow$ tilted ellipsoids
+\end{itemize}
+
+Normal points lie near the center of these ellipsoids; anomalies lie far outside them.
+
+\medskip
+
+\textbf{Normalization constant (intuition).}
+\[
+\frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}}
+\]
+ensures the total probability integrates to 1.  
+
+\begin{itemize}
+    \item \( (2\pi)^{d/2} \) comes from integration in \(d\) dimensions
+    \item \( |\Sigma|^{1/2} \) reflects the overall spread (volume) of the data
+\end{itemize}
+
+Larger spread $\Rightarrow$ lower peak density.
+
+\medskip
+
+\textbf{Key connections.}
+\begin{itemize}
+    \item Z-score (1D) $\longleftrightarrow$ Mahalanobis distance (multi-d)
+    \item Intervals $\longleftrightarrow$ ellipsoids
+    \item Distance-based view $\longleftrightarrow$ probability-based view
+\end{itemize}
+
+\medskip
+
+\textbf{Key intuition.}
+\[
+\text{Probability decays with distance from } \mu \text{, measured in the geometry of the data.}
+\]
 
 \item \textbf{More flexible models.}
 
