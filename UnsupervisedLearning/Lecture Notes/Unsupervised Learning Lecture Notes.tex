@@ -1889,4 +1889,179 @@ Hyperparameters & Perplexity & n\_neighbors, min\_dist
 \item \textbf{Intuition summary:}  
 UMAP builds a fuzzy neighbor graph to represent local connectivity, then finds a low-dimensional embedding that preserves this structure: connected points stay close, unconnected points are pushed apart. By modeling only local neighborhoods, UMAP scales efficiently and captures both cluster structure and some global topology.
 \end{enumerate}
+
+\section*{Anomaly detection} 
+\addcontentsline{toc}{section}{Anomaly detection}
+
+\begin{enumerate}
+\item \textbf{Definition:} Anomaly detection identifies observations that deviate significantly from the majority of the data (outliers).
+
+\item \textbf{Key idea:} Learn the structure of ``normal'' data and flag points that do not conform.
+
+\begin{itemize}
+\item Normal: high density / structured
+\item Anomaly: low density / isolated
+\end{itemize}
+
+\item \textbf{Applications:}
+\begin{itemize}
+    \item \textbf{Fraud detection:} Identify unusual transactions (e.g., credit card fraud)
+    \item \textbf{Cybersecurity:} Detect network intrusions or abnormal user behavior
+    \item \textbf{Healthcare:} Find abnormal patient measurements or rare conditions
+    \item \textbf{Manufacturing:} Detect defects or equipment failures from sensor data
+    \item \textbf{Finance:} Identify unusual market activity or trading patterns
+    \item \textbf{Monitoring systems:} Detect anomalies in time series (e.g., traffic, energy usage)
+\end{itemize}
+
+\item \textbf{Types of Anomaly Detection:}
+\begin{itemize}
+    \item \textbf{Supervised:} 
+    \begin{itemize}
+        \item Labeled data available (normal vs. anomaly)
+        \item Learn a classifier to separate anomalies
+        \item Example: fraud detection with historical labels
+    \end{itemize}
+    
+    \item \textbf{Semi-supervised:} 
+    \begin{itemize}
+        \item Only ``normal'' data labeled
+        \item Model normal behavior; deviations are anomalies
+        \item Example: sensor monitoring with only normal operation logs
+    \end{itemize}
+    
+    \item \textbf{Unsupervised:} 
+    \begin{itemize}
+        \item No labels available
+        \item Detect outliers using distance, density, clustering, or reconstruction
+        \item Example: network intrusion detection without prior labels
+    \end{itemize}
+\end{itemize}
+
+\item \textbf{Common Approaches for Unsupervised Anomaly Detection:}
+\begin{itemize}
+\item \textbf{Statistical:} Fit a probability model \(p(x)\) and flag points with low likelihood
+\[
+p(x) \text{ small} \;\Rightarrow\; \text{anomaly}
+\]
+Examples: Gaussian models (normal distribution), Gaussian mixture models (multiple distributions, one for normal, one for anomalies)
+
+\item \textbf{Proximity-based:} Anomalies are far from their neighbors
+\[
+\min_j \|x - x_j\| \text{ large} \;\Rightarrow\; \text{anomaly}
+\]
+Examples: kNN distance, Local Outlier Factor (LOF)
+
+\item \textbf{Clustering-based:} Use clustering structure
+\begin{itemize}
+\item Far from cluster centers
+\item Belong to very small clusters
+\item Labeled as noise (e.g., DBSCAN)
+\end{itemize}
+
+\item \textbf{Reconstruction-based:} Learn a low-dimensional representation and reconstruct
+\[
+\|x - \hat{x}\| \text{ large} \;\Rightarrow\; \text{anomaly}
+\]
+Examples: PCA, autoencoders (NN embeddings)
+\end{itemize}
+
+\item \textbf{Practical notes:}
+\begin{itemize}
+\item No labels $\Rightarrow$ evaluation is difficult
+\item Must choose a threshold (e.g., top 1\% most anomalous)
+\item Performance degrades in high dimensions
+\end{itemize}
+
+\item \textbf{Summary:}
+\[
+\text{An anomaly is a point that does not fit the learned structure of the data.}
+\]
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Statistical anomaly detection}
+\addcontentsline{toc}{subsection}{Statistical anomaly detection}
+
+\begin{enumerate}
+
+\item \textbf{Univariate intuition (simple starting point).}
+
+For a single variable, anomalies are values that are unusually large or small relative to the data.
+
+\begin{itemize}
+    \item \textbf{IQR rule (boxplot rule):}
+    \[
+    \text{Anomaly if } x < Q_1 - 1.5\,\text{IQR} \quad \text{or} \quad x > Q_3 + 1.5\,\text{IQR}
+    \]
+    where \( \text{IQR} = Q_3 - Q_1 \).
+    
+    \item \textbf{Z-score (normal assumption):}
+    \[
+    z = \frac{x - \mu}{\sigma}
+    \quad \Rightarrow \quad
+    |z| \text{ large } \;\Rightarrow\; \text{anomaly}
+    \]
+    Common rule: flag if \( |z| > 3 \). Can lookup thresholds in a distribution table.
+    
+    \item Notation differences for a population vs a sample. Probably want sample notation here.
+    
+    \item Note the mean is skewed by outliers. Median can be used. Don't sweat it here.
+\end{itemize}
+
+\item \textbf{Key idea (generalization).}
+
+Assume data are generated from a distribution \(p(x)\).  
+Points that are unlikely under this model are anomalies:
+\[
+p(x) \text{ small} \;\Rightarrow\; \text{anomaly}
+\]
+
+\item \textbf{Multivariate extension.}
+
+In higher dimensions, we replace simple thresholds with a model of the joint distribution.
+
+\begin{itemize}
+    \item \textbf{Gaussian model:} \(x \sim \mathcal{N}(\mu, \Sigma)\)
+    
+    \item Equivalent distance view (Mahalanobis distance):
+    \[
+    (x-\mu)^T \Sigma^{-1} (x-\mu) \text{ large} \;\Rightarrow\; \text{anomaly}
+    \]
+\end{itemize}
+
+\item \textbf{More flexible models.}
+
+\begin{itemize}
+    \item \textbf{Gaussian mixture model (GMM):}
+    \[
+    p(x) = \sum_{k=1}^K \pi_k \, \mathcal{N}(x \mid \mu_k, \Sigma_k)
+    \]
+    Captures multiple clusters of normal behavior.
+\end{itemize}
+
+\item \textbf{Basic procedure.}
+\begin{enumerate}
+    \item Fit a model \(p(x)\)
+    \item Compute a score (e.g., likelihood or distance)
+    \item Flag low-probability points
+\end{enumerate}
+
+\item \textbf{Thresholding.}
+\begin{itemize}
+    \item Choose cutoff \( \tau \):
+    \[
+    p(x) < \tau \;\Rightarrow\; \text{anomaly}
+    \]
+    \item Often chosen via percentiles (e.g., lowest 1\%)
+\end{itemize}
+
+\item \textbf{Takeaway.}
+\[
+\text{Statistical anomaly detection = “unlikely under the model.”}
+\]
+
+\end{enumerate}
 \end{document}
