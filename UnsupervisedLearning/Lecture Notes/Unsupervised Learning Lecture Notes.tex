@@ -1980,223 +1980,513 @@ Examples: PCA, autoencoders (NN embeddings)
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Statistical anomaly detection}
 \addcontentsline{toc}{subsection}{Statistical anomaly detection}
 
 \begin{enumerate}
 
-\item \textbf{Univariate intuition (simple starting point).}
+\item \textbf{Univariate intuition (starting point).}
 
 For a single variable, anomalies are values that are unusually large or small relative to the data.
 
 \begin{itemize}
-    \item \textbf{IQR rule (boxplot rule):}
+    \item \textbf{IQR rule (robust):} Comes from elementary stat and boxplots
     \[
-    \text{Anomaly if } x < Q_1 - 1.5\,\text{IQR} \quad \text{or} \quad x > Q_3 + 1.5\,\text{IQR}
+    \text{Anomaly if } x < Q_1 - 1.5\,\text{IQR}
+    \quad \text{or} \quad
+    x > Q_3 + 1.5\,\text{IQR},
+    \quad \text{IQR} = Q_3 - Q_1
     \]
-    where \( \text{IQR} = Q_3 - Q_1 \).
-    
-    \item \textbf{Z-score (normal assumption):}
+
+    \item \textbf{Z-score (normal assumption):} fit to a standard normal distribution
     \[
-    z = \frac{x - \mu}{\sigma}
-    \quad \Rightarrow \quad
-    |z| \text{ large } \;\Rightarrow\; \text{anomaly}
+    z = \frac{x - \mu}{\sigma},
+    \qquad |z| \text{ large } \Rightarrow \text{anomaly}
     \]
-    Common rule: flag if \( |z| > 3 \). Can lookup thresholds in a distribution table.
-    
-    \item Notation differences for a population vs a sample. Probably want sample notation here.
-    
-    \item Note the mean is skewed by outliers. Median can be used. Don't sweat it here.
+    Common rule: flag if \( |z| > 3 \).
+
+    \item \textbf{Notes:}
+    \begin{itemize}
+        \item In practice, use sample estimates \( \bar{x}, s \)
+        \item Mean and standard deviation are sensitive to outliers
+        \item Median/IQR provide more robust alternatives
+    \end{itemize}
 \end{itemize}
 
-\item \textbf{Key idea (generalization).}
+\item \textbf{Core idea (generalization).}
 
-Assume data are generated from a distribution \(p(x)\).  
+Assume the data are generated from a distribution \( p(x) \).  
 Points that are unlikely under this model are anomalies:
 \[
 p(x) \text{ small} \;\Rightarrow\; \text{anomaly}
 \]
-\item \textbf{Multivariate extension.}
 
-\textbf{Motivation.} 
-In multiple dimensions, checking each variable separately can fail. A point may look typical in every coordinate but still be unusual \emph{as a combination}.  
-For example, height and weight may each be typical individually, but an unusual pairing (e.g., very tall and very light) may be rare.  
-Thus, we must model the \emph{joint behavior} of the variables.
+\item \textbf{Gaussian model (1D).}
 
-\medskip
-
-\textbf{From 1D to higher dimensions.}
-In one dimension, anomaly detection is based on distance from the mean:
-\[
-\frac{(x - \mu)^2}{\sigma^2} \text{ large} \;\Rightarrow\; \text{anomaly}
-\]
-This measures how far \(x\) is from \(\mu\), scaled by variability.
-
-In higher dimensions:
-\begin{itemize}
-    \item The mean becomes a vector \( \mu \in \mathbb{R}^d \)
-    \item Variability becomes a covariance matrix \( \Sigma \in \mathbb{R}^{d \times d} \)
-    \item We need a notion of distance that accounts for:
-    \begin{itemize}
-        \item different scales in each direction
-        \item relationships (correlations) between variables
-    \end{itemize}
-\end{itemize}
-
-\medskip
-
-\textbf{Why Euclidean distance is not enough.}
-A naive approach is to use Euclidean distance:
-\[
-\|x - \mu\|^2
-\]
-However, this assumes:
-\begin{itemize}
-    \item all variables have the same variance
-    \item variables are independent (no correlation)
-\end{itemize}
-In real data, some directions have much larger spread than others, and variables are often correlated.  
-Thus, Euclidean distance can misidentify anomalies.
-
-\medskip
-\subsection*{Gaussian distributions: 1D and multivariate}
-
-\textbf{1D Gaussian.} For a continuous scalar variable $X$, the normal distribution models how likely values are near the mean $\mu$:
+For a scalar variable:
 \[
 X \sim \mathcal{N}(\mu, \sigma^2), \qquad
 p(x) = \frac{1}{\sqrt{2\pi \sigma^2}} 
 \exp\Bigg(-\frac{(x-\mu)^2}{2\sigma^2}\Bigg)
 \]
+
 \begin{itemize}
-    \item $(x-\mu)^2$ measures squared distance from the mean.
-    \item Dividing by $2\sigma^2$ scales distance by the variance.
-    \item Probability density decreases exponentially as $x$ moves away from $\mu$.
+    \item Probability decreases as distance from \( \mu \) increases
+    \item Distance is measured in units of standard deviation
+    \item Z-score:
+    \[
+    z^2 = \frac{(x-\mu)^2}{\sigma^2}
+    \]
 \end{itemize}
 
-\medskip
+\item \textbf{Why multivariate modeling is needed.}
 
-\textbf{Multivariate Gaussian.} For a continuous vector $X \in \mathbb{R}^d$, we generalize to account for scale and correlations:
+In higher dimensions, anomalies may not appear extreme in any single variable, but are unusual \emph{jointly}.
+
+\begin{itemize}
+    \item Example: height and weight individually normal, but unusual combination
+    \item Therefore, we must model the \emph{joint distribution}
+\end{itemize}
+
+\item \textbf{From distance to geometry.}
+
+In 1D:
+\[
+\frac{(x-\mu)^2}{\sigma^2} \text{ large} \Rightarrow \text{anomaly}
+\]
+
+In multiple dimensions:
+\begin{itemize}
+    \item Mean becomes \( \mu \in \mathbb{R}^d \)
+    \item Variability becomes covariance matrix \( \Sigma \)
+    \item Need distance that accounts for:
+    \begin{itemize}
+        \item different scales
+        \item correlations
+    \end{itemize}
+\end{itemize}
+
+\item \textbf{Why Euclidean distance fails.}
+
+\[
+\|x - \mu\|^2
+\]
+
+assumes:
+\begin{itemize}
+    \item equal variance in all directions
+    \item no correlation between variables
+\end{itemize}
+
+This is rarely true in real data.
+
+\item \textbf{Multivariate Gaussian model.}
+
 \[
 X \sim \mathcal{N}(\mu, \Sigma), \qquad
 p(x) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}}
-\exp\Bigg(-\frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \Bigg)
+\exp\Bigg(-\frac{1}{2}(x-\mu)^T \Sigma^{-1}(x-\mu)\Bigg)
 \]
-\begin{itemize}
-    \item $\mu \in \mathbb{R}^d$ is the mean vector.
-    \item $\Sigma \in \mathbb{R}^{d\times d}$ is the covariance matrix.
-    \item $(x-\mu)^T \Sigma^{-1} (x-\mu)$ is the Mahalanobis distance, measuring distance in the geometry of the data.
-    \item The exponent generalizes $-(x-\mu)^2/(2\sigma^2)$ from 1D.
-    \item Probability decays exponentially with distance from the mean along the principal axes of the data.
-\end{itemize}
-
-\medskip
-
-\textbf{Key intuition.} In both cases, probability is highest near the mean and decreases with “distance”:
-\begin{itemize}
-    \item 1D: distance measured by $(x-\mu)/\sigma$ (z-score)
-    \item Multivariate: distance measured by Mahalanobis distance
-\end{itemize}
-
-\medskip
-
-\textbf{Mahalanobis distance.}
-The quantity
-\[
-(x-\mu)^T \Sigma^{-1}(x-\mu)
-\]
-is called the \emph{Mahalanobis distance}.
 
 \begin{itemize}
-    \item It rescales each direction by its variance
-    \item It accounts for correlations between variables
-    \item It measures distance relative to the shape of the data cloud
+    \item \( \mu \): mean vector
+    \item \( \Sigma \): covariance matrix
+    \item Exponent generalizes squared distance from 1D
 \end{itemize}
+
+\item \textbf{Mahalanobis distance.}
 
 \[
-\text{Large Mahalanobis distance} \;\Rightarrow\; \text{anomaly}
+D_M^2(x) = (x-\mu)^T \Sigma^{-1}(x-\mu)
 \]
 
-\medskip
-
-\textbf{Geometric interpretation.}
 \begin{itemize}
-    \item In 1D: intervals around the mean
-    \item In 2D: ellipses
-    \item In higher dimensions: ellipsoids
+    \item Accounts for scale and correlation
+    \item Measures distance in the geometry of the data
+    \item Large distance \( \Rightarrow \) anomaly
 \end{itemize}
 
-The covariance matrix \( \Sigma \) determines the shape and orientation of these regions:
+\item \textbf{Geometric interpretation.}
+
+\begin{itemize}
+    \item 1D: intervals
+    \item 2D: ellipses
+    \item \(d\)D: ellipsoids
+\end{itemize}
+
 \begin{itemize}
     \item Large variance $\Rightarrow$ stretched directions
     \item Small variance $\Rightarrow$ compressed directions
     \item Correlation $\Rightarrow$ tilted ellipsoids
 \end{itemize}
 
-Normal points lie near the center of these ellipsoids; anomalies lie far outside them.
+Normal points lie near the center; anomalies lie far outside.
 
-\medskip
+\item \textbf{Normalization constant (intuition).}
 
-\textbf{Normalization constant (intuition).}
 \[
 \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}}
 \]
-ensures the total probability integrates to 1.  
 
 \begin{itemize}
-    \item \( (2\pi)^{d/2} \) comes from integration in \(d\) dimensions
-    \item \( |\Sigma|^{1/2} \) reflects the overall spread (volume) of the data
+    \item Ensures total probability is 1
+    \item \( |\Sigma| \) reflects overall spread (volume)
+    \item Larger spread $\Rightarrow$ lower peak density
 \end{itemize}
 
-Larger spread $\Rightarrow$ lower peak density.
+\item \textbf{Flexible models.}
 
-\medskip
-
-\textbf{Key connections.}
-\begin{itemize}
-    \item Z-score (1D) $\longleftrightarrow$ Mahalanobis distance (multi-d)
-    \item Intervals $\longleftrightarrow$ ellipsoids
-    \item Distance-based view $\longleftrightarrow$ probability-based view
-\end{itemize}
-
-\medskip
-
-\textbf{Key intuition.}
-\[
-\text{Probability decays with distance from } \mu \text{, measured in the geometry of the data.}
-\]
-
-\item \textbf{More flexible models.}
+The single Gaussian assumption may be too restrictive. Real data often contain multiple modes (clusters), skewness, or heterogeneous subpopulations.
 
 \begin{itemize}
-    \item \textbf{Gaussian mixture model (GMM):}
+    \item \textbf{Gaussian Mixture Model (GMM):}
     \[
-    p(x) = \sum_{k=1}^K \pi_k \, \mathcal{N}(x \mid \mu_k, \Sigma_k)
+    p(x) = \sum_{k=1}^K \pi_k \,\mathcal{N}(x \mid \mu_k, \Sigma_k)
     \]
-    Captures multiple clusters of normal behavior.
+
+    \begin{itemize}
+        \item Each component \(k\) represents a cluster of \emph{normal behavior}
+        \item \( \pi_k \ge 0 \), \( \sum_{k=1}^K \pi_k = 1 \) are mixing weights
+        \item \( \mu_k, \Sigma_k \) define the shape of each cluster
+    \end{itemize}
+
+    \item \textbf{Interpretation.}
+    \begin{itemize}
+        \item Data are generated by first choosing a component \(k\) with probability \( \pi_k \), then sampling from that Gaussian
+        \item The model captures \emph{multi-modal structure} (multiple “normal regions”)
+        \item Each component defines its own ellipsoidal region of high probability
+    \end{itemize}
+
+    \item \textbf{Why this helps for anomaly detection.}
+    \begin{itemize}
+        \item A single Gaussian may label valid clusters as anomalies
+        \item GMM allows multiple centers of normality
+        \item Points far from \emph{all} components will have low probability
+    \end{itemize}
+
+    \item \textbf{Connection to clustering.}
+    \begin{itemize}
+        \item GMM can be viewed as a \emph{soft clustering} method
+        \item Each point has responsibilities:
+        \[
+        \gamma_k(x) = P(\text{component } k \mid x)
+        \]
+        \item Unlike k-means:
+        \begin{itemize}
+            \item clusters can have different shapes (via \( \Sigma_k \))
+            \item assignments are probabilistic, not hard
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Practical notes.}
+    \begin{itemize}
+        \item Typically fit using the EM algorithm
+        \item Choice of \(K\) matters (too small: underfit, too large: overfit)
+        \item Common covariance choices:
+        \begin{itemize}
+            \item full (most flexible)
+            \item diagonal (faster, assumes independence)
+            \item spherical (strongest assumption)
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Fitting via EM (expectation-maximization) algorithm (idea).}
+
+\begin{itemize}
+    \item Goal: estimate \( \{\pi_k, \mu_k, \Sigma_k\}_{k=1}^K \) when component assignments are unknown
+
+    \item EM alternates between two steps:
+
+    \begin{itemize}
+        \item \textbf{E-step (Expectation):}  
+        Compute \emph{responsibilities} (soft assignments)
+        \[
+        \gamma_k(x_i) = P(k \mid x_i)
+        = \frac{\pi_k \,\mathcal{N}(x_i \mid \mu_k, \Sigma_k)}
+        {\sum_{j=1}^K \pi_j \,\mathcal{N}(x_i \mid \mu_j, \Sigma_j)}
+        \]
+
+        \item \textbf{M-step (Maximization):}  
+        Update parameters using weighted data
+        \[
+        \pi_k = \frac{1}{n} \sum_{i=1}^n \gamma_k(x_i), \quad
+        \mu_k = \frac{\sum_{i=1}^n \gamma_k(x_i)x_i}{\sum_{i=1}^n \gamma_k(x_i)}
+        \]
+        \[
+        \Sigma_k = \frac{\sum_{i=1}^n \gamma_k(x_i)(x_i-\mu_k)(x_i-\mu_k)^T}
+        {\sum_{i=1}^n \gamma_k(x_i)}
+        \]
+    \end{itemize}
+
+    \item Iterate until convergence (log-likelihood stops improving)
+    
+    \item \textbf{Likelihood and log-likelihood.}
+
+\begin{itemize}
+    \item Likelihood measures how well a model explains the data: for parameters $\theta$,
+    \[
+    L(\theta) = \prod_{i=1}^n p(x_i \mid \theta)
+    \]
+
+    \item Log-likelihood: same maximum as likelihood
+    \[
+    \ell(\theta) = \log L(\theta) = \sum_{i=1}^n \log p(x_i \mid \theta)
+    \]
+
+\end{itemize}
+
+    \item \textbf{Key intuition:}
+    \begin{itemize}
+        \item E-step: assign points to clusters (softly)
+        \item M-step: refit clusters using those assignments
+    \end{itemize}
+\end{itemize}
 \end{itemize}
 
 \item \textbf{Basic procedure.}
+
 \begin{enumerate}
-    \item Fit a model \(p(x)\)
-    \item Compute a score (e.g., likelihood or distance)
-    \item Flag low-probability points
+    \item \textbf{Fit a model \( p(x) \).}
+    \begin{itemize}
+        \item Choose a model (Gaussian, GMM, etc.)
+        \item Estimate parameters from data (e.g., MLE, EM)
+    \end{itemize}
+
+    \item \textbf{Compute anomaly scores.}
+    \begin{itemize}
+        \item Likelihood-based:
+        \[
+        s(x) = p(x) \quad \text{(low values indicate anomalies)}
+        \]
+        \item Log-likelihood (numerically stable):
+        \[
+        s(x) = \log p(x)
+        \]
+        \item Distance-based (Gaussian case):
+        \[
+        s(x) = (x-\mu)^T \Sigma^{-1}(x-\mu)
+        \]
+    \end{itemize}
+
+    \item \textbf{Thresholding.}
+    \begin{itemize}
+        \item Choose threshold \( \tau \):
+        \[
+        s(x) < \tau \;\Rightarrow\; \text{anomaly}
+        \]
+        \item Often set via:
+        \begin{itemize}
+            \item percentiles (e.g., lowest 1--5\%)
+            \item validation data (if labels available)
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Interpretation.}
+    \begin{itemize}
+        \item High-density regions = normal behavior
+        \item Low-density regions = anomalies
+        \item In GMM: anomaly if point is unlikely under \emph{all} components
+    \end{itemize}
 \end{enumerate}
 
 \item \textbf{Thresholding.}
-\begin{itemize}
-    \item Choose cutoff \( \tau \):
-    \[
-    p(x) < \tau \;\Rightarrow\; \text{anomaly}
-    \]
-    \item Often chosen via percentiles (e.g., lowest 1\%)
-\end{itemize}
 
-\item \textbf{Takeaway.}
 \[
-\text{Statistical anomaly detection = “unlikely under the model.”}
+p(x) < \tau \;\Rightarrow\; \text{anomaly}
 \]
 
+\begin{itemize}
+    \item Choose \( \tau \) via percentiles (e.g., lowest 1\%)
+\end{itemize}
+
+\item \textbf{Key takeaway.}
+
+\[
+\text{Anomaly detection = identifying points unlikely under the model}
+\]
+
+\item \textbf{Strengths and weaknesses of statistical anomaly detection.}
+
+\begin{itemize}
+    \item \textbf{Strengths:}
+    \begin{itemize}
+        \item Conceptually simple: “anomaly = unlikely under the model”
+        \item Works for both univariate and multivariate data
+        \item Probabilistic: provides a natural anomaly score
+        \item Can handle complex models (GMM, mixtures) for multi-modal data
+        \item Thresholding is interpretable (e.g., percentiles)
+    \end{itemize}
+
+    \item \textbf{Weaknesses:}
+    \begin{itemize}
+        \item Assumes a parametric form (e.g., Gaussian) which may be wrong
+        \item Sensitive to outliers during parameter estimation
+        \item High-dimensional data can make covariance estimation unstable
+        \item Overlapping clusters may reduce sensitivity to anomalies
+        \item Selecting number of components (\(K\)) can be tricky for unlabeled data
+    \end{itemize}
+\end{itemize}
+
 \end{enumerate}
+
+\subsection*{Proximity-based anomaly detection.}
+
+\begin{enumerate}
+\item \textbf{Core idea:} A point is anomalous if it is far from its neighbors in feature space. These approaches are model free because there is no model (formula) to represent the normal class.
+
+\item \textbf{Distance based:} k-Nearest Neighbors (kNN)
+\begin{itemize}
+\item For point $x_i$, let $d_k(x_i)$ be the distance to its $k$-th nearest neighbor.  
+\[
+\text{Anomaly score: } s(x_i) = d_k(x_i)
+\]
+
+\item Large $s(x_i)$ indicates isolation indicating anomaly.
+
+\item $k$ choice is hard per Tan text image. Can use elbow method on histogram of anomaly scores.
+
+\end{itemize}
+
+\item \textbf{Density based:} Can modify KNN to account for density. Close to Local Outlier Factor (LOF).
+\begin{itemize}
+
+\item For regions of varying density, can consider relative density:
+\[
+\text{RelativeDensity}(x, k) = \frac{\frac{1}{k} \sum_{i=1}^k \text{density}(y_i, k)}{\text{density}(x, k)}
+\]
+where
+\[
+\text{density}(x, k) = \frac{1}{\text{dist}(x, k)}
+\]
+\end{itemize}
+
+\item \textbf{Key points:}  
+\begin{itemize}
+        \item Non-parametric: no assumptions on distribution  
+        \item Handles irregular cluster shapes  
+        \item Sensitive to choice of distance metric and number of neighbors $k$
+\end{itemize}
+
+\item \textbf{High-dimensional caution:}  
+    \begin{itemize}
+        \item Distances become less meaningful as dimensions increase (curse of dimensionality)  
+        \item Dimensionality reduction or feature scaling may help
+    \end{itemize}
+    
+\item \textbf{Strengths and weaknesses of proximity-based methods.}
+
+\begin{itemize}
+    \item \textbf{Strengths:}
+    \begin{itemize}
+        \item Non-parametric: no assumptions about underlying distribution
+        \item Can detect anomalies in irregularly-shaped clusters
+        \item Works for multi-modal data
+        \item Provides a natural anomaly score (distance or relative density)
+    \end{itemize}
+
+    \item \textbf{Weaknesses:}
+    \begin{itemize}
+        \item Choice of distance metric and neighborhood size \(k\) strongly affects results
+        \item Sensitive to high-dimensional data (curse of dimensionality)
+        \item Computationally expensive for large datasets (kNN distances scale poorly)
+        \item Local density estimates can be noisy for small \(k\)
+    \end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection*{Cluster-based anomaly detection.}
+
+\begin{enumerate}
+    \item \textbf{Core idea:} Points far from clusters or with low probability under a cluster model are anomalies. Ie none of the clusters explain this point well.
+
+    \item \textbf{Clustering methods:}
+    \begin{itemize}
+        \item \textbf{k-means / centroid-based:}  
+        Partition data into $K$ clusters. For point $x_i$, compute distance to nearest cluster centroid:
+        \[
+        s(x_i) = \min_{j=1,\dots,K} \|x_i - \mu_j\|
+        \]
+        Large $s(x_i)$ indicates anomaly. Assumes roughly spherical clusters.
+
+        \item \textbf{Density-based (DBSCAN):}  
+        Clusters are dense regions. Points in low-density regions or not assigned to any cluster are anomalies. Handles arbitrary shapes.
+
+        \item \textbf{Probabilistic (GMM):}  
+        Model clusters as Gaussian components:
+        \[
+        p(x_i) = \sum_{j=1}^K \pi_j \, \mathcal{N}(x_i \mid \mu_j, \Sigma_j)
+        \]
+        Small $p(x_i)$ → anomaly.
+    \end{itemize}
+
+    \item \textbf{Advantages:}
+    \begin{itemize}
+        \item Handles multi-modal normal data
+        \item Flexible for irregular cluster shapes (DBSCAN, GMM)
+        \item Intuitive: anomalies lie between clusters or in sparse areas
+        \item Can combine distance, density, or probability scoring
+    \end{itemize}
+
+    \item \textbf{Limitations:}
+    \begin{itemize}
+        \item Choice of number of clusters $K$ or density parameters strongly affects results
+        \item k-means assumes spherical, similar-sized clusters
+        \item High-dimensional data may require dimensionality reduction or scaling
+        \item Computationally expensive for large datasets
+        \item Outliers heavily impact cluster formulation
+    \end{itemize}
+
+    \item \textbf{Intuition (2D):}  
+    Normal points: inside clusters; anomalies: outside clusters or in sparse areas.
+\end{enumerate}
+
+\subsection*{Reconstruction-based anomaly detection.}
+
+\begin{itemize}
+    \item \textbf{Core idea:} Learn a model that reconstructs normal data well; points with high reconstruction error are anomalies.
+
+    \item \textbf{PCA reconstruction:}  
+    Fit PCA using top $d$ components and reconstruct each point:
+    \[
+    \hat{x}_i = P_d P_d^T (x_i - \mu) + \mu
+    \]
+    Compute reconstruction error:
+    \[
+    e_i = \|x_i - \hat{x}_i\|^2
+    \]
+    Large $e_i$ → anomaly.
+
+    \item \textbf{Autoencoder reconstruction:}  
+    Encode inputs to a latent space and decode back:
+    \[
+    \hat{x}_i = \text{Decoder}(\text{Encoder}(x_i))
+    \]
+    Reconstruction loss:
+    \[
+    L(x_i) = \|x_i - \hat{x}_i\|^2
+    \]
+    High loss → anomaly.
+
+    \item \textbf{Other methods:}  
+    Robust PCA, sparse coding, dictionary learning. Key idea: normal patterns are compressible; anomalies are not.
+
+    \item \textbf{Advantages:}
+    \begin{itemize}
+        \item Captures complex, high-dimensional correlations
+        \item Works for structured data (images, time series, sensor readings)
+        \item Can model nonlinear manifolds with autoencoders
+    \end{itemize}
+
+    \item \textbf{Limitations:}
+    \begin{itemize}
+        \item Requires representative normal training data
+        \item Model capacity affects detection: underfitting or overfitting
+        \item Training can be computationally expensive
+        \item Sensitive to preprocessing and feature scaling
+    \end{itemize}
+
+    \item \textbf{Intuition:}  
+    Normal points are well approximated by the learned template; anomalies cannot be reconstructed accurately and “stick out.”
+\end{itemize}
+
 \end{document}
