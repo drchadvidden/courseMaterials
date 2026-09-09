@@ -1,9 +1,9 @@
 \documentclass{article}
 \usepackage{amsmath}
-\usepackage[margin=0.5in]{geometry}
+\usepackage[margin=0.5in]{geometry} 
 \usepackage{amssymb,amscd,graphicx}
 \usepackage{epsfig}
-\usepackage{epstopdf}
+\usepackage{epstopdf} 
 \usepackage{hyperref}
 \usepackage{color}
 \usepackage[]{amsmath}
@@ -68,86 +68,50 @@ dancing \url{https://www.youtube.com/watch?v=PCBTZh41Ris}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Syllabus highlights
-\begin{enumerate}
-\item Grades: 
-\begin{enumerate}
-\item Know the expectation / what you are getting into.
-\item 15perc A (excellent), 35perc B (good), 35perc C (satisfactory),10perc D (passing), some F (failing)
-\item Expect lower grades than you are used to. I was a student once upon a time. I know what it's like to give some effort in a class and still get an A/B. Night before study, good enough? 
-\item Turn in an exam / project. Did you do good work?
-\item Many will start off doing good / satisfactory work. Improve to something more. C is not the worst thing in existence. These letters say nothing of your capability. 
-\end{enumerate}
-\item What does good mean? Good means good. Good job! Excellent means you showed some flair.
-\item Expect: More work, more expectation on good writing.
-\item Math is a challenging subject. Not a natural thing to think or write in. It takes work and practice to be better. My goal is to train you to be better and give you ideas of where it can go.
-\item Fact that you are here shows you are smart and capable. Your goal should be to improve. 
-\item Why do I do this? I do it out of respect for you. You are smart enough. I want you to gain something valuable here. I wouldn't do this job if I didn't think you were gaining something of value.
-\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\item Outline of this class
+\item What is a differential equation?
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to model real world with differential equations:
-\begin{itemize}
-\item Population growth (cooling, investment, etc), harmonic motion (signals, spring, vibration), disease transfer (SIR model), more.
-\item Modeling will not be a big focus of this class, but it can be a big focus depending on your area (math biology). 
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Main topics:
-\begin{itemize}
-\item First order differential equations: Calculus 1,2
+
+\item Example: Population growth
 \[
-\frac{dy}{dt} = f(t,y), \quad \frac{dy}{dt} = ky,  
- \quad \frac{dy}{dt} = f(y),  
+\frac{dP}{dt} = 2P
 \]
-Given a specific $f$, goal is to solve for unknown function $y$.
-\item First order systems (many coupled equations): Vector calculus
+$P(t)$ is an unknown population function of time $t$. Many solutions, but can write the general solution. Given an initial population $P(0) = P_0$, we get a unique solution. Integration techniques give our solution in this case (analytic techniques).
+
+\item General first order (derivative) equation: Notice we focus on change, not static values like an algebraic equation.
 \[
-\frac{d\vec{Y}}{dt} = f(t,\vec{Y})
+\frac{dy}{dt} = f(t,y)
 \]
-\item Linear systems: Linear algebra
-\[
-\frac{d\vec{Y}}{dt} = A \vec{Y} \quad (\text{akin to } \lambda \vec{x}=A\vec{x})
-\]
-\item Second (and higher) order differential equations:  Calculus and linear algebra
-\[
-m \frac{d^2y}{dt^2} +b\frac{dy}{dt}+ky=f(t) \quad (\text{Newton's 2nd law: } F=ma)
-\]
-\item Laplace transforms: Extension of power series
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Main tools:
-\begin{itemize}
-\item 
-\end{itemize}
-\item Big views:
-\begin{itemize}
-\item Analytic (solve via Calculus and integration)
-\item Qualitative (visualize DE to understand global behavior)
-\item Numerical (program to find approximate solutions)
-\item Theoretical (existence and uniqueness, minor in this class, big in this field)
-\end{itemize}
+$f(t,y)$ is some given function. Generally no technique can solve, so we will need other ideas (numerical and qualitative analysis).
+
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Why do differential equations?
-%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Why study differential equations?
 \begin{enumerate}
-\item Theories in many fields of science are translated into differential equations.
-\begin{itemize}
-\item Fliud dynamics, gravitational waves, optics, finance, etc
+
+\item Goal is to model the real world which involves making assumptions, building equations, and analysis to hopefully find solutions. 
+
+\item Useful in all sciences (population growth, disease spread, fluid dynamics, heat transfer, ecology, circuits, chemical reaction, stock market, etc)
+
 \item List is long: \url{https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations}
-\item Trouble is almost none can be solved, instead they are studied (theory).
-\end{itemize}
-\item Millennium prize: \url{https://en.wikipedia.org/wiki/Millennium_Prize_Problems#Navier%E2%80%93Stokes_existence_and_smoothness}
-\item Youtubeness:
-\begin{itemize}
-\item 
-\end{itemize}
+
+\item Trouble is almost none can be solved, instead they are analyzed in general (theory) and approximated via simulations (coding).
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Course topics:
+\begin{enumerate}
+\item Building (analyzing) mathematical models (general theme)
+\item Ch1: First-order differential equations
+\item Ch2: First order systems
+\item Ch3: Linear systems
+\item Ch4: Forcing and resonance
+\item Ch5: Nonlinear systems
+\item Ch6: Laplace transform
+\end{enumerate}
+
 \end{enumerate}
 
 
@@ -158,118 +122,121 @@ m \frac{d^2y}{dt^2} +b\frac{dy}{dt}+ky=f(t) \quad (\text{Newton's 2nd law: } F=m
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{1.1: Modeling via differential equations}
+\subsection{1.1: Modeling via Differential Equations}
+
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Modeling via differential equations
+\item Mathematical Modeling
 \begin{enumerate}
-\item A mathematical model is a translation of some real world problem into math (algebra, calculus, linear algebra, etc). Making assumptions translates the problem into an equation. The more assumptions, the easier to solve, though the farther we travel from reality.
-\item Differential equations involve calculus and model change (derivatives).
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Examples of differential equations. $y=y(t)$ is an unknown function that we need to find.
-\begin{enumerate}
-\item $\ds \frac{dy}{dt} = y$ has solution $y(t)=e^t$ giving exponential growth.
-\item $\ds \frac{dy}{dt} = -y$ has solution $y(t)=e^{-t}$ giving exponential decay.
-\item $\ds \frac{dy}{dt} = 2ty$ has solution $y(t)=e^{t^2}$ giving another exponential.
-\item $\ds \frac{dy}{dt} = y^2$ has solution $y(t)=\frac{1}{1-t}$ giving geometric series summation.
-\item Note, the first three equations are linear in $y$ while the last is nonlinear in $y$. These are two important cases for us. Can check each solution by plugging into the equation and ensuring equality holds.
-\item In general, all first order equations can be written as
-\[
-\frac{dy}{dt} = f(t,y)
-\]
-for some given function $f$. They all model how $y$ changes.
-\item There are really infinite solutions to each. The first has another solution $y=2e^t$, and in general $y(t)=Ce^t$ for any constant $C$ is called the analytic solution to this equation. Sketch all these solutions given many values of $C$. This gives a global view of this differential equation (all solutions possible). Note $y(t)=0$ is called the equilibrium solution since it never changes (constant). 
-\item How do we know which one we want? Applications guide this.
+\item A \textbf{mathematical model} translates a real-world problem into mathematics.
+\item Assumptions simplify reality and determine the model.
+\item More assumptions $\Rightarrow$ simpler mathematics, but often a less realistic model.
+\item The goal is to \textbf{understand, explain, and predict} behavior—not merely solve an equation.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Modeling with differential equations: basic models.
+\item Ordinary Differential Equations (ODEs)
 \begin{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Simple population growth
-\begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Assume a population $P(t)$ grows at a rate proportional to it's size. This translates to
-\[
-\frac{dP}{dt} = k P \quad \rightarrow \quad P(t) = Ce^{kt} = P_0 e^{kt}
-\]
-where $k$ is called the growth rate.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item If La Crosse had population 50000 in 2010 and 55000 now, what will the population be in 2030? $P(0)=50000$ is called the initial condition.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Note this model is exactly the same for bacteria growth, continuous compound interest, radioactive decay, etc. Also the same model discussed above.
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Newton's law of cooling
-\begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Assume an item cools (or heats) at a rater proportional to the difference between its temp ($T(t)$) and surrounding temp (constant $T_s$). Then,
-\[
-\frac{dT}{dt} = k(T-T_s)
-\]
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item A quick change of variable as $y=T-T_s$ turns this into the familiar
-\[
-\frac{dy}{dt}=ky
-\]
-resulting in exponential decay.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Note $T(t)=T_s$ is now the equilibrium solution, and the name makes more sense.
-\end{enumerate}
+\item Population Growth
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Logistic population growth
-\begin{enumerate}
-\item If you compare our La Crosse population growth model to census data, it is clear that the model is good at first but then wildly inaccurate. Making more assumptions can correct this but leads to a more challenging model.
-\item Assume the carrying capacity of La Crosse is $N=80000$. Then revise the model as
-\[
-\frac{dP}{dt} = kP\left(1-\frac{P}{N}\right) = f(P)
-\]
-\item This is nonlinear and harder to solve (will see next time), though we can do a qualitative analysis by looking at $f(P)$ graphically. Plot $f$ noting that it is a parabola with zeros (equilibrium) at $P=0,N$. Note we can see decay and growth situations as well where $f$ is positive or negative. Using this we can reason out solutions between the equilibrium. Two main cases, if above capacity we have decay to $N$, if below and positive we have growth to $N$, third case doesn't make sense in application. 
-\item $P=N$ is called stable equilibrium while $P=0$ is unstable. We can check for stability via $f'(P)$ ($f'(N)>0$ is stable, $f'(0)<0$ is unstable).   
-\item If we knew the general solution, we could be more precise here. Will find later. 
-\end{enumerate}
+Assumption: The growth rate is proportional to the population.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Predator prey model
-\begin{enumerate}
-\item Touch of high dimension. What if we have two quantities changing in a coupled way?
-\item If rabbits and foxes live together, assume
+\[
+\frac{dP}{dt}=kP
+\]
+
 \begin{itemize}
-\item Rabbit growth rate is 2
-\item Rabbit harvest rate is 1.2
-\item Fox death rate is 1
-\item Fox growth rate is 0.9
+\item First-order linear ODE.
+\item Unknown: the function $P(t)$.
+\item General solution:
+\[
+P(t)=Ce^{kt}.
+\]
+\item An initial condition, e.g. $P(0)=P_0$, gives a unique (particular) solution.
+\item The parameter $k$ represents the growth rate. This needs to be determined via empirical rule or data.
+\item We will study:
+    \begin{itemize}
+    \item analytical solutions (formula for $P$),
+    \item qualitative behavior (effects of different $P_0$, draw various cases, note equilibrium case),
+    \item numerical approximations (if analytical solutions cannot be found, we will use Python for this).
+    \end{itemize}
 \end{itemize}
-\item The resulting model is then
+
+\item Logistic Growth (refinement of above)
+
+Assumption: Growth slows as the population approaches a carrying capacity $N$.
+
+\[
+\frac{dP}{dt}=kP\left(1-\frac{P}{N}\right)=f(P)
+\]
+
+\begin{itemize}
+\item First-order nonlinear ODE.
+\item Equilibrium solutions occur where $f(P)=0$.
+\item Graph $f(P)$ to determine increasing/decreasing solutions.
+\item More realistic than exponential growth, though more complicated.
+\end{itemize}
+
+\item General First-Order ODE
+
+\[
+\frac{dy}{dt}=f(t,y)
+\]
+
+\begin{itemize}
+\item Describes how $y$ changes.
+\item Much of this course studies equations of this form.
+\item Initial value problem case (IVP).
+\item Independent variable: usually time $t$.
+\item Dependent variable: the unknown function, e.g. $y(t)$.
+\item Variables vs. parameters
+\begin{itemize}
+\item Variables change during the problem ($t$, $y$).
+\item Parameters are fixed constants that describe the system ($k$, $N$, ...).
+\item Changing a parameter gives a different model.
+\end{itemize}
+\end{itemize}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Systems of ODEs
+
+\begin{enumerate}
+
+\item Predator--Prey Model
+
+\begin{itemize}
+\item Many systems involve several interacting variables.
+\item Let $R(t)$ = rabbits and $F(t)$ = foxes.
+\end{itemize}
+
+Assumptions:
+\begin{itemize}
+\item Rabbits reproduce naturally.
+\item Rabbits decrease through predation.
+\item Foxes die naturally.
+\item Foxes increase by consuming rabbits.
+\end{itemize}
+
 \[
 \begin{cases}
-\frac{dR}{dt} &= 2R-1.2 F\cdot R\\
-\frac{dF}{dt} &= -F+0.9 F \cdot R 
+\dfrac{dR}{dt}=\alpha R-\beta RF,\\[1ex]
+\dfrac{dF}{dt}=-\gamma F+\delta RF.
 \end{cases}
 \]
-\item This gives a coupled nonlinear system and equilibrium solutions have new interest. For a linear system, we can borrow linear algebra to decouple the system. More on this later.
-\end{enumerate}
+
+\begin{itemize}
+\item First-order, coupled nonlinear system.
+\item This gives a coupled nonlinear system and equilibrium solutions have new interest. Play around with inc/dec rabbit/fox populations.
+\item Variables cannot be solved independently.
+\item We will study equilibria, stability, and long-term behavior.
+\item Linear systems can often be analyzed using linear algebra (linear approximations).
+\end{itemize}
 
 \end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to solve differential equations? Three ways.
-\begin{enumerate}
-\item Analytic: Use calculus to find $y(t)$ explicitly. This gives the exact solution, but ignores global behavior of the DE. Most of the time this is impossible to do (integration is hard). 
-\item Qualitative: We will use graphs to visualize all cases of curves (as with logistic population growth) to get a global view. Drawback here is cannot get actual solution values (impractical).
-\item Numerical: When analytic methods fail (most of the time), we can design computer algorithms to give us numeric answers. These are efficient and easy to use, but we don't get functions as result. Only numbers.
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-3, 5, 11, 12, 16-18, 22, 23
 
 \end{enumerate}
 
@@ -281,12 +248,12 @@ resulting in exponential decay.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Separable equations
 \begin{enumerate}
-\item There are few nice cases of first order DEs which we can completely solve by hand. 
+\item There are few nice cases of first order DEs which we can completely solve by hand. These are important to gain insight from.
 \item Separable equation: $f$ can be separated as a product of a function of $t$ and function of $y$.
 \[
 \frac{dy}{dt} = f(t,y)= g(t)h(y)
 \]
-\item Once separated the solution can be found via direct integration. Our focus is then just on calculus.
+\item Once separated the solution can be found via direct integration (if doable). Our focus is then just on calculus.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -312,9 +279,16 @@ If we had an initial value problem of $y(0)=y_0$, we also could have handled as 
 \quad \Rightarrow \quad
 y = y_0e^{t^2}.
 \]
+Note, solutions are easy to verify via the original equation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Logistic growth: 
+\item Exponential growth: An autonomous equation of the form $\frac{dy}{dt} = f(y)$. The right hand side depends on $y$ alone.
+\[
+\frac{dy}{dt} = ky
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Logistic growth: Another autonomous equation.
 \[
 \frac{dP}{dt} = k P\left( 1-\frac{P}{N} \right)
 \]
@@ -322,7 +296,7 @@ Let's simplify things and take $k=1$, $N=1$.
 \[
 \frac{dP}{dt} = P\left( 1-P \right) = f(P)
 \]
-Again we are separable, but note the right hand side only depends on $P$. This is called an \emph{autonomous} equation. We solve the same way.
+Again we are separable, but note the right hand side only depends on $P$. This is called an \emph{autonomous} equation. We solve the same way. Note the equilibrium solutions $P=0,1$ as we divide.
 \begin{align*}
 \frac{dP}{dt} &= P\left( 1-P \right) \\
 \int \frac{1}{P(1-P)} ~dP &= \int ~dt \\
@@ -336,7 +310,7 @@ P &= \frac{Ce^t}{Ce^t+1}  = \frac{1}{1+Ae^{-t}}
 \end{align*}
 Note the use of partial fraction decomposition. For $A=1$ this is the sigmoid function (logistic curve). For the original equation with rate $k$ and carrying capacity $N$, we get
 \[
-P = \frac{NP_0e^{rt}}{N+P_0(e^{rt}-1)}.
+P = \frac{NP_0e^{kt}}{N+P_0(e^{kt}-1)}.
 \]
 \end{enumerate}
 
@@ -353,21 +327,22 @@ has solution
 \[
 \ln|y| + \frac{y^2}{2} = t+C
 \]
-and it is not possible to solve for $y$ (known as an implicit solution). Also, $y=0$ is an \emph{equilibrium solution}, yet our implicit solution does not make sense for $y=0$.  
+and it is not possible to solve for $y$ (known as an implicit solution). Like the equation of a circle, this still completely describes the solution set. We cannot write $y$ explicitly as a function of $t$. Also, $y=0$ is an \emph{equilibrium solution} which we missed due to (zero) division, yet our implicit solution does not make sense for $y=0$. Further, there are examples where integration is not possible. Don't forget to check for equilibrium solutions!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Integration is not always possible. 
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Mixing problems: A 200 gal tub contains pure water. Sugar water is pumped in at 5 tablespoons sugar per gallon at a rate of 3 gals per minute. The take is mixed and outflow rate is the same. How much sugar is in the tank after 10 mins? What is the equilibrium solution? Setting up the equation is the challenge.
+\item Mixing problems: A 200 gal tub contains pure water. Sugar water is pumped in at 5 tablespoons sugar per gallon at a rate of 3 gals per minute. The take is mixed and outflow rate is the same. How much sugar is in the tank after 10 mins? What is the equilibrium solution? Setting up the equation is the challenge. Build it as 
+\[
+\text{Rate of change} = \text{Rate in} - \text{Rate out}
+\]
+writing concentrations as $tbsp salt/gal$ and rates as $gal/min$. The product of these gives our salt rate of change. Then for $S(t)$ in tbsp of salt and $t$ in minutes,
 \[
 \frac{dS}{dt} = 5 \cdot 3 - \frac{S}{200} \cdot 3
 \]
-This is a separable equation yet again.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 3, 4, 5-38 odd, 39, 41, 43
+This is a separable equation yet again. Ex 39 also works.
 
 \end{enumerate}
 
@@ -380,89 +355,148 @@ This is a separable equation yet again.
 \item dfeild software: \url{https://math.rice.edu/~dfield/dfpp.html}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Finding exact solutions is usually out of reach in which case we need other options.
+\item Analytic solutions are often impossible (or difficult) to obtain. Instead, we can study a differential equation qualitatively.
 \begin{itemize}
-\item Visualize the solution (slope fields AKA direction fields): DE gives the slope of the tangent line of all solutions.
-\item Compute solution numerically (no formula, just numbers, approximation and error involved)
-\item Test if solution is stable (less information, but might be important information)
+\item Visualize solutions using a \emph{slope field} (or \emph{direction field}).
+\item Approximate solutions numerically.
+\item Predict long-term behavior (equilibria and stability).
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Slope fields: The geometry of $\ds \frac{dy}{dt} = f(t,y)$.
-\begin{enumerate}
+\item Slope fields visualize the differential equation
+\[
+\frac{dy}{dt}=f(t,y).
+\]
+At each point $(t,y)$, draw a short line segment with slope
+\[
+m=f(t,y).
+\]
+Solution curves are tangent to these line segments everywhere.
+
 %%%%%%%%%%%%%%%
-\item Example (autonomous equation): $\ds \frac{dy}{dt} = 2y, y(0)=1$ giving $y=e^{2t}$.
+\item Example: $\displaystyle y'=2y,\qquad y(0)=1$
 \begin{itemize}
-\item Plot the true solution. Draw small tangent lines at $t=-1,0,1,2$ to show off DE connection. 
-\item DE actually contains this information for all solutions and all times. Rest are just horizontal shifts of this curve (slope does not change in $t$ for this case).
+\item Slopes depend only on $y$ (autonomous equation), so each horizontal row has identical slope.
+\item Slopes are positive above $y=0$, negative below, and zero on $y=0$.
+\item Sketch the solution through $(0,1)$.
+\item Compare with the exact solution
+\[
+y=e^{2t}.
+\]
 \end{itemize}
 
 %%%%%%%%%%%%%%%
-\item Example (autonomous equation): $\ds \frac{dy}{dt} = 2-y$. 
+\item Example:
+\[
+y'=2-y.
+\]
 \begin{itemize}
-\item Again $f(t,y)$ is independent of $t$ and slopes stay the same horizontally. Plot slopes for $y=0,1,2,3,4,5$.
-\item Note $y=2$ is a stable equilibrium solution. 
-\item True solution ends up being $y=2+Ce^{-t}$. Can see this from the slope field.
+\item Nullcline: $y=2$.
+\item Above $y=2$, slopes are negative.
+\item Below $y=2$, slopes are positive.
+\item Every nearby solution moves toward $y=2$, so it is a stable equilibrium.
+\item Exact solution:
+\[
+y=2+Ce^{-t}.
+\]
 \end{itemize}
 
 %%%%%%%%%%%%%%%
-\item Key ideas:
-\begin{enumerate}
-\item Solution curves $y=2+Ce^{-t}$ are tangent to the direction arrows.
-\item Plot arrows along curves $f(t,y)=constant$ (known as \emph{isoclines}). In our case $2-y=s$ for slope $s$. In this case we only have horizontal isoclines since autonomous. 
-\item Note, curves can cross over isoclines, just not the zero isocline ($f(t,y)=0$) known as the \emph{nullcline}. The nullcline gives asymptotic behavior in this case.
-\end{enumerate}
-
-%%%%%%%%%%%%%%%
-\item Example (autonomous equation): Return to logistic equation: $\ds \frac{dP}{dt} = P(1-P)$. 
+\item Isoclines
 \begin{itemize}
-\item Procedure: Plot nullcline first, then follow isoclines (horizontal again since autonomous).
-\item Nullcline: $f(t,P)=P(1-P)=0$ for $P=0,1$. 
-\item Isoclines: $f(t,P)=P-P^2=s$ will be positive for $0<P<1$ and negative otherwise. Helps to plot $z=P(1-P)$ to see symmetry.
-\item $y=1$ is a stable equilibrium (solutions around $y=1$ are attracted), while $y=0$ is unstable (solutions around $y=0$ are repelled). 
-\item Note again the sigmiod curve in between.
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%
-\item Example (non-autonomous equation): $\ds \frac{dy}{dt}=1+t-y$.
-\begin{itemize}
-\item Nullcline: $f(t,y)=1+t-y=0$ gives $y=t+1$.
-\item Isoclines: $f(t,y)=1+t-y=s$ gives $y=t+1+s$ (vertical shifts of $y=t+1$). Consider $s=-2,-1,1,2$. 
-\item What is the equilibrium in this case? Looks like $y=t$. Makes sense since this solves the DE and the slop of that curve is unchanging (always 1). 
-\item True solution: $y=t+Ce^{-t}$ and we see that we asymptotically approach $y=t$.
-\item Note the lobster trap: once you pass an isocline, you cannot turn back forcing solutions off to infinity following the nullcline.
+\item An isocline is a curve where the slope is constant:
+\[
+f(t,y)=s.
+\]
+\item The nullcline is the special isocline where
+\[
+f(t,y)=0.
+\]
+\item Plotting several isoclines makes hand sketches much easier.
 \end{itemize}
 
 %%%%%%%%%%%%%%%
-\item Example (second special case): $\ds \frac{dy}{dt} = f(t)$
+\item Example:
+\[
+P'=P(1-P).
+\]
+
 \begin{itemize}
-\item What do you think will happen with the direction field? Nullclines? Isoclines?
-\item Example: $\ds \frac{dy}{dt}=2t$ gives $y=t^2+C$. All solutions are a vertical shift of eachother meaning slopes do not change along vertical lines (ie isoclines). 
+\item Nullclines: $P=0$ and $P=1$.
+\item Slopes are positive for $0<P<1$.
+\item Slopes are negative elsewhere.
+\item Therefore
+\begin{itemize}
+\item $P=1$ is stable.
+\item $P=0$ is unstable.
+\end{itemize}
+\item Compare with the familiar logistic curve.
 \end{itemize}
 
-\end{enumerate}
+%%%%%%%%%%%%%%%
+\item Example:
+\[
+y'=1+t-y.
+\]
+
+\begin{itemize}
+\item Nullcline:
+\[
+y=t+1.
+\]
+\item Isoclines:
+\[
+y=t+1+s.
+\]
+\item Unlike autonomous equations, the nullcline is not horizontal.
+\item Solutions approach the line
+\[
+y=t,
+\]
+which is an exact (nonconstant) solution.
+\end{itemize}
+
+%%%%%%%%%%%%%%%
+\item Special case:
+\[
+y'=f(t).
+\]
+\begin{itemize}
+\item Slopes depend only on $t$.
+\item Every vertical column has the same slope.
+\item Isoclines are vertical lines.
+\item Example:
+\[
+y'=2t,
+\]
+whose solutions are
+\[
+y=t^2+C.
+\]
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item dfield: Demo software for each of the above examples. 
+\item Using \texttt{dfield}
+
 \begin{itemize}
-\item Slopes are computed brute force.
-\item Solution curves are computed via numerical method.
+\item Computes slope fields by evaluating $f(t,y)$ on a grid.
+\item Numerically approximates solution curves from chosen initial conditions.
+\item Useful for exploring equations before attempting analytic methods.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Key takeaways:
+\item Key takeaways
+
 \begin{itemize}
-\item Solution curves are tangent to direction arrows: $y'=f(t,y)$
-\item Plotting isoclines ($f(t,y)=s$) helps when doing by hand (special case is nullcline).
-\item Solution curves for autonomous equations shift from left to right (horizintal lines have same slope). 
-\item Even if we cannot find the solution, we get global behavior as well as equilibrium (asymptotics). Not much calculus is used at all (no integration)!
-\item This method is good for intuition, but not practical if you care about calculation (still will need analytic or numerical solutions).
+\item A slope field visualizes the differential equation itself.
+\item Solution curves are everywhere tangent to the direction arrows.
+\item Isoclines organize regions of equal slope; nullclines identify zero slope.
+\item Autonomous equations have horizontal isoclines and equilibrium solutions.
+\item Qualitative analysis reveals long-term behavior even when no explicit solution exists.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-16, 20, 21
-
+\item A differential equation tells us how a solution changes, not what the solution is. A slope field converts this local information into a global picture of all possible solutions.
 \end{enumerate}
 
 
@@ -475,9 +509,9 @@ This is a separable equation yet again.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item For most differential equations, analytic solutions are not possible. We need numerical methods. 
 \begin{itemize}
-\item We trade exact for approximate, though as close to the the exact solution as desired if we are careful.
+\item We trade exact for approximate, though as close to the exact solution as desired if we are persistent.
 \item The simplest idea harnesses tangent lines (just like direction fields) and is called Euler's method.
-\item Drawback with this simple idea will be inefficiency, but this can be improved with more advanced methods.
+\item Drawback with this simple idea will be inefficiency, but this can be improved with more advanced methods which can be derived and analyzed via calculus ideas (Taylor series, numerical analysis).
 \end{itemize}
 
 
@@ -485,25 +519,39 @@ This is a separable equation yet again.
 \item Euler's method for approximating solutions to $\ds \frac{dy}{dt} = f(t,y)$:
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%
+\item Idea: Approximate the derivative (tangent line slope) with a difference quotient (secant line slope):
+\[
+\frac{df}{dx} = \lim_{h \rightarrow 0} \frac{\Delta f}{\Delta x}  
+= \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h}  
+= \lim_{\Delta x \rightarrow 0} \frac{f(x+\Delta x)-f(x)}{\Delta x} 
+\]
+translated to
+\[
+\frac{dy}{dt} =  \lim_{\Delta t \rightarrow 0} \frac{y(t+\Delta t)-f(t)}{\Delta t} \approx  \frac{y(t+\Delta t)-y(t)}{\Delta t}  
+\]
+for some $t$ and $\Delta t$. Fitting into our equation,
+\[
+\frac{y(t+\Delta t) - y(t)}{\Delta t} \approx f(t,y)
+\]
+gives a way to approximate the future
+\[
+y(t + \Delta t) \approx y(t) + \Delta t f(t,y).
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%
 \item First step: $y_1 = y_0 + \Delta t f_0$
 \begin{itemize}
-\item Notation: $y(0)=y_0$ (given initial value), $y_1 \approx y(t_1)$, $t_1 = \Delta t$ (some chosen time step), $f_0=f(t_0, y_0)$ (slope of the solution curve at $t_0$)
+\item Notation: $y(0)=y_0$ (given initial value), $y_1 \approx y(t_1)$, $t_1 = t_0+\Delta t$ (some chosen time step), $f_0=f(t_0, y_0)$ (slope of the solution curve at $t_0$). Likewise for $t_n, y_n$ and $f_n$.
 \item Follow the tangent line to get the first approximation:
 \[
 y_1 = y_0 + \Delta t f_0
 \]
-\item Example: $y'=2y$ with $t_0=0, y(t_0)=1$. Then the slope of the tangent is $f_0=2$ ad the tangent line is $y=y_0+tf_0$ giving 
+\item Example: $y'=2y$ with $t_0=0, y(t_0)=1$. Then the slope of the tangent is $f_0=2$ and the tangent line is $y=y_0+f_0(t-t_0)$ giving 
 \[
 y_1=y_0+\Delta t f_0=1+2\Delta t.
 \]
 Graph with the true solution $y(t)=e^{2t}$. Note we cannot take $\Delta t$ too big else we will stray far from the curve. 
 \end{itemize}
-
-%%%%%%%%%%%%%%%%%%%
-\item Rearranging this is the same as approximating the derivative with a difference quotient.
-\[
-\frac{dy}{dt} = f(t,y) \quad \Leftrightarrow \quad \frac{y_1-y_0}{\Delta t} = f_0
-\]
 
 %%%%%%%%%%%%%%%%%%%
 \item General $n$th time step: $y_{n+1}=y_n+\Delta t f_n$
@@ -517,145 +565,70 @@ y_{n+1}=y_n+\Delta t f_n \quad \left(\text{rearranged as } \frac{y_{n+1}-y_n}{\D
 y_{n+1} 
 &= y_n + \Delta t f_n \\
 &= y_n + \Delta t 2 y_n \\
-&= (y_{n-1}+\Delta t 2 y_{n-1}) + \Delta t 2 (y_{n-1}+\Delta t 2 y_{n-1}) \\
+&= (1+2\Delta t) y_{n} \\
 &= (1+2\Delta t)^2 y_{n-1} \\
 &= \vdots \\
 &= (1+2\Delta t)^n y_0 \\
 \end{align*}
-If $y(0)=1$, say we are truly after an approximation to $y(1)$. Then if we take $n$ time steps ($\Delta t = \frac{1}{n}$)
+If $y(0)=1$, say we are truly after an approximation to $y(1)$. Then if we take $n+1$ time steps ($\Delta t = \frac{1}{n}$)
 \[
 y_{n+1} = \left(1+\frac{2}{n} \right)^n \approx e^{2} \quad \left( \text{recall } (1+\frac{1}{n})^n \rightarrow e \right)
 \]
 and it looks like it is working!
 \item Taking smaller steps ($\Delta t$) results in more steps needed (larger $n$) to get to end time $T$. So we converge to the true solution.
-\item Draw on $y'=2y$ example 2 steps to $T=1$ vs 4 steps. Close approximation in the end, but how much better?
+\item Draw on $y'=2y$ example 2 steps to $T=1$ via 4 steps. Close approximation in the end, but how much better?
 \end{itemize}
 
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Euler's method error
+\item General Euler's method algorithm: Given the initial value problem
+\[
+\frac{dy}{dt}=f(t,y), \qquad y(t_0)=y_0,
+\]
+and a chosen step size $\Delta t$:
 \begin{enumerate}
-%%%%%%%%%%%%%%%%%
-\item Define error at the $n$th step as the exact solution minus the approximate solution:
+\item Set
 \[
-E_n = y(t_n)-y_n = y(n\Delta t)-y_n
+t=t_0,\qquad y=y_0.
 \]
-To measure this error, we break the process into two steps:
-\begin{itemize}
-\item Local error (error from tangent line approximation)
-\item Global error (summation of all local errors)
-\end{itemize}
-%%%%%%%%%%%%%%%%%
-\item Local error: How good is a tangent line approximation? Need Taylor series to tell.
-\begin{itemize}
-\item Taylor series: ($a=0$ gives Maclaurin series)
+\item Repeat until the desired final time is reached:
 \[
-f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n +\cdots
+\boxed{
+\begin{aligned}
+t_{n+1} &= t_n+\Delta t,\\
+y_{n+1} &= y_n+\Delta t\,f(t_n,y_n),
+\end{aligned}
+\qquad n=0,1,2,\ldots
+}
 \]
-with convergence for $|x-a|<R$ some radius of convergence.
-\item Maclaurin series you should know: $\ds e^x, \sin(x), \cos(x), \frac{1}{1-x}$. 
-\item For us, 
+
+\item The computed values
 \[
-y(t+\Delta t) = y(t) + \Delta t y'(t) + \frac{1}{2} \Delta t^2 y''(t) +\cdots
+(t_0,y_0),\ (t_1,y_1),\ \ldots,\ (t_n,y_n)
 \]
-and we approximate
+approximate the true solution at the times
 \[
-y(t+\Delta t) \approx y(t) + \Delta t y'(t) = y(t) + \Delta t f(t,y)
+t_n=t_0+n\Delta t.
 \]
-giving error 
-\[
-+ \frac{1}{2} \Delta t^2 y''(t) +\cdots \leq \frac{1}{2} \Delta t^2 \text{max}|y''|
-\]
-via the mean value theorem (Taylor's theorem). 
-\item So local error is of the order $\Delta t^2$ (constant times this value we control). 
-\end{itemize}
-%%%%%%%%%%%%%%%%%
-\item Global error: Euler's method is a linear method
-\begin{itemize}
-\item Taking $n$ steps to reach final destination $T=n\Delta t$ yields error accumulation of 
-\[
-\sum_{i=1}^n C \Delta t^2 = nC\Delta t^2 = TC \Delta t
-\]
-So the global error is of order $\Delta t$.
-\item We say Euler's method is a linear method. As a result, if we take $2n$ steps instead of size $\frac{\Delta t}{2}$, our error divided by a factor of 2. Not much gain for twice the work.
-\item Example: Returning to $y'=2y$, 
-\[
-\left(1+2\Delta t\right)^n = \left(1+\frac{2T}{n}\right)^n \approx e^{2T} \quad \text{with error $\frac{C}{n}$}
-\]
-\item Script example to compare $e, \left(1+\frac{1}{n}\right)^n,$ Taylor series for $e$, errors for $n=1,2,\cdots, 10$. Note the halving of error at each step for forward Euler, Taylor series is much faster.
-\end{itemize}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Stability of numerical methods
+\item Example: Random homework problem.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Idea of numerical analysis:
 \begin{enumerate}
-%%%%%%%%%%%%%
-\item Instability:
-\begin{itemize}
-\item Issue: Sometimes local error can grow out of control, and accumulating bad local errors can result in instable global error. 
-\item Solution: Take $\Delta t$ small enough to control instability.
-\end{itemize}
-
-%%%%%%%%%%%%%
-\item Example: $\ds \frac{dy}{dt} = -100y$ (rapid exponential decay)
-\begin{itemize}
-\item Start at $y(0)=1$ and end up at $y(T)=e^{-100T}$, very small value.
-\item Euler's method:
-\[
-y_{n+1} = y_n + \Delta t f_n = (1 - 100\Delta t)y_n \quad \Rightarrow \quad y_n = (1-100\Delta t)^ny_0
-\]
-\item What if we choose $\Delta t = 0.03$ which is reasonably small? Then $100 \Delta t=3$ and the above becomes
-\[
-y_n = (-2)^ny_0 \Rightarrow y_n = 1,-2,4,-8,\cdots
-\]
-which grows exponentially. This is instability. Local error grows faster than the true solution.
-\item Need $|1-100 \Delta t|\leq 1$ giving $\Delta t \leq \frac{2}{100}$.
-\item This is an example of a \emph{stiff} equation (true solution is varying slowly (stiff), but nearby solutions vary rapidly) resulting in instability for $\Delta t$ too large. For this example, not a huge 
-\end{itemize}
+\item Build mathematical guarantees about a numerical method such as Euler's method (simplest explicit method).
+\item Local error (per iteration), global error (accumulation of local errors)
+\item Convergence, rate of convergence (under suitable conditions, as $\delta t \rightarrow 0$ we converge to the true solution, rate of Euler's method is first order accurate, halving $\Delta t$ roughly halves the error)
+\item Stability analysis (conditions for convergence)
+\item Higher order methods (more terms, better approximation, faster convergence)
+\item Key tool: Taylor series and Taylor's Theorem (Chapter 7 holds mathematical analysis)
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Backwards Euler and implicit methods
-\begin{enumerate}
-%%%%%%%%%%%%%%%%%
-\item Instead of going forward to $y_{n+1}$ from $y_n, t_n, f_n$, we trace tangent lines backwards.
-%%%%%%%%%%%%%%%%%
-\item Backward Euler:
-\[
-\frac{y_{n+1}^B-y_n}{\Delta t} = f_{n+1}=f(t_{n+1},y_{n+1}^B) \quad \Rightarrow \quad
-y_{n+1}^B = y_n+\Delta t f_{n+1}
-\]
-Note, we need to solve for $y_{n+1}$ at each step which can be hard for complex $f$.
-%%%%%%%%%%%%%%%%%
-\item Example: $y'=-100y$ gives division by $(1+100\Delta t)$ instead of multiplying by $(1-100\Delta t)$.
-\[
-(1+100\Delta t)y_{n+1}^B = y_n \quad \Rightarrow \quad 
-y_{n}^B = \left(\frac{1}{1+100\Delta t}\right)^ny_0
-\]
-which will always decay regardless of size of $\Delta t$. Implicit Euler is a good option for this linear equation.
-%%%%%%%%%%%%%%%%%
-\item Implicit methods are more stable, but also more computationally expensive. 
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item How to improve?
-\begin{enumerate}
-\item Conquer more terms in the Taylor series expansion (central difference).
-\item Runge-Kutta (most often used in practice): Predict at $t+\Delta t$, correcting at $t+\Delta t$, then adjust stepsize $\Delta t$. 
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Programming assignment: In this section demo the results of first coding assignment in class. Subsequent assignment ideas:
-\begin{itemize}
-\item Higher order (Runge-Kutta)
-\item Systems of equations
-\item Application project (SIR?)
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-11, 13-14
+\item Programming assignment: Part 1, reproduce results in PDF. Details on Canvas.
 
 \end{enumerate}
 
@@ -666,39 +639,242 @@ which will always decay regardless of size of $\Delta t$. Implicit Euler is a go
 
 \begin{enumerate}
 
-\item Here we show an important theoretical (but also practical) result. When can we be sure a solution exists? Do we know it is unique?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{The basic question:} Given an initial value problem, can we be sure that a solution exists? If it exists, is it the \emph{only} solution?
+    
+These are theoretical questions, but they have practical consequences. If a differential equation is being used as a model, we want to know that the model actually determines a solution. This is also important when using numerical methods: if the IVP does not have a well-defined solution, there is nothing for a numerical method to approximate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Past experience: 
+\item \textbf{We have seen questions like this before.}
 \begin{enumerate}
-\item Quadratic equations: How many solutions does $ax^2 + bx + c = 0$ have? How do we know?
-\item Linear systems: When does $A \vec{x} = \vec{b}$ have a unique solution? $\det(A)\neq 0$, full rank, columns linearly independent...
-\item Others?
+    \item Quadratic equations: How many solutions does
+    \[
+    ax^2+bx+c=0
+    \]
+    have? How do we know?
+    
+    \item Linear systems: When does
+    \[
+    A\vec{x}=\vec{b}
+    \]
+    have a solution? When is the solution unique?
+    \[
+    \det(A)\neq 0,\qquad \text{full rank},\qquad
+    \text{linearly independent columns},\ldots
+    \]
+    
+    \item Differential equations: Given
+    \[
+    \frac{dy}{dt}=f(t,y),\qquad y(t_0)=y_0,
+    \]
+    when can we be sure that a solution exists? When is it unique?
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{What can go wrong?}
+
+Consider an initial value problem. We might encounter:
+\begin{itemize}
+    \item no solution;
+    \item more than one solution;
+    \item a solution that exists only for a limited range of $t$.
+\end{itemize}
+
+The goal of this section is to identify conditions that rule out these problems.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Existence and uniqueness for $\ds \frac{dy}{dt}=f(t,y)$. Requirement is that we need $f$ to be nice enough. 
+\item \textbf{Why does uniqueness matter?}
+
+Consider the differential equation
+\[
+\frac{dy}{dt}=y(1-y).
+\]
+
+There are two equilibrium solutions:
+\[
+y(t)=0,\qquad y(t)=1.
+\]
+
+Suppose a solution starts at $y(0)=\frac12$. Since
+\[
+y(1-y)>0\qquad\text{for }0<y<1,
+\]
+the solution initially increases.
+
+\begin{quote}
+Could this solution ever cross $y=1$?
+\end{quote}
+
+If it did, at the moment it reached $y=1$ there would be two different solutions through the same point: our solution and the equilibrium solution $y=1$.
+
+Thus, if solutions are unique, \textbf{solution curves cannot cross}. In particular,
+\[
+0<y(t)<1
+\]
+for all $t$ for which the solution exists.
+
+This illustrates the practical importance of uniqueness: it lets us draw conclusions about the behavior of solutions without solving the differential equation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Existence:} Consider the IVP
+\[
+\frac{dy}{dt}=f(t,y),\qquad y(t_0)=y_0.
+\]
+The basic idea is that $f$ needs to be ``nice enough'' near the initial point.
 \begin{enumerate}
-%%%%%%%%%%%%%%%%
-\item Existence: Starting at given $y(0)$ at time $t=0$, do we have a solution?
+    \item \textbf{Existence Theorem:} Suppose $f(t,y)$ is continuous on a rectangle
+    \[
+    R=\{(t,y):a<t<b,\ c<y<d\}.
+    \]
+    If $(t_0,y_0)$ is in $R$, then there exists a solution $y(t)$ to the IVP for $t$ sufficiently close to $t_0$.
+
+    \item ``Sufficiently close'' means that there is some $\epsilon>0$ such that the solution exists for
+    \[
+    |t-t_0|<\epsilon.
+    \]
+    The theorem guarantees existence \emph{locally}; it does not necessarily guarantee that the solution exists for all time.
+
+    \item If $f$ is not continuous near $(t_0,y_0)$, this theorem does not apply. A solution may or may not exist.
+
+    \item Example:
+    \[
+    \frac{dy}{dt}=1+y^2,\qquad y(0)=0.
+    \]
+    The solution is
+    \[
+    y(t)=\tan(t).
+    \]
+    Thus a solution exists near $t=0$, as the theorem predicts, but it blows up at
+    \[
+    t=\frac{\pi}{2}.
+    \]
+    Increasing $y$ generates a quadratic increase in $\frac{dy}{dt}$ which gets out of hand.
+    So existence near the initial point does not imply existence for all $t$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Uniqueness:} Existence is only part of the story. Suppose we know that a solution exists. Could there be several different solutions passing through the same initial point?
+\begin{enumerate}
+    \item \textbf{Existence and Uniqueness Theorem:} Suppose $f(t,y)$ and
+    \[
+    \frac{\partial f}{\partial y}(t,y)
+    \]
+    are continuous on a rectangle $R$ containing $(t_0,y_0)$. Then the IVP has a unique solution for $t$ sufficiently close to $t_0$.
+
+    \item The condition on $\partial f/\partial y$ gives us a way to guarantee that two different solution curves cannot pass through the same initial point.
+
+    \item \textbf{Existence does not guarantee uniqueness.} Consider
+\[
+\frac{dy}{dt}=3y^{2/3},\qquad y(0)=0.
+\]
+Here $f(y)=3y^{2/3}$ is continuous, so the existence theorem guarantees a solution. However, the solution is not unique. For example,
+\[
+y(t)=0
+\qquad\text{and}\qquad
+y(t)=t^3
+\]
+both satisfy the IVP. In fact, a solution can remain at $0$ for any amount of time and then depart:
+\[
+y(t)=
+\begin{cases}
+0, & t\leq C,\\
+(t-C)^3, & t>C.
+\end{cases}
+\]
+The problem is that
+\[
+\frac{\partial f}{\partial y}=2y^{-1/3}
+\]
+is not continuous at $y=0$, so the uniqueness theorem does not apply.
+
+\item This example shows why existence and uniqueness are separate questions:
 \begin{itemize}
-\item Theorem: A solution exists if $f(t,y)$ is a continuous function for $t$ near 0 and $y$ near $y(0)$. (note the word near, near could be rather small)
+    \item $f$ is continuous $\Rightarrow$ existence is guaranteed;
+    \item $f_y$ is not continuous at the initial point $\Rightarrow$ uniqueness is not guaranteed.
 \end{itemize}
+
+Thus, ``a solution exists'' does not necessarily mean ``the initial condition determines a single solution.''
+
+    \item Example:
+    \[
+    \frac{dy}{dt}=\frac{t}{y},\qquad y(0)=0.
+    \]
+    Here $f(t,y)=t/y$ is not defined at the initial point. For $t\neq0$, however, both
+	\[
+	y(t)=t
+	\qquad\text{and}\qquad
+	y(t)=-t
+	\]
+	satisfy the differential equation, and both approach $y=0$ as $t\to0$.
+
+	Thus the point $(0,0)$ lies on multiple solution curves of the differential equation, but strictly speaking these are not classical 	solutions of the IVP on an interval containing $t=0$, since the differential equation is undefined at the initial point.
+
+	This illustrates why the hypotheses of the theorem matter: if $f$ is not defined at the initial point, we cannot use the theorem to 	guarantee existence or uniqueness.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Why uniqueness matters:} Suppose $f$ is nice enough that the existence and uniqueness theorem applies. Then:
+\begin{quote}
+If two solution curves ever pass through the same point at the same time, they must be the same solution.
+\end{quote}
+This simple idea gives us a powerful way to understand solutions without solving the differential equation explicitly.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Example: the logistic equation}
+
+Consider
+\[
+\frac{dy}{dt}=y(1-y).
+\]
+
+The constant functions
+\[
+y(t)=0,\qquad y(t)=1
+\]
+are equilibrium solutions.
+
+Suppose
+\[
+y(0)=\frac12.
+\]
+
+Since
+\[
+0<\frac12<1,
+\]
+and
+\[
+f(y)=y(1-y)>0\qquad\text{for }0<y<1,
+\]
+the solution initially increases.
+
+Could it cross $y=1$?
+
+No. If it reached $y=1$ at some time $t_1$, then there would be two solutions passing through the same point $(t_1,1)$:
+\[
+y(t)=1
+\]
+and our solution. Uniqueness says this is impossible unless the two solutions are identical. But our solution started at $y(0)=1/2$, so they cannot be identical.
+
+Similarly, the solution cannot cross $y=0$.
+
+Therefore,
+\[
+0<y(t)<1
+\]
+for all $t$ for which the solution exists. Since $y'(t)>0$ in this interval, the solution is always increasing.
+
+This gives us qualitative information about the solution without solving the differential equation.
+
+In fact, the solution approaches $1$ as $t\to\infty$. If it approached some value $L<1$, then
+\[
+f(L)=L(1-L)>0,
+\]
+so the solution would still have a positive slope near $L$ and could not settle down there.
+
+
 %%%%%%%%%%%%%%%%
-\item Uniqueness: Is there more than one solution through the same $y(0)$?
-\begin{itemize}
-\item Theorem: There cannot be two solutions with the same $y(0)$ if $\frac{\partial f}{\partial y}$ is also continuous.
-\end{itemize}
-%%%%%%%%%%%%%%%%
-\item Examples: Note each starts at $\frac{0}{0}$ which is bound to be trouble.
-\begin{itemize}
-\item $\ds \frac{dy}{dt}=\frac{y}{t}, y(0)=0$ has infinitely many solutions $y=Ct$. Check they it work.
-\item $\ds \frac{dy}{dt}=\frac{t}{y}, y(0)=0$ has two solutions $y(t)=t, y(t)=-t$. Check that they work.
-\item Existence was not even ensured, though it is clear that $f$ is not continuous at $t=0$ for the first and $y(0)=0$  for the second.
-\end{itemize}
-%%%%%%%%%%%%%%%%
-\item Avoiding future bad behavior (finite time blow up).
+\item Depth: Avoiding future bad behavior (finite time blow up).
 \begin{itemize}
 \item Fact: Continuity of $f$ and $\frac{\partial f}{\partial y}$ at all points does not ensure that the solution will reach $t=\infty$.
 \item Example: $\ds \frac{dy}{dt}=y^2, y(0)=1$ has continuous $f$ as well as $\frac{\partial f}{\partial y} = 2y$. Separation of variables gives the solution 
@@ -758,19 +934,6 @@ solving $\frac{dy}{dt}=f(t,y)$.
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Practical side of uniqueness theorem: 
-\begin{itemize}
-\item For $f$ nice enough, if any two solutions are in the same place at the same time, they are the same function. Can use this fact to bound solutions.
-\item Example: Logistic equation $\frac{dy}{dt}=y(1-y)$ has equilibrium solutions at $y=0,1$. Then if we know $y(0)=\frac{1}{2}$, we know this solution $0<y(t)<1$ for all $t$. Also, since $f(y_0)>0$, we know $y(t)$ is always increasing. Then $y(t)$ will have to approach 1 as a horizontal asymptote. If not, say $y(t)$ had asymptote $L<1$, since $f(L)>0$, when $y$ is close to $L$ it must increase past $L$ which hence cannot be an asymptote.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-8, 11-17
-
-\end{enumerate}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{1.6: Equilibria and the phase line}
 
@@ -783,33 +946,112 @@ solving $\frac{dy}{dt}=f(t,y)$.
 \item Example: Logistic equation $\ds \frac{dy}{dt}=y(1-y)$. 
 \begin{itemize}
 \item Already noted that direction fields of autonomous equations are constant on horizontal lines. Why? $f(t,y)$ does not depend on $t$.
-\item A phase line compresses all this information into a single line. Draw vertical line next to the direction field. Already saw this in the previous sections.
+
+\item A phase line compresses this information into a single line. It answers a
+basic question: given the current value of $y$, will the solution increase or
+decrease? Draw a vertical line and mark the equilibrium values. Arrows indicate
+the direction of motion. Already saw this in the previous sections, though this simplification helps us gain intuition more easily.
+
+\item \textbf{Reading a phase line:} The arrows determine the long-term
+behavior of solutions without solving the differential equation. In particular,
+they tell us which equilibria are attracting and which are repelling.
+
+\item An equilibrium $y_0$ is \textbf{stable} if solutions that start
+sufficiently close to $y_0$ remain close to it. It is \textbf{asymptotically
+stable} if they also approach $y_0$ as $t\rightarrow\infty$.
 \end{itemize} 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \item Steps to draw a phase line
 \begin{itemize}
-\item Find equilibrium solutions, label on number line. These are the only places $f$ can change sign assuming continuous $f$.
+\item Find equilibrium solutions, label on number line. Because $f$ is continuous, these are the only places $f$ can change sign assuming continuous $f$.
 \item Find the sign of $f$ between equilibrium solutions. This gives increase / decrease of solution $y$.
 \end{itemize} 
 \end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Classification of equilibrium points: Three cases
+\item Classification of equilibrium points:
 \begin{enumerate}
-\item Sink (stable): Approach $y_0$ from both above and below as $t \rightarrow \infty$. Test if $f'(y_0)<0$ (draw graph of $f$ to illustrate). 
-\item Source (unstable): Repel $y_0$ from both above and below (approach as $t \rightarrow -\infty$).  Test if $f'(y_0)>0$.
-\item Node: Opposite behavior above and below (neither sink nor source).  Test if $f'(y_0)=0$ plus more information.
+\item \textbf{Sink (stable):} Solutions approach $y_0$ from both sides as
+$t\rightarrow\infty$. If $f'(y_0)<0$, then $y_0$ is a sink.
+
+\item \textbf{Source (unstable):} Solutions move away from $y_0$ on both sides
+as $t\rightarrow\infty$. If $f'(y_0)>0$, then $y_0$ is a source.
+
+\item \textbf{Semistable (stable from one side):} Solutions approach $y_0$ from one side and move away
+from it on the other. If $f'(y_0)=0$, the derivative test is inconclusive;
+inspect the signs of $f(y)$ on either side of $y_0$.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Example: Illustrate the above for
+\item \textbf{Example:} Consider
 \[
-\frac{dP}{dt} = kP\left(1-\frac{P}{N}\right)\left(\frac{P}{M}-1\right)\]
-where $N>M>0$. What is this? Modified logistic growth with minimal sustainable threshold $M$. Choose nice numbers $N=10, M=2$ and illustrate phase line and classify equilibrium. 
+\frac{dP}{dt}
+=
+kP\left(1-\frac{P}{N}\right)\left(\frac{P}{M}-1\right),
+\qquad N>M>0.
+\]
+This is a modified logistic model with a \emph{minimum sustainable population}
+(or threshold) $M$.
+
+Choose $N=10$, $M=2$, and assume $k>0$:
+\[
+\frac{dP}{dt}
+=
+kP\left(1-\frac{P}{10}\right)\left(\frac{P}{2}-1\right).
+\]
+
+\begin{enumerate}
+    \item Find and classify the equilibrium solutions.
+    \item Draw the phase line.
+    \item What happens to a population starting at $P(0)=1$? At $P(0)=5$?
+    \item Interpret the results biologically. What role does the threshold $M$
+    play?
+\end{enumerate}
+
+The equilibria are
+\[
+P=0,\qquad P=2,\qquad P=10.
+\]
+
+For $k>0$, the phase line is
+\[
+0\quad \longleftarrow\quad
+2\quad \longrightarrow\quad
+10\quad \longleftarrow.
+\]
+
+Thus $P=0$ and $P=10$ are sinks, while $P=2$ is a source. A population
+starting below the threshold $M=2$ declines toward extinction, while a
+population starting above $M$ grows toward the carrying capacity $N=10$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-36, 39, 43, 
+\item \textbf{Example:} Consider
+\[
+\frac{dy}{dt}=y(y-1)^2.
+\]
+
+\begin{enumerate}
+    \item Find the equilibrium solutions.
+    \item Draw the phase line.
+    \item Classify each equilibrium as a sink, source, or semistable.
+    \item Describe the long-term behavior for different initial conditions.
+\end{enumerate}
+
+Notice that
+\[
+f'(0)=f'(1)=0,
+\]
+so the derivative test is inconclusive. We must instead examine the sign of
+$f(y)$ on either side of each equilibrium.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Connection to uniqueness:} If the hypotheses of the uniqueness
+theorem hold, solution trajectories cannot cross equilibrium solutions.
+Therefore, equilibrium solutions divide the phase line into regions in which
+solutions remain for all future time (as long as the solution exists).
 
 \end{enumerate}
 
@@ -819,33 +1061,96 @@ where $N>M>0$. What is this? Modified logistic growth with minimal sustainable t
 
 \begin{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Here we study families of differential equations with general parameters. 
-\begin{itemize}
-\item Example: $\frac{dP}{dt} = kP$ where $k$ is a parameter (any real number). 
-\item If a change in a parameter drastically changes the long term behavior of the solution, we call this a \emph{bifurcation}.
-\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Logistic equation with harvesting
-\begin{enumerate}
-\item Consider a logistic equation with harvesting rate $-h$
-\[
-\frac{dP}{dt} = 4P-P^2 - h = f(P)
-\]
-where $h>0$ is our parameter.
+\item \textbf{What happens when a parameter changes?}
+
+Here we study families of differential equations that depend on one or more
+parameters. A parameter can change the equilibria and, more importantly, the
+long-term behavior of solutions.
+
 \begin{itemize}
-\item Plot $f(P)$ for ...
-\item $h=0$ (no harvesting), two steady states
-\item $h=3$ (light harvesting), two steady states
-\item $h=4$ (critical harvesting), one steady state
-\item $h=5$ (over harvesting), no steady states
-\item $h=4$ is the \emph{bifurcation value}. Find it via $f'(P)=0$ and choosing the parameter such that $f=0$ at that critical point. 
+\item Example:
+\[
+\frac{dy}{dt}=ky,
+\]
+where $k$ is a parameter. For $k<0$, the equilibrium $y=0$ is a sink; for
+$k>0$, it is a source. At $k=0$, every constant function is an equilibrium.
+
+\item A \emph{bifurcation} occurs when a change in a parameter causes a
+qualitative change in the behavior of solutions, such as a change in the
+number or stability of equilibria.
 \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Logistic growth with harvesting.}
+
+Consider
+\[
+\frac{dP}{dt}=4P-P^2-h=f(P),
+\]
+where $h>0$ is a constant harvesting rate.
+
+\begin{enumerate}
+\item Equilibria occur where
+\[
+f(P)=4P-P^2-h=0.
+\]
+Solving the quadratic gives
+\[
+P=2\pm\sqrt{4-h}.
+\]
+
+\item Explore the phase line for several values of $h$:
+\begin{itemize}
+\item $h=0$: two equilibria (no harvesting);
+\item $h=3$: two equilibria (light harvesting);
+\item $h=4$: one equilibrium (critical harvesting);
+\item $h=5$: no equilibria (overharvesting).
+\end{itemize}
+
+\item What happens as $h$ increases? The two equilibria approach each other,
+merge at $h=4$, and then disappear. Thus $h=4$ is the \emph{bifurcation value}.
+
+\item We can find the bifurcation value without solving for the equilibria.
+At the critical value, the graph of $f(P)$ is tangent to the $P$-axis, so
+\[
+f(P)=0,\qquad f'(P)=0.
+\]
+For
+\[
+f(P)=4P-P^2-h,
+\]
+we have
+\[
+f'(P)=4-2P.
+\]
+Thus $f'(P)=0$ gives $P=2$, and substituting into $f(P)=0$ gives
+\[
+h=4.
+\]
+
+\item \textbf{Interpretation:} $h=4$ is the maximum sustainable harvesting
+rate. For $h<4$, there is a positive equilibrium population. At $h=4$, the
+positive equilibria merge. For $h>4$, no positive equilibrium exists, so the
+population eventually declines.
+
+\item Draw the \emph{bifurcation diagram}: plot equilibrium values $P^*$ on
+the vertical axis against the parameter $h$ on the horizontal axis. Indicate
+which equilibrium branches are stable and unstable.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-13, 15-21
+\item \textbf{Another example:} Draw and interpret the bifurcation diagram for
+\[
+\frac{dy}{dt}=Ay-y^2=y(A-y).
+\]
+
+\begin{enumerate}
+\item Find the equilibrium solutions as functions of $A$.
+\item Determine their stability for different values of $A$.
+\item Identify the bifurcation value.
+\item Draw and interpret the bifurcation diagram.
+\end{enumerate}
 
 \end{enumerate}
 
@@ -856,31 +1161,62 @@ where $h>0$ is our parameter.
 \begin{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item We end the chapter with one more useful analytic technique. Though there are many more techniques available, these two are the most widely useful:
+\item We end the chapter with another important analytic technique. There are many techniques for solving differential equations, but two of the most widely useful for first-order equations are:
 \begin{enumerate}
-\item Separable equations (already done)
-\item Linear equations (now and next section)
+\item \textbf{Separation of variables}: separate the variables and integrate.
+\item \textbf{Linear equations}: use the structure of the equation to construct the solution.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item First order linear equations:
+\item For linear equations, we will see two approaches:
+\begin{itemize}
+\item \textbf{Undetermined coefficients}: make an educated guess for a particular solution.
+\item \textbf{Integrating factors}: systematically compute a particular solution (next section).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{First order linear equations} can be written in the form:
 \[
 \frac{dy}{dt} = a(t)y + b(t)
+\] 
+where $a(t)$ and $b(t)$ are known functions of $t$. The important feature is that the unknown function $y(t)$ appears \emph{linearly}: it only appears to the first power and is not multiplied by another function involving $y$.
+For example,
+\[
+y'=t^2y+\sin(t)
 \]
+is linear (in $y$ on the RHS), while
+\[
+y'=y^2+t,
+\qquad
+y'=\frac{1}{y}+t,
+\qquad
+y'=\sin(y)+t
+\]
+are nonlinear.
 \begin{itemize}
-\item If $b=0$, this is homogeneous (or non-forced).
-\item If $b\neq 0$, this is nonhomogeneous (or forced). Think of $b$ as new input after starting time $t=0$. 
+\item If $b(t)=0$, the equation is called \textbf{homogeneous} (or non-forced):
+\[
+y'=a(t)y.
+\]
+\item If $b(t)\neq 0$, the equation is called \textbf{nonhomogeneous} (or forced):
+\[
+y'=a(t)y+b(t).
+\]
+The terminology ``forced'' comes from applications: $b(t)$ can represent an external input or forcing acting on the system.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Meaning of linearity:
 \begin{enumerate}
 %%%%%%%%%%%%%%%%
-\item Homogeneous solution: If $y_h(t)$ solves the homogeneous equation $\frac{dy}{dt} = a(t)y$, then any constant times $y_h$ also solves it.
+\item Theorem: Linearity principle (homogeneous general solution): If $y_h(t)$ solves the homogeneous equation $\frac{dy}{dt} = a(t)y$, then any constant times $y_h$ also solves it. Not surprising because this is a separable equation and we know:
+\[
+\frac{dy}{dt} = a(t)y \quad \Rightarrow \quad \int \frac{1}{y} dy = \int a(t) dt \quad \Rightarrow \quad y_h(t) = Ce^{\int a(t) dt}
+\]
 %%%%%%%%%%%%%%%%
-\item Particular solution: $y_p(t)$ solves the nonhomogeneous equation $\frac{dy}{dt} = a(t)y+b(t)$.
+\item Particular solution (to the nonhomogeneous equation): $y_p(t)$ solves the nonhomogeneous equation $\frac{dy}{dt} = a(t)y+b(t)$.
 %%%%%%%%%%%%%%%%
-\item Complete solution: For linear equations, adding these two parts gives the complete solution
+\item Theorem: Extended linearity principle (nonhomogeneous general solution): For linear equations, adding these two parts gives the complete solution
 \[
 y = y_h + y_p
 \]
@@ -895,42 +1231,43 @@ Easy to plug in and see why.
 \item Solve the homogeneous equation (separable equation) to get $y_h$.
 \item Find a particular solution $y_p$. Two techniques:
 \begin{itemize}
-\item Undetermined coefficients
+\item Undetermined coefficients (guess and check)
 \item Integrating factor (next section)
 \end{itemize}
-\item Add two solutions.
+\item Add two solutions per previous theorem.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Method of undetermined coefficients:
 \begin{enumerate}
 %%%%%%%%%%%%%%%%%%%%%
-\item Example: $\ds \frac{dy}{dt} = -2y + e^t$. 
+\item Example: $\ds \frac{dy}{dt} = -2y + e^{t}$. 
 \begin{itemize}
 \item The homogeneous equation is $y'=-2y$ with solution $y_h = Ce^{-2t}$.
 \item For the particular solution, we need
 \[
-y' +2y = e^t
+y' +2y = e^{t}
 \]
-Then $y$ better be some multiple of $e^t$. Let
+Then $y$ better be some multiple of $e^{t}$. Let
 \[
-y_p = \alpha e^t
+y_p = \alpha e^{t}
 \]
 and find the $\alpha$ which works.
 \[
-y_p'+2y_p = \alpha e^t +2\alpha e^t = 3 \alpha e^t = e^t
+y_p'+2y_p = \alpha e^{t} +2\alpha e^{t} = 3 \alpha e^{t} = e^{t}
 \]
-Then $\alpha = 1/3$ and $y_p = \frac{1}{3} e^t$.
+Then $\alpha = 1/3$ and $y_p = \frac{1}{3} e^{t}$.
 \item The complete solution is then 
 \[
-y = y_h + y_p = Ce^{-2t}+\frac{1}{3}e^t
+y = y_h + y_p = Ce^{-2t}+\frac{1}{3}e^{t}
 \]
 \end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%
 \item This guessing really only works for nice functions for $b(t)$.
 \begin{itemize}
 \item $e^t$ needs $\alpha e^t$
-\item $\sin(t)$ (or $\cos(t)$) needs $\alpha \sin(t)+\beta\cos(t)$ (why both?)
+\item $\sin(t)$ (or $\cos(t)$) needs $\alpha \sin(t)+\beta\cos(t)$ (why both?) Example from HW.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%
 \item Of course guessing isn't a good technique: Example
@@ -943,9 +1280,6 @@ y' = -2y + e^{-2t}
 \item The next section trades guessing for computation (integration). 
 \end{itemize}
 \end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-24, 33, 34
 
 \end{enumerate}
 
@@ -969,7 +1303,7 @@ y' = -2y + e^{-2t}
 \[
 \frac{dy}{dt} + 2y = e^t
 \]
-We need to multiply the LHS by $e^{2t}$ (called the \emph{integrating factor}) in order to see the product rule exactly.
+We need to multiply both sides by $e^{2t}$ (called the \emph{integrating factor}) in order to see the product rule exactly.
 \begin{align*}
 e^{2t}\frac{dy}{dt} + 2e^{2t}y &= e^{2t}e^t \\
 \frac{d}{dt}\left(e^{2t}y\right) &= e^{3t} \\
@@ -977,7 +1311,7 @@ e^{2t}y &= \int e^{3t} ~dt \\
 e^{2t}y &= \frac{1}{3} e^{3t} + C \\
 y &= \frac{1}{3} e^{t} + Ce^{-2t} 
 \end{align*}
-as we found in the last section.
+as we found in the last section. Trick is to force the product rule to appear.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1017,22 +1351,16 @@ y &= t + \frac{C}{t}
 \end{align*}
 $y(1)=3$ gives $C=2$ and
 \[
-y = t + \frac{1}{t}
+y = t + \frac{2}{t}
 \]
 %%%%%%%%%%%%%%%%%%%%%%
-\item Trouble with this technique is two possibly challenging integrations:
+\item Trouble with this technique is two potentially challenging integrations:
 \begin{itemize}
 \item $\ds \mu(t) = e^{-\int a(t)~dt}$
 \item $\ds \int b(t)\mu(t)~dt$
 \end{itemize}
 
 \end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-24
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Chapter 1 review: 1-54
-
 
 \end{enumerate}
 
