@@ -2,6 +2,7 @@
 
 \usepackage[margin=0.75in]{geometry}
 \usepackage{amsmath, amssymb}
+\usepackage{hyperref}
 
 
 \newcommand{\ds}{\displaystyle}
@@ -105,7 +106,7 @@ P(E)= \frac{|E|}{|S|} = \frac{3}{6} = \frac{1}{2}.
 \item $P(S)=1$
 \item $P(E^c) = 1-P(E)$
 \item $P(A \cup B) = P(A)+P(B)-P(A \cap B)$
-\item For independent events, $P(A \cup B) = P(A)+P(B)$
+\item For mutually exclusive events, $P(A \cup B) = P(A)+P(B)$
 \end{itemize}
 
 \item The conditional probability of event $A$ given $B$ is
@@ -149,7 +150,7 @@ Variance is nice from a math perspective and good for algebraic properties. For 
 \[
 \sigma = \mathrm{SD}(X) = \sqrt{\mathrm{Var}(X)}.
 \]
-Standard deviation is messy mathematically, but it is in the same units of $X$ and represents interpretable spread (68-95-99 rule for a normal distribution). For the die, $\sigma = 1.707825$ meaning 66\% (2-5) lie within one standard deviation.
+Standard deviation is messy mathematically, but it is in the same units of $X$. For the continuous case, this represents interpretable spread (68-95-99 rule for a normal distribution). For the die, $\sigma = 1.707825$ meaning 66\% (2-5) lie within one standard deviation.
 
 \item Expected value of a function $g(X)$ is
 \[
@@ -157,7 +158,239 @@ Standard deviation is messy mathematically, but it is in the same units of $X$ a
 \]
 
 \end{enumerate}
+
+\item Probability crash course V2: Discrete case only, concrete example of dice roll.
+
+\begin{enumerate}
+\item Sample space $S$ is the set of all possible outcomes. Die sample space is
+
+$$
+S=\{1,2,3,4,5,6\}.
+$$
+
+\item An event $E \subset S$ is a subset of outcomes of the sample space $S$. For equally likely outcomes, the probability of an event is given by counts. That is, for event $E={1}$,
+
+$$
+P(E)=\frac{|E|}{|S|}=\frac{1}{6}.
+$$
+
+For event $E={2,4,6}$, an even roll,
+
+$$
+P(E)=\frac{|E|}{|S|}=\frac{3}{6}=\frac{1}{2}.
+$$
+
+\item Basic rules:
+\begin{itemize}
+\item $0 \leq P(E) \leq 1$
+\item $P(S)=1$
+\item $P(E^c)=1-P(E)$
+\item $P(A\cup B)=P(A)+P(B)-P(A\cap B)$
+\item If $A$ and $B$ are mutually exclusive, then $P(A\cap B)=0$, so
+
+$$
+P(A\cup B)=P(A)+P(B).
+$$
+
+\end{itemize}
+
+\item The conditional probability of event $A$ given $B$ is
+
+$$
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+$$
+
+which can be understood as restricting attention to the outcomes in $B$. In the equally likely case,
+
+$$
+P(A\mid B)=\frac{|A\cap B|}{|B|}
+=\frac{|A\cap B|/|S|}{|B|/|S|}
+=\frac{P(A\cap B)}{P(B)}.
+$$
+
+For the dice,
+
+$$
+P(4\mid \text{even})=\frac{1}{3}.
+$$
+
+\item Events $A$ and $B$ are independent if
+
+$$
+P(A\cap B)=P(A)P(B),
+$$
+
+which can be seen from conditional probability. Two dice or flipping two coins provide simple examples of independent events.
+
+\item A discrete random variable $X$ assigns numbers to outcomes. For a die roll, the outcome itself can be the random variable. For example, if two coins are flipped, $X$ could count the number of heads, with possible values ${0,1,2}$. This allows us to use mathematics and functions to describe random phenomena.
+
+\item The probability mass function (PMF)
+
+$$
+p(x)=P(X=x)
+$$
+
+gives the probability that the random variable $X$ has value $x$, allowing for unequally likely outcomes. Note
+
+$$
+\sum_x p(x)=1.
+$$
+
+For the die,
+
+$$
+p(x)=\frac{1}{6}, \qquad x=1,\ldots,6.
+$$
+
+\item The expected value (mean) of a discrete random variable $X$ is
+
+$$
+\mathbb{E}[X]=\sum_x x\,p(x),
+$$
+
+which represents the long-run average outcome. For the die,
+
+$$
+\mathbb{E}[X]=3.5.
+$$
+
+\item The variance of $X$ measures spread around the mean.
+
+$$
+\mathrm{Var}(X)=\mathbb{E}[(X-\mu)^2]
+=\sum_x(x-\mu)^2p(x)
+=\mathbb{E}[X^2]-[\mathbb{E}[X]]^2,
+$$
+
+where $\mu=\mathbb{E}[X]$. Variance measures the average squared distance from the mean. For the die,
+
+$$
+\mathrm{Var}(X)=\frac{35}{12}\approx 2.916667.
+$$
+
+\item The standard deviation is the square root of variance, an alternate measure of spread.
+
+$$
+\sigma=\mathrm{SD}(X)=\sqrt{\mathrm{Var}(X)}.
+$$
+
+Unlike variance, standard deviation is measured in the same units as $X$. For the die,
+
+$$
+\sigma=\sqrt{\frac{35}{12}}\approx1.707825.
+$$
+
+The die outcomes $2,3,4,5$ are within one standard deviation of the mean, so $4/6\approx67\%$ of outcomes fall within one standard deviation. The familiar 68-95-99.7 rule applies specifically to a normal distribution.
+
+\item The expected value of a function $g(X)$ is
+
+$$
+\mathbb{E}[g(X)]=\sum_xg(x)\,p(x).
+$$
+
+For example,
+
+$$
+\mathrm{Var}(X)=\mathbb{E}[(X-\mu)^2].
+$$
+
+\item The conditional expectation of $Y$ given $X=x$ is
+
+$$
+\mathbb{E}[Y\mid X=x].
+$$
+
+It represents the average value of $Y$ among observations for which $X=x$. For example, if $X$ is horsepower and $Y$ is fuel efficiency, then
+
+$$
+\mathbb{E}[Y\mid X=200]
+$$
+
+is the average fuel efficiency for cars with 200 horsepower.
+
+More generally, $\mathbb{E}[Y\mid X]$ is a function of $X$. It gives the expected value of $Y$ for each possible value of $X$ and can therefore be viewed as a prediction of $Y$ based on $X$.
+
+\item Conditional expectation provides the theoretical foundation for regression. Suppose we want to predict $Y$ from $X$ using squared prediction error. For a particular value $X=x$, consider predicting $Y$ with a number $a$. The expected squared prediction error is
+
+$$
+\mathbb{E}[(Y-a)^2\mid X=x].
+$$
+
+This quantity is minimized when
+
+$$
+a=\mathbb{E}[Y\mid X=x].
+$$
+
+Thus, the best possible prediction of $Y$ from $X=x$, when using squared error, is
+
+$$
+\boxed{\mathbb{E}[Y\mid X=x]}.
+$$
+
+In other words, the regression function
+
+$$
+f(x)=\mathbb{E}[Y\mid X=x]
+$$
+
+is the theoretical function that gives the best prediction of $Y$ from $X$ under squared error loss.
+
+In practice, we generally do not know the true function $f(x)$. Instead, we use observed data to estimate it. Linear regression assumes a particular form,
+
+$$
+f(x)\approx \beta_0+\beta_1x,
+$$
+
+and estimates $\beta_0$ and $\beta_1$ from the data.
+
+With multiple predictors,
+
+$$
+f(x_1,\ldots,x_p)
+=\mathbb{E}[Y\mid X_1=x_1,\ldots,X_p=x_p]
+\approx
+\beta_0+\beta_1x_1+\cdots+\beta_px_p.
+$$
+
+Thus, regression can be viewed as estimating the conditional mean of a response given one or more predictors.
+
+\item For classification, the same idea leads to conditional probabilities rather than conditional means. For a binary response $Y\in{0,1}$,
+
+$$
+\mathbb{E}[Y\mid X=x]
+=
+P(Y=1\mid X=x).
+$$
+
+Thus, the conditional expectation is also the probability that $Y=1$ given $X=x$.
+
+For example,
+
+$$
+P(\text{Survived}=1\mid \text{Age}=20)
+$$
+
+is the probability that a 20-year-old passenger survived. Logistic regression models this conditional probability.
+
+This gives a common framework for supervised learning:
+
+$$
+\boxed{\text{Regression: estimate }\mathbb{E}[Y\mid X]}
+$$
+
+$$
+\boxed{\text{Classification: estimate }P(Y=k\mid X)}
+$$
+
+The goal of supervised learning is to use observed data to estimate these unknown relationships between predictors $X$ and a response $Y$.
+]
+
 \end{enumerate}
+
+
+\end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{2.1: What is statistical learning?}
@@ -190,7 +423,7 @@ Y \approx \hat{Y} = \hat{f}(X).
 \item Prediction error in terms of expectation: Treating $f(X)$ and $\hat{f}(X)$ as constant and $\epsilon$ as a random variable with mean zero,
 \begin{align*}
 \mathbb{E}(Y-\hat{Y})^2 &= \mathbb{E}(f(X)+\epsilon-\hat{f}(x))^2 \\ 
-&= \mathbb{E}(f(X)-\hat{f}(X))^2 +  2\mathbb{E}(f(X)-\hat{f}(X))\epsilon + \mathbb{E}\epsilon^2\\  
+&= \mathbb{E}(f(X)-\hat{f}(X))^2 +  2\mathbb{E}(f(X)-\hat{f}(X))\epsilon + \mathbb{E}[\epsilon^2]\\  
 &= (f(X)-\hat{f}(X))^2 +  2(f(X)-\hat{f}(X)) \mathbb{E}(\epsilon) + \mathrm{Var}(\epsilon)\\  
 &= (f(X)-\hat{f}(X))^2 + \mathrm{Var}(\epsilon)\\  
 &= \text{Reducible error} + \text{Irreducible error}.
@@ -326,14 +559,24 @@ Putting it all together:
 \underbrace{\sigma^2}_{\text{irreducible error}}
 \]
 
-\item To minimize expected test error, we need a statistical learning method that has both low variance and low bias, but 
-never below irreducible error.
+\item To minimize expected test error, we need a statistical learning method that has both low variance and low bias, but can
+never be below irreducible error.
 \item Variance refers to how much $\hat{f}$ would change with a different set of training data. Inflexible models have low variance while flexible models have high variance.
 \item Bias refers to error introduced by approximating a real-life problem by a much simpler model. Inflexible models have high bias and flexible models have low bias.
-\item Nice picture in Ng cheatsheet.
+\item Nice picture in Ng cheatsheet. Sketch u-shape test error, bias variance tradeoff.
+\item Create a table to show tradeoff. \\
+\begin{tabular}{|c|c|c|}
+\hline
+ & Variance & Bias \\ 
+\hline
+Low flexibility & Low & High \\
+High flexibility   & High & Low \\
+\hline
+\end{tabular}
+
 \end{enumerate}
 
-\item The classification setting:
+\item The classification setting: Working example of pass/fail class as function of study hours and attendance.
 \begin{enumerate}
 \item $y_i$ is a category now rather than being a quantity, though the bias-variance trade-off still occurs.
 \item We seek to estimate $f$ from training observations $\{(x_1, y_1), \dots, (x_n, y_n) \}$.
@@ -382,6 +625,178 @@ Then classify according to the largest of these probabilities over all classes $
 \subsection*{Homework}
 \addcontentsline{toc}{subsection}{Homework}
 
+\begin{enumerate}
+\item For each of parts (a) through (d), indicate whether we would generally expect 
+the performance of a flexible statistical learning method to be better or
+worse than an inflexible method. Justify your answer.
+\begin{enumerate}
+
+\item The sample size $n$ is extremely large, and the number of predictors $p$ is small.
+
+Answer: Flexible best - opposite of b.
+
+\item The number of predictors $p$ is extremely large, and the number of observations $n$ is small.
+
+Answer: Inflexible best - high chance of some predictors being randomly associated. Avoid overfitting.
+
+\item The relationship between the predictors and response is highly non-linear.
+
+Answer: Flexible best - inflexible leads to high bias and underfitting.
+
+\item The variance of the error terms, i.e. $\sigma^2 = Var(\epsilon)$, is extremely high.
+
+Inflexible best - opposite of c. 
+\end{enumerate}
+
+\item Explain whether each scenario is a classification or regression problem, and
+ indicate whether we are most interested in inference or prediction. Finally,
+ provide $n$ and $p$.
+\begin{enumerate}
+\item We collect a set of data on the top 500 firms in the US. For each firm
+    we record profit, number of employees, industry and the CEO salary. We are
+    interested in understanding which factors affect CEO salary.
+
+Answer: $n=500$, $p=3$, regression, inference.
+
+\item We are considering launching a new product and wish to know whether
+    it will be a success or a failure. We collect data on 20 similar products
+    that were previously launched. For each product we have recorded whether it
+    was a success or failure, price charged for the product, marketing budget,
+    competition price, and ten other variables.
+
+Answer: $n=20$, $p=13$, classification, prediction.
+
+\item We are interested in predicting the \% change in the USD/Euro exchange
+    rate in relation to the weekly changes in the world stock markets. Hence we
+    collect weekly data for all of 2012. For each week we record the \% change
+    in the USD/Euro, the \% change in the US market, the \% change in the British
+    market, and the \% change in the German market.
+
+Answer: $n=52$, $p=3$, regression, prediction.
+\end{enumerate}
+
+\item We now revisit the bias-variance decomposition.
+\begin{enumerate}
+\item Provide a sketch of typical (squared) bias, variance, training error,
+    test error, and Bayes (or irreducible) error curves, on a single plot, as
+    we go from less flexible statistical learning methods towards more flexible
+    approaches. The x-axis should represent the amount of flexibility in the
+   method, and the y-axis should represent the values for each curve. There
+    should be five curves. Make sure to label each one.
+
+\item  Explain why each of the five curves has the shape displayed in
+    part (a).
+
+Answer:
+\begin{itemize}
+\item (squared) bias: Decreases with increasing flexibility (Generally, more
+  flexible methods result in less bias as they better fit the training data).
+\item variance: Increases with increasing flexibility (In general, more flexible
+  statistical methods have higher variance as they are more sensitive to changes in training data).
+\item training error: Decreases with model flexibility (More complex models will
+  better fit the training data).
+\item test error: Decreases initially, then increases due to overfitting (illustration of the bias-variance tradeoff).
+\item  Bayes (irreducible) error: fixed (does not change with model).
+\end{itemize}
+\end{enumerate}
+
+\item You will now think of some real-life applications for statistical learning.
+\begin{enumerate}
+\item Describe three real-life applications in which classification might
+    be useful. Describe the response, as well as the predictors. Is the goal of
+    each application inference or prediction? Explain your answer.
+
+Solution:
+\begin{itemize}
+\item Coffee machine cleaned? (clean (Y/N) predicted by day of week, person assigned), inference.
+\item Beer type (IPA, pilsner etc. predicted by drink color, taste, etc), prediction.
+\end{itemize}
+
+\item Describe three real-life applications in which regression might be
+    useful. Describe the response, as well as the predictors. Is the goal of
+    each application inference or prediction? Explain your answer.
+
+Solution:
+\begin{itemize}
+\item Amount of bonus paid (profitability, client feedback), prediction.
+\item Person's height, prediction.
+\item House price, inference.
+\end{itemize}
+
+\item Describe three real-life applications in which cluster analysis might be
+    useful.
+
+Solution:
+\begin{itemize}
+\item RNAseq tumour gene expression data.
+\item SNPs in human populations.
+\item Frequencies of mutations (with base pair context) in somatic mutation data.
+\end{itemize}
+\end{enumerate}
+
+\item What are the advantages and disadvantages of a very flexible (versus a less
+flexible) approach for regression or classification? Under what circumstances
+ might a more flexible approach be preferred to a less flexible approach? When
+ might a less flexible approach be preferred?
+
+Solution: Inflexible is more interpretable, fewer observations required, can be biased if the underlying function is over complex.
+Flexible can overfit (high error variance). In cases where we have high $n$ or
+non-linear patterns, flexible will be preferred.
+
+\item Describe the differences between a parametric and a non-parametric statistical
+ learning approach. What are the advantages of a parametric approach to
+ regression or classification (as opposed to a non-parametric approach)? What
+ are its disadvantages?
+
+Solution: Parametric uses (model) parameters. Parametric models can be more interpretable
+as there is a model behind how data is generated. However, the disadvantage is
+that the model might not reflect reality. If the model is too far from the
+truth, estimates will be poor and more flexible models can fit many different
+forms and require more parameters (leading to overfitting). Non-parametric
+approaches do not estimate a small number of parameters, so a large number
+of observations may be needed to obtain accurate estimates.
+
+\item The table below provides a training data set containing six observations,
+three predictors, and one qualitative response variable.
+ 
+ | Obs. | $X_1$ | $X_2$ | $X_3$ | $Y$   |
+ 
+ |------|-------|-------|-------|-------|
+ 
+ | 1    | 0     | 3     | 0     | Red   |
+ 
+ | 2    | 2     | 0     | 0     | Red   |
+ 
+ | 3    | 0     | 1     | 3     | Red   |
+ 
+ | 4    | 0     | 1     | 2     | Green |
+ 
+ | 5    | -1    | 0     | 1     | Green |
+ 
+ | 6    | 1     | 1     | 1     | Red   |
+ 
+Suppose we wish to use this data set to make a prediction for $Y$ when 
+$X_1 = X_2 = X_3 = 0$ using $K$-nearest neighbors.
+
+\begin{enumerate}
+\item Compute the Euclidean distance between each observation and the test
+    point, $X_1 = X_2 = X_3 = 0$.
+\item What is our prediction with $K = 1$? Why?
+
+Solution: Green (based on data point 5 only)
+
+\item What is our prediction with $K = 3$? Why?
+
+Solution: Red (based on data points 2, 5, 6)
+
+\item If the Bayes decision boundary in this problem is highly non-linear, then
+would we expect the best value for $K$ to be large or small? Why?
+
+Solution: Small (high $k$ leads to linear boundaries due to averaging)
+\end{enumerate}
+
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Chapter 3: Linear regression} 
 \addcontentsline{toc}{section}{Chapter 3: Linear regression}
@@ -416,7 +831,7 @@ e_i = y_i - \hat{y}_i
 \]
 where
 \[
-\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 + x_i,
+\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i,
 \]
 define the residual sum of squares as
 \[
@@ -424,7 +839,7 @@ RSS = e_1^2 + \dots + e_n^2.
 \]
 \item Using minimization via calculus, we can compute explicitly the least squares coefficients as follows
 \[
-\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n (x_i - \overline{x})^2}
+\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n (x_i - \overline{x})^2} = \frac{Cov(X,Y)}{Var(X)}
 \]\[
 \hat{\beta}_0 = \overline{y}-\hat{\beta}_1\overline{x}
 \]
@@ -450,20 +865,28 @@ Y = \beta_0 + \beta_1 X + \epsilon
 \]
 where we think of $\beta_0$ as the expected value of $Y$ when $X=0$, and $\beta_1$ is the average increase in $Y$ per unit increase in $X$. We aim to quantify the certainty around these expected values.
 
-\item Basic example to connect to the notion of bias: Single mean $\hat{\mu} \approx \mu$.
+\item Basic example to connect to the notion of bias: Single mean population mean $\mu$ approximated by averaging many sample means $\overline{x}_i$, call is $\hat{\mu}$. Assume all samples of the same size drawn in the same way (iid).
 \begin{itemize}
-\item We say that $\hat{\mu}$ is an unbiased approximation of $\mu$ because small samples can either cause $\hat{\mu}$ to be larger or smaller than $\mu$. For a very large sample, it will be exactly the same.
-\item This is related to the CLT.
+\item We say that $\hat{\mu}$ is an unbiased approximation of $\mu$ because different samples can either cause $\hat{\mu}$ to be larger or smaller than $\mu$. For a very large sample, it will be nearly the same as the population mean $\mu$. This is related to the CLT. Draw the normal distribution for big small sample sizes.
 \item Recall that we define bias as 
 \[
-Bias(\hat{\mu}) = E[\hat{\mu}] - \mu
+Bias(\hat{\mu}) = E[\hat{\mu}] - \mu = \mu - \mu = 0
 \]
-meaning that we have an unbiased estimate here because the CLT ensures for large number of samples $E[\hat{\mu}]=\mu$ giving zero bias.
+meaning that we have an unbiased estimate here because the CLT ensures for large number of samples $E[\hat{\mu}]=\mu$ giving zero bias. Can show this using iid assumption.
 \item The standard error of $\hat{\mu}$ has a well known formula:
 \[
 Var(\hat{\mu}) = SE(\hat{\mu})^2 = \frac{\sigma^2}{n}
 \]
-where $\sigma$ is the standard deviation of each of the realizations of $y_i$ of $Y$. 
+where $\sigma$ is the standard deviation of each of the samples $X$. Derivation below.
+\[
+E[\hat{\mu}] = E\left[ \frac{1}{n} \sum_i x_i \right] = \frac{1}{n} \sum_i E[y_i] = \frac{1}{n} \sum_i \mu = \mu
+\]
+using linearity of expectation and
+\[
+Var(\hat{\mu}) = Var \left( \frac{1}{n} \sum_i \overline{x}_i \right) =  \frac{1}{n^2} Var \left( \sum_i \overline{x}_i \right)
+ =  \frac{1}{n^2} \sum_i Var(\overline{x}_i) = \frac{n \sigma}{n^2} = \frac{\sigma}{n}
+\]
+using square property of variance.
 \item The $SE$ formula tells us the average amount $\hat{\mu}$ differs from $\mu$ as well as the effect of the sample size $n$. As $n$ increases, the $SE$ decreases. 
 \end{itemize}
 
@@ -478,10 +901,8 @@ SE(\hat{\beta}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2}
 SE(\hat{\beta}_0)^2 = \sigma^2 \left( \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x})^2} \right)
 \]
 
-\[
-\text{where} \quad \sigma^2 = Var(\epsilon) \text{ is the variance of errors, or estimated by} \quad
-\hat{\sigma}^2 = \frac{1}{n-2} \sum_{i=1}^n (y_i - \hat{y}_i)^2 = \frac{RSS}{n-2}
-\]
+where $\sigma^2 = Var(\epsilon)$ is the variance of errors, or estimated by $\hat{\sigma}^2 = \frac{1}{n-2} \sum_{i=1}^n (y_i - \hat{y}_i)^2 = \frac{RSS}{n-2}$.
+
 
 \item Note that $SE(\hat{\beta}_1)$ is smaller when the $x_i$'s are more spread out. Intuitively we have more leverage to estimate the slope in this case. 
 \item Also, $SE(\hat{\beta_0})$ would be the same as $SE(\hat{\mu})$ if $\overline{x}=0$ in which case $\beta_0$ would equal $\overline{y}$.
@@ -509,7 +930,6 @@ We test with a $t$-statistic as with a single mean via a $t$-distribution with $
 \[
 t = \frac{\hat{\beta}_1-0}{SE(\hat{\beta}_1} 
 \]
-
 \end{itemize}
 \end{enumerate}
 
@@ -574,10 +994,10 @@ RSS = \sum_{i=1}^n (y_i - \hat{y}_i)^2 = \sum_{i=1}^n (y_i - \hat{\beta}_0 - \ha
 \begin{enumerate}
 \item Answer via a hypothesis test.
 \[
-H_0: \beta_1 = \dots = \beta_p = 0
+H_0: \beta_1 = \dots = \beta_p = 0 \quad (\text{there is no relationship between $X$ and $Y$})
 \]
 \[
-H_a: \text{ At least one $\beta_j \neq 0$.}
+H_a: \text{ At least one $\beta_j \neq 0$} \quad (\text{there is a relationship between $X$ and $Y$}) 
 \]
 \item Conduct the hypothesis test via a $F$-distribution where the $F$-statistic is
 \[
@@ -652,18 +1072,28 @@ R^2 = \text{Cor}(Y,\hat{Y})^2.
 
 \item Extensions of linear models: These are additive ($X_j$ independent of eachother) and linear ($Y$ changes with $X_j$ separately).
 \begin{enumerate}
-\item Removing additive assumption uses interaction terms such as product $X_1 X_2$. Interpretation becomes more complicated.
-\item Removing the linear term allows for other polynomial models. $X^2$ gives quadratic, $X^3$ cubic, etc.
+\item Removing additive assumption uses interaction terms such as product $X_1 X_2$. Interpretation becomes more complicated. For example, if $Y=\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon$ models course grade where $X_1, X_2$ are sleep and study hours, it might help to include $\beta_3 X_1 X_2$ which emphasizes the right combination of study and sleep. Too much of one may diminish the other.
+\item Modifying the linear form allows for other polynomial models. $X^2$ gives quadratic, $X^3$ cubic, etc. All are trained in the same manor. 
 \end{enumerate}
 
 \item Potential problems (of linear regression):
 \begin{enumerate}
+\item Bad fit: Change model or transform variables
+\begin{itemize}
 \item Non-linearity of the predictor-response relationships. Residual plots are useful.
-\item Correlation of error terms. Especially an issue with time series data, but also when latent groups may occur.
 \item Non-constant variance of error terms. Data transformation or sample weighting may help.
+\item Correlation of error terms. Especially an issue with time series data, but also when latent groups may occur.
+\end{itemize}
+\item Sensitive fit: Remove outliers or change model or transform variables
+\begin{itemize}
 \item Outliers. Detection of outliers is possible, but it is hard to just if data should be removed to improve model fit.
 \item High-leverage points. Large $X$ values have a relatively large effect on model coefficients. The leverage statistic helps identify these.
-\item Collinearity. Model accuracy is not impacted, but variable interpretation is muddy. VIF score helps identify collinear variables. Remedy is to remove one or combine into a new variable.
+\end{itemize}
+\item Incorrect interpretation: Remove variables
+\begin{itemize}
+\item Many insignificant variables.
+\item Collinearity. Model accuracy is not impacted, but variable interpretation is muddy. Further, variance of coefficients will increase, sometimes dramatically. VIF score helps identify collinear variables. Remedy is to remove one or combine into a new variable. Claims of causality should be avoided for observational data.
+\end{itemize}
 \end{enumerate}
 \end{enumerate}
 
@@ -671,7 +1101,7 @@ R^2 = \text{Cor}(Y,\hat{Y})^2.
 \subsection*{3.4: The marketing plan}
 \addcontentsline{toc}{subsection}{3.4: The marketing plan}
 
-Case study summary. Maybe good for class demo.
+Case study summary. Maybe good for class demo. Use Carseats demo in class instead.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{3.5: Comparison of linear regression with K-nearest neighbors}
@@ -734,6 +1164,196 @@ KNN Regression (large $k$) & Higher & Lower \\
 \subsection*{Homework}
 \addcontentsline{toc}{subsection}{Homework}
 
+\begin{enumerate}
+\item Describe the null hypotheses to which the p-values given in Table 3.4
+ correspond. Explain what conclusions you can draw based on these p-values.
+ Your explanation should be phrased in terms of `sales`, `TV`, `radio`, and
+ `newspaper`, rather than in terms of the coefficients of the linear model.
+
+Solution: For intercept, that $\beta_0 = 0$
+For the others, that $\beta_n = 0$ (for $n = 1, 2, 3$)
+
+We can conclude that that without any spending, there are still some sales (the
+intercept is not 0). Furthermore, we can conclude that money spent on TV and
+radio are significantly associated with increased sales, but the same cannot be
+said of newspaper spending.
+
+\item Carefully explain the differences between the KNN classifier and KNN
+ regression methods.
+
+Solution: The KNN classifier is categorical and assigns a value based on the most
+frequent observed category among $K$ nearest neighbors, whereas KNN regression
+assigns a continuous variable, the average of the response variables for
+the $K$ nearest neighbors.
+
+\item Suppose we have a data set with five predictors, $X_1$ = GPA, $X_2$ = IQ,
+$X_3$ = Level (1 for College and 0 for High School), $X_4$ = Interaction
+ between GPA and IQ, and $X_5$ = Interaction between GPA and Level. The
+ response is starting salary after graduation (in thousands of dollars).
+ Suppose we use least squares to fit the model, and get $\hat\beta_0 = 50$,
+ $\hat\beta_1 = 20$, $\hat\beta_2 = 0.07$, $\hat\beta_3 = 35$, $\hat\beta_4 =
+ 0.01$, $\hat\beta_5 = -10$.
+
+\begin{enumerate}
+
+\item Which answer is correct, and why?
+
+i. For a fixed value of IQ and GPA, high school graduates earn more on
+        average than college graduates.
+
+ii. For a fixed value of IQ and GPA, college graduates earn more on
+         average than high school graduates.
+
+iii. For a fixed value of IQ and GPA, high school graduates earn more on
+          average than college graduates provided that the GPA is high enough.
+iv. For a fixed value of IQ and GPA, college graduates earn more on 
+
+         average than high school graduates provided that the GPA is high 
+         enough.
+
+Solution: The model is:
+
+$y = \beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{IQ} + \beta_3 \cdot \text{Level} + \beta_4 \cdot \text{GPA} \cdot \text{IQ} + \beta_5 \cdot \text{GPA} \cdot \text{Level}$
+
+Fixing IQ and GPA, changing Level from 0 to 1 will change the outcome by:
+
+$\Delta y = \beta_3 + \beta_5 \cdot \text{GPA}$
+
+$\Delta y > 0 \Rightarrow \beta_3 + \beta_5 \cdot \text{GPA} > 0 \Rightarrow \text{GPA} < \dfrac{-\beta_3}{\beta_5} = \dfrac{-35}{-10} = 3.5$
+
+Option iii correct.
+
+\item Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.
+
+\item True or false: Since the coefficient for the GPA/IQ interaction term is
+    very small, there is very little evidence of an interaction effect. Justify
+    your answer.
+
+Solution: This is false. It is important to remember that GPA and IQ vary over different
+scales. It is better to explicitly test the significance of the interaction 
+effect, and/or visualize or quantify the effect on sales under realistic ranges
+of GPA/IQ values.
+\end{enumerate}
+
+\item I collect a set of data ($n = 100$ observations) containing a single predictor
+ and a quantitative response. I then fit a linear regression model to the data,
+ as well as a separate cubic regression, i.e. $Y = \beta_0 + \beta_1X +
+ \beta_2X^2 + \beta_3X^3 + \epsilon$.
+
+\begin{enumerate}
+\item Suppose that the true relationship between $X$ and $Y$ is linear,
+    i.e. $Y = \beta_0 + \beta_1X + \epsilon$. Consider the training residual
+    sum of squares (RSS) for the linear regression, and also the training RSS
+    for the cubic regression. Would we expect one to be lower than the other,
+    would we expect them to be the same, or is there not enough information to
+    tell? Justify your answer.
+
+Solution: You would expect the cubic regression to have lower RSS since it is at least
+as flexible as the linear regression.
+
+\item Answer (a) using test rather than training RSS.
+
+Solution: Though we could not be certain, the test RSS would likely be higher due to
+overfitting.
+
+\item Suppose that the true relationship between $X$ and $Y$ is not linear, but
+   we don't know how far it is from linear. Consider the training RSS for the
+    linear regression, and also the training RSS for the cubic regression.
+    Would we expect one to be lower than the other, would we expect them to be
+    the same, or is there not enough information to tell? Justify your answer.
+
+Solution: You would expect the cubic regression to have lower RSS since it is at least
+as flexible as the linear regression.
+
+\item Answer (c) using test rather than training RSS.
+
+Solution: There is not enough information to tell, it depends on how non-linear the 
+true relationship is.
+\end{enumerate}
+
+\item Consider the fitted values that result from performing linear regression
+ without an intercept. In this setting, the ith fitted value takes the form
+ $$\hat{y}_i = x_i\hat\beta,$$
+ where
+ $$\hat{\beta} = \left(\sum_{i=1}^nx_iy_i\right) / \left(\sum_{i' = 1}^n x^2_{i'}\right).$$
+ show that we can write
+ $$\hat{y}_i = \sum_{i' = 1}^na_{i'}y_{i'}$$
+ What is $a_{i'}$?
+
+Note: We interpret this result by saying that the fitted 
+values from linear regression are linear combinations of the response values.
+
+Solution:
+\begin{align}
+\hat{y}_i 
+  & = x_i \frac{\sum_{i=1}^nx_iy_i}{\sum_{i' = 1}^n x^2_{i'}} \\
+  & = x_i \frac{\sum_{i'=1}^nx_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
+  & = \frac{\sum_{i'=1}^n x_i x_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
+  & = \sum_{i'=1}^n  \frac{ x_i x_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
+  & = \sum_{i'=1}^n  \frac{ x_i x_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} y_{i'}
+\end{align}
+
+therefore,
+
+$$a_{i'} = \frac{ x_i x_{i'}}{\sum x^2}$$
+
+\item Using (3.4), argue that in the case of simple linear regression, the
+ least squares line always passes through the point $(\bar{x}, \bar{y})$.
+
+Solution: When $x = \bar{x}$ what is $y$?
+
+\begin{align}
+y &= \hat\beta_0 + \hat\beta_1\bar{x} \\
+  &= \bar{y} - \hat\beta_1\bar{x} + \hat\beta_1\bar{x} \\
+  &= \bar{y}
+\end{align}
+
+\item It is claimed in the text that in the case of simple linear regression
+ of $Y$ onto $X$, the $R^2$ statistic (3.17) is equal to the square of the
+ correlation between $X$ and $Y$ (3.18). Prove that this is the case. For
+ simplicity, you may assume that $\bar{x} = \bar{y} = 0$.
+
+Solution: We have the following equations:
+
+$$ R^2 = \frac{\textit{TSS} - \textit{RSS}}{\textit{TSS}} $$
+$$ Cor(x,y) = \frac{\sum_i (x_i-\bar{x})(y_i - \bar{y})}{\sqrt{\sum_i(x_i - \bar{x})^2}\sqrt{\sum_i(y_i - \bar{y})^2}} $$
+
+As above, its important to remember $\sum_i x_i = \sum_j x_j$
+
+when $\bar{x} = \bar{y} = 0$
+$$ Cor(x,y)^2 = \frac{(\sum_ix_iy_i)^2}{\sum_ix_i^2 \sum_iy_i^2} $$
+
+Also note that:
+
+$$\hat{y}_i = \hat\beta_o + \hat\beta_1x_i = x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}$$
+
+Therefore, given that $RSS = \sum_i(y_i - \hat{y}_i)^2$ and
+$\textit{TSS} = \sum_i(y_i - \bar{y})^2 = \sum_iy_i^2$
+
+\begin{align}
+R^2 &= \frac{\sum_iy_i^2 - \sum_i(y_i - x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2}
+            {\sum_iy_i^2} \\
+    &= \frac{\sum_iy_i^2 - \sum_i(
+          y_i^2 -
+          2y_ix_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2} +
+          x_i^2 (\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2
+        )}{\sum_iy_i^2} \\
+    &= \frac{
+          2\sum_i(y_ix_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}) -
+          \sum_i(x_i^2 (\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2)
+        }{\sum_iy_i^2} \\
+    &= \frac{
+          2\sum_i(y_ix_i) \frac{\sum_j{x_jy_j}}{\sum_jx_j^2} -
+          \sum_i(x_i^2) \frac{(\sum_j{x_jy_j})^2}{(\sum_jx_j^2)^2}
+        }{\sum_iy_i^2} \\
+    &= \frac{
+          2\frac{(\sum_i{x_iy_i})^2}{\sum_jx_j^2} -
+          \frac{(\sum_i{x_iy_i})^2}{\sum_jx_j^2}
+        }{\sum_iy_i^2} \\
+    &= \frac{(\sum_i{x_iy_i})^2}{\sum_ix_i^2 \sum_iy_i^2}
+\end{align}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Chapter 4: Classification} 
 \addcontentsline{toc}{section}{Chapter 4: Classification}
@@ -758,7 +1378,7 @@ KNN Regression (large $k$) & Higher & Lower \\
 
 \begin{enumerate}
 \item Just as in regression, our classification models will have a set of training observations $(x_1, y_1), \dots, (x_n, y_n)$. Only now $y_i$ will be a categorical variable.
-\item 
+\item Example: Auto dataset high / low mpg classification by binning mpg quant variable. Note especially does not generalize to 3+ classes, though all pairing of classes could be considered.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -766,7 +1386,7 @@ KNN Regression (large $k$) & Higher & Lower \\
 \addcontentsline{toc}{subsection}{4.2: Why not linear regression?}
 
 \begin{enumerate}
-\item Even if we encode random variable $Y$ numerically such as $0,1,\dots$ for each category, a regression model would predict values outside the range of $Y$. Further, ordering categories numerically makes little sense.
+\item Even if we encode random variable $Y$ numerically such as $0,1,\dots$ for each category, a regression model would predict values outside the range of $Y$. Further, ordering categories numerically makes little sense. Hard issues when residuals are not normal, and variance of residuals is not constant. Coefs are not meaningful or reliable. Performance also is bad.
 \item Instead, we aim to give a meaningful estimate of conditional probability $Pr(Y | X)$.
 \end{enumerate}
 
@@ -785,11 +1405,13 @@ KNN Regression (large $k$) & Higher & Lower \\
 p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 \]
 It has an "s" shape and is symmetric around point $(0, 0.5)$. Also it is defined for any value of $X$. Extreme values of $X$ give probabilities close to zero. This is a "soft" version of a step function with nice math properties.
-\item Origins of the logistic curve: For probability $p$, if you model odds as
+\item Origins of the logistic curve: For probability $p$, if you model odds (success to failure ratio) as
 \[
-odds = \frac{p}{1-p},
+odds = \frac{p}{1-p}
 \]
-then the log of odds gives
+which lies in $[0,\infty)$.
+If betting, would say 5:1 odds of rolling a 2. If win, would get 1+5 dollars, else lose 1 dollar.
+Then, the log of odds gives
 \[
 \text{logit}(p) = \ln\left( \frac{p}{1-p} \right).
 \]
@@ -803,14 +1425,18 @@ which is the logistic function.
 \[
 \ln\left( \frac{p(X)}{1-p(X)}\right) = \beta_0 + \beta_1 X
 \]
-we see a unit increase in $X$ results in changing the log-odds by $\beta_1$. Equivalently, the odds changes by $e^{\beta_1}$. 
+we see a unit increase in $X$ results in changing the log-odds by $\beta_1$ (increase/decrease based on sign). Equivalently, the odds changes by multiplier $e^{\beta_1}$ (increase/decrease based on sign). Harder to see, the probability $p$ changes according to the sigmoid function (increase/decrease based on sign).
 \end{enumerate}
 
 \item Estimating the regression coefficients:
 \begin{enumerate}
-\item Our estimates $\hat{\beta}_0, \hat{\beta}_1$ of $\beta_0, \beta_1$ are chosen such that they maximize the likelihood function
+\item Our estimates $\hat{\beta}_0, \hat{\beta}_1$ of $\beta_0, \beta_1$ are chosen such that they maximize the (Bernoulli) likelihood function
 \[
-\ell(\beta_0, \beta_1) = \prod_{i: y_i=1} p(x_i) \prod_{i' : y_{i'}=0} (1-p(x_{i'})
+\ell(\beta | \{ Y_i, X_i \}) = \ell(\beta_0, \beta_1) = \prod_{i: y_i=1} p(x_i) \prod_{i' : y_{i'}=0} (1-p(x_{i'}))
+\]
+which assumes are training data is independent so joint probability because products. Note that
+\[
+P(Y_i=1 | X_i) = p(X_i), \quad P(Y_i=0 | X_i) = 1-p(X_i)
 \]
 Mathematically, the log-likelihood function is rather used for numerical optimization.
 \[
@@ -822,6 +1448,23 @@ where $p_i$ is the logistic function form.
 \end{enumerate}
 
 \item Making predictions: Estimates are easy once $\hat{\beta}$ are found. Same as linear regression only now results are interpreted as probabilities. A probability threshold (such as 0.5) is use to convert probability to category.
+\begin{enumerate}
+    \item \textbf{Model:} Logistic regression models the log-odds linearly:
+    \[
+        \text{logit}\big(P(Y=1 \mid X_1, \dots, X_p)\big) = \log \frac{P(Y=1 \mid X)}{P(Y=0 \mid X)} = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p
+    \]
+    
+    \item \textbf{Decision boundary:} Defined by $P(Y=1 \mid X) = 0.5$:
+    \[
+        0.5 = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p)}} 
+        \quad \Rightarrow \quad
+        \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p = 0
+    \]
+    
+    \item \textbf{Interpretation:} This is a linear equation in the predictors, i.e., a hyperplane in $p$-dimensional space. The logistic function introduces nonlinearity in probabilities, but the $0.5$ contour (decision boundary) remains linear.
+    
+    \item \textbf{Nonlinear boundaries:} To obtain nonlinear decision boundaries, one can transform predictors before modeling, e.g., include $X^2$, interactions $X_1 X_2$, or use splines.
+\end{enumerate}
 
 \item Multiple logistic regression:
 \begin{enumerate}
@@ -832,7 +1475,7 @@ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+e^{\beta_0 + \be
 \item Again, maximum likelihood is used to estimate parameters.
 \end{enumerate}
 
-\item Multinomial logistic regression: Extend to the $K>2$ classifier.
+\item Multinomial logistic regression: Extend to the $K>2$ classifier. 2 key desires: all probabilities sum to 1, and model log odds with a linear function.
 \begin{enumerate}
 \item Select the $K$th class as the baseline case. Then our new model is
 \[
@@ -842,6 +1485,7 @@ for $k=1,2,\dots,k-1$, and
 \[
 Pr(Y=K | X=x) = \frac{1}{1+ \sum_{l=1}^{K} e^{\beta_{l0}+\beta_{l1}x_1 + \dots + \beta_{lp}x_p}}.
 \]
+This last equation results from forcing all probabilities to sum to 1. Same with the summation in the denominator.
 \item One can show that
 \[
 \ln \left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)} \right) = \beta_{k0} + \beta_{k1} x_1 + \dots \beta_{kp}x_p
@@ -877,6 +1521,74 @@ Pr(Y=k | X=x) = \frac{e^{\beta_{k0}+\beta_{k1}x_1 + \dots + \beta_{kp}x_p}}{\sum
 \begin{enumerate}
 \item When classes are substantially separate, logistic regression is unstable. This approach solves this.
 \item For small sample and normal distributions of $X$ by classes $Y$, this approach can be more accurate.
+\end{enumerate}
+
+\item Recall Bayes' Theorem:
+\begin{enumerate}
+\item Basic version: 
+\[
+P(A | B) = \frac{P(B|A) P(A)}{P(B)}
+\]
+where
+\begin{align*}
+P(A \mid B) &= \text{probability of event $A$ given that $B$ occurred (posterior)} \\
+P(B \mid A) &= \text{probability of event $B$ given $A$ occurred (likelihood)} \\
+P(A) &= \text{probability of $A$ occurring (prior)} \\
+P(B) &= \text{total probability of $B$ occurring (normalizing constant)}, \text{ often computed as} \\
+P(B) &= P(B \mid A) P(A) + P(B \mid A^c) P(A^c)
+\end{align*}
+Example on probability of getting an apple given it is shiny. Bag of 0.7 apple, 0.3 orange. 0.8 apples shiny. 0.1 oranges shiny. Update probability based on new information. Move from one cond prob to another.
+\item Classification version:
+\begin{align*}
+P(Y=1 \mid X) &= \frac{P(X \mid Y=1) \, P(Y=1)}
+{P(X \mid Y=1) P(Y=1) + P(X \mid Y=0) P(Y=0)}, \\
+P(Y=0 \mid X) &= \frac{P(X \mid Y=0) \, P(Y=0)}
+{P(X \mid Y=1) P(Y=1) + P(X \mid Y=0) P(Y=0)}.
+\end{align*}
+We aim to model the density functions $P(X | Y=1)$ and $P(X | Y=0)$. 
+Decision rule: classify $X \text{ as 1 if } P(Y=1 \mid X) > P(Y=0 \mid X), \text{ otherwise 0.}$
+\end{enumerate}
+
+\item Approach: Simple example
+\begin{enumerate}
+    \item \textbf{Data:}
+    \[
+    \begin{array}{c|cc}
+    \text{Class} & 0 & 1 \\
+    \hline
+    x & 1, 2 & 4, 5
+    \end{array}
+    \]
+
+    \item \textbf{Class means:}
+    \[
+    \mu_0 = \frac{1+2}{2} = 1.5, \quad 
+    \mu_1 = \frac{4+5}{2} = 4.5
+    \]
+
+    \item \textbf{Shared variance:}
+    \[
+    \sigma^2 = \frac{(1-1.5)^2 + (2-1.5)^2 + (4-4.5)^2 + (5-4.5)^2}{4} = 0.25
+    \]
+
+    \item \textbf{Class priors:}
+    \[
+    P(y=0) = P(y=1) = 0.5
+    \]
+
+    \item \textbf{Class-conditional Gaussian likelihoods:}
+    \[
+    P(x \mid y=k) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\Bigg( - \frac{(x - \mu_k)^2}{2 \sigma^2} \Bigg), \quad k = 0,1
+    \]
+
+    \item \textbf{Posterior probability for $x=3.2$:}
+    \[
+    P(y=1 \mid x=3.2) = \frac{P(x=3.2 \mid y=1) \, P(y=1)}
+{P(x=3.2 \mid y=0) \, P(y=0) + P(x=3.2 \mid y=1) \, P(y=1)} \approx 0.916
+    \]
+    
+    \item \textbf{Decision boundary:} Generally a linear function in $X$.
+
 \end{enumerate}
 
 \item Approach: Suppose $Y$ has $K$ classes.
@@ -992,6 +1704,109 @@ similar to LDA but with the quadratic interaction terms
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{4.6: Generalized linear models}
 \addcontentsline{toc}{subsection}{4.6: Generalized linear models}
+Skip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{4.bonus: Classification evaluation metrics}
+\addcontentsline{toc}{subsection}{4.6: Generalized linear models}
+
+\begin{enumerate}
+\item Metric definitions:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c|c}
+ & \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
+\hline
+\textbf{Actual Positive} & True Positive (TP) & False Negative (FN) \\
+\textbf{Actual Negative} & False Positive (FP) & True Negative (TN) \\
+\end{tabular}
+\caption{Confusion matrix for binary classification.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l l l}
+\hline
+\textbf{Metric} & \textbf{Formula} & \textbf{Interpretation} \\
+\hline
+Accuracy & $\dfrac{TP + TN}{TP + TN + FP + FN}$ & Overall fraction correct \\
+Error Rate & $1 - \text{Accuracy}$ & Overall fraction incorrect \\
+Sensitivity (Recall, TPR) & $\dfrac{TP}{TP + FN}$ & Ability to detect positives, completeness \\
+Specificity (TNR) & $\dfrac{TN}{TN + FP}$ & Ability to detect negatives \\
+Precision & $\dfrac{TP}{TP + FP}$ & Reliability of pos predictions, pos more important, exactness \\
+F1 Score & $2 \cdot \dfrac{\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}$ & Balance of precision and recall, harmonic mean, is a percent \\
+ROC Curve & Plot: Sensitivity vs. $1 - \text{Specificity}$ & Tradeoff across thresholds, receiver operating char curve \\
+AUC & Area under ROC curve & Overall discrimination ability \\
+\hline
+\end{tabular}
+\caption{Common evaluation metrics for classification models.}
+\end{table}
+
+\item Example: Spam email detection
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c|c}
+ & \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
+\hline
+\textbf{Actual Positive} & 40 (TP) & 10 (FN) \\
+\textbf{Actual Negative} & 20 (FP) & 30 (TN) \\
+\end{tabular}
+\caption{Confusion matrix example with 100 total observations.}
+\end{table}
+
+\bigskip
+
+\noindent\textbf{Computed Metrics:}
+\begin{align*}
+\text{Accuracy} &= \frac{40 + 30}{100} = 0.70 \\
+\text{Error Rate} &= 1 - 0.70 = 0.30 \\
+\text{Sensitivity (Recall, TPR)} &= \frac{40}{40 + 10} = 0.80 \\
+\text{Specificity (TNR)} &= \frac{30}{30 + 20} = 0.60 \\
+\text{Precision} &= \frac{40}{40 + 20} = 0.67 \\
+\text{F1 Score} &= 2 \cdot \frac{0.67 \cdot 0.80}{0.67 + 0.80} \approx 0.73
+\end{align*}
+
+\item ROC and AUC:
+
+\begin{itemize}
+    \item \textbf{ROC Curve (Receiver Operating Characteristic):}  
+    Plots \textbf{True Positive Rate (TPR)} vs. \textbf{False Positive Rate (FPR)} as the classification threshold varies.
+    \[
+    \text{TPR (Sensitivity, Recall)} = \frac{TP}{TP + FN}, \quad
+    \text{FPR} = \frac{FP}{FP + TN} = 1 - \text{Specificity}
+    \]
+
+    \item \textbf{Interpretation:}
+    \begin{itemize}
+        \item Each point represents a specific threshold for classifying positives.
+        \item Curve starts at (0,0) (predict everything negative) and ends at (1,1) (predict everything positive).
+        \item Ideal classifier: curve hugs the top-left corner.
+        \item Random classifier: diagonal line from (0,0) to (1,1).
+    \end{itemize}
+
+    \item \textbf{AUC (Area Under Curve):}  
+    Single-number summary of ROC curve performance.
+    \[
+    0.5 \leq \text{AUC} \leq 1.0
+    \]
+    - AUC = 1: perfect separation of classes  
+    - AUC = 0.5: random guessing  
+    - Higher AUC = better model
+
+    \item \textbf{Advantages:}  
+    \begin{itemize}
+        \item Threshold-independent evaluation.  
+        \item Works well even with class imbalance.  
+        \item Visualizes trade-off between sensitivity and specificity.
+    \end{itemize}
+\end{itemize}
+
+
+\end{enumerate}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Lab: Classification methods}
@@ -1000,6 +1815,228 @@ similar to LDA but with the quadratic interaction terms
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Homework}
 \addcontentsline{toc}{subsection}{Homework}
+
+\begin{enumerate}
+\item Using a little bit of algebra, prove that (4.2) is equivalent to (4.3). In
+ other words, the logistic function representation and logit representation
+ for the logistic regression model are equivalent.
+
+Solution: We need to show that
+
+$$
+p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}
+$$
+
+is equivalent to
+
+$$
+\frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1X}
+$$
+
+Letting $x = e^{\beta_0 + \beta_1X}$
+
+\begin{align}
+\frac{P(X)}{1-p(X)} 
+  &= \frac{\frac{x}{1 + x}} {1 - \frac{x}{1 + x}} \\
+  &= \frac{\frac{x}{1 + x}} {\frac{1}{1 + x}} \\
+  &= x
+\end{align}
+
+\item When the number of features $p$ is large, there tends to be a deterioration
+ in the performance of KNN and other local approaches that perform
+ prediction using only observations that are near the test observation for
+ which a prediction must be made. This phenomenon is known as the
+ curse of dimensionality, and it ties into the fact that non-parametric
+ approaches often perform poorly when $p$ is large. We will now investigate
+ this curse.
+
+\begin{enumerate}
+\item Suppose that we have a set of observations, each with measurements on
+    $p = 1$ feature, $X$. We assume that $X$ is uniformly (evenly) distributed
+    on $[0, 1]$. Associated with each observation is a response value. Suppose
+    that we wish to predict a test observation's response using only
+    observations that are within 10\% of the range of $X$ closest to that test
+    observation. For instance, in order to predict the response for a test
+    observation with $X = 0.6$, we will use observations in the range
+    $[0.55, 0.65]$. On average, what fraction of the available observations
+    will we use to make the prediction?
+
+Solution: For values in $0...0.05$, we use less than 10\% of observations (between 5\% and
+10\%, 7.5\% on average), similarly with values in $0.95...1$. For values in
+$0.05...0.95$ we use 10\% of available observations. The (weighted) average is
+then $7.5 \times 0.1 + 10 \times 0.9 = 9.75\%$.
+
+\item Now suppose that we have a set of observations, each with measurements on
+    $p = 2$ features, $X_1$ and $X_2$. We assume that $(X_1, X_2)$ are
+    uniformly distributed on $[0, 1] \times [0, 1]$. We wish to predict a test
+    observation's response using only observations that are within 10% of the
+    range of $X_1$ and within 10\% of the range of $X_2$ closest to that test
+    observation. For instance, in order to predict the response for a test
+    observation with $X_1 = 0.6$ and $X_2 = 0.35$, we will use observations in
+    the range $[0.55, 0.65]$ for $X_1$ and in the range $[0.3, 0.4]$ for $X_2$.
+    On average, what fraction of the available observations will we use to
+    make the prediction?
+
+Solution: Since we need the observation to be within range for $X_1$ and $X_2$ we square
+9.75\% = $0.0975^2 \times 100 = 0.95\%$
+
+\item Now suppose that we have a set of observations on $p = 100$ features. Again
+    the observations are uniformly distributed on each feature, and again each
+    feature ranges in value from 0 to 1. We wish to predict a test
+    observation's response using observations within the 10\% of each feature's
+    range that is closest to that test observation. What fraction of the
+    available observations will we use to make the prediction?
+
+Solution: Similar to above, we use: $0.0975^{100} \times 100 = 8 \times 10^{-100}\%$,
+essentially zero.
+
+\item Using your answers to parts (a)--(c), argue that a drawback of KNN when
+    $p$ is large is that there are very few training observations "near" any
+    given test observation.
+
+Solution: As $p$ increases, the fraction of observations near any given point rapidly
+approaches zero. For instance, even if you use 50\% of the nearest observations
+for each $p$, with $p = 10$, only $0.5^{10} \times 100 \approx 0.1\%$ points are
+"near".
+
+\item Now suppose that we wish to make a prediction for a test observation by
+    creating a $p$-dimensional hypercube centered around the test observation
+    that contains, on average, 10% of the training observations. For
+    $p = 1,2,$ and $100$, what is the length of each side of the hypercube?
+    Comment on your answer.
+
+Note: A hypercube is a generalization of a cube to an arbitrary number of
+dimensions. When $p = 1$, a hypercube is simply a line segment, when $p = 2$
+it is a square, and when $p = 100$ it is a 100-dimensional cube.
+
+Solution: When $p = 1$, clearly the length is 0.1.
+When $p = 2$, we need the value $l$ such that $l^2 = 0.1$, so
+$l = \sqrt{0.1} = 0.32$.
+When $p = n$, $l = 0.1^{1/n}$, so in the case of $n = 100$, $l = 0.98$.
+Therefore, the length of each side of the hypercube rapidly approaches 1
+(or 100\%) of the range of each $p$.
+\end{enumerate}
+
+\item Suppose we collect data for a group of students in a statistics class with
+ variables $X_1 =$ hours studied, $X_2 =$ undergrad GPA, and $Y =$ receive an A.
+ We fit a logistic regression and produce estimated coefficient,
+ $\hat\beta_0 = -6$, $\hat\beta_1 = 0.05$, $\hat\beta_2 = 1$.
+
+\begin{enumerate}
+\item Estimate the probability that a student who studies for 40h and has an
+    undergrad GPA of 3.5 gets an A in the class.
+
+Solution: :The logistic model is:
+
+$$
+\log\left(\frac{p(X)}{1-p(x)}\right) = -6 + 0.05X_1 + X_2
+$$
+
+or
+
+$$
+p(X) = \frac{e^{-6 + 0.05X_1 + X_2}}{1 + e^{-6 + 0.05X_1 + X_2}}
+$$
+
+when $X_1 = 40$ and $X_2 = 3.5$, $p(X) = 0.38$
+
+\item How many hours would the student in part (a) need to study to have a 50\%
+    chance of getting an A in the class?
+
+Solution: We would like to solve for $X_1$ where $p(X) = 0.5$. Taking the first equation
+above, we need to solve $0 = -6 + 0.05X_1 + 3.5$, so $X_1 = 50$ hours.
+\end{enumerate}
+
+\item Suppose that we take a data set, divide it into equally-sized training and
+ test sets, and then try out two different classification procedures. First we
+ use logistic regression and get an error rate of 20\% on the training data and
+ 30\% on the test data. Next we use 1-nearest neighbors (i.e. $K = 1$) and get
+ an average error rate (averaged over both test and training data sets) of
+ 18\%. Based on these results, which method should we prefer to use for
+ classification of new observations? Why?
+
+Solution: For $K = 1$, performance on the training set is perfect and the error rate
+is zero, implying a test error rate of 36\%. Logistic regression outperforms
+1-nearest neighbor on the test set and therefore should be preferred.
+
+\item This problem has to do with odds.
+
+\begin{enumerate}
+\item On average, what fraction of people with an odds of 0.37 of defaulting on
+    their credit card payment will in fact default?
+
+Solution: Odds is defined as $p/(1-p)$.
+
+$$0.37 = \frac{p(x)}{1 - p(x)}$$
+
+therefore,
+
+$$p(x) = \frac{0.37}{1 + 0.37} = 0.27$$
+
+\item Suppose that an individual has a 16\% chance of defaulting on her credit
+    card payment. What are the odds that she will default?
+
+Solution:$$0.16 / (1 - 0.16)  = 0.19$$
+
+\end{enumerate}
+
+\item Suppose that you wish to classify an observation $X \in \mathbb{R}$ into 
+ `apples` and `oranges`. You fit a logistic regression model and find that
+
+ $$
+ \hat{Pr}(Y=orange|X=x) = 
+ \frac{\exp(\hat\beta_0 + \hat\beta_1x)}{1 + \exp(\hat\beta_0 + \hat\beta_1x)}
+ $$
+
+ Your friend fits a logistic regression model to the same data using the
+ softmax formulation in (4.13), and finds that
+
+ $$
+ \hat{Pr}(Y=orange|X=x) = 
+ \frac{\exp(\hat\alpha_{orange0} + \hat\alpha_{orange1}x)}
+ {\exp(\hat\alpha_{orange0} + \hat\alpha_{orange1}x) + \exp(\hat\alpha_{apple0} + \hat\alpha_{apple1}x)}
+ $$
+ 
+\begin{enumerate}
+\item What is the log odds of `orange` versus `apple` in your model?
+
+Solution: The log odds is just $\hat\beta_0 + \hat\beta_1x$
+
+\item What is the log odds of `orange` versus `apple` in your friend's model?
+
+Solution: From 4.14, log odds of our friend's model is:
+
+$$
+(\hat\alpha_{orange0} - \hat\alpha_{apple0}) + (\hat\alpha_{orange1} - \hat\alpha_{apple1})x
+$$
+
+\item Suppose that in your model, $\hat\beta_0 = 2$ and $\hat\beta = -1$. What
+    are the coefficient estimates in your friend's model? Be as specific as
+    possible.
+
+Solution: We can say that in our friend's model $\hat\alpha_{orange0} -
+\hat\alpha_{apple0} = 2$ and $\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$.
+
+We are unable to know the specific value of each parameter however.
+
+\item Now suppose that you and your friend fit the same two models on a different
+    data set. This time, your friend gets the coefficient estimates 
+    $\hat\alpha_{orange0} = 1.2$, $\hat\alpha_{orange1} = -2$, 
+    $\hat\alpha_{apple0} = 3$, $\hat\alpha_{apple1} = 0.6$. What are the 
+    coefficient estimates in your model?
+
+Solution: The coefficients in our model would be $\hat\beta_0 = 1.2 - 3 = -1.8$ and
+$\hat\beta_1 = -2 - 0.6 = -2.6$
+
+\item Finally, suppose you apply both models from (d) to a data set with 2,000
+    test observations. What fraction of the time do you expect the predicted 
+    class labels from your model to agree with those from your friend's model?
+    Explain your answer.
+
+Solution: The models are identical with different parameterization so they should 
+perfectly agree
+\end{enumerate}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Chapter 5: Resampling methods} 
@@ -1019,9 +2056,9 @@ similar to LDA but with the quadratic interaction terms
 \addcontentsline{toc}{subsection}{5.1: Cross-validation}
 
 \begin{enumerate}
-\item Usually, test data sets are not available. We only have access to a single training set. Unfortunately, training error often dramatically underestimates test error. So, this must be remedied.
+\item Usually, test data sets are not available. We only have access to a single training set. Unfortunately, training error often dramatically underestimates test error. So, this must be remedied. Recall u-shape test error as flexibility increases from chapter 2.
 
-\item Here we estimate the test error by making use of a hold-out of the training data. Approaches discussed will apply to both regression and classification problems.
+\item Here we estimate the test error by making use of a hold-out of the training data, though we still train the final model with all the data we have. Approaches discussed will apply to both regression and classification problems.
 
 \item The validation set approach:
 \begin{enumerate}
@@ -1030,7 +2067,7 @@ similar to LDA but with the quadratic interaction terms
 \item Drawbacks:
 \begin{itemize}
 \item Validation estimates of test error can vary a lot.
-\item Because we reduce the training set size, our model will perform worse than it would if we trained on the full data. For that reason, validation error will underestimate the true training error.
+\item Because we reduce the training set size, our model will perform worse than it would if we trained on the full data. For that reason, validation error will overestimate the true training error.
 \end{itemize}
 \end{enumerate}
 
@@ -1086,7 +2123,7 @@ where $Err_i = I(y_i \neq \hat{y}_i)$.
 \addcontentsline{toc}{subsection}{5.2: The bootstrap}
 
 \begin{enumerate}
-\item For models like linear regression, one can derive standard error (SE) formulas for confidence interval and hypothesis tests. Alternatively, bootstrapping can be used to estimate SE. This can be applied to complex models where SE formulas aren't available.
+\item For models like linear regression, one can derive standard error (SE) formulas for confidence interval and hypothesis tests. Alternatively, bootstrapping can be used to estimate SE. This can be applied to complex models where SE formulas aren't available. Statkey demo?
 
 \end{enumerate}
 
@@ -1103,6 +2140,32 @@ where $Err_i = I(y_i \neq \hat{y}_i)$.
 \addcontentsline{toc}{section}{Chapter 6: Linear model selection and regularization}
 
 \begin{enumerate}
+\item Recall (again, and again): The bias-variance tradeoff:
+\[
+\text{Expected Test Error} = \operatorname{Bias}^2 + \operatorname{Variance} + \operatorname{Var}(\varepsilon)
+= \big( \mathbb{E}[\hat{f}(x)] - f(x) \big)^2 + \mathbb{E}\big[ (\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2 \big] + \operatorname{Var}(\varepsilon) 
+\]
+\begin{enumerate}
+\item Balance between a model’s simplicity and its flexibility.
+\item Bias measures how much a model’s predictions systematically differ from the true values.
+\begin{itemize}
+\item High bias → model is too simple (e.g., underfitting).
+\item It makes strong assumptions and misses important patterns in the data.
+\end{itemize}
+\item Variance measures how much a model’s predictions change when trained on different samples of the data.
+\begin{itemize}
+\item High variance → model is too complex (e.g., overfitting).
+\item It fits noise in the training data, leading to poor generalization.
+\end{itemize}
+\item Tradeoff: As model complexity increases...
+\begin{itemize}
+\item Bias decreases (the model fits training data better).
+\item Variance increases (the model becomes more sensitive to noise).
+\item The goal is to find a sweet spot—a model complex enough to capture the true pattern (low bias) but simple enough to generalize well (low variance).
+\end{itemize}
+\end{enumerate}
+
+
 \item The standard linear model for regression is
 \[
 Y = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \epsilon
@@ -1118,9 +2181,9 @@ which is typically fitted via least squares. We will keep this linear framework 
 
 \item Summary of options:
 \begin{enumerate}
-\item Subset selection: Identify a best subset of $p$ predictors and remove rest.
+\item Subset selection: Identify a best subset of $p$ predictors and remove rest. Choose the best model via cross validation.
 \item Shrinkage: Keep all predictors, but shrink the coefficients towards zero to remove variance. 
-\item Dimension reduction: Project $p$ variables onto a $M$-dimensional subspace and use these instead.
+\item Dimension reduction: Project $p$ variables onto a $M$-dimensional subspace and use these instead (skip for now).
 \end{enumerate}
 \end{enumerate}
 
@@ -1239,17 +2302,71 @@ The $R^2$ always increases as more variables are added.
 \subsection*{6.2: Shrinkage methods}
 \addcontentsline{toc}{subsection}{6.2: Shrinkage methods}
 
+With linear regression, we minimize below residual sum of squares.
+\[
+RSS = \sum_i \left( y_i - \hat{y}_i \right)^2
+= \sum_i \left( y_i - \beta_0 - \sum_j \beta_j x_{ij} \right)^2
+\]
+In the case of overfitting (eg $n$ close to $p$), $\beta_j$ coefficients have high variance which translates into large values. Shrinkage methods shrink these unruly coefficients towards zero with the main aim of preventing overfitting. Two related strategies: ridge regression and the lasso. This approach is also known generally as regularization.
+
 \begin{enumerate}
-\item Ridge regression:
+\item Ridge regression )(ridge shape shows on the cost function):
 \begin{enumerate}
-\item 
+\item Estimate regression coefficients $\beta^R_i$ (note not the same as OLS) by minimizing a modified $RSS$ formula:
+\[
+RSS + \lambda \sum_j \beta_j^2
+= \sum_i \left( y_i - \beta_0 - \sum_j \beta_j x_{ij} \right)^2  + \lambda \sum_j \beta_j^2
+\]
+where $\lambda \geq 0$ is a tuning parameter usually found via cross validation. Note $\lambda$ term is only for $j \geq 1$, not to the intercept term $\beta_0$.
+
+\item Ridge regression tradeoff:
+\begin{enumerate}
+\item Minimize $RSS$ just as with OLS.
+\item $\lambda \sum \beta_j$ is a shrinkage penalty which forces $\beta_1, \dots , \beta_n$ close to zero. Larger $\lambda$ makes shrinkage more severe and reducing $RSS$ less important.
+\item This in reality is a set of regression coefficients, $\beta_{\lambda}^R$, one per parameter $\lambda$. Finding the right $\lambda$ is key.
+\item Extreme cases: $\lambda=0$ gives the same as OLS. $\lambda \rightarrow \infty$ gives null model (no predictors, just intercept).
+\end{enumerate}
+
+\item Example figures from text: Test error and bias/variance tradeoff. Note $\ell^2$ norm $\| \cdot \|_2$ is just Euclidean distance. Note MSE of OLS model is almost the same as the null model.
+\item Warning: OLS gives the same $\beta_j$ coefficients regardless of $X_j$ scale. Not so for ridge regression and $\beta_j^R$'s can change substantially. Normalizing data is key practice. $Z$-score works or equation (6.6) in text.
+\item In the case with $n < p$, less samples than predictors, OLS cannot be fit. Though, ridge regression still applies.
+\item In general, ridge regression is best when least squares estimates has high variance.
+\item Finally, ridge regression is much more efficient than any form of variable selection.
+\end{enumerate}
+
+\item The lasso (Least Absolute Shrinkage and Selection Operator):
+\begin{enumerate}
+\item Ridge regression has one disadvantage. It keeps all coefficients / variables present which makes it harder to interpret. This new approach addresses this.
+
+\item Estimate regression coefficients $\beta^L_i$ (note not the same as OLS) by minimizing a modified $RSS$ formula:
+\[
+RSS + \lambda \sum_j |\beta_j|
+= \sum_i \left( y_i - \beta_0 - \sum_j \beta_j x_{ij} \right)^2  + \lambda \sum_j |\beta_j|
+\]
+where $\lambda \geq 0$ is a tuning parameter usually found via cross validation. Note $\lambda$ term is only for $j \geq 1$, not to the intercept term $\beta_0$. 
+\item This new $\lambda$ term involves the $\ell_1$ norm: $\| \beta\| = \sum_j |\beta_j|$. This is the taxicab norm which can be seen in 2d.
+\item This penalty norm allows for $\beta^L_{\lambda}$ terms to be zero, meaning lass does both shrinkage and variable selection at the same time resulting in simpler models.
 
 \end{enumerate}
 
-\item The lasso:
+\item Who wins? Ridge regression or LASSO?
 \begin{enumerate}
-\item 
-
+\item No clear winner, let CV decide. 
+\item If only a small subset of predictors are actually predicting response variable $y$, then LASSO has the advantage.
+\item May be ridge by change.
+\item May be similar, in which case, choose the simpler of model.
+\item In general, ridge is more stable (less coef variance) and smooth (small changes in MSE) while LASSO is simpler. There is a hybrid approach called elastic net.
+\[
+RSS + \lambda_1 \sum_j |\beta_j| + \lambda_2 \sum_j \beta_j^2
+= \sum_i \left( y_i - \beta_0 - \sum_j \beta_j x_{ij} \right)^2  + \lambda_1 \sum_j |\beta_j| + \lambda_2 \sum_j \beta_j^2
+\]
+\item Note, alt version as constrained optimization. Shows in the homework.
+\[
+\text{minimize } \sum_i \left( y_i - \beta_0 - \sum_j \beta_j x_{ij} \right)^2, \quad \text{subject to } \sum_j \beta_j^2 \leq s
+\]
+\[
+\text{minimize } \sum_i \left( y_i - \beta_0 - \sum_j \beta_j x_{ij} \right)^2, \quad \text{subject to } \sum_j |\beta_j| \leq s
+\]
 \end{enumerate}
 \end{enumerate}
 
@@ -1269,9 +2386,85 @@ The $R^2$ always increases as more variables are added.
 \subsection*{Homework}
 \addcontentsline{toc}{subsection}{Homework}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Exam 1 summary: Chapters 1-6} 
+\addcontentsline{toc}{section}{Exam 1 summary: Chapters 1-6}
+
+\begin{enumerate}
+\item Chapter 1: Introduction
+\begin{enumerate}
+\item General intro, no exam content
+\end{enumerate}
+
+\item Chapter 2: Statistical learning
+\begin{enumerate}
+\item Goal: Relate response $Y$ to predictors $X_1, \dots, X_p$. Regression case: 
+\[
+Y = f(X) + \epsilon
+\]
+\item 2 key tasks: Prediction ($Y \approx \hat{Y} = \hat{f}(X)$) and inference (understanding $X$ and $Y$ relationship).
+\item Tradeoffs: Flexibility vs interpretability, bias-variance tradeoff
+\item Error: MSE for train and test dataset
+\item Key formulas:
+\begin{enumerate}
+\item Reducible and irreducible error, holding $f(X), \hat{f}(X)$ constant: $E[(Y-\hat{Y})^2] = (f(X) - \hat{f}(X))^2 + Var(\epsilon)$
+\item Bias-variance tradeoff: $E[(Y_0 - \hat{f}(x_0))^2] = [Bias(\hat{f}(x_0))]^2 + Var(\hat{f}(x_0)) + Var(\epsilon)$ where $Bias(\hat{f}(x_0)) = E[\hat{f}(x_0)] - f(x_0)$.
+\item "U" shaped test data fit curve. Over vs underfitting.
+\end{enumerate}
+\item Parametric vs nonparametric models
+\item Regression vs classification
+\item Supervised vs unsupervised learning
+\item Classification error, Bayes classifier.
+\end{enumerate}
+
+\item Chapter 3: Linear regression
+\begin{enumerate}
+\item Simple linear regression 
+\begin{enumerate}
+\item Coef values from minimizing residual sum of squares
+\item Coef confidence intervals and hypothesis tests involving SE formulas
+\item Fit via residual standard error (RSE) and $R^2$.
+\end{enumerate}
+\item Multiple linear regression 
+\begin{enumerate}
+\item Coef values from minimizing residual sum of squares, not nice formula
+\item Coef confidence intervals and hypothesis tests involving SE formulas. F-statistic.
+\item Fit via residual standard error (RSE) and $R^2$.
+\end{enumerate}
+\item 4 diagnostic plots
+\end{enumerate}
+
+\item Chapter 4: Classification
+\begin{enumerate}
+\item Predict a qualitative output, key idea is to estimate class probabilities
+\item Logistic regression, log-odds as a linear function.
+\[
+\ln(p/(1-p)) = \beta_0 + \beta_1 X_1 + \dots
+\]
+\item Evaluation via confusion matrix, accuracy, precision, recall, F1 score
+\item ROC curve, AUC for many thresholds
+\item Multiple logistic regression extension
+\item LDA and QDA
+\end{enumerate}
+
+\item Chapter 5: Resampling methods
+\begin{enumerate}
+\item Cross validation
+\item Bootstrap 
+\end{enumerate}
+
+\item Chapter 6: Linear model selection and regularization
+\begin{enumerate}
+\item Variable selection
+\item Shrinkage methods (regularization)
+\end{enumerate}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Chapter 7: Moving beyond linearity} 
 \addcontentsline{toc}{section}{Chapter 7: Moving beyond linearity}
+Skip
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{7.1: Polynomial regression}
@@ -1313,13 +2506,176 @@ The $R^2$ always increases as more variables are added.
 \section*{Chapter 8: Tree-based methods} 
 \addcontentsline{toc}{section}{Chapter 8: Tree-based methods}
 
+Tree based methods apply to both regression and classification problems. They involve stratifying or segmenting the predictor space into a number of simple regions. A single tree is simple and interpreable, though they are inferior to other learning methods when it comes to accuracy. For that reason, this chapter also introduces ensembles (consensus prediction of many trees) including bagging, random forest, boosting, and others.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{8.1: Basics of decision trees}
 \addcontentsline{toc}{subsection}{8.1: Basics of decision trees}
 
+Regression trees: Predict a quantitative variable $Y$ via predictors $X_1, X_2, \dots, X_P$ 
+\begin{enumerate}
+\item Key idea:
+\begin{enumerate}
+\item Divide the predictor data $X$ into regions $R_1, R_2, \dots, R_J$ such that within each region, the response $Y$ can be predicted by the mean of the observations in that region.
+\[
+\hat{y} = \text{average of $y_i$ for $X$ that lies within that region}
+\]
+\item Model generated:
+\[
+\hat{f}(X) = \sum_{j=1}^J \hat{y}_{R_j} I( x \in R_j)
+\]
+\end{enumerate}
+
+\item Tree building: Recursive binary splitting
+\begin{enumerate}
+\item Start with data all in one region.
+\item For each predictor $X_j$ and each possible split point $s$:
+\begin{itemize}
+\item Divide the data into 2 regions:
+\[
+R_1(j,s) = \{X | X_j<s \}, \quad R_2(j,s) = \{X | X_j \geq s \}
+\]
+where cutpoints $s$ are taken as midpoints of training data predictor variables.
+\item Compute the residual sum of squares:
+\[
+RSS(j,s) = \sum_{i: x_i \in R_1} (y_i - \hat{y}_{R_1})^2 + \sum_{i: x_i \in R_2} (y_i - \hat{y}_{R_2})^2
+\]
+\item Choose the predictor $X_j$ and cutpoint $s$ that minimizes RSS.
+\item Repeat within each resulting region until some stopping criteria is met (eg min number of training samples in a node).
+\item Top of tree is the root, bottom are leaves, middle points are nodes, rest are branches.
+\end{itemize}
+\end{enumerate}
+
+\item Predictions: Once the tree is built, for a new observation $x_0$
+\begin{enumerate}
+\item Trace $x_0$ down the tree until lands at a leaf.
+\item The predicted response $\hat{y}$ is the mean of all training responses $y_i$ in that leaf.
+\end{enumerate}
+
+\item Overfitting and pruning
+\begin{enumerate}
+\item A fully grown tree (only one training sample per node) will likely overfit. 
+\item Trees are pruned to balance over / under fitting.
+\item Cost-complexity pruning acts like regularization with $\alpha$ chosen via cross-validation.
+\[
+R_{\alpha}(T) = \sum_{m=1}^{|T|} \sum_{i \in R_m} (y_i - \hat{y}_{R_m})^2 + \alpha|T|
+\]
+where $|T|$ is the number of terminal nodes (leaves). Growing a tree fully then performing CV over $\alpha$ values is doable, while looking at all possible $2^{d}$ subtrees.
+\end{enumerate}
+
+\item Interpretation
+\begin{enumerate}
+\item Tree structure easy visual
+\item Top nodes most influential
+\item Terminal regions give groups of observations with similar responses
+\end{enumerate}
+
+\item Adv / disadvs:
+\begin{enumerate}
+\item Advantages: Simple, interpretable, handles nonlinearity and interactions automatically, handle categorical variables	
+\item Disadvantages: Unstable (small changes to train data can have large effects), low accuracy in general.
+\end{enumerate}
+
+\item Classification trees: Predict a qualitative $Y$ via predictors $X_1, X_2, \dots, X_p$.
+\begin{enumerate}
+\item Approach: Almost the same as the regression case above.
+\begin{itemize}
+\item Predict $\hat{y}(x_0)$ as the majority class of region $R_j$ containint $x_0$.
+\item Compare partition candidates for predictor $X_j$ and cutpoint $s$ ($R_1(j,s) = \{X | X_j < s\}$ and $R_2(j,s) = \{X | X_j \geq s\}$) via impurity measure of each region as a weighted average (see below).
+\item Apply cost-complexity pruning via cross validation.
+\[
+R_{\alpha}(T) = \sum_{m=1}^{|T|} Q_m(T) + \alpha|T|
+\]
+where $Q_m(T)$ is the impurity measure at node $m$, and $\alpha$ penalizes tree size.
+\end{itemize}
+
+\item Impurity measures: Choose the best split by weighted measures. Denote $\hat{p}_{mk}$ as the proportion of training observations in node $m$ belonging to class $k$. The purity of node $m$ is either:
+\begin{itemize}
+\item Classification error: $1-\max_k \hat{p}_{mk}$
+\item Gini index: Low is more pure
+\[
+G_m = \sum_k \hat{p}_{mk}(1-\hat{p}_{mk}) = 1-\sum_k \hat{p}_{mk}^2
+\]
+This measures the total variance across the $K$ classes. Small if $\hat{p}_{mk}$ is close to zero or 1. Measures how often you'd misclassify a random observation in that node if you randomly labeled it according to the node's class proportions. 50/50 and 90/10 examples.
+\item Cross-entropy (deviance): 
+\[
+-\sum_k \hat{p}_{mk} \log(\hat{p}_{mk})
+\]
+Comes from information theory and penalizes uncertainty more heavily than Gini. Note because $\hat{p}_{mk} \geq 0$, then $-\hat{p}_{mk}\log(\hat{p}_{mk}) \geq 0$. Like Gini, entropy is near zero if all $\hat{p}_{mk}$ are near 0 or 1.
+\end{itemize}
+\end{enumerate}
+
+\item Tree vs linear regression: Parametric vs non parametric, bias vs flexible, interpretable
+\begin{enumerate}
+\item Linear regression: $Y = f(x) + \epsilon = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \epsilon$
+\item Regression tree: $Y = f(x) + \epsilon = \sum c_m I(X \in R_m) + \epsilon$ where $c_m$ is the region mean.
+\end{enumerate}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{8.2: Bagging, random forests, boosting, and Bayesian additive regression trees}
 \addcontentsline{toc}{subsection}{8.2: Bagging, random forests, boosting, and Bayesian additive regression trees}
+
+An ensemble method combines many simple models (aka weak learners) in order obtain a single, possibly very powerful model. Draw picture of idea with notes of regression and classification cases.
+
+\begin{enumerate}
+\item Bagging (general approach across statistical learning)
+\begin{enumerate}
+\item Standard decision trees tend to suffer from high variance (small changes in train data can have large model impact), though they have low bias. Bootstrap aggregation (or bagging) is a strategy to reduce this variance while keeping bias low. For example, $n$ independent observations $Z_1, \dots, Z_n$ each with variance $\sigma$, the variance of the mean $\overline{Z}$ has new variance $\sigma^2/n$ (averaging observations reduces variance).
+\item Bagging ensemble of trees:
+\begin{itemize}
+\item Grow many trees on bootstrap samples. For training size $n$, draw $B$ bootstrap samples. Denote each fitted tree as $\hat{f}^{*b}(x)$ and the final prediction as 
+\[
+\hat{f}_{bag}(x) = \frac{1}{B} \sum_b \hat{f}^{*b}(x),  \quad \text{or} \quad \text{majority vote} \left\{ \hat{f}^{*b}(x) \right\}
+\]
+\item Average the tree results (for regression) or use majority vote (for classification) for prediction. Simulate test error on out-of-bag (OOB) samples left out of bootstrapping (usually around 1/3) removing the need for CV.
+\item Variance is reduced compared to a single tree.
+\item Importance of predictors is measured by how much each variable reduces impurity on average. Large values are better.
+\end{itemize}
+\end{enumerate}
+
+\item Random forest
+\begin{enumerate}
+\item Modification of bagging that decorrolates trees. A top predictor will always be at the root of a tree giving very similar models in bagging.
+\item Each split only considers a random subset of predictors $m \approx \sqrt{p}$. 
+\item Result is usually better performing than bagging. See text figure.
+\end{enumerate}
+
+\item Boosting (general approach across statistical learning)
+\begin{enumerate}
+\item Build trees sequentially, where each new tree focuses on residuals of the old one. Keep correcting mistakes.
+\item Boosting for regression (squared-error loss):
+\begin{itemize}
+\item Start with $\hat{f}(x) = 0$ (null model)
+\item For $b=1,2,\dots,B$, fit a small regression tree $\hat{f}^b(x)$ to the train data $(X,r)$ (note residuals in place of $Y$), and update the model
+\[
+\hat{f}(x) = \hat{f}(x)+\lambda \hat{f}^b(x)
+\]
+and update the residuals
+\[
+r_i = r_i - \lambda \hat{f}^b(x_i)
+\]
+\item Final model:
+\[
+\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)
+\]
+\end{itemize}
+\item Tuning parameters:
+\begin{itemize}
+\item Number of trees $B$ (boosting iteration)
+\item Shrinkage $\lambda$ (learning rate)
+\item Tree depth $d$ (splits per tree)
+\end{itemize}
+
+\item For classification: Minimize log-loss instead of squared error with the aim to improve distinguishing between classes.
+\item Bias-variance tradeoff: Reduces both bias and variance.
+\begin{itemize}
+\item Bias: Very low, many trees can capture complex patterns)
+\item Variance: Controlled by small trees and shrinkage
+\item Overall: Often outperforms bagging and random forest in test error, if tuned properly.
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Lab: Decision trees}
@@ -1333,21 +2689,150 @@ The $R^2$ always increases as more variables are added.
 \section*{Chapter 9: Support vector machines} 
 \addcontentsline{toc}{section}{Chapter 9: Support vector machines}
 
+Here we leverage hyperplanes for classification. Results is a classic CS ML technique from 1990s which often performs well. We build the ideas by growing from simple to complex:
+\begin{itemize}
+\item Draw picture of each
+\item Maximal margin classifier (optimal hyperplane separation if possible)
+\item Support vector classifier (allow misclassification at a cost)
+\item Support vector machine (nonlinear separation via kernel trick)
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{9.1: Maximal margin classifier}
 \addcontentsline{toc}{subsection}{9.1: Maximal margin classifier}
 
+\begin{enumerate}
+\item Goal is to find a hyperplane ($p-1$ dimension affine subspace of $\mathbb{R}^p$) that best separates 2 classes in a dataset.
+\begin{enumerate}
+\item Hyperplane in 2D: $\beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0$ (line in plane).
+\item Hyperplane in 3D: $\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 = 0$ (plane in 3 space).
+\item Hyperplane in pD: $\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \dots + \beta_p X_p = 0$.
+\item Short notation: $f(X) = \beta_0 + \vec{\beta}^T \vec{X} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \dots + \beta_p X_p$
+\item A hyperplane divides the space into 2. Evaluating $f(X)$ at a point not on the hyperplane gives either -1 or 1 depending on which side it is on. This will be used for classification.
+\item Recall, geometry of a hyperplane. For line $l$ in 2D, draw an example. Define in terms of vectors as all $\vec{x}$ such that $\vec{w} \cdot (\vec{x} - \vec{x}_0 ) = 0$ (only need a point an vector orthogonal to hyperplane). Expanding this gives the same form as above where $\vec{w} = \vec{\beta}$ and $\vec{w} \cdot \vec{x}_0 = \beta_0$.
+\end{enumerate}
+
+\item A hyperplane separates $p$-dimensional space into 2 regions. If the data is perfectly separable, there are many options. Draw 2D case. Not always possible of course.
+\begin{enumerate}
+\item For training data $x_i = (x_{i1}, x_{i1}, \dots , x_{ip})^T$ with classes $y_i \in \{-1,1 \}$ for $i=1,2,\dots,n$, a hyperplane separates classes $y_i$ if
+\[
+\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p > 0, \quad \text{if $y_i=1$}
+\]
+and
+\[
+\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p < 0, \quad \text{if $y_i=-1$}
+\]
+which can be combined as
+\[
+y_i \left(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p \right) > 0, \quad \text{for all $i$}
+\]
+written more compactly as
+\[
+y_i \left( \beta_0 + \vec{\beta}^T \vec{x_i}\right) > 0, \quad \text{for all $i$}
+\]
+\item For a new test datapoint $x^*$, we can classify based on the sign of $f(x^*) = \beta_0 + \beta_1 x_1^* + \dots + \beta_p x_P^* = \beta_0 + \vec{\beta}^T \vec{x^*}$ where the magnitude of $f(x^*)$ can give a measure of certainty.
+\end{enumerate}
+
+\item Maximal margin classifier separates the classes with the largest possible margin (distance between hyperplane and closest data points). Points closest to the boundary are the support vectors. 
+\begin{enumerate}
+\item The margin of the hyperplane is the smallest perpendicular distance from the training data to the hyperplane. 
+\[
+M = \min_i \frac{y_i(\beta_0 + \vec{\beta}^T \vec{x}_i)}{\| \vec{\beta} \|}
+\]
+where the perpendicular distance from a point $x_i$ to the hyperplane is
+\[
+\frac{|\beta_0 + \vec{\beta}^T \vec{x}_i|}{\| \vec{\beta} \|}.
+\]
+\item Find the maximal margin via the optimization problem:
+\[
+\max_{\beta_i, M} M, \quad \text{subject to } \sum_{j} \beta_j^2 = 1
+\]
+\[
+y_i \left(\beta_0 + \beta_1 x_{i1} + \dots \beta_p x_{ip} \right) \geq M, \quad \text{ all $i$}
+\]
+Note, the full margin is $2M$, one $M$ on either side of the hyperplane.
+\item Maximizing the margin makes the model robust to small pertubations in training data. Only the support vectors effect the model, so this classifier has low variance in general.
+\item If separation is not possible, this optimization model fails. Also note how small changes in the train data relative to the support vectors can have large impact on the hyperplane and margin.
+\end{enumerate}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{9.2: Support vector classifiers}
 \addcontentsline{toc}{subsection}{9.2: Support vector classifiers}
+\begin{enumerate}
+\item If perfect separation is not possible, we add a slack variable $\epsilon \geq 0$ to allow for misclassifications. In this way, the support vector classifier is also known as a soft margin classifier.
+\item Optimization problem:
+\[
+\max_{\beta_i, M} M, \quad \text{subject to } \sum_{j} \beta_j^2 = 1
+\]
+\[
+y_i \left(\beta_0 + \beta_1 x_{i1} + \dots \beta_p x_{ip} \right) \geq M(1-\epsilon_i), \quad \text{ all $i$}
+\]
+\[
+\epsilon_i \geq 0, \quad \sum \epsilon_i \leq C
+\]
+where $C$ is a nonnegative tuning parameter (large $C$ allows for margin and hyperplane violations) which gives bias variance tradeoffs (small $C$ has high bias, low variance and large $C$ visa versa).  
+\item $\epsilon_i$ has utility:
+\begin{enumerate}
+\item $\epsilon_i = 0$ operates as before.
+\item $\epsilon_i > 0$ means the point is on the wrong side of the margin.
+\item $\epsilon_i > 1$ means the point is on the wrong side of the hyperplane. 
+\item At most $C$ of the $\epsilon_i$ can be on the wrong side of the hyperplane.
+\end{enumerate}
+\item Only data on or violating the margin will effect the classifier decision boundary. These are the support vectors.
+\item Drawback of everything above: Decision boundaries are linear due to the design of the hyperplane separation. Pictures in text.
+\end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{9.3: Support vector machines}
 \addcontentsline{toc}{subsection}{9.3: Support vector machines}
 
+\begin{enumerate}
+\item To generalize beyond linear separation, we need to grow the feature space.
+\begin{enumerate}
+\item Include polynomial features: $X_i, X_i^2, X_i X_j, X_i^3$, etc
+\item Quadratic decision boundary example in 2D: $f(X) = \beta_0+\beta_1X_1 + \beta_2 X^2 + \beta_3 X_1^2 + \beta_4 X_2^2 + \beta_5 X_1 X_2 = 0$ (quadratic conic sections)
+\item Show general optimization in the text. Similar to support vector classifier. Issue is high degree polynomials get complex, so we resolve this with a Kernel function approach. 
+\end{enumerate}
+
+\item The kernel trick:
+\begin{enumerate}
+\item Recall: Inner product or dot product. 
+\[
+\langle x, y \rangle = \sum_{j=1}^p x_{j} y_{j} = \|  x \| \| y \| \cos(\theta)
+\]
+where $\theta$ is the angle between the vectors. This is a measure of similarity.
+\item Can show the support vector classifier function can be written as
+\[
+f(x) = \beta_0 + \sum_{i=1}^p \beta_i x_i = \beta_0 + \sum_{x_j \in S} \alpha_j \langle x , x_j \rangle
+\]
+where $S$ is the set of support vectors and $\alpha_j > 0$. Showing this requires Lagrange multipliers from Calc 3, but one can expand the inner product to see the matching to the $\beta$ coefficients.
+\item Replace the above inner product with a generalization of the form
+\[
+K(x, x_i)
+\]
+where $K$ is a function known as a kernel and acts like a similarity measure.
+\item Common kernels:
+\begin{itemize}
+\item Above linear kernel: $K(x, x_i) = \langle x , x_i \rangle$ (hyperplane decision boundary)
+\item Degree $d$ polynomial kernel: $K(x, x_i) = (1+\langle x , x_i \rangle)^d$. Try for $p=d=2$. (smooth curve)
+\item Radial kernel: $K(x,x_i) = \exp{\left(-\gamma \sum_{j=1}^p (x_j - x_{ij})^2\right)}$ for tuning parameter $\gamma$. (highly flexible curve, creates a bump like a Gaussian around each training point, large $\gamma$ only influences neighbors/high variance while small goes farther/high bias)
+\item 2D examples in text.
+\end{itemize}
+\end{enumerate}
+
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{9.4: SVMs with more than two classes}
 \addcontentsline{toc}{subsection}{9.4: SVMs with more than two classes}
+
+2 main approaches for $K>2$ classes: Sample size matters here.
+\begin{enumerate}
+\item OVA: One vs all, train $K$ 2-class models (one for each class, that class vs rest, classify to largest $f$ value)
+\item OVO: One vs one, train all $\binom{K}{2}$ paired models (classify to class which wins most paired comparisons). Best if $K$ is not too big.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{9.5: Relationship to logistic regression}
@@ -1365,36 +2850,142 @@ The $R^2$ always increases as more variables are added.
 \section*{Chapter 10: Deep learning} 
 \addcontentsline{toc}{section}{Chapter 10: Deep learning}
 
+Overview of ideas using text slides. Next deep dive into neural networks.
+
+Links:
+\begin{enumerate}
+\item \url{https://upload.wikimedia.org/wikipedia/commons/f/f2/AI-History-Timeline-300dpi.jpg}
+\item \url{https://www.tensorflow.org/}
+\item \url{https://pytorch.org/}
+\item \url{https://playground.tensorflow.org/}
+\item \url{https://projector.tensorflow.org/}
+\item \url{https://deeplizard.com/resource/pavq7noze2}
+\item \url{https://deeplizard.com/resource/pavq7noze3}
+\item \url{https://mco-mnist-draw-rwpxka3zaa-ue.a.run.app/}
+\item \url{https://poloclub.github.io/cnn-explainer/}
+\item \url{https://magenta.tensorflow.org/sketch-rnn-demo}
+\item \url{https://arxiv.org/abs/1607.06520}
+\item \url{https://scikit-learn.org/stable/}
+\item \url{https://www.deeplearning.ai/}
+\item \url{https://experiments.withgoogle.com/experiments}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.1: Single layer neural networks}
 \addcontentsline{toc}{subsection}{10.1: Single layer neural networks}
+
+\begin{enumerate}
+\item Use $p$ predictors $X = (X_1, X_2, \dots, X_p)$ to build nonlinear function $f(X)$ to predict response variable $Y$.
+\item Single layer neural network structure: Draw an example with $p=4, k=5$
+\begin{enumerate}
+\item Input layer: $X$ with $p$ predictors.
+\item Hidden layer: $K$ activations (neurons, some neurons fire with data) $A_k$ of the form
+\[
+A_k = h_k(X) = g(w_{k0} + \sum_{j=1}^p w_{kj} X_j)
+\] 
+where $g$ is a nonlinear activation function such as sigmoid or ReLU. $A_k$ has the role of (nonlinear) feature transformation.
+\item Output layer: Linear combination of activations.
+\[
+f(X) = \beta_0 + \sum_{k=1}^K \beta_k A_k
+\]
+\item Parameters to estimate: $\beta_k, w_{kj}$ which are fit by minimizing residual sum of squares of the train data
+\[
+\sum_{i=1}^n (y_i - f(x_i))^2.
+\]
+in the regression case. 
+\item The weights $w_{kj}$ are stored in a matrix $W$ with $4 \times 5 = 20$ total values. The output layer has 6 more $\beta_k$ coefs. 
+\item For classification, a softmax activation is used in the final layer, and negative multinomial log-likelihood (cross-entropy) is minimized. 
+\end{enumerate}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.2: Multilayer neural networks}
 \addcontentsline{toc}{subsection}{10.2: Multilayer neural networks}
 
+Pictures and intuition in slides.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.3: Convolution neural networks}
 \addcontentsline{toc}{subsection}{10.3: Convolution neural networks}
+
+Pictures and intuition in slides.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.4: Document classification}
 \addcontentsline{toc}{subsection}{10.4: Document classification}
 
+Pictures and intuition in slides.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.5: Recurrent neural networks}
 \addcontentsline{toc}{subsection}{10.5: Recurrent neural networks}
+
+Pictures and intuition in slides.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.6: When to use deep learning}
 \addcontentsline{toc}{subsection}{10.6: When to use deep learning}
 
+No free lunch!
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.7: Fitting a neural network}
 \addcontentsline{toc}{subsection}{10.7: Fitting a neural network}
 
+\begin{enumerate}
+\item The parameters to fit from the one layer example above are $\beta = (\beta_0, \beta_1, \dots, \beta_K)$ and activation weights $w_k = (w_{k0}, w_{k1}, \dots, w_{kp})$ for $k=1,2\dots,K$. 
+\item For our test data $(x_i, y_i)$, we solve a nonlinear least squares problem:
+\[
+\min_{w_k, \beta} \frac{1}{2} \sum_{i=1}^n (y_i - f(x_i))^2
+\]
+where
+\[
+f(x_i) = \beta_0 + \sum_{k=1}^K \beta_k g\left(w_{k0} + \sum_{j=1}^p w_{kj} x_{ij} \right).
+\]
+\item Writing all parameters in one long vector $\theta$, we can rewrite the objective as 
+\[
+R(\theta) = \frac{1}{2} \sum_{i=1}^n (y_i - f_{\theta}(x_i))^2
+\].
+\item Minimizing $R(\theta)$ seem straightforward, but the complexity of the network paired with the nonlinear activation functions makes it more challenging. Such functions usually have local and global mins (draw pic). To resolve this and prevent overfitting, 2 strategies are used:
+\begin{enumerate}
+\item Slow learning: model is fit in a slow, iterative fashion via gradient descent which halts when overfitting occurs.
+\item Regularization: Similar to lasso or ridge regression.
+\end{enumerate}
+\item Gradient descent:
+\begin{enumerate}
+\item Start with initial guess $\theta^0$, often random.
+\item Iterate until the objective function $R(\theta)$ fails to decrease:
+\begin{itemize}
+\item $\theta^{t+1} = \theta^t - \rho \nabla R(\theta^t)$ resulting in reduction in objective $(R(\theta^{t+1})<R(\theta^t))$.
+\item Small enuf $\rho$ ensures decreasing $R$. 
+\end{itemize}
+\item Determinant notation $\nabla R = \frac{\partial R}{\partial \theta}$ indicates the direction of steepest increase. Reversing this direction gives fasted decrease.
+\item Gradient calculation only requires the chain rule: $R(\theta) = \sum_{i=1}^n R_i (\theta) = \frac{1}{2} \sum_{i=1}^n (y_i - f_{\theta}(x_i))^2$.
+\[
+R_i(\theta) = \frac{1}{2} \left( y_i - \beta_0 - \sum_{k=1}^K \beta_k g(w_{k0}+\sum_{j=1}^p w_{kj} x_{ij}) \right)^2
+\]
+Denote everything inside $g$ as $z_{ik}$, then
+\[
+\frac{\partial R_i(\theta)}{\partial \beta_k} = \frac{\partial R_i(\theta)}{\partial f_{\theta} (x_i)}\frac{\partial f_{\theta} (x_i)}{\partial \beta_k} = -(y_i-f_{\theta}(x_i))g(z_{ik})
+\]
+and also
+\[
+\frac{\partial R_i(\theta)}{\partial w_{kj}} 
+= \frac{\partial R_i(\theta)}{\partial f_{\theta} (x_i)}\frac{\partial f_{\theta} (x_i)}{\partial g(z_{ik})} \frac{\partial g(z_{ik})}{\partial z_{ik}} \frac{\partial z_{ik}}{\partial w_{kj}} 
+= -(y_i-f_{\theta}(x_i))\beta_k g'(z_{ik}) x_{ij}
+\]
+Note that a fraction of the residuals ($y_i - f_{\theta}(x_i)$) are assigned to the parameters via the chain rule. This is the heart of backward propagation.
+\end{enumerate}
+
+\item To speed up gradient descent, a small fraction of the train sample (called a minibatch) is used to update parameters. This is known as stoichastic gradient descent. 
+
+\item Regularization akin to LASSO or ridge regression is used to prevent overfitting. 
+
+\item An epoch counts the number of times the equivalent of the training 
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{10.8: Interpolation and doulbe descent}
+\subsection*{10.8: Interpolation and double descent}
 \addcontentsline{toc}{subsection}{10.8: Interpolation and doulbe descent}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
