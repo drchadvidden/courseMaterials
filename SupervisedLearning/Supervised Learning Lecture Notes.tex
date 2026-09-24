@@ -966,96 +966,199 @@ though this does not extend to simple linear regression.
 \end{enumerate}
 
 \end{enumerate}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{3.2: Multiple linear regression}
 \addcontentsline{toc}{subsection}{3.2: Multiple linear regression}
 
 \begin{enumerate}
-\item Here we consider many predictors $X_j$ of response variable $Y$. 
+
+\item \textbf{The multiple linear regression model.}
+Here we consider many predictors $X_j$ of a response variable $Y$.
 \begin{enumerate}
-\item Instead of many simple linear regression models, combine into one.
-\[
-Y = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \epsilon
-\]
-\item Here, we interpret $\beta_j$ as the average effect on $Y$ of one unit increase of $X_j$ while holding all other predictors fixed.
-\item Given estimates $\hat{\beta}_j \approx \beta_j$, we make predictions via
-\[
-\hat{y} = \hat{\beta}_0+\hat{\beta}_1X_1 + \dots \hat{\beta}_pX_p.
-\]
-\item Estimates $\hat{\beta}_j$ result from minimizing the multiple least squares regression coefficients via
-\[
-RSS = \sum_{i=1}^n (y_i - \hat{y}_i)^2 = \sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_{i1} + \dots + \hat{\beta}_p x_{ip})^2.
-\]
-\item Explicit form of each $\hat{\beta}_j$ is messy but can be written in matrix form.
+\item Instead of fitting many simple linear regression models, combine the predictors into one model:
+
+$$
+Y=\beta_0+\beta_1X_1+\dots+\beta_pX_p+\epsilon.
+$$
+
+Equivalently,
+
+$$
+E(Y\mid X_1,\dots,X_p)
+=
+\beta_0+\beta_1X_1+\dots+\beta_pX_p.
+$$
+
+\item $\beta_j$ represents the expected change in $Y$ associated with a one-unit increase in $X_j$, \textbf{holding the other predictors fixed}.
+
+\item Given estimates $\hat{\beta}_j$, predictions are
+
+$$
+\hat{y}_i=
+\hat{\beta}_0+\hat{\beta}_1x_{i1}+\dots+\hat{\beta}_px_{ip}.
+$$
+
+\item The least-squares estimates minimize
+
+$$
+RSS=\sum_{i=1}^n(y_i-\hat{y}_i)^2.
+$$
+
+\item Explicit formulas for the individual $\hat{\beta}_j$ are cumbersome, but in matrix form:
+
+$$
+\hat{\boldsymbol{\beta}}
+=
+(X^TX)^{-1}X^Ty.
+$$
+
 \end{enumerate}
 
-\item Important question 1: Is at least one predictor $X_j$ useful in predicting $Y$?
+\item \textbf{Question 1: Is at least one predictor useful for predicting $Y$?}
 \begin{enumerate}
-\item Answer via a hypothesis test.
+\item Test
+
+$$
+H_0:\beta_1=\dots=\beta_p=0
+$$
+
+versus
+
+$$
+H_a:\text{at least one }\beta_j\neq0.
+$$
+
+\item Use the $F$-statistic
+
+$$
+F=
+\frac{(TSS-RSS)/p}{RSS/(n-p-1)},
+$$
+
+where
+
+$$
+TSS=\sum_{i=1}^n(y_i-\bar y)^2,
+\qquad
+RSS=\sum_{i=1}^n(y_i-\hat y_i)^2.
+$$
+
+\item Since
+
+$$
+TSS=SSR+RSS,
+$$
+where
 \[
-H_0: \beta_1 = \dots = \beta_p = 0 \quad (\text{there is no relationship between $X$ and $Y$})
+SSR=\sum(\hat y_i-\bar y)^2,\qquad
 \]
-\[
-H_a: \text{ At least one $\beta_j \neq 0$} \quad (\text{there is a relationship between $X$ and $Y$}) 
-\]
-\item Conduct the hypothesis test via a $F$-distribution where the $F$-statistic is
-\[
-F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}
-\]
-where as before $TSS=\sum(y_i-\overline{y})^2$ and $RSS=\sum(y_i-\hat{y}_i)^2$. 
-\item If the linear model assumptions are correct, one can show:
-\[
-E(RSS/(n-p-1))=\sigma^2
-\]
-and provided $H_0$ is true,
-\[
-E((TSS-RSS)/p)=\sigma^2.
-\]
-Hence no relationship between the response and predictors gives $F=1$. On the other hand, if $H_a$ is true, $E((TSS-RSS)/p)>\sigma^2$ giving $F>1$. 
-\item $t$-statistics and individual $p$-values exist for each $\beta_j$ coefficient separately.
+
+the $F$-statistic can also be written
+
+$$
+F=
+\frac{SSR/p}{RSS/(n-p-1)}.
+$$
+
+It compares explained variation per predictor to unexplained variation per residual degree of freedom.
+
+\item Under $H_0$,
+
+$$
+F\sim F_{p,n-p-1}.
+$$
+
+Large values of $F$ provide evidence against $H_0$.
+
+\item $t$-statistics and $p$-values can also be calculated for individual coefficients:
+
+$$
+t_j=\frac{\hat{\beta}_j}{SE(\hat{\beta}_j)}.
+$$
+
 \end{enumerate}
 
-\item Important question 2: Do all predictors help predict $Y$, or only some?
+\item \textbf{Question 2: Do all predictors help predict $Y$, or only some?}
 \begin{enumerate}
-\item Finding the subset of variables associated with the response variable $Y$ is known as variable selection. Many methods here which can produce varying results.
-\item Brute force yields $2^p$ possibilities, so this is not an option usually.
-\item Common options:
+\item Finding a useful subset of predictors is called \textbf{variable selection}.
+
+\item There are $2^p$ possible subsets, so exhaustive search becomes impractical as $p$ increases.
+
+\item Common approaches:
 \begin{itemize}
-\item Forward selection: Start with none, then add one at a time choosing the most significant first.
-\item Backward selection: Start with all, and remove one at a time choosing least significant first.
-\item Mixed (stepwise) selection: Combine both, adding and dropping variables iteratively.
+\item \textbf{Forward selection:} Start with no predictors and add predictors one at a time according to a specified criterion.
+\item \textbf{Backward selection:} Start with all predictors and remove predictors one at a time according to a specified criterion.
+\item \textbf{Stepwise selection:} Iteratively add and remove predictors.
 \end{itemize}
-\item Selection criteria include Mallows' Cp, AIC, BIC, and adjusted $R^2$. 
+
+\item Selection criteria include Mallows' $C_p$, AIC, BIC, adjusted $R^2$, and cross-validation error.
+
+\item Variable selection can produce different models for different samples and can lead to overly optimistic estimates of model performance.
 \end{enumerate}
 
-\item Important question 3: How well does the model fit the data?
+\item \textbf{Question 3: How well does the model fit the data?}
 \begin{enumerate}
-\item 2 most common measures are $RSE$ and $R^2$ (fraction of variance explained). 
+\item Two common measures are residual standard error ($RSE$) and $R^2$.
+
 \item Residual standard error:
-\[
-RSE = \sqrt{\frac{1}{n-p-1}RSS}, \quad RSS=\sum_{i=1}^n (y-\hat{y})^2
-\]
-Note, $RSS$ may decrease when adding more variables, but division with $p$ can cause $RSE$ to increase.
-\item $R^2$: Simple linear regression has
-\[
-R^2 = \text{Cor}(Y,X)^2
-\]
-while multiple linear regression has
-\[
-R^2 = \text{Cor}(Y,\hat{Y})^2.
-\]
+
+$$
+RSE=
+\sqrt{\frac{RSS}{n-p-1}}.
+$$
+
+It estimates the standard deviation $\sigma$ of the error term.
+
+\item Adding predictors cannot increase $RSS$, but $RSE$ can increase because the residual degrees of freedom $n-p-1$ decreases.
+
+\item The coefficient of determination is
+
+$$
+R^2
+=
+1-\frac{RSS}{TSS}
+=
+\frac{SSR}{TSS}.
+$$
+
+It represents the proportion of variation in $Y$ explained by the fitted model.
+
+\item With an intercept,
+
+$$
+R^2=\operatorname{Cor}(Y,\hat Y)^2.
+$$
+
+\item Adding predictors can never decrease $R^2$. Adjusted $R^2$ accounts for the number of predictors.
 \end{enumerate}
 
-\item Important question 4: Given a set of predictor values, what response value should we predict, and how accurate is our prediction?
+\item \textbf{Question 4: Given predictor values, what response should we predict and how accurate is the prediction?}
 \begin{enumerate}
-\item 3 sorts of prediction uncertainty:
-\begin{itemize}
-\item $\hat{\beta}_i$ estimates of $\beta_i$ (reducible error), can quantify uncertainty with a confidence interval for $\hat{Y}$ relative to $f(X)$.
-\item Linear model assumption for $f(X)$ (model bias), ignore this one and assume correct.
-\item $\epsilon$ (irreducible error), use prediction intervals to quantify how much $Y$ will vary from $\hat{Y}$.
-\end{itemize}
+\item We estimate the conditional mean
+
+$$
+f(X)=E(Y\mid X).
+$$
+
+Because $f(X)$ is unknown, $\hat f(X)$ has estimation uncertainty.
+
+\item A \textbf{confidence interval} quantifies uncertainty about the mean response:
+
+$$
+E(Y\mid X=x).
+$$
+
+\item A \textbf{prediction interval} quantifies uncertainty about a new observation:
+
+$$
+Y_{\text{new}}\mid X=x.
+$$
+
+\item Prediction intervals are wider because they include both estimation uncertainty and irreducible error $\epsilon$.
+
+\item The assumed linear model may also be incorrect, producing model bias that is not captured by these intervals.
 \end{enumerate}
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1063,39 +1166,154 @@ R^2 = \text{Cor}(Y,\hat{Y})^2.
 \addcontentsline{toc}{subsection}{3.3: Other considerations in the regression model}
 
 \begin{enumerate}
-\item Qualitative (categorical) predictors (also known as factors):
+
+\item \textbf{Qualitative (categorical) predictors.}
 \begin{enumerate}
-\item Variables which are not quantities need special encoding.
-\item 2 levels: Encode one new variable as 0 or 1 (no or yes). This is known as dummy variables. Can also encode as -1 or 1 to give various meanings to intercept $\beta_0$ in the case of simple linear regression.
-\item 3+ ($k$) levels: Encode $k-1$ dummy variables similar to above. One level becomes the intercept known as the baseline.
+\item Categorical variables require special encoding.
+
+\item For two levels, use a dummy variable:
+
+$$
+X=
+\begin{cases}
+0 & \text{reference category}\\
+1 & \text{other category}.
+\end{cases}
+$$
+
+For
+
+$$
+Y=\beta_0+\beta_1X+\epsilon,
+$$
+
+$\beta_0$ is the mean response for the reference category and $\beta_1$ is the difference between the two categories.
+
+\item For $k$ categories, use $k-1$ dummy variables. The omitted category is the reference/baseline category.
 \end{enumerate}
 
-\item Extensions of linear models: These are additive ($X_j$ independent of eachother) and linear ($Y$ changes with $X_j$ separately).
+\item \textbf{Extensions of linear models.}
 \begin{enumerate}
-\item Removing additive assumption uses interaction terms such as product $X_1 X_2$. Interpretation becomes more complicated. For example, if $Y=\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon$ models course grade where $X_1, X_2$ are sleep and study hours, it might help to include $\beta_3 X_1 X_2$ which emphasizes the right combination of study and sleep. Too much of one may diminish the other.
-\item Modifying the linear form allows for other polynomial models. $X^2$ gives quadratic, $X^3$ cubic, etc. All are trained in the same manor. 
+\item \textbf{Interactions:} An additive model assumes the contribution of each predictor is separate:
+
+$$
+Y=\beta_0+\beta_1X_1+\beta_2X_2+\epsilon.
+$$
+
+An interaction allows the association between one predictor and $Y$ to depend on another:
+
+$$
+Y=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2+\epsilon.
+$$
+
+In this model,
+
+$$
+\frac{\partial E(Y\mid X_1,X_2)}{\partial X_1}
+=
+\beta_1+\beta_3X_2.
+$$
+
+\item \textbf{Polynomial regression:} A nonlinear relationship can be modeled using powers of a predictor:
+
+$$
+Y=\beta_0+\beta_1X+\beta_2X^2+\epsilon.
+$$
+
+Although the relationship between $Y$ and $X$ is nonlinear, the model is still linear in the unknown coefficients $\beta_j$.
 \end{enumerate}
 
-\item Potential problems (of linear regression):
+\item \textbf{Potential problems with linear regression.}
 \begin{enumerate}
-\item Bad fit: Change model or transform variables
-\begin{itemize}
-\item Non-linearity of the predictor-response relationships. Residual plots are useful.
-\item Non-constant variance of error terms. Data transformation or sample weighting may help.
-\item Correlation of error terms. Especially an issue with time series data, but also when latent groups may occur.
-\end{itemize}
-\item Sensitive fit: Remove outliers or change model or transform variables
-\begin{itemize}
-\item Outliers. Detection of outliers is possible, but it is hard to just if data should be removed to improve model fit.
-\item High-leverage points. Large $X$ values have a relatively large effect on model coefficients. The leverage statistic helps identify these.
-\end{itemize}
-\item Incorrect interpretation: Remove variables
-\begin{itemize}
-\item Many insignificant variables.
-\item Collinearity. Model accuracy is not impacted, but variable interpretation is muddy. Further, variance of coefficients will increase, sometimes dramatically. VIF score helps identify collinear variables. Remedy is to remove one or combine into a new variable. Claims of causality should be avoided for observational data.
-\end{itemize}
+
+\item \textbf{Nonlinearity:}
+The relationship between predictors and response may not be linear. Residual plots can reveal systematic patterns. Transformations or a different model may help.
+
+\item \textbf{Nonconstant variance:}
+
+$$
+Var(\epsilon\mid X)\neq\sigma^2.
+$$
+
+Transformations or weighted least squares may help.
+
+\item \textbf{Correlated errors:}
+
+$$
+Cov(\epsilon_i,\epsilon_j)\neq0.
+$$
+
+This is especially important with time series, spatial data, longitudinal data, or clustered observations.
+
+\item \textbf{Outliers:}
+Observations with unusually large residuals can strongly affect the fitted model. Removing observations should require justification beyond improving model fit.
+
+\item \textbf{High leverage:}
+Observations with unusual predictor values can have substantial influence on the fitted regression coefficients. Leverage statistics help identify such observations.
+
+\item \textbf{Influential observations:}
+Some observations can substantially change the fitted model when removed. Influence measures help identify these observations.
+
+\item \textbf{Multicollinearity:}
+Highly correlated predictors contain overlapping information. This does not necessarily reduce predictive accuracy, but it can substantially increase the variance of individual coefficient estimates and make interpretation difficult.
+
+Variance inflation factors (VIFs) can help identify multicollinearity.
+
+\item \textbf{Association versus causation:}
+Regression coefficients describe conditional associations. In observational data, they generally should not be interpreted as causal effects without additional assumptions or an appropriate research design.
+
 \end{enumerate}
+
+\item \textbf{Multicollinearity example:} predictors are strongly correlated and contain overlapping information.
+
+Example:
+
+$$
+Price=\beta_0+\beta_1SqFt+\beta_2Bedrooms+\epsilon.
+$$
+
+If $SqFt$ and $Bedrooms$ are highly correlated, there are relatively few houses that differ substantially in bedrooms while having the same square footage. Thus, estimating the effect of $SqFt$ \textbf{holding $Bedrooms$ fixed} is difficult.
+
+If
+
+$$
+X_2\approx cX_1,
+$$
+
+then the columns of $X$ are nearly linearly dependent, so
+
+$$
+X^TX
+$$
+
+is nearly singular and
+
+$$
+\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}
+$$
+
+becomes unstable.
+
+Consequences:
+
+$$
+SE(\hat{\beta}_j)\text{ can be large},\qquad
+\hat{\beta}_j\text{ can be unstable},\qquad
+t\text{-tests can be nonsignificant}.
+$$
+
+The overall model can still predict well; the main problem is determining the \textbf{individual effects} of correlated predictors.
+
+A common diagnostic is the variance inflation factor:
+
+$$
+VIF_j=\frac{1}{1-R_j^2},
+$$
+
+where $R_j^2$ comes from regressing $X_j$ on the other predictors. Large $R_j^2$ implies large $VIF_j$ and greater uncertainty in $\hat{\beta}_j$.
+
 \end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{3.4: The marketing plan}
