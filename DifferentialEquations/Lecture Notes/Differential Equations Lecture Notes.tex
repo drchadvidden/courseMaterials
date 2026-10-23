@@ -85,6 +85,8 @@ $P(t)$ is an unknown population function of time $t$. Many solutions, but can wr
 \]
 $f(t,y)$ is some given function. Generally no technique can solve, so we will need other ideas (numerical and qualitative analysis).
 
+\item ODE vs PDE
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,7 +97,7 @@ $f(t,y)$ is some given function. Generally no technique can solve, so we will ne
 
 \item Useful in all sciences (population growth, disease spread, fluid dynamics, heat transfer, ecology, circuits, chemical reaction, stock market, etc)
 
-\item List is long: \url{https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations}
+\item List is long: \url{https://en.wikipedia.org/wiki/List_of_named_differential_equations} \url{https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations}
 
 \item Trouble is almost none can be solved, instead they are analyzed in general (theory) and approximated via simulations (coding).
 \end{enumerate}
@@ -133,13 +135,20 @@ $f(t,y)$ is some given function. Generally no technique can solve, so we will ne
 \item Assumptions simplify reality and determine the model.
 \item More assumptions $\Rightarrow$ simpler mathematics, but often a less realistic model.
 \item The goal is to \textbf{understand, explain, and predict} behavior—not merely solve an equation.
+\item Key steps:
+\begin{enumerate}
+\item State assumptions which relate key quianties of study
+\item Describe variables, parameters, and functions precisely
+\item Combine (i) and (ii) into an equation to solve or study
+\item Interpret (iii), state limitations, iterate as needed
+\end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Ordinary Differential Equations (ODEs)
 \begin{enumerate}
 
-\item Population Growth
+\item Population Growth (walk thru above steps)
 
 Assumption: The growth rate is proportional to the population.
 
@@ -162,6 +171,7 @@ P(t)=Ce^{kt}.
     \item qualitative behavior (effects of different $P_0$, draw various cases, note equilibrium case),
     \item numerical approximations (if analytical solutions cannot be found, we will use Python for this).
     \end{itemize}
+\item Discuss qualitative behavior for this one, equilibrium solutions, increasing and decreasing. Can reason out all possible solutions without formula.
 \end{itemize}
 
 \item Logistic Growth (refinement of above)
@@ -1528,9 +1538,6 @@ which are circles of radius $R$ in the $y,v$ plane.
 \end{itemize}
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homework: 1-16, 19-24
-
 \end{enumerate}
 
 
@@ -1813,8 +1820,39 @@ Jeff skip
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Chapter 2 introduced systems of DEs, though much of the time they cannot be solved. We are often limited to only qualitative (equilibrium solutions, nullclines, phase portraits) and quantititave analysis (Euler's method). One important case which we can solve is linear systems of the form
+\[
+\frac{d \vec{y}}{dt} = A \vec{y}
+\]
+where $\vec{y}$ is $n$-dimensions and $A$ is a $(n\times n)$ constant coefficient matrix. This system can always be solved via linear algebra concepts. It is important for 2 reasons:
+\begin{enumerate}
+\item The systems appear in practice (damped harmonic oscillator).
+\item Nonlinear systems can be approximated locally by linear systems which helps to classify their equilibrium point behavior (stable vs non-stable).
+\end{enumerate}
+
 \subsection{3.1: Properties of linear systems and the linearity principle}
+\begin{enumerate}
+\item Example: Formulate damped harmonic oscillator as a 2x2 linear system. Refresh matrix-vector multiplication.
+\item General linear system, $2\times 2$ case, $n\times n$ case.
+\item Equilibrium points: Start with DHO example. General 2x2 case. Only one if $A$ is non-singular (invertible). Invertible matrix theorem and check via determinant. 2x2 and 3x3 determinant eample. If singular, all of $Nul(A)$ is equilibrium points.
+\item Theorem (EPs are easy): For non-singular matrix $A$, the only equilibrium points of $\frac{d \vec{y}}{dt} = A \vec{y}$ are at the origin.
+\item Theorem (Linearity principle): For $\frac{d \vec{y}}{dt} = A \vec{y}$:
+\begin{itemize}
+\item If $\vec{y}$ is a solution, then so is $c \vec{y}$.
+\item If $\vec{y_1}$ and $\vec{y_2}$ are solutions, then so is $\vec{y_1}+\vec{y_2}$
+\end{itemize}
+Proof follows from linearity of differentiation and linearity of matrix-vector multiplication. Combine the two into one as the superposition principle.
+\item Theorem (General solutions): For $\vec{y_1}$ and $\vec{y_2}$ solutions to the linear system $\frac{d\vec{y}}{dt} = A\vec{y}$, if $\vec{y_1}(0)$ and $\vec{y_2}(0)$ are linearly independent, then we can always find a unique solution
+\[
+\vec{y} = c_1 \vec{y_1} + c_2 \vec{y_2}
+\]
+to any initial value problem. $\vec{y} = c_1 \vec{y_1} + c_2 \vec{y_2}$ is known as the general solution to the system.
+\item From the chapter 2 existence and uniqueness theorem, there is only one solution. This finds that unique solution.
+\item Example: SHO has 2 solutions $y_1(t)=\sin(t)$ and $y_2(t)=\cos(t)$. Reformulate as a linear system to get the general solution (the first component is the general solution to the 2nd order DE). Later we get a general approch which involves eigenstuff.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{old 3.1: Properties of linear systems and the linearity principle}
 
 \begin{enumerate}
 
