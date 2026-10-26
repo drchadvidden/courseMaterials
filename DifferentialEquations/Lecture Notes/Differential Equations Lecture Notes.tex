@@ -1847,7 +1847,7 @@ Proof follows from linearity of differentiation and linearity of matrix-vector m
 \vec{y} = c_1 \vec{y_1} + c_2 \vec{y_2}
 \]
 to any initial value problem. $\vec{y} = c_1 \vec{y_1} + c_2 \vec{y_2}$ is known as the general solution to the system.
-\item From the chapter 2 existence and uniqueness theorem, there is only one solution. This finds that unique solution.
+\item From the chapter 2 existence and uniqueness theorem, there is only one solution. This finds that unique solution. Our task is much narrower now: just find 2 particular solutions with LI initial values.
 \item Example: SHO has 2 solutions $y_1(t)=\sin(t)$ and $y_2(t)=\cos(t)$. Reformulate as a linear system to get the general solution (the first component is the general solution to the 2nd order DE). Later we get a general approch which involves eigenstuff.
 \end{enumerate}
 
@@ -2040,6 +2040,22 @@ and we see why linear independence is again key. Result is $c_2 = 2$ and $c_1=2$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.2: Straight-line solutions}	
+\begin{enumerate}
+\item Find the general solution to $\frac{d \vec{y}}{dt} = A \vec{y}$ for 
+\[
+A = \begin{bmatrix}
+2 & 3 \\ 0 & -4
+\end{bmatrix}
+\]
+Think of all cases of limiting behavior. Plot a phase portrait of some solutions. Put one of these straight line solutions into the DE and see what $A$ does.
+\item Consider a general straight line solution, see the eigenstuff problem come out.
+\item Carefully define eigenstuff. Note eigenvalues are unique, but eigenvectors are only unique up to scalar multiplication. Characteristic equation. Repeat and complex eigenvalues are possible. Mention diagonalization and decoupling.
+\item Theorem: Eigenstuff gives a straight line solution. $n$ distinct, real eigenvalues gives $n$ linearly independent solutions and hence a full general solution.
+\item Harmonic oscillator again.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{old3.2: Straight-line solutions}	
 
 \begin{enumerate}
 
