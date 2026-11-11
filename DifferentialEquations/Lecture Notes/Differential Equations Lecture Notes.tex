@@ -2298,8 +2298,66 @@ has general solution
 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.4: Complex eigenvalues}
+\begin{enumerate}
+
+\item For $2 \times 2$ linear systems $\frac{d\vec{y}}{dt} = A \vec{y}$, the eigenstory has a few cases:
+\begin{enumerate}
+\item Two distinct real $\lambda$ leading to linear independent eigenvectors.
+\item Repeat real $\lambda$ (next section)
+\item $\lambda = 0$ (next section)
+\item Complex $\lambda$, now and an impotant case.
+\end{enumerate}
+
+\item Examples: $A = \begin{bmatrix}
+-2 & -3 \\ 3 & -2
+\end{bmatrix}$ (textbook, sprial sink), 
+$B = \begin{bmatrix}
+2 & 1 \\ -4 & -1
+\end{bmatrix}$ (textbook, sprial source)
+
+\item Short review of complex numbers, arithmetic, plane, Euler's formula (capturing position and movement in the complex plane via a single exponential).
+
+\item Writing down complex eigenstuff solution is easy, but how to make is useful in $\mathbb{R}^2$?
+
+\item Theorem: For a complex valued solution $\vec{y}$ to the $2 \times 2$ linear system $\frac{d\vec{y}}{dt} = A\vec{y}$, we can decompose $\vec{y}$ as 
+\[
+\vec{y} = \vec{y}_{Re} + i \vec{y}_{Im}
+\]
+and both $\vec{y}_{Re}$ and $\vec{y}_{Im}$ are solutions to the original system. Further, both are linearly independent when $t=0$ giving general solution
+\[
+\vec{y} = c_1\vec{y}_{Re} + c_2 \vec{y}_{Im}.
+\]
+
+\item Return to example and write out general solution.
+
+\item Qualitative analysis: $\frac{d \vec{y}}{dt} = A \vec{y}$
+\begin{enumerate}
+\item For eigenstuff $\lambda = \alpha \pm \beta i$ and $\vec{v}, \overline{\vec{v}}$, we have complex solution via Euler's formula
+\[
+\vec{y} = e^{\alpha t} \left( \cos(\beta t) + i \sin(\beta t) \right) \vec{v}.
+\]
+\item The sign of $\alpha$ gives exponental growth ($\alpha >0$), decay ($\alpha <0$), or pure oscillation ($\alpha =0$).
+\item $\beta$ reveals perodicity for $0 \leq \beta t \leq 2\pi$.
+\item Using the sum formulas for cosine and sine, 
+\[
+\cos(u+v)=\cos(u)\cos(v)-\sin(u)\sin(v), \quad\sin(u+v)=\sin(u)\cos(v)+\cos(u)\sin(v),
+\]
+any linear combination of sine and cosine can be rewritten as a single shifted sinusoid:
+\[
+a\cos(\beta t)+b\sin(\beta t)
+=R\cos(\beta t-\gamma).
+\]
+This reveals periodic oscillation with period and a possible phase shift. Signal processing has a lot to say here.
+\item Combining this gives 3 cases to draw: spiral sink, spiral source, or oscillation. 
+\item Note: The two components can have different amplitudes and phase shifts, which is why the resulting trajectory is generally an ellipse rather than a circle. Rotationalization (made up counterpart of diagonalization) reveals this.
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{old3.4: Complex eigenvalues}
 
 \begin{enumerate}
 
@@ -2556,8 +2614,39 @@ c_2 e^t
 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.5: Special cases: repeated and zero eigenvalues}
+\begin{enumerate}
+\item Systems with only one eigenvalue or zero eigenvalue are relatively rare. We call them \emph{degenerate} cases. They act as the ``boundaries'' between most common types of liner systems and play an important role for bifurcation analysis. 
+
+\item Repeat eigenvalue case: $\frac{d \vec{y}}{dt} = A\vec{y}$ 
+\begin{enumerate}
+\item Basic example: $A = \begin{bmatrix}  -2 & 0 \\ 0 & -2 \end{bmatrix}$
+\item Motivating textbook example: $A = \begin{bmatrix}  -2 & 1 \\ 0 & -2 \end{bmatrix}$. Only one eigenvector, so no general solution. Have a look at the pplane. 
+\item Notice example is decoupled. Solve old way to fetch the general solution.
+\item Note again, one repeat eigenvalue can lead to 2 LI eigenvectors, though not always.
+\item Sound it all out: What if our general solution is of the form
+\[
+\vec{y} = e^{\lambda t} \vec{y}_0 + t e^{\lambda t} \vec{v}
+\]
+where $\lambda$ and $\vec{v}$ are eigenstuff as above. Then the solution works so long as $\vec{v}$ is an eigenvector and
+\[
+\vec{v} = (A-\lambda I)\vec{y}_0.
+\]
+\item Theorem: Suppose $\frac{d\vec{y}}{dt} = A\vec{y}$ and $A$ has a repeat eigenvalue $\lambda$ with only one eigenvector $\vec{v}$, then the general solution is
+\[
+\vec{y} = e^{\lambda t} \vec{y}_0 + t e^{\lambda t} \vec{v}
+\]
+where
+\[
+\vec{v} = (A-\lambda I)\vec{y}_0.
+\]
+Note, if it turns out $\vec{v}=\vec{0}$, then the initial condition is an eigenvector.
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{old3.5: Special cases: repeated and zero eigenvalues}
 
 \begin{enumerate}
 
