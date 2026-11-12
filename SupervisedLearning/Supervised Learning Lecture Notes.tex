@@ -3021,11 +3021,34 @@ where $C$ is a nonnegative tuning parameter (large $C$ allows for margin and hyp
 \langle x, y \rangle = \sum_{j=1}^p x_{j} y_{j} = \|  x \| \| y \| \cos(\theta)
 \]
 where $\theta$ is the angle between the vectors. This is a measure of similarity.
-\item Can show the support vector classifier function can be written as
+\item The support vector classifier can be written in terms of the training observations:
+
 \[
-f(x) = \beta_0 + \sum_{i=1}^p \beta_i x_i = \beta_0 + \sum_{x_j \in S} \alpha_j \langle x , x_j \rangle
+f(\mathbf{x}) = \beta_0 + \boldsymbol{\beta}^T\mathbf{x},
 \]
-where $S$ is the set of support vectors and $\alpha_j > 0$. Showing this requires Lagrange multipliers from Calc 3, but one can expand the inner product to see the matching to the $\beta$ coefficients.
+
+where the coefficient vector can be expressed as
+
+\[
+\boldsymbol{\beta} =
+\sum_{\mathbf{x}_j \in S} \alpha_j y_j \mathbf{x}_j.
+\]
+
+Substituting this expression for $\boldsymbol{\beta}$ gives
+
+\[
+\begin{aligned}
+f(\mathbf{x})
+&= \beta_0 +
+\left(\sum_{\mathbf{x}_j \in S}
+\alpha_j y_j \mathbf{x}_j\right)^T\mathbf{x}\\
+&= \beta_0 +
+\sum_{\mathbf{x}_j \in S}
+\alpha_j y_j \langle \mathbf{x},\mathbf{x}_j\rangle.
+\end{aligned}
+\]
+
+Here, $S$ is the set of support vectors, $y_j \in \{-1,1\}$ is the class label, and $\alpha_j > 0$ is the corresponding coefficient. All training observations that are not support vectors have $\alpha_j=0$ and therefore do not contribute to the classifier.
 \item Replace the above inner product with a generalization of the form
 \[
 K(x, x_i)
@@ -3038,6 +3061,21 @@ where $K$ is a function known as a kernel and acts like a similarity measure.
 \item Radial kernel: $K(x,x_i) = \exp{\left(-\gamma \sum_{j=1}^p (x_j - x_{ij})^2\right)}$ for tuning parameter $\gamma$. (highly flexible curve, creates a bump like a Gaussian around each training point, large $\gamma$ only influences neighbors/high variance while small goes farther/high bias)
 \item 2D examples in text.
 \end{itemize}
+
+\item Example: \[
+\begin{aligned}
+K(\mathbf{x},\mathbf{x}_i)
+&= (1+\mathbf{x}^T\mathbf{x}_i)^2\\
+&= (1+x_1x_{i1}+x_2x_{i2})^2\\
+&= 1+2x_1x_{i1}+2x_2x_{i2}\\
+&\quad +x_1^2x_{i1}^2
++2x_1x_2x_{i1}x_{i2}
++x_2^2x_{i2}^2.
+\end{aligned}
+\]
+
+This is equivalent to an inner product using the quadratic features
+$x_1^2$, $\sqrt{2}x_1x_2$, and $x_2^2$, without explicitly constructing them.
 \end{enumerate}
 
 \end{enumerate}
