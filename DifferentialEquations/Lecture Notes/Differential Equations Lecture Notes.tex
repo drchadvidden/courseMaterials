@@ -2621,8 +2621,8 @@ c_2 e^t
 
 \item Repeat eigenvalue case: $\frac{d \vec{y}}{dt} = A\vec{y}$ 
 \begin{enumerate}
-\item Basic example: $A = \begin{bmatrix}  -2 & 0 \\ 0 & -2 \end{bmatrix}$
-\item Motivating textbook example: $A = \begin{bmatrix}  -2 & 1 \\ 0 & -2 \end{bmatrix}$. Only one eigenvector, so no general solution. Have a look at the pplane. 
+\item Basic example: $A = \begin{bmatrix}  -2 & 0 \\ 0 & -2 \end{bmatrix}$, mention it to try yourself.
+\item Motivating textbook example: $A = \begin{bmatrix}  -2 & 1 \\ 0 & -2 \end{bmatrix}$. Only one eigenvector (called a defective matrix), so no general solution. Have a look at the pplane. 
 \item Notice example is decoupled. Solve old way to fetch the general solution.
 \item Note again, one repeat eigenvalue can lead to 2 LI eigenvectors, though not always.
 \item Sound it all out: What if our general solution is of the form
@@ -2641,7 +2641,40 @@ where
 \[
 \vec{v} = (A-\lambda I)\vec{y}_0.
 \]
-Note, if it turns out $\vec{v}=\vec{0}$, then the initial condition is an eigenvector.
+Note, if it turns out  the initial condition is an eigenvector, then result is $\vec{v}=\vec{0}$ and the solution $\vec{y}$ is a straight line solution.
+\end{enumerate}
+
+\item Check the theorem aligns with previous example.
+
+\item Note: The above form does not give 2 LI solutions, in fact the 2 separate parts are not necessarily solutions. Choose any vector \(\mathbf y_0\) that is not an eigenvector of \(A\), and define
+\[
+\mathbf v=(A-\lambda I)\mathbf y_0.
+\]
+
+Then the general solution is
+\[
+\boxed{
+\mathbf y(t)=
+c_1e^{\lambda t}\mathbf v+
+c_2\left(e^{\lambda t}\mathbf y_0+
+te^{\lambda t}\mathbf v\right)
+}
+\]
+
+where \(c_1,c_2\) are arbitrary constants.
+
+\item Qualitative analysis: Rewriting our solution,
+\[
+\vec{y} = e^{\lambda t} (\vec{y}_0 + t\vec{v})
+\]
+For $t$ large, $\vec{y} \approx e^{\lambda t} (t\vec{v})$ and we approach our straight line solution int he direction of the eigenvector. Only factor is source vs sink.
+
+\item Zero eigenvector case: $\frac{d \vec{y}}{dt} = A\vec{y}$ and $\lambda_1=0$ but $\lambda_2 \neq 0$.
+\begin{enumerate}
+\item General solution becomes $\vec{y} = c_1 \vec{v_1} + c_2 e^{\lambda_2 t} \vec{v}_2$.
+\item If $c_2=0$, all solutions are constant. These are points in the $\lambda_1$ eigenspace. Infinite equilibrium points.
+\item Source or sink depends on the sign of $\lambda_2$.
+\item Show pplane for one example $A$ with zero eigenvalue. Note must be singular (ie LD columns).
 \end{enumerate}
 \end{enumerate}
 
@@ -2840,8 +2873,56 @@ $A\vec{V_2} = \vec{0}$ gives
 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.6: Second-order linear equations}
+\begin{enumerate}
+\item Summary of general harmonic oscillator:
+\[
+m \frac{d^2y}{dt^2} + b \frac{dy}{dt} + ky = 0
+\]
+We solved this in chapter 2 via the charactersitic equation. This is the same as the eigen-analysis for the reformulated 2x2 system.
+\[
+\frac{d\vec{y}}{dt} = \begin{bmatrix}
+0 & 1 \\
+-\frac{k}{m} & -\frac{b}{m}
+\end{bmatrix} \vec{y}
+\]
+where $\vec{y} = (y,v)$, displacement and velocity components.
+
+\item Eigenvalues give the characteristic equation
+\[
+m\lambda^2 + b\lambda + k = 0 \quad \Rightarrow \quad
+\lambda = \frac{-b \pm \sqrt{b^2-4mk}}{2m}
+\]
+
+\item Cases:
+\begin{enumerate}
+\item $b=0$ gives no damping, only oscillation
+\[
+\cos(\beta t), \sin(\beta t)
+\]
+
+\item $b^2>4mk$ gives no oscilation, only exponential decay (overdamping)
+\[
+e^{\lambda_1 t}, e^{\lambda_2 t}
+\]
+
+\item $b^2=4mk$ gives repeated root (critical damping)
+\[
+e^{\lambda_1 t}, te^{\lambda_1 t}
+\]
+
+\item $b^2 < 4mk$ gives decay with oscillation, underdamping
+\[
+e^{\alpha t}\cos(\beta t), e^{\alpha t}\sin(\beta t)
+\]
+\end{enumerate}
+
+\item Desmos demonstration
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{old3.6: Second-order linear equations}
 
 \begin{enumerate}
 
