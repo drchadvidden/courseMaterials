@@ -3093,6 +3093,32 @@ e^{at} \cos(\omega t), e^{at} \sin(\omega t)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{3.7: The trace-determinant plane}
+\begin{enumerate}
+\item Idea: Recap all of chapter 3 into one story. Get a new insight into how everything relates. Show table at top of section.
+
+\item General case: $\frac{d \vec{y}}{dt} = A \vec{y} = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}$.
+\begin{enumerate}
+\item Eigenvalues: 
+\[
+det(A-\lambda I) = \lambda^2 - (a+d) \lambda + (ad-bc)=\lambda^2-T\lambda+D=0
+\] 
+where $T,D$ are trace and determinant.
+\[
+\lambda = \frac{T \pm \sqrt{T^2-4D}}{2}
+\]
+We can see the cases of distinct real, repeat real, and complex eigenvalues.
+\item Graph in the trace-determinant ($T-D$) plane. Start with just complex, repeat, distinct real 3 cases. Key feature is the curve $D=\frac{1}{4}T^2$, but the sign of $T$ matters for souce vs sink. Add determinant equal zero case to the text picture. 10 total pictures possible.
+\end{enumerate}
+
+\item Example: 19 in chapter review. Classify each.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{old3.7: The trace-determinant plane}
 
 \begin{enumerate}
 
