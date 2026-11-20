@@ -3315,10 +3315,117 @@ Here we touch on $2 \times 2$ nonlinear, autonomous systems of the form
 \[
 \frac{dx}{dt} = f(x,y), \quad \frac{dy}{dt} = g(x,y) 
 \]
-where $f$ and $g$ are nonlinear functions of $x$ and/or $y$. Of course analysis will be harder here, but we can borrow ideas of linear systems to do analysis at specific points (equilibrium points) / curves (isoclines).
+where $f$ and $g$ are nonlinear functions of $x$ and/or $y$. Of course analysis will be harder here, but we can borrow ideas of linear systems to do analysis at specific points (equilibrium points) / curves (isoclines). Linear approximation is key idea.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{5.1: Equilibrium point analysis}
+\begin{enumerate}
+\item Motivating example:
+\[
+\frac{dx}{dt} = -2x+2x^2=f(x,y), \quad \frac{dy}{dt}=-3x+y+3x^2=g(x,y)
+\]
+\begin{enumerate}
+\item Phase portrait is complicated, but we see familar features such as equilibrium points.
+\item Equilibrium points: $f(x,y)=0$ and $g(x,y)=0$ for $(0,0)$ and $(1,0)$. Looks like a saddle and a source.
+\item Linearization idea: Replace this nonlinear systems with a linear one near equilibrium points.
+\end{enumerate}
+
+\item Linearization via Calc 1 and 2 review:
+\begin{enumerate}
+\item General $y=f(x)$ graph and focus on a point $(a,f(a))$.
+\item The tangent line at this piont is a good approximation near this point.
+\[
+y-f(a)=f'(a)(x-a) \quad \Rightarrow \quad y=f(a)+f'(a)(x-a)
+\]
+\item This resembles Taylor series from Calc 2, refresh polynomial approximation, Desmos demo, Taylor's theorem.
+\[
+f(x) = f(a)+f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2+\dots
+\]
+We will use $y$ instead of $x$.
+\end{enumerate}
+
+\item Linearization of a single nonlinear DE, the logistic equation.
+\[
+\frac{dy}{dt} = y(1-y)=f(y)
+\]
+\begin{enumerate}
+\item Draw the phase line the old way, equilibrium points are $y=0,1$.
+\item Pretend we don't know how to classify stability, use linearization instead.
+\[
+\frac{dy}{dt} = f(y) \approx f(a)+f'(a)(y-a)
+\]
+where $a$ is our EP. Note that $f'(y)=1-2y$ and $f(a)=0$.
+\item $a=0$ gives $\frac{dy}{dt} = f(y) \approx y$. This is easy to solve with $y(t)=Ce^t$. As $t\rightarrow \infty$, we have $y\rightarrow \pm \infty$. So unstable equilibrium.
+\item Likewise $a=1$ gives $\frac{dy}{dt} \approx -(y-1)$. This is easier to look at as
+\[
+\frac{d(y-1)}{dt} \approx -(y-1)
+\]
+and so $y-1 = Ce^{-t}$ and $y=1+Ce^{-t}$. Then as $t \rightarrow \infty$, $y\rightarrow 1$ and we are stable.
+\item General case: The sign of $f'(a)$ tells the tale as before.
+\[
+\frac{dy}{dt} = f(y) \quad \Rightarrow \quad \frac{d(y-a)}{dt} = f'(a)(y-a)
+\] This is overkill for one equation, but it extends nicely to our $2 \times 2$ case.
+\end{enumerate}
+
+\item Linearization of a nonlinear system:
+\[
+\frac{dx}{dt} = -2x+2x^2=f(x,y), \quad \frac{dy}{dt}=-3x+y+3x^2=g(x,y)
+\]
+\begin{enumerate}
+\item Equilibrium points are still: $(0,0), (1,0)$.
+\item Linearization centered at $(1,0)$: Replace $f$ (and $g$) with a linear function apprximation centered at $(1,0)$. Need a taylor series expansion about both $x$ and $y$.
+\[
+f(x,y)=f(1,0)+\frac{\partial f}{\partial x} (x-1) + \frac{\partial f}{\partial y} (y-0) + \dots \\ 
+f(x,y) \approx \frac{\partial f}{\partial x} (x-1) + \frac{\partial f}{\partial y} (y-0) 
+\]
+Note these partial derivatives are all evaluated at point $(1,0)$.
+Then the linearized equation for $x$ becomes
+\[
+\frac{d(x-1)}{dt} = \frac{\partial f}{\partial x} (x-1) + \frac{\partial f}{\partial y} (y-0) 
+\]
+and likewise for $y$ and $g$ we have
+\[
+\frac{d(y-0)}{dt} = \frac{\partial g}{\partial x} (x-1) + \frac{\partial g}{\partial y} (y-0) 
+\]
+Combining the two equaitons we have the system
+\[
+\frac{d\vec{\tilde{y}}}{dt} = \begin{bmatrix}
+\frac{\partial f}{\partial x} (1,0) & \frac{\partial f}{\partial y} (1,0) \\
+\frac{\partial g}{\partial x} (1,0) & \frac{\partial g}{\partial y} (1,0) 
+\end{bmatrix}
+\vec{\tilde{y}}
+\]
+where $\vec{\tilde{y}} = (x-1,y-1)$. Note the shifting to center at $(1,0)$ is needed to make it resemble a standard linear system.
+
+\item Definition: The Jacobian matrix is
+\[
+A = \begin{bmatrix}
+\frac{\partial f}{\partial x}  & \frac{\partial f}{\partial y}  \\
+\frac{\partial g}{\partial x}  & \frac{\partial g}{\partial y} 
+\end{bmatrix}
+\]
+and is thought of as a generalization of the derivative of a single variable function to vector functions. Standard motation is matrix $J$ where components are functions of $n=2$ variables.
+
+\item Stability analysis at $(1,0)$: Evaluating the above gives
+\[
+\frac{d \vec{y}}{dt} = \begin{bmatrix}
+2 & 0 \\
+3 & 1
+\end{bmatrix}.
+\]
+We can see the eigenstuff wich gives a source (unstable). Alternatively, $tr(A)=3>0$ and $\det(A)=2>0$, so we are unstable. Also $tr(A)^2>4\det(A)$ so this is a 2 SLS source.
+
+\item Repeat for the second equilibrium point. Recall the phase portrait. Note the alignment with the original system.
+\end{enumerate}
+
+\item Example: Competign species model.
+\[
+\frac{dx}{dt} = 2x(1-x/2)-xy, \quad \frac{dy}{dt}=3y(1-y/3)-2xy
+\]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{old5.1: Equilibrium point analysis}
 
 \begin{enumerate}
 
